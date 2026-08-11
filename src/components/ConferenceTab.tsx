@@ -39,20 +39,22 @@ export function ConferenceTab({
           return a.name.localeCompare(b.name);
         });
         const rankedCount = ordered.filter((t) => ranks.has(t.id)).length;
-        const bestOverall = ordered.reduce<number | null>((best, team) => {
-          const r = ranks.get(team.id);
-          if (r == null) return best;
-          if (best == null || r < best) return r;
-          return best;
-        }, null);
-        return { name, ordered, rankedCount, bestOverall };
+        const rankedValues = ordered
+          .map((team) => ranks.get(team.id))
+          .filter((r): r is number => r != null);
+        const avgOverall =
+          rankedValues.length > 0
+            ? rankedValues.reduce((sum, r) => sum + r, 0) / rankedValues.length
+            : null;
+        const bestOverall = rankedValues.length ? Math.min(...rankedValues) : null;
+        return { name, ordered, rankedCount, bestOverall, avgOverall };
       })
       .sort((a, b) => {
-        if (a.bestOverall != null && b.bestOverall != null) {
-          return a.bestOverall - b.bestOverall;
+        if (a.avgOverall != null && b.avgOverall != null) {
+          return a.avgOverall - b.avgOverall;
         }
-        if (a.bestOverall != null) return -1;
-        if (b.bestOverall != null) return 1;
+        if (a.avgOverall != null) return -1;
+        if (b.avgOverall != null) return 1;
         return shortConferenceName(a.name).localeCompare(shortConferenceName(b.name));
       });
   }, [teams, ranks]);
@@ -67,7 +69,8 @@ export function ConferenceTab({
         <header className="panel-header">
           <h2>Conference rankings</h2>
           <p>
-            Built from your current ballot. Conferences ordered by their highest-ranked team.
+            Built from your current ballot. Conferences ordered by average team rank (lower is
+            stronger).
           </p>
         </header>
         <label className="block-label">
@@ -77,7 +80,9 @@ export function ConferenceTab({
             {conferences.map((c) => (
               <option key={c.name} value={c.name}>
                 {shortConferenceName(c.name)}
-                {c.bestOverall != null ? ` · best #${c.bestOverall}` : " · none ranked"}
+                {c.avgOverall != null
+                  ? ` · avg ${c.avgOverall.toFixed(1)}`
+                  : " · none ranked"}
               </option>
             ))}
           </select>
@@ -88,10 +93,15 @@ export function ConferenceTab({
         {visible.map((conf) => (
           <section key={conf.name} className="panel conference-card">
             <header className="panel-header">
-              <h2>{shortConferenceName(conf.name)}</h2>
+              <h2>
+                {shortConferenceName(conf.name)}
+                {conf.avgOverall != null ? (
+                  <span className="conference-avg"> avg {conf.avgOverall.toFixed(1)}</span>
+                ) : null}
+              </h2>
               <p>
                 {conf.rankedCount}/{conf.ordered.length} ranked
-                {conf.bestOverall != null ? ` · best overall #${conf.bestOverall}` : ""}
+                {conf.bestOverall != null ? ` · best #${conf.bestOverall}` : ""}
               </p>
             </header>
             <ol className="conference-list">
