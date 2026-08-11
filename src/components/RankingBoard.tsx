@@ -93,6 +93,10 @@ function SortableRankedItem({
   record,
   selected,
   onSelect,
+  onMoveUp,
+  onMoveDown,
+  canMoveUp,
+  canMoveDown,
 }: {
   id: string;
   team: Team;
@@ -100,6 +104,10 @@ function SortableRankedItem({
   record: { wins: number; losses: number };
   selected: boolean;
   onSelect: () => void;
+  onMoveUp: () => void;
+  onMoveDown: () => void;
+  canMoveUp: boolean;
+  canMoveDown: boolean;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
     useSortable({ id, data: { container: "ranked" } });
@@ -124,6 +132,26 @@ function SortableRankedItem({
       <button type="button" className="team-select" onClick={onSelect}>
         <TeamRowContent team={team} rank={rank} record={record} active={selected} />
       </button>
+      <div className="rank-actions">
+        <button
+          type="button"
+          onClick={onMoveUp}
+          disabled={!canMoveUp}
+          title="Move up one spot"
+          aria-label="Move up one spot"
+        >
+          ▲
+        </button>
+        <button
+          type="button"
+          onClick={onMoveDown}
+          disabled={!canMoveDown}
+          title="Move down one spot"
+          aria-label="Move down one spot"
+        >
+          ▼
+        </button>
+      </div>
     </li>
   );
 }
@@ -286,6 +314,14 @@ export function RankingBoard({
     else onChange([...rankedIds, teamId]);
   };
 
+  const moveTeam = (teamId: string, direction: "up" | "down") => {
+    const index = rankedIds.indexOf(teamId);
+    if (index < 0) return;
+    const target = direction === "up" ? index - 1 : index + 1;
+    if (target < 0 || target >= rankedIds.length) return;
+    onChange(arrayMove(rankedIds, index, target));
+  };
+
   return (
     <DndContext
       sensors={sensors}
@@ -317,6 +353,10 @@ export function RankingBoard({
                       record={records.get(id) ?? { wins: 0, losses: 0 }}
                       selected={selectedTeamId === id}
                       onSelect={() => onSelectTeam(id)}
+                      onMoveUp={() => moveTeam(id, "up")}
+                      onMoveDown={() => moveTeam(id, "down")}
+                      canMoveUp={index > 0}
+                      canMoveDown={index < rankedIds.length - 1}
                     />
                   );
                 })}

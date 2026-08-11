@@ -253,6 +253,10 @@ input[type="password"],
   background: rgba(255, 255, 255, 0.55);
 }
 
+.rank-item {
+  grid-template-columns: auto 1fr auto;
+}
+
 .pool-item {
   grid-template-columns: auto 1fr auto;
 }
@@ -270,7 +274,15 @@ input[type="password"],
   padding-right: 0.35rem;
 }
 
-.pool-actions button {
+.rank-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-right: 0.3rem;
+}
+
+.pool-actions button,
+.rank-actions button {
   border-radius: 999px;
   border: 1px solid var(--line);
   padding: 0.3rem 0.55rem;
@@ -281,8 +293,21 @@ input[type="password"],
   font-weight: 600;
 }
 
-.pool-actions button:hover {
+.rank-actions button {
+  border-radius: 8px;
+  padding: 0.15rem 0.45rem;
+  line-height: 1;
+  font-size: 0.7rem;
+}
+
+.pool-actions button:hover,
+.rank-actions button:hover:not(:disabled) {
   border-color: rgba(31, 107, 69, 0.45);
+}
+
+.rank-actions button:disabled {
+  opacity: 0.35;
+  cursor: default;
 }
 
 .rank-drop-zone,
