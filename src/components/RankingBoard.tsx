@@ -24,6 +24,24 @@ import { shortConferenceName } from "@/lib/conferences";
 import { insertIndexByRecord, sortTeamIdsByRecord } from "@/lib/ranking-logic";
 import type { Team } from "@/lib/types";
 
+function teamMatchesSearch(team: Team, query: string): boolean {
+  const q = query.trim().toLowerCase();
+  if (!q) return true;
+  const confShort = shortConferenceName(team.conference).toLowerCase();
+  const confFull = team.conference.toLowerCase();
+  const compact = (value: string) => value.replace(/[\s.-]/g, "");
+  const qCompact = compact(q);
+  return (
+    team.name.toLowerCase().includes(q) ||
+    team.shortName.toLowerCase().includes(q) ||
+    team.abbreviation.toLowerCase().includes(q) ||
+    confFull.includes(q) ||
+    confShort.includes(q) ||
+    compact(confFull).includes(qCompact) ||
+    compact(confShort).includes(qCompact)
+  );
+}
+
 const RANKED_CONTAINER = "ranked-container";
 const UNRANKED_CONTAINER = "unranked-container";
 
@@ -183,19 +201,11 @@ export function RankingBoard({
   const [activeId, setActiveId] = useState<string | null>(null);
 
   const filteredUnranked = useMemo(() => {
-    const q = search.trim().toLowerCase();
-    const filtered = !q
-      ? unrankedIds
-      : unrankedIds.filter((id) => {
-          const t = teamsById.get(id);
-          if (!t) return false;
-          return (
-            t.name.toLowerCase().includes(q) ||
-            t.shortName.toLowerCase().includes(q) ||
-            t.abbreviation.toLowerCase().includes(q) ||
-            t.conference.toLowerCase().includes(q)
-          );
-        });
+    const filtered = unrankedIds.filter((id) => {
+      const t = teamsById.get(id);
+      if (!t) return false;
+      return teamMatchesSearch(t, search);
+    });
 
     return sortTeamIdsByRecord(filtered, records, (id) => teamsById.get(id)?.name ?? id);
   }, [search, teamsById, unrankedIds, records]);
