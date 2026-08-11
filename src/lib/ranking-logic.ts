@@ -33,6 +33,54 @@ export function recordFromGames(
   return { wins, losses };
 }
 
+/** Negative => a belongs above b (better record). */
+export function compareRecords(
+  a: { wins: number; losses: number },
+  b: { wins: number; losses: number },
+): number {
+  if (a.wins !== b.wins) return b.wins - a.wins;
+  if (a.losses !== b.losses) return a.losses - b.losses;
+  const aPlayed = a.wins + a.losses;
+  const bPlayed = b.wins + b.losses;
+  if (aPlayed !== bPlayed && aPlayed > 0 && bPlayed > 0) {
+    const aPct = a.wins / aPlayed;
+    const bPct = b.wins / bPlayed;
+    if (aPct !== bPct) return bPct - aPct;
+  }
+  return 0;
+}
+
+export function sortTeamIdsByRecord(
+  teamIds: string[],
+  records: Map<string, { wins: number; losses: number }>,
+  nameFor?: (id: string) => string,
+): string[] {
+  return [...teamIds].sort((left, right) => {
+    const cmp = compareRecords(
+      records.get(left) ?? { wins: 0, losses: 0 },
+      records.get(right) ?? { wins: 0, losses: 0 },
+    );
+    if (cmp !== 0) return cmp;
+    const leftName = nameFor?.(left) ?? left;
+    const rightName = nameFor?.(right) ?? right;
+    return leftName.localeCompare(rightName);
+  });
+}
+
+/** Index to insert teamId so better records stay higher in the ballot. */
+export function insertIndexByRecord(
+  rankedIds: string[],
+  teamId: string,
+  records: Map<string, { wins: number; losses: number }>,
+): number {
+  const incoming = records.get(teamId) ?? { wins: 0, losses: 0 };
+  for (let i = 0; i < rankedIds.length; i++) {
+    const current = records.get(rankedIds[i]) ?? { wins: 0, losses: 0 };
+    if (compareRecords(incoming, current) < 0) return i;
+  }
+  return rankedIds.length;
+}
+
 export function gamesForTeam(
   teamId: string,
   games: Game[],

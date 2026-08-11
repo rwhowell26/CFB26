@@ -18,6 +18,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useMemo, useState } from "react";
+import { insertIndexByRecord, sortTeamIdsByRecord } from "@/lib/ranking-logic";
 import type { Team } from "@/lib/types";
 
 type Props = {
@@ -114,18 +115,21 @@ export function RankingBoard({
 
   const filteredUnranked = useMemo(() => {
     const q = search.trim().toLowerCase();
-    if (!q) return unrankedIds;
-    return unrankedIds.filter((id) => {
-      const t = teamsById.get(id);
-      if (!t) return false;
-      return (
-        t.name.toLowerCase().includes(q) ||
-        t.shortName.toLowerCase().includes(q) ||
-        t.abbreviation.toLowerCase().includes(q) ||
-        t.conference.toLowerCase().includes(q)
-      );
-    });
-  }, [search, teamsById, unrankedIds]);
+    const filtered = !q
+      ? unrankedIds
+      : unrankedIds.filter((id) => {
+          const t = teamsById.get(id);
+          if (!t) return false;
+          return (
+            t.name.toLowerCase().includes(q) ||
+            t.shortName.toLowerCase().includes(q) ||
+            t.abbreviation.toLowerCase().includes(q) ||
+            t.conference.toLowerCase().includes(q)
+          );
+        });
+
+    return sortTeamIdsByRecord(filtered, records, (id) => teamsById.get(id)?.name ?? id);
+  }, [search, teamsById, unrankedIds, records]);
 
   const onDragStart = (event: DragStartEvent) => {
     setActiveId(String(event.active.id));
@@ -141,11 +145,12 @@ export function RankingBoard({
     onChange(arrayMove(rankedIds, oldIndex, newIndex));
   };
 
-  const addTeam = (teamId: string, atIndex?: number) => {
+  const addTeam = (teamId: string, mode: "by-record" | "top" | "bottom" = "by-record") => {
     if (rankedIds.includes(teamId)) return;
     const next = [...rankedIds];
-    if (atIndex == null || atIndex < 0 || atIndex > next.length) next.push(teamId);
-    else next.splice(atIndex, 0, teamId);
+    if (mode === "top") next.unshift(teamId);
+    else if (mode === "bottom") next.push(teamId);
+    else next.splice(insertIndexByRecord(next, teamId, records), 0, teamId);
     onChange(next);
   };
 
@@ -206,7 +211,9 @@ export function RankingBoard({
       <section className="panel">
         <header className="panel-header">
           <h2>Unranked pool</h2>
-          <p>Click a team to append, or use +1 / bottom controls.</p>
+          <p>
+            Sorted by record (best first). + inserts by record into your ballot; +1 forces #1.
+          </p>
         </header>
         <ul className="pool-list">
           {filteredUnranked.map((id) => {
@@ -219,10 +226,14 @@ export function RankingBoard({
                   <TeamRowContent team={team} rank={null} record={record} active={selectedTeamId === id} />
                 </button>
                 <div className="pool-actions">
-                  <button type="button" onClick={() => addTeam(id, 0)} title="Insert at #1">
+                  <button type="button" onClick={() => addTeam(id, "top")} title="Insert at #1">
                     +1
                   </button>
-                  <button type="button" onClick={() => addTeam(id)} title="Add to bottom">
+                  <button
+                    type="button"
+                    onClick={() => addTeam(id, "by-record")}
+                    title="Insert by record"
+                  >
                     +
                   </button>
                 </div>
