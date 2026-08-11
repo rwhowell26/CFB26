@@ -553,9 +553,91 @@ input[type="password"],
   font-size: 0.85rem;
 }
 
-.movers-wrap {
+.sos-tab-wrap {
   display: grid;
   gap: 1rem;
+}
+
+.sos-mode-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sos-mode-tabs button {
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  padding: 0.45rem 0.85rem;
+  cursor: pointer;
+  background: #fffef9;
+  color: var(--ink);
+}
+
+.sos-mode-tabs button.active {
+  background: var(--turf-deep);
+  border-color: var(--turf-deep);
+  color: #f4fff7;
+}
+
+.sos-rank-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.3rem;
+  max-height: 70vh;
+  overflow: auto;
+}
+
+.sos-rank-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2.1rem 1.8rem 1fr auto;
+  gap: 0.55rem;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.55);
+  padding: 0.4rem 0.5rem;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+}
+
+.sos-rank-row.selected {
+  border-color: rgba(31, 107, 69, 0.45);
+  background: rgba(31, 107, 69, 0.08);
+}
+
+.sos-rank-team,
+.sos-rank-metrics {
+  display: grid;
+  min-width: 0;
+}
+
+.sos-rank-metrics {
+  text-align: right;
+  justify-items: end;
+}
+
+.sos-rank-team strong,
+.sos-rank-metrics strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sos-rank-metrics strong {
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  font-size: 1.35rem;
+  color: var(--turf-deep);
+}
+
+.sos-rank-team em,
+.sos-rank-metrics em {
+  color: var(--muted);
+  font-style: normal;
+  font-size: 0.85rem;
 }
 
 .movers-grid {

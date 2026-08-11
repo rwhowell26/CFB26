@@ -6,6 +6,7 @@ import { ConferenceTab } from "@/components/ConferenceTab";
 import { HistoryTab } from "@/components/HistoryTab";
 import { MoversTab } from "@/components/MoversTab";
 import { RankingBoard } from "@/components/RankingBoard";
+import { SosTab } from "@/components/SosTab";
 import { TeamResume } from "@/components/TeamResume";
 import { WarningsList } from "@/components/WarningsList";
 import {
@@ -27,7 +28,7 @@ import {
 } from "@/lib/storage";
 import type { Game, SeasonWeek, Team } from "@/lib/types";
 
-type Tab = "rank" | "conferences" | "movers" | "compare" | "history";
+type Tab = "rank" | "conferences" | "sos" | "compare" | "history" | "movers";
 
 type GamesPayload = {
   season: number;
@@ -243,6 +244,7 @@ export function RankingApp() {
           [
             ["rank", "Rank"],
             ["conferences", "Conferences"],
+            ["sos", "SOS"],
             ["compare", "Compare"],
             ["history", "History"],
             ["movers", "Movers"],
@@ -340,6 +342,18 @@ export function RankingApp() {
           records={records}
           onSelectTeam={setSelectedTeamId}
           selectedTeamId={selectedTeamId}
+        />
+      ) : null}
+
+      {tab === "sos" ? (
+        <SosTab
+          teams={teams}
+          games={games}
+          ranks={resumeRanks}
+          records={records}
+          onSelectTeam={setSelectedTeamId}
+          selectedTeamId={selectedTeamId}
+          search={search}
         />
       ) : null}
 

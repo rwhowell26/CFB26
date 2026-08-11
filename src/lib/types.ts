@@ -48,7 +48,11 @@ export type SosSummary = {
   playedAvgRank: number | null;
   remainingCount: number;
   remainingAvgRank: number | null;
+  totalCount: number;
+  totalAvgRank: number | null;
+  fbsOpponentCount: number;
   fcsPlayed: number;
+  fcsTotal: number;
 };
 
 export type WeekSnapshot = {

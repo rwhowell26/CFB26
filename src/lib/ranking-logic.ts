@@ -149,12 +149,18 @@ export function computeSos(
     return sum / ranked.length;
   };
 
+  const fbsWithRank = all.filter((g) => g.opponentIsFbs && g.opponentRank != null);
+
   return {
     playedCount: played.length,
     playedAvgRank: avg(played),
     remainingCount: remaining.length,
     remainingAvgRank: avg(remaining),
+    totalCount: all.length,
+    totalAvgRank: avg(all),
+    fbsOpponentCount: fbsWithRank.length,
     fcsPlayed: played.filter((g) => !g.opponentIsFbs).length,
+    fcsTotal: all.filter((g) => !g.opponentIsFbs).length,
   };
 }
 
