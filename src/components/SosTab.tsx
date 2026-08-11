@@ -1,9 +1,14 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { shortConferenceName } from "@/lib/conferences";
-import { computeSos } from "@/lib/ranking-logic";
-import type { Game, Team } from "@/lib/types";
+import {
+  computeSos,
+  formatRank,
+  gamesForTeam,
+  recordFromGames,
+} from "@/lib/ranking-logic";
+import type { Game, Team, TeamGameView } from "@/lib/types";
 
 type Props = {
   teams: Team[];
@@ -11,8 +16,6 @@ type Props = {
   /** Prefer resume ranks so unplaced teams still contribute opponent strength */
   ranks: Map<string, number>;
   records: Map<string, { wins: number; losses: number }>;
-  onSelectTeam?: (teamId: string) => void;
-  selectedTeamId?: string | null;
   search?: string;
 };
 
@@ -37,16 +40,106 @@ function teamMatches(team: Team, query: string): boolean {
   );
 }
 
-export function SosTab({
-  teams,
+function locLabel(location: TeamGameView["location"]) {
+  if (location === "home") return "vs";
+  if (location === "away") return "@";
+  return "n";
+}
+
+function SchedulePopup({
+  team,
   games,
   ranks,
-  records,
-  onSelectTeam,
-  selectedTeamId,
-  search = "",
-}: Props) {
+  sosRank,
+  totalSos,
+  onClose,
+}: {
+  team: Team;
+  games: Game[];
+  ranks: Map<string, number>;
+  sosRank: number;
+  totalSos: number | null;
+  onClose: () => void;
+}) {
+  const schedule = useMemo(() => gamesForTeam(team.id, games, ranks), [team.id, games, ranks]);
+  const record = recordFromGames(team.id, games);
+  const teamRank = ranks.get(team.id) ?? null;
+
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  return (
+    <div className="modal-backdrop" onClick={onClose} role="presentation">
+      <div
+        className="modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${team.name} schedule`}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <header className="modal-header">
+          <div className="resume-title">
+            {team.logo ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={team.logo} alt="" className="team-logo lg" />
+            ) : null}
+            <div>
+              <p className="eyebrow">Full schedule</p>
+              <h2>
+                {teamRank != null ? `#${teamRank} ` : ""}
+                {team.name}
+              </h2>
+              <p>
+                {record.wins}-{record.losses} · {shortConferenceName(team.conference)} · SOS #
+                {sosRank}
+                {totalSos != null ? ` · avg ${totalSos.toFixed(1)}` : ""}
+              </p>
+            </div>
+          </div>
+          <button type="button" className="ghost-btn" onClick={onClose}>
+            Close
+          </button>
+        </header>
+
+        {!schedule.length ? (
+          <div className="empty-state">No games loaded for this team.</div>
+        ) : (
+          <ul className="game-list modal-schedule">
+            {schedule.map((g) => (
+              <li
+                key={g.gameId}
+                className={`game-row ${g.result ? `result-${g.result.toLowerCase()}` : ""}`}
+              >
+                <span className="game-week">W{g.week}</span>
+                <span className="game-loc">{locLabel(g.location)}</span>
+                <span className="game-opp">
+                  {formatRank(g.opponentRank, g.opponentIsFbs)} {g.opponentName}
+                </span>
+                <span className="game-score">
+                  {g.status === "final" && g.result
+                    ? `${g.result} ${g.teamScore}-${g.opponentScore}`
+                    : new Date(g.date).toLocaleDateString(undefined, {
+                        month: "short",
+                        day: "numeric",
+                      })}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function SosTab({ teams, games, ranks, records, search = "" }: Props) {
   const [mode, setMode] = useState<"total" | "played" | "remaining">("total");
+  const [popupTeamId, setPopupTeamId] = useState<string | null>(null);
 
   const rows = useMemo(() => {
     const built: SosRow[] = [];
@@ -79,14 +172,17 @@ export function SosTab({
       .sort((a, b) => value(a) - value(b) || a.team.name.localeCompare(b.team.name));
   }, [teams, games, ranks, records, mode, search]);
 
+  const popupIndex = popupTeamId ? rows.findIndex((r) => r.team.id === popupTeamId) : -1;
+  const popupRow = popupIndex >= 0 ? rows[popupIndex] : null;
+
   return (
     <div className="sos-tab-wrap">
       <section className="panel">
         <header className="panel-header">
           <h2>SOS rankings</h2>
           <p>
-            Lower average opponent rank = tougher schedule. Based on your ballot ranks (with last
-            saved fallback for unplaced teams).
+            Lower average opponent rank = tougher schedule. Click a team to see their full
+            schedule.
           </p>
         </header>
         <div className="sos-mode-tabs">
@@ -128,8 +224,8 @@ export function SosTab({
                 <li key={row.team.id}>
                   <button
                     type="button"
-                    className={`sos-rank-row ${selectedTeamId === row.team.id ? "selected" : ""}`}
-                    onClick={() => onSelectTeam?.(row.team.id)}
+                    className={`sos-rank-row ${popupTeamId === row.team.id ? "selected" : ""}`}
+                    onClick={() => setPopupTeamId(row.team.id)}
                   >
                     <span className="rank-badge">{sosRank}</span>
                     {row.team.logo ? (
@@ -153,6 +249,17 @@ export function SosTab({
           </ol>
         )}
       </section>
+
+      {popupRow ? (
+        <SchedulePopup
+          team={popupRow.team}
+          games={games}
+          ranks={ranks}
+          sosRank={popupIndex + 1}
+          totalSos={popupRow.totalAvgRank}
+          onClose={() => setPopupTeamId(null)}
+        />
+      ) : null}
     </div>
   );
 }

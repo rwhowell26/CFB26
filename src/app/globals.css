@@ -690,6 +690,40 @@ input[type="password"],
   font-size: 0.85rem;
 }
 
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(15, 35, 24, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.modal-card {
+  width: min(640px, 100%);
+  max-height: min(85vh, 900px);
+  overflow: auto;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  padding: 1rem 1.1rem 1.15rem;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: start;
+  margin-bottom: 0.85rem;
+}
+
+.modal-schedule {
+  margin-top: 0.25rem;
+}
+
 .movers-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -351,8 +351,6 @@ export function RankingApp() {
           games={games}
           ranks={resumeRanks}
           records={records}
-          onSelectTeam={setSelectedTeamId}
-          selectedTeamId={selectedTeamId}
           search={search}
         />
       ) : null}
