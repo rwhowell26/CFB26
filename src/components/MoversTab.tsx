@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { rankMapFromOrder } from "@/lib/ranking-logic";
+import { formatWeekLabel } from "@/lib/season";
 import type { RankingStore, Team, WeekSnapshot } from "@/lib/types";
 
 type Props = {
@@ -157,7 +158,7 @@ export function MoversTab({
       ? rankMapFromOrder(currentRankedIds)
       : rankMapFromOrder(latestSnap.rankedIds);
     const toLabel = useCurrent
-      ? `Week ${currentWeek} (current ballot)`
+      ? `${formatWeekLabel(currentWeek)} (current ballot)`
       : latestSnap.label;
 
     // If only one snapshot and no complete current ballot, season movers need two points
@@ -206,7 +207,7 @@ export function MoversTab({
       .slice(0, 15);
     return {
       fromLabel: prior.label,
-      toLabel: `Week ${currentWeek} draft`,
+      toLabel: `${formatWeekLabel(currentWeek)} draft`,
       risers,
       droppers,
     };
@@ -298,8 +299,8 @@ export function MoversTab({
       {draftMovers && (draftMovers.risers.length || draftMovers.droppers.length) ? (
         <>
           <p className="movers-note">
-            In-progress Week {currentWeek} draft vs {draftMovers.fromLabel} (teams already placed
-            this week).
+            In-progress {formatWeekLabel(currentWeek)} draft vs {draftMovers.fromLabel} (teams already
+            placed this week).
           </p>
           <div className="movers-grid">
             <MoverList

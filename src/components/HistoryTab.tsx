@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { formatWeekLabel } from "@/lib/season";
 import { teamRankHistory } from "@/lib/storage";
 import type { RankingStore, Team, WeekSnapshot } from "@/lib/types";
 
@@ -58,7 +59,7 @@ export function HistoryTab({ store, teams, onLoadWeek }: Props) {
             </label>
             {snapshot ? (
               <button type="button" className="primary-btn" onClick={() => onLoadWeek(snapshot.week)}>
-                Open week {snapshot.week} in Rank
+                Open {formatWeekLabel(snapshot.week, snapshot.label)} in Rank
               </button>
             ) : null}
           </div>
@@ -113,9 +114,13 @@ export function HistoryTab({ store, teams, onLoadWeek }: Props) {
               {history.map((h) => {
                 const pct = h.rank == null ? 100 : ((h.rank - 1) / 137) * 100;
                 return (
-                  <div key={h.week} className="spark-col" title={`Week ${h.week}: #${h.rank}`}>
+                  <div
+                    key={h.week}
+                    className="spark-col"
+                    title={`${formatWeekLabel(h.week, h.label)}: #${h.rank}`}
+                  >
                     <div className="spark-bar" style={{ height: `${Math.max(8, 100 - pct)}%` }} />
-                    <span>W{h.week}</span>
+                    <span>{h.week === 0 ? "PS" : `W${h.week}`}</span>
                   </div>
                 );
               })}

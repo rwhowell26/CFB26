@@ -14,11 +14,12 @@ import {
   rankMapFromOrder,
   recordFromGames,
 } from "@/lib/ranking-logic";
-import { FBS_TEAM_COUNT, SEASON_YEAR } from "@/lib/season";
+import { FBS_TEAM_COUNT, PRESEASON_WEEK, SEASON_YEAR, formatWeekLabel } from "@/lib/season";
 import {
   clearDraft,
   exportStoreJson,
   getDraftOrder,
+  hydrateStoreFromLocalStorage,
   importStoreJson,
   mostRecentPriorRanks,
   resumeRankMap,
@@ -43,12 +44,22 @@ export function RankingApp() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [store, setStore] = useRankingStore();
-  const [week, setWeek] = useState(() => store.activeWeek || 1);
+  const [week, setWeek] = useState(() =>
+    typeof store.activeWeek === "number" ? store.activeWeek : PRESEASON_WEEK,
+  );
   const [tab, setTab] = useState<Tab>("rank");
   const [selectedTeamId, setSelectedTeamId] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [message, setMessage] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
+
+  useEffect(() => {
+    // Re-read localStorage after mount so legacy Week 1 → Preseason migration applies
+    const hydrated = hydrateStoreFromLocalStorage();
+    if (typeof hydrated.activeWeek === "number") {
+      queueMicrotask(() => setWeek(hydrated.activeWeek));
+    }
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -63,10 +74,17 @@ export function RankingApp() {
         if (cancelled) return;
         setData(json);
 
+        // Prefer the week that actually has ballot data (e.g. migrated Preseason)
         setWeek((prev) => {
-          if (store.drafts[String(prev)] || store.snapshots[String(prev)]) return prev;
-          if (store.activeWeek && store.activeWeek !== 1) return store.activeWeek;
-          return json.currentWeek || prev;
+          if (store.drafts[String(prev)]?.length || store.snapshots[String(prev)]) {
+            return prev;
+          }
+          const preDraft = store.drafts[String(PRESEASON_WEEK)];
+          if (preDraft?.length || store.snapshots[String(PRESEASON_WEEK)]) {
+            return PRESEASON_WEEK;
+          }
+          if (typeof store.activeWeek === "number") return store.activeWeek;
+          return typeof json.currentWeek === "number" ? json.currentWeek : prev;
         });
       } catch (err) {
         if (!cancelled) {
@@ -151,7 +169,7 @@ export function RankingApp() {
 
   const handleSaveSnapshot = () => {
     try {
-      const label = weekMeta?.label || `Week ${week}`;
+      const label = formatWeekLabel(week, weekMeta?.label);
       setStore(saveSnapshot(store, week, label, rankedIds));
       setMessage(`Saved ${label} snapshot (${FBS_TEAM_COUNT} teams).`);
     } catch (err) {
@@ -160,11 +178,12 @@ export function RankingApp() {
   };
 
   const handleFreshWeek = () => {
-    if (!confirm(`Clear Week ${week} draft and start fresh?`)) return;
+    const label = formatWeekLabel(week, weekMeta?.label);
+    if (!confirm(`Clear ${label} draft and start fresh?`)) return;
     const next = clearDraft(store, week);
     next.drafts[String(week)] = [];
     setStore(next);
-    setMessage(`Week ${week} draft cleared.`);
+    setMessage(`${label} draft cleared.`);
   };
 
   const handleExport = () => {
@@ -183,7 +202,7 @@ export function RankingApp() {
       const text = await file.text();
       const imported = importStoreJson(text);
       setStore(imported);
-      setWeek(imported.activeWeek || week);
+      setWeek(typeof imported.activeWeek === "number" ? imported.activeWeek : week);
       setMessage("Imported rankings backup.");
     } catch (err) {
       setMessage(err instanceof Error ? err.message : "Import failed");
@@ -220,14 +239,23 @@ export function RankingApp() {
           <label className="week-select">
             Ranking week
             <select value={week} onChange={(e) => changeWeek(Number(e.target.value))}>
-              {(weeks.length ? weeks : [{ number: week, label: `Week ${week}`, detail: "" }]).map(
-                (w) => (
-                  <option key={w.number} value={w.number}>
-                    {w.label}
-                    {store.snapshots[String(w.number)] ? " · saved" : ""}
-                  </option>
-                ),
-              )}
+              {(weeks.length
+                ? weeks
+                : [
+                    {
+                      number: week,
+                      label: formatWeekLabel(week),
+                      detail: "",
+                      startDate: "",
+                      endDate: "",
+                    },
+                  ]
+              ).map((w) => (
+                <option key={w.number} value={w.number}>
+                  {w.label}
+                  {store.snapshots[String(w.number)] ? " · saved" : ""}
+                </option>
+              ))}
             </select>
           </label>
           <button type="button" className="primary-btn" onClick={handleSaveSnapshot}>

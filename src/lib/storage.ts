@@ -1,15 +1,117 @@
 "use client";
 
 import { useCallback, useSyncExternalStore } from "react";
-import { FBS_TEAM_COUNT, SEASON_YEAR, STORAGE_KEY } from "./season";
+import {
+  FBS_TEAM_COUNT,
+  LEGACY_STORAGE_KEY,
+  PRESEASON_WEEK,
+  SEASON_YEAR,
+  STORAGE_KEY,
+  formatWeekLabel,
+} from "./season";
 import type { RankingStore, WeekSnapshot } from "./types";
 
-function emptyStore(activeWeek = 1): RankingStore {
+/** Bump when storage shape/migration rules change. */
+export const STORE_SCHEMA_VERSION = 2;
+
+function emptyStore(activeWeek = PRESEASON_WEEK): RankingStore {
   return {
     season: SEASON_YEAR,
+    schemaVersion: STORE_SCHEMA_VERSION,
     activeWeek,
     drafts: {},
     snapshots: {},
+  };
+}
+
+/** Move existing Week 1 (or active-week) ballots into Preseason once. */
+export function migrateRankingsToPreseason(store: RankingStore): RankingStore {
+  const preKey = String(PRESEASON_WEEK);
+  const drafts = { ...store.drafts };
+  const snapshots = { ...store.snapshots };
+
+  const hasPreseason =
+    (drafts[preKey]?.length ?? 0) > 0 || Boolean(snapshots[preKey]);
+  if (hasPreseason) {
+    return {
+      ...store,
+      drafts,
+      snapshots,
+      activeWeek:
+        typeof store.activeWeek === "number" ? store.activeWeek : PRESEASON_WEEK,
+      schemaVersion: STORE_SCHEMA_VERSION,
+    };
+  }
+
+  const activeKey = String(
+    typeof store.activeWeek === "number" ? store.activeWeek : 1,
+  );
+  let sourceKey: string | null = null;
+  if ((drafts["1"]?.length ?? 0) > 0 || snapshots["1"]) {
+    sourceKey = "1";
+  } else if (
+    activeKey !== preKey &&
+    ((drafts[activeKey]?.length ?? 0) > 0 || snapshots[activeKey])
+  ) {
+    sourceKey = activeKey;
+  } else {
+    sourceKey =
+      Object.keys(drafts).find((k) => (drafts[k]?.length ?? 0) > 0 && k !== preKey) ??
+      Object.keys(snapshots).find((k) => k !== preKey) ??
+      null;
+  }
+
+  if (!sourceKey) {
+    return {
+      ...store,
+      drafts,
+      snapshots,
+      activeWeek: PRESEASON_WEEK,
+      schemaVersion: STORE_SCHEMA_VERSION,
+    };
+  }
+
+  if (drafts[sourceKey]) {
+    drafts[preKey] = [...drafts[sourceKey]];
+    delete drafts[sourceKey];
+  }
+  if (snapshots[sourceKey]) {
+    const prior = snapshots[sourceKey];
+    snapshots[preKey] = {
+      ...prior,
+      week: PRESEASON_WEEK,
+      label: formatWeekLabel(PRESEASON_WEEK),
+    };
+    delete snapshots[sourceKey];
+  }
+
+  return {
+    ...store,
+    drafts,
+    snapshots,
+    activeWeek: PRESEASON_WEEK,
+    schemaVersion: STORE_SCHEMA_VERSION,
+  };
+}
+
+function normalizeStore(parsed: RankingStore): RankingStore {
+  const activeWeek =
+    typeof parsed.activeWeek === "number" ? parsed.activeWeek : PRESEASON_WEEK;
+  let store: RankingStore = {
+    ...emptyStore(activeWeek),
+    ...parsed,
+    drafts: parsed.drafts || {},
+    snapshots: parsed.snapshots || {},
+  };
+
+  const version = store.schemaVersion ?? 1;
+  if (version < 2) {
+    store = migrateRankingsToPreseason(store);
+  }
+
+  return {
+    ...store,
+    schemaVersion: STORE_SCHEMA_VERSION,
   };
 }
 
@@ -24,28 +126,43 @@ function emit() {
   for (const listener of listeners) listener();
 }
 
+function readRawStore(): RankingStore | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw) as RankingStore;
+
+    const legacy = window.localStorage.getItem(LEGACY_STORAGE_KEY);
+    if (legacy) {
+      const migrated = normalizeStore(JSON.parse(legacy) as RankingStore);
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
+      return migrated;
+    }
+  } catch {
+    return null;
+  }
+  return null;
+}
+
 export function loadStore(): RankingStore {
   if (typeof window === "undefined") return emptyStore();
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return emptyStore();
-    const parsed = JSON.parse(raw) as RankingStore;
+    const parsed = readRawStore();
+    if (!parsed) return emptyStore();
     if (parsed.season !== SEASON_YEAR) return emptyStore();
-    return {
-      ...emptyStore(parsed.activeWeek || 1),
-      ...parsed,
-      drafts: parsed.drafts || {},
-      snapshots: parsed.snapshots || {},
-    };
+    return normalizeStore(parsed);
   } catch {
     return emptyStore();
   }
 }
 
 export function saveStore(store: RankingStore) {
-  memoryStore = store;
+  memoryStore = {
+    ...store,
+    schemaVersion: STORE_SCHEMA_VERSION,
+  };
   if (typeof window !== "undefined") {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(memoryStore));
   }
   emit();
 }
@@ -65,9 +182,10 @@ function getServerSnapshot(): RankingStore {
   return serverSnapshot;
 }
 
-export function hydrateStoreFromLocalStorage() {
+export function hydrateStoreFromLocalStorage(): RankingStore {
   memoryStore = loadStore();
   emit();
+  return memoryStore;
 }
 
 export function useRankingStore(): [RankingStore, (next: RankingStore) => void] {
@@ -146,7 +264,7 @@ export function importStoreJson(raw: string): RankingStore {
   if (parsed.season !== SEASON_YEAR) {
     throw new Error(`Expected season ${SEASON_YEAR}`);
   }
-  return parsed;
+  return normalizeStore(parsed);
 }
 
 export function teamRankHistory(
@@ -230,4 +348,3 @@ export function resumeRankMap(
   }
   return map;
 }
-
