@@ -47,9 +47,12 @@ export function RankingApp() {
 
   useEffect(() => {
     let cancelled = false;
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 45000);
+
     (async () => {
       try {
-        const res = await fetch("/api/games");
+        const res = await fetch("/api/games", { signal: controller.signal });
         const json = (await res.json()) as GamesPayload & { error?: string };
         if (!res.ok) throw new Error(json.error || "Failed to load season data");
         if (cancelled) return;
@@ -62,15 +65,24 @@ export function RankingApp() {
         });
       } catch (err) {
         if (!cancelled) {
-          setError(err instanceof Error ? err.message : "Failed to load data");
+          const message =
+            err instanceof Error && err.name === "AbortError"
+              ? "Timed out loading schedules. Refresh to try again."
+              : err instanceof Error
+                ? err.message
+                : "Failed to load data";
+          setError(message);
         }
       } finally {
+        window.clearTimeout(timeout);
         if (!cancelled) setLoading(false);
       }
     })();
 
     return () => {
       cancelled = true;
+      controller.abort();
+      window.clearTimeout(timeout);
     };
     // Mount-only season fetch
     // eslint-disable-next-line react-hooks/exhaustive-deps

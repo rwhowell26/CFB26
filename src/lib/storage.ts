@@ -59,8 +59,10 @@ function getSnapshot(): RankingStore {
   return memoryStore;
 }
 
+const serverSnapshot = emptyStore();
+
 function getServerSnapshot(): RankingStore {
-  return emptyStore();
+  return serverSnapshot;
 }
 
 export function hydrateStoreFromLocalStorage() {
