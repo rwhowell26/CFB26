@@ -243,9 +243,9 @@ export function RankingApp() {
           [
             ["rank", "Rank"],
             ["conferences", "Conferences"],
-            ["movers", "Movers"],
             ["compare", "Compare"],
             ["history", "History"],
+            ["movers", "Movers"],
           ] as const
         ).map(([id, label]) => (
           <button
