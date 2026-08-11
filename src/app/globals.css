@@ -603,6 +603,20 @@ input[type="password"],
   font-size: 0.85rem;
 }
 
+.conference-overall {
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  font-size: 1.15rem;
+  color: var(--turf-deep);
+}
+
+.conference-avg {
+  margin-left: 0.45rem;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--turf);
+  letter-spacing: 0;
+}
+
 .sos-tab-wrap {
   display: grid;
   gap: 1rem;
