@@ -553,10 +553,81 @@ input[type="password"],
   font-size: 0.85rem;
 }
 
-.conference-overall {
+.movers-wrap {
+  display: grid;
+  gap: 1rem;
+}
+
+.movers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.movers-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.movers-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2.1rem 1.8rem 1fr auto;
+  gap: 0.55rem;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.55);
+  padding: 0.35rem 0.45rem;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+}
+
+.movers-row.selected {
+  border-color: rgba(31, 107, 69, 0.45);
+  background: rgba(31, 107, 69, 0.08);
+}
+
+.movers-team {
+  display: grid;
+  min-width: 0;
+}
+
+.movers-team strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.movers-team em {
+  color: var(--muted);
+  font-style: normal;
+  font-size: 0.85rem;
+}
+
+.movers-delta {
   font-family: var(--font-display), "Barlow Condensed", sans-serif;
-  font-size: 1.15rem;
-  color: var(--turf-deep);
+  font-size: 1.2rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.movers-delta.up {
+  color: var(--win);
+}
+
+.movers-delta.down {
+  color: var(--loss);
+}
+
+.movers-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
 }
 
 .history-rank-list {
@@ -659,7 +730,8 @@ input[type="password"],
   .rank-layout,
   .compare-grid,
   .history-wrap,
-  .conference-grid {
+  .conference-grid,
+  .movers-grid {
     grid-template-columns: 1fr;
   }
 
