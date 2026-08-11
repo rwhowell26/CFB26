@@ -1,0 +1,327 @@
+"use client";
+
+import { useEffect, useMemo, useState, useTransition } from "react";
+import { CompareTool } from "@/components/CompareTool";
+import { HistoryTab } from "@/components/HistoryTab";
+import { RankingBoard } from "@/components/RankingBoard";
+import { TeamResume } from "@/components/TeamResume";
+import { WarningsList } from "@/components/WarningsList";
+import {
+  philosophyWarnings,
+  rankMapFromOrder,
+  recordFromGames,
+} from "@/lib/ranking-logic";
+import { FBS_TEAM_COUNT, SEASON_YEAR } from "@/lib/season";
+import {
+  clearDraft,
+  exportStoreJson,
+  getDraftOrder,
+  importStoreJson,
+  saveSnapshot,
+  setDraftOrder,
+  useRankingStore,
+} from "@/lib/storage";
+import type { Game, SeasonWeek, Team } from "@/lib/types";
+
+type Tab = "rank" | "compare" | "history";
+
+type GamesPayload = {
+  season: number;
+  currentWeek: number;
+  teams: Team[];
+  weeks: SeasonWeek[];
+  games: Game[];
+};
+
+export function RankingApp() {
+  const [data, setData] = useState<GamesPayload | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [store, setStore] = useRankingStore();
+  const [week, setWeek] = useState(() => store.activeWeek || 1);
+  const [tab, setTab] = useState<Tab>("rank");
+  const [selectedTeamId, setSelectedTeamId] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
+  const [message, setMessage] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/api/games");
+        const json = (await res.json()) as GamesPayload & { error?: string };
+        if (!res.ok) throw new Error(json.error || "Failed to load season data");
+        if (cancelled) return;
+        setData(json);
+
+        setWeek((prev) => {
+          if (store.drafts[String(prev)] || store.snapshots[String(prev)]) return prev;
+          if (store.activeWeek && store.activeWeek !== 1) return store.activeWeek;
+          return json.currentWeek || prev;
+        });
+      } catch (err) {
+        if (!cancelled) {
+          setError(err instanceof Error ? err.message : "Failed to load data");
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+    // Mount-only season fetch
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const teams = useMemo(() => data?.teams ?? [], [data]);
+  const games = useMemo(() => data?.games ?? [], [data]);
+  const weeks = data?.weeks ?? [];
+  const teamsById = useMemo(() => new Map(teams.map((t) => [t.id, t])), [teams]);
+
+  const rankedIds = useMemo(() => getDraftOrder(store, week), [store, week]);
+  const rankedSet = useMemo(() => new Set(rankedIds), [rankedIds]);
+  const unrankedIds = useMemo(
+    () => teams.map((t) => t.id).filter((id) => !rankedSet.has(id)),
+    [teams, rankedSet],
+  );
+
+  const ranks = useMemo(() => rankMapFromOrder(rankedIds), [rankedIds]);
+  const records = useMemo(() => {
+    const map = new Map<string, { wins: number; losses: number }>();
+    for (const team of teams) {
+      map.set(team.id, recordFromGames(team.id, games));
+    }
+    return map;
+  }, [teams, games]);
+
+  const warnings = useMemo(
+    () => philosophyWarnings(rankedIds, teamsById, games),
+    [rankedIds, teamsById, games],
+  );
+
+  const selectedTeam = selectedTeamId ? teamsById.get(selectedTeamId) : null;
+  const weekMeta = weeks.find((w) => w.number === week);
+  const snapshotExists = Boolean(store.snapshots[String(week)]);
+
+  const updateRanked = (nextRanked: string[]) => {
+    startTransition(() => {
+      setStore(setDraftOrder(store, week, nextRanked));
+    });
+  };
+
+  const changeWeek = (nextWeek: number) => {
+    setWeek(nextWeek);
+    const next = { ...store, activeWeek: nextWeek };
+    if (!next.drafts[String(nextWeek)] && !next.snapshots[String(nextWeek)]) {
+      next.drafts = { ...next.drafts, [String(nextWeek)]: [] };
+    } else if (next.snapshots[String(nextWeek)] && !next.drafts[String(nextWeek)]) {
+      next.drafts = {
+        ...next.drafts,
+        [String(nextWeek)]: [...next.snapshots[String(nextWeek)].rankedIds],
+      };
+    }
+    setStore(next);
+    setMessage(null);
+  };
+
+  const handleSaveSnapshot = () => {
+    try {
+      const label = weekMeta?.label || `Week ${week}`;
+      setStore(saveSnapshot(store, week, label, rankedIds));
+      setMessage(`Saved ${label} snapshot (${FBS_TEAM_COUNT} teams).`);
+    } catch (err) {
+      setMessage(err instanceof Error ? err.message : "Could not save snapshot");
+    }
+  };
+
+  const handleFreshWeek = () => {
+    if (!confirm(`Clear Week ${week} draft and start fresh?`)) return;
+    const next = clearDraft(store, week);
+    next.drafts[String(week)] = [];
+    setStore(next);
+    setMessage(`Week ${week} draft cleared.`);
+  };
+
+  const handleExport = () => {
+    const blob = new Blob([exportStoreJson(store)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `cfb${SEASON_YEAR}-rankings.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleImport = async (file: File | null) => {
+    if (!file) return;
+    try {
+      const text = await file.text();
+      const imported = importStoreJson(text);
+      setStore(imported);
+      setWeek(imported.activeWeek || week);
+      setMessage("Imported rankings backup.");
+    } catch (err) {
+      setMessage(err instanceof Error ? err.message : "Import failed");
+    }
+  };
+
+  if (loading) {
+    return <div className="boot">Loading {SEASON_YEAR} FBS schedules…</div>;
+  }
+
+  if (error || !data) {
+    return (
+      <div className="boot error">
+        <p>Could not load season data.</p>
+        <p>{error}</p>
+        <button type="button" className="primary-btn" onClick={() => window.location.reload()}>
+          Retry
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="app-shell">
+      <header className="topbar">
+        <div className="brand-block">
+          <p className="brand">CFB{String(SEASON_YEAR).slice(2)}</p>
+          <h1>Personal FBS Rankings</h1>
+          <p className="tagline">
+            Drag-and-drop ballot · games played drive the resume · wins over everything
+          </p>
+        </div>
+        <div className="top-actions">
+          <label className="week-select">
+            Ranking week
+            <select value={week} onChange={(e) => changeWeek(Number(e.target.value))}>
+              {(weeks.length ? weeks : [{ number: week, label: `Week ${week}`, detail: "" }]).map(
+                (w) => (
+                  <option key={w.number} value={w.number}>
+                    {w.label}
+                    {store.snapshots[String(w.number)] ? " · saved" : ""}
+                  </option>
+                ),
+              )}
+            </select>
+          </label>
+          <button type="button" className="primary-btn" onClick={handleSaveSnapshot}>
+            Save week
+          </button>
+          <button type="button" className="ghost-btn" onClick={handleFreshWeek}>
+            Start fresh
+          </button>
+        </div>
+      </header>
+
+      <nav className="tabs" aria-label="Main">
+        {(
+          [
+            ["rank", "Rank"],
+            ["compare", "Compare"],
+            ["history", "History"],
+          ] as const
+        ).map(([id, label]) => (
+          <button
+            key={id}
+            type="button"
+            className={tab === id ? "active" : ""}
+            onClick={() => setTab(id)}
+          >
+            {label}
+          </button>
+        ))}
+      </nav>
+
+      <div className="toolbar">
+        <input
+          type="search"
+          placeholder="Search teams or conferences"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <div className="toolbar-meta">
+          <span>
+            {rankedIds.length}/{FBS_TEAM_COUNT} ranked
+            {snapshotExists ? " · snapshot saved" : ""}
+            {isPending ? " · updating…" : ""}
+          </span>
+          <button type="button" className="ghost-btn" onClick={handleExport}>
+            Export
+          </button>
+          <label className="ghost-btn file-btn">
+            Import
+            <input
+              type="file"
+              accept="application/json,.json"
+              hidden
+              onChange={(e) => handleImport(e.target.files?.[0] ?? null)}
+            />
+          </label>
+        </div>
+      </div>
+
+      {message ? <div className="toast">{message}</div> : null}
+
+      {tab === "rank" ? (
+        <div className="rank-page">
+          <RankingBoard
+            teamsById={teamsById}
+            rankedIds={rankedIds}
+            unrankedIds={unrankedIds}
+            records={records}
+            onChange={updateRanked}
+            onSelectTeam={setSelectedTeamId}
+            selectedTeamId={selectedTeamId}
+            search={search}
+          />
+          <aside className="side-column">
+            {selectedTeam ? (
+              <TeamResume
+                team={selectedTeam}
+                games={games}
+                ranks={ranks}
+                onClose={() => setSelectedTeamId(null)}
+              />
+            ) : (
+              <section className="panel">
+                <header className="panel-header">
+                  <h2>Resume</h2>
+                  <p>Select a team to see games played, home/away, opponent ranks, and SOS.</p>
+                </header>
+              </section>
+            )}
+            <WarningsList warnings={warnings} />
+            {selectedTeamId && rankedIds.includes(selectedTeamId) ? (
+              <button
+                type="button"
+                className="ghost-btn"
+                onClick={() => updateRanked(rankedIds.filter((id) => id !== selectedTeamId))}
+              >
+                Remove selected from ballot
+              </button>
+            ) : null}
+          </aside>
+        </div>
+      ) : null}
+
+      {tab === "compare" ? (
+        <CompareTool teams={teams} games={games} ranks={ranks} />
+      ) : null}
+
+      {tab === "history" ? (
+        <HistoryTab
+          store={store}
+          teams={teams}
+          onLoadWeek={(w) => {
+            changeWeek(w);
+            setTab("rank");
+          }}
+        />
+      ) : null}
+    </div>
+  );
+}
