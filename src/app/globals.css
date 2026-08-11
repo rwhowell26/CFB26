@@ -253,11 +253,36 @@ input[type="password"],
   background: rgba(255, 255, 255, 0.55);
 }
 
+.pool-item {
+  grid-template-columns: auto 1fr auto;
+}
+
 .rank-item.selected,
 .pool-item.selected,
 .team-row-active {
   border-color: rgba(31, 107, 69, 0.45);
   background: rgba(31, 107, 69, 0.08);
+}
+
+.pool-actions {
+  display: flex;
+  gap: 0.3rem;
+  padding-right: 0.35rem;
+}
+
+.pool-actions button {
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  padding: 0.3rem 0.55rem;
+  cursor: pointer;
+  background: #fffef9;
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.pool-actions button:hover {
+  border-color: rgba(31, 107, 69, 0.45);
 }
 
 .rank-drop-zone,

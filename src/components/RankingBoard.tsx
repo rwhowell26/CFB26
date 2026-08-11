@@ -134,12 +134,16 @@ function DraggablePoolItem({
   record,
   selected,
   onSelect,
+  onAddTop,
+  onAddBottom,
 }: {
   id: string;
   team: Team;
   record: { wins: number; losses: number };
   selected: boolean;
   onSelect: () => void;
+  onAddTop: () => void;
+  onAddBottom: () => void;
 }) {
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id,
@@ -164,6 +168,14 @@ function DraggablePoolItem({
       <button type="button" className="team-select" onClick={onSelect}>
         <TeamRowContent team={team} rank={null} record={record} active={selected} />
       </button>
+      <div className="pool-actions">
+        <button type="button" onClick={onAddTop} title="Add to top">
+          Top
+        </button>
+        <button type="button" onClick={onAddBottom} title="Add to bottom">
+          Bottom
+        </button>
+      </div>
     </li>
   );
 }
@@ -268,6 +280,12 @@ export function RankingBoard({
   const activeRank =
     activeId && rankedIds.includes(activeId) ? rankedIds.indexOf(activeId) + 1 : null;
 
+  const addTeam = (teamId: string, position: "top" | "bottom") => {
+    if (rankedIds.includes(teamId)) return;
+    if (position === "top") onChange([teamId, ...rankedIds]);
+    else onChange([...rankedIds, teamId]);
+  };
+
   return (
     <DndContext
       sensors={sensors}
@@ -315,7 +333,7 @@ export function RankingBoard({
         <section className="panel">
           <header className="panel-header">
             <h2>Unranked pool</h2>
-            <p>Sorted by record (best first). Drag a team into your rankings.</p>
+            <p>Sorted by record. Drag in, or use Top / Bottom.</p>
           </header>
           <DroppableList id={UNRANKED_CONTAINER} className="pool-drop-zone">
             <ul className="pool-list">
@@ -331,6 +349,8 @@ export function RankingBoard({
                     record={record}
                     selected={selectedTeamId === id}
                     onSelect={() => onSelectTeam(id)}
+                    onAddTop={() => addTeam(id, "top")}
+                    onAddBottom={() => addTeam(id, "bottom")}
                   />
                 );
               })}
