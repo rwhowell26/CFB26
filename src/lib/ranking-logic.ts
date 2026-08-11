@@ -250,3 +250,15 @@ export function formatRank(rank: number | null | undefined, isFbs: boolean): str
   if (rank == null) return "NR";
   return `#${rank}`;
 }
+
+export function formatResumeRank(
+  resolved: { rank: number; source: "current" | "prior"; week?: number } | null,
+  isFbs: boolean,
+): string {
+  if (!isFbs) return "FCS";
+  if (!resolved) return "NR";
+  if (resolved.source === "prior") {
+    return `#${resolved.rank}·W${resolved.week ?? "?"}`;
+  }
+  return `#${resolved.rank}`;
+}

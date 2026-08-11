@@ -18,6 +18,8 @@ import {
   exportStoreJson,
   getDraftOrder,
   importStoreJson,
+  mostRecentPriorRanks,
+  resumeRankMap,
   saveSnapshot,
   setDraftOrder,
   useRankingStore,
@@ -102,6 +104,11 @@ export function RankingApp() {
   );
 
   const ranks = useMemo(() => rankMapFromOrder(rankedIds), [rankedIds]);
+  const priorRanks = useMemo(() => mostRecentPriorRanks(store), [store]);
+  const resumeRanks = useMemo(
+    () => resumeRankMap(ranks, priorRanks, teams.map((t) => t.id)),
+    [ranks, priorRanks, teams],
+  );
   const records = useMemo(() => {
     const map = new Map<string, { wins: number; losses: number }>();
     for (const team of teams) {
@@ -297,7 +304,9 @@ export function RankingApp() {
               <TeamResume
                 team={selectedTeam}
                 games={games}
-                ranks={ranks}
+                currentRanks={ranks}
+                priorRanks={priorRanks}
+                resumeRanks={resumeRanks}
                 onClose={() => setSelectedTeamId(null)}
               />
             ) : (

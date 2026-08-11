@@ -2,16 +2,23 @@
 
 import {
   computeSos,
-  formatRank,
+  formatResumeRank,
   gamesForTeam,
   recordFromGames,
 } from "@/lib/ranking-logic";
+import type { PriorRank, ResumeRank } from "@/lib/storage";
+import { resolveResumeRank } from "@/lib/storage";
 import type { Game, Team } from "@/lib/types";
 
 type Props = {
   team: Team;
   games: Game[];
-  ranks: Map<string, number>;
+  /** Current-week ballot ranks only */
+  currentRanks: Map<string, number>;
+  /** Most recent saved snapshot ranks */
+  priorRanks: Map<string, PriorRank>;
+  /** Effective ranks for SOS / opponent display (current with prior fallback) */
+  resumeRanks: Map<string, number>;
   onClose?: () => void;
 };
 
@@ -21,12 +28,37 @@ function locLabel(location: "home" | "away" | "neutral") {
   return "n";
 }
 
-export function TeamResume({ team, games, ranks, onClose }: Props) {
-  const played = gamesForTeam(team.id, games, ranks, { playedOnly: true });
-  const upcoming = gamesForTeam(team.id, games, ranks).filter((g) => g.status !== "final");
+function rankCaption(resolved: ResumeRank | null): string {
+  if (!resolved) return "Not ranked yet";
+  if (resolved.source === "prior") {
+    return `Last saved ${resolved.label ?? `Week ${resolved.week}`} · not on this week's ballot yet`;
+  }
+  return "This week's ballot";
+}
+
+export function TeamResume({
+  team,
+  games,
+  currentRanks,
+  priorRanks,
+  resumeRanks,
+  onClose,
+}: Props) {
+  const played = gamesForTeam(team.id, games, resumeRanks, { playedOnly: true });
+  const upcoming = gamesForTeam(team.id, games, resumeRanks).filter((g) => g.status !== "final");
   const record = recordFromGames(team.id, games);
-  const sos = computeSos(team.id, games, ranks);
-  const rank = ranks.get(team.id) ?? null;
+  const sos = computeSos(team.id, games, resumeRanks);
+  const teamResolved = resolveResumeRank(team.id, currentRanks, priorRanks);
+
+  const oppLabel = (opponentId: string | null, opponentIsFbs: boolean) => {
+    if (!opponentIsFbs || !opponentId) {
+      return formatResumeRank(null, opponentIsFbs);
+    }
+    return formatResumeRank(
+      resolveResumeRank(opponentId, currentRanks, priorRanks),
+      true,
+    );
+  };
 
   return (
     <section className="panel resume-panel">
@@ -39,12 +71,13 @@ export function TeamResume({ team, games, ranks, onClose }: Props) {
           <div>
             <p className="eyebrow">Team resume · games played</p>
             <h2>
-              {rank != null ? `#${rank} ` : ""}
+              {teamResolved ? `${formatResumeRank(teamResolved, true)} ` : ""}
               {team.name}
             </h2>
             <p>
               {record.wins}-{record.losses} · {team.conference}
             </p>
+            <p className="resume-rank-note">{rankCaption(teamResolved)}</p>
           </div>
         </div>
         {onClose ? (
@@ -60,7 +93,9 @@ export function TeamResume({ team, games, ranks, onClose }: Props) {
           <strong>
             {sos.playedAvgRank != null ? sos.playedAvgRank.toFixed(1) : "—"}
           </strong>
-          <em>{sos.playedCount} games{sos.fcsPlayed ? ` · ${sos.fcsPlayed} FCS` : ""}</em>
+          <em>
+            {sos.playedCount} games{sos.fcsPlayed ? ` · ${sos.fcsPlayed} FCS` : ""}
+          </em>
         </div>
         <div>
           <span className="sos-label">SOS remaining</span>
@@ -70,6 +105,10 @@ export function TeamResume({ team, games, ranks, onClose }: Props) {
           <em>{sos.remainingCount} left</em>
         </div>
       </div>
+      <p className="resume-rank-note">
+        Opponent ranks use this week&apos;s ballot when placed; otherwise the latest saved week
+        (`#12·W3`).
+      </p>
 
       <h3 className="section-label">Played</h3>
       {played.length ? (
@@ -79,7 +118,7 @@ export function TeamResume({ team, games, ranks, onClose }: Props) {
               <span className="game-week">W{g.week}</span>
               <span className="game-loc">{locLabel(g.location)}</span>
               <span className="game-opp">
-                {formatRank(g.opponentRank, g.opponentIsFbs)} {g.opponentName}
+                {oppLabel(g.opponentId, g.opponentIsFbs)} {g.opponentName}
               </span>
               <span className="game-score">
                 {g.result} {g.teamScore}-{g.opponentScore}
@@ -99,7 +138,7 @@ export function TeamResume({ team, games, ranks, onClose }: Props) {
               <span className="game-week">W{g.week}</span>
               <span className="game-loc">{locLabel(g.location)}</span>
               <span className="game-opp">
-                {formatRank(g.opponentRank, g.opponentIsFbs)} {g.opponentName}
+                {oppLabel(g.opponentId, g.opponentIsFbs)} {g.opponentName}
               </span>
               <span className="game-score">
                 {new Date(g.date).toLocaleDateString(undefined, {

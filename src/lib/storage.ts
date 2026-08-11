@@ -163,3 +163,71 @@ export function teamRankHistory(
     };
   });
 }
+
+export type PriorRank = {
+  rank: number;
+  week: number;
+  label: string;
+};
+
+/** Most recent saved ballot rank for each team. */
+export function mostRecentPriorRanks(store: RankingStore): Map<string, PriorRank> {
+  const map = new Map<string, PriorRank>();
+  const snaps = Object.values(store.snapshots).sort((a, b) => a.week - b.week);
+  for (const snap of snaps) {
+    snap.rankedIds.forEach((id, index) => {
+      map.set(id, {
+        rank: index + 1,
+        week: snap.week,
+        label: snap.label,
+      });
+    });
+  }
+  return map;
+}
+
+export type ResumeRank = {
+  rank: number;
+  source: "current" | "prior";
+  week?: number;
+  label?: string;
+};
+
+/**
+ * Current-week rank when the team is on this week's ballot;
+ * otherwise fall back to the most recent saved weekly rank.
+ */
+export function resolveResumeRank(
+  teamId: string,
+  currentRanks: Map<string, number>,
+  priorRanks: Map<string, PriorRank>,
+): ResumeRank | null {
+  const current = currentRanks.get(teamId);
+  if (current != null) {
+    return { rank: current, source: "current" };
+  }
+  const prior = priorRanks.get(teamId);
+  if (prior) {
+    return {
+      rank: prior.rank,
+      source: "prior",
+      week: prior.week,
+      label: prior.label,
+    };
+  }
+  return null;
+}
+
+export function resumeRankMap(
+  currentRanks: Map<string, number>,
+  priorRanks: Map<string, PriorRank>,
+  teamIds: string[],
+): Map<string, number> {
+  const map = new Map<string, number>();
+  for (const id of teamIds) {
+    const resolved = resolveResumeRank(id, currentRanks, priorRanks);
+    if (resolved) map.set(id, resolved.rank);
+  }
+  return map;
+}
+
