@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { shortConferenceName } from "@/lib/conferences";
+import { normalizeConferenceName, shortConferenceName } from "@/lib/conferences";
 import { computeSos } from "@/lib/ranking-logic";
 import type { Game, Team } from "@/lib/types";
 
@@ -22,7 +22,7 @@ type SosRow = {
   playedAvgRank: number | null;
   remainingAvgRank: number | null;
   fbsOpponentCount: number;
-  fcsTotal: number;
+  conferenceRank: number | null;
   record: { wins: number; losses: number };
   overallRank: number | null;
 };
@@ -40,6 +40,35 @@ function teamMatches(team: Team, query: string): boolean {
   );
 }
 
+function conferenceRanksFor(
+  teams: Team[],
+  ranks: Map<string, number>,
+): Map<string, number> {
+  const byConf = new Map<string, Team[]>();
+  for (const team of teams) {
+    const key = normalizeConferenceName(team.conference);
+    const list = byConf.get(key) ?? [];
+    list.push(team);
+    byConf.set(key, list);
+  }
+
+  const confRanks = new Map<string, number>();
+  for (const members of byConf.values()) {
+    const ordered = [...members].sort((a, b) => {
+      const ar = ranks.get(a.id);
+      const br = ranks.get(b.id);
+      if (ar != null && br != null) return ar - br;
+      if (ar != null) return -1;
+      if (br != null) return 1;
+      return a.name.localeCompare(b.name);
+    });
+    ordered.forEach((team, index) => {
+      if (ranks.has(team.id)) confRanks.set(team.id, index + 1);
+    });
+  }
+  return confRanks;
+}
+
 export function SosTab({
   teams,
   games,
@@ -50,6 +79,7 @@ export function SosTab({
   search = "",
 }: Props) {
   const [mode, setMode] = useState<"total" | "played" | "remaining">("total");
+  const conferenceRanks = useMemo(() => conferenceRanksFor(teams, ranks), [teams, ranks]);
 
   const rows = useMemo(() => {
     const built: SosRow[] = [];
@@ -68,7 +98,7 @@ export function SosTab({
         playedAvgRank: sos.playedAvgRank,
         remainingAvgRank: sos.remainingAvgRank,
         fbsOpponentCount: sos.fbsOpponentCount,
-        fcsTotal: sos.fcsTotal,
+        conferenceRank: conferenceRanks.get(team.id) ?? null,
         record: records.get(team.id) ?? { wins: 0, losses: 0 },
         overallRank: ranks.get(team.id) ?? null,
       });
@@ -83,7 +113,7 @@ export function SosTab({
     return built
       .filter((row) => teamMatches(row.team, search))
       .sort((a, b) => value(a) - value(b) || a.team.name.localeCompare(b.team.name));
-  }, [teams, games, ranks, records, mode, search]);
+  }, [teams, games, ranks, records, mode, search, conferenceRanks]);
 
   return (
     <div className="sos-tab-wrap">
@@ -129,6 +159,7 @@ export function SosTab({
                   : mode === "remaining"
                     ? row.remainingAvgRank
                     : row.totalAvgRank;
+              const conf = shortConferenceName(row.team.conference);
               return (
                 <li key={row.team.id}>
                   <button
@@ -144,8 +175,7 @@ export function SosTab({
                     <span className="sos-rank-team">
                       <strong>{row.team.shortName}</strong>
                       <em>
-                        {shortConferenceName(row.team.conference)} · {row.record.wins}-
-                        {row.record.losses}
+                        {conf} · {row.record.wins}-{row.record.losses}
                         {row.overallRank != null ? ` · ballot #${row.overallRank}` : " · NR"}
                       </em>
                     </span>
@@ -153,7 +183,9 @@ export function SosTab({
                       <strong>{metric != null ? metric.toFixed(1) : "—"}</strong>
                       <em>
                         {row.fbsOpponentCount} FBS
-                        {row.fcsTotal ? ` · ${row.fcsTotal} FCS` : ""}
+                        {row.conferenceRank != null
+                          ? ` · #${row.conferenceRank} ${conf}`
+                          : ` · NR ${conf}`}
                       </em>
                     </span>
                   </button>
