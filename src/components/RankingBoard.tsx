@@ -20,6 +20,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useMemo, useState, type ReactNode } from "react";
+import { shortConferenceName } from "@/lib/conferences";
 import { insertIndexByRecord, sortTeamIdsByRecord } from "@/lib/ranking-logic";
 import type { Team } from "@/lib/types";
 
@@ -60,7 +61,7 @@ function TeamRowContent({
       <div className="team-meta">
         <div className="team-name">{team.shortName}</div>
         <div className="team-sub">
-          {team.conference.replace(" Conference", "")} · {record.wins}-{record.losses}
+          {shortConferenceName(team.conference)} · {record.wins}-{record.losses}
         </div>
       </div>
     </div>

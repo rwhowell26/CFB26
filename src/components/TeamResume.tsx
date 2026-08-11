@@ -6,6 +6,7 @@ import {
   gamesForTeam,
   recordFromGames,
 } from "@/lib/ranking-logic";
+import { shortConferenceName } from "@/lib/conferences";
 import type { PriorRank, ResumeRank } from "@/lib/storage";
 import { resolveResumeRank } from "@/lib/storage";
 import type { Game, Team } from "@/lib/types";
@@ -75,7 +76,7 @@ export function TeamResume({
               {team.name}
             </h2>
             <p>
-              {record.wins}-{record.losses} · {team.conference}
+              {record.wins}-{record.losses} · {shortConferenceName(team.conference)}
             </p>
             <p className="resume-rank-note">{rankCaption(teamResolved)}</p>
           </div>
