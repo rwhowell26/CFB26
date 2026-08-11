@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { normalizeConferenceName, shortConferenceName } from "@/lib/conferences";
 import type { Team } from "@/lib/types";
 
 type Props = {
@@ -10,17 +11,6 @@ type Props = {
   onSelectTeam?: (teamId: string) => void;
   selectedTeamId?: string | null;
 };
-
-function displayConference(name: string): string {
-  if (name.startsWith("Sun Belt")) return "Sun Belt Conference";
-  return name;
-}
-
-function shortConference(name: string): string {
-  return displayConference(name)
-    .replace(" Conference", "")
-    .replace("FBS Independents", "Independents");
-}
 
 export function ConferenceTab({
   teams,
@@ -32,7 +22,7 @@ export function ConferenceTab({
   const conferences = useMemo(() => {
     const groups = new Map<string, Team[]>();
     for (const team of teams) {
-      const key = displayConference(team.conference);
+      const key = normalizeConferenceName(team.conference);
       const list = groups.get(key) ?? [];
       list.push(team);
       groups.set(key, list);
@@ -63,7 +53,7 @@ export function ConferenceTab({
         }
         if (a.bestOverall != null) return -1;
         if (b.bestOverall != null) return 1;
-        return a.name.localeCompare(b.name);
+        return shortConferenceName(a.name).localeCompare(shortConferenceName(b.name));
       });
   }, [teams, ranks]);
 
@@ -86,7 +76,7 @@ export function ConferenceTab({
             <option value="all">All conferences</option>
             {conferences.map((c) => (
               <option key={c.name} value={c.name}>
-                {shortConference(c.name)}
+                {shortConferenceName(c.name)}
                 {c.bestOverall != null ? ` · best #${c.bestOverall}` : " · none ranked"}
               </option>
             ))}
@@ -98,7 +88,7 @@ export function ConferenceTab({
         {visible.map((conf) => (
           <section key={conf.name} className="panel conference-card">
             <header className="panel-header">
-              <h2>{shortConference(conf.name)}</h2>
+              <h2>{shortConferenceName(conf.name)}</h2>
               <p>
                 {conf.rankedCount}/{conf.ordered.length} ranked
                 {conf.bestOverall != null ? ` · best overall #${conf.bestOverall}` : ""}
