@@ -97,7 +97,6 @@ main {
 .toolbar,
 .history-controls,
 .compare-controls,
-.pool-actions,
 .tabs {
   display: flex;
   gap: 0.65rem;
@@ -130,7 +129,6 @@ input[type="password"],
 .primary-btn,
 .ghost-btn,
 .file-btn,
-.pool-actions button,
 .tabs button {
   border-radius: 999px;
   border: 1px solid var(--line);
@@ -149,8 +147,7 @@ input[type="password"],
 
 .ghost-btn:hover,
 .file-btn:hover,
-.tabs button:hover,
-.pool-actions button:hover {
+.tabs button:hover {
   border-color: rgba(31, 107, 69, 0.45);
 }
 
@@ -256,15 +253,31 @@ input[type="password"],
   background: rgba(255, 255, 255, 0.55);
 }
 
-.pool-item {
-  grid-template-columns: 1fr auto;
-}
-
 .rank-item.selected,
 .pool-item.selected,
 .team-row-active {
   border-color: rgba(31, 107, 69, 0.45);
   background: rgba(31, 107, 69, 0.08);
+}
+
+.rank-drop-zone,
+.pool-drop-zone {
+  border-radius: 14px;
+  min-height: 8rem;
+  transition: background 0.15s ease, outline-color 0.15s ease;
+  outline: 2px solid transparent;
+}
+
+.rank-drop-zone.drop-over,
+.pool-drop-zone.drop-over {
+  background: rgba(31, 107, 69, 0.08);
+  outline-color: rgba(31, 107, 69, 0.35);
+}
+
+.drop-hint {
+  border: 1px dashed rgba(31, 107, 69, 0.35);
+  border-radius: 12px;
+  margin-top: 0.35rem;
 }
 
 .drag-handle {

@@ -4,7 +4,9 @@ import {
   DndContext,
   DragOverlay,
   PointerSensor,
-  closestCenter,
+  closestCorners,
+  useDraggable,
+  useDroppable,
   useSensor,
   useSensors,
   type DragEndEvent,
@@ -17,9 +19,12 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { insertIndexByRecord, sortTeamIdsByRecord } from "@/lib/ranking-logic";
 import type { Team } from "@/lib/types";
+
+const RANKED_CONTAINER = "ranked-container";
+const UNRANKED_CONTAINER = "unranked-container";
 
 type Props = {
   teamsById: Map<string, Team>;
@@ -78,7 +83,7 @@ function SortableRankedItem({
   onSelect: () => void;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
-    useSortable({ id });
+    useSortable({ id, data: { container: "ranked" } });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -88,13 +93,76 @@ function SortableRankedItem({
 
   return (
     <li ref={setNodeRef} style={style} className={`rank-item ${selected ? "selected" : ""}`}>
-      <button type="button" className="drag-handle" aria-label="Drag to reorder" {...attributes} {...listeners}>
+      <button
+        type="button"
+        className="drag-handle"
+        aria-label="Drag to reorder"
+        {...attributes}
+        {...listeners}
+      >
         ⋮⋮
       </button>
       <button type="button" className="team-select" onClick={onSelect}>
         <TeamRowContent team={team} rank={rank} record={record} active={selected} />
       </button>
     </li>
+  );
+}
+
+function DraggablePoolItem({
+  id,
+  team,
+  record,
+  selected,
+  onSelect,
+}: {
+  id: string;
+  team: Team;
+  record: { wins: number; losses: number };
+  selected: boolean;
+  onSelect: () => void;
+}) {
+  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
+    id,
+    data: { container: "unranked" },
+  });
+
+  return (
+    <li
+      ref={setNodeRef}
+      className={`pool-item ${selected ? "selected" : ""} ${isDragging ? "is-dragging" : ""}`}
+      style={{ opacity: isDragging ? 0.35 : 1 }}
+    >
+      <button
+        type="button"
+        className="drag-handle"
+        aria-label="Drag into rankings"
+        {...attributes}
+        {...listeners}
+      >
+        ⋮⋮
+      </button>
+      <button type="button" className="team-select" onClick={onSelect}>
+        <TeamRowContent team={team} rank={null} record={record} active={selected} />
+      </button>
+    </li>
+  );
+}
+
+function DroppableList({
+  id,
+  className,
+  children,
+}: {
+  id: string;
+  className: string;
+  children: ReactNode;
+}) {
+  const { setNodeRef, isOver } = useDroppable({ id });
+  return (
+    <div ref={setNodeRef} className={`${className}${isOver ? " drop-over" : ""}`}>
+      {children}
+    </div>
   );
 }
 
@@ -131,6 +199,14 @@ export function RankingBoard({
     return sortTeamIdsByRecord(filtered, records, (id) => teamsById.get(id)?.name ?? id);
   }, [search, teamsById, unrankedIds, records]);
 
+  const containerOf = (id: string): "ranked" | "unranked" | null => {
+    if (id === RANKED_CONTAINER) return "ranked";
+    if (id === UNRANKED_CONTAINER) return "unranked";
+    if (rankedIds.includes(id)) return "ranked";
+    if (unrankedIds.includes(id) || filteredUnranked.includes(id)) return "unranked";
+    return null;
+  };
+
   const onDragStart = (event: DragStartEvent) => {
     setActiveId(String(event.active.id));
   };
@@ -138,116 +214,136 @@ export function RankingBoard({
   const onDragEnd = (event: DragEndEvent) => {
     setActiveId(null);
     const { active, over } = event;
-    if (!over || active.id === over.id) return;
-    const oldIndex = rankedIds.indexOf(String(active.id));
-    const newIndex = rankedIds.indexOf(String(over.id));
-    if (oldIndex < 0 || newIndex < 0) return;
-    onChange(arrayMove(rankedIds, oldIndex, newIndex));
-  };
+    if (!over) return;
 
-  const addTeam = (teamId: string, mode: "by-record" | "top" | "bottom" = "by-record") => {
-    if (rankedIds.includes(teamId)) return;
-    const next = [...rankedIds];
-    if (mode === "top") next.unshift(teamId);
-    else if (mode === "bottom") next.push(teamId);
-    else next.splice(insertIndexByRecord(next, teamId, records), 0, teamId);
-    onChange(next);
+    const activeTeamId = String(active.id);
+    const overId = String(over.id);
+    const from = containerOf(activeTeamId);
+    const to = containerOf(overId);
+    if (!from || !to) return;
+
+    // Reorder within rankings
+    if (from === "ranked" && to === "ranked") {
+      if (activeTeamId === overId) return;
+      if (overId === RANKED_CONTAINER) return;
+      const oldIndex = rankedIds.indexOf(activeTeamId);
+      const newIndex = rankedIds.indexOf(overId);
+      if (oldIndex < 0 || newIndex < 0) return;
+      onChange(arrayMove(rankedIds, oldIndex, newIndex));
+      return;
+    }
+
+    // Drag from pool into rankings
+    if (from === "unranked" && to === "ranked") {
+      if (rankedIds.includes(activeTeamId)) return;
+      const next = [...rankedIds];
+      if (overId === RANKED_CONTAINER || next.length === 0) {
+        next.splice(insertIndexByRecord(next, activeTeamId, records), 0, activeTeamId);
+      } else {
+        const overIndex = next.indexOf(overId);
+        next.splice(overIndex < 0 ? next.length : overIndex, 0, activeTeamId);
+      }
+      onChange(next);
+      return;
+    }
+
+    // Drag from rankings back to pool
+    if (from === "ranked" && to === "unranked") {
+      onChange(rankedIds.filter((id) => id !== activeTeamId));
+    }
   };
 
   const activeTeam = activeId ? teamsById.get(activeId) : null;
+  const activeRank =
+    activeId && rankedIds.includes(activeId) ? rankedIds.indexOf(activeId) + 1 : null;
 
   return (
-    <div className="rank-layout">
-      <section className="panel">
-        <header className="panel-header">
-          <h2>Your rankings</h2>
-          <p>
-            {rankedIds.length} / {rankedIds.length + unrankedIds.length} placed · drag to reorder ·
-            start fresh each week
-          </p>
-        </header>
-        <DndContext
-          sensors={sensors}
-          collisionDetection={closestCenter}
-          onDragStart={onDragStart}
-          onDragEnd={onDragEnd}
-        >
-          <SortableContext items={rankedIds} strategy={verticalListSortingStrategy}>
-            <ol className="rank-list">
-              {rankedIds.map((id, index) => {
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCorners}
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
+    >
+      <div className="rank-layout">
+        <section className="panel">
+          <header className="panel-header">
+            <h2>Your rankings</h2>
+            <p>
+              {rankedIds.length} / {rankedIds.length + unrankedIds.length} placed · drag to
+              reorder · drop pool teams here
+            </p>
+          </header>
+          <DroppableList id={RANKED_CONTAINER} className="rank-drop-zone">
+            <SortableContext items={rankedIds} strategy={verticalListSortingStrategy}>
+              <ol className="rank-list">
+                {rankedIds.map((id, index) => {
+                  const team = teamsById.get(id);
+                  if (!team) return null;
+                  return (
+                    <SortableRankedItem
+                      key={id}
+                      id={id}
+                      team={team}
+                      rank={index + 1}
+                      record={records.get(id) ?? { wins: 0, losses: 0 }}
+                      selected={selectedTeamId === id}
+                      onSelect={() => onSelectTeam(id)}
+                    />
+                  );
+                })}
+              </ol>
+            </SortableContext>
+            {!rankedIds.length && (
+              <div className="empty-state drop-hint">
+                Drag teams from the unranked pool into this ballot.
+              </div>
+            )}
+          </DroppableList>
+        </section>
+
+        <section className="panel">
+          <header className="panel-header">
+            <h2>Unranked pool</h2>
+            <p>Sorted by record (best first). Drag a team into your rankings.</p>
+          </header>
+          <DroppableList id={UNRANKED_CONTAINER} className="pool-drop-zone">
+            <ul className="pool-list">
+              {filteredUnranked.map((id) => {
                 const team = teamsById.get(id);
                 if (!team) return null;
+                const record = records.get(id) ?? { wins: 0, losses: 0 };
                 return (
-                  <SortableRankedItem
+                  <DraggablePoolItem
                     key={id}
                     id={id}
                     team={team}
-                    rank={index + 1}
-                    record={records.get(id) ?? { wins: 0, losses: 0 }}
+                    record={record}
                     selected={selectedTeamId === id}
                     onSelect={() => onSelectTeam(id)}
                   />
                 );
               })}
-            </ol>
-          </SortableContext>
-          <DragOverlay>
-            {activeTeam ? (
-              <div className="drag-overlay">
-                <TeamRowContent
-                  team={activeTeam}
-                  rank={(rankedIds.indexOf(activeTeam.id) + 1) || null}
-                  record={records.get(activeTeam.id) ?? { wins: 0, losses: 0 }}
-                />
+            </ul>
+            {!filteredUnranked.length && (
+              <div className="empty-state">
+                {unrankedIds.length ? "No teams match your search." : "All 138 teams are ranked."}
               </div>
-            ) : null}
-          </DragOverlay>
-        </DndContext>
-        {!rankedIds.length && (
-          <div className="empty-state">Add teams from the pool to begin this week&apos;s ballot.</div>
-        )}
-      </section>
-
-      <section className="panel">
-        <header className="panel-header">
-          <h2>Unranked pool</h2>
-          <p>
-            Sorted by record (best first). + inserts by record into your ballot; +1 forces #1.
-          </p>
-        </header>
-        <ul className="pool-list">
-          {filteredUnranked.map((id) => {
-            const team = teamsById.get(id);
-            if (!team) return null;
-            const record = records.get(id) ?? { wins: 0, losses: 0 };
-            return (
-              <li key={id} className={`pool-item ${selectedTeamId === id ? "selected" : ""}`}>
-                <button type="button" className="team-select" onClick={() => onSelectTeam(id)}>
-                  <TeamRowContent team={team} rank={null} record={record} active={selectedTeamId === id} />
-                </button>
-                <div className="pool-actions">
-                  <button type="button" onClick={() => addTeam(id, "top")} title="Insert at #1">
-                    +1
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => addTeam(id, "by-record")}
-                    title="Insert by record"
-                  >
-                    +
-                  </button>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-        {!filteredUnranked.length && (
-          <div className="empty-state">
-            {unrankedIds.length ? "No teams match your search." : "All 138 teams are ranked."}
-          </div>
-        )}
-      </section>
-
+            )}
+          </DroppableList>
+        </section>
       </div>
+
+      <DragOverlay>
+        {activeTeam ? (
+          <div className="drag-overlay">
+            <TeamRowContent
+              team={activeTeam}
+              rank={activeRank}
+              record={records.get(activeTeam.id) ?? { wins: 0, losses: 0 }}
+            />
+          </div>
+        ) : null}
+      </DragOverlay>
+    </DndContext>
   );
 }
