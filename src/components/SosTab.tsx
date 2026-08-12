@@ -248,63 +248,69 @@ export function SosTab({ teams, games, ranks, records, search = "" }: Props) {
             No SOS data yet. Rank some teams (or save a weekly ballot) so opponent ranks exist.
           </div>
         ) : (
-          <div className="sos-rank-header" aria-hidden>
-            <span />
-            <span />
-            <span>Team</span>
-            <span>{scheduleSosLabel(mode)}</span>
-            <span>SOW</span>
-            <span>SOL</span>
-          </div>
-          <ol className="sos-rank-list">
-            {rows.map((row, index) => {
-              const sosValue = scheduleSos(row, mode);
-              const sosRank = index + 1;
-              return (
-                <li key={row.team.id}>
-                  <button
-                    type="button"
-                    className={`sos-rank-row ${popupTeamId === row.team.id ? "selected" : ""}`}
-                    onClick={() => setPopupTeamId(row.team.id)}
-                  >
-                    <span className="rank-badge">{sosRank}</span>
-                    {row.team.logo ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={row.team.logo} alt="" className="team-logo" />
-                    ) : (
-                      <span className="team-logo team-logo-fallback" aria-hidden>
-                        ·
-                      </span>
-                    )}
-                    <span className="sos-rank-team">
-                      <strong>{row.team.shortName}</strong>
-                      <em>
-                        {row.record.wins}-{row.record.losses}
-                      </em>
-                    </span>
-                    <span
-                      className={`sos-rank-metrics ${
-                        mode === "total" || mode === "played" || mode === "remaining"
-                          ? "primary"
-                          : ""
-                      }`}
+          <>
+            <div className="sos-rank-header" aria-hidden>
+              <span />
+              <span />
+              <span>Team</span>
+              <span>{scheduleSosLabel(mode)}</span>
+              <span>SOW</span>
+              <span>SOL</span>
+            </div>
+            <ol className="sos-rank-list">
+              {rows.map((row, index) => {
+                const sosValue = scheduleSos(row, mode);
+                const sosRank = index + 1;
+                return (
+                  <li key={row.team.id}>
+                    <button
+                      type="button"
+                      className={`sos-rank-row ${popupTeamId === row.team.id ? "selected" : ""}`}
+                      onClick={() => setPopupTeamId(row.team.id)}
                     >
-                      <strong>{sosValue != null ? sosValue.toFixed(1) : "—"}</strong>
-                      <em>{scheduleSosLabel(mode)}</em>
-                    </span>
-                    <span className={`sos-rank-metrics ${mode === "wins" ? "primary" : ""}`}>
-                      <strong>{row.winAvgRank != null ? row.winAvgRank.toFixed(1) : "—"}</strong>
-                      <em>SOW</em>
-                    </span>
-                    <span className={`sos-rank-metrics ${mode === "losses" ? "primary" : ""}`}>
-                      <strong>{row.lossAvgRank != null ? row.lossAvgRank.toFixed(1) : "—"}</strong>
-                      <em>SOL</em>
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
-          </ol>
+                      <span className="rank-badge">{sosRank}</span>
+                      {row.team.logo ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={row.team.logo} alt="" className="team-logo" />
+                      ) : (
+                        <span className="team-logo team-logo-fallback" aria-hidden>
+                          ·
+                        </span>
+                      )}
+                      <span className="sos-rank-team">
+                        <strong>{row.team.shortName}</strong>
+                        <em>
+                          {row.record.wins}-{row.record.losses}
+                        </em>
+                      </span>
+                      <span
+                        className={`sos-rank-metrics ${
+                          mode === "total" || mode === "played" || mode === "remaining"
+                            ? "primary"
+                            : ""
+                        }`}
+                      >
+                        <strong>{sosValue != null ? sosValue.toFixed(1) : "—"}</strong>
+                        <em>{scheduleSosLabel(mode)}</em>
+                      </span>
+                      <span className={`sos-rank-metrics ${mode === "wins" ? "primary" : ""}`}>
+                        <strong>
+                          {row.winAvgRank != null ? row.winAvgRank.toFixed(1) : "—"}
+                        </strong>
+                        <em>SOW</em>
+                      </span>
+                      <span className={`sos-rank-metrics ${mode === "losses" ? "primary" : ""}`}>
+                        <strong>
+                          {row.lossAvgRank != null ? row.lossAvgRank.toFixed(1) : "—"}
+                        </strong>
+                        <em>SOL</em>
+                      </span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ol>
+          </>
         )}
       </section>
 
