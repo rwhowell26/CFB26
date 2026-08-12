@@ -66,7 +66,7 @@ export type WeekSnapshot = {
 
 export type RankingStore = {
   season: number;
-  /** 2+ = preseason week (0) supported; missing/1 migrates Week 1 → Preseason once */
+  /** 3+ remigrates current ballot into Preseason; 2+ adds preseason week support */
   schemaVersion?: number;
   activeWeek: number;
   drafts: Record<string, string[]>;

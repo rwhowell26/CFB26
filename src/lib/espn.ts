@@ -1,4 +1,4 @@
-import { PRESEASON_WEEK, SEASON_YEAR } from "./season";
+import { PRESEASON_WEEK, SEASON_YEAR, ensurePreseasonWeek } from "./season";
 import type { Game, GameStatus, SeasonWeek, Team } from "./types";
 
 const ESPN_SITE = "https://site.api.espn.com/apis/site/v2/sports/football/college-football";
@@ -139,18 +139,7 @@ type ScoreboardResponse = {
 };
 
 function withPreseasonWeek(regularWeeks: SeasonWeek[], year = SEASON_YEAR): SeasonWeek[] {
-  const first = regularWeeks[0];
-  const preseasonEnd = first
-    ? new Date(new Date(first.startDate).getTime() - 1).toISOString()
-    : `${year}-08-23T23:59:59.000Z`;
-  const preseason: SeasonWeek = {
-    number: PRESEASON_WEEK,
-    label: "Preseason",
-    detail: "Preseason rankings",
-    startDate: `${year}-01-01T00:00:00.000Z`,
-    endDate: preseasonEnd,
-  };
-  return [preseason, ...regularWeeks];
+  return ensurePreseasonWeek(regularWeeks, year);
 }
 
 export async function fetchSeasonWeeks(year = SEASON_YEAR): Promise<SeasonWeek[]> {

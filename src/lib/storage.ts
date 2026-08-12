@@ -12,7 +12,7 @@ import {
 import type { RankingStore, WeekSnapshot } from "./types";
 
 /** Bump when storage shape/migration rules change. */
-export const STORE_SCHEMA_VERSION = 2;
+export const STORE_SCHEMA_VERSION = 3;
 
 function emptyStore(activeWeek = PRESEASON_WEEK): RankingStore {
   return {
@@ -24,41 +24,34 @@ function emptyStore(activeWeek = PRESEASON_WEEK): RankingStore {
   };
 }
 
-/** Move existing Week 1 (or active-week) ballots into Preseason once. */
+/**
+ * Move the current ballot into Preseason.
+ * Prefers activeWeek data, otherwise the fullest non-empty week.
+ */
 export function migrateRankingsToPreseason(store: RankingStore): RankingStore {
   const preKey = String(PRESEASON_WEEK);
   const drafts = { ...store.drafts };
   const snapshots = { ...store.snapshots };
-
-  const hasPreseason =
-    (drafts[preKey]?.length ?? 0) > 0 || Boolean(snapshots[preKey]);
-  if (hasPreseason) {
-    return {
-      ...store,
-      drafts,
-      snapshots,
-      activeWeek:
-        typeof store.activeWeek === "number" ? store.activeWeek : PRESEASON_WEEK,
-      schemaVersion: STORE_SCHEMA_VERSION,
-    };
-  }
-
   const activeKey = String(
     typeof store.activeWeek === "number" ? store.activeWeek : 1,
   );
+
   let sourceKey: string | null = null;
-  if ((drafts["1"]?.length ?? 0) > 0 || snapshots["1"]) {
-    sourceKey = "1";
-  } else if (
-    activeKey !== preKey &&
-    ((drafts[activeKey]?.length ?? 0) > 0 || snapshots[activeKey])
-  ) {
+  if ((drafts[activeKey]?.length ?? 0) > 0 || snapshots[activeKey]) {
     sourceKey = activeKey;
   } else {
-    sourceKey =
-      Object.keys(drafts).find((k) => (drafts[k]?.length ?? 0) > 0 && k !== preKey) ??
-      Object.keys(snapshots).find((k) => k !== preKey) ??
-      null;
+    let bestLen = 0;
+    const keys = new Set([...Object.keys(drafts), ...Object.keys(snapshots)]);
+    for (const key of keys) {
+      const len = Math.max(
+        drafts[key]?.length ?? 0,
+        snapshots[key]?.rankedIds.length ?? 0,
+      );
+      if (len > bestLen) {
+        bestLen = len;
+        sourceKey = key;
+      }
+    }
   }
 
   if (!sourceKey) {
@@ -71,18 +64,20 @@ export function migrateRankingsToPreseason(store: RankingStore): RankingStore {
     };
   }
 
-  if (drafts[sourceKey]) {
-    drafts[preKey] = [...drafts[sourceKey]];
-    delete drafts[sourceKey];
-  }
-  if (snapshots[sourceKey]) {
-    const prior = snapshots[sourceKey];
-    snapshots[preKey] = {
-      ...prior,
-      week: PRESEASON_WEEK,
-      label: formatWeekLabel(PRESEASON_WEEK),
-    };
-    delete snapshots[sourceKey];
+  if (sourceKey !== preKey) {
+    if (drafts[sourceKey]?.length) {
+      drafts[preKey] = [...drafts[sourceKey]];
+      delete drafts[sourceKey];
+    }
+    if (snapshots[sourceKey]) {
+      const prior = snapshots[sourceKey];
+      snapshots[preKey] = {
+        ...prior,
+        week: PRESEASON_WEEK,
+        label: formatWeekLabel(PRESEASON_WEEK),
+      };
+      delete snapshots[sourceKey];
+    }
   }
 
   return {
@@ -105,7 +100,7 @@ function normalizeStore(parsed: RankingStore): RankingStore {
   };
 
   const version = store.schemaVersion ?? 1;
-  if (version < 2) {
+  if (version < STORE_SCHEMA_VERSION) {
     store = migrateRankingsToPreseason(store);
   }
 
@@ -150,7 +145,12 @@ export function loadStore(): RankingStore {
     const parsed = readRawStore();
     if (!parsed) return emptyStore();
     if (parsed.season !== SEASON_YEAR) return emptyStore();
-    return normalizeStore(parsed);
+    const normalized = normalizeStore(parsed);
+    const priorVersion = parsed.schemaVersion ?? 1;
+    if (priorVersion < STORE_SCHEMA_VERSION) {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(normalized));
+    }
+    return normalized;
   } catch {
     return emptyStore();
   }

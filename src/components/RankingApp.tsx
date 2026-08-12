@@ -15,7 +15,7 @@ import {
   rankMapFromOrder,
   recordFromGames,
 } from "@/lib/ranking-logic";
-import { FBS_TEAM_COUNT, PRESEASON_WEEK, SEASON_YEAR, formatWeekLabel } from "@/lib/season";
+import { FBS_TEAM_COUNT, PRESEASON_WEEK, SEASON_YEAR, ensurePreseasonWeek, formatWeekLabel } from "@/lib/season";
 import {
   clearDraft,
   exportStoreJson,
@@ -55,11 +55,13 @@ export function RankingApp() {
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
-    // Re-read localStorage after mount so legacy Week 1 → Preseason migration applies
+    // Re-read localStorage after mount so current ballot → Preseason migration applies
     const hydrated = hydrateStoreFromLocalStorage();
-    if (typeof hydrated.activeWeek === "number") {
-      queueMicrotask(() => setWeek(hydrated.activeWeek));
-    }
+    queueMicrotask(() => {
+      setWeek(
+        typeof hydrated.activeWeek === "number" ? hydrated.activeWeek : PRESEASON_WEEK,
+      );
+    });
   }, []);
 
   useEffect(() => {
@@ -75,14 +77,14 @@ export function RankingApp() {
         if (cancelled) return;
         setData(json);
 
-        // Prefer the week that actually has ballot data (e.g. migrated Preseason)
+        // Prefer Preseason / the week that actually has ballot data
         setWeek((prev) => {
-          if (store.drafts[String(prev)]?.length || store.snapshots[String(prev)]) {
-            return prev;
-          }
           const preDraft = store.drafts[String(PRESEASON_WEEK)];
           if (preDraft?.length || store.snapshots[String(PRESEASON_WEEK)]) {
             return PRESEASON_WEEK;
+          }
+          if (store.drafts[String(prev)]?.length || store.snapshots[String(prev)]) {
+            return prev;
           }
           if (typeof store.activeWeek === "number") return store.activeWeek;
           return typeof json.currentWeek === "number" ? json.currentWeek : prev;
@@ -114,7 +116,10 @@ export function RankingApp() {
 
   const teams = useMemo(() => data?.teams ?? [], [data]);
   const games = useMemo(() => data?.games ?? [], [data]);
-  const weeks = data?.weeks ?? [];
+  const weeks = useMemo(
+    () => ensurePreseasonWeek(data?.weeks ?? []),
+    [data?.weeks],
+  );
   const teamsById = useMemo(() => new Map(teams.map((t) => [t.id, t])), [teams]);
 
   const rankedIds = useMemo(() => getDraftOrder(store, week), [store, week]);
@@ -239,20 +244,12 @@ export function RankingApp() {
         <div className="top-actions">
           <label className="week-select">
             Ranking week
-            <select value={week} onChange={(e) => changeWeek(Number(e.target.value))}>
-              {(weeks.length
-                ? weeks
-                : [
-                    {
-                      number: week,
-                      label: formatWeekLabel(week),
-                      detail: "",
-                      startDate: "",
-                      endDate: "",
-                    },
-                  ]
-              ).map((w) => (
-                <option key={w.number} value={w.number}>
+            <select
+              value={String(week)}
+              onChange={(e) => changeWeek(Number(e.target.value))}
+            >
+              {weeks.map((w) => (
+                <option key={w.number} value={String(w.number)}>
                   {w.label}
                   {store.snapshots[String(w.number)] ? " · saved" : ""}
                 </option>
