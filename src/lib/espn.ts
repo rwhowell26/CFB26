@@ -1,5 +1,6 @@
-import { PRESEASON_WEEK, SEASON_YEAR, ensurePreseasonWeek } from "./season";
+import { PRESEASON_WEEK, SEASON_YEAR } from "./season";
 import type { Game, GameStatus, SeasonWeek, Team } from "./types";
+import { ensurePreseasonWeek } from "./weeks";
 
 const ESPN_SITE = "https://site.api.espn.com/apis/site/v2/sports/football/college-football";
 const ESPN_V2 = "https://site.api.espn.com/apis/v2/sports/football/college-football";

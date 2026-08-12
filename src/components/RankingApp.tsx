@@ -15,7 +15,7 @@ import {
   rankMapFromOrder,
   recordFromGames,
 } from "@/lib/ranking-logic";
-import { FBS_TEAM_COUNT, PRESEASON_WEEK, SEASON_YEAR, ensurePreseasonWeek, formatWeekLabel } from "@/lib/season";
+import { FBS_TEAM_COUNT, PRESEASON_WEEK, SEASON_YEAR, formatWeekLabel } from "@/lib/season";
 import {
   clearDraft,
   exportStoreJson,
@@ -29,6 +29,7 @@ import {
   useRankingStore,
 } from "@/lib/storage";
 import type { Game, SeasonWeek, Team } from "@/lib/types";
+import { ensurePreseasonWeek } from "@/lib/weeks";
 
 type Tab = "rank" | "board" | "conferences" | "sos" | "compare" | "history" | "movers";
 
