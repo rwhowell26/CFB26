@@ -1,6 +1,7 @@
 import { FCS_SOS_RANK } from "./season";
 import type {
   Game,
+  MoveSuggestion,
   PhilosophyWarning,
   SosSummary,
   Team,
@@ -185,7 +186,6 @@ export function philosophyWarnings(
     records.set(id, recordFromGames(id, games));
   }
 
-  // Lost to a team ranked below them (should usually sit behind that team)
   for (const game of games) {
     if (game.status !== "final") continue;
     if (!game.homeIsFbs || !game.awayIsFbs) continue;
@@ -195,20 +195,25 @@ export function philosophyWarnings(
     const awayRank = ranks.get(game.awayTeamId);
     if (homeRank == null || awayRank == null) continue;
 
-    if (game.homeScore > game.awayScore && homeRank > awayRank) {
-      // home beat away, but home ranked worse (higher number)
+    let winnerId: string | null = null;
+    let loserId: string | null = null;
+    if (game.homeScore > game.awayScore) {
+      winnerId = game.homeTeamId;
+      loserId = game.awayTeamId;
+    } else if (game.awayScore > game.homeScore) {
+      winnerId = game.awayTeamId;
+      loserId = game.homeTeamId;
+    }
+    if (!winnerId || !loserId) continue;
+
+    const winnerRank = ranks.get(winnerId)!;
+    const loserRank = ranks.get(loserId)!;
+    if (loserRank < winnerRank) {
       warnings.push({
         type: "lost_to_higher",
-        teamId: game.awayTeamId,
-        relatedTeamId: game.homeTeamId,
-        message: `${teamsById.get(game.awayTeamId)?.shortName ?? "Team"} (#${awayRank}) is ranked ahead of ${teamsById.get(game.homeTeamId)?.shortName ?? "team"} (#${homeRank}) after losing to them.`,
-      });
-    } else if (game.awayScore > game.homeScore && awayRank > homeRank) {
-      warnings.push({
-        type: "lost_to_higher",
-        teamId: game.homeTeamId,
-        relatedTeamId: game.awayTeamId,
-        message: `${teamsById.get(game.homeTeamId)?.shortName ?? "Team"} (#${homeRank}) is ranked ahead of ${teamsById.get(game.awayTeamId)?.shortName ?? "team"} (#${awayRank}) after losing to them.`,
+        teamId: loserId,
+        relatedTeamId: winnerId,
+        message: `${teamsById.get(loserId)?.shortName ?? "Team"} (#${loserRank}) is ranked ahead of ${teamsById.get(winnerId)?.shortName ?? "team"} (#${winnerRank}) after losing to them.`,
       });
     }
   }
@@ -257,6 +262,143 @@ export function philosophyWarnings(
   }
 
   return warnings;
+}
+
+/** Head-to-head result conflicts: ahead after a loss, or behind after a win. */
+export function resultMoveSuggestions(
+  rankedIds: string[],
+  teamsById: Map<string, Team>,
+  games: Game[],
+): MoveSuggestion[] {
+  const ranks = rankMapFromOrder(rankedIds);
+  const suggestions: MoveSuggestion[] = [];
+  const seen = new Set<string>();
+
+  for (const game of games) {
+    if (game.status !== "final") continue;
+    if (!game.homeIsFbs || !game.awayIsFbs) continue;
+    if (game.homeScore == null || game.awayScore == null) continue;
+
+    let winnerId: string | null = null;
+    let loserId: string | null = null;
+    if (game.homeScore > game.awayScore) {
+      winnerId = game.homeTeamId;
+      loserId = game.awayTeamId;
+    } else if (game.awayScore > game.homeScore) {
+      winnerId = game.awayTeamId;
+      loserId = game.homeTeamId;
+    }
+    if (!winnerId || !loserId) continue;
+
+    const winnerRank = ranks.get(winnerId);
+    const loserRank = ranks.get(loserId);
+    if (winnerRank == null || loserRank == null) continue;
+    // Conflict only when loser is ranked ahead of winner
+    if (loserRank < winnerRank) {
+      const pairKey = `${winnerId}:${loserId}`;
+      if (seen.has(pairKey)) continue;
+      seen.add(pairKey);
+
+      const winnerName = teamsById.get(winnerId)?.shortName ?? "Winner";
+      const loserName = teamsById.get(loserId)?.shortName ?? "Loser";
+
+      suggestions.push({
+        id: `loss-${pairKey}`,
+        type: "ahead_after_loss",
+        teamId: loserId,
+        relatedTeamId: winnerId,
+        winnerId,
+        loserId,
+        teamRank: loserRank,
+        relatedRank: winnerRank,
+        message: `${loserName} (#${loserRank}) is ahead of ${winnerName} (#${winnerRank}) after losing to them.`,
+        actionLabel: `Drop ${loserName} below ${winnerName}`,
+      });
+
+      suggestions.push({
+        id: `win-${pairKey}`,
+        type: "behind_after_win",
+        teamId: winnerId,
+        relatedTeamId: loserId,
+        winnerId,
+        loserId,
+        teamRank: winnerRank,
+        relatedRank: loserRank,
+        message: `${winnerName} (#${winnerRank}) is behind ${loserName} (#${loserRank}) after beating them.`,
+        actionLabel: `Raise ${winnerName} above ${loserName}`,
+      });
+    }
+  }
+
+  suggestions.sort((a, b) => {
+    if (a.type !== b.type) return a.type === "ahead_after_loss" ? -1 : 1;
+    return a.teamRank - b.teamRank;
+  });
+
+  return suggestions;
+}
+
+/** Put the winner immediately above the loser on the ballot. */
+export function applyWinnerAboveLoser(
+  rankedIds: string[],
+  winnerId: string,
+  loserId: string,
+): string[] {
+  if (winnerId === loserId) return rankedIds;
+  const winnerIdx = rankedIds.indexOf(winnerId);
+  const loserIdx = rankedIds.indexOf(loserId);
+  if (winnerIdx < 0 || loserIdx < 0) return rankedIds;
+  if (winnerIdx < loserIdx) return rankedIds;
+
+  const next = rankedIds.filter((id) => id !== winnerId);
+  const newLoserIdx = next.indexOf(loserId);
+  next.splice(newLoserIdx, 0, winnerId);
+  return next;
+}
+
+export type SlateGameView = {
+  game: Game;
+  homeRank: number | null;
+  awayRank: number | null;
+  interest: number;
+};
+
+function slateRankValue(
+  teamId: string,
+  isFbs: boolean,
+  ranks: Map<string, number>,
+): number {
+  if (!isFbs) return FCS_SOS_RANK;
+  return ranks.get(teamId) ?? FCS_SOS_RANK;
+}
+
+export function scoreSlateGame(game: Game, ranks: Map<string, number>): number {
+  const home = slateRankValue(game.homeTeamId, game.homeIsFbs, ranks);
+  const away = slateRankValue(game.awayTeamId, game.awayIsFbs, ranks);
+  const quality = FCS_SOS_RANK * 2 - (home + away);
+  const closeness = FCS_SOS_RANK - Math.abs(home - away);
+  const bothFbs = game.homeIsFbs && game.awayIsFbs ? 40 : 0;
+  return quality * 2 + closeness + bothFbs;
+}
+
+export function gamesForSlateWeek(
+  games: Game[],
+  weekNumber: number,
+  ranks: Map<string, number>,
+): SlateGameView[] {
+  return games
+    .filter((g) => g.week === weekNumber)
+    .map((game) => ({
+      game,
+      homeRank: game.homeIsFbs ? ranks.get(game.homeTeamId) ?? null : null,
+      awayRank: game.awayIsFbs ? ranks.get(game.awayTeamId) ?? null : null,
+      interest: scoreSlateGame(game, ranks),
+    }))
+    .sort((a, b) => {
+      const dateCmp = a.game.date.localeCompare(b.game.date);
+      if (dateCmp !== 0) return dateCmp;
+      return b.interest - a.interest;
+    });
 }
 
 export function formatRank(rank: number | null | undefined, isFbs: boolean): string {

@@ -1,40 +1,84 @@
 "use client";
 
-import type { PhilosophyWarning } from "@/lib/types";
+import type { MoveSuggestion, PhilosophyWarning } from "@/lib/types";
 
-export function WarningsList({ warnings }: { warnings: PhilosophyWarning[] }) {
-  if (!warnings.length) {
+type Props = {
+  suggestions: MoveSuggestion[];
+  warnings: PhilosophyWarning[];
+  onApply: (suggestion: MoveSuggestion) => void;
+  onSelectTeam?: (teamId: string) => void;
+};
+
+export function WarningsList({ suggestions, warnings, onApply, onSelectTeam }: Props) {
+  const ahead = suggestions.filter((s) => s.type === "ahead_after_loss");
+  const behind = suggestions.filter((s) => s.type === "behind_after_win");
+  const undefeated = warnings.filter((w) => w.type === "undefeated_behind_loss");
+  const winless = warnings.filter((w) => w.type === "winless_not_bottom");
+
+  if (!suggestions.length && !undefeated.length && !winless.length) {
     return (
       <div className="warnings ok">
-        No philosophy flags on the current ballot (based on games played so far).
+        No auto-suggest flags — nobody is ahead of a team they lost to or behind a team they
+        beat on the current ballot.
       </div>
     );
   }
 
-  const lostTo = warnings.filter((w) => w.type === "lost_to_higher");
-  const undefeated = warnings.filter((w) => w.type === "undefeated_behind_loss");
-  const winless = warnings.filter((w) => w.type === "winless_not_bottom");
-
   return (
     <div className="warnings">
-      <h3>Philosophy checks</h3>
+      <h3>Auto-suggest moves</h3>
       <p className="warnings-intro">
-        Wins rule the board: usually sit behind teams you lost to; undefeated teams rarely trail
-        teams with losses; winless teams sink.
+        Flags head-to-head conflicts with your ballot. Apply puts the winner directly above the
+        loser.
       </p>
-      {lostTo.length ? (
+
+      {ahead.length ? (
         <div className="warn-block">
-          <h4>Ranked ahead after a loss ({lostTo.length})</h4>
-          <ul>
-            {lostTo.slice(0, 12).map((w, i) => (
-              <li key={`${w.teamId}-${w.relatedTeamId}-${i}`}>{w.message}</li>
+          <h4>Ahead after a loss ({ahead.length})</h4>
+          <ul className="suggest-list">
+            {ahead.slice(0, 16).map((s) => (
+              <li key={s.id} className="suggest-row">
+                <button
+                  type="button"
+                  className="suggest-msg"
+                  onClick={() => onSelectTeam?.(s.teamId)}
+                >
+                  {s.message}
+                </button>
+                <button type="button" className="primary-btn suggest-apply" onClick={() => onApply(s)}>
+                  {s.actionLabel}
+                </button>
+              </li>
             ))}
           </ul>
         </div>
       ) : null}
+
+      {behind.length ? (
+        <div className="warn-block">
+          <h4>Behind after a win ({behind.length})</h4>
+          <ul className="suggest-list">
+            {behind.slice(0, 16).map((s) => (
+              <li key={s.id} className="suggest-row">
+                <button
+                  type="button"
+                  className="suggest-msg"
+                  onClick={() => onSelectTeam?.(s.teamId)}
+                >
+                  {s.message}
+                </button>
+                <button type="button" className="primary-btn suggest-apply" onClick={() => onApply(s)}>
+                  {s.actionLabel}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+
       {undefeated.length ? (
         <div className="warn-block">
-          <h4>Undefeated behind a loss ({undefeated.length})</h4>
+          <h4>Also: undefeated behind a loss ({undefeated.length})</h4>
           <ul>
             {undefeated.slice(0, 8).map((w, i) => (
               <li key={`${w.teamId}-${i}`}>{w.message}</li>
@@ -42,9 +86,10 @@ export function WarningsList({ warnings }: { warnings: PhilosophyWarning[] }) {
           </ul>
         </div>
       ) : null}
+
       {winless.length ? (
         <div className="warn-block">
-          <h4>Winless above a winner ({winless.length})</h4>
+          <h4>Also: winless above a winner ({winless.length})</h4>
           <ul>
             {winless.slice(0, 8).map((w, i) => (
               <li key={`${w.teamId}-${i}`}>{w.message}</li>

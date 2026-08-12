@@ -80,6 +80,21 @@ export type PhilosophyWarning = {
   relatedTeamId?: string;
 };
 
+/** Actionable ballot fix for head-to-head result vs rank order. */
+export type MoveSuggestion = {
+  id: string;
+  type: "ahead_after_loss" | "behind_after_win";
+  /** Team the suggestion is about */
+  teamId: string;
+  relatedTeamId: string;
+  winnerId: string;
+  loserId: string;
+  teamRank: number;
+  relatedRank: number;
+  message: string;
+  actionLabel: string;
+};
+
 export type SeasonWeek = {
   number: number;
   label: string;

@@ -7,13 +7,16 @@ import { FullBoardTab } from "@/components/FullBoardTab";
 import { HistoryTab } from "@/components/HistoryTab";
 import { MoversTab } from "@/components/MoversTab";
 import { RankingBoard } from "@/components/RankingBoard";
+import { SlateTab } from "@/components/SlateTab";
 import { SosTab } from "@/components/SosTab";
 import { TeamResume } from "@/components/TeamResume";
 import { WarningsList } from "@/components/WarningsList";
 import {
+  applyWinnerAboveLoser,
   philosophyWarnings,
   rankMapFromOrder,
   recordFromGames,
+  resultMoveSuggestions,
 } from "@/lib/ranking-logic";
 import { FBS_TEAM_COUNT, PRESEASON_WEEK, SEASON_YEAR, formatWeekLabel } from "@/lib/season";
 import {
@@ -31,7 +34,7 @@ import {
 import type { Game, SeasonWeek, Team } from "@/lib/types";
 import { ensurePreseasonWeek } from "@/lib/weeks";
 
-type Tab = "rank" | "board" | "conferences" | "sos" | "compare" | "history" | "movers";
+type Tab = "rank" | "board" | "slate" | "conferences" | "sos" | "compare" | "history" | "movers";
 
 type GamesPayload = {
   season: number;
@@ -148,6 +151,11 @@ export function RankingApp() {
     () => philosophyWarnings(rankedIds, teamsById, games),
     [rankedIds, teamsById, games],
   );
+  const suggestions = useMemo(
+    () => resultMoveSuggestions(rankedIds, teamsById, games),
+    [rankedIds, teamsById, games],
+  );
+  const seasonWeek = data?.currentWeek ?? PRESEASON_WEEK;
 
   const selectedTeam = selectedTeamId ? teamsById.get(selectedTeamId) : null;
   const weekMeta = weeks.find((w) => w.number === week);
@@ -157,6 +165,20 @@ export function RankingApp() {
     startTransition(() => {
       setStore(setDraftOrder(store, week, nextRanked));
     });
+  };
+
+  const applySuggestion = (suggestion: {
+    winnerId: string;
+    loserId: string;
+    actionLabel: string;
+  }) => {
+    const next = applyWinnerAboveLoser(rankedIds, suggestion.winnerId, suggestion.loserId);
+    if (next === rankedIds || next.every((id, i) => id === rankedIds[i])) {
+      setMessage("Ballot already has the winner above the loser.");
+      return;
+    }
+    updateRanked(next);
+    setMessage(`Applied: ${suggestion.actionLabel}`);
   };
 
   const changeWeek = (nextWeek: number) => {
@@ -271,6 +293,7 @@ export function RankingApp() {
           [
             ["rank", "Rank"],
             ["board", "Board"],
+            ["slate", "Slate"],
             ["conferences", "Conferences"],
             ["sos", "SOS"],
             ["compare", "Compare"],
@@ -349,7 +372,12 @@ export function RankingApp() {
                 </header>
               </section>
             )}
-            <WarningsList warnings={warnings} />
+            <WarningsList
+              suggestions={suggestions}
+              warnings={warnings}
+              onApply={applySuggestion}
+              onSelectTeam={setSelectedTeamId}
+            />
             {selectedTeamId && rankedIds.includes(selectedTeamId) ? (
               <button
                 type="button"
@@ -367,6 +395,17 @@ export function RankingApp() {
         <FullBoardTab
           teamsById={teamsById}
           rankedIds={rankedIds}
+          onSelectTeam={setSelectedTeamId}
+          selectedTeamId={selectedTeamId}
+        />
+      ) : null}
+
+      {tab === "slate" ? (
+        <SlateTab
+          games={games}
+          weeks={weeks}
+          seasonWeek={seasonWeek}
+          ranks={resumeRanks}
           onSelectTeam={setSelectedTeamId}
           selectedTeamId={selectedTeamId}
         />
