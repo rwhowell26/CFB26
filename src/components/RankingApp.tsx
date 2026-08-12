@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { CompareTool } from "@/components/CompareTool";
 import { ConferenceTab } from "@/components/ConferenceTab";
+import { FullBoardTab } from "@/components/FullBoardTab";
 import { HistoryTab } from "@/components/HistoryTab";
 import { MoversTab } from "@/components/MoversTab";
 import { RankingBoard } from "@/components/RankingBoard";
@@ -29,7 +30,7 @@ import {
 } from "@/lib/storage";
 import type { Game, SeasonWeek, Team } from "@/lib/types";
 
-type Tab = "rank" | "conferences" | "sos" | "compare" | "history" | "movers";
+type Tab = "rank" | "board" | "conferences" | "sos" | "compare" | "history" | "movers";
 
 type GamesPayload = {
   season: number;
@@ -271,6 +272,7 @@ export function RankingApp() {
         {(
           [
             ["rank", "Rank"],
+            ["board", "Board"],
             ["conferences", "Conferences"],
             ["sos", "SOS"],
             ["compare", "Compare"],
@@ -361,6 +363,15 @@ export function RankingApp() {
             ) : null}
           </aside>
         </div>
+      ) : null}
+
+      {tab === "board" ? (
+        <FullBoardTab
+          teamsById={teamsById}
+          rankedIds={rankedIds}
+          onSelectTeam={setSelectedTeamId}
+          selectedTeamId={selectedTeamId}
+        />
       ) : null}
 
       {tab === "conferences" ? (
