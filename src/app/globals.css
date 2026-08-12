@@ -790,12 +790,28 @@ input[type="password"],
   overflow: auto;
 }
 
+.sos-rank-header,
 .sos-rank-row {
   width: 100%;
   display: grid;
-  grid-template-columns: 2.1rem 1.8rem 1fr auto;
+  grid-template-columns: 2.1rem 1.8rem minmax(7rem, 1.4fr) repeat(3, minmax(3.6rem, 0.7fr));
   gap: 0.55rem;
   align-items: center;
+}
+
+.sos-rank-header {
+  padding: 0 0.5rem 0.35rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sos-rank-header span:nth-child(n + 4) {
+  text-align: right;
+}
+
+.sos-rank-row {
   border: 1px solid transparent;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.55);
@@ -830,6 +846,11 @@ input[type="password"],
 
 .sos-rank-metrics strong {
   font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+
+.sos-rank-metrics.primary strong {
   font-size: 1.35rem;
   color: var(--turf-deep);
 }
@@ -838,7 +859,38 @@ input[type="password"],
 .sos-rank-metrics em {
   color: var(--muted);
   font-style: normal;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 700px) {
+  .sos-rank-header {
+    display: none;
+  }
+
+  .sos-rank-row {
+    grid-template-columns: 2.1rem 1.8rem 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .sos-rank-team {
+    grid-column: 3;
+  }
+
+  .sos-rank-metrics {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: flex-start;
+    text-align: left;
+    justify-items: start;
+    padding-left: 0.15rem;
+  }
+
+  .sos-rank-metrics strong {
+    font-size: 1.05rem;
+  }
 }
 
 .modal-backdrop {

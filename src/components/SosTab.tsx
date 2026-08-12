@@ -61,10 +61,22 @@ function metricForMode(row: SosRow, mode: SosMode): number | null {
 }
 
 function modeLabel(mode: SosMode): string {
-  if (mode === "played") return "played SOS";
-  if (mode === "remaining") return "remaining SOS";
+  if (mode === "played") return "Played";
+  if (mode === "remaining") return "Remaining";
   if (mode === "wins") return "SOW";
   if (mode === "losses") return "SOL";
+  return "SOS";
+}
+
+function scheduleSos(row: SosRow, mode: SosMode): number | null {
+  if (mode === "played") return row.playedAvgRank;
+  if (mode === "remaining") return row.remainingAvgRank;
+  return row.totalAvgRank;
+}
+
+function scheduleSosLabel(mode: SosMode): string {
+  if (mode === "played") return "Played";
+  if (mode === "remaining") return "Remain";
   return "SOS";
 }
 
@@ -236,9 +248,17 @@ export function SosTab({ teams, games, ranks, records, search = "" }: Props) {
             No SOS data yet. Rank some teams (or save a weekly ballot) so opponent ranks exist.
           </div>
         ) : (
+          <div className="sos-rank-header" aria-hidden>
+            <span />
+            <span />
+            <span>Team</span>
+            <span>{scheduleSosLabel(mode)}</span>
+            <span>SOW</span>
+            <span>SOL</span>
+          </div>
           <ol className="sos-rank-list">
             {rows.map((row, index) => {
-              const metric = metricForMode(row, mode);
+              const sosValue = scheduleSos(row, mode);
               const sosRank = index + 1;
               return (
                 <li key={row.team.id}>
@@ -251,18 +271,34 @@ export function SosTab({ teams, games, ranks, records, search = "" }: Props) {
                     {row.team.logo ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={row.team.logo} alt="" className="team-logo" />
-                    ) : null}
+                    ) : (
+                      <span className="team-logo team-logo-fallback" aria-hidden>
+                        ·
+                      </span>
+                    )}
                     <span className="sos-rank-team">
                       <strong>{row.team.shortName}</strong>
                       <em>
                         {row.record.wins}-{row.record.losses}
-                        {row.winAvgRank != null ? ` · SOW ${row.winAvgRank.toFixed(1)}` : ""}
-                        {row.lossAvgRank != null ? ` · SOL ${row.lossAvgRank.toFixed(1)}` : ""}
                       </em>
                     </span>
-                    <span className="sos-rank-metrics">
-                      <strong>{metric != null ? metric.toFixed(1) : "—"}</strong>
-                      <em>{modeLabel(mode)}</em>
+                    <span
+                      className={`sos-rank-metrics ${
+                        mode === "total" || mode === "played" || mode === "remaining"
+                          ? "primary"
+                          : ""
+                      }`}
+                    >
+                      <strong>{sosValue != null ? sosValue.toFixed(1) : "—"}</strong>
+                      <em>{scheduleSosLabel(mode)}</em>
+                    </span>
+                    <span className={`sos-rank-metrics ${mode === "wins" ? "primary" : ""}`}>
+                      <strong>{row.winAvgRank != null ? row.winAvgRank.toFixed(1) : "—"}</strong>
+                      <em>SOW</em>
+                    </span>
+                    <span className={`sos-rank-metrics ${mode === "losses" ? "primary" : ""}`}>
+                      <strong>{row.lossAvgRank != null ? row.lossAvgRank.toFixed(1) : "—"}</strong>
+                      <em>SOL</em>
                     </span>
                   </button>
                 </li>
