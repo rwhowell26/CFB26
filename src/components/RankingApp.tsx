@@ -18,6 +18,13 @@ import {
   recordFromGames,
   resultMoveSuggestions,
 } from "@/lib/ranking-logic";
+import {
+  buildDirectWinGraph,
+  buildResultsBallot,
+  buildTransitiveWins,
+  findCyclePairs,
+  fixAllDirectH2h,
+} from "@/lib/results-rank";
 import { FBS_TEAM_COUNT, PRESEASON_WEEK, SEASON_YEAR, formatWeekLabel } from "@/lib/season";
 import {
   clearDraft,
@@ -155,6 +162,19 @@ export function RankingApp() {
     () => resultMoveSuggestions(rankedIds, teamsById, games),
     [rankedIds, teamsById, games],
   );
+  const cycleNotes = useMemo(() => {
+    if (!rankedIds.length) return [];
+    const direct = buildDirectWinGraph(rankedIds, games);
+    const transitive = buildTransitiveWins(rankedIds, direct);
+    return findCyclePairs(rankedIds, transitive)
+      .slice(0, 20)
+      .map((pair) => ({
+        a: pair.a,
+        b: pair.b,
+        aName: teamsById.get(pair.a)?.shortName ?? pair.a,
+        bName: teamsById.get(pair.b)?.shortName ?? pair.b,
+      }));
+  }, [rankedIds, games, teamsById]);
   const seasonWeek = data?.currentWeek ?? PRESEASON_WEEK;
 
   const selectedTeam = selectedTeamId ? teamsById.get(selectedTeamId) : null;
@@ -179,6 +199,44 @@ export function RankingApp() {
     }
     updateRanked(next);
     setMessage(`Applied: ${suggestion.actionLabel}`);
+  };
+
+  const handleFixAllH2h = () => {
+    const { rankedIds: next, repairs } = fixAllDirectH2h(rankedIds, games);
+    if (!repairs) {
+      setMessage("No direct head-to-head fixes left.");
+      return;
+    }
+    updateRanked(next);
+    setMessage(`Fixed ${repairs} head-to-head conflict${repairs === 1 ? "" : "s"}.`);
+  };
+
+  const handleAutoRank = () => {
+    if (
+      rankedIds.length > 0 &&
+      !confirm(
+        "Replace the current ballot with a results-based order?\n\nUses record, head-to-head, transitive wins, and SOS. You can still drag afterward for early-season opinion.",
+      )
+    ) {
+      return;
+    }
+
+    const prior = Object.values(store.snapshots).sort((a, b) => b.week - a.week)[0];
+    const preserveOrder =
+      rankedIds.length > 0 ? rankedIds : prior?.rankedIds ?? teams.map((t) => t.id);
+
+    const result = buildResultsBallot(
+      teams.map((t) => t.id),
+      games,
+      { preserveOrder, teamsById },
+    );
+
+    updateRanked(result.rankedIds);
+
+    const gapCount = result.cyclePairs.length;
+    setMessage(
+      `Auto-ranked by results · ${result.h2hRepairs} H2H repair${result.h2hRepairs === 1 ? "" : "s"} · ${result.remainingH2hConflicts} conflict${result.remainingH2hConflicts === 1 ? "" : "s"} left · ${gapCount} opinion gap${gapCount === 1 ? "" : "s"}`,
+    );
   };
 
   const changeWeek = (nextWeek: number) => {
@@ -279,6 +337,9 @@ export function RankingApp() {
               ))}
             </select>
           </label>
+          <button type="button" className="primary-btn" onClick={handleAutoRank}>
+            Auto-rank
+          </button>
           <button type="button" className="primary-btn" onClick={handleSaveSnapshot}>
             Save week
           </button>
@@ -375,7 +436,9 @@ export function RankingApp() {
             <WarningsList
               suggestions={suggestions}
               warnings={warnings}
+              cycleNotes={cycleNotes}
               onApply={applySuggestion}
+              onFixAll={handleFixAllH2h}
               onSelectTeam={setSelectedTeamId}
             />
             {selectedTeamId && rankedIds.includes(selectedTeamId) ? (

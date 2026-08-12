@@ -572,6 +572,10 @@ input[type="password"],
   padding: 0.35rem 0.7rem;
 }
 
+.warnings > .suggest-apply {
+  margin-bottom: 0.35rem;
+}
+
 .slate-wrap {
   display: grid;
   gap: 1rem;
