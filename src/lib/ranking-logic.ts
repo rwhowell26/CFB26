@@ -1,3 +1,4 @@
+import { FCS_SOS_RANK } from "./season";
 import type {
   Game,
   PhilosophyWarning,
@@ -142,11 +143,18 @@ export function computeSos(
   const played = all.filter((g) => g.status === "final");
   const remaining = all.filter((g) => g.status !== "final");
 
+  /** FCS counts as 139 for SOS only; schedule UI still shows "FCS" with no rank. */
+  const sosOpponentRank = (g: TeamGameView): number | null => {
+    if (!g.opponentIsFbs) return FCS_SOS_RANK;
+    return g.opponentRank ?? null;
+  };
+
   const avg = (list: typeof all) => {
-    const ranked = list.filter((g) => g.opponentIsFbs && g.opponentRank != null);
-    if (!ranked.length) return null;
-    const sum = ranked.reduce((acc, g) => acc + (g.opponentRank as number), 0);
-    return sum / ranked.length;
+    const values = list
+      .map(sosOpponentRank)
+      .filter((rank): rank is number => rank != null);
+    if (!values.length) return null;
+    return values.reduce((acc, rank) => acc + rank, 0) / values.length;
   };
 
   const fbsWithRank = all.filter((g) => g.opponentIsFbs && g.opponentRank != null);
