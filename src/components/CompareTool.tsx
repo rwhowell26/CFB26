@@ -72,8 +72,10 @@ export function CompareTool({ teams, games, ranks }: Props) {
                 {team.shortName}
               </h2>
               <p>
-                {record.wins}-{record.losses} · SOS played{" "}
+                {record.wins}-{record.losses} · SOS{" "}
                 {sos.playedAvgRank != null ? sos.playedAvgRank.toFixed(1) : "—"}
+                {sos.winAvgRank != null ? ` · SOW ${sos.winAvgRank.toFixed(1)}` : ""}
+                {sos.lossAvgRank != null ? ` · SOL ${sos.lossAvgRank.toFixed(1)}` : ""}
               </p>
             </header>
             <ul className="game-list">

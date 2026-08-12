@@ -19,11 +19,17 @@ type Props = {
   search?: string;
 };
 
+type SosMode = "total" | "played" | "remaining" | "wins" | "losses";
+
 type SosRow = {
   team: Team;
-  totalAvgRank: number;
+  totalAvgRank: number | null;
   playedAvgRank: number | null;
   remainingAvgRank: number | null;
+  winAvgRank: number | null;
+  lossAvgRank: number | null;
+  winCount: number;
+  lossCount: number;
   record: { wins: number; losses: number };
 };
 
@@ -46,19 +52,37 @@ function locLabel(location: TeamGameView["location"]) {
   return "n";
 }
 
+function metricForMode(row: SosRow, mode: SosMode): number | null {
+  if (mode === "played") return row.playedAvgRank;
+  if (mode === "remaining") return row.remainingAvgRank;
+  if (mode === "wins") return row.winAvgRank;
+  if (mode === "losses") return row.lossAvgRank;
+  return row.totalAvgRank;
+}
+
+function modeLabel(mode: SosMode): string {
+  if (mode === "played") return "played SOS";
+  if (mode === "remaining") return "remaining SOS";
+  if (mode === "wins") return "SOW";
+  if (mode === "losses") return "SOL";
+  return "SOS";
+}
+
 function SchedulePopup({
   team,
   games,
   ranks,
   sosRank,
-  totalSos,
+  row,
+  mode,
   onClose,
 }: {
   team: Team;
   games: Game[];
   ranks: Map<string, number>;
   sosRank: number;
-  totalSos: number | null;
+  row: SosRow;
+  mode: SosMode;
   onClose: () => void;
 }) {
   const schedule = useMemo(() => gamesForTeam(team.id, games, ranks), [team.id, games, ranks]);
@@ -95,9 +119,11 @@ function SchedulePopup({
                 {team.name}
               </h2>
               <p>
-                {record.wins}-{record.losses} · {shortConferenceName(team.conference)} · SOS #
-                {sosRank}
-                {totalSos != null ? ` · avg ${totalSos.toFixed(1)}` : ""}
+                {record.wins}-{record.losses} · {shortConferenceName(team.conference)} ·{" "}
+                {modeLabel(mode)} #{sosRank}
+                {row.totalAvgRank != null ? ` · SOS ${row.totalAvgRank.toFixed(1)}` : ""}
+                {row.winAvgRank != null ? ` · SOW ${row.winAvgRank.toFixed(1)}` : ""}
+                {row.lossAvgRank != null ? ` · SOL ${row.lossAvgRank.toFixed(1)}` : ""}
               </p>
             </div>
           </div>
@@ -138,38 +164,35 @@ function SchedulePopup({
 }
 
 export function SosTab({ teams, games, ranks, records, search = "" }: Props) {
-  const [mode, setMode] = useState<"total" | "played" | "remaining">("total");
+  const [mode, setMode] = useState<SosMode>("total");
   const [popupTeamId, setPopupTeamId] = useState<string | null>(null);
 
   const rows = useMemo(() => {
     const built: SosRow[] = [];
     for (const team of teams) {
       const sos = computeSos(team.id, games, ranks);
-      const metric =
-        mode === "played"
-          ? sos.playedAvgRank
-          : mode === "remaining"
-            ? sos.remainingAvgRank
-            : sos.totalAvgRank;
-      if (metric == null) continue;
-      built.push({
+      const row: SosRow = {
         team,
-        totalAvgRank: sos.totalAvgRank ?? metric,
+        totalAvgRank: sos.totalAvgRank,
         playedAvgRank: sos.playedAvgRank,
         remainingAvgRank: sos.remainingAvgRank,
+        winAvgRank: sos.winAvgRank,
+        lossAvgRank: sos.lossAvgRank,
+        winCount: sos.winCount,
+        lossCount: sos.lossCount,
         record: records.get(team.id) ?? { wins: 0, losses: 0 },
-      });
+      };
+      if (metricForMode(row, mode) == null) continue;
+      built.push(row);
     }
-
-    const value = (row: SosRow) => {
-      if (mode === "played") return row.playedAvgRank ?? 999;
-      if (mode === "remaining") return row.remainingAvgRank ?? 999;
-      return row.totalAvgRank;
-    };
 
     return built
       .filter((row) => teamMatches(row.team, search))
-      .sort((a, b) => value(a) - value(b) || a.team.name.localeCompare(b.team.name));
+      .sort(
+        (a, b) =>
+          (metricForMode(a, mode) ?? 999) - (metricForMode(b, mode) ?? 999) ||
+          a.team.name.localeCompare(b.team.name),
+      );
   }, [teams, games, ranks, records, mode, search]);
 
   const popupIndex = popupTeamId ? rows.findIndex((r) => r.team.id === popupTeamId) : -1;
@@ -181,8 +204,8 @@ export function SosTab({ teams, games, ranks, records, search = "" }: Props) {
         <header className="panel-header">
           <h2>SOS rankings</h2>
           <p>
-            Lower average opponent rank = tougher schedule. Click a team to see their full
-            schedule.
+            Lower average opponent rank = tougher. SOW = strength of wins, SOL = strength of
+            losses (FCS counts as 139). Click a team for their schedule.
           </p>
         </header>
         <div className="sos-mode-tabs">
@@ -191,6 +214,8 @@ export function SosTab({ teams, games, ranks, records, search = "" }: Props) {
               ["total", "Total SOS"],
               ["played", "Played"],
               ["remaining", "Remaining"],
+              ["wins", "SOW"],
+              ["losses", "SOL"],
             ] as const
           ).map(([id, label]) => (
             <button
@@ -213,12 +238,7 @@ export function SosTab({ teams, games, ranks, records, search = "" }: Props) {
         ) : (
           <ol className="sos-rank-list">
             {rows.map((row, index) => {
-              const metric =
-                mode === "played"
-                  ? row.playedAvgRank
-                  : mode === "remaining"
-                    ? row.remainingAvgRank
-                    : row.totalAvgRank;
+              const metric = metricForMode(row, mode);
               const sosRank = index + 1;
               return (
                 <li key={row.team.id}>
@@ -235,12 +255,14 @@ export function SosTab({ teams, games, ranks, records, search = "" }: Props) {
                     <span className="sos-rank-team">
                       <strong>{row.team.shortName}</strong>
                       <em>
-                        {row.record.wins}-{row.record.losses} · SOS #{sosRank}
+                        {row.record.wins}-{row.record.losses}
+                        {row.winAvgRank != null ? ` · SOW ${row.winAvgRank.toFixed(1)}` : ""}
+                        {row.lossAvgRank != null ? ` · SOL ${row.lossAvgRank.toFixed(1)}` : ""}
                       </em>
                     </span>
                     <span className="sos-rank-metrics">
                       <strong>{metric != null ? metric.toFixed(1) : "—"}</strong>
-                      <em>avg opp rank</em>
+                      <em>{modeLabel(mode)}</em>
                     </span>
                   </button>
                 </li>
@@ -256,7 +278,8 @@ export function SosTab({ teams, games, ranks, records, search = "" }: Props) {
           games={games}
           ranks={ranks}
           sosRank={popupIndex + 1}
-          totalSos={popupRow.totalAvgRank}
+          row={popupRow}
+          mode={mode}
           onClose={() => setPopupTeamId(null)}
         />
       ) : null}

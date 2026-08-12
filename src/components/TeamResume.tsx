@@ -105,6 +105,20 @@ export function TeamResume({
           </strong>
           <em>{sos.remainingCount} left</em>
         </div>
+        <div>
+          <span className="sos-label">SOW</span>
+          <strong>{sos.winAvgRank != null ? sos.winAvgRank.toFixed(1) : "—"}</strong>
+          <em>
+            {sos.winCount} win{sos.winCount === 1 ? "" : "s"}
+          </em>
+        </div>
+        <div>
+          <span className="sos-label">SOL</span>
+          <strong>{sos.lossAvgRank != null ? sos.lossAvgRank.toFixed(1) : "—"}</strong>
+          <em>
+            {sos.lossCount} loss{sos.lossCount === 1 ? "" : "es"}
+          </em>
+        </div>
       </div>
       <p className="resume-rank-note">
         Opponent ranks use this week&apos;s ballot when placed; otherwise the latest saved week

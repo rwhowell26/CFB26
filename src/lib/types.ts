@@ -50,6 +50,12 @@ export type SosSummary = {
   remainingAvgRank: number | null;
   totalCount: number;
   totalAvgRank: number | null;
+  /** Average opponent rank in wins (FCS = 139); lower = stronger wins */
+  winAvgRank: number | null;
+  winCount: number;
+  /** Average opponent rank in losses (FCS = 139); lower = tougher losses */
+  lossAvgRank: number | null;
+  lossCount: number;
   fbsOpponentCount: number;
   fcsPlayed: number;
   fcsTotal: number;

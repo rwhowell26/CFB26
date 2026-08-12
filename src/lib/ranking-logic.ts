@@ -143,8 +143,10 @@ export function computeSos(
   const all = gamesForTeam(teamId, games, ranks);
   const played = all.filter((g) => g.status === "final");
   const remaining = all.filter((g) => g.status !== "final");
+  const wins = played.filter((g) => g.result === "W");
+  const losses = played.filter((g) => g.result === "L");
 
-  /** FCS counts as 139 for SOS only; schedule UI still shows "FCS" with no rank. */
+  /** FCS counts as 139 for SOS / SOW / SOL; schedule UI still shows "FCS" with no rank. */
   const sosOpponentRank = (g: TeamGameView): number | null => {
     if (!g.opponentIsFbs) return FCS_SOS_RANK;
     return g.opponentRank ?? null;
@@ -167,6 +169,10 @@ export function computeSos(
     remainingAvgRank: avg(remaining),
     totalCount: all.length,
     totalAvgRank: avg(all),
+    winAvgRank: avg(wins),
+    winCount: wins.length,
+    lossAvgRank: avg(losses),
+    lossCount: losses.length,
     fbsOpponentCount: fbsWithRank.length,
     fcsPlayed: played.filter((g) => !g.opponentIsFbs).length,
     fcsTotal: all.filter((g) => !g.opponentIsFbs).length,
