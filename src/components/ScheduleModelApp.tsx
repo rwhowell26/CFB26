@@ -1,14 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { BuilderTab } from "@/components/BuilderTab";
 import { PlayoffTab } from "@/components/PlayoffTab";
 import { RankingsTab } from "@/components/RankingsTab";
 import { RegionsTab } from "@/components/RegionsTab";
 import { SchedulesTab } from "@/components/SchedulesTab";
 import { defaultAssignment, REGIONS, TEAMS } from "@/lib/teams";
-import { loadAssignment, saveAssignment } from "@/lib/storage";
-import type { Assignment, RegionId, TierId } from "@/lib/types";
+import { useAssignment } from "@/lib/storage";
+import type { RegionId, TierId } from "@/lib/types";
 
 const TABS = [
   { id: "regions", label: "Regions" },
@@ -22,17 +22,7 @@ type TabId = (typeof TABS)[number]["id"];
 
 export function ScheduleModelApp() {
   const [tab, setTab] = useState<TabId>("regions");
-  const [assignment, setAssignment] = useState<Assignment>(defaultAssignment);
-  const [hydrated, setHydrated] = useState(false);
-
-  useEffect(() => {
-    setAssignment(loadAssignment());
-    setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (hydrated) saveAssignment(assignment);
-  }, [assignment, hydrated]);
+  const [assignment, setAssignment] = useAssignment();
 
   const onMove = (teamId: string, region: RegionId, tier: TierId) => {
     setAssignment((current) => ({

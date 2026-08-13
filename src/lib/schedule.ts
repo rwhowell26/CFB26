@@ -32,25 +32,28 @@ export function inTierPairs(
   const size = ids.length;
   if (size < 2) return [];
 
+  const used = new Set<string>();
   const degreeOf: Record<string, number> = Object.fromEntries(ids.map((id) => [id, 0]));
   const edges: Array<[string, string]> = [];
+
+  const tryAdd = (a: string, b: string) => {
+    if (a === b) return false;
+    const key = pairKey(a, b);
+    if (forbidden.has(key) || used.has(key)) return false;
+    if (degreeOf[a] >= degree || degreeOf[b] >= degree) return false;
+    degreeOf[a] += 1;
+    degreeOf[b] += 1;
+    used.add(key);
+    edges.push([a, b]);
+    return true;
+  };
+
   const distances: number[] = [];
   const maxTwoWay = Math.floor((size - 1) / 2);
   for (let step = 0; step < maxTwoWay; step += 1) {
     distances.push(((year + step) % maxTwoWay) + 1);
   }
   if (size % 2 === 0) distances.push(size / 2);
-
-  const tryAdd = (a: string, b: string) => {
-    if (a === b) return;
-    const key = pairKey(a, b);
-    if (forbidden.has(key)) return;
-    if (degreeOf[a] >= degree || degreeOf[b] >= degree) return;
-    if (edges.some(([x, y]) => pairKey(x, y) === key)) return;
-    degreeOf[a] += 1;
-    degreeOf[b] += 1;
-    edges.push([a, b]);
-  };
 
   for (const distance of distances) {
     if (size % 2 === 0 && distance === size / 2) {
@@ -66,6 +69,19 @@ export function inTierPairs(
       if (seen.has(key)) continue;
       seen.add(key);
       tryAdd(ids[i], ids[j]);
+    }
+  }
+
+  let progressed = true;
+  while (progressed) {
+    progressed = false;
+    const needy = ids
+      .filter((id) => degreeOf[id] < degree)
+      .sort((a, b) => a.localeCompare(b));
+    for (let i = 0; i < needy.length; i += 1) {
+      for (let j = i + 1; j < needy.length; j += 1) {
+        if (tryAdd(needy[i], needy[j])) progressed = true;
+      }
     }
   }
 
