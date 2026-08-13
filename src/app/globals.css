@@ -288,6 +288,22 @@ main { min-height: 100vh; }
 
 .rank-copy { display: grid; flex: 1; }
 .rank-list li { padding: 0.3rem 0; border-bottom: 1px solid var(--line); }
+.rank-tier { margin-top: 0.85rem; }
+.rank-tier header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.35rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--line);
+}
+.rank-tier h3 {
+  margin: 0;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.rank-tier header span { color: var(--muted); font-size: 0.78rem; }
 
 .stat-row { display: flex; gap: 0.7rem; flex-wrap: wrap; }
 .stat {
