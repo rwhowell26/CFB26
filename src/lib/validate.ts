@@ -1,6 +1,6 @@
 import { buildPlayoffField } from "./playoff";
 import { teamsIn, tiersInRegion } from "./rankings";
-import { isRealRivalry } from "./rivalries";
+import { isRealRivalry, traditionalDate } from "./rivalries";
 import { clearRival } from "./rivals";
 import { allSchedules, roundRobinRounds } from "./schedule";
 import {
@@ -75,16 +75,39 @@ export function validateModel() {
       assert(reverse, `${team.abbreviation} vs ${game.opponentId} is one-way`);
       assert(reverse.home !== game.home, `${team.abbreviation} home/away mismatch`);
       assert(reverse.week === game.week, `${team.abbreviation} week mismatch`);
+      const dated = traditionalDate(team.id, game.opponentId);
+      if (dated) {
+        assert(
+          game.week === dated.week,
+          `${team.abbreviation} ${dated.name} should be week ${dated.week}, got ${game.week}`,
+        );
+        continue;
+      }
       const sameTier =
         assignment[team.id].region === assignment[game.opponentId].region &&
         assignment[team.id].tier === assignment[game.opponentId].tier;
       if (game.kind === "in-tier" || (game.kind === "rival" && sameTier)) {
-        assert(game.week >= RR_START_WEEK, `${team.abbreviation} round-robin in week ${game.week}`);
-      } else {
-        assert(game.week < LEAGUE_BYE_WEEK, `${team.abbreviation} out-of-tier in week ${game.week}`);
+        assert(
+          game.week >= RR_START_WEEK || game.week < LEAGUE_BYE_WEEK,
+          `${team.abbreviation} round-robin in week ${game.week}`,
+        );
       }
     }
   }
+
+  const ala = TEAMS.find((team) => team.abbreviation === "ALA");
+  const tenn = TEAMS.find((team) => team.abbreviation === "TENN");
+  const miss = TEAMS.find((team) => team.abbreviation === "MISS");
+  const msst = TEAMS.find((team) => team.abbreviation === "MSST");
+  assert(ala && tenn && miss && msst, "named rivalry teams missing");
+  assert(
+    schedules[ala.id].games.find((game) => game.opponentId === tenn.id)?.week === 8,
+    "Alabama–Tennessee belongs on the Third Saturday in October",
+  );
+  assert(
+    schedules[miss.id].games.find((game) => game.opponentId === msst.id)?.week === 13,
+    "Egg Bowl belongs on Thanksgiving week",
+  );
 
   let sparse = defaultRivals();
   const stripped = TEAMS[0];

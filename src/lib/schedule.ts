@@ -1,5 +1,6 @@
 import { regionRanks, teamsIn, tiersInRegion } from "./rankings";
 import { rivalsOf } from "./rivals";
+import { traditionalDate, traditionalPins } from "./rivalries";
 import {
   LEAGUE_BYE_WEEK,
   REGIONS,
@@ -144,7 +145,8 @@ function classifyLeftover(
   oocSet: Set<string>,
 ): { kind: GameKind; label: string } {
   if (rivalsOf(rivals, a).includes(b)) {
-    return { kind: "rival", label: "Protected rival" };
+    const dated = traditionalDate(a, b);
+    return { kind: "rival", label: dated ? dated.name : "Protected rival" };
   }
   const placeA = assignment[a];
   const placeB = assignment[b];
@@ -190,11 +192,14 @@ function matchLeftoverWeek(
   rivals: RivalMap,
   oocSet: Set<string>,
   seen: Set<string>,
+  available: Set<string>,
 ): Array<[string, string]> {
-  const unmatched = new Set(TEAM_IDS);
+  const unmatched = new Set(available);
   const partner = new Map<string, string>();
   const rivalSet = new Set(leftoverRivals(rivals, seen).map(([a, b]) => pairKey(a, b)));
-  const allowed = (a: string, b: string) => a !== b && !seen.has(pairKey(a, b));
+  const pool = [...available];
+  const allowed = (a: string, b: string) =>
+    a !== b && available.has(a) && available.has(b) && !seen.has(pairKey(a, b));
 
   const pair = (a: string, b: string) => {
     if (!unmatched.has(a) || !unmatched.has(b) || !allowed(a, b)) return false;
@@ -205,7 +210,10 @@ function matchLeftoverWeek(
     return true;
   };
 
-  for (const [a, b] of leftoverRivals(rivals, seen)) pair(a, b);
+  for (const [a, b] of leftoverRivals(rivals, seen)) {
+    if (traditionalDate(a, b)) continue;
+    pair(a, b);
+  }
   for (const [a, b] of plannedCrossovers(assignment, seen)) {
     if (!oocSet.has(pairKey(a, b))) continue;
     pair(a, b);
@@ -236,7 +244,7 @@ function matchLeftoverWeek(
   const augment = (start: string): boolean => {
     const visited = new Set<string>();
     const dfs = (u: string): boolean => {
-      for (const v of TEAM_IDS) {
+      for (const v of pool) {
         if (v === start || !allowed(u, v) || visited.has(v)) continue;
         visited.add(v);
         const w = partner.get(v);
@@ -272,7 +280,7 @@ function matchLeftoverWeek(
         if (!unmatched.has(a) || !unmatched.has(b)) continue;
         if (pair(a, b)) continue;
         let swapped = false;
-        for (const x of TEAM_IDS) {
+        for (const x of pool) {
           const y = partner.get(x);
           if (!y || x >= y) continue;
           if (allowed(a, x) && allowed(b, y)) {
@@ -332,44 +340,178 @@ function toCalendarGame(
   };
 }
 
+function containsPair(round: Array<[string, string]>, a: string, b: string): boolean {
+  const key = pairKey(a, b);
+  return round.some(([x, y]) => pairKey(x, y) === key);
+}
+
+function assignWeeksToRounds(
+  rounds: Array<Array<[string, string]>>,
+  pins: Array<{ a: string; b: string; week: number }>,
+): number[] | null {
+  const locked = new Map<number, number>();
+  for (const pin of pins) {
+    const roundIndex = rounds.findIndex((round) => containsPair(round, pin.a, pin.b));
+    if (roundIndex < 0) return null;
+    const existing = locked.get(roundIndex);
+    if (existing !== undefined && existing !== pin.week) return null;
+    for (const [otherRound, week] of locked) {
+      if (otherRound !== roundIndex && week === pin.week) return null;
+    }
+    locked.set(roundIndex, pin.week);
+  }
+  const used = new Set(locked.values());
+  const freeWeeks = Array.from({ length: 7 }, (_, i) => RR_START_WEEK + i).filter(
+    (week) => !used.has(week),
+  );
+  const weeks: number[] = [];
+  let nextFree = 0;
+  for (let round = 0; round < rounds.length; round += 1) {
+    const lockedWeek = locked.get(round);
+    weeks.push(lockedWeek ?? freeWeeks[nextFree++]);
+  }
+  return weeks;
+}
+
+function buildPinnedRounds(
+  ids: string[],
+  pins: Array<{ a: string; b: string; week: number }>,
+): { rounds: Array<Array<[string, string]>>; weeks: number[] } {
+  const groupPins = pins.filter((pin) => ids.includes(pin.a) && ids.includes(pin.b));
+  const tryOrder = (order: string[]) => {
+    const rounds = roundRobinRounds(order);
+    const weeks = assignWeeksToRounds(rounds, groupPins);
+    return weeks ? { rounds, weeks } : null;
+  };
+  if (!groupPins.length) {
+    const rounds = roundRobinRounds(ids);
+    return { rounds, weeks: rounds.map((_, index) => RR_START_WEEK + index) };
+  }
+  for (let offset = 0; offset < ids.length; offset += 1) {
+    const rotated = [...ids.slice(offset), ...ids.slice(0, offset)];
+    const found = tryOrder(rotated) ?? tryOrder([...rotated].reverse());
+    if (found) return found;
+  }
+  const rounds = roundRobinRounds(ids);
+  return { rounds, weeks: rounds.map((_, index) => RR_START_WEEK + index) };
+}
+
 export function buildCalendar(assignment: Assignment, rivals: RivalMap): CalendarGame[] {
   const seen = new Set<string>();
   const placed: CalendarGame[] = [];
+  const busy = new Map<string, Set<number>>();
   const isRival = (a: string, b: string) => rivalsOf(rivals, a).includes(b);
+  const mark = (a: string, b: string, week: number) => {
+    const aSet = busy.get(a) ?? new Set<number>();
+    const bSet = busy.get(b) ?? new Set<number>();
+    aSet.add(week);
+    bSet.add(week);
+    busy.set(a, aSet);
+    busy.set(b, bSet);
+  };
+  const free = (teamId: string, week: number) => !(busy.get(teamId)?.has(week) ?? false);
+  const degree = () => {
+    const count: Record<string, number> = Object.fromEntries(TEAM_IDS.map((id) => [id, 0]));
+    for (const game of placed) {
+      count[game.homeId] += 1;
+      count[game.awayId] += 1;
+    }
+    return count;
+  };
+
+  const pushGame = (a: string, b: string, week: number, kind: GameKind, label: string) => {
+    if (a === b || seen.has(pairKey(a, b)) || !free(a, week) || !free(b, week)) return false;
+    if (week === LEAGUE_BYE_WEEK) return false;
+    seen.add(pairKey(a, b));
+    placed.push(toCalendarGame(a, b, week, kind, label));
+    mark(a, b, week);
+    return true;
+  };
+
+  const gameInWeek = (teamId: string, week: number) =>
+    placed.find(
+      (game) => game.week === week && (game.homeId === teamId || game.awayId === teamId),
+    );
+
+  const moveGame = (game: CalendarGame, week: number) => {
+    if (!free(game.homeId, week) || !free(game.awayId, week) || week === LEAGUE_BYE_WEEK) {
+      return false;
+    }
+    busy.get(game.homeId)?.delete(game.week);
+    busy.get(game.awayId)?.delete(game.week);
+    game.week = week;
+    mark(game.homeId, game.awayId, week);
+    return true;
+  };
+
+  const clearWeekForPin = (teamId: string, week: number) => {
+    const existing = gameInWeek(teamId, week);
+    if (!existing) return;
+    const dest = OUT_OF_TIER_WEEKS.find(
+      (slot) => free(existing.homeId, slot) && free(existing.awayId, slot),
+    );
+    if (dest) moveGame(existing, dest);
+  };
+
+  const activePins = traditionalPins().filter((pin) => isRival(pin.a, pin.b));
 
   for (const region of REGIONS) {
     for (const tier of tiersInRegion(assignment, region.id)) {
       const group = teamsIn(assignment, region.id, tier).map((team) => team.id);
-      const rounds = roundRobinRounds(group);
+      const { rounds, weeks } = buildPinnedRounds(group, activePins);
       rounds.forEach((pairs, round) => {
-        const week = RR_START_WEEK + round;
+        const week = weeks[round];
         for (const [a, b] of pairs) {
           const rival = isRival(a, b);
-          seen.add(pairKey(a, b));
-          placed.push(
-            toCalendarGame(
-              a,
-              b,
-              week,
-              rival ? "rival" : "in-tier",
-              rival
+          const dated = rival ? traditionalDate(a, b) : undefined;
+          pushGame(
+            a,
+            b,
+            week,
+            rival ? "rival" : "in-tier",
+            dated
+              ? dated.name
+              : rival
                 ? `Protected rival · ${region.name} ${tierName(tier)}`
                 : `${region.name} ${tierName(tier)}`,
-            ),
           );
         }
       });
     }
   }
 
+  for (const pin of activePins) {
+    const sameTier =
+      assignment[pin.a]?.region === assignment[pin.b]?.region &&
+      assignment[pin.a]?.tier === assignment[pin.b]?.tier;
+    if (sameTier || seen.has(pairKey(pin.a, pin.b))) continue;
+    if (!free(pin.a, pin.week)) clearWeekForPin(pin.a, pin.week);
+    if (!free(pin.b, pin.week)) clearWeekForPin(pin.b, pin.week);
+    pushGame(pin.a, pin.b, pin.week, "rival", pin.name);
+  }
+
   const oocSet = new Set(plannedCrossovers(assignment, seen).map(([a, b]) => pairKey(a, b)));
 
   for (const week of OUT_OF_TIER_WEEKS) {
-    const pairs = matchLeftoverWeek(assignment, rivals, oocSet, seen);
+    const available = new Set(TEAM_IDS.filter((id) => free(id, week)));
+    const pairs = matchLeftoverWeek(assignment, rivals, oocSet, seen, available);
     for (const [a, b] of pairs) {
-      seen.add(pairKey(a, b));
       const meta = classifyLeftover(a, b, assignment, rivals, oocSet);
-      placed.push(toCalendarGame(a, b, week, meta.kind, meta.label));
+      pushGame(a, b, week, meta.kind, meta.label);
+    }
+  }
+
+  for (let week = 1; week <= SEASON_WEEKS; week += 1) {
+    if (week === LEAGUE_BYE_WEEK) continue;
+    const counts = degree();
+    const available = new Set(
+      TEAM_IDS.filter((id) => free(id, week) && (counts[id] ?? 0) < 12),
+    );
+    if (available.size < 2) continue;
+    const pairs = matchLeftoverWeek(assignment, rivals, oocSet, seen, available);
+    for (const [a, b] of pairs) {
+      const meta = classifyLeftover(a, b, assignment, rivals, oocSet);
+      pushGame(a, b, week, meta.kind, meta.label);
     }
   }
 

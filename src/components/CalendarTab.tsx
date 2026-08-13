@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { TeamChip } from "@/components/TeamChip";
 import { gamesInWeek } from "@/lib/schedule";
+import { WEEK_TRADITION } from "@/lib/rivalries";
 import { LEAGUE_BYE_WEEK, REGIONS, SEASON_WEEKS, getTeam, regionName } from "@/lib/teams";
 import type { Assignment, RegionId, RivalMap } from "@/lib/types";
 
@@ -20,9 +21,10 @@ export function CalendarTab({
   return (
     <div className="stack">
       <p className="lede">
-        A 13-week calendar with 12 games and a league-wide bye. Weeks 1–5 are games outside
-        the tier. Week 6 is off for every team. Weeks 7–13 are the 8-team round-robins.
-        Nobody plays twice in the same week.
+        A 13-week calendar with 12 games and a league-wide bye. Weeks 1–5 are mostly games
+        outside the tier. Week 6 is off for every team. Weeks 7–13 are the round-robins,
+        except dated rivalries stay on their traditional Saturdays (Egg Bowl on Thanksgiving
+        week, Alabama–Tennessee on the Third Saturday in October, Red River, and the rest).
       </p>
       <div className="week-bar">
         {Array.from({ length: SEASON_WEEKS }, (_, index) => index + 1).map((item) => (
@@ -32,7 +34,7 @@ export function CalendarTab({
             className={week === item ? "is-active" : ""}
             onClick={() => setWeek(item)}
           >
-            {item === LEAGUE_BYE_WEEK ? `${item} bye` : item}
+            {item === LEAGUE_BYE_WEEK ? `${item} bye` : WEEK_TRADITION[item] ? `${item}*` : item}
           </button>
         ))}
         <select
@@ -48,7 +50,13 @@ export function CalendarTab({
       </div>
       <section className="panel">
         <header className="panel-head">
-          <h2>{week === LEAGUE_BYE_WEEK ? `Week ${week} · Bye` : `Week ${week}`}</h2>
+          <h2>
+            {week === LEAGUE_BYE_WEEK
+              ? `Week ${week} · Bye`
+              : WEEK_TRADITION[week]
+                ? `Week ${week} · ${WEEK_TRADITION[week]}`
+                : `Week ${week}`}
+          </h2>
           <span>{week === LEAGUE_BYE_WEEK ? "every team off" : `${games.length} games`}</span>
         </header>
         {week === LEAGUE_BYE_WEEK && games.length === 0 ? (

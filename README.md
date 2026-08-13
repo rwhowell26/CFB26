@@ -10,7 +10,7 @@ The pool is **160 clubs**. Starting tiers use **2021–2025 records**. Former FC
 - Teams may have **0–3 protected rivals**, and only **named college football series** (Iron Bowl, Army–Navy, Apple Cup, etc.). Slots are not padded with nearby clubs.
 - **One balanced crossover** from each of the other three regions (strong vs weak mixed with same-band and offset pairings so SOS is closer to even).
 - Open slots fill with **other clubs in the same region, different tier**.
-- **Weeks 1–5:** games outside the tier. **Week 6:** bye for every team. **Weeks 7–13:** the round-robin.
+- **Weeks 1–5:** games outside the tier. **Week 6:** bye for every team. **Weeks 7–13:** the round-robin. Dated rivalries (Egg Bowl on Thanksgiving week, Alabama–Tennessee on the Third Saturday in October, Red River, Iron Bowl, and the rest) stay on those traditional Saturdays.
 
 ## Playoff (24, all autobids)
 

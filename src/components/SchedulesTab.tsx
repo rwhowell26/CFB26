@@ -13,6 +13,7 @@ import {
   regionName,
   tierName,
 } from "@/lib/teams";
+import { traditionalDate } from "@/lib/rivalries";
 import type { Assignment, GameKind, RivalMap, ScheduledGame } from "@/lib/types";
 
 const KIND_LABEL: Record<GameKind, string> = {
@@ -112,7 +113,7 @@ export function SchedulesTab({
                 <span className="week-pill">W{game.week}</span>
                 <TeamChip team={opponent} extra={`${recordLabel(opponent)} · ${game.home ? "Home" : "Away"}`} />
                 <div className="game-meta">
-                  <b>{KIND_LABEL[game.kind]}</b>
+                  <b>{traditionalDate(selectedId, game.opponentId)?.name ?? KIND_LABEL[game.kind]}</b>
                   <span>
                     {REGIONS.find((region) => region.id === oppPlace.region)?.name} {tierName(oppPlace.tier)}
                   </span>
@@ -122,10 +123,11 @@ export function SchedulesTab({
           })}
         </ul>
         <p className="footnote">
-          Weeks 1–5 are games outside the tier (leftover rivals, balanced crossovers, and
-          same-region clubs from other tiers). Week 6 is a bye for every team. Weeks 7–13 are
-          the 8-team round-robin. Still 12 games — the bye is not a 13th contest. Protected
-          rivals are named series only (0–3); open slots fill in-region, out of tier.
+          Weeks 1–5 are mostly games outside the tier. Week 6 is a bye for every team. Weeks
+          7–13 are the 8-team round-robin. Dated rivalries stay on their traditional Saturdays
+          (Egg Bowl on Thanksgiving week, Alabama–Tennessee on the Third Saturday in October).
+          Still 12 games — the bye is not a 13th contest. Protected rivals are named series
+          only (0–3); open slots fill in-region, out of tier.
         </p>
       </section>
     </div>
