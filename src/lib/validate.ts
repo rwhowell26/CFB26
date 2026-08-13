@@ -4,8 +4,10 @@ import { isRealRivalry, traditionalDate } from "./rivalries";
 import { clearRival } from "./rivals";
 import { allSchedules, roundRobinRounds } from "./schedule";
 import {
+  compareSpPlus,
   defaultAssignment,
   defaultRivals,
+  getTeam,
   LEAGUE_BYE_WEEK,
   MAX_GAMES,
   MAX_RIVALS,
@@ -220,6 +222,13 @@ export function validateModel() {
     );
     assert(feed, `no first-round feed for bye ${game.seedA}`);
     assert(feed.projectedWinnerId === game.teamBId, `R16 ${game.seedA} does not receive the first-round winner`);
+  }
+  for (const game of bracket) {
+    if (!game.teamAId || !game.teamBId || !game.projectedWinnerId) continue;
+    const a = getTeam(game.teamAId);
+    const b = getTeam(game.teamBId);
+    const expected = compareSpPlus(a, b) < 0 ? a.id : b.id;
+    assert(game.projectedWinnerId === expected, `${game.id} winner should be the higher SP+ club`);
   }
 
   return {

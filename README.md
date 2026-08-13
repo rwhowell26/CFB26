@@ -14,7 +14,7 @@ The pool is **160 clubs**. Starting tiers use **2025 SP+** (Bill Connelly’s fi
 
 ## Playoff (24, all autobids)
 
-Each region sends **3 Tier I, 2 Tier II, and 1 Tier III** (place in the 8-team standings). Seeds are by **tier and place**, not record: the four Tier I champions are 1–4, then Tier I runners-up, then 3rd place, then Tier II, then the four Tier III champions. Opening games are **cross-region**. Seeds 1–8 get a bye. Tiers IV+ play for promotion only.
+Each region sends **3 Tier I, 2 Tier II, and 1 Tier III** (place in the 8-team standings). Seeds are by **tier and place**, not record. Opening games are **cross-region**. Each region’s 1 and 2 get a bye. **Projected bracket winners use 2025 SP+**. Tiers IV+ play for promotion only.
 
 ## Movement
 

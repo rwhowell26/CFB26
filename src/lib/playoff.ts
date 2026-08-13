@@ -1,5 +1,5 @@
 import { teamsIn } from "./rankings";
-import { compareRecords, getTeam, PLAYOFF_TIERS, regionCode, regionName, tierName } from "./teams";
+import { compareSpPlus, getTeam, PLAYOFF_TIERS, regionCode, regionName, tierName } from "./teams";
 import type { Assignment, PlayoffGame, PlayoffTeam, RegionId, Team } from "./types";
 
 const FIELD_SIZE = 24;
@@ -29,7 +29,7 @@ const REGION_BY_SEED: RegionId[] = [
 function projectedWinner(aId: string | null, bId: string | null): string | null {
   if (!aId) return bId;
   if (!bId) return aId;
-  return compareRecords(getTeam(aId), getTeam(bId)) < 0 ? aId : bId;
+  return compareSpPlus(getTeam(aId), getTeam(bId)) < 0 ? aId : bId;
 }
 
 export function playoffBidCount(tier: number): number {

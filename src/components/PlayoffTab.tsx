@@ -45,7 +45,8 @@ export function PlayoffTab({ assignment }: { assignment: Assignment }) {
         Each region sends 3 from Tier I, 2 from Tier II, and 1 from Tier III (24 autobids).
         Labels are regional place, not a 1–24 seed: 1W is first in the West, 2E is the East
         runner-up, 6S is the South Tier III champion. Each region’s 1 and 2 receive a
-        first-round bye. Opening games are always cross-region.
+        first-round bye. Opening games are always cross-region. Bracket winners are
+        projected from last year’s SP+.
       </p>
       <div className="stat-row">
         <div className="stat"><b>{summary.fieldSize}</b><span>team field</span></div>
@@ -57,7 +58,7 @@ export function PlayoffTab({ assignment }: { assignment: Assignment }) {
       <section className="panel playoff-board-panel">
         <header className="panel-head">
           <h2>Bracket</h2>
-          <span>Projected winners still use 2025 win%</span>
+          <span>Projected winners use 2025 SP+</span>
         </header>
         <div className="bracket-board">
           {columns.map((column) => (

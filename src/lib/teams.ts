@@ -111,6 +111,16 @@ export function compareRecords(a: Team, b: Team): number {
   return a.shortName.localeCompare(b.shortName);
 }
 
+export function compareSpPlus(a: Team, b: Team): number {
+  const aRating = a.spPlus ?? Number.NEGATIVE_INFINITY;
+  const bRating = b.spPlus ?? Number.NEGATIVE_INFINITY;
+  if (bRating !== aRating) return bRating - aRating;
+  const aRank = a.spPlusRank ?? Number.POSITIVE_INFINITY;
+  const bRank = b.spPlusRank ?? Number.POSITIVE_INFINITY;
+  if (aRank !== bRank) return aRank - bRank;
+  return a.shortName.localeCompare(b.shortName);
+}
+
 export function getTeam(id: string): Team {
   const team = TEAM_BY_ID[id];
   if (!team) throw new Error(`Unknown team id ${id}`);

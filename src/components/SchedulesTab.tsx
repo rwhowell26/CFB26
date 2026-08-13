@@ -11,6 +11,7 @@ import {
   getTeam,
   recordLabel,
   regionName,
+  spPlusLabel,
   tierName,
 } from "@/lib/teams";
 import { traditionalDate } from "@/lib/rivalries";
@@ -20,7 +21,7 @@ const KIND_LABEL: Record<GameKind, string> = {
   rival: "Protected rival",
   "in-tier": "Same tier",
   "inter-region": "Crossover",
-  "cross-tier": "Region, other tier",
+  "cross-tier": "Other tier",
 };
 
 type SlateRow =
@@ -54,9 +55,11 @@ export function SchedulesTab({
     if (game) slate.push({ type: "game", week, game });
     else slate.push({ type: "bye", week });
   }
+  const left = slate.slice(0, 7);
+  const right = slate.slice(7);
 
   return (
-    <div className="split">
+    <div className="split schedules-layout">
       <aside className="side-list">
         <input
           value={query}
@@ -78,58 +81,86 @@ export function SchedulesTab({
       <section className="panel schedule-panel">
         <header className="hero-team">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={selected.logo} alt="" width={64} height={64} />
+          <img src={selected.logo} alt="" width={44} height={44} />
           <div>
             <p className="eyebrow">
-              {regionName(place.region)} · {tierName(place.tier)}
+              {regionName(place.region)} · {tierName(place.tier)} · {spPlusLabel(selected)}
             </p>
             <h2>{selected.name}</h2>
             <p>
-              2025 record {recordLabel(selected)} · {schedule.games.length}-game slate · bye
-              week {byeWeek} · opponent win% {Math.round(sos * 1000) / 10}
+              {recordLabel(selected)} in 2025 · 12 games · bye W{byeWeek} · opp win%{" "}
+              {Math.round(sos * 1000) / 10}
             </p>
           </div>
         </header>
-        <ul className="game-list">
-          {slate.map((row) => {
-            if (row.type === "bye") {
-              return (
-                <li key={`bye-${row.week}`} className="is-bye-week">
-                  <span className="week-pill">W{row.week}</span>
-                  <div className="chip-copy">
-                    <b>Bye</b>
-                    <span className="muted">
-                      {row.week === LEAGUE_BYE_WEEK ? "League-wide off week" : "No game this week"}
-                    </span>
-                  </div>
-                </li>
-              );
-            }
-            const game = row.game;
-            const opponent = getTeam(game.opponentId);
-            const oppPlace = assignment[opponent.id];
-            return (
-              <li key={`${game.week}-${game.opponentId}`}>
-                <span className="week-pill">W{game.week}</span>
-                <TeamChip team={opponent} extra={`${recordLabel(opponent)} · ${game.home ? "Home" : "Away"}`} />
-                <div className="game-meta">
-                  <b>{traditionalDate(selectedId, game.opponentId)?.name ?? KIND_LABEL[game.kind]}</b>
-                  <span>
-                    {REGIONS.find((region) => region.id === oppPlace.region)?.name} {tierName(oppPlace.tier)}
-                  </span>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="schedule-slate">
+          <WeekColumn
+            rows={left}
+            selectedId={selectedId}
+            assignment={assignment}
+          />
+          <WeekColumn
+            rows={right}
+            selectedId={selectedId}
+            assignment={assignment}
+          />
+        </div>
         <p className="footnote">
-          Weeks 1–5 are mostly games outside the tier. Week 6 is a bye for every team. Weeks
-          7–13 are the 8-team round-robin. Dated rivalries stay on their traditional Saturdays
-          (Egg Bowl on Thanksgiving week, Alabama–Tennessee on the Third Saturday in October).
-          Still 12 games — the bye is not a 13th contest. Protected rivals are named series
-          only (0–3); open slots fill in-region, out of tier.
+          W1–5 out of tier · W6 league bye · W7–13 round-robin. Named rivals only; dated
+          series stay on their traditional Saturdays.
         </p>
       </section>
     </div>
+  );
+}
+
+function WeekColumn({
+  rows,
+  selectedId,
+  assignment,
+}: {
+  rows: SlateRow[];
+  selectedId: string;
+  assignment: Assignment;
+}) {
+  return (
+    <ul className="game-list">
+      {rows.map((row) => {
+        if (row.type === "bye") {
+          return (
+            <li key={`bye-${row.week}`} className="is-bye-week">
+              <span className="week-pill">W{row.week}</span>
+              <div className="chip-copy">
+                <b>Bye</b>
+                <span className="muted">
+                  {row.week === LEAGUE_BYE_WEEK ? "League-wide" : "Open"}
+                </span>
+              </div>
+            </li>
+          );
+        }
+        const game = row.game;
+        const opponent = getTeam(game.opponentId);
+        const oppPlace = assignment[opponent.id];
+        const series = traditionalDate(selectedId, game.opponentId)?.name;
+        return (
+          <li key={`${game.week}-${game.opponentId}`}>
+            <span className="week-pill">W{game.week}</span>
+            <TeamChip
+              team={opponent}
+              compact
+              extra={`${game.home ? "Home" : "Away"} · ${recordLabel(opponent)}`}
+            />
+            <div className="game-meta">
+              <b>{series ?? KIND_LABEL[game.kind]}</b>
+              <span>
+                {REGIONS.find((region) => region.id === oppPlace.region)?.name}{" "}
+                {tierName(oppPlace.tier)}
+              </span>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
   );
 }

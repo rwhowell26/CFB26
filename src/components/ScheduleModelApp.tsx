@@ -46,7 +46,7 @@ export function ScheduleModelApp() {
   );
 
   return (
-    <div className={`app-shell${tab === "playoff" ? " is-wide" : ""}`}>
+    <div className={`app-shell${tab === "playoff" || tab === "schedules" ? " is-wide" : ""}${tab === "schedules" ? " is-compact" : ""}`}>
       <header className="topbar">
         <div className="brand-block">
           <p className="kicker">CFB26 · realignment lab</p>
