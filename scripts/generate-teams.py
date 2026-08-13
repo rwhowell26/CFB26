@@ -1,15 +1,23 @@
 #!/usr/bin/env python3
-"""Build seeded FBS + FCS team data: geography, 2025 records, and named-rivalry slots."""
+"""Build seeded FBS + FCS team data: geography, 2025 SP+, and named-rivalry slots."""
 
 from __future__ import annotations
 
+import html as htmlmod
 import json
+import re
+import unicodedata
 import urllib.request
 from collections import defaultdict
 from pathlib import Path
 
 OUT = Path("/workspace/src/data/teams.json")
 RIVALRIES = Path("/workspace/src/data/rivalries.json")
+SP_PLUS_OUT = Path("/workspace/src/data/sp-plus-2025.json")
+SP_PLUS_URL = (
+    "https://www.espn.com/college-football/story/_/id/46128861/"
+    "2025-college-football-sp+-rankings-all-136-fbs-teams"
+)
 TIER_SIZE = 8
 MAX_RIVALS = 3
 
@@ -164,16 +172,110 @@ def fetch_standings(group: int, year: int) -> list[dict]:
     return teams
 
 
+def norm_name(value: str) -> str:
+    text = unicodedata.normalize("NFKD", htmlmod.unescape(value))
+    text = text.encode("ascii", "ignore").decode().lower().replace("&", "and")
+    text = re.sub(r"j['’]ville", "jacksonville", text)
+    text = re.sub(r"\bmiss\.", "mississippi", text)
+    text = re.sub(r"\bwash\.", "washington", text)
+    text = re.sub(r"\bga\.", "georgia", text)
+    text = re.sub(r"\bva\.", "virginia", text)
+    text = re.sub(r"\bn\.\s*texas\b", "north texas", text)
+    text = re.sub(r"\bn\.\s*carolina\b", "north carolina", text)
+    text = re.sub(r"\bn\.\s*illinois\b", "northern illinois", text)
+    text = re.sub(r"\bs\.\s*carolina\b", "south carolina", text)
+    text = re.sub(r"\bs\.\s*alabama\b", "south alabama", text)
+    text = re.sub(r"\bw\.\s*virginia\b", "west virginia", text)
+    text = re.sub(r"\bso\.\s*miss\b", "southern miss", text)
+    text = re.sub(r"\bla\.\s*tech\b", "louisiana tech", text)
+    text = re.sub(r"\bapp\.\s*st\b", "app state", text)
+    text = re.sub(r"\bcoastal caro\.?\b", "coastal", text)
+    text = re.sub(r"\bboston coll\.?\b", "boston college", text)
+    text = re.sub(r"\bst\.?\b", "st", text)
+    text = re.sub(r"\bstate\b", "st", text)
+    return re.sub(r"[^a-z0-9]+", "", text)
+
+
+SP_PLUS_ALIASES = {
+    "pittsburgh": "PITT",
+    "jacksonvillest": "JVST",
+    "georgiasouthern": "GASO",
+    "northernillinois": "NIU",
+}
+
+
+def fetch_sp_plus() -> list[dict]:
+    req = urllib.request.Request(SP_PLUS_URL, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(req) as response:
+        page = response.read().decode("utf-8", "replace")
+    rows = re.findall(
+        r"<td>(\d+)\.\s+([^<]+?)\s+\((\d+)-(\d+)\)</td><td>([-0-9.]+)</td>",
+        page,
+    )
+    seen: set[int] = set()
+    out: list[dict] = []
+    for rank, name, wins, losses, rating in rows:
+        rank_n = int(rank)
+        if rank_n in seen:
+            continue
+        seen.add(rank_n)
+        out.append({
+            "rank": rank_n,
+            "name": name,
+            "wins": int(wins),
+            "losses": int(losses),
+            "rating": float(rating),
+        })
+        if len(out) == 136:
+            break
+    if len(out) != 136:
+        raise SystemExit(f"expected 136 SP+ rows, got {len(out)}")
+    SP_PLUS_OUT.parent.mkdir(parents=True, exist_ok=True)
+    SP_PLUS_OUT.write_text(json.dumps(out, indent=2) + "\n")
+    return out
+
+
+def apply_sp_plus(teams: list[dict], rankings: list[dict]) -> None:
+    by_norm: dict[str, dict] = {}
+    for team in teams:
+        if team["subdivision"] != "fbs":
+            continue
+        for key in (team["abbreviation"], team["shortName"], team["name"]):
+            by_norm[norm_name(key)] = team
+    matched: set[str] = set()
+    for row in rankings:
+        needle = norm_name(row["name"])
+        team = by_norm.get(needle)
+        if not team:
+            abbr = SP_PLUS_ALIASES.get(needle)
+            team = next((item for item in teams if item["abbreviation"] == abbr), None)
+        if not team:
+            raise SystemExit(f"No team for SP+ row {row['rank']} {row['name']} ({needle})")
+        if team["abbreviation"] in matched:
+            raise SystemExit(f"Duplicate SP+ match for {team['abbreviation']}")
+        team["spPlus"] = row["rating"]
+        team["spPlusRank"] = row["rank"]
+        matched.add(team["abbreviation"])
+    missing = [
+        team["abbreviation"]
+        for team in teams
+        if team["subdivision"] == "fbs" and team["abbreviation"] not in matched
+    ]
+    if missing:
+        raise SystemExit(f"FBS teams missing SP+: {missing}")
+    for team in teams:
+        if team["subdivision"] == "fcs":
+            team["spPlus"] = None
+            team["spPlusRank"] = None
+
+
 def assign_tiers(group: list[dict]) -> None:
-    """Rank by 5-year record. FCS cannot occupy Tiers I–II."""
+    """Rank by 2025 SP+. FCS has no SP+ and cannot occupy Tiers I–II."""
     fbs = [t for t in group if t["subdivision"] == "fbs"]
     fcs = [t for t in group if t["subdivision"] == "fcs"]
-    key = lambda t: (-t["winPct5"], -t["wins5"], -t["pointDiff5"], t["shortName"])
-    fbs.sort(key=key)
-    fcs.sort(key=key)
-    top = fbs[: TIER_SIZE * 2]
-    rest = sorted(fbs[TIER_SIZE * 2 :] + fcs, key=key)
-    ordered = top + rest
+    fbs.sort(key=lambda t: (-(t["spPlus"] or 0), t["spPlusRank"] or 999, t["shortName"]))
+    fcs.sort(key=lambda t: (-t["winPct"], -t["wins"], t["shortName"]))
+    ordered = fbs + fcs
     for i, team in enumerate(ordered):
         team["tier"] = i // TIER_SIZE + 1
         if team["subdivision"] == "fcs":
@@ -193,6 +295,7 @@ def main() -> None:
     raw = [{**row, "subdivision": "fbs"} for row in latest_fbs]
     raw += [{**row, "subdivision": "fcs"} for row in latest_fcs]
     keep_ids = {row["id"] for row in raw}
+    sp_plus = fetch_sp_plus()
 
     totals: dict[str, dict[str, int]] = {
         row["id"]: {"wins": 0, "losses": 0, "pf": 0, "pa": 0} for row in raw
@@ -253,6 +356,7 @@ def main() -> None:
     if set(counts.values()) != {40}:
         raise SystemExit(f"Regions not balanced to 40: {dict(counts)}")
 
+    apply_sp_plus(teams, sp_plus)
     for region in ("east", "south", "midwest", "west"):
         assign_tiers([t for t in teams if t["region"] == region])
     fcs_high = [t["abbreviation"] for t in teams if t["subdivision"] == "fcs" and t["tier"] < 3]
@@ -278,6 +382,8 @@ def main() -> None:
             "pa": t["pa"],
             "wins5": t["wins5"],
             "losses5": t["losses5"],
+            "spPlus": t["spPlus"],
+            "spPlusRank": t["spPlusRank"],
             "region": t["region"],
             "tier": t["tier"],
             "subdivision": t["subdivision"],
@@ -291,7 +397,8 @@ def main() -> None:
     for abbr in ("ALA", "OSU", "UGA", "TEX", "ND", "NDSU", "MONT", "VILL"):
         t = next(x for x in out if x["abbreviation"] == abbr)
         names = [id_to_team[r]["abbreviation"] for r in t["rivals"]]
-        print(abbr, "->", names, "region", t["region"], "tier", t["tier"], f"2025 {t['wins']}-{t['losses']}", f"5yr {t['wins5']}-{t['losses5']}")
+        sp = "FCS" if t["spPlus"] is None else f"SP+ #{t['spPlusRank']} {t['spPlus']}"
+        print(abbr, "->", names, "region", t["region"], "tier", t["tier"], f"2025 {t['wins']}-{t['losses']}", sp)
 
 
 if __name__ == "__main__":

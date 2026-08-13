@@ -1,0 +1,954 @@
+[
+  {
+    "rank": 1,
+    "name": "Indiana",
+    "wins": 16,
+    "losses": 0,
+    "rating": 32.4
+  },
+  {
+    "rank": 2,
+    "name": "Ohio St.",
+    "wins": 12,
+    "losses": 2,
+    "rating": 30.1
+  },
+  {
+    "rank": 3,
+    "name": "Texas Tech",
+    "wins": 12,
+    "losses": 2,
+    "rating": 27.6
+  },
+  {
+    "rank": 4,
+    "name": "Oregon",
+    "wins": 13,
+    "losses": 2,
+    "rating": 25.9
+  },
+  {
+    "rank": 5,
+    "name": "Notre Dame",
+    "wins": 10,
+    "losses": 2,
+    "rating": 24.4
+  },
+  {
+    "rank": 6,
+    "name": "Georgia",
+    "wins": 12,
+    "losses": 2,
+    "rating": 24.1
+  },
+  {
+    "rank": 7,
+    "name": "Ole Miss",
+    "wins": 13,
+    "losses": 2,
+    "rating": 24.0
+  },
+  {
+    "rank": 8,
+    "name": "Utah",
+    "wins": 11,
+    "losses": 2,
+    "rating": 22.2
+  },
+  {
+    "rank": 9,
+    "name": "Miami",
+    "wins": 13,
+    "losses": 3,
+    "rating": 20.7
+  },
+  {
+    "rank": 10,
+    "name": "Texas A&M",
+    "wins": 11,
+    "losses": 2,
+    "rating": 20.7
+  },
+  {
+    "rank": 11,
+    "name": "Vanderbilt",
+    "wins": 10,
+    "losses": 3,
+    "rating": 20.3
+  },
+  {
+    "rank": 12,
+    "name": "Iowa",
+    "wins": 9,
+    "losses": 4,
+    "rating": 19.7
+  },
+  {
+    "rank": 13,
+    "name": "Washington",
+    "wins": 9,
+    "losses": 4,
+    "rating": 18.4
+  },
+  {
+    "rank": 14,
+    "name": "Oklahoma",
+    "wins": 10,
+    "losses": 3,
+    "rating": 18.3
+  },
+  {
+    "rank": 15,
+    "name": "Penn St.",
+    "wins": 7,
+    "losses": 6,
+    "rating": 18.1
+  },
+  {
+    "rank": 16,
+    "name": "USC",
+    "wins": 9,
+    "losses": 4,
+    "rating": 16.9
+  },
+  {
+    "rank": 17,
+    "name": "Texas",
+    "wins": 10,
+    "losses": 3,
+    "rating": 16.2
+  },
+  {
+    "rank": 18,
+    "name": "BYU",
+    "wins": 12,
+    "losses": 2,
+    "rating": 15.9
+  },
+  {
+    "rank": 19,
+    "name": "Tennessee",
+    "wins": 8,
+    "losses": 5,
+    "rating": 15.0
+  },
+  {
+    "rank": 20,
+    "name": "Alabama",
+    "wins": 11,
+    "losses": 4,
+    "rating": 14.8
+  },
+  {
+    "rank": 21,
+    "name": "Missouri",
+    "wins": 8,
+    "losses": 5,
+    "rating": 14.4
+  },
+  {
+    "rank": 22,
+    "name": "N. Texas",
+    "wins": 12,
+    "losses": 2,
+    "rating": 13.8
+  },
+  {
+    "rank": 23,
+    "name": "SMU",
+    "wins": 9,
+    "losses": 4,
+    "rating": 13.4
+  },
+  {
+    "rank": 24,
+    "name": "Illinois",
+    "wins": 9,
+    "losses": 4,
+    "rating": 12.9
+  },
+  {
+    "rank": 25,
+    "name": "Michigan",
+    "wins": 9,
+    "losses": 4,
+    "rating": 12.4
+  },
+  {
+    "rank": 26,
+    "name": "Louisville",
+    "wins": 9,
+    "losses": 4,
+    "rating": 12.4
+  },
+  {
+    "rank": 27,
+    "name": "JMU",
+    "wins": 12,
+    "losses": 2,
+    "rating": 12.3
+  },
+  {
+    "rank": 28,
+    "name": "Arizona",
+    "wins": 9,
+    "losses": 4,
+    "rating": 12.0
+  },
+  {
+    "rank": 29,
+    "name": "Auburn",
+    "wins": 5,
+    "losses": 7,
+    "rating": 11.6
+  },
+  {
+    "rank": 30,
+    "name": "USF",
+    "wins": 9,
+    "losses": 4,
+    "rating": 11.6
+  },
+  {
+    "rank": 31,
+    "name": "Virginia",
+    "wins": 11,
+    "losses": 3,
+    "rating": 11.1
+  },
+  {
+    "rank": 32,
+    "name": "LSU",
+    "wins": 7,
+    "losses": 6,
+    "rating": 10.3
+  },
+  {
+    "rank": 33,
+    "name": "Iowa St.",
+    "wins": 8,
+    "losses": 4,
+    "rating": 9.9
+  },
+  {
+    "rank": 34,
+    "name": "Clemson",
+    "wins": 7,
+    "losses": 6,
+    "rating": 9.5
+  },
+  {
+    "rank": 35,
+    "name": "Ga. Tech",
+    "wins": 9,
+    "losses": 4,
+    "rating": 9.3
+  },
+  {
+    "rank": 36,
+    "name": "Pittsburgh",
+    "wins": 8,
+    "losses": 5,
+    "rating": 8.4
+  },
+  {
+    "rank": 37,
+    "name": "TCU",
+    "wins": 9,
+    "losses": 4,
+    "rating": 8.3
+  },
+  {
+    "rank": 38,
+    "name": "ECU",
+    "wins": 9,
+    "losses": 4,
+    "rating": 8.0
+  },
+  {
+    "rank": 39,
+    "name": "Memphis",
+    "wins": 8,
+    "losses": 5,
+    "rating": 7.6
+  },
+  {
+    "rank": 40,
+    "name": "Houston",
+    "wins": 10,
+    "losses": 3,
+    "rating": 7.4
+  },
+  {
+    "rank": 41,
+    "name": "Florida St.",
+    "wins": 5,
+    "losses": 7,
+    "rating": 7.2
+  },
+  {
+    "rank": 42,
+    "name": "Kansas St.",
+    "wins": 6,
+    "losses": 6,
+    "rating": 7.0
+  },
+  {
+    "rank": 43,
+    "name": "San Diego St.",
+    "wins": 9,
+    "losses": 4,
+    "rating": 6.7
+  },
+  {
+    "rank": 44,
+    "name": "Duke",
+    "wins": 9,
+    "losses": 5,
+    "rating": 6.6
+  },
+  {
+    "rank": 45,
+    "name": "Tulane",
+    "wins": 11,
+    "losses": 3,
+    "rating": 6.3
+  },
+  {
+    "rank": 46,
+    "name": "Nebraska",
+    "wins": 7,
+    "losses": 6,
+    "rating": 6.2
+  },
+  {
+    "rank": 47,
+    "name": "Navy",
+    "wins": 11,
+    "losses": 2,
+    "rating": 6.2
+  },
+  {
+    "rank": 48,
+    "name": "Toledo",
+    "wins": 8,
+    "losses": 5,
+    "rating": 6.0
+  },
+  {
+    "rank": 49,
+    "name": "S. Carolina",
+    "wins": 4,
+    "losses": 8,
+    "rating": 5.9
+  },
+  {
+    "rank": 50,
+    "name": "ODU",
+    "wins": 10,
+    "losses": 3,
+    "rating": 5.9
+  },
+  {
+    "rank": 51,
+    "name": "Northwestern",
+    "wins": 7,
+    "losses": 6,
+    "rating": 5.8
+  },
+  {
+    "rank": 52,
+    "name": "Wake Forest",
+    "wins": 9,
+    "losses": 4,
+    "rating": 5.7
+  },
+  {
+    "rank": 53,
+    "name": "UConn",
+    "wins": 9,
+    "losses": 4,
+    "rating": 5.1
+  },
+  {
+    "rank": 54,
+    "name": "Arkansas",
+    "wins": 2,
+    "losses": 10,
+    "rating": 5.1
+  },
+  {
+    "rank": 55,
+    "name": "NC St.",
+    "wins": 8,
+    "losses": 5,
+    "rating": 4.8
+  },
+  {
+    "rank": 56,
+    "name": "Cincinnati",
+    "wins": 7,
+    "losses": 6,
+    "rating": 4.5
+  },
+  {
+    "rank": 57,
+    "name": "UNLV",
+    "wins": 10,
+    "losses": 4,
+    "rating": 4.3
+  },
+  {
+    "rank": 58,
+    "name": "Miss. St.",
+    "wins": 5,
+    "losses": 8,
+    "rating": 4.1
+  },
+  {
+    "rank": 59,
+    "name": "Kansas",
+    "wins": 5,
+    "losses": 7,
+    "rating": 4.1
+  },
+  {
+    "rank": 60,
+    "name": "Arizona St.",
+    "wins": 8,
+    "losses": 5,
+    "rating": 3.9
+  },
+  {
+    "rank": 61,
+    "name": "Wash. St.",
+    "wins": 7,
+    "losses": 6,
+    "rating": 3.8
+  },
+  {
+    "rank": 62,
+    "name": "UTSA",
+    "wins": 7,
+    "losses": 6,
+    "rating": 3.7
+  },
+  {
+    "rank": 63,
+    "name": "Florida",
+    "wins": 4,
+    "losses": 8,
+    "rating": 3.5
+  },
+  {
+    "rank": 64,
+    "name": "Boise St.",
+    "wins": 9,
+    "losses": 5,
+    "rating": 3.1
+  },
+  {
+    "rank": 65,
+    "name": "Texas St.",
+    "wins": 7,
+    "losses": 6,
+    "rating": 2.3
+  },
+  {
+    "rank": 66,
+    "name": "Fresno St.",
+    "wins": 9,
+    "losses": 4,
+    "rating": 1.8
+  },
+  {
+    "rank": 67,
+    "name": "Kentucky",
+    "wins": 5,
+    "losses": 7,
+    "rating": 1.8
+  },
+  {
+    "rank": 68,
+    "name": "Hawaii",
+    "wins": 9,
+    "losses": 4,
+    "rating": 1.7
+  },
+  {
+    "rank": 69,
+    "name": "WKU",
+    "wins": 9,
+    "losses": 4,
+    "rating": 1.6
+  },
+  {
+    "rank": 70,
+    "name": "Minnesota",
+    "wins": 8,
+    "losses": 5,
+    "rating": 1.5
+  },
+  {
+    "rank": 71,
+    "name": "Baylor",
+    "wins": 5,
+    "losses": 7,
+    "rating": 1.4
+  },
+  {
+    "rank": 72,
+    "name": "Rutgers",
+    "wins": 5,
+    "losses": 7,
+    "rating": 1.0
+  },
+  {
+    "rank": 73,
+    "name": "New Mexico",
+    "wins": 9,
+    "losses": 4,
+    "rating": 0.9
+  },
+  {
+    "rank": 74,
+    "name": "Army",
+    "wins": 7,
+    "losses": 6,
+    "rating": 0.8
+  },
+  {
+    "rank": 75,
+    "name": "Maryland",
+    "wins": 4,
+    "losses": 8,
+    "rating": 0.6
+  },
+  {
+    "rank": 76,
+    "name": "UCF",
+    "wins": 5,
+    "losses": 7,
+    "rating": -1.2
+  },
+  {
+    "rank": 77,
+    "name": "La. Tech",
+    "wins": 8,
+    "losses": 5,
+    "rating": -1.3
+  },
+  {
+    "rank": 78,
+    "name": "WMU",
+    "wins": 10,
+    "losses": 4,
+    "rating": -1.4
+  },
+  {
+    "rank": 79,
+    "name": "Utah St.",
+    "wins": 6,
+    "losses": 7,
+    "rating": -3.1
+  },
+  {
+    "rank": 80,
+    "name": "California",
+    "wins": 7,
+    "losses": 6,
+    "rating": -3.2
+  },
+  {
+    "rank": 81,
+    "name": "Air Force",
+    "wins": 4,
+    "losses": 8,
+    "rating": -3.2
+  },
+  {
+    "rank": 82,
+    "name": "Miami-OH",
+    "wins": 7,
+    "losses": 7,
+    "rating": -3.4
+  },
+  {
+    "rank": 83,
+    "name": "Michigan St.",
+    "wins": 4,
+    "losses": 8,
+    "rating": -3.4
+  },
+  {
+    "rank": 84,
+    "name": "Ohio",
+    "wins": 9,
+    "losses": 4,
+    "rating": -4.0
+  },
+  {
+    "rank": 85,
+    "name": "Wisconsin",
+    "wins": 4,
+    "losses": 8,
+    "rating": -4.4
+  },
+  {
+    "rank": 86,
+    "name": "Marshall",
+    "wins": 5,
+    "losses": 7,
+    "rating": -4.5
+  },
+  {
+    "rank": 87,
+    "name": "Troy",
+    "wins": 8,
+    "losses": 6,
+    "rating": -4.8
+  },
+  {
+    "rank": 88,
+    "name": "Temple",
+    "wins": 5,
+    "losses": 7,
+    "rating": -5.1
+  },
+  {
+    "rank": 89,
+    "name": "Kennesaw St.",
+    "wins": 10,
+    "losses": 4,
+    "rating": -5.4
+  },
+  {
+    "rank": 90,
+    "name": "Purdue",
+    "wins": 2,
+    "losses": 10,
+    "rating": -6.1
+  },
+  {
+    "rank": 91,
+    "name": "N. Carolina",
+    "wins": 4,
+    "losses": 8,
+    "rating": -6.6
+  },
+  {
+    "rank": 92,
+    "name": "J'ville St.",
+    "wins": 9,
+    "losses": 5,
+    "rating": -6.7
+  },
+  {
+    "rank": 93,
+    "name": "W. Virginia",
+    "wins": 4,
+    "losses": 8,
+    "rating": -6.8
+  },
+  {
+    "rank": 94,
+    "name": "So. Miss",
+    "wins": 7,
+    "losses": 6,
+    "rating": -7.1
+  },
+  {
+    "rank": 95,
+    "name": "Buffalo",
+    "wins": 5,
+    "losses": 7,
+    "rating": -7.5
+  },
+  {
+    "rank": 96,
+    "name": "Colorado",
+    "wins": 3,
+    "losses": 9,
+    "rating": -8.3
+  },
+  {
+    "rank": 97,
+    "name": "Boston Coll.",
+    "wins": 2,
+    "losses": 10,
+    "rating": -8.5
+  },
+  {
+    "rank": 98,
+    "name": "UCLA",
+    "wins": 3,
+    "losses": 9,
+    "rating": -8.7
+  },
+  {
+    "rank": 99,
+    "name": "FAU",
+    "wins": 4,
+    "losses": 8,
+    "rating": -8.7
+  },
+  {
+    "rank": 100,
+    "name": "Arkansas St.",
+    "wins": 7,
+    "losses": 6,
+    "rating": -8.8
+  },
+  {
+    "rank": 101,
+    "name": "CMU",
+    "wins": 7,
+    "losses": 6,
+    "rating": -8.8
+  },
+  {
+    "rank": 102,
+    "name": "Liberty",
+    "wins": 4,
+    "losses": 8,
+    "rating": -9.0
+  },
+  {
+    "rank": 103,
+    "name": "Ga. Southern",
+    "wins": 7,
+    "losses": 6,
+    "rating": -9.4
+  },
+  {
+    "rank": 104,
+    "name": "Tulsa",
+    "wins": 4,
+    "losses": 8,
+    "rating": -10.0
+  },
+  {
+    "rank": 105,
+    "name": "Louisiana",
+    "wins": 6,
+    "losses": 7,
+    "rating": -10.1
+  },
+  {
+    "rank": 106,
+    "name": "Va. Tech",
+    "wins": 3,
+    "losses": 9,
+    "rating": -10.1
+  },
+  {
+    "rank": 107,
+    "name": "FIU",
+    "wins": 7,
+    "losses": 6,
+    "rating": -10.5
+  },
+  {
+    "rank": 108,
+    "name": "Missouri St.",
+    "wins": 7,
+    "losses": 6,
+    "rating": -10.7
+  },
+  {
+    "rank": 109,
+    "name": "Delaware",
+    "wins": 7,
+    "losses": 6,
+    "rating": -10.9
+  },
+  {
+    "rank": 110,
+    "name": "Wyoming",
+    "wins": 4,
+    "losses": 8,
+    "rating": -11.3
+  },
+  {
+    "rank": 111,
+    "name": "App. St.",
+    "wins": 5,
+    "losses": 8,
+    "rating": -11.4
+  },
+  {
+    "rank": 112,
+    "name": "Stanford",
+    "wins": 4,
+    "losses": 8,
+    "rating": -11.8
+  },
+  {
+    "rank": 113,
+    "name": "BGSU",
+    "wins": 4,
+    "losses": 8,
+    "rating": -12.6
+  },
+  {
+    "rank": 114,
+    "name": "S. Alabama",
+    "wins": 4,
+    "losses": 8,
+    "rating": -12.7
+  },
+  {
+    "rank": 115,
+    "name": "Syracuse",
+    "wins": 3,
+    "losses": 9,
+    "rating": -13.1
+  },
+  {
+    "rank": 116,
+    "name": "Nevada",
+    "wins": 3,
+    "losses": 9,
+    "rating": -13.4
+  },
+  {
+    "rank": 117,
+    "name": "Akron",
+    "wins": 5,
+    "losses": 7,
+    "rating": -13.9
+  },
+  {
+    "rank": 118,
+    "name": "San Jose St.",
+    "wins": 3,
+    "losses": 9,
+    "rating": -14.3
+  },
+  {
+    "rank": 119,
+    "name": "EMU",
+    "wins": 4,
+    "losses": 8,
+    "rating": -14.7
+  },
+  {
+    "rank": 120,
+    "name": "Rice",
+    "wins": 5,
+    "losses": 8,
+    "rating": -14.8
+  },
+  {
+    "rank": 121,
+    "name": "Oklahoma St.",
+    "wins": 1,
+    "losses": 11,
+    "rating": -15.1
+  },
+  {
+    "rank": 122,
+    "name": "Coastal Caro.",
+    "wins": 6,
+    "losses": 7,
+    "rating": -15.1
+  },
+  {
+    "rank": 123,
+    "name": "NMSU",
+    "wins": 4,
+    "losses": 8,
+    "rating": -15.5
+  },
+  {
+    "rank": 124,
+    "name": "Colorado St.",
+    "wins": 2,
+    "losses": 10,
+    "rating": -15.6
+  },
+  {
+    "rank": 125,
+    "name": "UAB",
+    "wins": 4,
+    "losses": 8,
+    "rating": -15.8
+  },
+  {
+    "rank": 126,
+    "name": "Oregon St.",
+    "wins": 2,
+    "losses": 10,
+    "rating": -15.9
+  },
+  {
+    "rank": 127,
+    "name": "MTSU",
+    "wins": 3,
+    "losses": 9,
+    "rating": -16.0
+  },
+  {
+    "rank": 128,
+    "name": "N. Illinois",
+    "wins": 3,
+    "losses": 9,
+    "rating": -16.7
+  },
+  {
+    "rank": 129,
+    "name": "UTEP",
+    "wins": 2,
+    "losses": 10,
+    "rating": -17.5
+  },
+  {
+    "rank": 130,
+    "name": "Kent St.",
+    "wins": 5,
+    "losses": 7,
+    "rating": -19.3
+  },
+  {
+    "rank": 131,
+    "name": "ULM",
+    "wins": 3,
+    "losses": 9,
+    "rating": -21.6
+  },
+  {
+    "rank": 132,
+    "name": "Ball St.",
+    "wins": 4,
+    "losses": 8,
+    "rating": -23.0
+  },
+  {
+    "rank": 133,
+    "name": "Georgia St.",
+    "wins": 1,
+    "losses": 11,
+    "rating": -24.5
+  },
+  {
+    "rank": 134,
+    "name": "Charlotte",
+    "wins": 1,
+    "losses": 11,
+    "rating": -26.7
+  },
+  {
+    "rank": 135,
+    "name": "Sam Houston",
+    "wins": 2,
+    "losses": 10,
+    "rating": -27.8
+  },
+  {
+    "rank": 136,
+    "name": "UMass",
+    "wins": 0,
+    "losses": 12,
+    "rating": -36.6
+  }
+]

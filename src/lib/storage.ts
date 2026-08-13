@@ -2,7 +2,7 @@ import { useCallback, useSyncExternalStore } from "react";
 import { defaultAssignment, defaultRivals } from "./teams";
 import type { Assignment, RivalMap } from "./types";
 
-const KEY = "cfb26-schedule-model-v4";
+const KEY = "cfb26-schedule-model-v5";
 
 export type ModelState = {
   assignment: Assignment;

@@ -15,7 +15,7 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import { useState } from "react";
 import { nextEmptyTier, teamsIn, tiersInRegion } from "@/lib/rankings";
-import { REGIONS, TIER_SIZE, getTeam, recordLabel5, tierName } from "@/lib/teams";
+import { REGIONS, TIER_SIZE, getTeam, spPlusLabel, tierName } from "@/lib/teams";
 import type { Assignment, RegionId, Team, TierId } from "@/lib/types";
 
 function DropColumn({
@@ -54,7 +54,7 @@ function TeamCard({ team }: { team: Team }) {
       <img src={team.logo} alt="" width={26} height={26} />
       <div>
         <strong>{team.shortName}</strong>
-        <span>{recordLabel5(team)} over 5 years · {team.state}</span>
+        <span>{spPlusLabel(team)} · {team.state}</span>
       </div>
     </article>
   );
@@ -102,9 +102,10 @@ export function RegionsTab({
   return (
     <div className="stack">
       <p className="lede">
-        Tiers start ordered by 2021–2025 record. Added clubs cannot sit above Tier III —
-        dropping one there snaps them back to Tier III. Each bucket is built for 8 teams;
-        gold means it is not at 8 yet. Drop onto “New tier” to add another group.
+        Tiers start from last year’s final SP+ rankings. Added clubs cannot sit above
+        Tier III — dropping one there snaps them back to Tier III. Each bucket is built
+        for 8 teams; gold means it is not at 8 yet. Drop onto “New tier” to add another
+        group.
       </p>
       <DndContext
         sensors={sensors}

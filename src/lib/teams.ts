@@ -96,6 +96,12 @@ export function recordLabel5(team: Team): string {
   return `${team.wins5}-${team.losses5}`;
 }
 
+export function spPlusLabel(team: Team): string {
+  if (team.spPlus == null || team.spPlusRank == null) return "No SP+ (FCS)";
+  const rating = team.spPlus > 0 ? `+${team.spPlus.toFixed(1)}` : team.spPlus.toFixed(1);
+  return `SP+ ${rating} · #${team.spPlusRank}`;
+}
+
 export function compareRecords(a: Team, b: Team): number {
   const pct = winPct(b) - winPct(a);
   if (pct !== 0) return pct;

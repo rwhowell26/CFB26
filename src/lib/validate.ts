@@ -30,6 +30,24 @@ export function validateModel() {
     "no extra club may start above Tier III",
   );
   assert(TEAMS.every((team) => typeof team.wins5 === "number"), "5-year records required");
+  assert(
+    TEAMS.filter((team) => team.subdivision === "fbs").every(
+      (team) => typeof team.spPlus === "number" && typeof team.spPlusRank === "number",
+    ),
+    "FBS teams need 2025 SP+",
+  );
+  assert(
+    TEAMS.filter((team) => team.subdivision === "fcs").every(
+      (team) => team.spPlus == null && team.spPlusRank == null,
+    ),
+    "FCS teams are outside SP+",
+  );
+  const indiana = TEAMS.find((team) => team.abbreviation === "IU");
+  const ohioState = TEAMS.find((team) => team.abbreviation === "OSU");
+  const texasTech = TEAMS.find((team) => team.abbreviation === "TTU");
+  assert(indiana?.spPlusRank === 1 && indiana.tier === 1, "Indiana should be SP+ #1 in Tier I");
+  assert(ohioState?.spPlusRank === 2 && ohioState.tier === 1, "Ohio State should be SP+ #2 in Tier I");
+  assert(texasTech?.spPlusRank === 3 && texasTech.tier === 1, "Texas Tech should be SP+ #3 in Tier I");
 
   for (const region of REGIONS) {
     const count = teamsIn(assignment, region.id).length;

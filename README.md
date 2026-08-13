@@ -2,7 +2,7 @@
 
 A conference-free map: **four regions**, **8-team tiers** (as many as a region needs), optional protected rivals, a 13-week calendar with a league-wide bye, promotion/relegation, and a **24-team all-autobid playoff** for Tiers I–III.
 
-The pool is **160 clubs**. Starting tiers use **2021–2025 records**. Former FCS programs cannot occupy Tiers I–II. 2025 records still drive in-season rankings, the playoff, and movement.
+The pool is **160 clubs**. Starting tiers use **2025 SP+** (Bill Connelly’s final ratings). Former FCS programs are not in SP+ and cannot occupy Tiers I–II. 2025 records still drive in-season rankings, the playoff, and movement.
 
 ## Schedule (12 games + 1 bye, no 13th contest)
 

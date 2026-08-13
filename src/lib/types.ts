@@ -15,6 +15,8 @@ export type Team = {
   pa: number;
   wins5: number;
   losses5: number;
+  spPlus: number | null;
+  spPlusRank: number | null;
   region: RegionId;
   tier: TierId;
   subdivision: Subdivision;
