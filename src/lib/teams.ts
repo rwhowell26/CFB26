@@ -97,9 +97,8 @@ export function recordLabel5(team: Team): string {
 }
 
 export function spPlusLabel(team: Team): string {
-  if (team.spPlus == null || team.spPlusRank == null) return "No SP+ (FCS)";
-  const rating = team.spPlus > 0 ? `+${team.spPlus.toFixed(1)}` : team.spPlus.toFixed(1);
-  return `SP+ ${rating} · #${team.spPlusRank}`;
+  if (team.spPlus == null || team.spPlusRank == null) return "No SP+";
+  return `SP+ ${team.spPlus.toFixed(1)} · #${team.spPlusRank}`;
 }
 
 export function compareRecords(a: Team, b: Team): number {
@@ -119,6 +118,25 @@ export function compareSpPlus(a: Team, b: Team): number {
   const bRank = b.spPlusRank ?? Number.POSITIVE_INFINITY;
   if (aRank !== bRank) return aRank - bRank;
   return a.shortName.localeCompare(b.shortName);
+}
+
+export function reseedTiers(assignment: Assignment): Assignment {
+  const next: Assignment = { ...assignment };
+  for (const region of REGIONS) {
+    const placed = TEAMS.filter((team) => next[team.id]?.region === region.id);
+    const fbs = placed.filter((team) => team.subdivision === "fbs").sort(compareSpPlus);
+    const fcs = placed.filter((team) => team.subdivision === "fcs").sort(compareSpPlus);
+    const ordered = [
+      ...fbs.slice(0, TIER_SIZE * 2),
+      ...[...fbs.slice(TIER_SIZE * 2), ...fcs].sort(compareSpPlus),
+    ];
+    ordered.forEach((team, index) => {
+      let tier = Math.floor(index / TIER_SIZE) + 1;
+      if (team.subdivision === "fcs") tier = Math.max(tier, FCS_MIN_TIER);
+      next[team.id] = { region: region.id, tier };
+    });
+  }
+  return next;
 }
 
 export function getTeam(id: string): Team {

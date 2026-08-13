@@ -49,7 +49,9 @@ STATE = {
     "222": "PA", "257": "VA", "2729": "VA", "160": "NH", "107": "MA", "227": "RI",
     "231": "SC", "236": "TN", "2382": "GA", "2296": "MS", "50": "FL", "2011": "AL",
     "2449": "ND", "2571": "SD", "233": "SD", "155": "ND", "2287": "IL", "2754": "OH",
-    "149": "MT", "147": "MT", "70": "ID", "331": "WA", "16": "CA", "302": "CA",
+    "70": "ID", "331": "WA", "16": "CA", "302": "CA",
+    "2627": "TX", "2329": "PA", "108": "MA", "2617": "TX",
+    "2635": "TN", "2545": "LA", "79": "IL", "2900": "MN",
 }
 
 EAST = {
@@ -57,23 +59,23 @@ EAST = {
     "WVU", "MD", "DEL", "UVA", "VT", "JMU", "ODU", "LIB", "DUKE", "UNC", "NCSU",
     "WAKE", "ECU", "CLT", "APP", "CLEM", "SC", "CCU", "MRSH", "BUFF", "CIN",
     "LOU", "UK", "WKU",
-    "VILL", "RICH", "W&M", "UNH", "HC", "URI",
+    "VILL", "RICH", "W&M", "UNH", "HC", "URI", "LEH", "HARV",
 }
 SOUTH = {
     "MIA", "FSU", "FLA", "UCF", "USF", "FAU", "FIU", "UGA", "GT", "GASO", "GAST",
     "KENN", "AUB", "ALA", "USA", "TROY", "JVST", "MISS", "MSST", "USM", "LSU",
     "UL", "ULM", "LT", "TULN", "ARK", "ARST", "MEM", "TENN", "VAN", "MTSU",
     "UAB", "TA&M", "HOU",
-    "FUR", "UTC", "MER", "JKST", "FAMU", "ALST",
+    "FUR", "UTC", "MER", "JKST", "FAMU", "ALST", "TNTC", "SELA",
 }
 MIDWEST = {
     "OSU", "OHIO", "AKR", "KENT", "BGSU", "TOL", "M-OH", "MICH", "MSU", "WMU",
     "CMU", "EMU", "BALL", "IU", "PUR", "ND", "ILL", "NU", "WIS", "MINN", "IOWA",
     "ISU", "MIZ", "MOST", "KU", "KSU", "NEB", "OU", "OKST", "NIU", "TLSA",
     "UNT", "BAY", "TCU",
-    "NDSU", "SDST", "SDAK", "UND", "ILST", "YSU",
+    "NDSU", "SDST", "SDAK", "UND", "ILST", "YSU", "SIU", "STMN",
 }
-WEST_FCS = {"MONT", "MTST", "IDHO", "EWU", "SAC", "UCD"}
+WEST_FCS = {"MONT", "MTST", "IDHO", "EWU", "SAC", "UCD", "TAR", "SFA"}
 
 
 def apply_real_rivals(teams: list[dict]) -> None:
@@ -205,41 +207,17 @@ SP_PLUS_ALIASES = {
 
 
 def fetch_sp_plus() -> list[dict]:
-    req = urllib.request.Request(SP_PLUS_URL, headers={"User-Agent": "Mozilla/5.0"})
-    with urllib.request.urlopen(req) as response:
-        page = response.read().decode("utf-8", "replace")
-    rows = re.findall(
-        r"<td>(\d+)\.\s+([^<]+?)\s+\((\d+)-(\d+)\)</td><td>([-0-9.]+)</td>",
-        page,
-    )
-    seen: set[int] = set()
-    out: list[dict] = []
-    for rank, name, wins, losses, rating in rows:
-        rank_n = int(rank)
-        if rank_n in seen:
-            continue
-        seen.add(rank_n)
-        out.append({
-            "rank": rank_n,
-            "name": name,
-            "wins": int(wins),
-            "losses": int(losses),
-            "rating": float(rating),
-        })
-        if len(out) == 136:
-            break
-    if len(out) != 136:
-        raise SystemExit(f"expected 136 SP+ rows, got {len(out)}")
-    SP_PLUS_OUT.parent.mkdir(parents=True, exist_ok=True)
-    SP_PLUS_OUT.write_text(json.dumps(out, indent=2) + "\n")
-    return out
+    if not SP_PLUS_OUT.exists():
+        raise SystemExit(f"missing {SP_PLUS_OUT}")
+    rows = json.loads(SP_PLUS_OUT.read_text())
+    if len(rows) < 100:
+        raise SystemExit(f"SP+ table looks short: {len(rows)}")
+    return rows
 
 
 def apply_sp_plus(teams: list[dict], rankings: list[dict]) -> None:
     by_norm: dict[str, dict] = {}
     for team in teams:
-        if team["subdivision"] != "fbs":
-            continue
         for key in (team["abbreviation"], team["shortName"], team["name"]):
             by_norm[norm_name(key)] = team
     matched: set[str] = set()
@@ -250,32 +228,25 @@ def apply_sp_plus(teams: list[dict], rankings: list[dict]) -> None:
             abbr = SP_PLUS_ALIASES.get(needle)
             team = next((item for item in teams if item["abbreviation"] == abbr), None)
         if not team:
-            raise SystemExit(f"No team for SP+ row {row['rank']} {row['name']} ({needle})")
+            continue
         if team["abbreviation"] in matched:
-            raise SystemExit(f"Duplicate SP+ match for {team['abbreviation']}")
+            continue
         team["spPlus"] = row["rating"]
         team["spPlusRank"] = row["rank"]
         matched.add(team["abbreviation"])
-    missing = [
-        team["abbreviation"]
-        for team in teams
-        if team["subdivision"] == "fbs" and team["abbreviation"] not in matched
-    ]
+    missing = [team["abbreviation"] for team in teams if team["abbreviation"] not in matched]
     if missing:
-        raise SystemExit(f"FBS teams missing SP+: {missing}")
-    for team in teams:
-        if team["subdivision"] == "fcs":
-            team["spPlus"] = None
-            team["spPlusRank"] = None
+        raise SystemExit(f"teams missing SP+: {missing}")
 
 
 def assign_tiers(group: list[dict]) -> None:
-    """Rank by 2025 SP+. FCS has no SP+ and cannot occupy Tiers I–II."""
+    """Rank by 2025 SP+. FCS cannot occupy Tiers I–II."""
     fbs = [t for t in group if t["subdivision"] == "fbs"]
     fcs = [t for t in group if t["subdivision"] == "fcs"]
-    fbs.sort(key=lambda t: (-(t["spPlus"] or 0), t["spPlusRank"] or 999, t["shortName"]))
-    fcs.sort(key=lambda t: (-t["winPct"], -t["wins"], t["shortName"]))
-    ordered = fbs + fcs
+    key = lambda t: (-(t["spPlus"] if t["spPlus"] is not None else -999), t["spPlusRank"] or 999, t["shortName"])
+    fbs.sort(key=key)
+    fcs.sort(key=key)
+    ordered = fbs[: TIER_SIZE * 2] + sorted(fbs[TIER_SIZE * 2 :] + fcs, key=key)
     for i, team in enumerate(ordered):
         team["tier"] = i // TIER_SIZE + 1
         if team["subdivision"] == "fcs":
@@ -285,10 +256,10 @@ def assign_tiers(group: list[dict]) -> None:
 def main() -> None:
     years = [2021, 2022, 2023, 2024, 2025]
     fcs_keep = {
-        "VILL", "RICH", "W&M", "UNH", "HC", "URI",
-        "FUR", "UTC", "MER", "JKST", "FAMU", "ALST",
-        "NDSU", "SDST", "SDAK", "UND", "ILST", "YSU",
-        "MONT", "MTST", "IDHO", "EWU", "SAC", "UCD",
+        "VILL", "RICH", "W&M", "UNH", "HC", "URI", "LEH", "HARV",
+        "FUR", "UTC", "MER", "JKST", "FAMU", "ALST", "TNTC", "SELA",
+        "NDSU", "SDST", "SDAK", "UND", "ILST", "YSU", "SIU", "STMN",
+        "MONT", "MTST", "IDHO", "EWU", "SAC", "UCD", "TAR", "SFA",
     }
     latest_fbs = fetch_standings(80, 2025)
     latest_fcs = [row for row in fetch_standings(81, 2025) if row["abbreviation"] in fcs_keep]
@@ -353,8 +324,8 @@ def main() -> None:
     for t in teams:
         counts[t["region"]] += 1
     print("region counts", dict(counts), "total", len(teams))
-    if set(counts.values()) != {40}:
-        raise SystemExit(f"Regions not balanced to 40: {dict(counts)}")
+    if set(counts.values()) != {42}:
+        raise SystemExit(f"Regions not balanced to 42: {dict(counts)}")
 
     apply_sp_plus(teams, sp_plus)
     for region in ("east", "south", "midwest", "west"):

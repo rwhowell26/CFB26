@@ -1,12 +1,14 @@
 import { useCallback, useSyncExternalStore } from "react";
-import { defaultAssignment, defaultRivals } from "./teams";
+import { defaultAssignment, defaultRivals, reseedTiers } from "./teams";
 import type { Assignment, RivalMap } from "./types";
 
 const KEY = "cfb26-schedule-model-v5";
+export const TIER_SEED = "spplus-2025-connelly-table";
 
 export type ModelState = {
   assignment: Assignment;
   rivals: RivalMap;
+  tierSeed: string;
 };
 
 const listeners = new Set<() => void>();
@@ -17,7 +19,7 @@ function emit() {
 }
 
 function fallback(): ModelState {
-  return { assignment: defaultAssignment(), rivals: defaultRivals() };
+  return { assignment: defaultAssignment(), rivals: defaultRivals(), tierSeed: TIER_SEED };
 }
 
 export function loadState(): ModelState {
@@ -27,10 +29,16 @@ export function loadState(): ModelState {
     const raw = window.localStorage.getItem(KEY);
     if (!raw) return base;
     const parsed = JSON.parse(raw) as Partial<ModelState>;
-    return {
-      assignment: { ...base.assignment, ...parsed.assignment },
-      rivals: { ...base.rivals, ...parsed.rivals },
+    const assignment = { ...base.assignment, ...parsed.assignment };
+    const rivals = { ...base.rivals, ...parsed.rivals };
+    const needsReseed = parsed.tierSeed !== TIER_SEED;
+    const state: ModelState = {
+      assignment: needsReseed ? reseedTiers(assignment) : assignment,
+      rivals,
+      tierSeed: TIER_SEED,
     };
+    if (needsReseed) saveState(state);
+    return state;
   } catch {
     return base;
   }

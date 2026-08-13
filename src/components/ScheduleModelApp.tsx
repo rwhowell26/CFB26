@@ -52,7 +52,7 @@ export function ScheduleModelApp() {
           <p className="kicker">CFB26 · realignment lab</p>
           <h1 className="brand">Four Regions. Eight-Team Tiers.</h1>
           <p className="subhead">
-            160 clubs, full round-robins, named-rivalry protected games, a 13-week
+            168 clubs, full round-robins, named-rivalry protected games, a 13-week
             calendar with a league-wide bye, promotion and relegation, and a 24-team
             all-autobid playoff for Tiers I–III.
           </p>

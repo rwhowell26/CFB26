@@ -102,10 +102,9 @@ export function RegionsTab({
   return (
     <div className="stack">
       <p className="lede">
-        Tiers start from last year’s final SP+ rankings. Added clubs cannot sit above
-        Tier III — dropping one there snaps them back to Tier III. Each bucket is built
-        for 8 teams; gold means it is not at 8 yet. Drop onto “New tier” to add another
-        group.
+        Tiers follow last year’s SP+ inside whatever region a club is in. Added clubs
+        cannot sit above Tier III. Each bucket is built for 8 teams; gold means it is
+        not at 8 yet. Drop onto “New tier” to add another group.
       </p>
       <DndContext
         sensors={sensors}

@@ -12,6 +12,7 @@ import {
   MAX_GAMES,
   MAX_RIVALS,
   REGIONS,
+  reseedTiers,
   RR_START_WEEK,
   SEASON_WEEKS,
   TEAMS,
@@ -25,39 +26,44 @@ function assert(condition: unknown, message: string): asserts condition {
 export function validateModel() {
   const assignment = defaultAssignment();
   const rivals = defaultRivals();
-  assert(TEAMS.length === 160, `Expected 160 teams, got ${TEAMS.length}`);
-  assert(TEAMS.filter((team) => team.subdivision === "fcs").length === 24, "expected 24 extra clubs");
+  assert(TEAMS.length === 168, `Expected 168 teams, got ${TEAMS.length}`);
+  assert(TEAMS.filter((team) => team.subdivision === "fcs").length === 32, "expected 32 extra clubs");
   assert(
     TEAMS.every((team) => team.subdivision !== "fcs" || team.tier >= 3),
     "no extra club may start above Tier III",
   );
   assert(TEAMS.every((team) => typeof team.wins5 === "number"), "5-year records required");
   assert(
-    TEAMS.filter((team) => team.subdivision === "fbs").every(
-      (team) => typeof team.spPlus === "number" && typeof team.spPlusRank === "number",
-    ),
-    "FBS teams need 2025 SP+",
-  );
-  assert(
-    TEAMS.filter((team) => team.subdivision === "fcs").every(
-      (team) => team.spPlus == null && team.spPlusRank == null,
-    ),
-    "FCS teams are outside SP+",
+    TEAMS.every((team) => typeof team.spPlus === "number" && typeof team.spPlusRank === "number"),
+    "every club needs 2025 SP+",
   );
   const indiana = TEAMS.find((team) => team.abbreviation === "IU");
   const ohioState = TEAMS.find((team) => team.abbreviation === "OSU");
   const texasTech = TEAMS.find((team) => team.abbreviation === "TTU");
-  assert(indiana?.spPlusRank === 1 && indiana.tier === 1, "Indiana should be SP+ #1 in Tier I");
+  const ndsu = TEAMS.find((team) => team.abbreviation === "NDSU");
+  assert(indiana?.spPlusRank === 1 && indiana.spPlus === 85 && indiana.tier === 1, "Indiana should be SP+ #1 in Tier I");
   assert(ohioState?.spPlusRank === 2 && ohioState.tier === 1, "Ohio State should be SP+ #2 in Tier I");
   assert(texasTech?.spPlusRank === 3 && texasTech.tier === 1, "Texas Tech should be SP+ #3 in Tier I");
+  assert(ndsu && ndsu.tier >= 3 && ndsu.spPlusRank === 65, "NDSU is FCS and should sit no higher than Tier III");
+  const moved = reseedTiers({
+    ...assignment,
+    [indiana!.id]: { region: "west", tier: 5 },
+  });
+  assert(moved[indiana!.id].region === "west", "reseed should keep a club in the region it was placed in");
+  assert(moved[indiana!.id].tier === 1, "Indiana should still be Tier I after a region move");
 
   for (const region of REGIONS) {
     const count = teamsIn(assignment, region.id).length;
-    assert(count === 40, `${region.name} has ${count} teams`);
+    assert(count === 42, `${region.name} has ${count} teams`);
     const tiers = tiersInRegion(assignment, region.id);
-    assert(tiers.length === 5, `${region.name} should have 5 tiers`);
+    assert(tiers.length >= 5, `${region.name} should have at least 5 tiers`);
     for (const tier of tiers) {
-      assert(teamsIn(assignment, region.id, tier).length === TIER_SIZE, `${region.name} tier ${tier} size`);
+      const size = teamsIn(assignment, region.id, tier).length;
+      if (tier === tiers[tiers.length - 1]) {
+        assert(size > 0 && size <= TIER_SIZE, `${region.name} last tier size ${size}`);
+      } else {
+        assert(size === TIER_SIZE, `${region.name} tier ${tier} size`);
+      }
     }
   }
 
