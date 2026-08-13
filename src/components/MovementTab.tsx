@@ -3,32 +3,35 @@
 import { TeamChip } from "@/components/TeamChip";
 import { applyMovement, planAllMovement } from "@/lib/promotion";
 import { getTeam, regionName, tierName } from "@/lib/teams";
-import type { Assignment } from "@/lib/types";
+import type { Assignment, SeasonSim } from "@/lib/types";
 
 export function MovementTab({
   assignment,
+  season,
   onApply,
 }: {
   assignment: Assignment;
+  season: SeasonSim;
   onApply: (next: Assignment) => void;
 }) {
-  const plans = planAllMovement(assignment);
+  const plans = planAllMovement(assignment, season.records);
   const ready = plans.every((plan) => plan.complete);
 
   return (
     <div className="stack">
       <p className="lede">
-        End-of-year movement uses last year’s standings as this season’s results. Champions
-        always go up. Last place always goes down. Playoff teams from Tiers II and III also
-        go up. Remaining bubble clubs play relegation games — at most three teams leave a
-        tier in one direction. Apply writes the new map onto the Regions board.
+        End-of-year movement uses the 2026 simulated records. Champions always go
+        up. Last place always goes down. Playoff teams from Tiers II and III also
+        go up. Remaining bubble clubs play relegation games — at most three teams
+        leave a tier in one direction. Ole Miss and LSU keep their scripted results
+        in those games. Apply writes the new map onto the Regions board.
       </p>
       <div className="top-actions" style={{ justifyItems: "start" }}>
         <button
           type="button"
           className="ghost"
           disabled={!ready}
-          onClick={() => onApply(applyMovement(assignment))}
+          onClick={() => onApply(applyMovement(assignment, season.records))}
         >
           Apply offseason movement
         </button>

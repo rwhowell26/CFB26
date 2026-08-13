@@ -31,6 +31,18 @@ export type Placement = {
 export type Assignment = Record<string, Placement>;
 export type RivalMap = Record<string, string[]>;
 
+export type SeasonRecord = {
+  wins: number;
+  losses: number;
+};
+
+export type RecordMap = Record<string, SeasonRecord>;
+
+export type SeasonSim = {
+  records: RecordMap;
+  winners: Record<string, string>;
+};
+
 export type GameKind = "rival" | "in-tier" | "inter-region" | "cross-tier";
 
 export type ScheduledGame = {

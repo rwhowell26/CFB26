@@ -3,8 +3,8 @@ import { teamsIn, tiersInRegion } from "./rankings";
 import { isRealRivalry, traditionalDate } from "./rivalries";
 import { clearRival } from "./rivals";
 import { allSchedules, roundRobinRounds } from "./schedule";
+import { pickWinner, simulateSeason } from "./simulate";
 import {
-  compareSpPlus,
   defaultAssignment,
   defaultRivals,
   getTeam,
@@ -233,8 +233,44 @@ export function validateModel() {
     if (!game.teamAId || !game.teamBId || !game.projectedWinnerId) continue;
     const a = getTeam(game.teamAId);
     const b = getTeam(game.teamBId);
-    const expected = compareSpPlus(a, b) < 0 ? a.id : b.id;
-    assert(game.projectedWinnerId === expected, `${game.id} winner should be the higher SP+ club`);
+    const expected = pickWinner(a, b).id;
+    assert(game.projectedWinnerId === expected, `${game.id} winner should follow the 2026 script / SP+`);
+  }
+
+  const season = simulateSeason(assignment, rivals);
+  const oleMiss = TEAMS.find((team) => team.abbreviation === "MISS");
+  const lsu = TEAMS.find((team) => team.abbreviation === "LSU");
+  assert(oleMiss && lsu, "Ole Miss and LSU missing");
+  assert(season.records[oleMiss.id].wins === MAX_GAMES, `Ole Miss should go ${MAX_GAMES}-0`);
+  assert(season.records[oleMiss.id].losses === 0, "Ole Miss should not lose in 2026");
+  assert(season.records[lsu.id].wins === 0, "LSU should not win in 2026");
+  assert(season.records[lsu.id].losses === MAX_GAMES, `LSU should go 0-${MAX_GAMES}`);
+  assert(
+    TEAMS.every((team) => {
+      const record = season.records[team.id];
+      return record.wins + record.losses === MAX_GAMES;
+    }),
+    "every club should finish 12 simulated games",
+  );
+  const simField = buildPlayoffField(assignment, season.records);
+  assert(
+    simField.some((entry) => entry.teamId === oleMiss.id),
+    "Ole Miss should make the 2026 playoff field",
+  );
+  assert(
+    simField.every((entry) => entry.teamId !== lsu.id),
+    "LSU should miss the 2026 playoff field",
+  );
+  const simBracket = buildPlayoffBracket(simField);
+  const title = simBracket.find((game) => game.round === "final");
+  assert(title?.projectedWinnerId === oleMiss.id, "Ole Miss should win the 2026 playoff");
+  for (const game of simBracket) {
+    if (game.teamAId === oleMiss.id || game.teamBId === oleMiss.id) {
+      assert(game.projectedWinnerId === oleMiss.id, `${game.id} should go to Ole Miss`);
+    }
+    if (game.teamAId === lsu.id || game.teamBId === lsu.id) {
+      assert(game.projectedWinnerId !== lsu.id, `${game.id} should not go to LSU`);
+    }
   }
 
   return {

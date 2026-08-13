@@ -1,7 +1,7 @@
 import { playoffTeamsInGroup } from "./playoff";
 import { teamsIn, tiersInRegion } from "./rankings";
+import { pickWinner } from "./simulate";
 import {
-  compareRecords,
   canPromoteTo,
   MAX_MOVEMENT,
   regionName,
@@ -9,7 +9,7 @@ import {
   tierName,
   TIER_SIZE,
 } from "./teams";
-import type { Assignment, RegionId, Team } from "./types";
+import type { Assignment, RecordMap, RegionId, Team } from "./types";
 
 export type MovementReason =
   | "champion"
@@ -58,7 +58,11 @@ function nextPromotable(
   return list.find((team) => !used.has(team.id) && canPromoteTo(team, toTier));
 }
 
-export function planRegionMovement(assignment: Assignment, region: RegionId): RegionMovement {
+export function planRegionMovement(
+  assignment: Assignment,
+  region: RegionId,
+  records?: RecordMap,
+): RegionMovement {
   const tiers = tiersInRegion(assignment, region);
   const promotions: MovementItem[] = [];
   const relegations: MovementItem[] = [];
@@ -68,7 +72,7 @@ export function planRegionMovement(assignment: Assignment, region: RegionId): Re
     return { region, complete: false, warning: "No teams in this region", promotions, relegations, games };
   }
 
-  const sizes = tiers.map((tier) => teamsIn(assignment, region, tier).length);
+  const sizes = tiers.map((tier) => teamsIn(assignment, region, tier, records).length);
   const complete = sizes.every((size) => size === TIER_SIZE);
   if (!complete) {
     return {
@@ -84,8 +88,8 @@ export function planRegionMovement(assignment: Assignment, region: RegionId): Re
   for (let i = 0; i < tiers.length - 1; i += 1) {
     const higherTier = tiers[i];
     const lowerTier = tiers[i + 1];
-    const higher = teamsIn(assignment, region, higherTier);
-    const lower = teamsIn(assignment, region, lowerTier);
+    const higher = teamsIn(assignment, region, higherTier, records);
+    const lower = teamsIn(assignment, region, lowerTier, records);
     const usedH = new Set<string>();
     const usedL = new Set<string>();
 
@@ -147,7 +151,7 @@ export function planRegionMovement(assignment: Assignment, region: RegionId): Re
       if (!hBubble || !lBubble) break;
       usedH.add(hBubble.id);
       usedL.add(lBubble.id);
-      const lowerWins = compareRecords(lBubble, hBubble) < 0;
+      const lowerWins = pickWinner(lBubble, hBubble).id === lBubble.id;
       games.push({
         region,
         higherId: hBubble.id,
@@ -179,13 +183,13 @@ export function planRegionMovement(assignment: Assignment, region: RegionId): Re
   return { region, complete: true, promotions, relegations, games };
 }
 
-export function planAllMovement(assignment: Assignment): RegionMovement[] {
-  return REGIONS.map((region) => planRegionMovement(assignment, region.id));
+export function planAllMovement(assignment: Assignment, records?: RecordMap): RegionMovement[] {
+  return REGIONS.map((region) => planRegionMovement(assignment, region.id, records));
 }
 
-export function applyMovement(assignment: Assignment): Assignment {
+export function applyMovement(assignment: Assignment, records?: RecordMap): Assignment {
   const next = { ...assignment };
-  for (const plan of planAllMovement(assignment)) {
+  for (const plan of planAllMovement(assignment, records)) {
     if (!plan.complete) continue;
     for (const item of [...plan.promotions, ...plan.relegations]) {
       const current = next[item.teamId];

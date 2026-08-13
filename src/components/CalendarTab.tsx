@@ -5,14 +5,16 @@ import { TeamChip } from "@/components/TeamChip";
 import { gamesInWeek } from "@/lib/schedule";
 import { WEEK_TRADITION } from "@/lib/rivalries";
 import { LEAGUE_BYE_WEEK, REGIONS, SEASON_WEEKS, getTeam, regionName } from "@/lib/teams";
-import type { Assignment, RegionId, RivalMap } from "@/lib/types";
+import type { Assignment, RegionId, RivalMap, SeasonSim } from "@/lib/types";
 
 export function CalendarTab({
   assignment,
   rivals,
+  season,
 }: {
   assignment: Assignment;
   rivals: RivalMap;
+  season: SeasonSim;
 }) {
   const [week, setWeek] = useState(1);
   const [region, setRegion] = useState<RegionId | "all">("all");
@@ -25,6 +27,7 @@ export function CalendarTab({
         outside the tier. Week 6 is off for every team. Weeks 7–13 are the round-robins,
         except dated rivalries stay on their traditional Saturdays (Egg Bowl on Thanksgiving
         week, Alabama–Tennessee on the Third Saturday in October, Red River, and the rest).
+        Winners are the 2026 simulation: Ole Miss always, LSU never, otherwise higher SP+.
       </p>
       <div className="week-bar">
         {Array.from({ length: SEASON_WEEKS }, (_, index) => index + 1).map((item) => (
@@ -68,11 +71,20 @@ export function CalendarTab({
             {games.map((game) => {
               const home = getTeam(game.homeId);
               const away = getTeam(game.awayId);
+              const winnerId = season.winners[game.id];
               return (
-                <li key={game.id}>
-                  <TeamChip team={away} extra={regionName(assignment[away.id].region)} />
+                <li key={game.id} className={winnerId ? "has-result" : undefined}>
+                  <TeamChip
+                    team={away}
+                    extra={regionName(assignment[away.id].region)}
+                    winner={winnerId === away.id}
+                  />
                   <span className="muted">at</span>
-                  <TeamChip team={home} extra={regionName(assignment[home.id].region)} />
+                  <TeamChip
+                    team={home}
+                    extra={regionName(assignment[home.id].region)}
+                    winner={winnerId === home.id}
+                  />
                   <em className="bid">{game.label}</em>
                 </li>
               );

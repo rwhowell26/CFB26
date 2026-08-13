@@ -2,8 +2,8 @@
 
 import { TeamChip } from "@/components/TeamChip";
 import { buildPlayoffBracket, buildPlayoffField, playoffSummary } from "@/lib/playoff";
-import { getTeam, recordLabel, REGIONS, tierName } from "@/lib/teams";
-import type { Assignment, PlayoffGame } from "@/lib/types";
+import { getTeam, recordLabel, REGIONS, tierName, withRecord } from "@/lib/teams";
+import type { Assignment, PlayoffGame, SeasonSim } from "@/lib/types";
 
 type Side = "left" | "right" | "center";
 
@@ -12,12 +12,20 @@ function half(games: PlayoffGame[], side: Exclude<Side, "center">) {
   return side === "left" ? games.slice(0, mid) : games.slice(mid);
 }
 
-export function PlayoffTab({ assignment }: { assignment: Assignment }) {
-  const field = buildPlayoffField(assignment);
+export function PlayoffTab({
+  assignment,
+  season,
+}: {
+  assignment: Assignment;
+  season: SeasonSim;
+}) {
+  const field = buildPlayoffField(assignment, season.records);
   const bracket = buildPlayoffBracket(field);
   const summary = playoffSummary(field);
   const codes = new Map(field.map((entry) => [entry.seed, entry.rankCode]));
   const codeFor = (seed: number) => codes.get(seed) ?? String(seed);
+  const championId = bracket.find((game) => game.round === "final")?.projectedWinnerId;
+  const champion = championId ? getTeam(championId) : null;
 
   const byRound = (round: PlayoffGame["round"]) =>
     bracket.filter((game) => game.round === round);
@@ -42,11 +50,12 @@ export function PlayoffTab({ assignment }: { assignment: Assignment }) {
   return (
     <div className="stack playoff-page">
       <p className="lede">
-        Each region sends 3 from Tier I, 2 from Tier II, and 1 from Tier III (24 autobids).
-        Labels are regional place, not a 1–24 seed: 1W is first in the West, 2E is the East
-        runner-up, 6S is the South Tier III champion. Each region’s 1 and 2 receive a
-        first-round bye. Opening games are always cross-region. Bracket winners are
-        projected from last year’s SP+.
+        Each region sends 3 from Tier I, 2 from Tier II, and 1 from Tier III (24 autobids)
+        from the 2026 simulated standings. Labels are regional place, not a 1–24 seed:
+        1W is first in the West, 2E is the East runner-up, 6S is the South Tier III
+        champion. Each region’s 1 and 2 receive a first-round bye. Opening games are
+        always cross-region. Ole Miss wins every playoff game they play
+        {champion ? ` — ${champion.shortName} is the national champion` : ""}.
       </p>
       <div className="stat-row">
         <div className="stat"><b>{summary.fieldSize}</b><span>team field</span></div>
@@ -58,7 +67,7 @@ export function PlayoffTab({ assignment }: { assignment: Assignment }) {
       <section className="panel playoff-board-panel">
         <header className="panel-head">
           <h2>Bracket</h2>
-          <span>Projected winners use 2025 SP+</span>
+          <span>Ole Miss wins the playoff · other games use SP+</span>
         </header>
         <div className="bracket-board">
           {columns.map((column) => (
@@ -90,7 +99,7 @@ export function PlayoffTab({ assignment }: { assignment: Assignment }) {
       <section className="panel">
         <header className="panel-head">
           <h2>Autobids</h2>
-          <span>1W is first in the West · 6 bids per region</span>
+          <span>1W is first in the West · 6 bids per region · 2026 records</span>
         </header>
         <div className="seed-grid">
           {REGIONS.map((region) => {
@@ -102,7 +111,7 @@ export function PlayoffTab({ assignment }: { assignment: Assignment }) {
                 <h3>{region.name}</h3>
                 <ol>
                   {entries.map((entry) => {
-                    const team = getTeam(entry.teamId);
+                    const team = withRecord(getTeam(entry.teamId), season.records);
                     const place = assignment[team.id];
                     return (
                       <li key={entry.teamId}>

@@ -1,5 +1,5 @@
 import teamsJson from "@/data/teams.json";
-import type { Assignment, RegionId, RivalMap, Team, TierId } from "./types";
+import type { Assignment, RecordMap, RegionId, RivalMap, Team, TierId } from "./types";
 
 export const TEAMS: Team[] = teamsJson as Team[];
 
@@ -81,6 +81,12 @@ export function defaultAssignment(): Assignment {
 
 export function defaultRivals(): RivalMap {
   return Object.fromEntries(TEAMS.map((team) => [team.id, [...team.rivals]]));
+}
+
+export function withRecord(team: Team, records?: RecordMap): Team {
+  const record = records?.[team.id];
+  if (!record) return team;
+  return { ...team, wins: record.wins, losses: record.losses };
 }
 
 export function winPct(team: Team): number {

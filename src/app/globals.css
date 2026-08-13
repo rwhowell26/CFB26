@@ -338,6 +338,21 @@ main { min-height: 100vh; }
   border-radius: 10px;
   padding: 0.45rem 0.4rem;
 }
+.chip.is-winner strong { color: var(--gold); }
+.game-list li.is-win { background: rgba(61, 154, 95, 0.08); border-radius: 10px; }
+.game-list li.is-loss { background: rgba(239, 68, 68, 0.06); border-radius: 10px; }
+.result-pill {
+  display: inline-block;
+  min-width: 1.15rem;
+  padding: 0 0.28rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+.result-pill.is-win { color: #bbf7d0; background: rgba(61, 154, 95, 0.28); }
+.result-pill.is-loss { color: #fecaca; background: rgba(239, 68, 68, 0.28); }
 
 .freq-table { width: 100%; border-collapse: collapse; }
 .freq-table th, .freq-table td {

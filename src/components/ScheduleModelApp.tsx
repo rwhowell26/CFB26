@@ -8,6 +8,7 @@ import { PlayoffTab } from "@/components/PlayoffTab";
 import { RankingsTab } from "@/components/RankingsTab";
 import { RegionsTab } from "@/components/RegionsTab";
 import { SchedulesTab } from "@/components/SchedulesTab";
+import { simulateSeason } from "@/lib/simulate";
 import { REGIONS, TEAMS, clampTier, getTeam } from "@/lib/teams";
 import { useModel } from "@/lib/storage";
 import type { RegionId, TierId } from "@/lib/types";
@@ -27,6 +28,7 @@ type TabId = (typeof TABS)[number]["id"];
 export function ScheduleModelApp() {
   const [tab, setTab] = useState<TabId>("regions");
   const { assignment, rivals, setAssignment, setRivals, reset } = useModel();
+  const season = useMemo(() => simulateSeason(assignment, rivals), [assignment, rivals]);
 
   const onMove = (teamId: string, region: RegionId, tier: TierId) => {
     const team = getTeam(teamId);
@@ -54,7 +56,9 @@ export function ScheduleModelApp() {
           <p className="subhead">
             168 clubs, full round-robins, named-rivalry protected games, a 13-week
             calendar with a league-wide bye, promotion and relegation, and a 24-team
-            all-autobid playoff for Tiers I–III.
+            all-autobid playoff for Tiers I–III. 2026 is played out on this slate:
+            Ole Miss wins every game and the playoff, LSU loses every game, and
+            every other result follows 2025 SP+.
           </p>
         </div>
         <div className="top-actions">
@@ -86,16 +90,20 @@ export function ScheduleModelApp() {
       </nav>
 
       {tab === "regions" ? <RegionsTab assignment={assignment} onMove={onMove} /> : null}
-      {tab === "rankings" ? <RankingsTab assignment={assignment} /> : null}
-      {tab === "schedules" ? <SchedulesTab assignment={assignment} rivals={rivals} /> : null}
-      {tab === "calendar" ? <CalendarTab assignment={assignment} rivals={rivals} /> : null}
+      {tab === "rankings" ? <RankingsTab assignment={assignment} season={season} /> : null}
+      {tab === "schedules" ? (
+        <SchedulesTab assignment={assignment} rivals={rivals} season={season} />
+      ) : null}
+      {tab === "calendar" ? (
+        <CalendarTab assignment={assignment} rivals={rivals} season={season} />
+      ) : null}
       {tab === "builder" ? (
-        <BuilderTab assignment={assignment} rivals={rivals} onChangeRivals={setRivals} />
+        <BuilderTab assignment={assignment} rivals={rivals} season={season} onChangeRivals={setRivals} />
       ) : null}
       {tab === "movement" ? (
-        <MovementTab assignment={assignment} onApply={setAssignment} />
+        <MovementTab assignment={assignment} season={season} onApply={setAssignment} />
       ) : null}
-      {tab === "playoff" ? <PlayoffTab assignment={assignment} /> : null}
+      {tab === "playoff" ? <PlayoffTab assignment={assignment} season={season} /> : null}
     </div>
   );
 }

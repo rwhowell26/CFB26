@@ -11,11 +11,13 @@ import {
   regionName,
   tierName,
   winPct,
+  withRecord,
 } from "./teams";
 import type {
   Assignment,
   CalendarGame,
   GameKind,
+  RecordMap,
   RegionId,
   RivalMap,
   ScheduledGame,
@@ -586,9 +588,12 @@ export function tenYearFrequencies(
   });
 }
 
-export function scheduleStrength(games: ScheduledGame[]): number {
+export function scheduleStrength(games: ScheduledGame[], records?: RecordMap): number {
   if (!games.length) return 0;
-  const sum = games.reduce((total, game) => total + winPct(getTeam(game.opponentId)), 0);
+  const sum = games.reduce(
+    (total, game) => total + winPct(withRecord(getTeam(game.opponentId), records)),
+    0,
+  );
   return sum / games.length;
 }
 

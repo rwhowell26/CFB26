@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { TeamChip, TeamRow, useTeamSearch } from "@/components/TeamChip";
 import { byeWeekOf, scheduleFor, scheduleStrength } from "@/lib/schedule";
+import { gameWinnerId } from "@/lib/simulate";
 import {
   LEAGUE_BYE_WEEK,
   REGIONS,
@@ -13,9 +14,10 @@ import {
   regionName,
   spPlusLabel,
   tierName,
+  withRecord,
 } from "@/lib/teams";
 import { traditionalDate } from "@/lib/rivalries";
-import type { Assignment, GameKind, RivalMap, ScheduledGame } from "@/lib/types";
+import type { Assignment, GameKind, RivalMap, ScheduledGame, SeasonSim } from "@/lib/types";
 
 const KIND_LABEL: Record<GameKind, string> = {
   rival: "Protected rival",
@@ -31,23 +33,26 @@ type SlateRow =
 export function SchedulesTab({
   assignment,
   rivals,
+  season,
 }: {
   assignment: Assignment;
   rivals: RivalMap;
+  season: SeasonSim;
 }) {
+  const oleMiss = TEAMS.find((team) => team.abbreviation === "MISS");
   const [query, setQuery] = useState("");
-  const [selectedId, setSelectedId] = useState(TEAMS[0]?.id ?? "");
+  const [selectedId, setSelectedId] = useState(oleMiss?.id ?? TEAMS[0]?.id ?? "");
   const filtered = useTeamSearch(
     [...TEAMS].sort((a, b) => a.shortName.localeCompare(b.shortName)),
     query,
   );
-  const selected = getTeam(selectedId);
+  const selected = withRecord(getTeam(selectedId), season.records);
   const place = assignment[selectedId];
   const schedule = useMemo(
     () => scheduleFor(assignment, rivals, selectedId),
     [assignment, rivals, selectedId],
   );
-  const sos = scheduleStrength(schedule.games);
+  const sos = scheduleStrength(schedule.games, season.records);
   const byeWeek = byeWeekOf(schedule.games);
   const slate: SlateRow[] = [];
   for (let week = 1; week <= SEASON_WEEKS; week += 1) {
@@ -71,7 +76,7 @@ export function SchedulesTab({
           {filtered.map((team) => (
             <TeamRow
               key={team.id}
-              team={team}
+              team={withRecord(team, season.records)}
               active={team.id === selectedId}
               onClick={() => setSelectedId(team.id)}
             />
@@ -88,7 +93,7 @@ export function SchedulesTab({
             </p>
             <h2>{selected.name}</h2>
             <p>
-              {recordLabel(selected)} in 2025 · 12 games · bye W{byeWeek} · opp win%{" "}
+              {recordLabel(selected)} in 2026 · 12 games · bye W{byeWeek} · opp win%{" "}
               {Math.round(sos * 1000) / 10}
             </p>
           </div>
@@ -98,16 +103,19 @@ export function SchedulesTab({
             rows={left}
             selectedId={selectedId}
             assignment={assignment}
+            season={season}
           />
           <WeekColumn
             rows={right}
             selectedId={selectedId}
             assignment={assignment}
+            season={season}
           />
         </div>
         <p className="footnote">
           W1–5 out of tier · W6 league bye · W7–13 round-robin. Named rivals only; dated
-          series stay on their traditional Saturdays.
+          series stay on their traditional Saturdays. Ole Miss wins every game; LSU loses
+          every game; other results follow SP+.
         </p>
       </section>
     </div>
@@ -118,10 +126,12 @@ function WeekColumn({
   rows,
   selectedId,
   assignment,
+  season,
 }: {
   rows: SlateRow[];
   selectedId: string;
   assignment: Assignment;
+  season: SeasonSim;
 }) {
   return (
     <ul className="game-list">
@@ -140,11 +150,13 @@ function WeekColumn({
           );
         }
         const game = row.game;
-        const opponent = getTeam(game.opponentId);
+        const opponent = withRecord(getTeam(game.opponentId), season.records);
         const oppPlace = assignment[opponent.id];
         const series = traditionalDate(selectedId, game.opponentId)?.name;
+        const winnerId = gameWinnerId(season, selectedId, game.opponentId);
+        const won = winnerId === selectedId;
         return (
-          <li key={`${game.week}-${game.opponentId}`}>
+          <li key={`${game.week}-${game.opponentId}`} className={won ? "is-win" : "is-loss"}>
             <span className="week-pill">W{game.week}</span>
             <TeamChip
               team={opponent}
@@ -152,7 +164,11 @@ function WeekColumn({
               extra={`${game.home ? "Home" : "Away"} · ${recordLabel(opponent)}`}
             />
             <div className="game-meta">
-              <b>{series ?? KIND_LABEL[game.kind]}</b>
+              <b>
+                <span className={`result-pill ${won ? "is-win" : "is-loss"}`}>{won ? "W" : "L"}</span>
+                {" "}
+                {series ?? KIND_LABEL[game.kind]}
+              </b>
               <span>
                 {REGIONS.find((region) => region.id === oppPlace.region)?.name}{" "}
                 {tierName(oppPlace.tier)}

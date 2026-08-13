@@ -3,14 +3,22 @@
 import { playoffBidCount } from "@/lib/playoff";
 import { teamsIn, tiersInRegion } from "@/lib/rankings";
 import { PLAYOFF_TIERS, REGIONS, recordLabel, tierName, winPct } from "@/lib/teams";
-import type { Assignment } from "@/lib/types";
+import type { Assignment, SeasonSim } from "@/lib/types";
 
-export function RankingsTab({ assignment }: { assignment: Assignment }) {
+export function RankingsTab({
+  assignment,
+  season,
+}: {
+  assignment: Assignment;
+  season: SeasonSim;
+}) {
   return (
     <div className="stack">
       <p className="lede">
-        2025 standings inside each 8-team tier. Autobids: top 3 in Tier I, top 2 in
-        Tier II, champion of Tier III. These lists also drive promotion games and crossovers.
+        2026 simulated standings inside each 8-team tier. Ole Miss wins every game.
+        LSU loses every game. Other results follow 2025 SP+. Autobids: top 3 in
+        Tier I, top 2 in Tier II, champion of Tier III. These lists also drive
+        promotion games and crossovers.
       </p>
       <div className="region-grid">
         {REGIONS.map((region) => {
@@ -22,7 +30,7 @@ export function RankingsTab({ assignment }: { assignment: Assignment }) {
                 <span>{tiers.length} tiers</span>
               </header>
               {tiers.map((tier) => {
-                const ranked = teamsIn(assignment, region.id, tier);
+                const ranked = teamsIn(assignment, region.id, tier, season.records);
                 return (
                   <section key={tier} className="rank-tier">
                     <header>

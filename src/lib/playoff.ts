@@ -1,6 +1,7 @@
 import { teamsIn } from "./rankings";
-import { compareSpPlus, getTeam, PLAYOFF_TIERS, regionCode, regionName, tierName } from "./teams";
-import type { Assignment, PlayoffGame, PlayoffTeam, RegionId, Team } from "./types";
+import { pickWinner } from "./simulate";
+import { getTeam, PLAYOFF_TIERS, regionCode, regionName, tierName } from "./teams";
+import type { Assignment, PlayoffGame, PlayoffTeam, RecordMap, RegionId, Team } from "./types";
 
 const FIELD_SIZE = 24;
 const BYES = 8;
@@ -29,7 +30,7 @@ const REGION_BY_SEED: RegionId[] = [
 function projectedWinner(aId: string | null, bId: string | null): string | null {
   if (!aId) return bId;
   if (!bId) return aId;
-  return compareSpPlus(getTeam(aId), getTeam(bId)) < 0 ? aId : bId;
+  return pickWinner(getTeam(aId), getTeam(bId)).id;
 }
 
 export function playoffBidCount(tier: number): number {
@@ -56,13 +57,13 @@ export function playoffRankCode(seed: number, region: RegionId): string {
   return `${place}${regionCode(region)}`;
 }
 
-export function buildPlayoffField(assignment: Assignment): PlayoffTeam[] {
+export function buildPlayoffField(assignment: Assignment, records?: RecordMap): PlayoffTeam[] {
   const selected: PlayoffTeam[] = [];
 
   for (let seed = 1; seed <= FIELD_SIZE; seed += 1) {
     const band = BANDS[Math.floor((seed - 1) / 4)];
     const region = REGION_BY_SEED[seed - 1];
-    const group = teamsIn(assignment, region, band.tier);
+    const group = teamsIn(assignment, region, band.tier, records);
     const team = group[band.place];
     if (!team) continue;
     selected.push({

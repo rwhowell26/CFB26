@@ -5,16 +5,18 @@ import { TeamChip, TeamRow, useTeamSearch } from "@/components/TeamChip";
 import { tenYearFrequencies } from "@/lib/schedule";
 import { realRivalIds } from "@/lib/rivalries";
 import { rivalsOf, setRival, clearRival } from "@/lib/rivals";
-import { TEAMS, getTeam, recordLabel, regionName, tierName } from "@/lib/teams";
-import type { Assignment, RivalMap } from "@/lib/types";
+import { TEAMS, getTeam, recordLabel, regionName, tierName, withRecord } from "@/lib/teams";
+import type { Assignment, RivalMap, SeasonSim } from "@/lib/types";
 
 export function BuilderTab({
   assignment,
   rivals,
+  season,
   onChangeRivals,
 }: {
   assignment: Assignment;
   rivals: RivalMap;
+  season: SeasonSim;
   onChangeRivals: (next: RivalMap) => void;
 }) {
   const [query, setQuery] = useState("");
@@ -54,7 +56,7 @@ export function BuilderTab({
           {filtered.map((team) => (
             <TeamRow
               key={team.id}
-              team={team}
+              team={withRecord(team, season.records)}
               active={team.id === selectedId}
               onClick={() => {
                 setSelectedId(team.id);
@@ -72,7 +74,8 @@ export function BuilderTab({
             <p className="eyebrow">Schedule construction</p>
             <h2>{selected.shortName}</h2>
             <p>
-              {regionName(place.region)} {tierName(place.tier)} · {recordLabel(selected)} last year
+              {regionName(place.region)} {tierName(place.tier)} ·{" "}
+              {recordLabel(withRecord(selected, season.records))} in 2026
             </p>
           </div>
         </header>

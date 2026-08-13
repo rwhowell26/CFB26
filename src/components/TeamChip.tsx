@@ -8,14 +8,16 @@ export function TeamChip({
   team,
   extra,
   compact = false,
+  winner = false,
 }: {
   team: Team | string;
   extra?: string;
   compact?: boolean;
+  winner?: boolean;
 }) {
   const resolved = typeof team === "string" ? getTeam(team) : team;
   return (
-    <span className={`chip ${compact ? "chip-compact" : ""}`}>
+    <span className={`chip ${compact ? "chip-compact" : ""}${winner ? " is-winner" : ""}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={resolved.logo} alt="" width={22} height={22} />
       <span className="chip-copy">
