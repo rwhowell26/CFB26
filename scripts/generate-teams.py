@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""Build seeded FBS team data: geography, 2025 records, and 3 protected rivals."""
+"""Build seeded FBS + FCS team data: geography, 2025 records, and 3 protected rivals."""
 
 from __future__ import annotations
 
 import json
+import urllib.request
 from collections import defaultdict
 from pathlib import Path
 
-ESPN = Path("/tmp/espn_teams.json")
 OUT = Path("/workspace/src/data/teams.json")
+TIER_SIZE = 8
 
 STATE = {
     "2005": "CO", "2006": "OH", "333": "AL", "2026": "NC", "12": "AZ", "9": "AZ",
@@ -34,6 +35,11 @@ STATE = {
     "30": "CA", "2638": "TX", "2636": "TX", "254": "UT", "328": "UT", "238": "TN",
     "258": "VA", "259": "VA", "2711": "MI", "154": "NC", "264": "WA", "265": "WA",
     "277": "WV", "98": "KY", "275": "WI", "2751": "WY",
+    # FCS additions
+    "222": "PA", "257": "VA", "2729": "VA", "160": "NH", "107": "MA", "227": "RI",
+    "231": "SC", "236": "TN", "2382": "GA", "2296": "MS", "50": "FL", "2011": "AL",
+    "2449": "ND", "2571": "SD", "233": "SD", "155": "ND", "2287": "IL", "2754": "OH",
+    "149": "MT", "147": "MT", "70": "ID", "331": "WA", "16": "CA", "302": "CA",
 }
 
 EAST = {
@@ -41,19 +47,23 @@ EAST = {
     "WVU", "MD", "DEL", "UVA", "VT", "JMU", "ODU", "LIB", "DUKE", "UNC", "NCSU",
     "WAKE", "ECU", "CLT", "APP", "CLEM", "SC", "CCU", "MRSH", "BUFF", "CIN",
     "LOU", "UK", "WKU",
+    "VILL", "RICH", "W&M", "UNH", "HC", "URI",
 }
 SOUTH = {
     "MIA", "FSU", "FLA", "UCF", "USF", "FAU", "FIU", "UGA", "GT", "GASO", "GAST",
     "KENN", "AUB", "ALA", "USA", "TROY", "JVST", "MISS", "MSST", "USM", "LSU",
     "UL", "ULM", "LT", "TULN", "ARK", "ARST", "MEM", "TENN", "VAN", "MTSU",
     "UAB", "TA&M", "HOU",
+    "FUR", "UTC", "MER", "JKST", "FAMU", "ALST",
 }
 MIDWEST = {
     "OSU", "OHIO", "AKR", "KENT", "BGSU", "TOL", "M-OH", "MICH", "MSU", "WMU",
     "CMU", "EMU", "BALL", "IU", "PUR", "ND", "ILL", "NU", "WIS", "MINN", "IOWA",
     "ISU", "MIZ", "MOST", "KU", "KSU", "NEB", "OU", "OKST", "NIU", "TLSA",
     "UNT", "BAY", "TCU",
+    "NDSU", "SDST", "SDAK", "UND", "ILST", "YSU",
 }
+WEST_FCS = {"MONT", "MTST", "IDHO", "EWU", "SAC", "UCD"}
 
 PRIORITY_PAIRS = [
     ("ARMY", "NAVY"), ("AFA", "ARMY"), ("AFA", "NAVY"),
@@ -135,6 +145,14 @@ PRIORITY_PAIRS = [
     ("KU", "OU"), ("KSU", "OU"), ("MIZ", "OKST"),
     ("MOST", "KU"), ("TCU", "TEX"), ("BAY", "SMU"),
     ("UNT", "RICE"), ("TLSA", "OKST"),
+    ("NDSU", "SDST"), ("NDSU", "UND"), ("SDST", "SDAK"), ("UND", "SDAK"),
+    ("MONT", "MTST"), ("IDHO", "WSU"), ("IDHO", "MTST"), ("EWU", "IDHO"),
+    ("SAC", "UCD"), ("SAC", "FRES"), ("UCD", "CAL"),
+    ("VILL", "TEM"), ("VILL", "PSU"), ("RICH", "W&M"), ("RICH", "UVA"),
+    ("UNH", "URI"), ("HC", "BC"), ("URI", "CONN"),
+    ("FUR", "CLEM"), ("UTC", "TENN"), ("MER", "UGA"), ("JKST", "ALST"),
+    ("FAMU", "FSU"), ("ALST", "AUB"), ("ILST", "ILL"), ("YSU", "OSU"),
+    ("NDSU", "MINN"), ("SDAK", "NEB"), ("MONT", "WSU"), ("MTST", "BOIS"),
 ]
 
 
@@ -167,22 +185,74 @@ def add_edge(adj: dict[str, set[str]], a: str, b: str) -> bool:
     return True
 
 
+def fetch_standings(group: int) -> list[dict]:
+    url = (
+        "https://site.api.espn.com/apis/v2/sports/football/college-football/"
+        f"standings?group={group}&season=2025&seasontype=2"
+    )
+    with urllib.request.urlopen(url) as response:
+        data = json.load(response)
+    teams: list[dict] = []
+
+    def walk(node: dict, conf: str | None = None) -> None:
+        name = node.get("name") or conf
+        for entry in (node.get("standings") or {}).get("entries") or []:
+            team = entry.get("team") or {}
+            overall = None
+            pf = pa = None
+            for stat in entry.get("stats") or []:
+                if stat.get("name") == "overall" or stat.get("abbreviation") == "overall":
+                    overall = stat.get("displayValue")
+                if stat.get("name") == "pointsFor" and pf is None:
+                    pf = stat.get("value")
+                if stat.get("name") == "pointsAgainst" and pa is None:
+                    pa = stat.get("value")
+            logos = team.get("logos") or []
+            logo = next((item.get("href") for item in logos if "500" in (item.get("href") or "")), None)
+            if not logo and logos:
+                logo = logos[0].get("href")
+            teams.append({
+                "id": str(team.get("id")),
+                "name": team.get("displayName"),
+                "shortName": team.get("shortDisplayName") or team.get("displayName"),
+                "abbreviation": team.get("abbreviation") or team.get("shortDisplayName"),
+                "logo": logo or f"https://a.espncdn.com/i/teamlogos/ncaa/500/{team.get('id')}.png",
+                "overall": overall,
+                "pf": pf,
+                "pa": pa,
+            })
+        for child in node.get("children") or []:
+            walk(child, child.get("name") or name)
+
+    walk(data)
+    return teams
+
+
 def main() -> None:
-    raw = json.loads(ESPN.read_text())
+    fbs = fetch_standings(80)
+    fcs = fetch_standings(81)
+    fcs_keep = {
+        "VILL", "RICH", "W&M", "UNH", "HC", "URI",
+        "FUR", "UTC", "MER", "JKST", "FAMU", "ALST",
+        "NDSU", "SDST", "SDAK", "UND", "ILST", "YSU",
+        "MONT", "MTST", "IDHO", "EWU", "SAC", "UCD",
+    }
+    raw = [{**row, "subdivision": "fbs"} for row in fbs]
+    raw += [{**row, "subdivision": "fcs"} for row in fcs if row["abbreviation"] in fcs_keep]
+
     by_abbr = {t["abbreviation"]: t for t in raw}
     missing_state = [t["id"] for t in raw if t["id"] not in STATE]
     if missing_state:
         raise SystemExit(f"Missing state for ids: {missing_state}")
 
-    for abbr in EAST | SOUTH | MIDWEST:
-        if abbr not in by_abbr:
-            raise SystemExit(f"Unknown abbreviation in region sets: {abbr}")
+    wanted = EAST | SOUTH | MIDWEST | WEST_FCS
+    missing_abbr = [abbr for abbr in wanted if abbr not in by_abbr]
+    if missing_abbr:
+        raise SystemExit(f"Unknown abbreviation in region sets: {missing_abbr}")
 
     teams = []
     for t in raw:
-        wins, losses = t["wins"], t["losses"]
-        if t.get("overall"):
-            wins, losses = parse_overall(t["overall"])
+        wins, losses = parse_overall(t.get("overall"))
         pf = int(t.get("pf") or 0)
         pa = int(t.get("pa") or 0)
         teams.append({
@@ -199,29 +269,21 @@ def main() -> None:
             "winPct": round(wins / (wins + losses), 4) if wins + losses else 0,
             "pointDiff": pf - pa,
             "region": region_for(t["abbreviation"]),
+            "subdivision": t["subdivision"],
         })
 
     counts = defaultdict(int)
     for t in teams:
         counts[t["region"]] += 1
-    print("region counts", dict(counts))
-    if set(counts.values()) != {34}:
-        raise SystemExit(f"Regions not balanced: {dict(counts)}")
+    print("region counts", dict(counts), "total", len(teams))
+    if set(counts.values()) != {40}:
+        raise SystemExit(f"Regions not balanced to 40: {dict(counts)}")
 
-    # Default tiers by last-year record within region
     for region in ("east", "south", "midwest", "west"):
         group = [t for t in teams if t["region"] == region]
         group.sort(key=lambda t: (-t["winPct"], -t["wins"], -t["pointDiff"], t["shortName"]))
-        n = len(group)
-        t1 = (n + 2) // 3
-        t2 = (n + 1) // 3
         for i, t in enumerate(group):
-            if i < t1:
-                t["tier"] = 1
-            elif i < t1 + t2:
-                t["tier"] = 2
-            else:
-                t["tier"] = 3
+            t["tier"] = i // TIER_SIZE + 1
 
     abbr_to_id = {t["abbreviation"]: t["id"] for t in teams}
     id_to_team = {t["id"]: t for t in teams}
@@ -311,6 +373,7 @@ def main() -> None:
             "pa": t["pa"],
             "region": t["region"],
             "tier": t["tier"],
+            "subdivision": t["subdivision"],
             "rivals": t["rivals"],
         })
     out.sort(key=lambda t: t["shortName"])
@@ -318,7 +381,7 @@ def main() -> None:
     OUT.write_text(json.dumps(out, indent=2) + "\n")
     print(f"wrote {len(out)} teams to {OUT}")
     # sample rivals
-    for abbr in ("ALA", "OSU", "UGA", "TEX", "ND", "USC"):
+    for abbr in ("ALA", "OSU", "UGA", "TEX", "ND", "NDSU", "MONT", "VILL"):
         t = next(x for x in out if x["abbreviation"] == abbr)
         names = [id_to_team[r]["abbreviation"] for r in t["rivals"]]
         print(abbr, "->", names, "region", t["region"], "tier", t["tier"], f"{t['wins']}-{t['losses']}")

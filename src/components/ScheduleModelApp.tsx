@@ -2,19 +2,23 @@
 
 import { useMemo, useState } from "react";
 import { BuilderTab } from "@/components/BuilderTab";
+import { CalendarTab } from "@/components/CalendarTab";
+import { MovementTab } from "@/components/MovementTab";
 import { PlayoffTab } from "@/components/PlayoffTab";
 import { RankingsTab } from "@/components/RankingsTab";
 import { RegionsTab } from "@/components/RegionsTab";
 import { SchedulesTab } from "@/components/SchedulesTab";
-import { defaultAssignment, REGIONS, TEAMS } from "@/lib/teams";
-import { useAssignment } from "@/lib/storage";
+import { REGIONS, TEAMS } from "@/lib/teams";
+import { useModel } from "@/lib/storage";
 import type { RegionId, TierId } from "@/lib/types";
 
 const TABS = [
   { id: "regions", label: "Regions" },
   { id: "rankings", label: "Rankings" },
   { id: "schedules", label: "Schedules" },
+  { id: "calendar", label: "Calendar" },
   { id: "builder", label: "Builder" },
+  { id: "movement", label: "Movement" },
   { id: "playoff", label: "Playoff" },
 ] as const;
 
@@ -22,7 +26,7 @@ type TabId = (typeof TABS)[number]["id"];
 
 export function ScheduleModelApp() {
   const [tab, setTab] = useState<TabId>("regions");
-  const [assignment, setAssignment] = useAssignment();
+  const { assignment, rivals, setAssignment, setRivals, reset } = useModel();
 
   const onMove = (teamId: string, region: RegionId, tier: TierId) => {
     setAssignment((current) => ({
@@ -45,10 +49,10 @@ export function ScheduleModelApp() {
       <header className="topbar">
         <div className="brand-block">
           <p className="kicker">CFB26 · realignment lab</p>
-          <h1 className="brand">Four Regions. Three Tiers.</h1>
+          <h1 className="brand">Four Regions. Eight-Team Tiers.</h1>
           <p className="subhead">
-            A 12-game national model with protected rivals, standing-based crossover games,
-            and a 24-team playoff that still leaves a door open in every tier.
+            160 clubs (136 FBS + 24 FCS), full round-robins, balanced crossovers, a 12-week
+            calendar, promotion and relegation, and a 24-team all-autobid playoff for Tiers I–III.
           </p>
         </div>
         <div className="top-actions">
@@ -60,11 +64,7 @@ export function ScheduleModelApp() {
               </li>
             ))}
           </ul>
-          <button
-            type="button"
-            className="ghost"
-            onClick={() => setAssignment(defaultAssignment())}
-          >
+          <button type="button" className="ghost" onClick={reset}>
             Reset auto-fill
           </button>
         </div>
@@ -85,8 +85,14 @@ export function ScheduleModelApp() {
 
       {tab === "regions" ? <RegionsTab assignment={assignment} onMove={onMove} /> : null}
       {tab === "rankings" ? <RankingsTab assignment={assignment} /> : null}
-      {tab === "schedules" ? <SchedulesTab assignment={assignment} /> : null}
-      {tab === "builder" ? <BuilderTab assignment={assignment} /> : null}
+      {tab === "schedules" ? <SchedulesTab assignment={assignment} rivals={rivals} /> : null}
+      {tab === "calendar" ? <CalendarTab assignment={assignment} rivals={rivals} /> : null}
+      {tab === "builder" ? (
+        <BuilderTab assignment={assignment} rivals={rivals} onChangeRivals={setRivals} />
+      ) : null}
+      {tab === "movement" ? (
+        <MovementTab assignment={assignment} onApply={setAssignment} />
+      ) : null}
       {tab === "playoff" ? <PlayoffTab assignment={assignment} /> : null}
     </div>
   );

@@ -1,5 +1,6 @@
 export type RegionId = "east" | "south" | "midwest" | "west";
-export type TierId = 1 | 2 | 3;
+export type TierId = number;
+export type Subdivision = "fbs" | "fcs";
 
 export type Team = {
   id: string;
@@ -14,6 +15,7 @@ export type Team = {
   pa: number;
   region: RegionId;
   tier: TierId;
+  subdivision: Subdivision;
   rivals: string[];
 };
 
@@ -23,6 +25,7 @@ export type Placement = {
 };
 
 export type Assignment = Record<string, Placement>;
+export type RivalMap = Record<string, string[]>;
 
 export type GameKind = "rival" | "in-tier" | "inter-region";
 
@@ -31,6 +34,7 @@ export type ScheduledGame = {
   kind: GameKind;
   home: boolean;
   label: string;
+  week: number;
 };
 
 export type TeamSchedule = {
@@ -38,7 +42,16 @@ export type TeamSchedule = {
   games: ScheduledGame[];
 };
 
-export type PlayoffBidKind = "tier-champion" | "tier1-runner-up" | "at-large";
+export type CalendarGame = {
+  id: string;
+  week: number;
+  homeId: string;
+  awayId: string;
+  kind: GameKind;
+  label: string;
+};
+
+export type PlayoffBidKind = "tier-champion" | "tier-runner-up";
 
 export type PlayoffTeam = {
   teamId: string;

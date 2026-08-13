@@ -11,7 +11,8 @@
     "pf": 358,
     "pa": 364,
     "region": "west",
-    "tier": 2,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
       "349",
       "2426",
@@ -30,11 +31,12 @@
     "pf": 267,
     "pa": 329,
     "region": "midwest",
-    "tier": 3,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
-      "48",
-      "2309",
-      "98"
+      "189",
+      "107",
+      "2309"
     ]
   },
   {
@@ -50,10 +52,31 @@
     "pa": 226,
     "region": "south",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "2",
       "99",
       "2633"
+    ]
+  },
+  {
+    "id": "2011",
+    "name": "Alabama State Hornets",
+    "shortName": "Alabama St",
+    "abbreviation": "ALST",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2011.png",
+    "state": "AL",
+    "wins": 10,
+    "losses": 2,
+    "pf": 509,
+    "pa": 257,
+    "region": "south",
+    "tier": 1,
+    "subdivision": "fcs",
+    "rivals": [
+      "9",
+      "2296",
+      "2483"
     ]
   },
   {
@@ -68,7 +91,8 @@
     "pf": 304,
     "pa": 358,
     "region": "east",
-    "tier": 3,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
       "2429",
       "324",
@@ -87,7 +111,8 @@
     "pf": 391,
     "pa": 227,
     "region": "west",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "9",
       "38",
@@ -106,10 +131,11 @@
     "pf": 296,
     "pa": 276,
     "region": "west",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
+      "2011",
       "12",
-      "242",
       "254"
     ]
   },
@@ -125,7 +151,8 @@
     "pf": 395,
     "pa": 406,
     "region": "south",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "99",
       "142",
@@ -144,11 +171,12 @@
     "pf": 293,
     "pa": 328,
     "region": "south",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
-      "239",
-      "62",
-      "2534"
+      "331",
+      "2226",
+      "62"
     ]
   },
   {
@@ -163,7 +191,8 @@
     "pf": 269,
     "pa": 265,
     "region": "east",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
       "2005",
       "2426",
@@ -182,7 +211,8 @@
     "pf": 321,
     "pa": 248,
     "region": "south",
-    "tier": 3,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
       "333",
       "61",
@@ -202,8 +232,9 @@
     "pa": 247,
     "region": "west",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
-      "189",
+      "236",
       "254",
       "328"
     ]
@@ -220,11 +251,12 @@
     "pf": 190,
     "pa": 358,
     "region": "midwest",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
-      "84",
-      "145",
-      "6"
+      "107",
+      "2287",
+      "84"
     ]
   },
   {
@@ -239,9 +271,10 @@
     "pf": 373,
     "pa": 391,
     "region": "midwest",
-    "tier": 2,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
-      "2032",
+      "233",
       "2628",
       "2641"
     ]
@@ -258,9 +291,10 @@
     "pf": 418,
     "pa": 337,
     "region": "west",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
-      "2483",
+      "147",
       "2439",
       "328"
     ]
@@ -277,7 +311,8 @@
     "pf": 305,
     "pa": 393,
     "region": "east",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "183",
       "41",
@@ -296,9 +331,10 @@
     "pf": 246,
     "pa": 291,
     "region": "midwest",
-    "tier": 3,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
-      "252",
+      "2006",
       "2309",
       "2649"
     ]
@@ -315,9 +351,10 @@
     "pf": 288,
     "pa": 282,
     "region": "east",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
-      "2623",
+      "276",
       "164",
       "183"
     ]
@@ -334,10 +371,11 @@
     "pf": 286,
     "pa": 272,
     "region": "midwest",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
+      "150",
       "2199",
-      "127",
       "2711"
     ]
   },
@@ -353,10 +391,11 @@
     "pf": 298,
     "pa": 318,
     "region": "west",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
       "24",
-      "2655",
+      "302",
       "26"
     ]
   },
@@ -372,11 +411,32 @@
     "pf": 172,
     "pa": 436,
     "region": "east",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "2026",
       "151",
       "2579"
+    ]
+  },
+  {
+    "id": "236",
+    "name": "Chattanooga Mocs",
+    "shortName": "Chattanooga",
+    "abbreviation": "UTC",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/236.png",
+    "state": "TN",
+    "wins": 5,
+    "losses": 7,
+    "pf": 339,
+    "pa": 396,
+    "region": "south",
+    "tier": 4,
+    "subdivision": "fcs",
+    "rivals": [
+      "252",
+      "48",
+      "231"
     ]
   },
   {
@@ -392,6 +452,7 @@
     "pa": 298,
     "region": "east",
     "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "97",
       "193",
@@ -410,7 +471,8 @@
     "pf": 344,
     "pa": 245,
     "region": "east",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "52",
       "59",
@@ -429,11 +491,12 @@
     "pf": 274,
     "pa": 407,
     "region": "east",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
       "2026",
       "36",
-      "150"
+      "2579"
     ]
   },
   {
@@ -448,7 +511,8 @@
     "pf": 251,
     "pa": 366,
     "region": "west",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "12",
       "36",
@@ -467,7 +531,8 @@
     "pf": 222,
     "pa": 370,
     "region": "west",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "324",
       "38",
@@ -486,11 +551,12 @@
     "pf": 357,
     "pa": 390,
     "region": "east",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
-      "2006",
-      "120",
-      "41"
+      "236",
+      "231",
+      "120"
     ]
   },
   {
@@ -505,9 +571,10 @@
     "pf": 442,
     "pa": 373,
     "region": "east",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
-      "324",
+      "2117",
       "153",
       "154"
     ]
@@ -524,11 +591,32 @@
     "pf": 289,
     "pa": 357,
     "region": "midwest",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "2117",
-      "120",
+      "84",
       "2711"
+    ]
+  },
+  {
+    "id": "331",
+    "name": "Eastern Washington Eagles",
+    "shortName": "E Washington",
+    "abbreviation": "EWU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/331.png",
+    "state": "WA",
+    "wins": 5,
+    "losses": 7,
+    "pf": 281,
+    "pa": 362,
+    "region": "west",
+    "tier": 4,
+    "subdivision": "fcs",
+    "rivals": [
+      "2032",
+      "70",
+      "55"
     ]
   },
   {
@@ -544,6 +632,7 @@
     "pa": 244,
     "region": "east",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "2429",
       "152",
@@ -562,11 +651,12 @@
     "pf": 354,
     "pa": 436,
     "region": "south",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
+      "2032",
       "2229",
-      "2390",
-      "2433"
+      "2390"
     ]
   },
   {
@@ -581,10 +671,11 @@
     "pf": 351,
     "pa": 333,
     "region": "south",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
       "2226",
-      "2393",
+      "2247",
       "6"
     ]
   },
@@ -600,11 +691,32 @@
     "pf": 259,
     "pa": 288,
     "region": "south",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "52",
       "61",
       "2116"
+    ]
+  },
+  {
+    "id": "50",
+    "name": "Florida A&M Rattlers",
+    "shortName": "Florida A&M",
+    "abbreviation": "FAMU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/50.png",
+    "state": "FL",
+    "wins": 5,
+    "losses": 7,
+    "pf": 291,
+    "pa": 406,
+    "region": "south",
+    "tier": 4,
+    "subdivision": "fcs",
+    "rivals": [
+      "2348",
+      "155",
+      "2534"
     ]
   },
   {
@@ -619,7 +731,8 @@
     "pf": 396,
     "pa": 264,
     "region": "south",
-    "tier": 2,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
       "228",
       "57",
@@ -639,10 +752,31 @@
     "pa": 241,
     "region": "west",
     "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "62",
       "2440",
       "23"
+    ]
+  },
+  {
+    "id": "231",
+    "name": "Furman Paladins",
+    "shortName": "Furman",
+    "abbreviation": "FUR",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/231.png",
+    "state": "SC",
+    "wins": 6,
+    "losses": 6,
+    "pf": 293,
+    "pa": 372,
+    "region": "south",
+    "tier": 4,
+    "subdivision": "fcs",
+    "rivals": [
+      "236",
+      "48",
+      "2636"
     ]
   },
   {
@@ -657,7 +791,8 @@
     "pf": 334,
     "pa": 410,
     "region": "south",
-    "tier": 2,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
       "2026",
       "2247",
@@ -677,6 +812,7 @@
     "pa": 207,
     "region": "south",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "2",
       "57",
@@ -695,10 +831,11 @@
     "pf": 237,
     "pa": 454,
     "region": "south",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
+      "2229",
       "290",
-      "55",
       "338"
     ]
   },
@@ -714,7 +851,8 @@
     "pf": 397,
     "pa": 300,
     "region": "south",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "228",
       "61",
@@ -733,11 +871,32 @@
     "pf": 342,
     "pa": 282,
     "region": "west",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
       "2032",
       "278",
       "21"
+    ]
+  },
+  {
+    "id": "107",
+    "name": "Holy Cross Crusaders",
+    "shortName": "Holy Cross",
+    "abbreviation": "HC",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/107.png",
+    "state": "MA",
+    "wins": 3,
+    "losses": 9,
+    "pf": 246,
+    "pa": 297,
+    "region": "east",
+    "tier": 5,
+    "subdivision": "fcs",
+    "rivals": [
+      "2006",
+      "2050",
+      "113"
     ]
   },
   {
@@ -752,11 +911,32 @@
     "pf": 340,
     "pa": 262,
     "region": "south",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "242",
       "2567",
       "2636"
+    ]
+  },
+  {
+    "id": "70",
+    "name": "Idaho Vandals",
+    "shortName": "Idaho",
+    "abbreviation": "IDHO",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/70.png",
+    "state": "ID",
+    "wins": 4,
+    "losses": 8,
+    "pf": 302,
+    "pa": 317,
+    "region": "west",
+    "tier": 4,
+    "subdivision": "fcs",
+    "rivals": [
+      "331",
+      "147",
+      "265"
     ]
   },
   {
@@ -771,11 +951,32 @@
     "pf": 352,
     "pa": 279,
     "region": "midwest",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "2459",
       "77",
       "2509"
+    ]
+  },
+  {
+    "id": "2287",
+    "name": "Illinois State Redbirds",
+    "shortName": "Illinois St",
+    "abbreviation": "ILST",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2287.png",
+    "state": "IL",
+    "wins": 11,
+    "losses": 4,
+    "pf": 459,
+    "pa": 388,
+    "region": "midwest",
+    "tier": 1,
+    "subdivision": "fcs",
+    "rivals": [
+      "2050",
+      "96",
+      "23"
     ]
   },
   {
@@ -791,10 +992,11 @@
     "pa": 141,
     "region": "midwest",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "2050",
-      "2509",
-      "277"
+      "2199",
+      "2509"
     ]
   },
   {
@@ -809,7 +1011,8 @@
     "pf": 347,
     "pa": 182,
     "region": "midwest",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "66",
       "135",
@@ -828,11 +1031,32 @@
     "pf": 329,
     "pa": 242,
     "region": "midwest",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "2294",
       "2305",
       "158"
+    ]
+  },
+  {
+    "id": "2296",
+    "name": "Jackson State Tigers",
+    "shortName": "Jackson St",
+    "abbreviation": "JKST",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2296.png",
+    "state": "MS",
+    "wins": 9,
+    "losses": 3,
+    "pf": 394,
+    "pa": 225,
+    "region": "south",
+    "tier": 2,
+    "subdivision": "fcs",
+    "rivals": [
+      "2011",
+      "2433",
+      "2754"
     ]
   },
   {
@@ -848,10 +1072,11 @@
     "pa": 206,
     "region": "east",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "2335",
       "295",
-      "259"
+      "2116"
     ]
   },
   {
@@ -866,9 +1091,10 @@
     "pf": 377,
     "pa": 340,
     "region": "south",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
-      "2247",
+      "331",
       "2653",
       "5"
     ]
@@ -885,7 +1111,8 @@
     "pf": 337,
     "pa": 321,
     "region": "midwest",
-    "tier": 2,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
       "66",
       "2306",
@@ -904,7 +1131,8 @@
     "pf": 353,
     "pa": 320,
     "region": "midwest",
-    "tier": 2,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
       "2305",
       "158",
@@ -923,11 +1151,12 @@
     "pf": 368,
     "pa": 316,
     "region": "south",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "2247",
       "59",
-      "204"
+      "2440"
     ]
   },
   {
@@ -942,11 +1171,12 @@
     "pf": 255,
     "pa": 403,
     "region": "midwest",
-    "tier": 3,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
       "2006",
       "189",
-      "2623"
+      "193"
     ]
   },
   {
@@ -961,10 +1191,11 @@
     "pf": 276,
     "pa": 317,
     "region": "east",
-    "tier": 2,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
+      "2287",
       "97",
-      "153",
       "2633"
     ]
   },
@@ -980,7 +1211,8 @@
     "pf": 262,
     "pa": 220,
     "region": "south",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
       "333",
       "8",
@@ -999,7 +1231,8 @@
     "pf": 307,
     "pa": 318,
     "region": "east",
-    "tier": 3,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
       "256",
       "197",
@@ -1018,11 +1251,12 @@
     "pf": 325,
     "pa": 360,
     "region": "south",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
       "2348",
-      "2433",
-      "265"
+      "2382",
+      "2433"
     ]
   },
   {
@@ -1037,10 +1271,11 @@
     "pf": 332,
     "pa": 256,
     "region": "south",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
+      "50",
       "309",
-      "344",
       "2572"
     ]
   },
@@ -1056,7 +1291,8 @@
     "pf": 362,
     "pa": 253,
     "region": "east",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "2132",
       "96",
@@ -1075,9 +1311,10 @@
     "pf": 269,
     "pa": 371,
     "region": "south",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
-      "2229",
+      "26",
       "238",
       "98"
     ]
@@ -1094,10 +1331,11 @@
     "pf": 369,
     "pa": 363,
     "region": "east",
-    "tier": 2,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
+      "2084",
       "195",
-      "23",
       "277"
     ]
   },
@@ -1113,10 +1351,11 @@
     "pf": 282,
     "pa": 318,
     "region": "east",
-    "tier": 3,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
       "48",
-      "2199",
+      "2623",
       "258"
     ]
   },
@@ -1132,11 +1371,32 @@
     "pf": 415,
     "pa": 270,
     "region": "south",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "145",
       "2572",
       "5"
+    ]
+  },
+  {
+    "id": "2382",
+    "name": "Mercer Bears",
+    "shortName": "Mercer",
+    "abbreviation": "MER",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2382.png",
+    "state": "GA",
+    "wins": 9,
+    "losses": 3,
+    "pf": 434,
+    "pa": 306,
+    "region": "south",
+    "tier": 2,
+    "subdivision": "fcs",
+    "rivals": [
+      "309",
+      "160",
+      "222"
     ]
   },
   {
@@ -1152,6 +1412,7 @@
     "pa": 166,
     "region": "south",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "2226",
       "52",
@@ -1170,11 +1431,12 @@
     "pf": 326,
     "pa": 286,
     "region": "midwest",
-    "tier": 2,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
       "2132",
-      "195",
-      "218"
+      "2309",
+      "195"
     ]
   },
   {
@@ -1190,6 +1452,7 @@
     "pa": 224,
     "region": "midwest",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "127",
       "87",
@@ -1208,10 +1471,11 @@
     "pf": 295,
     "pa": 359,
     "region": "midwest",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
-      "2117",
       "130",
+      "153",
       "2711"
     ]
   },
@@ -1227,7 +1491,8 @@
     "pf": 279,
     "pa": 281,
     "region": "midwest",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
       "2294",
       "158",
@@ -1246,11 +1511,12 @@
     "pf": 366,
     "pa": 350,
     "region": "south",
-    "tier": 3,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
-      "2348",
       "145",
-      "5"
+      "5",
+      "2729"
     ]
   },
   {
@@ -1265,7 +1531,8 @@
     "pf": 386,
     "pa": 233,
     "region": "midwest",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "8",
       "2305",
@@ -1284,11 +1551,72 @@
     "pf": 305,
     "pa": 340,
     "region": "midwest",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
-      "2084",
-      "2309",
-      "142"
+      "120",
+      "142",
+      "2449"
+    ]
+  },
+  {
+    "id": "149",
+    "name": "Montana Grizzlies",
+    "shortName": "Montana",
+    "abbreviation": "MONT",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/149.png",
+    "state": "MT",
+    "wins": 13,
+    "losses": 1,
+    "pf": 592,
+    "pa": 333,
+    "region": "west",
+    "tier": 1,
+    "subdivision": "fcs",
+    "rivals": [
+      "147",
+      "2571",
+      "218"
+    ]
+  },
+  {
+    "id": "147",
+    "name": "Montana State Bobcats",
+    "shortName": "Montana St",
+    "abbreviation": "MTST",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/147.png",
+    "state": "MT",
+    "wins": 12,
+    "losses": 2,
+    "pf": 523,
+    "pa": 247,
+    "region": "west",
+    "tier": 1,
+    "subdivision": "fcs",
+    "rivals": [
+      "68",
+      "70",
+      "149"
+    ]
+  },
+  {
+    "id": "2449",
+    "name": "North Dakota State Bison",
+    "shortName": "N Dakota St",
+    "abbreviation": "NDSU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2449.png",
+    "state": "ND",
+    "wins": 12,
+    "losses": 1,
+    "pf": 534,
+    "pa": 169,
+    "region": "midwest",
+    "tier": 1,
+    "subdivision": "fcs",
+    "rivals": [
+      "2623",
+      "155",
+      "2571"
     ]
   },
   {
@@ -1303,11 +1631,12 @@
     "pf": 205,
     "pa": 292,
     "region": "midwest",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "356",
       "77",
-      "218"
+      "98"
     ]
   },
   {
@@ -1322,7 +1651,8 @@
     "pf": 362,
     "pa": 346,
     "region": "east",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
       "151",
       "153",
@@ -1342,6 +1672,7 @@
     "pa": 312,
     "region": "east",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "2005",
       "349",
@@ -1360,7 +1691,8 @@
     "pf": 351,
     "pa": 276,
     "region": "midwest",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
       "66",
       "2306",
@@ -1379,11 +1711,32 @@
     "pf": 211,
     "pa": 330,
     "region": "west",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "278",
-      "2439",
-      "238"
+      "338",
+      "2439"
+    ]
+  },
+  {
+    "id": "160",
+    "name": "New Hampshire Wildcats",
+    "shortName": "New Hampshire",
+    "abbreviation": "UNH",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/160.png",
+    "state": "NH",
+    "wins": 8,
+    "losses": 5,
+    "pf": 323,
+    "pa": 297,
+    "region": "east",
+    "tier": 2,
+    "subdivision": "fcs",
+    "rivals": [
+      "2382",
+      "227",
+      "257"
     ]
   },
   {
@@ -1398,7 +1751,8 @@
     "pf": 335,
     "pa": 270,
     "region": "west",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "12",
       "166",
@@ -1417,10 +1771,11 @@
     "pf": 259,
     "pa": 331,
     "region": "west",
-    "tier": 3,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
       "167",
-      "26",
+      "16",
       "2638"
     ]
   },
@@ -1436,11 +1791,32 @@
     "pf": 231,
     "pa": 294,
     "region": "east",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "150",
-      "96",
+      "127",
       "152"
+    ]
+  },
+  {
+    "id": "155",
+    "name": "North Dakota Fighting Hawks",
+    "shortName": "North Dakota",
+    "abbreviation": "UND",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/155.png",
+    "state": "ND",
+    "wins": 8,
+    "losses": 6,
+    "pf": 461,
+    "pa": 278,
+    "region": "midwest",
+    "tier": 3,
+    "subdivision": "fcs",
+    "rivals": [
+      "50",
+      "2449",
+      "233"
     ]
   },
   {
@@ -1456,6 +1832,7 @@
     "pa": 324,
     "region": "midwest",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "2567",
       "326",
@@ -1474,7 +1851,8 @@
     "pf": 270,
     "pa": 251,
     "region": "midwest",
-    "tier": 2,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
       "356",
       "2459",
@@ -1494,6 +1872,7 @@
     "pa": 211,
     "region": "midwest",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "130",
       "2509",
@@ -1513,6 +1892,7 @@
     "pa": 275,
     "region": "midwest",
     "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "276",
       "193",
@@ -1532,6 +1912,7 @@
     "pa": 106,
     "region": "midwest",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "2132",
       "130",
@@ -1551,6 +1932,7 @@
     "pa": 167,
     "region": "midwest",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "2306",
       "197",
@@ -1569,7 +1951,8 @@
     "pf": 170,
     "pa": 400,
     "region": "midwest",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "2335",
       "201",
@@ -1589,10 +1972,11 @@
     "pa": 231,
     "region": "east",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "151",
       "256",
-      "202"
+      "257"
     ]
   },
   {
@@ -1608,10 +1992,11 @@
     "pa": 241,
     "region": "south",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
-      "2050",
       "235",
-      "344"
+      "344",
+      "2655"
     ]
   },
   {
@@ -1627,8 +2012,9 @@
     "pa": 178,
     "region": "west",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
-      "68",
+      "2011",
       "204",
       "264"
     ]
@@ -1645,10 +2031,11 @@
     "pf": 218,
     "pa": 353,
     "region": "west",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
-      "338",
       "2483",
+      "242",
       "265"
     ]
   },
@@ -1664,7 +2051,8 @@
     "pf": 381,
     "pa": 257,
     "region": "east",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
       "194",
       "221",
@@ -1683,7 +2071,8 @@
     "pf": 421,
     "pa": 299,
     "region": "east",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "213",
       "183",
@@ -1702,11 +2091,32 @@
     "pf": 225,
     "pa": 382,
     "region": "midwest",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "356",
       "84",
       "87"
+    ]
+  },
+  {
+    "id": "227",
+    "name": "Rhode Island Rams",
+    "shortName": "Rhode Island",
+    "abbreviation": "URI",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/227.png",
+    "state": "RI",
+    "wins": 11,
+    "losses": 3,
+    "pf": 438,
+    "pa": 296,
+    "region": "east",
+    "tier": 1,
+    "subdivision": "fcs",
+    "rivals": [
+      "160",
+      "41",
+      "2754"
     ]
   },
   {
@@ -1721,11 +2131,32 @@
     "pf": 238,
     "pa": 387,
     "region": "west",
-    "tier": 2,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
-      "9",
       "248",
+      "204",
       "2534"
+    ]
+  },
+  {
+    "id": "257",
+    "name": "Richmond Spiders",
+    "shortName": "Richmond",
+    "abbreviation": "RICH",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/257.png",
+    "state": "VA",
+    "wins": 7,
+    "losses": 5,
+    "pf": 263,
+    "pa": 272,
+    "region": "east",
+    "tier": 3,
+    "subdivision": "fcs",
+    "rivals": [
+      "160",
+      "295",
+      "2729"
     ]
   },
   {
@@ -1740,11 +2171,32 @@
     "pf": 344,
     "pa": 382,
     "region": "east",
-    "tier": 2,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
       "349",
       "2084",
       "213"
+    ]
+  },
+  {
+    "id": "2571",
+    "name": "South Dakota State Jackrabbits",
+    "shortName": "S Dakota St",
+    "abbreviation": "SDST",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2571.png",
+    "state": "SD",
+    "wins": 9,
+    "losses": 5,
+    "pf": 400,
+    "pa": 307,
+    "region": "midwest",
+    "tier": 3,
+    "subdivision": "fcs",
+    "rivals": [
+      "149",
+      "2449",
+      "233"
     ]
   },
   {
@@ -1759,11 +2211,32 @@
     "pf": 395,
     "pa": 248,
     "region": "west",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "248",
       "249",
       "2628"
+    ]
+  },
+  {
+    "id": "16",
+    "name": "Sacramento State Hornets",
+    "shortName": "Sacramento St",
+    "abbreviation": "SAC",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/16.png",
+    "state": "CA",
+    "wins": 7,
+    "losses": 5,
+    "pf": 405,
+    "pa": 315,
+    "region": "west",
+    "tier": 3,
+    "subdivision": "fcs",
+    "rivals": [
+      "166",
+      "6",
+      "302"
     ]
   },
   {
@@ -1778,9 +2251,10 @@
     "pf": 213,
     "pa": 454,
     "region": "west",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
-      "2032",
+      "50",
       "242",
       "326"
     ]
@@ -1797,7 +2271,8 @@
     "pf": 296,
     "pa": 151,
     "region": "west",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "62",
       "23",
@@ -1816,10 +2291,11 @@
     "pf": 257,
     "pa": 390,
     "region": "west",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "278",
-      "276",
+      "2287",
       "21"
     ]
   },
@@ -1835,10 +2311,11 @@
     "pf": 318,
     "pa": 365,
     "region": "south",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
-      "2050",
       "2229",
+      "16",
       "2653"
     ]
   },
@@ -1854,11 +2331,32 @@
     "pf": 272,
     "pa": 265,
     "region": "east",
-    "tier": 3,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
       "2429",
       "228",
-      "2649"
+      "324"
+    ]
+  },
+  {
+    "id": "233",
+    "name": "South Dakota Coyotes",
+    "shortName": "South Dakota",
+    "abbreviation": "SDAK",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/233.png",
+    "state": "SD",
+    "wins": 10,
+    "losses": 5,
+    "pf": 407,
+    "pa": 395,
+    "region": "midwest",
+    "tier": 2,
+    "subdivision": "fcs",
+    "rivals": [
+      "239",
+      "155",
+      "2571"
     ]
   },
   {
@@ -1873,7 +2371,8 @@
     "pf": 516,
     "pa": 280,
     "region": "south",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "2390",
       "2655",
@@ -1892,11 +2391,12 @@
     "pf": 358,
     "pa": 329,
     "region": "south",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
       "2348",
       "235",
-      "245"
+      "2638"
     ]
   },
   {
@@ -1911,7 +2411,8 @@
     "pf": 226,
     "pa": 350,
     "region": "west",
-    "tier": 3,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
       "25",
       "30",
@@ -1930,7 +2431,8 @@
     "pf": 242,
     "pa": 419,
     "region": "east",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "103",
       "2084",
@@ -1949,7 +2451,8 @@
     "pf": 369,
     "pa": 302,
     "region": "midwest",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
       "239",
       "2567",
@@ -1968,11 +2471,12 @@
     "pf": 334,
     "pa": 356,
     "region": "east",
-    "tier": 2,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
-      "193",
-      "2459",
-      "2426"
+      "149",
+      "2426",
+      "222"
     ]
   },
   {
@@ -1988,6 +2492,7 @@
     "pa": 345,
     "region": "south",
     "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "333",
       "96",
@@ -2006,7 +2511,8 @@
     "pf": 355,
     "pa": 237,
     "region": "west",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "201",
       "245",
@@ -2026,10 +2532,11 @@
     "pa": 263,
     "region": "south",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "8",
-      "2572",
-      "251"
+      "251",
+      "277"
     ]
   },
   {
@@ -2044,7 +2551,8 @@
     "pf": 433,
     "pa": 367,
     "region": "west",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
       "249",
       "2534",
@@ -2064,6 +2572,7 @@
     "pa": 142,
     "region": "west",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "239",
       "2628",
@@ -2082,11 +2591,12 @@
     "pf": 379,
     "pa": 146,
     "region": "midwest",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "189",
       "195",
-      "2579"
+      "222"
     ]
   },
   {
@@ -2101,7 +2611,8 @@
     "pf": 316,
     "pa": 318,
     "region": "south",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
       "290",
       "55",
@@ -2121,8 +2632,9 @@
     "pa": 294,
     "region": "south",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
-      "25",
+      "145",
       "58",
       "2433"
     ]
@@ -2139,11 +2651,12 @@
     "pf": 278,
     "pa": 347,
     "region": "midwest",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "249",
       "197",
-      "295"
+      "2754"
     ]
   },
   {
@@ -2158,11 +2671,32 @@
     "pf": 317,
     "pa": 459,
     "region": "south",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "55",
       "235",
       "344"
+    ]
+  },
+  {
+    "id": "302",
+    "name": "UC Davis Aggies",
+    "shortName": "UC Davis",
+    "abbreviation": "UCD",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/302.png",
+    "state": "CA",
+    "wins": 9,
+    "losses": 4,
+    "pf": 421,
+    "pa": 392,
+    "region": "west",
+    "tier": 2,
+    "subdivision": "fcs",
+    "rivals": [
+      "25",
+      "16",
+      "238"
     ]
   },
   {
@@ -2177,11 +2711,12 @@
     "pf": 292,
     "pa": 283,
     "region": "south",
-    "tier": 3,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
       "57",
-      "58",
-      "2636"
+      "256",
+      "58"
     ]
   },
   {
@@ -2196,10 +2731,11 @@
     "pf": 218,
     "pa": 401,
     "region": "west",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "25",
-      "166",
+      "2393",
       "30"
     ]
   },
@@ -2216,9 +2752,10 @@
     "pa": 310,
     "region": "east",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "103",
-      "48",
+      "227",
       "113"
     ]
   },
@@ -2234,9 +2771,10 @@
     "pf": 199,
     "pa": 383,
     "region": "south",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
-      "2226",
+      "2296",
       "309",
       "2655"
     ]
@@ -2253,11 +2791,12 @@
     "pf": 133,
     "pa": 463,
     "region": "east",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "103",
-      "41",
-      "2638"
+      "107",
+      "41"
     ]
   },
   {
@@ -2273,6 +2812,7 @@
     "pa": 375,
     "region": "west",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "68",
       "2440",
@@ -2292,6 +2832,7 @@
     "pa": 269,
     "region": "west",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "87",
       "24",
@@ -2310,11 +2851,12 @@
     "pf": 280,
     "pa": 365,
     "region": "west",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "167",
       "166",
-      "113"
+      "2572"
     ]
   },
   {
@@ -2329,11 +2871,12 @@
     "pf": 405,
     "pa": 355,
     "region": "west",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
+      "231",
       "248",
-      "326",
-      "2116"
+      "326"
     ]
   },
   {
@@ -2349,6 +2892,7 @@
     "pa": 224,
     "region": "west",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "9",
       "252",
@@ -2367,7 +2911,8 @@
     "pf": 381,
     "pa": 339,
     "region": "west",
-    "tier": 2,
+    "tier": 3,
+    "subdivision": "fbs",
     "rivals": [
       "252",
       "68",
@@ -2387,10 +2932,31 @@
     "pa": 263,
     "region": "south",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "2393",
-      "2440",
-      "2633"
+      "2633",
+      "302"
+    ]
+  },
+  {
+    "id": "222",
+    "name": "Villanova Wildcats",
+    "shortName": "Villanova",
+    "abbreviation": "VILL",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/222.png",
+    "state": "PA",
+    "wins": 12,
+    "losses": 2,
+    "pf": 429,
+    "pa": 284,
+    "region": "east",
+    "tier": 1,
+    "subdivision": "fcs",
+    "rivals": [
+      "2382",
+      "218",
+      "2649"
     ]
   },
   {
@@ -2406,6 +2972,7 @@
     "pa": 267,
     "region": "east",
     "tier": 1,
+    "subdivision": "fbs",
     "rivals": [
       "120",
       "259",
@@ -2424,11 +2991,12 @@
     "pf": 257,
     "pa": 362,
     "region": "east",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
-      "256",
       "2335",
-      "258"
+      "258",
+      "2729"
     ]
   },
   {
@@ -2443,7 +3011,8 @@
     "pf": 307,
     "pa": 237,
     "region": "midwest",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "2117",
       "2199",
@@ -2462,7 +3031,8 @@
     "pf": 322,
     "pa": 258,
     "region": "east",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "150",
       "152",
@@ -2481,7 +3051,8 @@
     "pf": 443,
     "pa": 243,
     "region": "west",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
       "2483",
       "24",
@@ -2500,9 +3071,10 @@
     "pf": 259,
     "pa": 242,
     "region": "west",
-    "tier": 2,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
-      "309",
+      "70",
       "204",
       "264"
     ]
@@ -2519,11 +3091,12 @@
     "pf": 261,
     "pa": 370,
     "region": "east",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
-      "84",
       "276",
-      "221"
+      "221",
+      "245"
     ]
   },
   {
@@ -2538,11 +3111,32 @@
     "pf": 357,
     "pa": 281,
     "region": "east",
-    "tier": 1,
+    "tier": 2,
+    "subdivision": "fbs",
     "rivals": [
-      "2006",
       "97",
-      "2393"
+      "2393",
+      "2459"
+    ]
+  },
+  {
+    "id": "2729",
+    "name": "William & Mary Tribe",
+    "shortName": "William & Mary",
+    "abbreviation": "W&M",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2729.png",
+    "state": "VA",
+    "wins": 7,
+    "losses": 5,
+    "pf": 354,
+    "pa": 308,
+    "region": "east",
+    "tier": 3,
+    "subdivision": "fcs",
+    "rivals": [
+      "344",
+      "257",
+      "259"
     ]
   },
   {
@@ -2557,7 +3151,8 @@
     "pf": 154,
     "pa": 259,
     "region": "midwest",
-    "tier": 3,
+    "tier": 5,
+    "subdivision": "fbs",
     "rivals": [
       "2294",
       "135",
@@ -2576,11 +3171,32 @@
     "pf": 192,
     "pa": 246,
     "region": "west",
-    "tier": 3,
+    "tier": 4,
+    "subdivision": "fbs",
     "rivals": [
       "2005",
       "36",
       "328"
+    ]
+  },
+  {
+    "id": "2754",
+    "name": "Youngstown State Penguins",
+    "shortName": "Youngstown St",
+    "abbreviation": "YSU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2754.png",
+    "state": "OH",
+    "wins": 8,
+    "losses": 5,
+    "pf": 476,
+    "pa": 403,
+    "region": "midwest",
+    "tier": 3,
+    "subdivision": "fcs",
+    "rivals": [
+      "2296",
+      "227",
+      "202"
     ]
   }
 ]

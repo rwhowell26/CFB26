@@ -14,26 +14,29 @@ import {
 } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import { useState } from "react";
-import { REGIONS, TIER_META, getTeam, recordLabel } from "@/lib/teams";
-import { teamsIn } from "@/lib/rankings";
+import { nextEmptyTier, teamsIn, tiersInRegion } from "@/lib/rankings";
+import { REGIONS, TIER_SIZE, getTeam, recordLabel, tierName } from "@/lib/teams";
 import type { Assignment, RegionId, Team, TierId } from "@/lib/types";
 
 function DropColumn({
   region,
   tier,
   teams,
+  emptyLabel,
 }: {
   region: RegionId;
   tier: TierId;
   teams: Team[];
+  emptyLabel?: string;
 }) {
   const id = `${region}:${tier}`;
   const { setNodeRef, isOver } = useDroppable({ id });
+  const countOk = teams.length === TIER_SIZE || (teams.length === 0 && emptyLabel);
   return (
-    <section ref={setNodeRef} className={`tier-bucket ${isOver ? "is-over" : ""}`}>
+    <section ref={setNodeRef} className={`tier-bucket ${isOver ? "is-over" : ""} ${countOk ? "" : "is-warn"}`}>
       <header>
-        <h3>{TIER_META[tier].name}</h3>
-        <span>{teams.length} teams</span>
+        <h3>{emptyLabel ?? tierName(tier)}</h3>
+        <span>{teams.length}/{TIER_SIZE}</span>
       </header>
       <div className="tier-list">
         {teams.map((team) => (
@@ -50,7 +53,7 @@ function TeamCard({ team }: { team: Team }) {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={team.logo} alt="" width={26} height={26} />
       <div>
-        <strong>{team.shortName}</strong>
+        <strong>{team.shortName}{team.subdivision === "fcs" ? " · FCS" : ""}</strong>
         <span>{recordLabel(team)} · {team.state}</span>
       </div>
     </article>
@@ -83,8 +86,7 @@ export function RegionsTab({
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 6 } }));
 
   const onDragStart = (event: DragStartEvent) => {
-    const teamId = String(event.active.id);
-    setActive(getTeam(teamId));
+    setActive(getTeam(String(event.active.id)));
   };
 
   const onDragEnd = (event: DragEndEvent) => {
@@ -92,17 +94,17 @@ export function RegionsTab({
     const overId = event.over?.id;
     if (!overId) return;
     const [region, tierRaw] = String(overId).split(":");
-    const tier = Number(tierRaw) as TierId;
-    if (!region || ![1, 2, 3].includes(tier)) return;
+    const tier = Number(tierRaw);
+    if (!region || !Number.isFinite(tier) || tier < 1) return;
     onMove(String(event.active.id), region as RegionId, tier);
   };
 
   return (
     <div className="stack">
       <p className="lede">
-        Conferences are gone. Drag any team into a new region or tier — the rest of the model
-        (schedules, rankings, playoff) updates immediately. Starting placement is geographic,
-        with tiers split by 2025 record inside each region.
+        Drag any team into a new region or tier. Each tier is built for 8 teams so the group
+        plays a full round-robin. Regions can have different numbers of tiers — drop a team
+        onto “New tier” to add one. Gold warning means that bucket is not at 8 yet.
       </p>
       <DndContext
         sensors={sensors}
@@ -111,23 +113,33 @@ export function RegionsTab({
         onDragEnd={onDragEnd}
       >
         <div className="region-grid">
-          {REGIONS.map((region) => (
-            <article key={region.id} className="region-column" style={{ ["--accent" as string]: region.accent }}>
-              <header className="region-head">
-                <h2>{region.name}</h2>
-                <p>{region.blurb}</p>
-                <strong>{teamsIn(assignment, region.id).length} teams</strong>
-              </header>
-              {([1, 2, 3] as TierId[]).map((tier) => (
+          {REGIONS.map((region) => {
+            const tiers = tiersInRegion(assignment, region.id);
+            const extra = nextEmptyTier(assignment, region.id);
+            return (
+              <article key={region.id} className="region-column" style={{ ["--accent" as string]: region.accent }}>
+                <header className="region-head">
+                  <h2>{region.name}</h2>
+                  <p>{region.blurb}</p>
+                  <strong>{teamsIn(assignment, region.id).length} teams · {tiers.length} tiers</strong>
+                </header>
+                {tiers.map((tier) => (
+                  <DropColumn
+                    key={tier}
+                    region={region.id}
+                    tier={tier}
+                    teams={teamsIn(assignment, region.id, tier)}
+                  />
+                ))}
                 <DropColumn
-                  key={tier}
                   region={region.id}
-                  tier={tier}
-                  teams={teamsIn(assignment, region.id, tier)}
+                  tier={extra}
+                  teams={[]}
+                  emptyLabel={`New ${tierName(extra)}`}
                 />
-              ))}
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
         <DragOverlay>
           {active ? <TeamCard team={active} /> : null}

@@ -1,31 +1,44 @@
 import { useCallback, useSyncExternalStore } from "react";
-import { defaultAssignment } from "./teams";
-import type { Assignment } from "./types";
+import { defaultAssignment, defaultRivals } from "./teams";
+import type { Assignment, RivalMap } from "./types";
 
-const KEY = "cfb26-schedule-model-v1";
+const KEY = "cfb26-schedule-model-v2";
+
+export type ModelState = {
+  assignment: Assignment;
+  rivals: RivalMap;
+};
+
 const listeners = new Set<() => void>();
-let clientCache: Assignment | null = null;
+let clientCache: ModelState | null = null;
 
 function emit() {
   listeners.forEach((listener) => listener());
 }
 
-export function loadAssignment(): Assignment {
-  const fallback = defaultAssignment();
-  if (typeof window === "undefined") return fallback;
+function fallback(): ModelState {
+  return { assignment: defaultAssignment(), rivals: defaultRivals() };
+}
+
+export function loadState(): ModelState {
+  const base = fallback();
+  if (typeof window === "undefined") return base;
   try {
     const raw = window.localStorage.getItem(KEY);
-    if (!raw) return fallback;
-    const parsed = JSON.parse(raw) as Assignment;
-    return { ...fallback, ...parsed };
+    if (!raw) return base;
+    const parsed = JSON.parse(raw) as Partial<ModelState>;
+    return {
+      assignment: { ...base.assignment, ...parsed.assignment },
+      rivals: { ...base.rivals, ...parsed.rivals },
+    };
   } catch {
-    return fallback;
+    return base;
   }
 }
 
-export function saveAssignment(assignment: Assignment) {
+function saveState(state: ModelState) {
   if (typeof window === "undefined") return;
-  window.localStorage.setItem(KEY, JSON.stringify(assignment));
+  window.localStorage.setItem(KEY, JSON.stringify(state));
 }
 
 function subscribe(listener: () => void) {
@@ -33,26 +46,32 @@ function subscribe(listener: () => void) {
   return () => listeners.delete(listener);
 }
 
-function getClientSnapshot(): Assignment {
-  if (!clientCache) clientCache = loadAssignment();
+function getClientSnapshot(): ModelState {
+  if (!clientCache) clientCache = loadState();
   return clientCache;
 }
 
-function getServerSnapshot(): Assignment {
-  return defaultAssignment();
-}
-
-export function writeAssignment(next: Assignment | ((prev: Assignment) => Assignment)) {
+function writeState(next: ModelState | ((prev: ModelState) => ModelState)) {
   const prev = getClientSnapshot();
   clientCache = typeof next === "function" ? next(prev) : next;
-  saveAssignment(clientCache);
+  saveState(clientCache);
   emit();
 }
 
-export function useAssignment() {
-  const assignment = useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);
+export function useModel() {
+  const state = useSyncExternalStore(subscribe, getClientSnapshot, fallback);
   const setAssignment = useCallback((next: Assignment | ((prev: Assignment) => Assignment)) => {
-    writeAssignment(next);
+    writeState((prev) => ({
+      ...prev,
+      assignment: typeof next === "function" ? next(prev.assignment) : next,
+    }));
   }, []);
-  return [assignment, setAssignment] as const;
+  const setRivals = useCallback((next: RivalMap | ((prev: RivalMap) => RivalMap)) => {
+    writeState((prev) => ({
+      ...prev,
+      rivals: typeof next === "function" ? next(prev.rivals) : next,
+    }));
+  }, []);
+  const reset = useCallback(() => writeState(fallback()), []);
+  return { ...state, setAssignment, setRivals, reset };
 }

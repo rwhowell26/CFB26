@@ -1,11 +1,27 @@
 import teamsJson from "@/data/teams.json";
-import type { Assignment, RegionId, Team, TierId } from "./types";
+import type { Assignment, RegionId, RivalMap, Team, TierId } from "./types";
 
 export const TEAMS: Team[] = teamsJson as Team[];
 
 export const TEAM_BY_ID: Record<string, Team> = Object.fromEntries(
   TEAMS.map((team) => [team.id, team]),
 );
+
+export const TIER_SIZE = 8;
+export const PLAYOFF_TIERS = 3;
+export const SEASON_WEEKS = 12;
+export const MAX_GAMES = 12;
+export const MAX_MOVEMENT = 3;
+
+const ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
+
+export function tierName(tier: TierId): string {
+  return `Tier ${ROMAN[tier] ?? tier}`;
+}
+
+export function tierShort(tier: TierId): string {
+  return ROMAN[tier] ?? String(tier);
+}
 
 export const REGIONS: Array<{
   id: RegionId;
@@ -32,7 +48,7 @@ export const REGIONS: Array<{
     id: "midwest",
     name: "Midwest",
     short: "Midwest",
-    blurb: "Great Lakes, Plains, Oklahoma, and North Texas / Big 12 Texas",
+    blurb: "Great Lakes, Plains, Oklahoma, and North Texas",
     accent: "#f59e0b",
   },
   {
@@ -44,31 +60,14 @@ export const REGIONS: Array<{
   },
 ];
 
-export const TIER_META: Record<
-  TierId,
-  { name: string; short: string; detail: string }
-> = {
-  1: {
-    name: "Tier I",
-    short: "I",
-    detail: "Top band in the region — extra playoff access",
-  },
-  2: {
-    name: "Tier II",
-    short: "II",
-    detail: "Middle band — autobid for the champion",
-  },
-  3: {
-    name: "Tier III",
-    short: "III",
-    detail: "Development band — still has an autobid path",
-  },
-};
-
 export function defaultAssignment(): Assignment {
   return Object.fromEntries(
-    TEAMS.map((team) => [team.id, { region: team.region, tier: team.tier as TierId }]),
+    TEAMS.map((team) => [team.id, { region: team.region, tier: team.tier }]),
   );
+}
+
+export function defaultRivals(): RivalMap {
+  return Object.fromEntries(TEAMS.map((team) => [team.id, [...team.rivals]]));
 }
 
 export function winPct(team: Team): number {
@@ -93,4 +92,8 @@ export function getTeam(id: string): Team {
   const team = TEAM_BY_ID[id];
   if (!team) throw new Error(`Unknown team id ${id}`);
   return team;
+}
+
+export function regionName(id: RegionId): string {
+  return REGIONS.find((region) => region.id === id)?.name ?? id;
 }

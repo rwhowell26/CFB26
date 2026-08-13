@@ -2,7 +2,7 @@
 
 import { TeamChip } from "@/components/TeamChip";
 import { buildPlayoffBracket, buildPlayoffField, playoffSummary } from "@/lib/playoff";
-import { REGIONS, TIER_META, getTeam, recordLabel } from "@/lib/teams";
+import { getTeam, recordLabel, regionName, tierName } from "@/lib/teams";
 import type { Assignment, PlayoffGame } from "@/lib/types";
 
 const ROUNDS: PlayoffGame["round"][] = ["first", "second", "quarter", "semi", "final"];
@@ -15,10 +15,9 @@ export function PlayoffTab({ assignment }: { assignment: Assignment }) {
   return (
     <div className="stack">
       <p className="lede">
-        A 24-team playoff with a path from every tier. Each of the 12 region-tiers gets an
-        autobid for its champion. Each Tier I group also locks in its runner-up, so the top
-        band gets eight automatic berths to the lower tiers&apos; four. The last eight spots are
-        at-large. Seeds 1–8 sit out the first round.
+        A 24-team playoff made entirely of autobids. The champion and runner-up of each
+        region’s Tiers I, II, and III (4 × 3 × 2) are in. Tiers IV and below play for
+        promotion, not the national bracket. Seeds 1–8 receive a first-round bye.
       </p>
       <div className="stat-row">
         <div className="stat"><b>{summary.fieldSize}</b><span>team field</span></div>
@@ -26,12 +25,11 @@ export function PlayoffTab({ assignment }: { assignment: Assignment }) {
         <div className="stat"><b>{summary.atLarge}</b><span>at-large</span></div>
         <div className="stat"><b>{summary.byes}</b><span>first-round byes</span></div>
       </div>
-
       <div className="split playoff-split">
         <section className="panel">
           <header className="panel-head">
             <h2>Field</h2>
-            <span>Projected from 2025 records</span>
+            <span>All autobids · projected from 2025 records</span>
           </header>
           <ol className="seed-list">
             {field.map((entry) => {
@@ -42,9 +40,9 @@ export function PlayoffTab({ assignment }: { assignment: Assignment }) {
                   <span className={`seed ${entry.bye ? "is-bye" : ""}`}>{entry.seed}</span>
                   <TeamChip
                     team={team}
-                    extra={`${recordLabel(team)} · ${REGIONS.find((region) => region.id === place.region)?.name} ${TIER_META[place.tier].short}`}
+                    extra={`${recordLabel(team)} · ${regionName(place.region)} ${tierName(place.tier)}`}
                   />
-                  <em className={`bid bid-${entry.bid}`}>
+                  <em className="bid">
                     {entry.bye ? "Bye · " : ""}
                     {entry.bidLabel}
                   </em>

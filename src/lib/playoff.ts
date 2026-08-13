@@ -1,6 +1,6 @@
-import { teamsIn } from "./rankings";
-import { compareRecords, getTeam, REGIONS, TEAMS } from "./teams";
-import type { Assignment, PlayoffGame, PlayoffTeam, RegionId, Team, TierId } from "./types";
+import { teamsIn, tiersInRegion } from "./rankings";
+import { compareRecords, getTeam, PLAYOFF_TIERS, regionName, REGIONS, tierName } from "./teams";
+import type { Assignment, PlayoffGame, PlayoffTeam, Team } from "./types";
 
 const FIELD_SIZE = 24;
 const BYES = 8;
@@ -11,69 +11,43 @@ function projectedWinner(aId: string | null, bId: string | null): string | null 
   return compareRecords(getTeam(aId), getTeam(bId)) < 0 ? aId : bId;
 }
 
-function seedLabel(seed: number, bye: boolean): string {
-  return bye ? `${seed} (bye)` : String(seed);
+export function playoffTeamsInGroup(group: Team[], tier: number): Team[] {
+  if (tier > PLAYOFF_TIERS) return [];
+  return group.slice(0, 2);
 }
 
 export function buildPlayoffField(assignment: Assignment): PlayoffTeam[] {
-  const selected = new Map<string, PlayoffTeam>();
-
-  const take = (
-    team: Team,
-    bid: PlayoffTeam["bid"],
-    bidLabel: string,
-  ) => {
-    if (selected.has(team.id) || selected.size >= FIELD_SIZE) return;
-    selected.set(team.id, {
-      teamId: team.id,
-      seed: 0,
-      bid,
-      bidLabel,
-      bye: false,
-    });
-  };
+  const selected: PlayoffTeam[] = [];
 
   for (const region of REGIONS) {
-    for (const tier of [1, 2, 3] as TierId[]) {
+    for (const tier of tiersInRegion(assignment, region.id)) {
+      if (tier > PLAYOFF_TIERS) continue;
       const group = teamsIn(assignment, region.id, tier);
-      if (!group.length) continue;
-      take(
-        group[0],
-        "tier-champion",
-        `${region.name} Tier ${tier} champion`,
-      );
-      if (tier === 1 && group[1]) {
-        take(
-          group[1],
-          "tier1-runner-up",
-          `${region.name} Tier I runner-up`,
-        );
-      }
+      const bids = playoffTeamsInGroup(group, tier);
+      bids.forEach((team, index) => {
+        selected.push({
+          teamId: team.id,
+          seed: 0,
+          bid: index === 0 ? "tier-champion" : "tier-runner-up",
+          bidLabel: `${regionName(region.id)} ${tierName(tier)} ${index === 0 ? "champion" : "runner-up"}`,
+          bye: false,
+        });
+      });
     }
   }
 
-  const remaining = TEAMS.filter((team) => !selected.has(team.id)).sort(compareRecords);
-  for (const team of remaining) {
-    if (selected.size >= FIELD_SIZE) break;
-    const place = assignment[team.id];
-    take(team, "at-large", `At-large · ${titleRegion(place.region)} Tier ${place.tier}`);
-  }
-
-  const ordered = [...selected.values()].sort((a, b) =>
-    compareRecords(getTeam(a.teamId), getTeam(b.teamId)),
-  );
-
-  return ordered.map((entry, index) => ({
-    ...entry,
-    seed: index + 1,
-    bye: index < BYES,
-  }));
+  return selected
+    .sort((a, b) => compareRecords(getTeam(a.teamId), getTeam(b.teamId)))
+    .map((entry, index) => ({
+      ...entry,
+      seed: index + 1,
+      bye: index < BYES,
+    }));
 }
 
 export function buildPlayoffBracket(field: PlayoffTeam[]): PlayoffGame[] {
   const bySeed = new Map(field.map((entry) => [entry.seed, entry]));
   const games: PlayoffGame[] = [];
-
   const firstRoundWinners: Array<{ seed: number; teamId: string | null }> = [];
 
   for (let high = 9; high <= 16; high += 1) {
@@ -90,8 +64,8 @@ export function buildPlayoffBracket(field: PlayoffTeam[]): PlayoffGame[] {
       teamAId: a?.teamId ?? null,
       teamBId: b?.teamId ?? null,
       projectedWinnerId: winner,
-      labelA: seedLabel(high, false),
-      labelB: seedLabel(low, false),
+      labelA: String(high),
+      labelB: String(low),
     });
     firstRoundWinners.push({ seed: high, teamId: winner });
   }
@@ -100,7 +74,6 @@ export function buildPlayoffBracket(field: PlayoffTeam[]): PlayoffGame[] {
   for (let seed = 1; seed <= 8; seed += 1) {
     const byeTeam = bySeed.get(seed);
     const incoming = firstRoundWinners[8 - seed];
-    const winner = projectedWinner(byeTeam?.teamId ?? null, incoming.teamId);
     second.push({
       id: `r16-${seed}`,
       round: "second",
@@ -109,8 +82,8 @@ export function buildPlayoffBracket(field: PlayoffTeam[]): PlayoffGame[] {
       seedB: incoming.seed,
       teamAId: byeTeam?.teamId ?? null,
       teamBId: incoming.teamId,
-      projectedWinnerId: winner,
-      labelA: seedLabel(seed, true),
+      projectedWinnerId: projectedWinner(byeTeam?.teamId ?? null, incoming.teamId),
+      labelA: `${seed} (bye)`,
       labelB: `W ${incoming.seed}/${FIELD_SIZE + 1 - incoming.seed}`,
     });
   }
@@ -122,7 +95,7 @@ export function buildPlayoffBracket(field: PlayoffTeam[]): PlayoffGame[] {
     [2, 7],
     [3, 6],
   ];
-  const quarters: PlayoffGame[] = quarterSeeds.map(([high, low]) => {
+  const quarters = quarterSeeds.map(([high, low]) => {
     const a = second.find((game) => game.seedA === high);
     const b = second.find((game) => game.seedA === low);
     return {
@@ -140,7 +113,7 @@ export function buildPlayoffBracket(field: PlayoffTeam[]): PlayoffGame[] {
   });
   games.push(...quarters);
 
-  const semis: PlayoffGame[] = [
+  const semis = [
     [quarters[0], quarters[1], 1, 4],
     [quarters[2], quarters[3], 2, 3],
   ].map(([a, b, seedA, seedB], index) => ({
@@ -176,12 +149,11 @@ export function buildPlayoffBracket(field: PlayoffTeam[]): PlayoffGame[] {
   return games;
 }
 
-function titleRegion(region: RegionId): string {
-  return REGIONS.find((item) => item.id === region)?.name ?? region;
-}
-
 export function playoffSummary(field: PlayoffTeam[]) {
-  const autobids = field.filter((entry) => entry.bid !== "at-large").length;
-  const byes = field.filter((entry) => entry.bye).length;
-  return { autobids, atLarge: field.length - autobids, byes, fieldSize: field.length };
+  return {
+    autobids: field.length,
+    atLarge: 0,
+    byes: field.filter((entry) => entry.bye).length,
+    fieldSize: field.length,
+  };
 }
