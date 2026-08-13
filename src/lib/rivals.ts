@@ -1,4 +1,4 @@
-import { defaultRivals, TEAMS } from "./teams";
+import { defaultRivals, MAX_RIVALS, TEAMS } from "./teams";
 import type { RivalMap } from "./types";
 
 export function rivalsOf(rivals: RivalMap, teamId: string): string[] {
@@ -20,13 +20,19 @@ function link(map: RivalMap, a: string, b: string) {
   if (!(map[b] ?? []).includes(a)) map[b] = [...(map[b] ?? []), a];
 }
 
-/** Replace one protected rival. Keeps lists symmetric and repairs leftover teams when possible. */
+function capLists(map: RivalMap) {
+  for (const team of TEAMS) {
+    map[team.id] = (map[team.id] ?? []).slice(0, MAX_RIVALS);
+  }
+}
+
+/** Replace or fill one protected-rival slot. Lists stay symmetric; 0–3 rivals is allowed. */
 export function setRival(rivals: RivalMap, teamId: string, slot: number, newRivalId: string): RivalMap {
   if (teamId === newRivalId) return rivals;
   const next = clone({ ...defaultRivals(), ...rivals });
   const current = [...(next[teamId] ?? [])];
-  while (current.length < 3) current.push("");
-  const old = current[slot];
+  while (current.length < MAX_RIVALS) current.push("");
+  const old = current[slot] ?? "";
   if (old === newRivalId) return rivals;
 
   const already = current.indexOf(newRivalId);
@@ -34,34 +40,31 @@ export function setRival(rivals: RivalMap, teamId: string, slot: number, newRiva
     current[already] = old;
     current[slot] = newRivalId;
     next[teamId] = current.filter(Boolean);
+    capLists(next);
     return next;
   }
 
   if (old) unlink(next, teamId, old);
 
-  let dropped: string | undefined;
   const bList = [...(next[newRivalId] ?? [])];
-  if (bList.length >= 3) {
-    dropped = bList[bList.length - 1];
-    unlink(next, newRivalId, dropped);
+  if (bList.length >= MAX_RIVALS) {
+    const dropped = bList.find((id) => id !== teamId) ?? bList[bList.length - 1];
+    if (dropped) unlink(next, newRivalId, dropped);
   }
 
   current[slot] = newRivalId;
-  next[teamId] = current.filter(Boolean).slice(0, 3);
+  next[teamId] = current.filter(Boolean).slice(0, MAX_RIVALS);
   link(next, teamId, newRivalId);
-  next[newRivalId] = (next[newRivalId] ?? []).slice(0, 3);
+  capLists(next);
+  return next;
+}
 
-  if (old && dropped && old !== dropped) {
-    const oldList = next[old] ?? [];
-    const dropList = next[dropped] ?? [];
-    if (oldList.length < 3 && dropList.length < 3 && !oldList.includes(dropped)) {
-      link(next, old, dropped);
-    }
-  }
-
-  for (const team of TEAMS) {
-    next[team.id] = (next[team.id] ?? team.rivals).slice(0, 3);
-  }
-
+/** Drop a protected rival without filling the slot. The other club also loses the pairing. */
+export function clearRival(rivals: RivalMap, teamId: string, slot: number): RivalMap {
+  const next = clone({ ...defaultRivals(), ...rivals });
+  const old = (next[teamId] ?? [])[slot];
+  if (!old) return rivals;
+  unlink(next, teamId, old);
+  capLists(next);
   return next;
 }

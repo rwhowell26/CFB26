@@ -180,7 +180,7 @@ main { min-height: 100vh; }
 
 .tier-list { display: grid; gap: 0.35rem; }
 
-.drag-card, .chip, .team-row, .rank-list li, .seed-list li {
+.drag-card, .chip, .team-row, .rank-list li, .seed-list li, .game-list li {
   display: flex;
   gap: 0.55rem;
   align-items: center;
@@ -256,11 +256,30 @@ main { min-height: 100vh; }
 .chip-compact img { width: 18px; height: 18px; }
 
 .rival-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.6rem; }
+.rival-card-wrap { position: relative; min-width: 0; }
 .rival-card {
   padding: 0.8rem;
   border: 1px solid var(--line);
   border-radius: 12px;
   background: rgba(61, 154, 95, 0.08);
+}
+.rival-clear {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.3rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel);
+  cursor: pointer;
+  line-height: 1;
+  font-size: 1rem;
+}
+.game-list li.is-bye-week {
+  background: rgba(61, 154, 95, 0.08);
+  border-radius: 10px;
+  padding: 0.45rem 0.4rem;
 }
 
 .freq-table { width: 100%; border-collapse: collapse; }

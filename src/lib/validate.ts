@@ -1,7 +1,19 @@
 import { buildPlayoffField } from "./playoff";
 import { teamsIn, tiersInRegion } from "./rankings";
+import { clearRival } from "./rivals";
 import { allSchedules, roundRobinRounds } from "./schedule";
-import { defaultAssignment, defaultRivals, REGIONS, TEAMS, TIER_SIZE } from "./teams";
+import {
+  defaultAssignment,
+  defaultRivals,
+  LEAGUE_BYE_WEEK,
+  MAX_GAMES,
+  MAX_RIVALS,
+  REGIONS,
+  RR_START_WEEK,
+  SEASON_WEEKS,
+  TEAMS,
+  TIER_SIZE,
+} from "./teams";
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);
@@ -29,7 +41,7 @@ export function validateModel() {
   }
 
   for (const team of TEAMS) {
-    assert(rivals[team.id].length === 3, `${team.abbreviation} rival count`);
+    assert(rivals[team.id].length <= MAX_RIVALS, `${team.abbreviation} has more than ${MAX_RIVALS} rivals`);
     for (const rivalId of rivals[team.id]) {
       assert(rivals[rivalId].includes(team.id), `${team.abbreviation} rival not symmetric`);
     }
@@ -45,17 +57,53 @@ export function validateModel() {
     const games = schedules[team.id].games;
     const ids = games.map((game) => game.opponentId);
     assert(new Set(ids).size === ids.length, `${team.abbreviation} duplicate opponent`);
-    assert(games.length <= 12, `${team.abbreviation} has ${games.length} games`);
-    assert(games.length >= 7, `${team.abbreviation} has only ${games.length} games`);
+    assert(games.length === MAX_GAMES, `${team.abbreviation} has ${games.length} games`);
     const weeks = games.map((game) => game.week);
     assert(new Set(weeks).size === weeks.length, `${team.abbreviation} two games in one week`);
+    const missing = Array.from({ length: SEASON_WEEKS }, (_, i) => i + 1).filter(
+      (week) => !weeks.includes(week),
+    );
+    assert(missing.length === 1, `${team.abbreviation} bye count ${missing.length}`);
+    assert(missing[0] === LEAGUE_BYE_WEEK, `${team.abbreviation} bye is week ${missing[0]}`);
     for (const game of games) {
       const reverse = schedules[game.opponentId].games.find((item) => item.opponentId === team.id);
       assert(reverse, `${team.abbreviation} vs ${game.opponentId} is one-way`);
       assert(reverse.home !== game.home, `${team.abbreviation} home/away mismatch`);
       assert(reverse.week === game.week, `${team.abbreviation} week mismatch`);
+      const sameTier =
+        assignment[team.id].region === assignment[game.opponentId].region &&
+        assignment[team.id].tier === assignment[game.opponentId].tier;
+      if (game.kind === "in-tier" || (game.kind === "rival" && sameTier)) {
+        assert(game.week >= RR_START_WEEK, `${team.abbreviation} round-robin in week ${game.week}`);
+      } else {
+        assert(game.week < LEAGUE_BYE_WEEK, `${team.abbreviation} out-of-tier in week ${game.week}`);
+      }
     }
   }
+
+  let sparse = defaultRivals();
+  const stripped = TEAMS[0];
+  for (let slot = MAX_RIVALS - 1; slot >= 0; slot -= 1) {
+    sparse = clearRival(sparse, stripped.id, slot);
+  }
+  assert(sparse[stripped.id].length === 0, "clearing rivals should allow 0 protected games");
+  const sparseSchedules = allSchedules(assignment, sparse);
+  const sparseGames = sparseSchedules[stripped.id].games;
+  assert(sparseGames.length === MAX_GAMES, "fewer rivals still fill a 12-game slate");
+  assert(
+    sparseGames.some((game) => game.kind === "cross-tier"),
+    "open slots should fill with same-region, different-tier clubs",
+  );
+  assert(
+    sparseGames.every((game) => {
+      if (game.kind !== "cross-tier") return true;
+      return (
+        assignment[game.opponentId].region === assignment[stripped.id].region &&
+        assignment[game.opponentId].tier !== assignment[stripped.id].tier
+      );
+    }),
+    "cross-tier fillers stay in-region and out of the same tier",
+  );
 
   const field = buildPlayoffField(assignment);
   assert(field.length === 24, `playoff field ${field.length}`);

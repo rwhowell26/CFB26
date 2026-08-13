@@ -29,7 +29,7 @@ export type Placement = {
 export type Assignment = Record<string, Placement>;
 export type RivalMap = Record<string, string[]>;
 
-export type GameKind = "rival" | "in-tier" | "inter-region";
+export type GameKind = "rival" | "in-tier" | "inter-region" | "cross-tier";
 
 export type ScheduledGame = {
   opponentId: string;

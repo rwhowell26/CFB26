@@ -1,15 +1,16 @@
 # CFB26 regional schedule model
 
-A conference-free map: **four regions**, **8-team tiers** (as many as a region needs), protected rivals, a 12-week calendar, promotion/relegation, and a **24-team all-autobid playoff** for Tiers I–III.
+A conference-free map: **four regions**, **8-team tiers** (as many as a region needs), optional protected rivals, a 13-week calendar with a league-wide bye, promotion/relegation, and a **24-team all-autobid playoff** for Tiers I–III.
 
 The pool is **160 clubs**. Starting tiers use **2021–2025 records**. Former FCS programs cannot occupy Tiers I–II. 2025 records still drive in-season rankings, the playoff, and movement.
 
-## Schedule (max 12 games, no 13th)
+## Schedule (12 games + 1 bye, no 13th contest)
 
 - Full **round-robin inside the 8-team tier** (7 games). A protected rival in that tier counts toward those 7.
-- Any remaining protected rivals are still played every year.
+- Teams may have **0–3 protected rivals**. Remaining rivals outside the tier are still played every year.
 - **One balanced crossover** from each of the other three regions (strong vs weak mixed with same-band and offset pairings so SOS is closer to even).
-- Cap at 12. Weeks 1–7 are the round-robins; leftovers fill weeks 8–12.
+- Open slots fill with **other clubs in the same region, different tier**.
+- **Weeks 1–5:** games outside the tier. **Week 6:** bye for every team. **Weeks 7–13:** the round-robin.
 
 ## Playoff (24, all autobids)
 

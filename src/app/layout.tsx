@@ -17,7 +17,7 @@ const sans = Source_Sans_3({
 export const metadata: Metadata = {
   title: "CFB26 Regional Schedule Model",
   description:
-    "Four-region, three-tier college football realignment with protected rivals, standing-based schedules, and a 24-team playoff.",
+    "Four-region college football realignment with 8-team tiers, optional protected rivals, a 13-week calendar with a bye, and a 24-team playoff.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

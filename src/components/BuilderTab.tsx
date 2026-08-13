@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { TeamChip, TeamRow, useTeamSearch } from "@/components/TeamChip";
 import { tenYearFrequencies } from "@/lib/schedule";
-import { rivalsOf, setRival } from "@/lib/rivals";
+import { rivalsOf, setRival, clearRival } from "@/lib/rivals";
 import { TEAMS, getTeam, recordLabel, regionName, tierName } from "@/lib/teams";
 import type { Assignment, RivalMap } from "@/lib/types";
 
@@ -75,33 +75,48 @@ export function BuilderTab({
           </div>
         </header>
 
-        <h3 className="section-title">Protected rivals · every year</h3>
+        <h3 className="section-title">Protected rivals · 0 to 3</h3>
         <p className="footnote" style={{ marginTop: 0 }}>
-          Click a rival to replace them. If that club is in the same 8-team tier, the game
-          already counts toward the round-robin.
+          Rivals are optional. Click a slot to add or replace, or clear it. A rival in the
+          same 8-team tier already counts toward the round-robin. Empty slots are filled with
+          other clubs in this region, not the same tier.
         </p>
         <div className="rival-row">
           {[0, 1, 2].map((slot) => {
             const rival = rivalTeams[slot];
             return (
-              <button
-                key={slot}
-                type="button"
-                className={`rival-card ${editingSlot === slot ? "is-editing" : ""}`}
-                onClick={() => {
-                  setEditingSlot(slot);
-                  setRivalQuery("");
-                }}
-              >
+              <div key={slot} className="rival-card-wrap">
+                <button
+                  type="button"
+                  className={`rival-card ${editingSlot === slot ? "is-editing" : ""}`}
+                  onClick={() => {
+                    setEditingSlot(slot);
+                    setRivalQuery("");
+                  }}
+                >
+                  {rival ? (
+                    <TeamChip
+                      team={rival}
+                      extra={`${regionName(assignment[rival.id].region)} ${tierName(assignment[rival.id].tier)}`}
+                    />
+                  ) : (
+                    <span>Open slot — not required</span>
+                  )}
+                </button>
                 {rival ? (
-                  <TeamChip
-                    team={rival}
-                    extra={`${regionName(assignment[rival.id].region)} ${tierName(assignment[rival.id].tier)}`}
-                  />
-                ) : (
-                  <span>Empty slot — choose a rival</span>
-                )}
-              </button>
+                  <button
+                    type="button"
+                    className="rival-clear"
+                    aria-label={`Remove ${rival.shortName} as a protected rival`}
+                    onClick={() => {
+                      onChangeRivals(clearRival(rivals, selectedId, slot));
+                      setEditingSlot(null);
+                    }}
+                  >
+                    ×
+                  </button>
+                ) : null}
+              </div>
             );
           })}
         </div>
@@ -125,6 +140,16 @@ export function BuilderTab({
                 />
               ))}
             </div>
+            <button
+              type="button"
+              className="ghost"
+              onClick={() => {
+                onChangeRivals(clearRival(rivals, selectedId, editingSlot));
+                setEditingSlot(null);
+              }}
+            >
+              Clear this slot
+            </button>
             <button type="button" className="ghost" onClick={() => setEditingSlot(null)}>
               Cancel
             </button>
@@ -134,7 +159,8 @@ export function BuilderTab({
         <h3 className="section-title">{regionName(place.region)} over 10 years</h3>
         <p className="footnote" style={{ marginTop: 0 }}>
           Same-tier clubs play every year (full round-robin). Protected rivals also play every
-          year. Other clubs in the region only show up if they are a rival.
+          year. Remaining games against other clubs in the region (different tier) fill out
+          the 12-game slate.
         </p>
         <table className="freq-table">
           <thead>

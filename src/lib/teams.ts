@@ -10,8 +10,11 @@ export const TEAM_BY_ID: Record<string, Team> = Object.fromEntries(
 export const TIER_SIZE = 8;
 export const PLAYOFF_TIERS = 3;
 export const FCS_MIN_TIER = 3;
-export const SEASON_WEEKS = 12;
+export const SEASON_WEEKS = 13;
 export const MAX_GAMES = 12;
+export const MAX_RIVALS = 3;
+export const LEAGUE_BYE_WEEK = 6;
+export const RR_START_WEEK = 7;
 export const MAX_MOVEMENT = 3;
 
 const ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];

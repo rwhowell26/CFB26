@@ -1,8 +1,9 @@
 import { regionRanks, teamsIn, tiersInRegion } from "./rankings";
 import { rivalsOf } from "./rivals";
 import {
-  MAX_GAMES,
+  LEAGUE_BYE_WEEK,
   REGIONS,
+  RR_START_WEEK,
   SEASON_WEEKS,
   TEAMS,
   getTeam,
@@ -56,14 +57,6 @@ export function roundRobinRounds(ids: string[]): Array<Array<[string, string]>> 
   return rounds;
 }
 
-type RawGame = {
-  a: string;
-  b: string;
-  kind: GameKind;
-  label: string;
-  suggestedWeek?: number;
-};
-
 function matchBalanced(a: Team[], b: Team[], mode: 0 | 1 | 2): Array<[string, string]> {
   if (!a.length || !b.length) return [];
   const usedB = new Set<number>();
@@ -109,23 +102,239 @@ function pairMode(a: RegionId, b: RegionId): 0 | 1 | 2 {
   return PAIR_MODE[key] ?? 0;
 }
 
-export function buildRawGames(assignment: Assignment, rivals: RivalMap): RawGame[] {
-  const games: RawGame[] = [];
-  const seen = new Set<string>();
-  const degree: Record<string, number> = Object.fromEntries(TEAMS.map((team) => [team.id, 0]));
+const OUT_OF_TIER_WEEKS = Array.from({ length: LEAGUE_BYE_WEEK - 1 }, (_, i) => i + 1);
+const TEAM_IDS = TEAMS.map((team) => team.id);
 
-  const add = (a: string, b: string, kind: GameKind, label: string, suggestedWeek?: number) => {
-    if (a === b) return false;
-    const key = pairKey(a, b);
-    if (seen.has(key)) return false;
-    if ((degree[a] ?? 0) >= MAX_GAMES || (degree[b] ?? 0) >= MAX_GAMES) return false;
-    seen.add(key);
-    degree[a] = (degree[a] ?? 0) + 1;
-    degree[b] = (degree[b] ?? 0) + 1;
-    games.push({ a, b, kind, label, suggestedWeek });
+function leftoverRivals(rivals: RivalMap, seen: Set<string>): Array<[string, string]> {
+  const pairs: Array<[string, string]> = [];
+  const used = new Set<string>();
+  for (const team of TEAMS) {
+    for (const rivalId of rivalsOf(rivals, team.id)) {
+      const key = pairKey(team.id, rivalId);
+      if (used.has(key) || seen.has(key)) continue;
+      used.add(key);
+      pairs.push([team.id, rivalId]);
+    }
+  }
+  return pairs;
+}
+
+function plannedCrossovers(assignment: Assignment, seen: Set<string>): Array<[string, string]> {
+  const pairs: Array<[string, string]> = [];
+  const ranks = regionRanks(assignment);
+  for (let i = 0; i < REGIONS.length; i += 1) {
+    for (let j = i + 1; j < REGIONS.length; j += 1) {
+      const regionA = REGIONS[i].id;
+      const regionB = REGIONS[j].id;
+      for (const [a, b] of matchBalanced(ranks[regionA], ranks[regionB], pairMode(regionA, regionB))) {
+        const key = pairKey(a, b);
+        if (seen.has(key)) continue;
+        pairs.push([a, b]);
+      }
+    }
+  }
+  return pairs;
+}
+
+function classifyLeftover(
+  a: string,
+  b: string,
+  assignment: Assignment,
+  rivals: RivalMap,
+  oocSet: Set<string>,
+): { kind: GameKind; label: string } {
+  if (rivalsOf(rivals, a).includes(b)) {
+    return { kind: "rival", label: "Protected rival" };
+  }
+  const placeA = assignment[a];
+  const placeB = assignment[b];
+  if (oocSet.has(pairKey(a, b))) {
+    return {
+      kind: "inter-region",
+      label: `vs ${regionName(placeB.region)} (balanced crossover)`,
+    };
+  }
+  if (placeA.region !== placeB.region) {
+    return {
+      kind: "inter-region",
+      label: `vs ${regionName(placeB.region)} (crossover)`,
+    };
+  }
+  return {
+    kind: "cross-tier",
+    label: `${regionName(placeA.region)} cross-tier (${tierName(placeA.tier)} vs ${tierName(placeB.tier)})`,
+  };
+}
+
+function partnerScore(
+  a: string,
+  b: string,
+  assignment: Assignment,
+  rivalSet: Set<string>,
+  oocSet: Set<string>,
+): number {
+  const key = pairKey(a, b);
+  if (rivalSet.has(key)) return 0;
+  if (oocSet.has(key)) return 1;
+  const placeA = assignment[a];
+  const placeB = assignment[b];
+  if (placeA.region === placeB.region && placeA.tier !== placeB.tier) {
+    return 2 + Math.abs(placeA.tier - placeB.tier) / 100;
+  }
+  if (placeA.region !== placeB.region) return 5;
+  return 20;
+}
+
+function matchLeftoverWeek(
+  assignment: Assignment,
+  rivals: RivalMap,
+  oocSet: Set<string>,
+  seen: Set<string>,
+): Array<[string, string]> {
+  const unmatched = new Set(TEAM_IDS);
+  const partner = new Map<string, string>();
+  const rivalSet = new Set(leftoverRivals(rivals, seen).map(([a, b]) => pairKey(a, b)));
+  const allowed = (a: string, b: string) => a !== b && !seen.has(pairKey(a, b));
+
+  const pair = (a: string, b: string) => {
+    if (!unmatched.has(a) || !unmatched.has(b) || !allowed(a, b)) return false;
+    unmatched.delete(a);
+    unmatched.delete(b);
+    partner.set(a, b);
+    partner.set(b, a);
     return true;
   };
 
+  for (const [a, b] of leftoverRivals(rivals, seen)) pair(a, b);
+  for (const [a, b] of plannedCrossovers(assignment, seen)) {
+    if (!oocSet.has(pairKey(a, b))) continue;
+    pair(a, b);
+  }
+
+  const optionCount = (id: string) =>
+    [...unmatched].reduce((sum, other) => sum + (allowed(id, other) ? 1 : 0), 0);
+
+  const greedyFill = () => {
+    const rest = [...unmatched].sort((a, b) => optionCount(a) - optionCount(b) || a.localeCompare(b));
+    for (const a of rest) {
+      if (!unmatched.has(a)) continue;
+      let best: string | null = null;
+      let bestScore = Number.POSITIVE_INFINITY;
+      for (const b of unmatched) {
+        if (!allowed(a, b)) continue;
+        const score = partnerScore(a, b, assignment, rivalSet, oocSet);
+        if (score < bestScore) {
+          bestScore = score;
+          best = b;
+        }
+      }
+      if (best) pair(a, best);
+    }
+  };
+  greedyFill();
+
+  const augment = (start: string): boolean => {
+    const visited = new Set<string>();
+    const dfs = (u: string): boolean => {
+      for (const v of TEAM_IDS) {
+        if (v === start || !allowed(u, v) || visited.has(v)) continue;
+        visited.add(v);
+        const w = partner.get(v);
+        if (!w) {
+          partner.set(u, v);
+          partner.set(v, u);
+          unmatched.delete(u);
+          unmatched.delete(v);
+          return true;
+        }
+        if (dfs(w)) {
+          partner.set(u, v);
+          partner.set(v, u);
+          unmatched.delete(u);
+          return true;
+        }
+      }
+      return false;
+    };
+    return dfs(start);
+  };
+
+  for (const start of [...unmatched]) {
+    if (unmatched.has(start)) augment(start);
+  }
+
+  if (unmatched.size >= 2) {
+    const leftover = [...unmatched];
+    for (let i = 0; i < leftover.length; i += 1) {
+      for (let j = i + 1; j < leftover.length; j += 1) {
+        const a = leftover[i];
+        const b = leftover[j];
+        if (!unmatched.has(a) || !unmatched.has(b)) continue;
+        if (pair(a, b)) continue;
+        let swapped = false;
+        for (const x of TEAM_IDS) {
+          const y = partner.get(x);
+          if (!y || x >= y) continue;
+          if (allowed(a, x) && allowed(b, y)) {
+            partner.set(a, x);
+            partner.set(x, a);
+            partner.set(b, y);
+            partner.set(y, b);
+            unmatched.delete(a);
+            unmatched.delete(b);
+            swapped = true;
+            break;
+          }
+          if (allowed(a, y) && allowed(b, x)) {
+            partner.set(a, y);
+            partner.set(y, a);
+            partner.set(b, x);
+            partner.set(x, b);
+            unmatched.delete(a);
+            unmatched.delete(b);
+            swapped = true;
+            break;
+          }
+        }
+        if (swapped) break;
+      }
+    }
+  }
+
+  if (unmatched.size) greedyFill();
+
+  const pairs: Array<[string, string]> = [];
+  const used = new Set<string>();
+  for (const [a, b] of partner) {
+    const key = pairKey(a, b);
+    if (used.has(key)) continue;
+    used.add(key);
+    pairs.push([a, b]);
+  }
+  return pairs;
+}
+
+function toCalendarGame(
+  a: string,
+  b: string,
+  week: number,
+  kind: GameKind,
+  label: string,
+): CalendarGame {
+  const homeId = homeFor(a, b, week + 17);
+  return {
+    id: pairKey(a, b),
+    week,
+    homeId,
+    awayId: homeId === a ? b : a,
+    kind,
+    label,
+  };
+}
+
+export function buildCalendar(assignment: Assignment, rivals: RivalMap): CalendarGame[] {
+  const seen = new Set<string>();
+  const placed: CalendarGame[] = [];
   const isRival = (a: string, b: string) => rivalsOf(rivals, a).includes(b);
 
   for (const region of REGIONS) {
@@ -133,110 +342,38 @@ export function buildRawGames(assignment: Assignment, rivals: RivalMap): RawGame
       const group = teamsIn(assignment, region.id, tier).map((team) => team.id);
       const rounds = roundRobinRounds(group);
       rounds.forEach((pairs, round) => {
+        const week = RR_START_WEEK + round;
         for (const [a, b] of pairs) {
           const rival = isRival(a, b);
-          add(
-            a,
-            b,
-            rival ? "rival" : "in-tier",
-            rival
-              ? `Protected rival · ${region.name} ${tierName(tier)}`
-              : `${region.name} ${tierName(tier)}`,
-            round + 1,
+          seen.add(pairKey(a, b));
+          placed.push(
+            toCalendarGame(
+              a,
+              b,
+              week,
+              rival ? "rival" : "in-tier",
+              rival
+                ? `Protected rival · ${region.name} ${tierName(tier)}`
+                : `${region.name} ${tierName(tier)}`,
+            ),
           );
         }
       });
     }
   }
 
-  const seenRivals = new Set<string>();
-  for (const team of TEAMS) {
-    for (const rivalId of rivalsOf(rivals, team.id)) {
-      const key = pairKey(team.id, rivalId);
-      if (seenRivals.has(key)) continue;
-      seenRivals.add(key);
-      add(team.id, rivalId, "rival", "Protected rival");
+  const oocSet = new Set(plannedCrossovers(assignment, seen).map(([a, b]) => pairKey(a, b)));
+
+  for (const week of OUT_OF_TIER_WEEKS) {
+    const pairs = matchLeftoverWeek(assignment, rivals, oocSet, seen);
+    for (const [a, b] of pairs) {
+      seen.add(pairKey(a, b));
+      const meta = classifyLeftover(a, b, assignment, rivals, oocSet);
+      placed.push(toCalendarGame(a, b, week, meta.kind, meta.label));
     }
-  }
-
-  const ranks = regionRanks(assignment);
-  for (let i = 0; i < REGIONS.length; i += 1) {
-    for (let j = i + 1; j < REGIONS.length; j += 1) {
-      const regionA = REGIONS[i].id;
-      const regionB = REGIONS[j].id;
-      const pairs = matchBalanced(ranks[regionA], ranks[regionB], pairMode(regionA, regionB));
-      for (const [a, b] of pairs) {
-        if (isRival(a, b)) continue;
-        add(
-          a,
-          b,
-          "inter-region",
-          `vs ${regionName(assignment[b].region)} (balanced crossover)`,
-        );
-      }
-    }
-  }
-
-  return games;
-}
-
-function assignWeeks(games: RawGame[]): CalendarGame[] {
-  const busy = new Map<string, Set<number>>();
-  const mark = (teamId: string, week: number) => {
-    const set = busy.get(teamId) ?? new Set<number>();
-    set.add(week);
-    busy.set(teamId, set);
-  };
-  const free = (teamId: string, week: number) => !(busy.get(teamId)?.has(week) ?? false);
-
-  const placed: CalendarGame[] = [];
-  const leftover: RawGame[] = [];
-
-  for (const game of games) {
-    const week = game.suggestedWeek;
-    if (week && free(game.a, week) && free(game.b, week)) {
-      const homeId = homeFor(game.a, game.b, week);
-      placed.push({
-        id: pairKey(game.a, game.b),
-        week,
-        homeId,
-        awayId: homeId === game.a ? game.b : game.a,
-        kind: game.kind,
-        label: game.label,
-      });
-      mark(game.a, week);
-      mark(game.b, week);
-    } else {
-      leftover.push(game);
-    }
-  }
-
-  const weekOrder = [
-    ...Array.from({ length: 5 }, (_, i) => i + 8),
-    ...Array.from({ length: 7 }, (_, i) => i + 1),
-  ].filter((week) => week <= SEASON_WEEKS);
-
-  for (const game of leftover) {
-    const week = weekOrder.find((slot) => free(game.a, slot) && free(game.b, slot));
-    if (!week) continue;
-    const homeId = homeFor(game.a, game.b, week + 40);
-    placed.push({
-      id: pairKey(game.a, game.b),
-      week,
-      homeId,
-      awayId: homeId === game.a ? game.b : game.a,
-      kind: game.kind,
-      label: game.label,
-    });
-    mark(game.a, week);
-    mark(game.b, week);
   }
 
   return placed.sort((a, b) => a.week - b.week || a.homeId.localeCompare(b.homeId));
-}
-
-export function buildCalendar(assignment: Assignment, rivals: RivalMap): CalendarGame[] {
-  return assignWeeks(buildRawGames(assignment, rivals));
 }
 
 export function allSchedules(
@@ -275,6 +412,14 @@ export function scheduleFor(
   teamId: string,
 ): TeamSchedule {
   return allSchedules(assignment, rivals)[teamId];
+}
+
+export function byeWeekOf(games: ScheduledGame[]): number {
+  const taken = new Set(games.map((game) => game.week));
+  for (let week = 1; week <= SEASON_WEEKS; week += 1) {
+    if (!taken.has(week)) return week;
+  }
+  return LEAGUE_BYE_WEEK;
 }
 
 export function tenYearFrequencies(

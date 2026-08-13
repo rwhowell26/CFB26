@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { TeamChip } from "@/components/TeamChip";
 import { gamesInWeek } from "@/lib/schedule";
-import { REGIONS, SEASON_WEEKS, getTeam, regionName } from "@/lib/teams";
+import { LEAGUE_BYE_WEEK, REGIONS, SEASON_WEEKS, getTeam, regionName } from "@/lib/teams";
 import type { Assignment, RegionId, RivalMap } from "@/lib/types";
 
 export function CalendarTab({
@@ -20,9 +20,9 @@ export function CalendarTab({
   return (
     <div className="stack">
       <p className="lede">
-        A 12-week regular season. Weeks 1–7 are the 8-team round-robins (every team in a
-        complete tier plays every week). Protected leftovers and balanced crossovers fill
-        weeks 8–12. Nobody plays twice in the same week.
+        A 13-week calendar with 12 games and a league-wide bye. Weeks 1–5 are games outside
+        the tier. Week 6 is off for every team. Weeks 7–13 are the 8-team round-robins.
+        Nobody plays twice in the same week.
       </p>
       <div className="week-bar">
         {Array.from({ length: SEASON_WEEKS }, (_, index) => index + 1).map((item) => (
@@ -32,7 +32,7 @@ export function CalendarTab({
             className={week === item ? "is-active" : ""}
             onClick={() => setWeek(item)}
           >
-            {item}
+            {item === LEAGUE_BYE_WEEK ? `${item} bye` : item}
           </button>
         ))}
         <select
@@ -48,23 +48,29 @@ export function CalendarTab({
       </div>
       <section className="panel">
         <header className="panel-head">
-          <h2>Week {week}</h2>
-          <span>{games.length} games</span>
+          <h2>{week === LEAGUE_BYE_WEEK ? `Week ${week} · Bye` : `Week ${week}`}</h2>
+          <span>{week === LEAGUE_BYE_WEEK ? "every team off" : `${games.length} games`}</span>
         </header>
-        <ul className="game-list">
-          {games.map((game) => {
-            const home = getTeam(game.homeId);
-            const away = getTeam(game.awayId);
-            return (
-              <li key={game.id}>
-                <TeamChip team={away} extra={regionName(assignment[away.id].region)} />
-                <span className="muted">at</span>
-                <TeamChip team={home} extra={regionName(assignment[home.id].region)} />
-                <em className="bid">{game.label}</em>
-              </li>
-            );
-          })}
-        </ul>
+        {week === LEAGUE_BYE_WEEK && games.length === 0 ? (
+          <p className="lede" style={{ margin: 0 }}>
+            League-wide bye. Out-of-tier games are already done; round-robin play starts next week.
+          </p>
+        ) : (
+          <ul className="game-list">
+            {games.map((game) => {
+              const home = getTeam(game.homeId);
+              const away = getTeam(game.awayId);
+              return (
+                <li key={game.id}>
+                  <TeamChip team={away} extra={regionName(assignment[away.id].region)} />
+                  <span className="muted">at</span>
+                  <TeamChip team={home} extra={regionName(assignment[home.id].region)} />
+                  <em className="bid">{game.label}</em>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </section>
     </div>
   );
