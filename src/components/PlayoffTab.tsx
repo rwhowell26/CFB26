@@ -2,7 +2,7 @@
 
 import { TeamChip } from "@/components/TeamChip";
 import { buildPlayoffBracket, buildPlayoffField, playoffSummary } from "@/lib/playoff";
-import { getTeam, recordLabel, regionName, tierName } from "@/lib/teams";
+import { getTeam, recordLabel, REGIONS, tierName } from "@/lib/teams";
 import type { Assignment, PlayoffGame } from "@/lib/types";
 
 type Side = "left" | "right" | "center";
@@ -16,6 +16,8 @@ export function PlayoffTab({ assignment }: { assignment: Assignment }) {
   const field = buildPlayoffField(assignment);
   const bracket = buildPlayoffBracket(field);
   const summary = playoffSummary(field);
+  const codes = new Map(field.map((entry) => [entry.seed, entry.rankCode]));
+  const codeFor = (seed: number) => codes.get(seed) ?? String(seed);
 
   const byRound = (round: PlayoffGame["round"]) =>
     bracket.filter((game) => game.round === round);
@@ -41,9 +43,9 @@ export function PlayoffTab({ assignment }: { assignment: Assignment }) {
     <div className="stack playoff-page">
       <p className="lede">
         Each region sends 3 from Tier I, 2 from Tier II, and 1 from Tier III (24 autobids).
-        Seeds follow place and tier — not 2025 record. Opening games are always
-        cross-region. Seeds 1–8 receive a first-round bye. The board is 1 vs 8,
-        4 vs 5, 2 vs 7, and 3 vs 6 from the round of 16 on.
+        Labels are regional place, not a 1–24 seed: 1W is first in the West, 2E is the East
+        runner-up, 6S is the South Tier III champion. Each region’s 1 and 2 receive a
+        first-round bye. Opening games are always cross-region.
       </p>
       <div className="stat-row">
         <div className="stat"><b>{summary.fieldSize}</b><span>team field</span></div>
@@ -66,17 +68,15 @@ export function PlayoffTab({ assignment }: { assignment: Assignment }) {
                   <article key={game.id} className="bracket-game">
                     <Slot
                       teamId={game.teamAId}
-                      seed={game.seedA}
+                      code={codeFor(game.seedA)}
                       label={game.labelA}
                       winnerId={game.projectedWinnerId}
-                      assignment={assignment}
                     />
                     <Slot
                       teamId={game.teamBId}
-                      seed={game.seedB}
+                      code={codeFor(game.seedB)}
                       label={game.labelB}
                       winnerId={game.projectedWinnerId}
-                      assignment={assignment}
                     />
                   </article>
                 ))}
@@ -89,29 +89,40 @@ export function PlayoffTab({ assignment }: { assignment: Assignment }) {
       <section className="panel">
         <header className="panel-head">
           <h2>Autobids</h2>
-          <span>Seeded by tier and place</span>
+          <span>1W is first in the West · 6 bids per region</span>
         </header>
-        <ol className="seed-grid">
-          {field.map((entry) => {
-            const team = getTeam(entry.teamId);
-            const place = assignment[team.id];
+        <div className="seed-grid">
+          {REGIONS.map((region) => {
+            const entries = field
+              .filter((entry) => assignment[entry.teamId].region === region.id)
+              .sort((a, b) => a.rankCode.localeCompare(b.rankCode, undefined, { numeric: true }));
             return (
-              <li key={entry.teamId}>
-                <span className={`seed ${entry.bye ? "is-bye" : ""}`}>{entry.seed}</span>
-                <TeamChip
-                  team={team}
-                  extra={`${regionName(place.region)} ${tierName(place.tier)}`}
-                />
-                <em className="bid">
-                  {entry.bye ? "Bye · " : ""}
-                  {entry.bidLabel}
-                  {" · "}
-                  {recordLabel(team)}
-                </em>
-              </li>
+              <section key={region.id} className="seed-region">
+                <h3>{region.name}</h3>
+                <ol>
+                  {entries.map((entry) => {
+                    const team = getTeam(entry.teamId);
+                    const place = assignment[team.id];
+                    return (
+                      <li key={entry.teamId}>
+                        <span className={`seed ${entry.bye ? "is-bye" : ""}`}>{entry.rankCode}</span>
+                        <TeamChip
+                          team={team}
+                          extra={`${tierName(place.tier)}${entry.bye ? " · Bye" : ""}`}
+                        />
+                        <em className="bid">
+                          {entry.bidLabel}
+                          {" · "}
+                          {recordLabel(team)}
+                        </em>
+                      </li>
+                    );
+                  })}
+                </ol>
+              </section>
             );
           })}
-        </ol>
+        </div>
       </section>
     </div>
   );
@@ -119,31 +130,25 @@ export function PlayoffTab({ assignment }: { assignment: Assignment }) {
 
 function Slot({
   teamId,
-  seed,
+  code,
   label,
   winnerId,
-  assignment,
 }: {
   teamId: string | null;
-  seed: number;
+  code: string;
   label: string;
   winnerId: string | null;
-  assignment: Assignment;
 }) {
   const team = teamId ? getTeam(teamId) : null;
   const won = teamId !== null && teamId === winnerId;
-  const place = team ? assignment[team.id] : null;
   return (
     <div className={`slot ${won ? "is-winner" : ""}`}>
-      <span className="slot-seed">{seed}</span>
+      <span className="slot-seed" aria-hidden="true">{code}</span>
       {team ? (
         <span className="slot-team">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={team.logo} alt="" width={18} height={18} />
-          <span>
-            {team.shortName}
-            {place ? <em>{regionName(place.region)}</em> : null}
-          </span>
+          <span>{team.shortName}</span>
         </span>
       ) : (
         <span className="slot-team muted">{label}</span>

@@ -1,5 +1,5 @@
 import { teamsIn } from "./rankings";
-import { compareRecords, getTeam, PLAYOFF_TIERS, regionName, tierName } from "./teams";
+import { compareRecords, getTeam, PLAYOFF_TIERS, regionCode, regionName, tierName } from "./teams";
 import type { Assignment, PlayoffGame, PlayoffTeam, RegionId, Team } from "./types";
 
 const FIELD_SIZE = 24;
@@ -50,6 +50,12 @@ function bidForPlace(place: number): PlayoffTeam["bid"] {
   return "tier-third";
 }
 
+/** 1W = first in the West, 2E = East runner-up, 6MW = Midwest Tier III champion. */
+export function playoffRankCode(seed: number, region: RegionId): string {
+  const place = Math.floor((seed - 1) / 4) + 1;
+  return `${place}${regionCode(region)}`;
+}
+
 export function buildPlayoffField(assignment: Assignment): PlayoffTeam[] {
   const selected: PlayoffTeam[] = [];
 
@@ -62,6 +68,7 @@ export function buildPlayoffField(assignment: Assignment): PlayoffTeam[] {
     selected.push({
       teamId: team.id,
       seed,
+      rankCode: playoffRankCode(seed, region),
       bid: bidForPlace(band.place),
       bidLabel: `${regionName(region)} ${tierName(band.tier)} ${PLACE_LABEL[band.place]}`,
       bye: seed <= BYES,

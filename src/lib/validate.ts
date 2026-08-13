@@ -164,6 +164,21 @@ export function validateModel() {
     const home = regionOf(seed);
     assert(home !== regionOf(a) && home !== regionOf(b), `bye ${seed} can open against own region`);
   }
+  assert(
+    field.find((entry) => entry.rankCode === "1W")?.teamId &&
+      assignment[field.find((entry) => entry.rankCode === "1W")!.teamId].region === "west",
+    "1W should be first in the West",
+  );
+  assert(
+    field.filter((entry) => entry.rankCode === "1W" || entry.rankCode === "1E" || entry.rankCode === "1S" || entry.rankCode === "1MW").length === 4,
+    "each region should have a 1",
+  );
+  assert(new Set(field.map((entry) => entry.rankCode)).size === 24, "rank codes should be unique");
+  const westCodes = field
+    .filter((entry) => assignment[entry.teamId].region === "west")
+    .map((entry) => entry.rankCode)
+    .sort();
+  assert(westCodes.join(",") === "1W,2W,3W,4W,5W,6W", `West codes ${westCodes.join(",")}`);
   const bracket = buildPlayoffBracket(field);
   const roundCount: Record<string, number> = { first: 8, second: 8, quarter: 4, semi: 2, final: 1 };
   for (const [round, expected] of Object.entries(roundCount)) {

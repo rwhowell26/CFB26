@@ -31,6 +31,7 @@ export const REGIONS: Array<{
   id: RegionId;
   name: string;
   short: string;
+  code: string;
   blurb: string;
   accent: string;
 }> = [
@@ -38,6 +39,7 @@ export const REGIONS: Array<{
     id: "east",
     name: "East",
     short: "East",
+    code: "E",
     blurb: "Atlantic seaboard, Appalachia, and Kentucky",
     accent: "#3b82f6",
   },
@@ -45,6 +47,7 @@ export const REGIONS: Array<{
     id: "south",
     name: "South",
     short: "South",
+    code: "S",
     blurb: "Deep South, Florida, Tennessee, and Texas A&M / Houston",
     accent: "#ef4444",
   },
@@ -52,6 +55,7 @@ export const REGIONS: Array<{
     id: "midwest",
     name: "Midwest",
     short: "Midwest",
+    code: "MW",
     blurb: "Great Lakes, Plains, Oklahoma, and North Texas",
     accent: "#f59e0b",
   },
@@ -59,10 +63,15 @@ export const REGIONS: Array<{
     id: "west",
     name: "West",
     short: "West",
+    code: "W",
     blurb: "Texas, the Mountain West, and the Pacific",
     accent: "#14b8a6",
   },
 ];
+
+export function regionCode(id: RegionId): string {
+  return REGIONS.find((region) => region.id === id)?.code ?? id.slice(0, 1).toUpperCase();
+}
 
 export function defaultAssignment(): Assignment {
   return Object.fromEntries(

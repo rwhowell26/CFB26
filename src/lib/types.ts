@@ -58,6 +58,7 @@ export type PlayoffBidKind = "tier-champion" | "tier-runner-up" | "tier-third";
 export type PlayoffTeam = {
   teamId: string;
   seed: number;
+  rankCode: string;
   bid: PlayoffBidKind;
   bidLabel: string;
   bye: boolean;
