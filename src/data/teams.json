@@ -1,0 +1,2586 @@
+[
+  {
+    "id": "2005",
+    "name": "Air Force Falcons",
+    "shortName": "Air Force",
+    "abbreviation": "AFA",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2005.png",
+    "state": "CO",
+    "wins": 4,
+    "losses": 8,
+    "pf": 358,
+    "pa": 364,
+    "region": "west",
+    "tier": 2,
+    "rivals": [
+      "349",
+      "2426",
+      "2751"
+    ]
+  },
+  {
+    "id": "2006",
+    "name": "Akron Zips",
+    "shortName": "Akron",
+    "abbreviation": "AKR",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2006.png",
+    "state": "OH",
+    "wins": 5,
+    "losses": 7,
+    "pf": 267,
+    "pa": 329,
+    "region": "midwest",
+    "tier": 3,
+    "rivals": [
+      "48",
+      "2309",
+      "98"
+    ]
+  },
+  {
+    "id": "333",
+    "name": "Alabama Crimson Tide",
+    "shortName": "Alabama",
+    "abbreviation": "ALA",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/333.png",
+    "state": "AL",
+    "wins": 10,
+    "losses": 3,
+    "pf": 406,
+    "pa": 226,
+    "region": "south",
+    "tier": 1,
+    "rivals": [
+      "2",
+      "99",
+      "2633"
+    ]
+  },
+  {
+    "id": "2026",
+    "name": "App State Mountaineers",
+    "shortName": "App State",
+    "abbreviation": "APP",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2026.png",
+    "state": "NC",
+    "wins": 5,
+    "losses": 7,
+    "pf": 304,
+    "pa": 358,
+    "region": "east",
+    "tier": 3,
+    "rivals": [
+      "2429",
+      "324",
+      "290"
+    ]
+  },
+  {
+    "id": "12",
+    "name": "Arizona Wildcats",
+    "shortName": "Arizona",
+    "abbreviation": "ARIZ",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/12.png",
+    "state": "AZ",
+    "wins": 9,
+    "losses": 3,
+    "pf": 391,
+    "pa": 227,
+    "region": "west",
+    "tier": 1,
+    "rivals": [
+      "9",
+      "38",
+      "167"
+    ]
+  },
+  {
+    "id": "9",
+    "name": "Arizona State Sun Devils",
+    "shortName": "Arizona St",
+    "abbreviation": "ASU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/9.png",
+    "state": "AZ",
+    "wins": 8,
+    "losses": 4,
+    "pf": 296,
+    "pa": 276,
+    "region": "west",
+    "tier": 2,
+    "rivals": [
+      "12",
+      "242",
+      "254"
+    ]
+  },
+  {
+    "id": "8",
+    "name": "Arkansas Razorbacks",
+    "shortName": "Arkansas",
+    "abbreviation": "ARK",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/8.png",
+    "state": "AR",
+    "wins": 2,
+    "losses": 10,
+    "pf": 395,
+    "pa": 406,
+    "region": "south",
+    "tier": 3,
+    "rivals": [
+      "99",
+      "142",
+      "245"
+    ]
+  },
+  {
+    "id": "2032",
+    "name": "Arkansas State Red Wolves",
+    "shortName": "Arkansas St",
+    "abbreviation": "ARST",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2032.png",
+    "state": "AR",
+    "wins": 6,
+    "losses": 6,
+    "pf": 293,
+    "pa": 328,
+    "region": "south",
+    "tier": 2,
+    "rivals": [
+      "239",
+      "62",
+      "2534"
+    ]
+  },
+  {
+    "id": "349",
+    "name": "Army Black Knights",
+    "shortName": "Army",
+    "abbreviation": "ARMY",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/349.png",
+    "state": "NY",
+    "wins": 6,
+    "losses": 6,
+    "pf": 269,
+    "pa": 265,
+    "region": "east",
+    "tier": 2,
+    "rivals": [
+      "2005",
+      "2426",
+      "164"
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Auburn Tigers",
+    "shortName": "Auburn",
+    "abbreviation": "AUB",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2.png",
+    "state": "AL",
+    "wins": 5,
+    "losses": 7,
+    "pf": 321,
+    "pa": 248,
+    "region": "south",
+    "tier": 3,
+    "rivals": [
+      "333",
+      "61",
+      "99"
+    ]
+  },
+  {
+    "id": "252",
+    "name": "BYU Cougars",
+    "shortName": "BYU",
+    "abbreviation": "BYU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/252.png",
+    "state": "UT",
+    "wins": 11,
+    "losses": 2,
+    "pf": 415,
+    "pa": 247,
+    "region": "west",
+    "tier": 1,
+    "rivals": [
+      "189",
+      "254",
+      "328"
+    ]
+  },
+  {
+    "id": "2050",
+    "name": "Ball State Cardinals",
+    "shortName": "Ball State",
+    "abbreviation": "BALL",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2050.png",
+    "state": "IN",
+    "wins": 4,
+    "losses": 8,
+    "pf": 190,
+    "pa": 358,
+    "region": "midwest",
+    "tier": 3,
+    "rivals": [
+      "84",
+      "145",
+      "6"
+    ]
+  },
+  {
+    "id": "239",
+    "name": "Baylor Bears",
+    "shortName": "Baylor",
+    "abbreviation": "BAY",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/239.png",
+    "state": "TX",
+    "wins": 5,
+    "losses": 7,
+    "pf": 373,
+    "pa": 391,
+    "region": "midwest",
+    "tier": 2,
+    "rivals": [
+      "2032",
+      "2628",
+      "2641"
+    ]
+  },
+  {
+    "id": "68",
+    "name": "Boise State Broncos",
+    "shortName": "Boise St",
+    "abbreviation": "BOIS",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/68.png",
+    "state": "ID",
+    "wins": 9,
+    "losses": 5,
+    "pf": 418,
+    "pa": 337,
+    "region": "west",
+    "tier": 2,
+    "rivals": [
+      "2483",
+      "2439",
+      "328"
+    ]
+  },
+  {
+    "id": "103",
+    "name": "Boston College Eagles",
+    "shortName": "Boston College",
+    "abbreviation": "BC",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/103.png",
+    "state": "MA",
+    "wins": 2,
+    "losses": 10,
+    "pf": 305,
+    "pa": 393,
+    "region": "east",
+    "tier": 3,
+    "rivals": [
+      "183",
+      "41",
+      "113"
+    ]
+  },
+  {
+    "id": "189",
+    "name": "Bowling Green Falcons",
+    "shortName": "Bowling Green",
+    "abbreviation": "BGSU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/189.png",
+    "state": "OH",
+    "wins": 4,
+    "losses": 8,
+    "pf": 246,
+    "pa": 291,
+    "region": "midwest",
+    "tier": 3,
+    "rivals": [
+      "252",
+      "2309",
+      "2649"
+    ]
+  },
+  {
+    "id": "2084",
+    "name": "Buffalo Bulls",
+    "shortName": "Buffalo",
+    "abbreviation": "BUFF",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2084.png",
+    "state": "NY",
+    "wins": 5,
+    "losses": 7,
+    "pf": 288,
+    "pa": 282,
+    "region": "east",
+    "tier": 2,
+    "rivals": [
+      "2623",
+      "164",
+      "183"
+    ]
+  },
+  {
+    "id": "2117",
+    "name": "Central Michigan Chippewas",
+    "shortName": "C Michigan",
+    "abbreviation": "CMU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2117.png",
+    "state": "MI",
+    "wins": 7,
+    "losses": 5,
+    "pf": 286,
+    "pa": 272,
+    "region": "midwest",
+    "tier": 2,
+    "rivals": [
+      "2199",
+      "127",
+      "2711"
+    ]
+  },
+  {
+    "id": "25",
+    "name": "California Golden Bears",
+    "shortName": "California",
+    "abbreviation": "CAL",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/25.png",
+    "state": "CA",
+    "wins": 7,
+    "losses": 5,
+    "pf": 298,
+    "pa": 318,
+    "region": "west",
+    "tier": 2,
+    "rivals": [
+      "24",
+      "2655",
+      "26"
+    ]
+  },
+  {
+    "id": "2429",
+    "name": "Charlotte 49ers",
+    "shortName": "Charlotte",
+    "abbreviation": "CLT",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2429.png",
+    "state": "NC",
+    "wins": 1,
+    "losses": 11,
+    "pf": 172,
+    "pa": 436,
+    "region": "east",
+    "tier": 3,
+    "rivals": [
+      "2026",
+      "151",
+      "2579"
+    ]
+  },
+  {
+    "id": "2132",
+    "name": "Cincinnati Bearcats",
+    "shortName": "Cincinnati",
+    "abbreviation": "CIN",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2132.png",
+    "state": "OH",
+    "wins": 7,
+    "losses": 5,
+    "pf": 381,
+    "pa": 298,
+    "region": "east",
+    "tier": 2,
+    "rivals": [
+      "97",
+      "193",
+      "194"
+    ]
+  },
+  {
+    "id": "228",
+    "name": "Clemson Tigers",
+    "shortName": "Clemson",
+    "abbreviation": "CLEM",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/228.png",
+    "state": "SC",
+    "wins": 7,
+    "losses": 5,
+    "pf": 344,
+    "pa": 245,
+    "region": "east",
+    "tier": 1,
+    "rivals": [
+      "52",
+      "59",
+      "2579"
+    ]
+  },
+  {
+    "id": "324",
+    "name": "Coastal Carolina Chanticleers",
+    "shortName": "Coastal",
+    "abbreviation": "CCU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/324.png",
+    "state": "SC",
+    "wins": 6,
+    "losses": 6,
+    "pf": 274,
+    "pa": 407,
+    "region": "east",
+    "tier": 2,
+    "rivals": [
+      "2026",
+      "36",
+      "150"
+    ]
+  },
+  {
+    "id": "38",
+    "name": "Colorado Buffaloes",
+    "shortName": "Colorado",
+    "abbreviation": "COLO",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/38.png",
+    "state": "CO",
+    "wins": 3,
+    "losses": 9,
+    "pf": 251,
+    "pa": 366,
+    "region": "west",
+    "tier": 3,
+    "rivals": [
+      "12",
+      "36",
+      "254"
+    ]
+  },
+  {
+    "id": "36",
+    "name": "Colorado State Rams",
+    "shortName": "Colorado St",
+    "abbreviation": "CSU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/36.png",
+    "state": "CO",
+    "wins": 2,
+    "losses": 10,
+    "pf": 222,
+    "pa": 370,
+    "region": "west",
+    "tier": 3,
+    "rivals": [
+      "324",
+      "38",
+      "2751"
+    ]
+  },
+  {
+    "id": "48",
+    "name": "Delaware Blue Hens",
+    "shortName": "Delaware",
+    "abbreviation": "DEL",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/48.png",
+    "state": "DE",
+    "wins": 6,
+    "losses": 6,
+    "pf": 357,
+    "pa": 390,
+    "region": "east",
+    "tier": 2,
+    "rivals": [
+      "2006",
+      "120",
+      "41"
+    ]
+  },
+  {
+    "id": "150",
+    "name": "Duke Blue Devils",
+    "shortName": "Duke",
+    "abbreviation": "DUKE",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/150.png",
+    "state": "NC",
+    "wins": 8,
+    "losses": 5,
+    "pf": 442,
+    "pa": 373,
+    "region": "east",
+    "tier": 1,
+    "rivals": [
+      "324",
+      "153",
+      "154"
+    ]
+  },
+  {
+    "id": "2199",
+    "name": "Eastern Michigan Eagles",
+    "shortName": "E Michigan",
+    "abbreviation": "EMU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2199.png",
+    "state": "MI",
+    "wins": 4,
+    "losses": 8,
+    "pf": 289,
+    "pa": 357,
+    "region": "midwest",
+    "tier": 3,
+    "rivals": [
+      "2117",
+      "120",
+      "2711"
+    ]
+  },
+  {
+    "id": "151",
+    "name": "East Carolina Pirates",
+    "shortName": "East Carolina",
+    "abbreviation": "ECU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/151.png",
+    "state": "NC",
+    "wins": 8,
+    "losses": 4,
+    "pf": 402,
+    "pa": 244,
+    "region": "east",
+    "tier": 1,
+    "rivals": [
+      "2429",
+      "152",
+      "295"
+    ]
+  },
+  {
+    "id": "2226",
+    "name": "Florida Atlantic Owls",
+    "shortName": "FAU",
+    "abbreviation": "FAU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2226.png",
+    "state": "FL",
+    "wins": 4,
+    "losses": 8,
+    "pf": 354,
+    "pa": 436,
+    "region": "south",
+    "tier": 3,
+    "rivals": [
+      "2229",
+      "2390",
+      "2433"
+    ]
+  },
+  {
+    "id": "2229",
+    "name": "Florida International Panthers",
+    "shortName": "FIU",
+    "abbreviation": "FIU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2229.png",
+    "state": "FL",
+    "wins": 7,
+    "losses": 5,
+    "pf": 351,
+    "pa": 333,
+    "region": "south",
+    "tier": 2,
+    "rivals": [
+      "2226",
+      "2393",
+      "6"
+    ]
+  },
+  {
+    "id": "57",
+    "name": "Florida Gators",
+    "shortName": "Florida",
+    "abbreviation": "FLA",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/57.png",
+    "state": "FL",
+    "wins": 4,
+    "losses": 8,
+    "pf": 259,
+    "pa": 288,
+    "region": "south",
+    "tier": 3,
+    "rivals": [
+      "52",
+      "61",
+      "2116"
+    ]
+  },
+  {
+    "id": "52",
+    "name": "Florida State Seminoles",
+    "shortName": "Florida St",
+    "abbreviation": "FSU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/52.png",
+    "state": "FL",
+    "wins": 5,
+    "losses": 7,
+    "pf": 396,
+    "pa": 264,
+    "region": "south",
+    "tier": 2,
+    "rivals": [
+      "228",
+      "57",
+      "2390"
+    ]
+  },
+  {
+    "id": "278",
+    "name": "Fresno State Bulldogs",
+    "shortName": "Fresno St",
+    "abbreviation": "FRES",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/278.png",
+    "state": "CA",
+    "wins": 8,
+    "losses": 4,
+    "pf": 317,
+    "pa": 241,
+    "region": "west",
+    "tier": 2,
+    "rivals": [
+      "62",
+      "2440",
+      "23"
+    ]
+  },
+  {
+    "id": "290",
+    "name": "Georgia Southern Eagles",
+    "shortName": "GA Southern",
+    "abbreviation": "GASO",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/290.png",
+    "state": "GA",
+    "wins": 6,
+    "losses": 6,
+    "pf": 334,
+    "pa": 410,
+    "region": "south",
+    "tier": 2,
+    "rivals": [
+      "2026",
+      "2247",
+      "2653"
+    ]
+  },
+  {
+    "id": "61",
+    "name": "Georgia Bulldogs",
+    "shortName": "Georgia",
+    "abbreviation": "UGA",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/61.png",
+    "state": "GA",
+    "wins": 12,
+    "losses": 1,
+    "pf": 415,
+    "pa": 207,
+    "region": "south",
+    "tier": 1,
+    "rivals": [
+      "2",
+      "57",
+      "59"
+    ]
+  },
+  {
+    "id": "2247",
+    "name": "Georgia State Panthers",
+    "shortName": "Georgia St",
+    "abbreviation": "GAST",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2247.png",
+    "state": "GA",
+    "wins": 1,
+    "losses": 11,
+    "pf": 237,
+    "pa": 454,
+    "region": "south",
+    "tier": 3,
+    "rivals": [
+      "290",
+      "55",
+      "338"
+    ]
+  },
+  {
+    "id": "59",
+    "name": "Georgia Tech Yellow Jackets",
+    "shortName": "Georgia Tech",
+    "abbreviation": "GT",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/59.png",
+    "state": "GA",
+    "wins": 9,
+    "losses": 3,
+    "pf": 397,
+    "pa": 300,
+    "region": "south",
+    "tier": 1,
+    "rivals": [
+      "228",
+      "61",
+      "338"
+    ]
+  },
+  {
+    "id": "62",
+    "name": "Hawai'i Rainbow Warriors",
+    "shortName": "Hawai'i",
+    "abbreviation": "HAW",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/62.png",
+    "state": "HI",
+    "wins": 8,
+    "losses": 4,
+    "pf": 342,
+    "pa": 282,
+    "region": "west",
+    "tier": 2,
+    "rivals": [
+      "2032",
+      "278",
+      "21"
+    ]
+  },
+  {
+    "id": "248",
+    "name": "Houston Cougars",
+    "shortName": "Houston",
+    "abbreviation": "HOU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/248.png",
+    "state": "TX",
+    "wins": 9,
+    "losses": 3,
+    "pf": 340,
+    "pa": 262,
+    "region": "south",
+    "tier": 1,
+    "rivals": [
+      "242",
+      "2567",
+      "2636"
+    ]
+  },
+  {
+    "id": "356",
+    "name": "Illinois Fighting Illini",
+    "shortName": "Illinois",
+    "abbreviation": "ILL",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/356.png",
+    "state": "IL",
+    "wins": 8,
+    "losses": 4,
+    "pf": 352,
+    "pa": 279,
+    "region": "midwest",
+    "tier": 1,
+    "rivals": [
+      "2459",
+      "77",
+      "2509"
+    ]
+  },
+  {
+    "id": "84",
+    "name": "Indiana Hoosiers",
+    "shortName": "Indiana",
+    "abbreviation": "IU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/84.png",
+    "state": "IN",
+    "wins": 13,
+    "losses": 0,
+    "pf": 545,
+    "pa": 141,
+    "region": "midwest",
+    "tier": 1,
+    "rivals": [
+      "2050",
+      "2509",
+      "277"
+    ]
+  },
+  {
+    "id": "2294",
+    "name": "Iowa Hawkeyes",
+    "shortName": "Iowa",
+    "abbreviation": "IOWA",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2294.png",
+    "state": "IA",
+    "wins": 8,
+    "losses": 4,
+    "pf": 347,
+    "pa": 182,
+    "region": "midwest",
+    "tier": 1,
+    "rivals": [
+      "66",
+      "135",
+      "275"
+    ]
+  },
+  {
+    "id": "66",
+    "name": "Iowa State Cyclones",
+    "shortName": "Iowa State",
+    "abbreviation": "ISU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/66.png",
+    "state": "IA",
+    "wins": 8,
+    "losses": 4,
+    "pf": 329,
+    "pa": 242,
+    "region": "midwest",
+    "tier": 1,
+    "rivals": [
+      "2294",
+      "2305",
+      "158"
+    ]
+  },
+  {
+    "id": "256",
+    "name": "James Madison Dukes",
+    "shortName": "James Madison",
+    "abbreviation": "JMU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/256.png",
+    "state": "VA",
+    "wins": 12,
+    "losses": 1,
+    "pf": 485,
+    "pa": 206,
+    "region": "east",
+    "tier": 1,
+    "rivals": [
+      "2335",
+      "295",
+      "259"
+    ]
+  },
+  {
+    "id": "55",
+    "name": "Jacksonville State Gamecocks",
+    "shortName": "Jax State",
+    "abbreviation": "JVST",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/55.png",
+    "state": "AL",
+    "wins": 8,
+    "losses": 5,
+    "pf": 377,
+    "pa": 340,
+    "region": "south",
+    "tier": 2,
+    "rivals": [
+      "2247",
+      "2653",
+      "5"
+    ]
+  },
+  {
+    "id": "2305",
+    "name": "Kansas Jayhawks",
+    "shortName": "Kansas",
+    "abbreviation": "KU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2305.png",
+    "state": "KS",
+    "wins": 5,
+    "losses": 7,
+    "pf": 337,
+    "pa": 321,
+    "region": "midwest",
+    "tier": 2,
+    "rivals": [
+      "66",
+      "2306",
+      "142"
+    ]
+  },
+  {
+    "id": "2306",
+    "name": "Kansas State Wildcats",
+    "shortName": "Kansas St",
+    "abbreviation": "KSU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2306.png",
+    "state": "KS",
+    "wins": 6,
+    "losses": 6,
+    "pf": 353,
+    "pa": 320,
+    "region": "midwest",
+    "tier": 2,
+    "rivals": [
+      "2305",
+      "158",
+      "201"
+    ]
+  },
+  {
+    "id": "338",
+    "name": "Kennesaw State Owls",
+    "shortName": "Kennesaw St",
+    "abbreviation": "KENN",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/338.png",
+    "state": "GA",
+    "wins": 10,
+    "losses": 3,
+    "pf": 368,
+    "pa": 316,
+    "region": "south",
+    "tier": 1,
+    "rivals": [
+      "2247",
+      "59",
+      "204"
+    ]
+  },
+  {
+    "id": "2309",
+    "name": "Kent State Golden Flashes",
+    "shortName": "Kent State",
+    "abbreviation": "KENT",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2309.png",
+    "state": "OH",
+    "wins": 5,
+    "losses": 7,
+    "pf": 255,
+    "pa": 403,
+    "region": "midwest",
+    "tier": 3,
+    "rivals": [
+      "2006",
+      "189",
+      "2623"
+    ]
+  },
+  {
+    "id": "96",
+    "name": "Kentucky Wildcats",
+    "shortName": "Kentucky",
+    "abbreviation": "UK",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/96.png",
+    "state": "KY",
+    "wins": 5,
+    "losses": 7,
+    "pf": 276,
+    "pa": 317,
+    "region": "east",
+    "tier": 2,
+    "rivals": [
+      "97",
+      "153",
+      "2633"
+    ]
+  },
+  {
+    "id": "99",
+    "name": "LSU Tigers",
+    "shortName": "LSU",
+    "abbreviation": "LSU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/99.png",
+    "state": "LA",
+    "wins": 7,
+    "losses": 5,
+    "pf": 262,
+    "pa": 220,
+    "region": "south",
+    "tier": 2,
+    "rivals": [
+      "333",
+      "8",
+      "2"
+    ]
+  },
+  {
+    "id": "2335",
+    "name": "Liberty Flames",
+    "shortName": "Liberty",
+    "abbreviation": "LIB",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2335.png",
+    "state": "VA",
+    "wins": 4,
+    "losses": 8,
+    "pf": 307,
+    "pa": 318,
+    "region": "east",
+    "tier": 3,
+    "rivals": [
+      "256",
+      "197",
+      "259"
+    ]
+  },
+  {
+    "id": "309",
+    "name": "Louisiana Ragin' Cajuns",
+    "shortName": "Louisiana",
+    "abbreviation": "UL",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/309.png",
+    "state": "LA",
+    "wins": 6,
+    "losses": 6,
+    "pf": 325,
+    "pa": 360,
+    "region": "south",
+    "tier": 2,
+    "rivals": [
+      "2348",
+      "2433",
+      "265"
+    ]
+  },
+  {
+    "id": "2348",
+    "name": "Louisiana Tech Bulldogs",
+    "shortName": "Louisiana Tech",
+    "abbreviation": "LT",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2348.png",
+    "state": "LA",
+    "wins": 7,
+    "losses": 5,
+    "pf": 332,
+    "pa": 256,
+    "region": "south",
+    "tier": 2,
+    "rivals": [
+      "309",
+      "344",
+      "2572"
+    ]
+  },
+  {
+    "id": "97",
+    "name": "Louisville Cardinals",
+    "shortName": "Louisville",
+    "abbreviation": "LOU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/97.png",
+    "state": "KY",
+    "wins": 8,
+    "losses": 4,
+    "pf": 362,
+    "pa": 253,
+    "region": "east",
+    "tier": 1,
+    "rivals": [
+      "2132",
+      "96",
+      "98"
+    ]
+  },
+  {
+    "id": "2393",
+    "name": "Middle Tennessee Blue Raiders",
+    "shortName": "MTSU",
+    "abbreviation": "MTSU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2393.png",
+    "state": "TN",
+    "wins": 3,
+    "losses": 9,
+    "pf": 269,
+    "pa": 371,
+    "region": "south",
+    "tier": 3,
+    "rivals": [
+      "2229",
+      "238",
+      "98"
+    ]
+  },
+  {
+    "id": "276",
+    "name": "Marshall Thundering Herd",
+    "shortName": "Marshall",
+    "abbreviation": "MRSH",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/276.png",
+    "state": "WV",
+    "wins": 5,
+    "losses": 7,
+    "pf": 369,
+    "pa": 363,
+    "region": "east",
+    "tier": 2,
+    "rivals": [
+      "195",
+      "23",
+      "277"
+    ]
+  },
+  {
+    "id": "120",
+    "name": "Maryland Terrapins",
+    "shortName": "Maryland",
+    "abbreviation": "MD",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/120.png",
+    "state": "MD",
+    "wins": 4,
+    "losses": 8,
+    "pf": 282,
+    "pa": 318,
+    "region": "east",
+    "tier": 3,
+    "rivals": [
+      "48",
+      "2199",
+      "258"
+    ]
+  },
+  {
+    "id": "235",
+    "name": "Memphis Tigers",
+    "shortName": "Memphis",
+    "abbreviation": "MEM",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/235.png",
+    "state": "TN",
+    "wins": 8,
+    "losses": 4,
+    "pf": 415,
+    "pa": 270,
+    "region": "south",
+    "tier": 1,
+    "rivals": [
+      "145",
+      "2572",
+      "5"
+    ]
+  },
+  {
+    "id": "2390",
+    "name": "Miami Hurricanes",
+    "shortName": "Miami",
+    "abbreviation": "MIA",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png",
+    "state": "FL",
+    "wins": 10,
+    "losses": 2,
+    "pf": 409,
+    "pa": 166,
+    "region": "south",
+    "tier": 1,
+    "rivals": [
+      "2226",
+      "52",
+      "58"
+    ]
+  },
+  {
+    "id": "193",
+    "name": "Miami (OH) RedHawks",
+    "shortName": "Miami OH",
+    "abbreviation": "M-OH",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/193.png",
+    "state": "OH",
+    "wins": 7,
+    "losses": 6,
+    "pf": 326,
+    "pa": 286,
+    "region": "midwest",
+    "tier": 2,
+    "rivals": [
+      "2132",
+      "195",
+      "218"
+    ]
+  },
+  {
+    "id": "130",
+    "name": "Michigan Wolverines",
+    "shortName": "Michigan",
+    "abbreviation": "MICH",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/130.png",
+    "state": "MI",
+    "wins": 9,
+    "losses": 3,
+    "pf": 331,
+    "pa": 224,
+    "region": "midwest",
+    "tier": 1,
+    "rivals": [
+      "127",
+      "87",
+      "194"
+    ]
+  },
+  {
+    "id": "127",
+    "name": "Michigan State Spartans",
+    "shortName": "Michigan St",
+    "abbreviation": "MSU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/127.png",
+    "state": "MI",
+    "wins": 4,
+    "losses": 8,
+    "pf": 295,
+    "pa": 359,
+    "region": "midwest",
+    "tier": 3,
+    "rivals": [
+      "2117",
+      "130",
+      "2711"
+    ]
+  },
+  {
+    "id": "135",
+    "name": "Minnesota Golden Gophers",
+    "shortName": "Minnesota",
+    "abbreviation": "MINN",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/135.png",
+    "state": "MN",
+    "wins": 7,
+    "losses": 5,
+    "pf": 279,
+    "pa": 281,
+    "region": "midwest",
+    "tier": 2,
+    "rivals": [
+      "2294",
+      "158",
+      "275"
+    ]
+  },
+  {
+    "id": "344",
+    "name": "Mississippi State Bulldogs",
+    "shortName": "Mississippi St",
+    "abbreviation": "MSST",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/344.png",
+    "state": "MS",
+    "wins": 5,
+    "losses": 7,
+    "pf": 366,
+    "pa": 350,
+    "region": "south",
+    "tier": 3,
+    "rivals": [
+      "2348",
+      "145",
+      "5"
+    ]
+  },
+  {
+    "id": "142",
+    "name": "Missouri Tigers",
+    "shortName": "Missouri",
+    "abbreviation": "MIZ",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/142.png",
+    "state": "MO",
+    "wins": 8,
+    "losses": 4,
+    "pf": 386,
+    "pa": 233,
+    "region": "midwest",
+    "tier": 1,
+    "rivals": [
+      "8",
+      "2305",
+      "2623"
+    ]
+  },
+  {
+    "id": "2623",
+    "name": "Missouri State Bears",
+    "shortName": "Missouri St",
+    "abbreviation": "MOST",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2623.png",
+    "state": "MO",
+    "wins": 7,
+    "losses": 5,
+    "pf": 305,
+    "pa": 340,
+    "region": "midwest",
+    "tier": 2,
+    "rivals": [
+      "2084",
+      "2309",
+      "142"
+    ]
+  },
+  {
+    "id": "2459",
+    "name": "Northern Illinois Huskies",
+    "shortName": "N Illinois",
+    "abbreviation": "NIU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2459.png",
+    "state": "IL",
+    "wins": 3,
+    "losses": 9,
+    "pf": 205,
+    "pa": 292,
+    "region": "midwest",
+    "tier": 3,
+    "rivals": [
+      "356",
+      "77",
+      "218"
+    ]
+  },
+  {
+    "id": "152",
+    "name": "NC State Wolfpack",
+    "shortName": "NC State",
+    "abbreviation": "NCSU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/152.png",
+    "state": "NC",
+    "wins": 7,
+    "losses": 5,
+    "pf": 362,
+    "pa": 346,
+    "region": "east",
+    "tier": 2,
+    "rivals": [
+      "151",
+      "153",
+      "154"
+    ]
+  },
+  {
+    "id": "2426",
+    "name": "Navy Midshipmen",
+    "shortName": "Navy",
+    "abbreviation": "NAVY",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2426.png",
+    "state": "MD",
+    "wins": 10,
+    "losses": 2,
+    "pf": 374,
+    "pa": 312,
+    "region": "east",
+    "tier": 1,
+    "rivals": [
+      "2005",
+      "349",
+      "218"
+    ]
+  },
+  {
+    "id": "158",
+    "name": "Nebraska Cornhuskers",
+    "shortName": "Nebraska",
+    "abbreviation": "NEB",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/158.png",
+    "state": "NE",
+    "wins": 7,
+    "losses": 5,
+    "pf": 351,
+    "pa": 276,
+    "region": "midwest",
+    "tier": 2,
+    "rivals": [
+      "66",
+      "2306",
+      "135"
+    ]
+  },
+  {
+    "id": "2440",
+    "name": "Nevada Wolf Pack",
+    "shortName": "Nevada",
+    "abbreviation": "NEV",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2440.png",
+    "state": "NV",
+    "wins": 3,
+    "losses": 9,
+    "pf": 211,
+    "pa": 330,
+    "region": "west",
+    "tier": 3,
+    "rivals": [
+      "278",
+      "2439",
+      "238"
+    ]
+  },
+  {
+    "id": "167",
+    "name": "New Mexico Lobos",
+    "shortName": "New Mexico",
+    "abbreviation": "UNM",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/167.png",
+    "state": "NM",
+    "wins": 9,
+    "losses": 3,
+    "pf": 335,
+    "pa": 270,
+    "region": "west",
+    "tier": 1,
+    "rivals": [
+      "12",
+      "166",
+      "2638"
+    ]
+  },
+  {
+    "id": "166",
+    "name": "New Mexico State Aggies",
+    "shortName": "New Mexico St",
+    "abbreviation": "NMSU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/166.png",
+    "state": "NM",
+    "wins": 4,
+    "losses": 8,
+    "pf": 259,
+    "pa": 331,
+    "region": "west",
+    "tier": 3,
+    "rivals": [
+      "167",
+      "26",
+      "2638"
+    ]
+  },
+  {
+    "id": "153",
+    "name": "North Carolina Tar Heels",
+    "shortName": "North Carolina",
+    "abbreviation": "UNC",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/153.png",
+    "state": "NC",
+    "wins": 4,
+    "losses": 8,
+    "pf": 231,
+    "pa": 294,
+    "region": "east",
+    "tier": 3,
+    "rivals": [
+      "150",
+      "96",
+      "152"
+    ]
+  },
+  {
+    "id": "249",
+    "name": "North Texas Mean Green",
+    "shortName": "North Texas",
+    "abbreviation": "UNT",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/249.png",
+    "state": "TX",
+    "wins": 11,
+    "losses": 2,
+    "pf": 582,
+    "pa": 324,
+    "region": "midwest",
+    "tier": 1,
+    "rivals": [
+      "2567",
+      "326",
+      "202"
+    ]
+  },
+  {
+    "id": "77",
+    "name": "Northwestern Wildcats",
+    "shortName": "Northwestern",
+    "abbreviation": "NU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/77.png",
+    "state": "IL",
+    "wins": 6,
+    "losses": 6,
+    "pf": 270,
+    "pa": 251,
+    "region": "midwest",
+    "tier": 2,
+    "rivals": [
+      "356",
+      "2459",
+      "275"
+    ]
+  },
+  {
+    "id": "87",
+    "name": "Notre Dame Fighting Irish",
+    "shortName": "Notre Dame",
+    "abbreviation": "ND",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/87.png",
+    "state": "IN",
+    "wins": 10,
+    "losses": 2,
+    "pf": 504,
+    "pa": 211,
+    "region": "midwest",
+    "tier": 1,
+    "rivals": [
+      "130",
+      "2509",
+      "30"
+    ]
+  },
+  {
+    "id": "195",
+    "name": "Ohio Bobcats",
+    "shortName": "Ohio",
+    "abbreviation": "OHIO",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/195.png",
+    "state": "OH",
+    "wins": 8,
+    "losses": 4,
+    "pf": 344,
+    "pa": 275,
+    "region": "midwest",
+    "tier": 2,
+    "rivals": [
+      "276",
+      "193",
+      "2649"
+    ]
+  },
+  {
+    "id": "194",
+    "name": "Ohio State Buckeyes",
+    "shortName": "Ohio State",
+    "abbreviation": "OSU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/194.png",
+    "state": "OH",
+    "wins": 12,
+    "losses": 1,
+    "pf": 454,
+    "pa": 106,
+    "region": "midwest",
+    "tier": 1,
+    "rivals": [
+      "2132",
+      "130",
+      "213"
+    ]
+  },
+  {
+    "id": "201",
+    "name": "Oklahoma Sooners",
+    "shortName": "Oklahoma",
+    "abbreviation": "OU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/201.png",
+    "state": "OK",
+    "wins": 10,
+    "losses": 2,
+    "pf": 317,
+    "pa": 167,
+    "region": "midwest",
+    "tier": 1,
+    "rivals": [
+      "2306",
+      "197",
+      "251"
+    ]
+  },
+  {
+    "id": "197",
+    "name": "Oklahoma State Cowboys",
+    "shortName": "Oklahoma St",
+    "abbreviation": "OKST",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/197.png",
+    "state": "OK",
+    "wins": 1,
+    "losses": 11,
+    "pf": 170,
+    "pa": 400,
+    "region": "midwest",
+    "tier": 3,
+    "rivals": [
+      "2335",
+      "201",
+      "202"
+    ]
+  },
+  {
+    "id": "295",
+    "name": "Old Dominion Monarchs",
+    "shortName": "Old Dominion",
+    "abbreviation": "ODU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/295.png",
+    "state": "VA",
+    "wins": 9,
+    "losses": 3,
+    "pf": 392,
+    "pa": 231,
+    "region": "east",
+    "tier": 1,
+    "rivals": [
+      "151",
+      "256",
+      "202"
+    ]
+  },
+  {
+    "id": "145",
+    "name": "Ole Miss Rebels",
+    "shortName": "Ole Miss",
+    "abbreviation": "MISS",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/145.png",
+    "state": "MS",
+    "wins": 11,
+    "losses": 1,
+    "pf": 447,
+    "pa": 241,
+    "region": "south",
+    "tier": 1,
+    "rivals": [
+      "2050",
+      "235",
+      "344"
+    ]
+  },
+  {
+    "id": "2483",
+    "name": "Oregon Ducks",
+    "shortName": "Oregon",
+    "abbreviation": "ORE",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png",
+    "state": "OR",
+    "wins": 11,
+    "losses": 1,
+    "pf": 458,
+    "pa": 178,
+    "region": "west",
+    "tier": 1,
+    "rivals": [
+      "68",
+      "204",
+      "264"
+    ]
+  },
+  {
+    "id": "204",
+    "name": "Oregon State Beavers",
+    "shortName": "Oregon St",
+    "abbreviation": "ORST",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/204.png",
+    "state": "OR",
+    "wins": 2,
+    "losses": 10,
+    "pf": 218,
+    "pa": 353,
+    "region": "west",
+    "tier": 3,
+    "rivals": [
+      "338",
+      "2483",
+      "265"
+    ]
+  },
+  {
+    "id": "213",
+    "name": "Penn State Nittany Lions",
+    "shortName": "Penn State",
+    "abbreviation": "PSU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/213.png",
+    "state": "PA",
+    "wins": 6,
+    "losses": 6,
+    "pf": 381,
+    "pa": 257,
+    "region": "east",
+    "tier": 2,
+    "rivals": [
+      "194",
+      "221",
+      "164"
+    ]
+  },
+  {
+    "id": "221",
+    "name": "Pittsburgh Panthers",
+    "shortName": "Pitt",
+    "abbreviation": "PITT",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/221.png",
+    "state": "PA",
+    "wins": 8,
+    "losses": 4,
+    "pf": 421,
+    "pa": 299,
+    "region": "east",
+    "tier": 1,
+    "rivals": [
+      "213",
+      "183",
+      "277"
+    ]
+  },
+  {
+    "id": "2509",
+    "name": "Purdue Boilermakers",
+    "shortName": "Purdue",
+    "abbreviation": "PUR",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2509.png",
+    "state": "IN",
+    "wins": 2,
+    "losses": 10,
+    "pf": 225,
+    "pa": 382,
+    "region": "midwest",
+    "tier": 3,
+    "rivals": [
+      "356",
+      "84",
+      "87"
+    ]
+  },
+  {
+    "id": "242",
+    "name": "Rice Owls",
+    "shortName": "Rice",
+    "abbreviation": "RICE",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/242.png",
+    "state": "TX",
+    "wins": 5,
+    "losses": 7,
+    "pf": 238,
+    "pa": 387,
+    "region": "west",
+    "tier": 2,
+    "rivals": [
+      "9",
+      "248",
+      "2534"
+    ]
+  },
+  {
+    "id": "164",
+    "name": "Rutgers Scarlet Knights",
+    "shortName": "Rutgers",
+    "abbreviation": "RUTG",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/164.png",
+    "state": "NJ",
+    "wins": 5,
+    "losses": 7,
+    "pf": 344,
+    "pa": 382,
+    "region": "east",
+    "tier": 2,
+    "rivals": [
+      "349",
+      "2084",
+      "213"
+    ]
+  },
+  {
+    "id": "2567",
+    "name": "SMU Mustangs",
+    "shortName": "SMU",
+    "abbreviation": "SMU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2567.png",
+    "state": "TX",
+    "wins": 8,
+    "losses": 4,
+    "pf": 395,
+    "pa": 248,
+    "region": "west",
+    "tier": 1,
+    "rivals": [
+      "248",
+      "249",
+      "2628"
+    ]
+  },
+  {
+    "id": "2534",
+    "name": "Sam Houston Bearkats",
+    "shortName": "Sam Houston",
+    "abbreviation": "SHSU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2534.png",
+    "state": "TX",
+    "wins": 2,
+    "losses": 10,
+    "pf": 213,
+    "pa": 454,
+    "region": "west",
+    "tier": 3,
+    "rivals": [
+      "2032",
+      "242",
+      "326"
+    ]
+  },
+  {
+    "id": "21",
+    "name": "San Diego State Aztecs",
+    "shortName": "San Diego St",
+    "abbreviation": "SDSU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/21.png",
+    "state": "CA",
+    "wins": 9,
+    "losses": 3,
+    "pf": 296,
+    "pa": 151,
+    "region": "west",
+    "tier": 1,
+    "rivals": [
+      "62",
+      "23",
+      "2439"
+    ]
+  },
+  {
+    "id": "23",
+    "name": "San Jos\u00e9 State Spartans",
+    "shortName": "San Jos\u00e9 St",
+    "abbreviation": "SJSU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/23.png",
+    "state": "CA",
+    "wins": 3,
+    "losses": 9,
+    "pf": 257,
+    "pa": 390,
+    "region": "west",
+    "tier": 3,
+    "rivals": [
+      "278",
+      "276",
+      "21"
+    ]
+  },
+  {
+    "id": "6",
+    "name": "South Alabama Jaguars",
+    "shortName": "South Alabama",
+    "abbreviation": "USA",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/6.png",
+    "state": "AL",
+    "wins": 4,
+    "losses": 8,
+    "pf": 318,
+    "pa": 365,
+    "region": "south",
+    "tier": 3,
+    "rivals": [
+      "2050",
+      "2229",
+      "2653"
+    ]
+  },
+  {
+    "id": "2579",
+    "name": "South Carolina Gamecocks",
+    "shortName": "South Carolina",
+    "abbreviation": "SC",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2579.png",
+    "state": "SC",
+    "wins": 4,
+    "losses": 8,
+    "pf": 272,
+    "pa": 265,
+    "region": "east",
+    "tier": 3,
+    "rivals": [
+      "2429",
+      "228",
+      "2649"
+    ]
+  },
+  {
+    "id": "58",
+    "name": "South Florida Bulls",
+    "shortName": "South Florida",
+    "abbreviation": "USF",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/58.png",
+    "state": "FL",
+    "wins": 9,
+    "losses": 3,
+    "pf": 516,
+    "pa": 280,
+    "region": "south",
+    "tier": 1,
+    "rivals": [
+      "2390",
+      "2655",
+      "2116"
+    ]
+  },
+  {
+    "id": "2572",
+    "name": "Southern Miss Golden Eagles",
+    "shortName": "Southern Miss",
+    "abbreviation": "USM",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2572.png",
+    "state": "MS",
+    "wins": 7,
+    "losses": 5,
+    "pf": 358,
+    "pa": 329,
+    "region": "south",
+    "tier": 2,
+    "rivals": [
+      "2348",
+      "235",
+      "245"
+    ]
+  },
+  {
+    "id": "24",
+    "name": "Stanford Cardinal",
+    "shortName": "Stanford",
+    "abbreviation": "STAN",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/24.png",
+    "state": "CA",
+    "wins": 4,
+    "losses": 8,
+    "pf": 226,
+    "pa": 350,
+    "region": "west",
+    "tier": 3,
+    "rivals": [
+      "25",
+      "30",
+      "264"
+    ]
+  },
+  {
+    "id": "183",
+    "name": "Syracuse Orange",
+    "shortName": "Syracuse",
+    "abbreviation": "SYR",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/183.png",
+    "state": "NY",
+    "wins": 3,
+    "losses": 9,
+    "pf": 242,
+    "pa": 419,
+    "region": "east",
+    "tier": 3,
+    "rivals": [
+      "103",
+      "2084",
+      "221"
+    ]
+  },
+  {
+    "id": "2628",
+    "name": "TCU Horned Frogs",
+    "shortName": "TCU",
+    "abbreviation": "TCU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2628.png",
+    "state": "TX",
+    "wins": 8,
+    "losses": 4,
+    "pf": 369,
+    "pa": 302,
+    "region": "midwest",
+    "tier": 2,
+    "rivals": [
+      "239",
+      "2567",
+      "2641"
+    ]
+  },
+  {
+    "id": "218",
+    "name": "Temple Owls",
+    "shortName": "Temple",
+    "abbreviation": "TEM",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/218.png",
+    "state": "PA",
+    "wins": 5,
+    "losses": 7,
+    "pf": 334,
+    "pa": 356,
+    "region": "east",
+    "tier": 2,
+    "rivals": [
+      "193",
+      "2459",
+      "2426"
+    ]
+  },
+  {
+    "id": "2633",
+    "name": "Tennessee Volunteers",
+    "shortName": "Tennessee",
+    "abbreviation": "TENN",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2633.png",
+    "state": "TN",
+    "wins": 8,
+    "losses": 4,
+    "pf": 489,
+    "pa": 345,
+    "region": "south",
+    "tier": 2,
+    "rivals": [
+      "333",
+      "96",
+      "238"
+    ]
+  },
+  {
+    "id": "251",
+    "name": "Texas Longhorns",
+    "shortName": "Texas",
+    "abbreviation": "TEX",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/251.png",
+    "state": "TX",
+    "wins": 9,
+    "losses": 3,
+    "pf": 355,
+    "pa": 237,
+    "region": "west",
+    "tier": 1,
+    "rivals": [
+      "201",
+      "245",
+      "2641"
+    ]
+  },
+  {
+    "id": "245",
+    "name": "Texas A&M Aggies",
+    "shortName": "Texas A&M",
+    "abbreviation": "TA&M",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/245.png",
+    "state": "TX",
+    "wins": 11,
+    "losses": 1,
+    "pf": 436,
+    "pa": 263,
+    "region": "south",
+    "tier": 1,
+    "rivals": [
+      "8",
+      "2572",
+      "251"
+    ]
+  },
+  {
+    "id": "326",
+    "name": "Texas State Bobcats",
+    "shortName": "Texas St",
+    "abbreviation": "TXST",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/326.png",
+    "state": "TX",
+    "wins": 6,
+    "losses": 6,
+    "pf": 433,
+    "pa": 367,
+    "region": "west",
+    "tier": 2,
+    "rivals": [
+      "249",
+      "2534",
+      "2636"
+    ]
+  },
+  {
+    "id": "2641",
+    "name": "Texas Tech Red Raiders",
+    "shortName": "Texas Tech",
+    "abbreviation": "TTU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png",
+    "state": "TX",
+    "wins": 12,
+    "losses": 1,
+    "pf": 552,
+    "pa": 142,
+    "region": "west",
+    "tier": 1,
+    "rivals": [
+      "239",
+      "2628",
+      "251"
+    ]
+  },
+  {
+    "id": "2649",
+    "name": "Toledo Rockets",
+    "shortName": "Toledo",
+    "abbreviation": "TOL",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2649.png",
+    "state": "OH",
+    "wins": 8,
+    "losses": 4,
+    "pf": 379,
+    "pa": 146,
+    "region": "midwest",
+    "tier": 1,
+    "rivals": [
+      "189",
+      "195",
+      "2579"
+    ]
+  },
+  {
+    "id": "2653",
+    "name": "Troy Trojans",
+    "shortName": "Troy",
+    "abbreviation": "TROY",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2653.png",
+    "state": "AL",
+    "wins": 8,
+    "losses": 5,
+    "pf": 316,
+    "pa": 318,
+    "region": "south",
+    "tier": 2,
+    "rivals": [
+      "290",
+      "55",
+      "6"
+    ]
+  },
+  {
+    "id": "2655",
+    "name": "Tulane Green Wave",
+    "shortName": "Tulane",
+    "abbreviation": "TULN",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2655.png",
+    "state": "LA",
+    "wins": 11,
+    "losses": 2,
+    "pf": 378,
+    "pa": 294,
+    "region": "south",
+    "tier": 1,
+    "rivals": [
+      "25",
+      "58",
+      "2433"
+    ]
+  },
+  {
+    "id": "202",
+    "name": "Tulsa Golden Hurricane",
+    "shortName": "Tulsa",
+    "abbreviation": "TLSA",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/202.png",
+    "state": "OK",
+    "wins": 4,
+    "losses": 8,
+    "pf": 278,
+    "pa": 347,
+    "region": "midwest",
+    "tier": 3,
+    "rivals": [
+      "249",
+      "197",
+      "295"
+    ]
+  },
+  {
+    "id": "5",
+    "name": "UAB Blazers",
+    "shortName": "UAB",
+    "abbreviation": "UAB",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/5.png",
+    "state": "AL",
+    "wins": 4,
+    "losses": 8,
+    "pf": 317,
+    "pa": 459,
+    "region": "south",
+    "tier": 3,
+    "rivals": [
+      "55",
+      "235",
+      "344"
+    ]
+  },
+  {
+    "id": "2116",
+    "name": "UCF Knights",
+    "shortName": "UCF",
+    "abbreviation": "UCF",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2116.png",
+    "state": "FL",
+    "wins": 5,
+    "losses": 7,
+    "pf": 292,
+    "pa": 283,
+    "region": "south",
+    "tier": 3,
+    "rivals": [
+      "57",
+      "58",
+      "2636"
+    ]
+  },
+  {
+    "id": "26",
+    "name": "UCLA Bruins",
+    "shortName": "UCLA",
+    "abbreviation": "UCLA",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/26.png",
+    "state": "CA",
+    "wins": 3,
+    "losses": 9,
+    "pf": 218,
+    "pa": 401,
+    "region": "west",
+    "tier": 3,
+    "rivals": [
+      "25",
+      "166",
+      "30"
+    ]
+  },
+  {
+    "id": "41",
+    "name": "UConn Huskies",
+    "shortName": "UConn",
+    "abbreviation": "CONN",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/41.png",
+    "state": "CT",
+    "wins": 9,
+    "losses": 3,
+    "pf": 443,
+    "pa": 310,
+    "region": "east",
+    "tier": 1,
+    "rivals": [
+      "103",
+      "48",
+      "113"
+    ]
+  },
+  {
+    "id": "2433",
+    "name": "UL Monroe Warhawks",
+    "shortName": "UL Monroe",
+    "abbreviation": "ULM",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2433.png",
+    "state": "LA",
+    "wins": 3,
+    "losses": 9,
+    "pf": 199,
+    "pa": 383,
+    "region": "south",
+    "tier": 3,
+    "rivals": [
+      "2226",
+      "309",
+      "2655"
+    ]
+  },
+  {
+    "id": "113",
+    "name": "Massachusetts Minutemen",
+    "shortName": "UMass",
+    "abbreviation": "MASS",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/113.png",
+    "state": "MA",
+    "wins": 0,
+    "losses": 12,
+    "pf": 133,
+    "pa": 463,
+    "region": "east",
+    "tier": 3,
+    "rivals": [
+      "103",
+      "41",
+      "2638"
+    ]
+  },
+  {
+    "id": "2439",
+    "name": "UNLV Rebels",
+    "shortName": "UNLV",
+    "abbreviation": "UNLV",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2439.png",
+    "state": "NV",
+    "wins": 10,
+    "losses": 3,
+    "pf": 467,
+    "pa": 375,
+    "region": "west",
+    "tier": 1,
+    "rivals": [
+      "68",
+      "2440",
+      "21"
+    ]
+  },
+  {
+    "id": "30",
+    "name": "USC Trojans",
+    "shortName": "USC",
+    "abbreviation": "USC",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/30.png",
+    "state": "CA",
+    "wins": 9,
+    "losses": 3,
+    "pf": 438,
+    "pa": 269,
+    "region": "west",
+    "tier": 1,
+    "rivals": [
+      "87",
+      "24",
+      "26"
+    ]
+  },
+  {
+    "id": "2638",
+    "name": "UTEP Miners",
+    "shortName": "UTEP",
+    "abbreviation": "UTEP",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2638.png",
+    "state": "TX",
+    "wins": 2,
+    "losses": 10,
+    "pf": 280,
+    "pa": 365,
+    "region": "west",
+    "tier": 3,
+    "rivals": [
+      "167",
+      "166",
+      "113"
+    ]
+  },
+  {
+    "id": "2636",
+    "name": "UTSA Roadrunners",
+    "shortName": "UTSA",
+    "abbreviation": "UTSA",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2636.png",
+    "state": "TX",
+    "wins": 6,
+    "losses": 6,
+    "pf": 405,
+    "pa": 355,
+    "region": "west",
+    "tier": 2,
+    "rivals": [
+      "248",
+      "326",
+      "2116"
+    ]
+  },
+  {
+    "id": "254",
+    "name": "Utah Utes",
+    "shortName": "Utah",
+    "abbreviation": "UTAH",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/254.png",
+    "state": "UT",
+    "wins": 10,
+    "losses": 2,
+    "pf": 493,
+    "pa": 224,
+    "region": "west",
+    "tier": 1,
+    "rivals": [
+      "9",
+      "252",
+      "38"
+    ]
+  },
+  {
+    "id": "328",
+    "name": "Utah State Aggies",
+    "shortName": "Utah State",
+    "abbreviation": "USU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/328.png",
+    "state": "UT",
+    "wins": 6,
+    "losses": 6,
+    "pf": 381,
+    "pa": 339,
+    "region": "west",
+    "tier": 2,
+    "rivals": [
+      "252",
+      "68",
+      "2751"
+    ]
+  },
+  {
+    "id": "238",
+    "name": "Vanderbilt Commodores",
+    "shortName": "Vanderbilt",
+    "abbreviation": "VAN",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/238.png",
+    "state": "TN",
+    "wins": 10,
+    "losses": 2,
+    "pf": 473,
+    "pa": 263,
+    "region": "south",
+    "tier": 1,
+    "rivals": [
+      "2393",
+      "2440",
+      "2633"
+    ]
+  },
+  {
+    "id": "258",
+    "name": "Virginia Cavaliers",
+    "shortName": "Virginia",
+    "abbreviation": "UVA",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/258.png",
+    "state": "VA",
+    "wins": 10,
+    "losses": 3,
+    "pf": 418,
+    "pa": 267,
+    "region": "east",
+    "tier": 1,
+    "rivals": [
+      "120",
+      "259",
+      "154"
+    ]
+  },
+  {
+    "id": "259",
+    "name": "Virginia Tech Hokies",
+    "shortName": "Virginia Tech",
+    "abbreviation": "VT",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/259.png",
+    "state": "VA",
+    "wins": 3,
+    "losses": 9,
+    "pf": 257,
+    "pa": 362,
+    "region": "east",
+    "tier": 3,
+    "rivals": [
+      "256",
+      "2335",
+      "258"
+    ]
+  },
+  {
+    "id": "2711",
+    "name": "Western Michigan Broncos",
+    "shortName": "W Michigan",
+    "abbreviation": "WMU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2711.png",
+    "state": "MI",
+    "wins": 9,
+    "losses": 4,
+    "pf": 307,
+    "pa": 237,
+    "region": "midwest",
+    "tier": 1,
+    "rivals": [
+      "2117",
+      "2199",
+      "127"
+    ]
+  },
+  {
+    "id": "154",
+    "name": "Wake Forest Demon Deacons",
+    "shortName": "Wake Forest",
+    "abbreviation": "WAKE",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/154.png",
+    "state": "NC",
+    "wins": 8,
+    "losses": 4,
+    "pf": 322,
+    "pa": 258,
+    "region": "east",
+    "tier": 1,
+    "rivals": [
+      "150",
+      "152",
+      "258"
+    ]
+  },
+  {
+    "id": "264",
+    "name": "Washington Huskies",
+    "shortName": "Washington",
+    "abbreviation": "WASH",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/264.png",
+    "state": "WA",
+    "wins": 9,
+    "losses": 4,
+    "pf": 443,
+    "pa": 243,
+    "region": "west",
+    "tier": 1,
+    "rivals": [
+      "2483",
+      "24",
+      "265"
+    ]
+  },
+  {
+    "id": "265",
+    "name": "Washington State Cougars",
+    "shortName": "Washington St",
+    "abbreviation": "WSU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/265.png",
+    "state": "WA",
+    "wins": 6,
+    "losses": 6,
+    "pf": 259,
+    "pa": 242,
+    "region": "west",
+    "tier": 2,
+    "rivals": [
+      "309",
+      "204",
+      "264"
+    ]
+  },
+  {
+    "id": "277",
+    "name": "West Virginia Mountaineers",
+    "shortName": "West Virginia",
+    "abbreviation": "WVU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/277.png",
+    "state": "WV",
+    "wins": 4,
+    "losses": 8,
+    "pf": 261,
+    "pa": 370,
+    "region": "east",
+    "tier": 3,
+    "rivals": [
+      "84",
+      "276",
+      "221"
+    ]
+  },
+  {
+    "id": "98",
+    "name": "Western Kentucky Hilltoppers",
+    "shortName": "Western KY",
+    "abbreviation": "WKU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/98.png",
+    "state": "KY",
+    "wins": 8,
+    "losses": 4,
+    "pf": 357,
+    "pa": 281,
+    "region": "east",
+    "tier": 1,
+    "rivals": [
+      "2006",
+      "97",
+      "2393"
+    ]
+  },
+  {
+    "id": "275",
+    "name": "Wisconsin Badgers",
+    "shortName": "Wisconsin",
+    "abbreviation": "WIS",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/275.png",
+    "state": "WI",
+    "wins": 4,
+    "losses": 8,
+    "pf": 154,
+    "pa": 259,
+    "region": "midwest",
+    "tier": 3,
+    "rivals": [
+      "2294",
+      "135",
+      "77"
+    ]
+  },
+  {
+    "id": "2751",
+    "name": "Wyoming Cowboys",
+    "shortName": "Wyoming",
+    "abbreviation": "WYO",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2751.png",
+    "state": "WY",
+    "wins": 4,
+    "losses": 8,
+    "pf": 192,
+    "pa": 246,
+    "region": "west",
+    "tier": 3,
+    "rivals": [
+      "2005",
+      "36",
+      "328"
+    ]
+  }
+]
