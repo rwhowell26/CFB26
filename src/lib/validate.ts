@@ -165,7 +165,29 @@ export function validateModel() {
     assert(home !== regionOf(a) && home !== regionOf(b), `bye ${seed} can open against own region`);
   }
   const bracket = buildPlayoffBracket(field);
-  assert(bracket.some((game) => game.round === "first"), "first round exists");
+  const roundCount: Record<string, number> = { first: 8, second: 8, quarter: 4, semi: 2, final: 1 };
+  for (const [round, expected] of Object.entries(roundCount)) {
+    const games = bracket.filter((game) => game.round === round);
+    assert(games.length === expected, `${round} has ${games.length} games, expected ${expected}`);
+  }
+  const ids = bracket.map((game) => game.id);
+  assert(new Set(ids).size === ids.length, "duplicate bracket game ids");
+  const firstTeams = bracket
+    .filter((game) => game.round === "first")
+    .flatMap((game) => [game.teamAId, game.teamBId]);
+  assert(firstTeams.every(Boolean), "first round missing a team");
+  assert(new Set(firstTeams).size === 16, "first round should have 16 unique teams");
+  const r16 = bracket.filter((game) => game.round === "second");
+  assert(r16.map((game) => game.seedA).join(",") === "1,8,4,5,2,7,3,6", "round of 16 order");
+  const r16Teams = r16.flatMap((game) => [game.teamAId, game.teamBId]);
+  assert(new Set(r16Teams).size === 16, "round of 16 should have 16 unique teams");
+  for (const game of r16) {
+    const feed = bracket.find(
+      (item) => item.round === "first" && (item.seedA === game.seedB || item.seedB === game.seedB),
+    );
+    assert(feed, `no first-round feed for bye ${game.seedA}`);
+    assert(feed.projectedWinnerId === game.teamBId, `R16 ${game.seedA} does not receive the first-round winner`);
+  }
 
   return {
     teams: TEAMS.length,
