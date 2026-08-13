@@ -2,7 +2,7 @@
 
 A conference-free map: **four regions**, **8-team tiers** (as many as a region needs), protected rivals, a 12-week calendar, promotion/relegation, and a **24-team all-autobid playoff** for Tiers I–III.
 
-The pool is **136 FBS + 24 FCS** clubs (NDSU, Montana, Villanova, and other historically strong / high-resource FCS programs). 2025 records come from ESPN. Drag teams on the Regions tab anytime.
+The pool is **160 clubs**. Starting tiers use **2021–2025 records**. Former FCS programs cannot occupy Tiers I–II. 2025 records still drive in-season rankings, the playoff, and movement.
 
 ## Schedule (max 12 games, no 13th)
 

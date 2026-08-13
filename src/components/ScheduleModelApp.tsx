@@ -8,7 +8,7 @@ import { PlayoffTab } from "@/components/PlayoffTab";
 import { RankingsTab } from "@/components/RankingsTab";
 import { RegionsTab } from "@/components/RegionsTab";
 import { SchedulesTab } from "@/components/SchedulesTab";
-import { REGIONS, TEAMS } from "@/lib/teams";
+import { REGIONS, TEAMS, clampTier, getTeam } from "@/lib/teams";
 import { useModel } from "@/lib/storage";
 import type { RegionId, TierId } from "@/lib/types";
 
@@ -29,9 +29,10 @@ export function ScheduleModelApp() {
   const { assignment, rivals, setAssignment, setRivals, reset } = useModel();
 
   const onMove = (teamId: string, region: RegionId, tier: TierId) => {
+    const team = getTeam(teamId);
     setAssignment((current) => ({
       ...current,
-      [teamId]: { region, tier },
+      [teamId]: { region, tier: clampTier(team, tier) },
     }));
   };
 
@@ -51,7 +52,7 @@ export function ScheduleModelApp() {
           <p className="kicker">CFB26 · realignment lab</p>
           <h1 className="brand">Four Regions. Eight-Team Tiers.</h1>
           <p className="subhead">
-            160 clubs (136 FBS + 24 FCS), full round-robins, balanced crossovers, a 12-week
+            160 clubs, full round-robins, balanced crossovers, a 12-week
             calendar, promotion and relegation, and a 24-team all-autobid playoff for Tiers I–III.
           </p>
         </div>

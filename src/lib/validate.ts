@@ -11,7 +11,12 @@ export function validateModel() {
   const assignment = defaultAssignment();
   const rivals = defaultRivals();
   assert(TEAMS.length === 160, `Expected 160 teams, got ${TEAMS.length}`);
-  assert(TEAMS.filter((team) => team.subdivision === "fcs").length === 24, "expected 24 FCS teams");
+  assert(TEAMS.filter((team) => team.subdivision === "fcs").length === 24, "expected 24 extra clubs");
+  assert(
+    TEAMS.every((team) => team.subdivision !== "fcs" || team.tier >= 3),
+    "no extra club may start above Tier III",
+  );
+  assert(TEAMS.every((team) => typeof team.wins5 === "number"), "5-year records required");
 
   for (const region of REGIONS) {
     const count = teamsIn(assignment, region.id).length;

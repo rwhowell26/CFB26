@@ -15,7 +15,7 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import { useState } from "react";
 import { nextEmptyTier, teamsIn, tiersInRegion } from "@/lib/rankings";
-import { REGIONS, TIER_SIZE, getTeam, recordLabel, tierName } from "@/lib/teams";
+import { REGIONS, TIER_SIZE, getTeam, recordLabel5, tierName } from "@/lib/teams";
 import type { Assignment, RegionId, Team, TierId } from "@/lib/types";
 
 function DropColumn({
@@ -53,8 +53,8 @@ function TeamCard({ team }: { team: Team }) {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={team.logo} alt="" width={26} height={26} />
       <div>
-        <strong>{team.shortName}{team.subdivision === "fcs" ? " · FCS" : ""}</strong>
-        <span>{recordLabel(team)} · {team.state}</span>
+        <strong>{team.shortName}</strong>
+        <span>{recordLabel5(team)} over 5 years · {team.state}</span>
       </div>
     </article>
   );
@@ -102,9 +102,9 @@ export function RegionsTab({
   return (
     <div className="stack">
       <p className="lede">
-        Drag any team into a new region or tier. Each tier is built for 8 teams so the group
-        plays a full round-robin. Regions can have different numbers of tiers — drop a team
-        onto “New tier” to add one. Gold warning means that bucket is not at 8 yet.
+        Tiers start ordered by 2021–2025 record. Added clubs cannot sit above Tier III —
+        dropping one there snaps them back to Tier III. Each bucket is built for 8 teams;
+        gold means it is not at 8 yet. Drop onto “New tier” to add another group.
       </p>
       <DndContext
         sensors={sensors}

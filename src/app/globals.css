@@ -340,17 +340,6 @@ main { min-height: 100vh; }
 .slot-team { display: flex; gap: 0.35rem; align-items: center; }
 .muted { color: var(--muted); }
 
-.fcs-tag {
-  margin-left: 0.35rem;
-  padding: 0.05rem 0.35rem;
-  border-radius: 999px;
-  font-size: 0.62rem;
-  letter-spacing: 0.08em;
-  background: rgba(228, 195, 122, 0.18);
-  color: var(--gold);
-  vertical-align: middle;
-}
-
 .tier-bucket.is-warn { border-color: var(--warn); }
 .week-pill {
   font-family: var(--font-display), "Barlow Condensed", sans-serif;

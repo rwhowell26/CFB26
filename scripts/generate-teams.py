@@ -185,10 +185,10 @@ def add_edge(adj: dict[str, set[str]], a: str, b: str) -> bool:
     return True
 
 
-def fetch_standings(group: int) -> list[dict]:
+def fetch_standings(group: int, year: int) -> list[dict]:
     url = (
         "https://site.api.espn.com/apis/v2/sports/football/college-football/"
-        f"standings?group={group}&season=2025&seasontype=2"
+        f"standings?group={group}&season={year}&seasontype=2"
     )
     with urllib.request.urlopen(url) as response:
         data = json.load(response)
@@ -228,17 +228,49 @@ def fetch_standings(group: int) -> list[dict]:
     return teams
 
 
+def assign_tiers(group: list[dict]) -> None:
+    """Rank by 5-year record. FCS cannot occupy Tiers I–II."""
+    fbs = [t for t in group if t["subdivision"] == "fbs"]
+    fcs = [t for t in group if t["subdivision"] == "fcs"]
+    key = lambda t: (-t["winPct5"], -t["wins5"], -t["pointDiff5"], t["shortName"])
+    fbs.sort(key=key)
+    fcs.sort(key=key)
+    top = fbs[: TIER_SIZE * 2]
+    rest = sorted(fbs[TIER_SIZE * 2 :] + fcs, key=key)
+    ordered = top + rest
+    for i, team in enumerate(ordered):
+        team["tier"] = i // TIER_SIZE + 1
+        if team["subdivision"] == "fcs":
+            team["tier"] = max(team["tier"], 3)
+
+
 def main() -> None:
-    fbs = fetch_standings(80)
-    fcs = fetch_standings(81)
+    years = [2021, 2022, 2023, 2024, 2025]
     fcs_keep = {
         "VILL", "RICH", "W&M", "UNH", "HC", "URI",
         "FUR", "UTC", "MER", "JKST", "FAMU", "ALST",
         "NDSU", "SDST", "SDAK", "UND", "ILST", "YSU",
         "MONT", "MTST", "IDHO", "EWU", "SAC", "UCD",
     }
-    raw = [{**row, "subdivision": "fbs"} for row in fbs]
-    raw += [{**row, "subdivision": "fcs"} for row in fcs if row["abbreviation"] in fcs_keep]
+    latest_fbs = fetch_standings(80, 2025)
+    latest_fcs = [row for row in fetch_standings(81, 2025) if row["abbreviation"] in fcs_keep]
+    raw = [{**row, "subdivision": "fbs"} for row in latest_fbs]
+    raw += [{**row, "subdivision": "fcs"} for row in latest_fcs]
+    keep_ids = {row["id"] for row in raw}
+
+    totals: dict[str, dict[str, int]] = {
+        row["id"]: {"wins": 0, "losses": 0, "pf": 0, "pa": 0} for row in raw
+    }
+    for year in years:
+        for group in (80, 81):
+            for row in fetch_standings(group, year):
+                if row["id"] not in keep_ids:
+                    continue
+                wins, losses = parse_overall(row.get("overall"))
+                totals[row["id"]]["wins"] += wins
+                totals[row["id"]]["losses"] += losses
+                totals[row["id"]]["pf"] += int(row.get("pf") or 0)
+                totals[row["id"]]["pa"] += int(row.get("pa") or 0)
 
     by_abbr = {t["abbreviation"]: t for t in raw}
     missing_state = [t["id"] for t in raw if t["id"] not in STATE]
@@ -255,6 +287,8 @@ def main() -> None:
         wins, losses = parse_overall(t.get("overall"))
         pf = int(t.get("pf") or 0)
         pa = int(t.get("pa") or 0)
+        five = totals[t["id"]]
+        games5 = five["wins"] + five["losses"]
         teams.append({
             "id": t["id"],
             "name": t["name"],
@@ -266,8 +300,12 @@ def main() -> None:
             "losses": losses,
             "pf": pf,
             "pa": pa,
+            "wins5": five["wins"],
+            "losses5": five["losses"],
             "winPct": round(wins / (wins + losses), 4) if wins + losses else 0,
+            "winPct5": round(five["wins"] / games5, 4) if games5 else 0,
             "pointDiff": pf - pa,
+            "pointDiff5": five["pf"] - five["pa"],
             "region": region_for(t["abbreviation"]),
             "subdivision": t["subdivision"],
         })
@@ -280,10 +318,10 @@ def main() -> None:
         raise SystemExit(f"Regions not balanced to 40: {dict(counts)}")
 
     for region in ("east", "south", "midwest", "west"):
-        group = [t for t in teams if t["region"] == region]
-        group.sort(key=lambda t: (-t["winPct"], -t["wins"], -t["pointDiff"], t["shortName"]))
-        for i, t in enumerate(group):
-            t["tier"] = i // TIER_SIZE + 1
+        assign_tiers([t for t in teams if t["region"] == region])
+    fcs_high = [t["abbreviation"] for t in teams if t["subdivision"] == "fcs" and t["tier"] < 3]
+    if fcs_high:
+        raise SystemExit(f"FCS above Tier III: {fcs_high}")
 
     abbr_to_id = {t["abbreviation"]: t["id"] for t in teams}
     id_to_team = {t["id"]: t for t in teams}
@@ -371,6 +409,8 @@ def main() -> None:
             "losses": t["losses"],
             "pf": t["pf"],
             "pa": t["pa"],
+            "wins5": t["wins5"],
+            "losses5": t["losses5"],
             "region": t["region"],
             "tier": t["tier"],
             "subdivision": t["subdivision"],
@@ -384,7 +424,7 @@ def main() -> None:
     for abbr in ("ALA", "OSU", "UGA", "TEX", "ND", "NDSU", "MONT", "VILL"):
         t = next(x for x in out if x["abbreviation"] == abbr)
         names = [id_to_team[r]["abbreviation"] for r in t["rivals"]]
-        print(abbr, "->", names, "region", t["region"], "tier", t["tier"], f"{t['wins']}-{t['losses']}")
+        print(abbr, "->", names, "region", t["region"], "tier", t["tier"], f"2025 {t['wins']}-{t['losses']}", f"5yr {t['wins5']}-{t['losses5']}")
 
 
 if __name__ == "__main__":

@@ -2,6 +2,7 @@ import { playoffTeamsInGroup } from "./playoff";
 import { teamsIn, tiersInRegion } from "./rankings";
 import {
   compareRecords,
+  canPromoteTo,
   MAX_MOVEMENT,
   regionName,
   REGIONS,
@@ -49,6 +50,14 @@ function nextUnused(list: Team[], used: Set<string>, fromEnd: boolean): Team | u
   return ordered.find((team) => !used.has(team.id));
 }
 
+function nextPromotable(
+  list: Team[],
+  used: Set<string>,
+  toTier: number,
+): Team | undefined {
+  return list.find((team) => !used.has(team.id) && canPromoteTo(team, toTier));
+}
+
 export function planRegionMovement(assignment: Assignment, region: RegionId): RegionMovement {
   const tiers = tiersInRegion(assignment, region);
   const promotions: MovementItem[] = [];
@@ -81,25 +90,32 @@ export function planRegionMovement(assignment: Assignment, region: RegionId): Re
     const usedL = new Set<string>();
 
     const last = higher[higher.length - 1];
-    const champ = lower[0];
-    relegations.push({
-      teamId: last.id,
-      fromTier: higherTier,
-      toTier: lowerTier,
-      reason: "last-place",
-      detail: `${tierName(higherTier)} last place always goes down`,
-    });
-    promotions.push({
-      teamId: champ.id,
-      fromTier: lowerTier,
-      toTier: higherTier,
-      reason: "champion",
-      detail: `${tierName(lowerTier)} champion always goes up`,
-    });
-    usedH.add(last.id);
-    usedL.add(champ.id);
+    const eligibleChamp = nextPromotable(lower, usedL, higherTier);
+    if (eligibleChamp) {
+      relegations.push({
+        teamId: last.id,
+        fromTier: higherTier,
+        toTier: lowerTier,
+        reason: "last-place",
+        detail: `${tierName(higherTier)} last place always goes down`,
+      });
+      promotions.push({
+        teamId: eligibleChamp.id,
+        fromTier: lowerTier,
+        toTier: higherTier,
+        reason: "champion",
+        detail:
+          eligibleChamp.id === lower[0].id
+            ? `${tierName(lowerTier)} champion always goes up`
+            : `${lower[0].shortName} cannot go above Tier III, so ${eligibleChamp.shortName} goes up`,
+      });
+      usedH.add(last.id);
+      usedL.add(eligibleChamp.id);
+      if (eligibleChamp.id !== lower[0].id) usedL.add(lower[0].id);
+    }
 
     for (const team of playoffTeamsInGroup(lower, lowerTier)) {
+      if (!canPromoteTo(team, higherTier)) continue;
       if (usedL.has(team.id) || promotions.filter((item) => item.fromTier === lowerTier).length >= MAX_MOVEMENT) {
         continue;
       }
@@ -127,7 +143,7 @@ export function planRegionMovement(assignment: Assignment, region: RegionId): Re
     const playInSlots = MAX_MOVEMENT - alreadyUp;
     for (let slot = 0; slot < playInSlots; slot += 1) {
       const hBubble = nextUnused(higher, usedH, true);
-      const lBubble = nextUnused(lower, usedL, false);
+      const lBubble = nextPromotable(lower, usedL, higherTier);
       if (!hBubble || !lBubble) break;
       usedH.add(hBubble.id);
       usedL.add(lBubble.id);

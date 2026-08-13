@@ -21,7 +21,6 @@ export function TeamChip({
       <span className="chip-copy">
         <strong>
           {resolved.shortName}
-          {resolved.subdivision === "fcs" ? <span className="fcs-tag">FCS</span> : null}
         </strong>
         {extra ? <em>{extra}</em> : null}
       </span>
@@ -51,7 +50,7 @@ export function TeamRow({
       <img src={team.logo} alt="" width={28} height={28} />
       <span className="team-row-copy">
         <strong>{team.shortName}</strong>
-        <em>{team.abbreviation}{team.subdivision === "fcs" ? " · FCS" : ""}</em>
+        <em>{team.abbreviation}</em>
       </span>
       <span className="team-row-record">{record}</span>
       {trailing}

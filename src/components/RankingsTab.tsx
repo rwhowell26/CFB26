@@ -8,9 +8,8 @@ export function RankingsTab({ assignment }: { assignment: Assignment }) {
   return (
     <div className="stack">
       <p className="lede">
-        Regional standings from the 2025 record. These order the 8-team tiers, the playoff
-        autobids (top two in Tiers I–III), promotion/relegation, and the balanced crossover
-        games. Dragging a team on Regions changes which list they sit on, not the record.
+        Regional standings from the 2025 record. These drive playoff autobids, promotion
+        games, and crossovers. Starting tiers on the Regions tab use 2021–2025 records.
       </p>
       <div className="region-grid">
         {REGIONS.map((region) => {
@@ -37,7 +36,6 @@ export function RankingsTab({ assignment }: { assignment: Assignment }) {
                         <em>
                           {tierName(place.tier)} #{groupRank}
                           {playoff ? " · autobid" : ""}
-                          {team.subdivision === "fcs" ? " · FCS" : ""}
                           · {Math.round(winPct(team) * 1000) / 10}%
                         </em>
                       </div>

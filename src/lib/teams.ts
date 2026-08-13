@@ -9,6 +9,7 @@ export const TEAM_BY_ID: Record<string, Team> = Object.fromEntries(
 
 export const TIER_SIZE = 8;
 export const PLAYOFF_TIERS = 3;
+export const FCS_MIN_TIER = 3;
 export const SEASON_WEEKS = 12;
 export const MAX_GAMES = 12;
 export const MAX_MOVEMENT = 3;
@@ -79,6 +80,10 @@ export function recordLabel(team: Team): string {
   return `${team.wins}-${team.losses}`;
 }
 
+export function recordLabel5(team: Team): string {
+  return `${team.wins5}-${team.losses5}`;
+}
+
 export function compareRecords(a: Team, b: Team): number {
   const pct = winPct(b) - winPct(a);
   if (pct !== 0) return pct;
@@ -92,6 +97,15 @@ export function getTeam(id: string): Team {
   const team = TEAM_BY_ID[id];
   if (!team) throw new Error(`Unknown team id ${id}`);
   return team;
+}
+
+export function clampTier(team: Team, tier: TierId): TierId {
+  if (team.subdivision === "fcs" && tier < FCS_MIN_TIER) return FCS_MIN_TIER;
+  return tier;
+}
+
+export function canPromoteTo(team: Team, tier: TierId): boolean {
+  return team.subdivision !== "fcs" || tier >= FCS_MIN_TIER;
 }
 
 export function regionName(id: RegionId): string {

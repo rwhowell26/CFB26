@@ -10,8 +10,10 @@
     "losses": 8,
     "pf": 358,
     "pa": 364,
+    "wins5": 35,
+    "losses5": 25,
     "region": "west",
-    "tier": 4,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
       "349",
@@ -30,13 +32,15 @@
     "losses": 7,
     "pf": 267,
     "pa": 329,
+    "wins5": 15,
+    "losses5": 45,
     "region": "midwest",
-    "tier": 4,
+    "tier": 5,
     "subdivision": "fbs",
     "rivals": [
       "189",
-      "107",
-      "2309"
+      "2309",
+      "233"
     ]
   },
   {
@@ -50,6 +54,8 @@
     "losses": 3,
     "pf": 406,
     "pa": 226,
+    "wins5": 53,
+    "losses5": 10,
     "region": "south",
     "tier": 1,
     "subdivision": "fbs",
@@ -70,12 +76,14 @@
     "losses": 2,
     "pf": 509,
     "pa": 257,
+    "wins5": 35,
+    "losses5": 22,
     "region": "south",
-    "tier": 1,
+    "tier": 3,
     "subdivision": "fcs",
     "rivals": [
-      "9",
       "2296",
+      "2382",
       "2483"
     ]
   },
@@ -90,8 +98,10 @@
     "losses": 7,
     "pf": 304,
     "pa": 358,
+    "wins5": 34,
+    "losses5": 27,
     "region": "east",
-    "tier": 4,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
       "2429",
@@ -110,8 +120,10 @@
     "losses": 3,
     "pf": 391,
     "pa": 227,
+    "wins5": 28,
+    "losses5": 32,
     "region": "west",
-    "tier": 2,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
       "9",
@@ -130,12 +142,14 @@
     "losses": 4,
     "pf": 296,
     "pa": 276,
+    "wins5": 33,
+    "losses5": 28,
     "region": "west",
-    "tier": 3,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
-      "2011",
       "12",
+      "145",
       "254"
     ]
   },
@@ -150,8 +164,10 @@
     "losses": 10,
     "pf": 395,
     "pa": 406,
+    "wins5": 26,
+    "losses5": 34,
     "region": "south",
-    "tier": 5,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
       "99",
@@ -170,13 +186,15 @@
     "losses": 6,
     "pf": 293,
     "pa": 328,
+    "wins5": 24,
+    "losses5": 36,
     "region": "south",
-    "tier": 3,
+    "tier": 5,
     "subdivision": "fbs",
     "rivals": [
-      "331",
       "2226",
-      "62"
+      "2623",
+      "302"
     ]
   },
   {
@@ -190,8 +208,10 @@
     "losses": 6,
     "pf": 269,
     "pa": 265,
+    "wins5": 37,
+    "losses5": 24,
     "region": "east",
-    "tier": 3,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
       "2005",
@@ -210,6 +230,8 @@
     "losses": 7,
     "pf": 321,
     "pa": 248,
+    "wins5": 27,
+    "losses5": 33,
     "region": "south",
     "tier": 4,
     "subdivision": "fbs",
@@ -230,11 +252,13 @@
     "losses": 2,
     "pf": 415,
     "pa": 247,
+    "wins5": 43,
+    "losses5": 18,
     "region": "west",
     "tier": 1,
     "subdivision": "fbs",
     "rivals": [
-      "236",
+      "2571",
       "254",
       "328"
     ]
@@ -250,12 +274,14 @@
     "losses": 8,
     "pf": 190,
     "pa": 358,
+    "wins5": 22,
+    "losses5": 38,
     "region": "midwest",
     "tier": 5,
     "subdivision": "fbs",
     "rivals": [
+      "331",
       "107",
-      "2287",
       "84"
     ]
   },
@@ -270,13 +296,15 @@
     "losses": 7,
     "pf": 373,
     "pa": 391,
+    "wins5": 33,
+    "losses5": 28,
     "region": "midwest",
-    "tier": 4,
+    "tier": 3,
     "subdivision": "fbs",
     "rivals": [
-      "233",
       "2628",
-      "2641"
+      "2641",
+      "202"
     ]
   },
   {
@@ -290,8 +318,10 @@
     "losses": 5,
     "pf": 418,
     "pa": 337,
+    "wins5": 45,
+    "losses5": 20,
     "region": "west",
-    "tier": 3,
+    "tier": 1,
     "subdivision": "fbs",
     "rivals": [
       "147",
@@ -310,6 +340,8 @@
     "losses": 10,
     "pf": 305,
     "pa": 393,
+    "wins5": 24,
+    "losses5": 36,
     "region": "east",
     "tier": 5,
     "subdivision": "fbs",
@@ -330,6 +362,8 @@
     "losses": 8,
     "pf": 246,
     "pa": 291,
+    "wins5": 28,
+    "losses5": 32,
     "region": "midwest",
     "tier": 4,
     "subdivision": "fbs",
@@ -350,11 +384,13 @@
     "losses": 7,
     "pf": 288,
     "pa": 282,
+    "wins5": 26,
+    "losses5": 34,
     "region": "east",
-    "tier": 3,
+    "tier": 5,
     "subdivision": "fbs",
     "rivals": [
-      "276",
+      "2449",
       "164",
       "183"
     ]
@@ -370,12 +406,14 @@
     "losses": 5,
     "pf": 286,
     "pa": 272,
+    "wins5": 28,
+    "losses5": 32,
     "region": "midwest",
-    "tier": 3,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
-      "150",
       "2199",
+      "127",
       "2711"
     ]
   },
@@ -390,8 +428,10 @@
     "losses": 5,
     "pf": 298,
     "pa": 318,
+    "wins5": 28,
+    "losses5": 32,
     "region": "west",
-    "tier": 3,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
       "24",
@@ -410,6 +450,8 @@
     "losses": 11,
     "pf": 172,
     "pa": 436,
+    "wins5": 17,
+    "losses5": 43,
     "region": "east",
     "tier": 5,
     "subdivision": "fbs",
@@ -430,13 +472,15 @@
     "losses": 7,
     "pf": 339,
     "pa": 396,
+    "wins5": 33,
+    "losses5": 26,
     "region": "south",
-    "tier": 4,
+    "tier": 3,
     "subdivision": "fcs",
     "rivals": [
-      "252",
-      "48",
-      "231"
+      "231",
+      "26",
+      "277"
     ]
   },
   {
@@ -450,6 +494,8 @@
     "losses": 5,
     "pf": 381,
     "pa": 298,
+    "wins5": 37,
+    "losses5": 24,
     "region": "east",
     "tier": 2,
     "subdivision": "fbs",
@@ -470,8 +516,10 @@
     "losses": 5,
     "pf": 344,
     "pa": 245,
+    "wins5": 45,
+    "losses5": 17,
     "region": "east",
-    "tier": 2,
+    "tier": 1,
     "subdivision": "fbs",
     "rivals": [
       "52",
@@ -490,13 +538,15 @@
     "losses": 6,
     "pf": 274,
     "pa": 407,
+    "wins5": 38,
+    "losses5": 22,
     "region": "east",
-    "tier": 3,
+    "tier": 1,
     "subdivision": "fbs",
     "rivals": [
       "2026",
-      "36",
-      "2579"
+      "23",
+      "2655"
     ]
   },
   {
@@ -510,6 +560,8 @@
     "losses": 9,
     "pf": 251,
     "pa": 366,
+    "wins5": 21,
+    "losses5": 39,
     "region": "west",
     "tier": 5,
     "subdivision": "fbs",
@@ -530,12 +582,14 @@
     "losses": 10,
     "pf": 222,
     "pa": 370,
+    "wins5": 21,
+    "losses5": 39,
     "region": "west",
     "tier": 5,
     "subdivision": "fbs",
     "rivals": [
-      "324",
       "38",
+      "62",
       "2751"
     ]
   },
@@ -550,12 +604,14 @@
     "losses": 6,
     "pf": 357,
     "pa": 390,
+    "wins5": 37,
+    "losses5": 23,
     "region": "east",
-    "tier": 3,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
-      "236",
-      "231",
+      "331",
+      "96",
       "120"
     ]
   },
@@ -570,11 +626,13 @@
     "losses": 5,
     "pf": 442,
     "pa": 373,
+    "wins5": 35,
+    "losses5": 26,
     "region": "east",
     "tier": 2,
     "subdivision": "fbs",
     "rivals": [
-      "2117",
+      "160",
       "153",
       "154"
     ]
@@ -590,12 +648,14 @@
     "losses": 8,
     "pf": 289,
     "pa": 357,
+    "wins5": 30,
+    "losses5": 30,
     "region": "midwest",
-    "tier": 5,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
       "2117",
-      "84",
+      "295",
       "2711"
     ]
   },
@@ -610,13 +670,15 @@
     "losses": 7,
     "pf": 281,
     "pa": 362,
+    "wins5": 26,
+    "losses5": 33,
     "region": "west",
     "tier": 4,
     "subdivision": "fcs",
     "rivals": [
-      "2032",
-      "70",
-      "55"
+      "2050",
+      "48",
+      "70"
     ]
   },
   {
@@ -630,8 +692,10 @@
     "losses": 4,
     "pf": 402,
     "pa": 244,
+    "wins5": 31,
+    "losses5": 29,
     "region": "east",
-    "tier": 1,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
       "2429",
@@ -650,6 +714,8 @@
     "losses": 8,
     "pf": 354,
     "pa": 436,
+    "wins5": 21,
+    "losses5": 39,
     "region": "south",
     "tier": 5,
     "subdivision": "fbs",
@@ -670,13 +736,15 @@
     "losses": 5,
     "pf": 351,
     "pa": 333,
+    "wins5": 20,
+    "losses5": 40,
     "region": "south",
-    "tier": 3,
+    "tier": 5,
     "subdivision": "fbs",
     "rivals": [
       "2226",
-      "2247",
-      "6"
+      "6",
+      "2572"
     ]
   },
   {
@@ -690,8 +758,10 @@
     "losses": 8,
     "pf": 259,
     "pa": 288,
+    "wins5": 28,
+    "losses5": 32,
     "region": "south",
-    "tier": 5,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
       "52",
@@ -710,13 +780,15 @@
     "losses": 7,
     "pf": 291,
     "pa": 406,
+    "wins5": 41,
+    "losses5": 18,
     "region": "south",
-    "tier": 4,
+    "tier": 3,
     "subdivision": "fcs",
     "rivals": [
-      "2348",
-      "155",
-      "2534"
+      "84",
+      "2393",
+      "227"
     ]
   },
   {
@@ -730,8 +802,10 @@
     "losses": 7,
     "pf": 396,
     "pa": 264,
+    "wins5": 34,
+    "losses5": 27,
     "region": "south",
-    "tier": 4,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
       "228",
@@ -750,6 +824,8 @@
     "losses": 4,
     "pf": 317,
     "pa": 241,
+    "wins5": 40,
+    "losses5": 21,
     "region": "west",
     "tier": 2,
     "subdivision": "fbs",
@@ -770,13 +846,15 @@
     "losses": 6,
     "pf": 293,
     "pa": 372,
+    "wins5": 35,
+    "losses5": 25,
     "region": "south",
-    "tier": 4,
+    "tier": 3,
     "subdivision": "fcs",
     "rivals": [
       "236",
-      "48",
-      "2636"
+      "2287",
+      "2116"
     ]
   },
   {
@@ -790,6 +868,8 @@
     "losses": 6,
     "pf": 334,
     "pa": 410,
+    "wins5": 29,
+    "losses5": 31,
     "region": "south",
     "tier": 4,
     "subdivision": "fbs",
@@ -810,6 +890,8 @@
     "losses": 1,
     "pf": 415,
     "pa": 207,
+    "wins5": 60,
+    "losses5": 5,
     "region": "south",
     "tier": 1,
     "subdivision": "fbs",
@@ -830,13 +912,15 @@
     "losses": 11,
     "pf": 237,
     "pa": 454,
+    "wins5": 21,
+    "losses5": 39,
     "region": "south",
     "tier": 5,
     "subdivision": "fbs",
     "rivals": [
-      "2229",
       "290",
-      "338"
+      "338",
+      "16"
     ]
   },
   {
@@ -850,8 +934,10 @@
     "losses": 3,
     "pf": 397,
     "pa": 300,
+    "wins5": 30,
+    "losses5": 30,
     "region": "south",
-    "tier": 2,
+    "tier": 3,
     "subdivision": "fbs",
     "rivals": [
       "228",
@@ -870,11 +956,13 @@
     "losses": 4,
     "pf": 342,
     "pa": 282,
+    "wins5": 27,
+    "losses5": 36,
     "region": "west",
-    "tier": 3,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
-      "2032",
+      "36",
       "278",
       "21"
     ]
@@ -890,12 +978,14 @@
     "losses": 9,
     "pf": 246,
     "pa": 297,
+    "wins5": 38,
+    "losses5": 23,
     "region": "east",
-    "tier": 5,
+    "tier": 3,
     "subdivision": "fcs",
     "rivals": [
-      "2006",
       "2050",
+      "155",
       "113"
     ]
   },
@@ -910,6 +1000,8 @@
     "losses": 3,
     "pf": 340,
     "pa": 262,
+    "wins5": 35,
+    "losses5": 26,
     "region": "south",
     "tier": 2,
     "subdivision": "fbs",
@@ -930,8 +1022,10 @@
     "losses": 8,
     "pf": 302,
     "pa": 317,
+    "wins5": 34,
+    "losses5": 28,
     "region": "west",
-    "tier": 4,
+    "tier": 3,
     "subdivision": "fcs",
     "rivals": [
       "331",
@@ -950,6 +1044,8 @@
     "losses": 4,
     "pf": 352,
     "pa": 279,
+    "wins5": 35,
+    "losses5": 25,
     "region": "midwest",
     "tier": 2,
     "subdivision": "fbs",
@@ -970,13 +1066,15 @@
     "losses": 4,
     "pf": 459,
     "pa": 388,
+    "wins5": 37,
+    "losses5": 25,
     "region": "midwest",
-    "tier": 1,
+    "tier": 3,
     "subdivision": "fcs",
     "rivals": [
-      "2050",
-      "96",
-      "23"
+      "231",
+      "149",
+      "2459"
     ]
   },
   {
@@ -990,12 +1088,14 @@
     "losses": 0,
     "pf": 545,
     "pa": 141,
+    "wins5": 33,
+    "losses5": 28,
     "region": "midwest",
-    "tier": 1,
+    "tier": 3,
     "subdivision": "fbs",
     "rivals": [
       "2050",
-      "2199",
+      "50",
       "2509"
     ]
   },
@@ -1010,8 +1110,10 @@
     "losses": 4,
     "pf": 347,
     "pa": 182,
+    "wins5": 43,
+    "losses5": 19,
     "region": "midwest",
-    "tier": 2,
+    "tier": 1,
     "subdivision": "fbs",
     "rivals": [
       "66",
@@ -1030,6 +1132,8 @@
     "losses": 4,
     "pf": 329,
     "pa": 242,
+    "wins5": 36,
+    "losses5": 25,
     "region": "midwest",
     "tier": 2,
     "subdivision": "fbs",
@@ -1050,13 +1154,15 @@
     "losses": 3,
     "pf": 394,
     "pa": 225,
+    "wins5": 51,
+    "losses5": 10,
     "region": "south",
-    "tier": 2,
+    "tier": 3,
     "subdivision": "fcs",
     "rivals": [
       "2011",
-      "2433",
-      "2754"
+      "344",
+      "2433"
     ]
   },
   {
@@ -1070,13 +1176,15 @@
     "losses": 1,
     "pf": 485,
     "pa": 206,
+    "wins5": 51,
+    "losses5": 10,
     "region": "east",
     "tier": 1,
     "subdivision": "fbs",
     "rivals": [
       "2335",
-      "295",
-      "2116"
+      "120",
+      "295"
     ]
   },
   {
@@ -1090,11 +1198,13 @@
     "losses": 5,
     "pf": 377,
     "pa": 340,
+    "wins5": 39,
+    "losses5": 21,
     "region": "south",
-    "tier": 3,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
-      "331",
+      "6",
       "2653",
       "5"
     ]
@@ -1110,8 +1220,10 @@
     "losses": 7,
     "pf": 337,
     "pa": 321,
+    "wins5": 26,
+    "losses5": 34,
     "region": "midwest",
-    "tier": 4,
+    "tier": 5,
     "subdivision": "fbs",
     "rivals": [
       "66",
@@ -1130,8 +1242,10 @@
     "losses": 6,
     "pf": 353,
     "pa": 320,
+    "wins5": 39,
+    "losses5": 22,
     "region": "midwest",
-    "tier": 4,
+    "tier": 1,
     "subdivision": "fbs",
     "rivals": [
       "2305",
@@ -1150,13 +1264,15 @@
     "losses": 3,
     "pf": 368,
     "pa": 316,
+    "wins5": 31,
+    "losses5": 27,
     "region": "south",
     "tier": 2,
     "subdivision": "fbs",
     "rivals": [
       "2247",
       "59",
-      "2440"
+      "2382"
     ]
   },
   {
@@ -1170,13 +1286,15 @@
     "losses": 7,
     "pf": 255,
     "pa": 403,
+    "wins5": 18,
+    "losses5": 43,
     "region": "midwest",
-    "tier": 4,
+    "tier": 5,
     "subdivision": "fbs",
     "rivals": [
       "2006",
       "189",
-      "193"
+      "2754"
     ]
   },
   {
@@ -1190,11 +1308,13 @@
     "losses": 7,
     "pf": 276,
     "pa": 317,
+    "wins5": 32,
+    "losses5": 28,
     "region": "east",
     "tier": 4,
     "subdivision": "fbs",
     "rivals": [
-      "2287",
+      "48",
       "97",
       "2633"
     ]
@@ -1210,8 +1330,10 @@
     "losses": 5,
     "pf": 262,
     "pa": 220,
+    "wins5": 39,
+    "losses5": 22,
     "region": "south",
-    "tier": 3,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
       "333",
@@ -1230,8 +1352,10 @@
     "losses": 8,
     "pf": 307,
     "pa": 318,
+    "wins5": 40,
+    "losses5": 20,
     "region": "east",
-    "tier": 4,
+    "tier": 1,
     "subdivision": "fbs",
     "rivals": [
       "256",
@@ -1250,12 +1374,14 @@
     "losses": 6,
     "pf": 325,
     "pa": 360,
+    "wins5": 40,
+    "losses5": 22,
     "region": "south",
-    "tier": 3,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
       "2348",
-      "2382",
+      "204",
       "2433"
     ]
   },
@@ -1270,13 +1396,15 @@
     "losses": 5,
     "pf": 332,
     "pa": 256,
+    "wins5": 21,
+    "losses5": 39,
     "region": "south",
-    "tier": 3,
+    "tier": 5,
     "subdivision": "fbs",
     "rivals": [
-      "50",
       "309",
-      "2572"
+      "2572",
+      "238"
     ]
   },
   {
@@ -1290,8 +1418,10 @@
     "losses": 4,
     "pf": 362,
     "pa": 253,
+    "wins5": 39,
+    "losses5": 22,
     "region": "east",
-    "tier": 2,
+    "tier": 1,
     "subdivision": "fbs",
     "rivals": [
       "2132",
@@ -1310,11 +1440,13 @@
     "losses": 9,
     "pf": 269,
     "pa": 371,
+    "wins5": 23,
+    "losses5": 37,
     "region": "south",
     "tier": 5,
     "subdivision": "fbs",
     "rivals": [
-      "26",
+      "50",
       "238",
       "98"
     ]
@@ -1330,13 +1462,15 @@
     "losses": 7,
     "pf": 369,
     "pa": 363,
+    "wins5": 36,
+    "losses5": 25,
     "region": "east",
-    "tier": 4,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
-      "2084",
       "195",
-      "277"
+      "277",
+      "2729"
     ]
   },
   {
@@ -1350,12 +1484,14 @@
     "losses": 8,
     "pf": 282,
     "pa": 318,
+    "wins5": 28,
+    "losses5": 32,
     "region": "east",
     "tier": 4,
     "subdivision": "fbs",
     "rivals": [
       "48",
-      "2623",
+      "256",
       "258"
     ]
   },
@@ -1370,8 +1506,10 @@
     "losses": 4,
     "pf": 415,
     "pa": 270,
+    "wins5": 39,
+    "losses5": 21,
     "region": "south",
-    "tier": 2,
+    "tier": 1,
     "subdivision": "fbs",
     "rivals": [
       "145",
@@ -1390,13 +1528,15 @@
     "losses": 3,
     "pf": 434,
     "pa": 306,
+    "wins5": 43,
+    "losses5": 17,
     "region": "south",
-    "tier": 2,
+    "tier": 3,
     "subdivision": "fcs",
     "rivals": [
-      "309",
-      "160",
-      "222"
+      "2011",
+      "338",
+      "16"
     ]
   },
   {
@@ -1410,6 +1550,8 @@
     "losses": 2,
     "pf": 409,
     "pa": 166,
+    "wins5": 39,
+    "losses5": 21,
     "region": "south",
     "tier": 1,
     "subdivision": "fbs",
@@ -1430,13 +1572,15 @@
     "losses": 6,
     "pf": 326,
     "pa": 286,
+    "wins5": 38,
+    "losses5": 25,
     "region": "midwest",
-    "tier": 4,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
       "2132",
-      "2309",
-      "195"
+      "195",
+      "222"
     ]
   },
   {
@@ -1450,6 +1594,8 @@
     "losses": 3,
     "pf": 331,
     "pa": 224,
+    "wins5": 54,
+    "losses5": 9,
     "region": "midwest",
     "tier": 1,
     "subdivision": "fbs",
@@ -1470,12 +1616,14 @@
     "losses": 8,
     "pf": 295,
     "pa": 359,
+    "wins5": 28,
+    "losses5": 32,
     "region": "midwest",
-    "tier": 5,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
+      "2117",
       "130",
-      "153",
       "2711"
     ]
   },
@@ -1490,8 +1638,10 @@
     "losses": 5,
     "pf": 279,
     "pa": 281,
+    "wins5": 35,
+    "losses5": 25,
     "region": "midwest",
-    "tier": 3,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
       "2294",
@@ -1510,13 +1660,15 @@
     "losses": 7,
     "pf": 366,
     "pa": 350,
+    "wins5": 27,
+    "losses5": 33,
     "region": "south",
     "tier": 4,
     "subdivision": "fbs",
     "rivals": [
+      "2296",
       "145",
-      "5",
-      "2729"
+      "5"
     ]
   },
   {
@@ -1530,8 +1682,10 @@
     "losses": 4,
     "pf": 386,
     "pa": 233,
+    "wins5": 39,
+    "losses5": 21,
     "region": "midwest",
-    "tier": 2,
+    "tier": 1,
     "subdivision": "fbs",
     "rivals": [
       "8",
@@ -1550,13 +1704,15 @@
     "losses": 5,
     "pf": 305,
     "pa": 340,
+    "wins5": 32,
+    "losses5": 26,
     "region": "midwest",
-    "tier": 3,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
-      "120",
+      "2032",
       "142",
-      "2449"
+      "2754"
     ]
   },
   {
@@ -1570,13 +1726,15 @@
     "losses": 1,
     "pf": 592,
     "pa": 333,
+    "wins5": 52,
+    "losses5": 15,
     "region": "west",
-    "tier": 1,
+    "tier": 3,
     "subdivision": "fcs",
     "rivals": [
+      "2287",
       "147",
-      "2571",
-      "218"
+      "242"
     ]
   },
   {
@@ -1590,8 +1748,10 @@
     "losses": 2,
     "pf": 523,
     "pa": 247,
+    "wins5": 57,
+    "losses5": 9,
     "region": "west",
-    "tier": 1,
+    "tier": 3,
     "subdivision": "fcs",
     "rivals": [
       "68",
@@ -1610,11 +1770,13 @@
     "losses": 1,
     "pf": 534,
     "pa": 169,
+    "wins5": 58,
+    "losses5": 9,
     "region": "midwest",
-    "tier": 1,
+    "tier": 3,
     "subdivision": "fcs",
     "rivals": [
-      "2623",
+      "2084",
       "155",
       "2571"
     ]
@@ -1630,13 +1792,15 @@
     "losses": 9,
     "pf": 205,
     "pa": 292,
+    "wins5": 28,
+    "losses5": 33,
     "region": "midwest",
-    "tier": 5,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
       "356",
-      "77",
-      "98"
+      "2287",
+      "77"
     ]
   },
   {
@@ -1650,8 +1814,10 @@
     "losses": 5,
     "pf": 362,
     "pa": 346,
+    "wins5": 39,
+    "losses5": 21,
     "region": "east",
-    "tier": 3,
+    "tier": 1,
     "subdivision": "fbs",
     "rivals": [
       "151",
@@ -1670,8 +1836,10 @@
     "losses": 2,
     "pf": 374,
     "pa": 312,
+    "wins5": 32,
+    "losses5": 28,
     "region": "east",
-    "tier": 1,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
       "2005",
@@ -1690,8 +1858,10 @@
     "losses": 5,
     "pf": 351,
     "pa": 276,
+    "wins5": 25,
+    "losses5": 35,
     "region": "midwest",
-    "tier": 3,
+    "tier": 5,
     "subdivision": "fbs",
     "rivals": [
       "66",
@@ -1710,12 +1880,14 @@
     "losses": 9,
     "pf": 211,
     "pa": 330,
+    "wins5": 18,
+    "losses5": 43,
     "region": "west",
     "tier": 5,
     "subdivision": "fbs",
     "rivals": [
       "278",
-      "338",
+      "166",
       "2439"
     ]
   },
@@ -1730,13 +1902,15 @@
     "losses": 5,
     "pf": 323,
     "pa": 297,
+    "wins5": 34,
+    "losses5": 27,
     "region": "east",
-    "tier": 2,
+    "tier": 3,
     "subdivision": "fcs",
     "rivals": [
-      "2382",
+      "150",
       "227",
-      "257"
+      "2649"
     ]
   },
   {
@@ -1750,8 +1924,10 @@
     "losses": 3,
     "pf": 335,
     "pa": 270,
+    "wins5": 23,
+    "losses5": 37,
     "region": "west",
-    "tier": 2,
+    "tier": 5,
     "subdivision": "fbs",
     "rivals": [
       "12",
@@ -1770,12 +1946,14 @@
     "losses": 8,
     "pf": 259,
     "pa": 331,
+    "wins5": 25,
+    "losses5": 37,
     "region": "west",
-    "tier": 4,
+    "tier": 5,
     "subdivision": "fbs",
     "rivals": [
+      "2440",
       "167",
-      "16",
       "2638"
     ]
   },
@@ -1790,13 +1968,15 @@
     "losses": 8,
     "pf": 231,
     "pa": 294,
+    "wins5": 33,
+    "losses5": 28,
     "region": "east",
-    "tier": 5,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
       "150",
-      "127",
-      "152"
+      "152",
+      "257"
     ]
   },
   {
@@ -1810,11 +1990,13 @@
     "losses": 6,
     "pf": 461,
     "pa": 278,
+    "wins5": 32,
+    "losses5": 29,
     "region": "midwest",
     "tier": 3,
     "subdivision": "fcs",
     "rivals": [
-      "50",
+      "107",
       "2449",
       "233"
     ]
@@ -1830,8 +2012,10 @@
     "losses": 2,
     "pf": 582,
     "pa": 324,
+    "wins5": 35,
+    "losses5": 27,
     "region": "midwest",
-    "tier": 1,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
       "2567",
@@ -1850,8 +2034,10 @@
     "losses": 6,
     "pf": 270,
     "pa": 251,
+    "wins5": 21,
+    "losses5": 39,
     "region": "midwest",
-    "tier": 4,
+    "tier": 5,
     "subdivision": "fbs",
     "rivals": [
       "356",
@@ -1870,6 +2056,8 @@
     "losses": 2,
     "pf": 504,
     "pa": 211,
+    "wins5": 49,
+    "losses5": 11,
     "region": "midwest",
     "tier": 1,
     "subdivision": "fbs",
@@ -1890,6 +2078,8 @@
     "losses": 4,
     "pf": 344,
     "pa": 275,
+    "wins5": 39,
+    "losses5": 23,
     "region": "midwest",
     "tier": 2,
     "subdivision": "fbs",
@@ -1910,6 +2100,8 @@
     "losses": 1,
     "pf": 454,
     "pa": 106,
+    "wins5": 54,
+    "losses5": 7,
     "region": "midwest",
     "tier": 1,
     "subdivision": "fbs",
@@ -1930,6 +2122,8 @@
     "losses": 2,
     "pf": 317,
     "pa": 167,
+    "wins5": 42,
+    "losses5": 18,
     "region": "midwest",
     "tier": 1,
     "subdivision": "fbs",
@@ -1950,8 +2144,10 @@
     "losses": 11,
     "pf": 170,
     "pa": 400,
+    "wins5": 31,
+    "losses5": 31,
     "region": "midwest",
-    "tier": 5,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
       "2335",
@@ -1970,13 +2166,15 @@
     "losses": 3,
     "pf": 392,
     "pa": 231,
+    "wins5": 29,
+    "losses5": 31,
     "region": "east",
-    "tier": 1,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
+      "2199",
       "151",
-      "256",
-      "257"
+      "256"
     ]
   },
   {
@@ -1990,13 +2188,15 @@
     "losses": 1,
     "pf": 447,
     "pa": 241,
+    "wins5": 48,
+    "losses5": 12,
     "region": "south",
     "tier": 1,
     "subdivision": "fbs",
     "rivals": [
+      "9",
       "235",
-      "344",
-      "2655"
+      "344"
     ]
   },
   {
@@ -2010,6 +2210,8 @@
     "losses": 1,
     "pf": 458,
     "pa": 178,
+    "wins5": 54,
+    "losses5": 9,
     "region": "west",
     "tier": 1,
     "subdivision": "fbs",
@@ -2030,12 +2232,14 @@
     "losses": 10,
     "pf": 218,
     "pa": 353,
+    "wins5": 31,
+    "losses5": 29,
     "region": "west",
-    "tier": 5,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
+      "309",
       "2483",
-      "242",
       "265"
     ]
   },
@@ -2050,8 +2254,10 @@
     "losses": 6,
     "pf": 381,
     "pa": 257,
+    "wins5": 44,
+    "losses5": 17,
     "region": "east",
-    "tier": 3,
+    "tier": 1,
     "subdivision": "fbs",
     "rivals": [
       "194",
@@ -2070,6 +2276,8 @@
     "losses": 4,
     "pf": 421,
     "pa": 299,
+    "wins5": 37,
+    "losses5": 24,
     "region": "east",
     "tier": 2,
     "subdivision": "fbs",
@@ -2090,6 +2298,8 @@
     "losses": 10,
     "pf": 225,
     "pa": 382,
+    "wins5": 23,
+    "losses5": 38,
     "region": "midwest",
     "tier": 5,
     "subdivision": "fbs",
@@ -2110,13 +2320,15 @@
     "losses": 3,
     "pf": 438,
     "pa": 296,
+    "wins5": 42,
+    "losses5": 19,
     "region": "east",
-    "tier": 1,
+    "tier": 3,
     "subdivision": "fcs",
     "rivals": [
+      "50",
       "160",
-      "41",
-      "2754"
+      "41"
     ]
   },
   {
@@ -2130,12 +2342,14 @@
     "losses": 7,
     "pf": 238,
     "pa": 387,
+    "wins5": 24,
+    "losses5": 36,
     "region": "west",
-    "tier": 4,
+    "tier": 5,
     "subdivision": "fbs",
     "rivals": [
       "248",
-      "204",
+      "149",
       "2534"
     ]
   },
@@ -2150,12 +2364,14 @@
     "losses": 5,
     "pf": 263,
     "pa": 272,
+    "wins5": 41,
+    "losses5": 21,
     "region": "east",
     "tier": 3,
     "subdivision": "fcs",
     "rivals": [
-      "160",
-      "295",
+      "153",
+      "222",
       "2729"
     ]
   },
@@ -2170,8 +2386,10 @@
     "losses": 7,
     "pf": 344,
     "pa": 382,
+    "wins5": 27,
+    "losses5": 33,
     "region": "east",
-    "tier": 4,
+    "tier": 5,
     "subdivision": "fbs",
     "rivals": [
       "349",
@@ -2190,11 +2408,13 @@
     "losses": 5,
     "pf": 400,
     "pa": 307,
+    "wins5": 57,
+    "losses5": 11,
     "region": "midwest",
     "tier": 3,
     "subdivision": "fcs",
     "rivals": [
-      "149",
+      "252",
       "2449",
       "233"
     ]
@@ -2210,8 +2430,10 @@
     "losses": 4,
     "pf": 395,
     "pa": 248,
+    "wins5": 45,
+    "losses5": 17,
     "region": "west",
-    "tier": 2,
+    "tier": 1,
     "subdivision": "fbs",
     "rivals": [
       "248",
@@ -2230,12 +2452,14 @@
     "losses": 5,
     "pf": 405,
     "pa": 315,
+    "wins5": 39,
+    "losses5": 23,
     "region": "west",
     "tier": 3,
     "subdivision": "fcs",
     "rivals": [
-      "166",
-      "6",
+      "2247",
+      "2382",
       "302"
     ]
   },
@@ -2250,13 +2474,15 @@
     "losses": 10,
     "pf": 213,
     "pa": 454,
+    "wins5": 30,
+    "losses5": 27,
     "region": "west",
-    "tier": 5,
+    "tier": 3,
     "subdivision": "fbs",
     "rivals": [
-      "50",
       "242",
-      "326"
+      "326",
+      "2433"
     ]
   },
   {
@@ -2270,6 +2496,8 @@
     "losses": 3,
     "pf": 296,
     "pa": 151,
+    "wins5": 34,
+    "losses5": 27,
     "region": "west",
     "tier": 2,
     "subdivision": "fbs",
@@ -2290,12 +2518,14 @@
     "losses": 9,
     "pf": 257,
     "pa": 390,
+    "wins5": 29,
+    "losses5": 30,
     "region": "west",
-    "tier": 5,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
+      "324",
       "278",
-      "2287",
       "21"
     ]
   },
@@ -2310,12 +2540,14 @@
     "losses": 8,
     "pf": 318,
     "pa": 365,
+    "wins5": 31,
+    "losses5": 29,
     "region": "south",
-    "tier": 5,
+    "tier": 3,
     "subdivision": "fbs",
     "rivals": [
       "2229",
-      "16",
+      "55",
       "2653"
     ]
   },
@@ -2330,13 +2562,15 @@
     "losses": 8,
     "pf": 272,
     "pa": 265,
+    "wins5": 32,
+    "losses5": 28,
     "region": "east",
-    "tier": 4,
+    "tier": 3,
     "subdivision": "fbs",
     "rivals": [
       "2429",
       "228",
-      "324"
+      "2754"
     ]
   },
   {
@@ -2350,11 +2584,13 @@
     "losses": 5,
     "pf": 407,
     "pa": 395,
+    "wins5": 41,
+    "losses5": 23,
     "region": "midwest",
-    "tier": 2,
+    "tier": 3,
     "subdivision": "fcs",
     "rivals": [
-      "239",
+      "2006",
       "155",
       "2571"
     ]
@@ -2370,8 +2606,10 @@
     "losses": 3,
     "pf": 516,
     "pa": 280,
+    "wins5": 24,
+    "losses5": 36,
     "region": "south",
-    "tier": 2,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
       "2390",
@@ -2390,13 +2628,15 @@
     "losses": 5,
     "pf": 358,
     "pa": 329,
+    "wins5": 20,
+    "losses5": 40,
     "region": "south",
-    "tier": 3,
+    "tier": 5,
     "subdivision": "fbs",
     "rivals": [
+      "2229",
       "2348",
-      "235",
-      "2638"
+      "235"
     ]
   },
   {
@@ -2410,8 +2650,10 @@
     "losses": 8,
     "pf": 226,
     "pa": 350,
+    "wins5": 16,
+    "losses5": 44,
     "region": "west",
-    "tier": 4,
+    "tier": 5,
     "subdivision": "fbs",
     "rivals": [
       "25",
@@ -2430,8 +2672,10 @@
     "losses": 9,
     "pf": 242,
     "pa": 419,
+    "wins5": 30,
+    "losses5": 30,
     "region": "east",
-    "tier": 5,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
       "103",
@@ -2450,8 +2694,10 @@
     "losses": 4,
     "pf": 369,
     "pa": 302,
+    "wins5": 38,
+    "losses5": 23,
     "region": "midwest",
-    "tier": 3,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
       "239",
@@ -2470,13 +2716,15 @@
     "losses": 7,
     "pf": 334,
     "pa": 356,
+    "wins5": 17,
+    "losses5": 43,
     "region": "east",
-    "tier": 4,
+    "tier": 5,
     "subdivision": "fbs",
     "rivals": [
-      "149",
       "2426",
-      "222"
+      "222",
+      "98"
     ]
   },
   {
@@ -2490,8 +2738,10 @@
     "losses": 4,
     "pf": 489,
     "pa": 345,
+    "wins5": 43,
+    "losses5": 17,
     "region": "south",
-    "tier": 2,
+    "tier": 1,
     "subdivision": "fbs",
     "rivals": [
       "333",
@@ -2510,8 +2760,10 @@
     "losses": 3,
     "pf": 355,
     "pa": 237,
+    "wins5": 45,
+    "losses5": 17,
     "region": "west",
-    "tier": 2,
+    "tier": 1,
     "subdivision": "fbs",
     "rivals": [
       "201",
@@ -2530,13 +2782,15 @@
     "losses": 1,
     "pf": 436,
     "pa": 263,
+    "wins5": 39,
+    "losses5": 21,
     "region": "south",
     "tier": 1,
     "subdivision": "fbs",
     "rivals": [
       "8",
       "251",
-      "277"
+      "2655"
     ]
   },
   {
@@ -2550,8 +2804,10 @@
     "losses": 6,
     "pf": 433,
     "pa": 367,
+    "wins5": 28,
+    "losses5": 32,
     "region": "west",
-    "tier": 3,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
       "249",
@@ -2570,8 +2826,10 @@
     "losses": 1,
     "pf": 552,
     "pa": 142,
+    "wins5": 39,
+    "losses5": 22,
     "region": "west",
-    "tier": 1,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
       "239",
@@ -2590,13 +2848,15 @@
     "losses": 4,
     "pf": 379,
     "pa": 146,
+    "wins5": 41,
+    "losses5": 21,
     "region": "midwest",
-    "tier": 2,
+    "tier": 1,
     "subdivision": "fbs",
     "rivals": [
       "189",
-      "195",
-      "222"
+      "160",
+      "195"
     ]
   },
   {
@@ -2610,8 +2870,10 @@
     "losses": 5,
     "pf": 316,
     "pa": 318,
+    "wins5": 39,
+    "losses5": 24,
     "region": "south",
-    "tier": 3,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
       "290",
@@ -2630,13 +2892,15 @@
     "losses": 2,
     "pf": 378,
     "pa": 294,
+    "wins5": 44,
+    "losses5": 20,
     "region": "south",
     "tier": 1,
     "subdivision": "fbs",
     "rivals": [
-      "145",
+      "324",
       "58",
-      "2433"
+      "245"
     ]
   },
   {
@@ -2650,13 +2914,15 @@
     "losses": 8,
     "pf": 278,
     "pa": 347,
+    "wins5": 22,
+    "losses5": 38,
     "region": "midwest",
     "tier": 5,
     "subdivision": "fbs",
     "rivals": [
+      "239",
       "249",
-      "197",
-      "2754"
+      "197"
     ]
   },
   {
@@ -2670,8 +2936,10 @@
     "losses": 8,
     "pf": 317,
     "pa": 459,
+    "wins5": 25,
+    "losses5": 35,
     "region": "south",
-    "tier": 5,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
       "55",
@@ -2690,13 +2958,15 @@
     "losses": 4,
     "pf": 421,
     "pa": 392,
+    "wins5": 41,
+    "losses5": 20,
     "region": "west",
-    "tier": 2,
+    "tier": 3,
     "subdivision": "fcs",
     "rivals": [
+      "2032",
       "25",
-      "16",
-      "238"
+      "16"
     ]
   },
   {
@@ -2710,12 +2980,14 @@
     "losses": 7,
     "pf": 292,
     "pa": 283,
+    "wins5": 32,
+    "losses5": 29,
     "region": "south",
-    "tier": 4,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
       "57",
-      "256",
+      "231",
       "58"
     ]
   },
@@ -2730,12 +3002,14 @@
     "losses": 9,
     "pf": 218,
     "pa": 401,
+    "wins5": 32,
+    "losses5": 28,
     "region": "west",
-    "tier": 5,
+    "tier": 3,
     "subdivision": "fbs",
     "rivals": [
       "25",
-      "2393",
+      "236",
       "30"
     ]
   },
@@ -2750,8 +3024,10 @@
     "losses": 3,
     "pf": 443,
     "pa": 310,
+    "wins5": 27,
+    "losses5": 33,
     "region": "east",
-    "tier": 1,
+    "tier": 5,
     "subdivision": "fbs",
     "rivals": [
       "103",
@@ -2770,13 +3046,15 @@
     "losses": 9,
     "pf": 199,
     "pa": 383,
+    "wins5": 18,
+    "losses5": 42,
     "region": "south",
     "tier": 5,
     "subdivision": "fbs",
     "rivals": [
       "2296",
       "309",
-      "2655"
+      "2534"
     ]
   },
   {
@@ -2790,6 +3068,8 @@
     "losses": 12,
     "pf": 133,
     "pa": 463,
+    "wins5": 7,
+    "losses5": 53,
     "region": "east",
     "tier": 5,
     "subdivision": "fbs",
@@ -2810,8 +3090,10 @@
     "losses": 3,
     "pf": 467,
     "pa": 375,
+    "wins5": 36,
+    "losses5": 27,
     "region": "west",
-    "tier": 1,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
       "68",
@@ -2830,8 +3112,10 @@
     "losses": 3,
     "pf": 438,
     "pa": 269,
+    "wins5": 37,
+    "losses5": 24,
     "region": "west",
-    "tier": 1,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
       "87",
@@ -2850,13 +3134,15 @@
     "losses": 10,
     "pf": 280,
     "pa": 365,
+    "wins5": 20,
+    "losses5": 40,
     "region": "west",
     "tier": 5,
     "subdivision": "fbs",
     "rivals": [
       "167",
       "166",
-      "2572"
+      "2636"
     ]
   },
   {
@@ -2870,13 +3156,15 @@
     "losses": 6,
     "pf": 405,
     "pa": 355,
+    "wins5": 43,
+    "losses5": 19,
     "region": "west",
-    "tier": 3,
+    "tier": 1,
     "subdivision": "fbs",
     "rivals": [
-      "231",
       "248",
-      "326"
+      "326",
+      "2638"
     ]
   },
   {
@@ -2890,6 +3178,8 @@
     "losses": 2,
     "pf": 493,
     "pa": 224,
+    "wins5": 43,
+    "losses5": 19,
     "region": "west",
     "tier": 1,
     "subdivision": "fbs",
@@ -2910,6 +3200,8 @@
     "losses": 6,
     "pf": 381,
     "pa": 339,
+    "wins5": 32,
+    "losses5": 29,
     "region": "west",
     "tier": 3,
     "subdivision": "fbs",
@@ -2930,13 +3222,15 @@
     "losses": 2,
     "pf": 473,
     "pa": 263,
+    "wins5": 25,
+    "losses5": 35,
     "region": "south",
-    "tier": 1,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
+      "2348",
       "2393",
-      "2633",
-      "302"
+      "2633"
     ]
   },
   {
@@ -2950,13 +3244,15 @@
     "losses": 2,
     "pf": 429,
     "pa": 284,
+    "wins5": 48,
+    "losses5": 17,
     "region": "east",
-    "tier": 1,
+    "tier": 3,
     "subdivision": "fcs",
     "rivals": [
-      "2382",
-      "218",
-      "2649"
+      "193",
+      "257",
+      "218"
     ]
   },
   {
@@ -2970,8 +3266,10 @@
     "losses": 3,
     "pf": 418,
     "pa": 267,
+    "wins5": 27,
+    "losses5": 32,
     "region": "east",
-    "tier": 1,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
       "120",
@@ -2990,6 +3288,8 @@
     "losses": 9,
     "pf": 257,
     "pa": 362,
+    "wins5": 24,
+    "losses5": 35,
     "region": "east",
     "tier": 5,
     "subdivision": "fbs",
@@ -3010,8 +3310,10 @@
     "losses": 4,
     "pf": 307,
     "pa": 237,
+    "wins5": 31,
+    "losses5": 30,
     "region": "midwest",
-    "tier": 2,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
       "2117",
@@ -3030,8 +3332,10 @@
     "losses": 4,
     "pf": 322,
     "pa": 258,
+    "wins5": 33,
+    "losses5": 28,
     "region": "east",
-    "tier": 2,
+    "tier": 3,
     "subdivision": "fbs",
     "rivals": [
       "150",
@@ -3050,8 +3354,10 @@
     "losses": 4,
     "pf": 443,
     "pa": 243,
+    "wins5": 42,
+    "losses5": 20,
     "region": "west",
-    "tier": 2,
+    "tier": 1,
     "subdivision": "fbs",
     "rivals": [
       "2483",
@@ -3070,8 +3376,10 @@
     "losses": 6,
     "pf": 259,
     "pa": 242,
+    "wins5": 33,
+    "losses5": 27,
     "region": "west",
-    "tier": 4,
+    "tier": 2,
     "subdivision": "fbs",
     "rivals": [
       "70",
@@ -3090,13 +3398,15 @@
     "losses": 8,
     "pf": 261,
     "pa": 370,
+    "wins5": 29,
+    "losses5": 31,
     "region": "east",
-    "tier": 5,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
+      "236",
       "276",
-      "221",
-      "245"
+      "221"
     ]
   },
   {
@@ -3110,13 +3420,15 @@
     "losses": 4,
     "pf": 357,
     "pa": 281,
+    "wins5": 39,
+    "losses5": 24,
     "region": "east",
-    "tier": 2,
+    "tier": 1,
     "subdivision": "fbs",
     "rivals": [
       "97",
       "2393",
-      "2459"
+      "218"
     ]
   },
   {
@@ -3130,11 +3442,13 @@
     "losses": 5,
     "pf": 354,
     "pa": 308,
+    "wins5": 37,
+    "losses5": 22,
     "region": "east",
     "tier": 3,
     "subdivision": "fcs",
     "rivals": [
-      "344",
+      "276",
       "257",
       "259"
     ]
@@ -3150,8 +3464,10 @@
     "losses": 8,
     "pf": 154,
     "pa": 259,
+    "wins5": 30,
+    "losses5": 30,
     "region": "midwest",
-    "tier": 5,
+    "tier": 4,
     "subdivision": "fbs",
     "rivals": [
       "2294",
@@ -3170,6 +3486,8 @@
     "losses": 8,
     "pf": 192,
     "pa": 246,
+    "wins5": 28,
+    "losses5": 32,
     "region": "west",
     "tier": 4,
     "subdivision": "fbs",
@@ -3190,13 +3508,15 @@
     "losses": 5,
     "pf": 476,
     "pa": 403,
+    "wins5": 30,
+    "losses5": 29,
     "region": "midwest",
     "tier": 3,
     "subdivision": "fcs",
     "rivals": [
-      "2296",
-      "227",
-      "202"
+      "2309",
+      "2623",
+      "2579"
     ]
   }
 ]
