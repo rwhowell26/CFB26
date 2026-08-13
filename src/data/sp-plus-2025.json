@@ -1,0 +1,1346 @@
+[
+  {
+    "rank": 1,
+    "name": "Indiana",
+    "rating": 85.0,
+    "record": "16-0"
+  },
+  {
+    "rank": 2,
+    "name": "Ohio State",
+    "rating": 82.7,
+    "record": "12-2"
+  },
+  {
+    "rank": 3,
+    "name": "Texas Tech",
+    "rating": 80.2,
+    "record": "12-2"
+  },
+  {
+    "rank": 4,
+    "name": "Oregon",
+    "rating": 78.5,
+    "record": "13-2"
+  },
+  {
+    "rank": 5,
+    "name": "Notre Dame",
+    "rating": 77.0,
+    "record": "10-2"
+  },
+  {
+    "rank": 6,
+    "name": "Georgia",
+    "rating": 76.7,
+    "record": "12-2"
+  },
+  {
+    "rank": 7,
+    "name": "Ole Miss",
+    "rating": 76.6,
+    "record": "13-2"
+  },
+  {
+    "rank": 8,
+    "name": "Utah",
+    "rating": 74.8,
+    "record": "11-2"
+  },
+  {
+    "rank": 9,
+    "name": "Miami-FL",
+    "rating": 73.3,
+    "record": "13-3"
+  },
+  {
+    "rank": 10,
+    "name": "Texas A&M",
+    "rating": 73.3,
+    "record": "11-2"
+  },
+  {
+    "rank": 11,
+    "name": "Vanderbilt",
+    "rating": 72.9,
+    "record": "10-3"
+  },
+  {
+    "rank": 12,
+    "name": "Iowa",
+    "rating": 72.3,
+    "record": "9-4"
+  },
+  {
+    "rank": 13,
+    "name": "Washington",
+    "rating": 71.0,
+    "record": "9-4"
+  },
+  {
+    "rank": 14,
+    "name": "Oklahoma",
+    "rating": 70.9,
+    "record": "10-3"
+  },
+  {
+    "rank": 15,
+    "name": "Penn State",
+    "rating": 70.7,
+    "record": "7-6"
+  },
+  {
+    "rank": 16,
+    "name": "USC",
+    "rating": 69.5,
+    "record": "9-4"
+  },
+  {
+    "rank": 17,
+    "name": "Texas",
+    "rating": 68.8,
+    "record": "10-3"
+  },
+  {
+    "rank": 18,
+    "name": "BYU",
+    "rating": 68.5,
+    "record": "12-2"
+  },
+  {
+    "rank": 19,
+    "name": "Tennessee",
+    "rating": 67.6,
+    "record": "8-5"
+  },
+  {
+    "rank": 20,
+    "name": "Alabama",
+    "rating": 67.4,
+    "record": "11-4"
+  },
+  {
+    "rank": 21,
+    "name": "Missouri",
+    "rating": 67.0,
+    "record": "8-5"
+  },
+  {
+    "rank": 22,
+    "name": "North Texas",
+    "rating": 66.4,
+    "record": "12-2"
+  },
+  {
+    "rank": 23,
+    "name": "SMU",
+    "rating": 66.0,
+    "record": "9-4"
+  },
+  {
+    "rank": 24,
+    "name": "Illinois",
+    "rating": 65.5,
+    "record": "9-4"
+  },
+  {
+    "rank": 25,
+    "name": "Michigan",
+    "rating": 65.0,
+    "record": "9-4"
+  },
+  {
+    "rank": 26,
+    "name": "Louisville",
+    "rating": 65.0,
+    "record": "9-4"
+  },
+  {
+    "rank": 27,
+    "name": "James Madison",
+    "rating": 64.9,
+    "record": "12-2"
+  },
+  {
+    "rank": 28,
+    "name": "Arizona",
+    "rating": 64.6,
+    "record": "9-4"
+  },
+  {
+    "rank": 29,
+    "name": "Auburn",
+    "rating": 64.2,
+    "record": "5-7"
+  },
+  {
+    "rank": 30,
+    "name": "USF",
+    "rating": 64.2,
+    "record": "9-4"
+  },
+  {
+    "rank": 31,
+    "name": "Virginia",
+    "rating": 63.7,
+    "record": "11-3"
+  },
+  {
+    "rank": 32,
+    "name": "LSU",
+    "rating": 62.9,
+    "record": "7-6"
+  },
+  {
+    "rank": 33,
+    "name": "Iowa State",
+    "rating": 62.5,
+    "record": "8-4"
+  },
+  {
+    "rank": 34,
+    "name": "Clemson",
+    "rating": 62.1,
+    "record": "7-6"
+  },
+  {
+    "rank": 35,
+    "name": "Georgia Tech",
+    "rating": 61.9,
+    "record": "9-4"
+  },
+  {
+    "rank": 36,
+    "name": "Pittsburgh",
+    "rating": 61.0,
+    "record": "8-5"
+  },
+  {
+    "rank": 37,
+    "name": "TCU",
+    "rating": 60.9,
+    "record": "9-4"
+  },
+  {
+    "rank": 38,
+    "name": "East Carolina",
+    "rating": 60.6,
+    "record": "9-4"
+  },
+  {
+    "rank": 39,
+    "name": "Memphis",
+    "rating": 60.2,
+    "record": "8-5"
+  },
+  {
+    "rank": 40,
+    "name": "Houston",
+    "rating": 60.0,
+    "record": "10-3"
+  },
+  {
+    "rank": 41,
+    "name": "Florida State",
+    "rating": 59.8,
+    "record": "5-7"
+  },
+  {
+    "rank": 42,
+    "name": "Kansas State",
+    "rating": 59.6,
+    "record": "6-6"
+  },
+  {
+    "rank": 43,
+    "name": "San Diego State",
+    "rating": 59.3,
+    "record": "9-4"
+  },
+  {
+    "rank": 44,
+    "name": "Duke",
+    "rating": 59.2,
+    "record": "9-5"
+  },
+  {
+    "rank": 45,
+    "name": "Tulane",
+    "rating": 58.9,
+    "record": "11-3"
+  },
+  {
+    "rank": 46,
+    "name": "Nebraska",
+    "rating": 58.8,
+    "record": "7-6"
+  },
+  {
+    "rank": 47,
+    "name": "Navy",
+    "rating": 58.8,
+    "record": "11-2"
+  },
+  {
+    "rank": 48,
+    "name": "Toledo",
+    "rating": 58.6,
+    "record": "8-5"
+  },
+  {
+    "rank": 49,
+    "name": "South Carolina",
+    "rating": 58.5,
+    "record": "4-8"
+  },
+  {
+    "rank": 50,
+    "name": "Old Dominion",
+    "rating": 58.5,
+    "record": "10-3"
+  },
+  {
+    "rank": 51,
+    "name": "Northwestern",
+    "rating": 58.4,
+    "record": "7-6"
+  },
+  {
+    "rank": 52,
+    "name": "Wake Forest",
+    "rating": 58.3,
+    "record": "9-4"
+  },
+  {
+    "rank": 53,
+    "name": "Connecticut",
+    "rating": 57.7,
+    "record": "9-4"
+  },
+  {
+    "rank": 54,
+    "name": "Arkansas",
+    "rating": 57.7,
+    "record": "2-10"
+  },
+  {
+    "rank": 55,
+    "name": "NC State",
+    "rating": 57.4,
+    "record": "8-5"
+  },
+  {
+    "rank": 56,
+    "name": "Cincinnati",
+    "rating": 57.1,
+    "record": "7-6"
+  },
+  {
+    "rank": 57,
+    "name": "UNLV",
+    "rating": 56.9,
+    "record": "10-4"
+  },
+  {
+    "rank": 58,
+    "name": "Mississippi State",
+    "rating": 56.7,
+    "record": "5-8"
+  },
+  {
+    "rank": 59,
+    "name": "Kansas",
+    "rating": 56.7,
+    "record": "5-7"
+  },
+  {
+    "rank": 60,
+    "name": "Arizona State",
+    "rating": 56.5,
+    "record": "8-5"
+  },
+  {
+    "rank": 61,
+    "name": "Washington State",
+    "rating": 56.4,
+    "record": "7-6"
+  },
+  {
+    "rank": 62,
+    "name": "UTSA",
+    "rating": 56.3,
+    "record": "7-6"
+  },
+  {
+    "rank": 63,
+    "name": "Florida",
+    "rating": 56.1,
+    "record": "4-8"
+  },
+  {
+    "rank": 64,
+    "name": "Boise State",
+    "rating": 55.7,
+    "record": "9-5"
+  },
+  {
+    "rank": 65,
+    "name": "North Dakota State",
+    "rating": 55.4,
+    "record": "12-1"
+  },
+  {
+    "rank": 66,
+    "name": "Texas State",
+    "rating": 54.9,
+    "record": "7-6"
+  },
+  {
+    "rank": 67,
+    "name": "Fresno State",
+    "rating": 54.4,
+    "record": "9-4"
+  },
+  {
+    "rank": 68,
+    "name": "Kentucky",
+    "rating": 54.4,
+    "record": "5-7"
+  },
+  {
+    "rank": 69,
+    "name": "Hawaii",
+    "rating": 54.3,
+    "record": "9-4"
+  },
+  {
+    "rank": 70,
+    "name": "Western Kentucky",
+    "rating": 54.2,
+    "record": "9-4"
+  },
+  {
+    "rank": 71,
+    "name": "Minnesota",
+    "rating": 54.1,
+    "record": "8-5"
+  },
+  {
+    "rank": 72,
+    "name": "Baylor",
+    "rating": 54.0,
+    "record": "5-7"
+  },
+  {
+    "rank": 73,
+    "name": "Rutgers",
+    "rating": 53.6,
+    "record": "5-7"
+  },
+  {
+    "rank": 74,
+    "name": "New Mexico",
+    "rating": 53.5,
+    "record": "9-4"
+  },
+  {
+    "rank": 75,
+    "name": "Army",
+    "rating": 53.4,
+    "record": "7-6"
+  },
+  {
+    "rank": 76,
+    "name": "Maryland",
+    "rating": 53.2,
+    "record": "4-8"
+  },
+  {
+    "rank": 77,
+    "name": "UCF",
+    "rating": 51.4,
+    "record": "5-7"
+  },
+  {
+    "rank": 78,
+    "name": "Louisiana Tech",
+    "rating": 51.3,
+    "record": "8-5"
+  },
+  {
+    "rank": 79,
+    "name": "Western Michigan",
+    "rating": 51.2,
+    "record": "10-4"
+  },
+  {
+    "rank": 80,
+    "name": "Utah State",
+    "rating": 49.5,
+    "record": "6-7"
+  },
+  {
+    "rank": 81,
+    "name": "California",
+    "rating": 49.4,
+    "record": "7-6"
+  },
+  {
+    "rank": 82,
+    "name": "Air Force",
+    "rating": 49.4,
+    "record": "4-8"
+  },
+  {
+    "rank": 83,
+    "name": "Miami-OH",
+    "rating": 49.2,
+    "record": "7-7"
+  },
+  {
+    "rank": 84,
+    "name": "Michigan State",
+    "rating": 49.2,
+    "record": "4-8"
+  },
+  {
+    "rank": 85,
+    "name": "Ohio",
+    "rating": 48.6,
+    "record": "9-4"
+  },
+  {
+    "rank": 86,
+    "name": "Wisconsin",
+    "rating": 48.2,
+    "record": "4-8"
+  },
+  {
+    "rank": 87,
+    "name": "Marshall",
+    "rating": 48.1,
+    "record": "5-7"
+  },
+  {
+    "rank": 88,
+    "name": "Troy",
+    "rating": 47.8,
+    "record": "8-6"
+  },
+  {
+    "rank": 89,
+    "name": "Temple",
+    "rating": 47.5,
+    "record": "5-7"
+  },
+  {
+    "rank": 90,
+    "name": "Kennesaw State",
+    "rating": 47.2,
+    "record": "10-4"
+  },
+  {
+    "rank": 91,
+    "name": "Purdue",
+    "rating": 46.5,
+    "record": "2-10"
+  },
+  {
+    "rank": 92,
+    "name": "North Carolina",
+    "rating": 46.0,
+    "record": "4-8"
+  },
+  {
+    "rank": 93,
+    "name": "Jacksonville State",
+    "rating": 45.9,
+    "record": "9-5"
+  },
+  {
+    "rank": 94,
+    "name": "West Virginia",
+    "rating": 45.8,
+    "record": "4-8"
+  },
+  {
+    "rank": 95,
+    "name": "Southern Miss",
+    "rating": 45.5,
+    "record": "7-6"
+  },
+  {
+    "rank": 96,
+    "name": "Buffalo",
+    "rating": 45.1,
+    "record": "5-7"
+  },
+  {
+    "rank": 97,
+    "name": "Colorado",
+    "rating": 44.3,
+    "record": "3-9"
+  },
+  {
+    "rank": 98,
+    "name": "Boston College",
+    "rating": 44.1,
+    "record": "2-10"
+  },
+  {
+    "rank": 99,
+    "name": "UCLA",
+    "rating": 43.9,
+    "record": "3-9"
+  },
+  {
+    "rank": 100,
+    "name": "Tarleton State",
+    "rating": 43.9,
+    "record": "12-2"
+  },
+  {
+    "rank": 101,
+    "name": "Florida Atlantic",
+    "rating": 43.9,
+    "record": "4-8"
+  },
+  {
+    "rank": 102,
+    "name": "Arkansas State",
+    "rating": 43.8,
+    "record": "7-6"
+  },
+  {
+    "rank": 103,
+    "name": "Central Michigan",
+    "rating": 43.8,
+    "record": "7-6"
+  },
+  {
+    "rank": 104,
+    "name": "Liberty",
+    "rating": 43.6,
+    "record": "4-8"
+  },
+  {
+    "rank": 105,
+    "name": "Georgia Southern",
+    "rating": 43.2,
+    "record": "7-6"
+  },
+  {
+    "rank": 106,
+    "name": "Montana State",
+    "rating": 42.7,
+    "record": "14-2"
+  },
+  {
+    "rank": 107,
+    "name": "Tulsa",
+    "rating": 42.6,
+    "record": "4-8"
+  },
+  {
+    "rank": 108,
+    "name": "UL-Lafayette",
+    "rating": 42.5,
+    "record": "6-7"
+  },
+  {
+    "rank": 109,
+    "name": "Virginia Tech",
+    "rating": 42.5,
+    "record": "3-9"
+  },
+  {
+    "rank": 110,
+    "name": "Florida International",
+    "rating": 42.1,
+    "record": "7-6"
+  },
+  {
+    "rank": 111,
+    "name": "Missouri State",
+    "rating": 41.9,
+    "record": "7-6"
+  },
+  {
+    "rank": 112,
+    "name": "Delaware",
+    "rating": 41.7,
+    "record": "7-6"
+  },
+  {
+    "rank": 113,
+    "name": "Wyoming",
+    "rating": 41.3,
+    "record": "4-8"
+  },
+  {
+    "rank": 114,
+    "name": "Lehigh",
+    "rating": 41.3,
+    "record": "12-1"
+  },
+  {
+    "rank": 115,
+    "name": "Appalachian State",
+    "rating": 41.2,
+    "record": "5-8"
+  },
+  {
+    "rank": 116,
+    "name": "Stanford",
+    "rating": 40.8,
+    "record": "4-8"
+  },
+  {
+    "rank": 117,
+    "name": "North Dakota",
+    "rating": 40.1,
+    "record": "8-6"
+  },
+  {
+    "rank": 118,
+    "name": "Bowling Green",
+    "rating": 40.0,
+    "record": "4-8"
+  },
+  {
+    "rank": 119,
+    "name": "South Alabama",
+    "rating": 39.9,
+    "record": "4-8"
+  },
+  {
+    "rank": 120,
+    "name": "Syracuse",
+    "rating": 39.5,
+    "record": "3-9"
+  },
+  {
+    "rank": 121,
+    "name": "Montana",
+    "rating": 39.4,
+    "record": "13-2"
+  },
+  {
+    "rank": 122,
+    "name": "Nevada",
+    "rating": 39.2,
+    "record": "3-9"
+  },
+  {
+    "rank": 123,
+    "name": "Akron",
+    "rating": 38.7,
+    "record": "5-7"
+  },
+  {
+    "rank": 124,
+    "name": "Harvard",
+    "rating": 38.3,
+    "record": "9-2"
+  },
+  {
+    "rank": 125,
+    "name": "San Jose State",
+    "rating": 38.3,
+    "record": "3-9"
+  },
+  {
+    "rank": 126,
+    "name": "Eastern Michigan",
+    "rating": 37.9,
+    "record": "4-8"
+  },
+  {
+    "rank": 127,
+    "name": "Rice",
+    "rating": 37.8,
+    "record": "5-8"
+  },
+  {
+    "rank": 128,
+    "name": "Oklahoma State",
+    "rating": 37.5,
+    "record": "1-11"
+  },
+  {
+    "rank": 129,
+    "name": "Coastal Carolina",
+    "rating": 37.5,
+    "record": "6-7"
+  },
+  {
+    "rank": 130,
+    "name": "Stephen F. Austin",
+    "rating": 37.3,
+    "record": "11-3"
+  },
+  {
+    "rank": 131,
+    "name": "New Mexico State",
+    "rating": 37.1,
+    "record": "4-8"
+  },
+  {
+    "rank": 132,
+    "name": "Colorado State",
+    "rating": 37.0,
+    "record": "2-10"
+  },
+  {
+    "rank": 133,
+    "name": "UAB",
+    "rating": 36.8,
+    "record": "4-8"
+  },
+  {
+    "rank": 134,
+    "name": "Oregon State",
+    "rating": 36.7,
+    "record": "2-10"
+  },
+  {
+    "rank": 135,
+    "name": "Middle Tennessee",
+    "rating": 36.6,
+    "record": "3-9"
+  },
+  {
+    "rank": 136,
+    "name": "Northern Illinois",
+    "rating": 35.9,
+    "record": "3-9"
+  },
+  {
+    "rank": 137,
+    "name": "South Dakota State",
+    "rating": 35.7,
+    "record": "9-5"
+  },
+  {
+    "rank": 138,
+    "name": "UTEP",
+    "rating": 35.1,
+    "record": "2-10"
+  },
+  {
+    "rank": 139,
+    "name": "Illinois State",
+    "rating": 35.1,
+    "record": "12-5"
+  },
+  {
+    "rank": 140,
+    "name": "Rhode Island",
+    "rating": 34.9,
+    "record": "11-3"
+  },
+  {
+    "rank": 142,
+    "name": "Tennessee Tech",
+    "rating": 34.2,
+    "record": "11-2"
+  },
+  {
+    "rank": 143,
+    "name": "Southern Illinois",
+    "rating": 33.9,
+    "record": "7-5"
+  },
+  {
+    "rank": 144,
+    "name": "Villanova",
+    "rating": 33.7,
+    "record": "12-3"
+  },
+  {
+    "rank": 145,
+    "name": "Southeastern Louisiana",
+    "rating": 33.5,
+    "record": "9-4"
+  },
+  {
+    "rank": 146,
+    "name": "Kent State",
+    "rating": 33.3,
+    "record": "5-7"
+  },
+  {
+    "rank": 147,
+    "name": "Jackson State",
+    "rating": 33.2,
+    "record": "10-2"
+  },
+  {
+    "rank": 149,
+    "name": "Youngstown State",
+    "rating": 32.0,
+    "record": "8-5"
+  },
+  {
+    "rank": 150,
+    "name": "Alabama State",
+    "rating": 32.0,
+    "record": "9-3"
+  },
+  {
+    "rank": 152,
+    "name": "South Dakota",
+    "rating": 31.7,
+    "record": "10-5"
+  },
+  {
+    "rank": 153,
+    "name": "Mercer",
+    "rating": 31.2,
+    "record": "9-3"
+  },
+  {
+    "rank": 154,
+    "name": "UL-Monroe",
+    "rating": 31.0,
+    "record": "3-9"
+  },
+  {
+    "rank": 155,
+    "name": "UC Davis",
+    "rating": 30.3,
+    "record": "9-4"
+  },
+  {
+    "rank": 157,
+    "name": "Sacramento State",
+    "rating": 30.0,
+    "record": "7-5"
+  },
+  {
+    "rank": 158,
+    "name": "Ball State",
+    "rating": 29.6,
+    "record": "4-8"
+  },
+  {
+    "rank": 163,
+    "name": "St. Thomas",
+    "rating": 28.4,
+    "record": "7-5"
+  },
+  {
+    "rank": 165,
+    "name": "Georgia State",
+    "rating": 28.1,
+    "record": "1-11"
+  },
+  {
+    "rank": 173,
+    "name": "Charlotte",
+    "rating": 25.9,
+    "record": "1-11"
+  },
+  {
+    "rank": 180,
+    "name": "Sam Houston",
+    "rating": 24.8,
+    "record": "2-10"
+  },
+  {
+    "rank": 181,
+    "name": "William & Mary",
+    "rating": 24.8,
+    "record": "7-5"
+  },
+  {
+    "rank": 182,
+    "name": "New Hampshire",
+    "rating": 24.4,
+    "record": "8-5"
+  },
+  {
+    "rank": 196,
+    "name": "Richmond",
+    "rating": 21.1,
+    "record": "7-5"
+  },
+  {
+    "rank": 198,
+    "name": "Idaho",
+    "rating": 20.6,
+    "record": "4-8"
+  },
+  {
+    "rank": 206,
+    "name": "Holy Cross",
+    "rating": 18.0,
+    "record": "3-9"
+  },
+  {
+    "rank": 216,
+    "name": "Massachusetts",
+    "rating": 16.0,
+    "record": "0-12"
+  },
+  {
+    "rank": 221,
+    "name": "Eastern Washington",
+    "rating": 15.6,
+    "record": "5-7"
+  },
+  {
+    "rank": 228,
+    "name": "Furman",
+    "rating": 14.5,
+    "record": "6-6"
+  },
+  {
+    "rank": 241,
+    "name": "Chattanooga",
+    "rating": 12.8,
+    "record": "4-8"
+  },
+  {
+    "rank": 273,
+    "name": "Florida A&M",
+    "rating": 9.2,
+    "record": "6-6"
+  },
+  {
+    "rank": 141,
+    "name": "Yale",
+    "rating": 36.8,
+    "record": "9-3"
+  },
+  {
+    "rank": 148,
+    "name": "Dartmouth",
+    "rating": 35.0,
+    "record": "7-3"
+  },
+  {
+    "rank": 151,
+    "name": "Monmouth",
+    "rating": 33.8,
+    "record": "9-3"
+  },
+  {
+    "rank": 156,
+    "name": "Lafayette",
+    "rating": 32.8,
+    "record": "8-4"
+  },
+  {
+    "rank": 159,
+    "name": "South Carolina State",
+    "rating": 32.3,
+    "record": "10-3"
+  },
+  {
+    "rank": 160,
+    "name": "UT Rio Grande Valley",
+    "rating": 32.1,
+    "record": "9-3"
+  },
+  {
+    "rank": 161,
+    "name": "Abilene Christian",
+    "rating": 31.3,
+    "record": "9-5"
+  },
+  {
+    "rank": 162,
+    "name": "West Georgia",
+    "rating": 30.7,
+    "record": "8-3"
+  },
+  {
+    "rank": 164,
+    "name": "San Diego",
+    "rating": 30.4,
+    "record": "8-4"
+  },
+  {
+    "rank": 166,
+    "name": "Drake",
+    "rating": 29.9,
+    "record": "8-4"
+  },
+  {
+    "rank": 167,
+    "name": "Northern Arizona",
+    "rating": 29.3,
+    "record": "7-5"
+  },
+  {
+    "rank": 168,
+    "name": "Grambling",
+    "rating": 28.9,
+    "record": "7-5"
+  },
+  {
+    "rank": 169,
+    "name": "Austin Peay",
+    "rating": 28.6,
+    "record": "7-5"
+  },
+  {
+    "rank": 170,
+    "name": "Dayton",
+    "rating": 28.5,
+    "record": "7-4"
+  },
+  {
+    "rank": 171,
+    "name": "East Tennessee State",
+    "rating": 27.9,
+    "record": "7-5"
+  },
+  {
+    "rank": 172,
+    "name": "Southern Utah",
+    "rating": 27.5,
+    "record": "7-5"
+  },
+  {
+    "rank": 174,
+    "name": "Towson",
+    "rating": 26.2,
+    "record": "6-6"
+  },
+  {
+    "rank": 179,
+    "name": "Weber State",
+    "rating": 23.5,
+    "record": "4-8"
+  },
+  {
+    "rank": 184,
+    "name": "Northern Iowa",
+    "rating": 22.8,
+    "record": "3-9"
+  },
+  {
+    "rank": 197,
+    "name": "Southeast Missouri",
+    "rating": 19.4,
+    "record": "4-8"
+  },
+  {
+    "rank": 199,
+    "name": "Nicholls",
+    "rating": 18.2,
+    "record": "4-8"
+  },
+  {
+    "rank": 207,
+    "name": "Western Illinois",
+    "rating": 17.0,
+    "record": "4-8"
+  },
+  {
+    "rank": 215,
+    "name": "Indiana State",
+    "rating": 16.2,
+    "record": "3-9"
+  },
+  {
+    "rank": 227,
+    "name": "Southern Jaguars",
+    "rating": 14.8,
+    "record": "2-10"
+  },
+  {
+    "rank": 175,
+    "name": "Penn",
+    "rating": 31.0,
+    "record": "6-4"
+  },
+  {
+    "rank": 176,
+    "name": "Incarnate Word",
+    "rating": 28.0,
+    "record": "5-7"
+  },
+  {
+    "rank": 177,
+    "name": "UT Martin",
+    "rating": 26.8,
+    "record": "6-6"
+  },
+  {
+    "rank": 178,
+    "name": "Idaho State",
+    "rating": 25.5,
+    "record": "6-6"
+  },
+  {
+    "rank": 183,
+    "name": "Butler",
+    "rating": 24.8,
+    "record": "6-6"
+  },
+  {
+    "rank": 185,
+    "name": "Lindenwood",
+    "rating": 24.0,
+    "record": "6-6"
+  },
+  {
+    "rank": 186,
+    "name": "Bethune-Cookman",
+    "rating": 23.2,
+    "record": "6-6"
+  },
+  {
+    "rank": 187,
+    "name": "Alcorn State",
+    "rating": 21.5,
+    "record": "5-7"
+  },
+  {
+    "rank": 188,
+    "name": "McNeese",
+    "rating": 20.8,
+    "record": "5-7"
+  },
+  {
+    "rank": 189,
+    "name": "Cal Poly",
+    "rating": 19.0,
+    "record": "4-8"
+  },
+  {
+    "rank": 190,
+    "name": "Alabama A&M",
+    "rating": 18.6,
+    "record": "4-8"
+  },
+  {
+    "rank": 191,
+    "name": "Northern Colorado",
+    "rating": 17.8,
+    "record": "4-8"
+  },
+  {
+    "rank": 193,
+    "name": "Eastern Illinois",
+    "rating": 15.5,
+    "record": "3-9"
+  },
+  {
+    "rank": 194,
+    "name": "Samford",
+    "rating": 15.0,
+    "record": "1-11"
+  },
+  {
+    "rank": 200,
+    "name": "Murray State",
+    "rating": 13.5,
+    "record": "1-11"
+  },
+  {
+    "rank": 205,
+    "name": "Portland State",
+    "rating": 12.0,
+    "record": "1-11"
+  },
+  {
+    "rank": 192,
+    "name": "Lamar",
+    "rating": 27.2,
+    "record": "8-5"
+  },
+  {
+    "rank": 208,
+    "name": "Maine",
+    "rating": 22.0,
+    "record": "6-6"
+  },
+  {
+    "rank": 209,
+    "name": "Elon",
+    "rating": 21.8,
+    "record": "6-6"
+  },
+  {
+    "rank": 210,
+    "name": "Stony Brook",
+    "rating": 21.2,
+    "record": "6-6"
+  },
+  {
+    "rank": 211,
+    "name": "Morehead State",
+    "rating": 20.5,
+    "record": "6-6"
+  },
+  {
+    "rank": 212,
+    "name": "Wofford",
+    "rating": 20.0,
+    "record": "6-6"
+  },
+  {
+    "rank": 213,
+    "name": "Colgate",
+    "rating": 19.5,
+    "record": "5-7"
+  },
+  {
+    "rank": 214,
+    "name": "Howard",
+    "rating": 19.2,
+    "record": "5-7"
+  },
+  {
+    "rank": 217,
+    "name": "Eastern Kentucky",
+    "rating": 18.8,
+    "record": "5-7"
+  },
+  {
+    "rank": 218,
+    "name": "Robert Morris",
+    "rating": 16.0,
+    "record": "3-9"
+  },
+  {
+    "rank": 219,
+    "name": "Albany",
+    "rating": 14.0,
+    "record": "2-10"
+  },
+  {
+    "rank": 220,
+    "name": "North Alabama",
+    "rating": 13.8,
+    "record": "2-10"
+  },
+  {
+    "rank": 222,
+    "name": "Valparaiso",
+    "rating": 13.2,
+    "record": "2-10"
+  },
+  {
+    "rank": 223,
+    "name": "Utah Tech",
+    "rating": 12.5,
+    "record": "2-10"
+  },
+  {
+    "rank": 224,
+    "name": "Houston Christian",
+    "rating": 11.8,
+    "record": "2-10"
+  },
+  {
+    "rank": 225,
+    "name": "Fordham",
+    "rating": 11.5,
+    "record": "1-11"
+  }
+]

@@ -1,0 +1,209 @@
+import { teamsIn } from "./rankings";
+import { pickWinner } from "./simulate";
+import { getTeam, PLAYOFF_TIERS, regionCode, regionName, tierName } from "./teams";
+import type { Assignment, PlayoffGame, PlayoffTeam, RecordMap, RegionId, Team } from "./types";
+
+const FIELD_SIZE = 24;
+const BYES = 8;
+
+const PLACE_LABEL = ["champion", "runner-up", "3rd"];
+
+const BANDS: Array<{ tier: number; place: number }> = [
+  { tier: 1, place: 0 },
+  { tier: 1, place: 1 },
+  { tier: 1, place: 2 },
+  { tier: 2, place: 0 },
+  { tier: 2, place: 1 },
+  { tier: 3, place: 0 },
+];
+
+/** Region for each seed 1–24 so opening games are never same-region. */
+const REGION_BY_SEED: RegionId[] = [
+  "east", "south", "midwest", "west",
+  "east", "south", "midwest", "west",
+  "south", "east", "west", "midwest",
+  "east", "south", "midwest", "west",
+  "south", "east", "west", "midwest",
+  "south", "east", "west", "midwest",
+];
+
+function projectedWinner(aId: string | null, bId: string | null): string | null {
+  if (!aId) return bId;
+  if (!bId) return aId;
+  return pickWinner(getTeam(aId), getTeam(bId)).id;
+}
+
+export function playoffBidCount(tier: number): number {
+  if (tier === 1) return 3;
+  if (tier === 2) return 2;
+  if (tier === 3) return 1;
+  return 0;
+}
+
+export function playoffTeamsInGroup(group: Team[], tier: number): Team[] {
+  if (tier > PLAYOFF_TIERS) return [];
+  return group.slice(0, playoffBidCount(tier));
+}
+
+function bidForPlace(place: number): PlayoffTeam["bid"] {
+  if (place === 0) return "tier-champion";
+  if (place === 1) return "tier-runner-up";
+  return "tier-third";
+}
+
+/** 1W = first in the West, 2E = East runner-up, 6MW = Midwest Tier III champion. */
+export function playoffRankCode(seed: number, region: RegionId): string {
+  const place = Math.floor((seed - 1) / 4) + 1;
+  return `${place}${regionCode(region)}`;
+}
+
+export function buildPlayoffField(assignment: Assignment, records?: RecordMap): PlayoffTeam[] {
+  const selected: PlayoffTeam[] = [];
+
+  for (let seed = 1; seed <= FIELD_SIZE; seed += 1) {
+    const band = BANDS[Math.floor((seed - 1) / 4)];
+    const region = REGION_BY_SEED[seed - 1];
+    const group = teamsIn(assignment, region, band.tier, records);
+    const team = group[band.place];
+    if (!team) continue;
+    selected.push({
+      teamId: team.id,
+      seed,
+      rankCode: playoffRankCode(seed, region),
+      bid: bidForPlace(band.place),
+      bidLabel: `${regionName(region)} ${tierName(band.tier)} ${PLACE_LABEL[band.place]}`,
+      bye: seed <= BYES,
+    });
+  }
+
+  return selected;
+}
+
+export function buildPlayoffBracket(field: PlayoffTeam[]): PlayoffGame[] {
+  const bySeed = new Map(field.map((entry) => [entry.seed, entry]));
+  const games: PlayoffGame[] = [];
+
+  const winnerOf = (game: PlayoffGame): { seed: number; teamId: string | null } => {
+    if (game.projectedWinnerId === game.teamBId) return { seed: game.seedB, teamId: game.teamBId };
+    if (game.projectedWinnerId === game.teamAId) return { seed: game.seedA, teamId: game.teamAId };
+    return { seed: game.seedA, teamId: game.projectedWinnerId };
+  };
+
+  const firstByBye = new Map<number, PlayoffGame>();
+  const r16Order = [1, 8, 4, 5, 2, 7, 3, 6];
+
+  for (const byeSeed of r16Order) {
+    const high = 17 - byeSeed;
+    const low = 16 + byeSeed;
+    const a = bySeed.get(high);
+    const b = bySeed.get(low);
+    const winner = projectedWinner(a?.teamId ?? null, b?.teamId ?? null);
+    const game: PlayoffGame = {
+      id: `r24-${high}-${low}`,
+      round: "first",
+      roundLabel: "First round",
+      seedA: high,
+      seedB: low,
+      teamAId: a?.teamId ?? null,
+      teamBId: b?.teamId ?? null,
+      projectedWinnerId: winner,
+      labelA: String(high),
+      labelB: String(low),
+    };
+    games.push(game);
+    firstByBye.set(byeSeed, game);
+  }
+
+  const r16Games = r16Order.map((byeSeed) => {
+    const byeTeam = bySeed.get(byeSeed);
+    const feed = firstByBye.get(byeSeed)!;
+    const incoming = winnerOf(feed);
+    const game: PlayoffGame = {
+      id: `r16-${byeSeed}`,
+      round: "second",
+      roundLabel: "Round of 16",
+      seedA: byeSeed,
+      seedB: incoming.seed,
+      teamAId: byeTeam?.teamId ?? null,
+      teamBId: incoming.teamId,
+      projectedWinnerId: projectedWinner(byeTeam?.teamId ?? null, incoming.teamId),
+      labelA: `${byeSeed} (bye)`,
+      labelB: `W ${feed.seedA}/${feed.seedB}`,
+    };
+    games.push(game);
+    return game;
+  });
+
+  const quarterPairs: Array<[number, number]> = [
+    [0, 1],
+    [2, 3],
+    [4, 5],
+    [6, 7],
+  ];
+  const quarters = quarterPairs.map(([i, j], index) => {
+    const a = winnerOf(r16Games[i]);
+    const b = winnerOf(r16Games[j]);
+    const game: PlayoffGame = {
+      id: `q-${index}`,
+      round: "quarter",
+      roundLabel: "Quarterfinals",
+      seedA: a.seed,
+      seedB: b.seed,
+      teamAId: a.teamId,
+      teamBId: b.teamId,
+      projectedWinnerId: projectedWinner(a.teamId, b.teamId),
+      labelA: `W of ${r16Games[i].seedA}`,
+      labelB: `W of ${r16Games[j].seedA}`,
+    };
+    games.push(game);
+    return game;
+  });
+
+  const semis = [
+    [quarters[0], quarters[1]],
+    [quarters[2], quarters[3]],
+  ].map(([left, right], index) => {
+    const a = winnerOf(left);
+    const b = winnerOf(right);
+    const game: PlayoffGame = {
+      id: `s-${index}`,
+      round: "semi",
+      roundLabel: "Semifinals",
+      seedA: a.seed,
+      seedB: b.seed,
+      teamAId: a.teamId,
+      teamBId: b.teamId,
+      projectedWinnerId: projectedWinner(a.teamId, b.teamId),
+      labelA: "Winner",
+      labelB: "Winner",
+    };
+    games.push(game);
+    return game;
+  });
+
+  const finalA = winnerOf(semis[0]);
+  const finalB = winnerOf(semis[1]);
+  games.push({
+    id: "final",
+    round: "final",
+    roundLabel: "National Championship",
+    seedA: finalA.seed,
+    seedB: finalB.seed,
+    teamAId: finalA.teamId,
+    teamBId: finalB.teamId,
+    projectedWinnerId: projectedWinner(finalA.teamId, finalB.teamId),
+    labelA: "Finalist",
+    labelB: "Finalist",
+  });
+
+  return games;
+}
+
+export function playoffSummary(field: PlayoffTeam[]) {
+  return {
+    autobids: field.length,
+    atLarge: 0,
+    byes: field.filter((entry) => entry.bye).length,
+    fieldSize: field.length,
+  };
+}
