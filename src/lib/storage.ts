@@ -3,7 +3,7 @@ import { defaultAssignment, defaultRivals, reseedTiers } from "./teams";
 import type { Assignment, RivalMap } from "./types";
 
 const KEY = "cfb26-schedule-model-v5";
-export const TIER_SEED = "spplus-2025-fill-fcs-tiers";
+export const TIER_SEED = "spplus-2025-fill-bottom-remainders";
 
 export type ModelState = {
   assignment: Assignment;

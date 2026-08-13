@@ -34,5 +34,7 @@
   {"a": "UK", "b": "LOU", "week": 13, "name": "Governor's Cup"},
   {"a": "HARV", "b": "YALE", "week": 12, "name": "Harvard–Yale"},
   {"a": "LAF", "b": "LEH", "week": 12, "name": "The Rivalry"},
-  {"a": "GRAM", "b": "SOU", "week": 13, "name": "Bayou Classic"}
+  {"a": "GRAM", "b": "SOU", "week": 13, "name": "Bayou Classic"},
+  {"a": "FAMU", "b": "BCU", "week": 13, "name": "Florida Classic"},
+  {"a": "IDHO", "b": "IDST", "week": 13, "name": "Battle of the Domes"}
 ]

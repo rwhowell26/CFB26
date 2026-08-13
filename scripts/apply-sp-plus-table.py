@@ -208,6 +208,38 @@ TABLE: list[tuple[int, str, float, str]] = [
     (207, "Western Illinois", 17.0, "4-8"),
     (215, "Indiana State", 16.2, "3-9"),
     (227, "Southern Jaguars", 14.8, "2-10"),
+    (175, "Penn", 31.0, "6-4"),
+    (176, "Incarnate Word", 28.0, "5-7"),
+    (177, "UT Martin", 26.8, "6-6"),
+    (178, "Idaho State", 25.5, "6-6"),
+    (183, "Butler", 24.8, "6-6"),
+    (185, "Lindenwood", 24.0, "6-6"),
+    (186, "Bethune-Cookman", 23.2, "6-6"),
+    (187, "Alcorn State", 21.5, "5-7"),
+    (188, "McNeese", 20.8, "5-7"),
+    (189, "Cal Poly", 19.0, "4-8"),
+    (190, "Alabama A&M", 18.6, "4-8"),
+    (191, "Northern Colorado", 17.8, "4-8"),
+    (193, "Eastern Illinois", 15.5, "3-9"),
+    (194, "Samford", 15.0, "1-11"),
+    (200, "Murray State", 13.5, "1-11"),
+    (205, "Portland State", 12.0, "1-11"),
+    (192, "Lamar", 27.2, "8-5"),
+    (208, "Maine", 22.0, "6-6"),
+    (209, "Elon", 21.8, "6-6"),
+    (210, "Stony Brook", 21.2, "6-6"),
+    (211, "Morehead State", 20.5, "6-6"),
+    (212, "Wofford", 20.0, "6-6"),
+    (213, "Colgate", 19.5, "5-7"),
+    (214, "Howard", 19.2, "5-7"),
+    (217, "Eastern Kentucky", 18.8, "5-7"),
+    (218, "Robert Morris", 16.0, "3-9"),
+    (219, "Albany", 14.0, "2-10"),
+    (220, "North Alabama", 13.8, "2-10"),
+    (222, "Valparaiso", 13.2, "2-10"),
+    (223, "Utah Tech", 12.5, "2-10"),
+    (224, "Houston Christian", 11.8, "2-10"),
+    (225, "Fordham", 11.5, "1-11"),
 ]
 
 NAME_TO_ABBR = {
@@ -262,6 +294,15 @@ NAME_TO_ABBR = {
     "Weber State": "WEB", "Northern Iowa": "UNI", "Southeast Missouri": "SEMO",
     "Nicholls": "NICH", "Western Illinois": "WIU", "Indiana State": "INST",
     "Southern Jaguars": "SOU",
+    "Penn": "PENN", "Incarnate Word": "UIW", "UT Martin": "UTM", "Idaho State": "IDST",
+    "Butler": "BUT", "Lindenwood": "LIN", "Bethune-Cookman": "BCU", "Alcorn State": "ALCN",
+    "McNeese": "MCN", "Cal Poly": "CP", "Alabama A&M": "AAMU", "Northern Colorado": "UNCO",
+    "Eastern Illinois": "EIU", "Samford": "SAM", "Murray State": "MUR", "Portland State": "PRST",
+    "Lamar": "LAM", "Maine": "ME", "Elon": "ELON", "Stony Brook": "STBK",
+    "Morehead State": "MORE", "Wofford": "WOF", "Colgate": "COLG", "Howard": "HOW",
+    "Eastern Kentucky": "EKU", "Robert Morris": "RMU", "Albany": "ALB",
+    "North Alabama": "UNA", "Valparaiso": "VAL", "Utah Tech": "UTU",
+    "Houston Christian": "HCU", "Fordham": "FOR",
 }
 
 NEW_FCS = [
@@ -417,6 +458,166 @@ NEW_FCS = [
         "abbreviation": "WEB", "state": "UT", "region": "west", "wins": 4, "losses": 8,
         "pf": 277, "pa": 460, "wins5": 30, "losses5": 29,
     },
+    {
+        "id": "219", "name": "Pennsylvania Quakers", "shortName": "Penn",
+        "abbreviation": "PENN", "state": "PA", "region": "east", "wins": 6, "losses": 4,
+        "pf": 271, "pa": 265, "wins5": 27, "losses5": 23,
+    },
+    {
+        "id": "2535", "name": "Samford Bulldogs", "shortName": "Samford",
+        "abbreviation": "SAM", "state": "AL", "region": "south", "wins": 1, "losses": 11,
+        "pf": 175, "pa": 455, "wins5": 26, "losses5": 32,
+    },
+    {
+        "id": "2016", "name": "Alcorn State Braves", "shortName": "Alcorn State",
+        "abbreviation": "ALCN", "state": "MS", "region": "south", "wins": 5, "losses": 7,
+        "pf": 291, "pa": 278, "wins5": 29, "losses5": 28,
+    },
+    {
+        "id": "2010", "name": "Alabama A&M Bulldogs", "shortName": "Alabama A&M",
+        "abbreviation": "AAMU", "state": "AL", "region": "south", "wins": 4, "losses": 8,
+        "pf": 281, "pa": 401, "wins5": 26, "losses5": 30,
+    },
+    {
+        "id": "2377", "name": "McNeese Cowboys", "shortName": "McNeese",
+        "abbreviation": "MCN", "state": "LA", "region": "south", "wins": 5, "losses": 7,
+        "pf": 282, "pa": 306, "wins5": 19, "losses5": 37,
+    },
+    {
+        "id": "2630", "name": "UT Martin Skyhawks", "shortName": "UT Martin",
+        "abbreviation": "UTM", "state": "TN", "region": "south", "wins": 6, "losses": 6,
+        "pf": 248, "pa": 287, "wins5": 40, "losses5": 21,
+    },
+    {
+        "id": "2065", "name": "Bethune-Cookman Wildcats", "shortName": "Bethune-Cookman",
+        "abbreviation": "BCU", "state": "FL", "region": "south", "wins": 6, "losses": 6,
+        "pf": 356, "pa": 392, "wins5": 15, "losses5": 42,
+    },
+    {
+        "id": "93", "name": "Murray State Racers", "shortName": "Murray State",
+        "abbreviation": "MUR", "state": "KY", "region": "midwest", "wins": 1, "losses": 11,
+        "pf": 228, "pa": 463, "wins5": 12, "losses5": 45,
+    },
+    {
+        "id": "2197", "name": "Eastern Illinois Panthers", "shortName": "Eastern Illinois",
+        "abbreviation": "EIU", "state": "IL", "region": "midwest", "wins": 3, "losses": 9,
+        "pf": 210, "pa": 350, "wins5": 17, "losses5": 40,
+    },
+    {
+        "id": "2086", "name": "Butler Bulldogs", "shortName": "Butler",
+        "abbreviation": "BUT", "state": "IN", "region": "midwest", "wins": 6, "losses": 6,
+        "pf": 274, "pa": 304, "wins5": 32, "losses5": 25,
+    },
+    {
+        "id": "2815", "name": "Lindenwood Lions", "shortName": "Lindenwood",
+        "abbreviation": "LIN", "state": "MO", "region": "midwest", "wins": 6, "losses": 6,
+        "pf": 297, "pa": 324, "wins5": 21, "losses5": 23,
+    },
+    {
+        "id": "304", "name": "Idaho State Bengals", "shortName": "Idaho State",
+        "abbreviation": "IDST", "state": "ID", "region": "west", "wins": 6, "losses": 6,
+        "pf": 396, "pa": 327, "wins5": 16, "losses5": 41,
+    },
+    {
+        "id": "13", "name": "Cal Poly Mustangs", "shortName": "Cal Poly",
+        "abbreviation": "CP", "state": "CA", "region": "west", "wins": 4, "losses": 8,
+        "pf": 330, "pa": 378, "wins5": 14, "losses5": 42,
+    },
+    {
+        "id": "2502", "name": "Portland State Vikings", "shortName": "Portland State",
+        "abbreviation": "PRST", "state": "OR", "region": "west", "wins": 1, "losses": 11,
+        "pf": 194, "pa": 512, "wins5": 18, "losses5": 38,
+    },
+    {
+        "id": "2458", "name": "Northern Colorado Bears", "shortName": "Northern Colorado",
+        "abbreviation": "UNCO", "state": "CO", "region": "west", "wins": 4, "losses": 8,
+        "pf": 243, "pa": 341, "wins5": 11, "losses5": 46,
+    },
+    {
+        "id": "2916", "name": "Incarnate Word Cardinals", "shortName": "Incarnate Word",
+        "abbreviation": "UIW", "state": "TX", "region": "west", "wins": 5, "losses": 7,
+        "pf": 308, "pa": 306, "wins5": 46, "losses5": 16,
+    },
+    {
+        "id": "311", "name": "Maine Black Bears", "shortName": "Maine",
+        "abbreviation": "ME", "state": "ME", "region": "east", "wins": 6, "losses": 6,
+        "pf": 290, "pa": 291, "wins5": 21, "losses5": 36,
+    },
+    {
+        "id": "2210", "name": "Elon Phoenix", "shortName": "Elon",
+        "abbreviation": "ELON", "state": "NC", "region": "east", "wins": 6, "losses": 6,
+        "pf": 345, "pa": 297, "wins5": 32, "losses5": 26,
+    },
+    {
+        "id": "2142", "name": "Colgate Raiders", "shortName": "Colgate",
+        "abbreviation": "COLG", "state": "NY", "region": "east", "wins": 5, "losses": 7,
+        "pf": 340, "pa": 372, "wins5": 21, "losses5": 36,
+    },
+    {
+        "id": "47", "name": "Howard Bison", "shortName": "Howard",
+        "abbreviation": "HOW", "state": "DC", "region": "east", "wins": 5, "losses": 7,
+        "pf": 238, "pa": 295, "wins5": 23, "losses5": 34,
+    },
+    {
+        "id": "399", "name": "UAlbany Great Danes", "shortName": "UAlbany",
+        "abbreviation": "ALB", "state": "NY", "region": "east", "wins": 2, "losses": 10,
+        "pf": 201, "pa": 387, "wins5": 22, "losses5": 38,
+    },
+    {
+        "id": "2619", "name": "Stony Brook Seawolves", "shortName": "Stony Brook",
+        "abbreviation": "STBK", "state": "NY", "region": "east", "wins": 6, "losses": 6,
+        "pf": 336, "pa": 309, "wins5": 21, "losses5": 35,
+    },
+    {
+        "id": "2230", "name": "Fordham Rams", "shortName": "Fordham",
+        "abbreviation": "FOR", "state": "NY", "region": "east", "wins": 1, "losses": 11,
+        "pf": 191, "pa": 397, "wins5": 24, "losses5": 34,
+    },
+    {
+        "id": "2747", "name": "Wofford Terriers", "shortName": "Wofford",
+        "abbreviation": "WOF", "state": "SC", "region": "south", "wins": 6, "losses": 6,
+        "pf": 274, "pa": 207, "wins5": 17, "losses5": 40,
+    },
+    {
+        "id": "2453", "name": "North Alabama Lions", "shortName": "North Alabama",
+        "abbreviation": "UNA", "state": "AL", "region": "south", "wins": 2, "losses": 10,
+        "pf": 303, "pa": 470, "wins5": 12, "losses5": 45,
+    },
+    {
+        "id": "2674", "name": "Valparaiso Beacons", "shortName": "Valparaiso",
+        "abbreviation": "VAL", "state": "IN", "region": "midwest", "wins": 2, "losses": 10,
+        "pf": 244, "pa": 427, "wins5": 18, "losses5": 39,
+    },
+    {
+        "id": "2413", "name": "Morehead State Eagles", "shortName": "Morehead State",
+        "abbreviation": "MORE", "state": "KY", "region": "midwest", "wins": 6, "losses": 6,
+        "pf": 254, "pa": 358, "wins5": 26, "losses5": 31,
+    },
+    {
+        "id": "2198", "name": "Eastern Kentucky Colonels", "shortName": "Eastern Kentucky",
+        "abbreviation": "EKU", "state": "KY", "region": "midwest", "wins": 5, "losses": 7,
+        "pf": 232, "pa": 292, "wins5": 32, "losses5": 27,
+    },
+    {
+        "id": "2523", "name": "Robert Morris Colonials", "shortName": "Robert Morris",
+        "abbreviation": "RMU", "state": "PA", "region": "midwest", "wins": 3, "losses": 9,
+        "pf": 182, "pa": 299, "wins5": 18, "losses5": 38,
+    },
+    {
+        "id": "3101", "name": "Utah Tech Trailblazers", "shortName": "Utah Tech",
+        "abbreviation": "UTU", "state": "UT", "region": "west", "wins": 2, "losses": 10,
+        "pf": 192, "pa": 352, "wins5": 10, "losses5": 47,
+    },
+    {
+        "id": "2320", "name": "Lamar Cardinals", "shortName": "Lamar",
+        "abbreviation": "LAM", "state": "TX", "region": "west", "wins": 8, "losses": 5,
+        "pf": 292, "pa": 299, "wins5": 23, "losses5": 34,
+    },
+    {
+        "id": "2277", "name": "Houston Christian Huskies", "shortName": "Houston Christian",
+        "abbreviation": "HCU", "state": "TX", "region": "west", "wins": 2, "losses": 10,
+        "pf": 202, "pa": 363, "wins5": 14, "losses5": 42,
+    },
 ]
 
 
@@ -487,6 +688,7 @@ def main() -> None:
         }
         teams.append(row)
         by_abbr[row["abbreviation"]] = row
+        existing_ids.add(row["id"])
 
     payload = []
     matched: set[str] = set()

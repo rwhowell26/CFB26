@@ -56,6 +56,13 @@ STATE = {
     "2755": "LA", "2582": "LA", "2046": "TN", "2193": "TN", "2698": "GA", "2447": "LA",
     "2460": "IA", "282": "IN", "2181": "IA", "2168": "OH", "2710": "IL", "2546": "MO",
     "301": "CA", "2000": "TX", "292": "TX", "2464": "AZ", "253": "UT", "2692": "UT",
+    "219": "PA", "2535": "AL", "2016": "MS", "2010": "AL", "2377": "LA", "2630": "TN", "2065": "FL",
+    "93": "KY", "2197": "IL", "2086": "IN", "2815": "MO",
+    "304": "ID", "13": "CA", "2502": "OR", "2458": "CO", "2916": "TX",
+    "311": "ME", "2210": "NC", "2142": "NY", "47": "DC", "399": "NY", "2619": "NY", "2230": "NY",
+    "2747": "SC", "2453": "AL",
+    "2674": "IN", "2413": "KY", "2198": "KY", "2523": "PA",
+    "3101": "UT", "2320": "TX", "2277": "TX",
 }
 
 EAST = {
@@ -64,7 +71,8 @@ EAST = {
     "WAKE", "ECU", "CLT", "APP", "CLEM", "SC", "CCU", "MRSH", "BUFF", "CIN",
     "LOU", "UK", "WKU",
     "VILL", "RICH", "W&M", "UNH", "HC", "URI", "LEH", "HARV",
-    "LAF", "YALE", "DART", "MONM", "TOW", "SCST",
+    "LAF", "YALE", "DART", "MONM", "TOW", "SCST", "PENN",
+    "ME", "ELON", "COLG", "HOW", "ALB", "STBK", "FOR",
 }
 SOUTH = {
     "MIA", "FSU", "FLA", "UCF", "USF", "FAU", "FIU", "UGA", "GT", "GASO", "GAST",
@@ -73,6 +81,8 @@ SOUTH = {
     "UAB", "TA&M", "HOU",
     "FUR", "UTC", "MER", "JKST", "FAMU", "ALST", "TNTC", "SELA",
     "GRAM", "SOU", "APSU", "ETSU", "WES", "NICH",
+    "SAM", "ALCN", "AAMU", "MCN", "UTM", "BCU",
+    "WOF", "UNA",
 }
 MIDWEST = {
     "OSU", "OHIO", "AKR", "KENT", "BGSU", "TOL", "M-OH", "MICH", "MSU", "WMU",
@@ -81,10 +91,14 @@ MIDWEST = {
     "UNT", "BAY", "TCU",
     "NDSU", "SDST", "SDAK", "UND", "ILST", "YSU", "SIU", "STMN",
     "UNI", "INST", "DRKE", "DAY", "WIU", "SEMO",
+    "MUR", "EIU", "BUT", "LIN",
+    "VAL", "MORE", "EKU", "RMU",
 }
 WEST_FCS = {
     "MONT", "MTST", "IDHO", "EWU", "SAC", "UCD", "TAR", "SFA",
     "USD", "ACU", "RGV", "NAU", "SUU", "WEB",
+    "IDST", "CP", "PRST", "UNCO", "UIW",
+    "UTU", "LAM", "HCU",
 }
 
 
@@ -238,6 +252,22 @@ SP_PLUS_ALIASES = {
     "northernarizona": "NAU",
     "southernutah": "SUU",
     "weberst": "WEB",
+    "penn": "PENN",
+    "incarnateword": "UIW",
+    "utmartin": "UTM",
+    "idahost": "IDST",
+    "butler": "BUT",
+    "lindenwood": "LIN",
+    "bethunecookman": "BCU",
+    "alcornst": "ALCN",
+    "mcneese": "MCN",
+    "calpoly": "CP",
+    "alabamaam": "AAMU",
+    "northerncolorado": "UNCO",
+    "easternillinois": "EIU",
+    "samford": "SAM",
+    "murrayst": "MUR",
+    "portlandst": "PRST",
 }
 
 
@@ -292,13 +322,20 @@ def main() -> None:
     years = [2021, 2022, 2023, 2024, 2025]
     fcs_keep = {
         "VILL", "RICH", "W&M", "UNH", "HC", "URI", "LEH", "HARV",
-        "LAF", "YALE", "DART", "MONM", "TOW", "SCST",
+        "LAF", "YALE", "DART", "MONM", "TOW", "SCST", "PENN",
+        "ME", "ELON", "COLG", "HOW", "ALB", "STBK", "FOR",
         "FUR", "UTC", "MER", "JKST", "FAMU", "ALST", "TNTC", "SELA",
         "GRAM", "SOU", "APSU", "ETSU", "WES", "NICH",
+        "SAM", "ALCN", "AAMU", "MCN", "UTM", "BCU",
+        "WOF", "UNA",
         "NDSU", "SDST", "SDAK", "UND", "ILST", "YSU", "SIU", "STMN",
         "UNI", "INST", "DRKE", "DAY", "WIU", "SEMO",
+        "MUR", "EIU", "BUT", "LIN",
+        "VAL", "MORE", "EKU", "RMU",
         "MONT", "MTST", "IDHO", "EWU", "SAC", "UCD", "TAR", "SFA",
         "USD", "ACU", "RGV", "NAU", "SUU", "WEB",
+        "IDST", "CP", "PRST", "UNCO", "UIW",
+        "UTU", "LAM", "HCU",
     }
     latest_fbs = fetch_standings(80, 2025)
     latest_fcs = [row for row in fetch_standings(81, 2025) if row["abbreviation"] in fcs_keep]
@@ -363,8 +400,8 @@ def main() -> None:
     for t in teams:
         counts[t["region"]] += 1
     print("region counts", dict(counts), "total", len(teams))
-    if set(counts.values()) != {48}:
-        raise SystemExit(f"Regions not balanced to 48: {dict(counts)}")
+    if set(counts.values()) != {56}:
+        raise SystemExit(f"Regions not balanced to 56: {dict(counts)}")
 
     apply_sp_plus(teams, sp_plus)
     for region in ("east", "south", "midwest", "west"):

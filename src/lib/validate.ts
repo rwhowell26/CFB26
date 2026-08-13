@@ -27,8 +27,8 @@ function assert(condition: unknown, message: string): asserts condition {
 export function validateModel() {
   const assignment = defaultAssignment();
   const rivals = defaultRivals();
-  assert(TEAMS.length === 192, `Expected 192 teams, got ${TEAMS.length}`);
-  assert(TEAMS.filter((team) => team.subdivision === "fcs").length === 56, "expected 56 extra clubs");
+  assert(TEAMS.length === 224, `Expected 224 teams, got ${TEAMS.length}`);
+  assert(TEAMS.filter((team) => team.subdivision === "fcs").length === 88, "expected 88 extra clubs");
   assert(
     TEAMS.every((team) => team.subdivision !== "fcs" || team.tier >= 3),
     "no extra club may start above Tier III",
@@ -55,9 +55,9 @@ export function validateModel() {
 
   for (const region of REGIONS) {
     const count = teamsIn(assignment, region.id).length;
-    assert(count === 48, `${region.name} has ${count} teams`);
+    assert(count === 56, `${region.name} has ${count} teams`);
     const tiers = tiersInRegion(assignment, region.id);
-    assert(tiers.length === 6, `${region.name} should have 6 full tiers`);
+    assert(tiers.length === 7, `${region.name} should have 7 full tiers`);
     for (const tier of tiers) {
       const size = teamsIn(assignment, region.id, tier).length;
       assert(size === TIER_SIZE, `${region.name} tier ${tier} size ${size}`);

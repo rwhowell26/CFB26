@@ -90,6 +90,28 @@
     ]
   },
   {
+    "id": "2010",
+    "name": "Alabama A&M Bulldogs",
+    "shortName": "Alabama A&M",
+    "abbreviation": "AAMU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2010.png",
+    "state": "AL",
+    "wins": 4,
+    "losses": 8,
+    "pf": 281,
+    "pa": 401,
+    "wins5": 26,
+    "losses5": 30,
+    "spPlus": 18.6,
+    "spPlusRank": 190,
+    "region": "south",
+    "tier": 7,
+    "subdivision": "fcs",
+    "rivals": [
+      "2011"
+    ]
+  },
+  {
     "id": "2011",
     "name": "Alabama State Hornets",
     "shortName": "Alabama St",
@@ -106,6 +128,29 @@
     "spPlusRank": 150,
     "region": "south",
     "tier": 5,
+    "subdivision": "fcs",
+    "rivals": [
+      "2010",
+      "2296"
+    ]
+  },
+  {
+    "id": "2016",
+    "name": "Alcorn State Braves",
+    "shortName": "Alcorn State",
+    "abbreviation": "ALCN",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2016.png",
+    "state": "MS",
+    "wins": 5,
+    "losses": 7,
+    "pf": 291,
+    "pa": 278,
+    "wins5": 29,
+    "losses5": 28,
+    "spPlus": 21.5,
+    "spPlusRank": 187,
+    "region": "south",
+    "tier": 6,
     "subdivision": "fcs",
     "rivals": [
       "2296"
@@ -355,6 +400,28 @@
     ]
   },
   {
+    "id": "2065",
+    "name": "Bethune-Cookman Wildcats",
+    "shortName": "Bethune-Cookman",
+    "abbreviation": "BCU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2065.png",
+    "state": "FL",
+    "wins": 6,
+    "losses": 6,
+    "pf": 356,
+    "pa": 392,
+    "wins5": 15,
+    "losses5": 42,
+    "spPlus": 23.2,
+    "spPlusRank": 186,
+    "region": "south",
+    "tier": 6,
+    "subdivision": "fcs",
+    "rivals": [
+      "50"
+    ]
+  },
+  {
     "id": "68",
     "name": "Boise State Broncos",
     "shortName": "Boise St",
@@ -443,6 +510,26 @@
     "rivals": []
   },
   {
+    "id": "2086",
+    "name": "Butler Bulldogs",
+    "shortName": "Butler",
+    "abbreviation": "BUT",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2086.png",
+    "state": "IN",
+    "wins": 6,
+    "losses": 6,
+    "pf": 274,
+    "pa": 304,
+    "wins5": 32,
+    "losses5": 25,
+    "spPlus": 24.8,
+    "spPlusRank": 183,
+    "region": "midwest",
+    "tier": 6,
+    "subdivision": "fcs",
+    "rivals": []
+  },
+  {
     "id": "2117",
     "name": "Central Michigan Chippewas",
     "shortName": "C Michigan",
@@ -463,6 +550,28 @@
     "rivals": [
       "2199",
       "2711"
+    ]
+  },
+  {
+    "id": "13",
+    "name": "Cal Poly Mustangs",
+    "shortName": "Cal Poly",
+    "abbreviation": "CP",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/13.png",
+    "state": "CA",
+    "wins": 4,
+    "losses": 8,
+    "pf": 330,
+    "pa": 378,
+    "wins5": 14,
+    "losses5": 42,
+    "spPlus": 19.0,
+    "spPlusRank": 189,
+    "region": "west",
+    "tier": 7,
+    "subdivision": "fcs",
+    "rivals": [
+      "302"
     ]
   },
   {
@@ -524,7 +633,7 @@
     "spPlus": 12.8,
     "spPlusRank": 241,
     "region": "south",
-    "tier": 6,
+    "tier": 7,
     "subdivision": "fcs",
     "rivals": []
   },
@@ -595,6 +704,28 @@
     "subdivision": "fbs",
     "rivals": [
       "2026"
+    ]
+  },
+  {
+    "id": "2142",
+    "name": "Colgate Raiders",
+    "shortName": "Colgate",
+    "abbreviation": "COLG",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2142.png",
+    "state": "NY",
+    "wins": 5,
+    "losses": 7,
+    "pf": 340,
+    "pa": 372,
+    "wins5": 21,
+    "losses5": 36,
+    "spPlus": 19.5,
+    "spPlusRank": 213,
+    "region": "east",
+    "tier": 7,
+    "subdivision": "fcs",
+    "rivals": [
+      "107"
     ]
   },
   {
@@ -790,7 +921,7 @@
     "spPlus": 15.6,
     "spPlusRank": 221,
     "region": "west",
-    "tier": 6,
+    "tier": 7,
     "subdivision": "fcs",
     "rivals": [
       "70"
@@ -837,6 +968,68 @@
     "rivals": [
       "152"
     ]
+  },
+  {
+    "id": "2197",
+    "name": "Eastern Illinois Panthers",
+    "shortName": "Eastern Illinois",
+    "abbreviation": "EIU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2197.png",
+    "state": "IL",
+    "wins": 3,
+    "losses": 9,
+    "pf": 210,
+    "pa": 350,
+    "wins5": 17,
+    "losses5": 40,
+    "spPlus": 15.5,
+    "spPlusRank": 193,
+    "region": "midwest",
+    "tier": 7,
+    "subdivision": "fcs",
+    "rivals": [
+      "2287"
+    ]
+  },
+  {
+    "id": "2198",
+    "name": "Eastern Kentucky Colonels",
+    "shortName": "Eastern Kentucky",
+    "abbreviation": "EKU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2198.png",
+    "state": "KY",
+    "wins": 5,
+    "losses": 7,
+    "pf": 232,
+    "pa": 292,
+    "wins5": 32,
+    "losses5": 27,
+    "spPlus": 18.8,
+    "spPlusRank": 217,
+    "region": "midwest",
+    "tier": 7,
+    "subdivision": "fcs",
+    "rivals": []
+  },
+  {
+    "id": "2210",
+    "name": "Elon Phoenix",
+    "shortName": "Elon",
+    "abbreviation": "ELON",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2210.png",
+    "state": "NC",
+    "wins": 6,
+    "losses": 6,
+    "pf": 345,
+    "pa": 297,
+    "wins5": 32,
+    "losses5": 26,
+    "spPlus": 21.8,
+    "spPlusRank": 209,
+    "region": "east",
+    "tier": 6,
+    "subdivision": "fcs",
+    "rivals": []
   },
   {
     "id": "2226",
@@ -922,9 +1115,11 @@
     "spPlus": 9.2,
     "spPlusRank": 273,
     "region": "south",
-    "tier": 6,
+    "tier": 7,
     "subdivision": "fcs",
-    "rivals": []
+    "rivals": [
+      "2065"
+    ]
   },
   {
     "id": "52",
@@ -949,6 +1144,26 @@
       "57",
       "2390"
     ]
+  },
+  {
+    "id": "2230",
+    "name": "Fordham Rams",
+    "shortName": "Fordham",
+    "abbreviation": "FOR",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2230.png",
+    "state": "NY",
+    "wins": 1,
+    "losses": 11,
+    "pf": 191,
+    "pa": 397,
+    "wins5": 24,
+    "losses5": 34,
+    "spPlus": 11.5,
+    "spPlusRank": 225,
+    "region": "east",
+    "tier": 7,
+    "subdivision": "fcs",
+    "rivals": []
   },
   {
     "id": "278",
@@ -990,9 +1205,11 @@
     "spPlus": 14.5,
     "spPlusRank": 228,
     "region": "south",
-    "tier": 6,
+    "tier": 7,
     "subdivision": "fcs",
-    "rivals": []
+    "rivals": [
+      "2747"
+    ]
   },
   {
     "id": "290",
@@ -1168,10 +1385,11 @@
     "spPlus": 18.0,
     "spPlusRank": 206,
     "region": "east",
-    "tier": 6,
+    "tier": 7,
     "subdivision": "fcs",
     "rivals": [
       "103",
+      "2142",
       "113"
     ]
   },
@@ -1200,6 +1418,46 @@
     ]
   },
   {
+    "id": "2277",
+    "name": "Houston Christian Huskies",
+    "shortName": "Houston Christian",
+    "abbreviation": "HCU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2277.png",
+    "state": "TX",
+    "wins": 2,
+    "losses": 10,
+    "pf": 202,
+    "pa": 363,
+    "wins5": 14,
+    "losses5": 42,
+    "spPlus": 11.8,
+    "spPlusRank": 224,
+    "region": "west",
+    "tier": 7,
+    "subdivision": "fcs",
+    "rivals": []
+  },
+  {
+    "id": "47",
+    "name": "Howard Bison",
+    "shortName": "Howard",
+    "abbreviation": "HOW",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/47.png",
+    "state": "DC",
+    "wins": 5,
+    "losses": 7,
+    "pf": 238,
+    "pa": 295,
+    "wins5": 23,
+    "losses5": 34,
+    "spPlus": 19.2,
+    "spPlusRank": 214,
+    "region": "east",
+    "tier": 7,
+    "subdivision": "fcs",
+    "rivals": []
+  },
+  {
     "id": "70",
     "name": "Idaho Vandals",
     "shortName": "Idaho",
@@ -1215,13 +1473,33 @@
     "spPlus": 20.6,
     "spPlusRank": 198,
     "region": "west",
-    "tier": 6,
+    "tier": 7,
     "subdivision": "fcs",
     "rivals": [
       "331",
       "149",
       "265"
     ]
+  },
+  {
+    "id": "304",
+    "name": "Idaho State Bengals",
+    "shortName": "Idaho State",
+    "abbreviation": "IDST",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/304.png",
+    "state": "ID",
+    "wins": 6,
+    "losses": 6,
+    "pf": 396,
+    "pa": 327,
+    "wins5": 16,
+    "losses5": 41,
+    "spPlus": 25.5,
+    "spPlusRank": 178,
+    "region": "west",
+    "tier": 6,
+    "subdivision": "fcs",
+    "rivals": []
   },
   {
     "id": "356",
@@ -1265,7 +1543,30 @@
     "tier": 5,
     "subdivision": "fcs",
     "rivals": [
+      "2197",
       "79"
+    ]
+  },
+  {
+    "id": "2916",
+    "name": "Incarnate Word Cardinals",
+    "shortName": "Incarnate Word",
+    "abbreviation": "UIW",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2916.png",
+    "state": "TX",
+    "wins": 5,
+    "losses": 7,
+    "pf": 308,
+    "pa": 306,
+    "wins5": 46,
+    "losses5": 16,
+    "spPlus": 28.0,
+    "spPlusRank": 176,
+    "region": "west",
+    "tier": 6,
+    "subdivision": "fcs",
+    "rivals": [
+      "2617"
     ]
   },
   {
@@ -1306,7 +1607,7 @@
     "spPlus": 16.2,
     "spPlusRank": 215,
     "region": "midwest",
-    "tier": 6,
+    "tier": 7,
     "subdivision": "fcs",
     "rivals": []
   },
@@ -1376,7 +1677,8 @@
     "tier": 5,
     "subdivision": "fcs",
     "rivals": [
-      "2011"
+      "2011",
+      "2016"
     ]
   },
   {
@@ -1582,6 +1884,26 @@
     ]
   },
   {
+    "id": "2320",
+    "name": "Lamar Cardinals",
+    "shortName": "Lamar",
+    "abbreviation": "LAM",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2320.png",
+    "state": "TX",
+    "wins": 8,
+    "losses": 5,
+    "pf": 292,
+    "pa": 299,
+    "wins5": 23,
+    "losses5": 34,
+    "spPlus": 27.2,
+    "spPlusRank": 192,
+    "region": "west",
+    "tier": 6,
+    "subdivision": "fcs",
+    "rivals": []
+  },
+  {
     "id": "2329",
     "name": "Lehigh Mountain Hawks",
     "shortName": "Lehigh",
@@ -1626,6 +1948,26 @@
     ]
   },
   {
+    "id": "2815",
+    "name": "Lindenwood Lions",
+    "shortName": "Lindenwood",
+    "abbreviation": "LIN",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2815.png",
+    "state": "MO",
+    "wins": 6,
+    "losses": 6,
+    "pf": 297,
+    "pa": 324,
+    "wins5": 21,
+    "losses5": 23,
+    "spPlus": 24.0,
+    "spPlusRank": 185,
+    "region": "midwest",
+    "tier": 6,
+    "subdivision": "fcs",
+    "rivals": []
+  },
+  {
     "id": "309",
     "name": "Louisiana Ragin' Cajuns",
     "shortName": "Louisiana",
@@ -1645,6 +1987,7 @@
     "subdivision": "fbs",
     "rivals": [
       "2348",
+      "2377",
       "2433"
     ]
   },
@@ -1717,6 +2060,28 @@
     ]
   },
   {
+    "id": "311",
+    "name": "Maine Black Bears",
+    "shortName": "Maine",
+    "abbreviation": "ME",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/311.png",
+    "state": "ME",
+    "wins": 6,
+    "losses": 6,
+    "pf": 290,
+    "pa": 291,
+    "wins5": 21,
+    "losses5": 36,
+    "spPlus": 22.0,
+    "spPlusRank": 208,
+    "region": "east",
+    "tier": 6,
+    "subdivision": "fcs",
+    "rivals": [
+      "160"
+    ]
+  },
+  {
     "id": "276",
     "name": "Marshall Thundering Herd",
     "shortName": "Marshall",
@@ -1758,6 +2123,28 @@
     "subdivision": "fbs",
     "rivals": [
       "258"
+    ]
+  },
+  {
+    "id": "2377",
+    "name": "McNeese Cowboys",
+    "shortName": "McNeese",
+    "abbreviation": "MCN",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2377.png",
+    "state": "LA",
+    "wins": 5,
+    "losses": 7,
+    "pf": 282,
+    "pa": 306,
+    "wins5": 19,
+    "losses5": 37,
+    "spPlus": 20.8,
+    "spPlusRank": 188,
+    "region": "south",
+    "tier": 6,
+    "subdivision": "fcs",
+    "rivals": [
+      "309"
     ]
   },
   {
@@ -2055,6 +2442,48 @@
     ]
   },
   {
+    "id": "2413",
+    "name": "Morehead State Eagles",
+    "shortName": "Morehead State",
+    "abbreviation": "MORE",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2413.png",
+    "state": "KY",
+    "wins": 6,
+    "losses": 6,
+    "pf": 254,
+    "pa": 358,
+    "wins5": 26,
+    "losses5": 31,
+    "spPlus": 20.5,
+    "spPlusRank": 211,
+    "region": "midwest",
+    "tier": 6,
+    "subdivision": "fcs",
+    "rivals": []
+  },
+  {
+    "id": "93",
+    "name": "Murray State Racers",
+    "shortName": "Murray State",
+    "abbreviation": "MUR",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/93.png",
+    "state": "KY",
+    "wins": 1,
+    "losses": 11,
+    "pf": 228,
+    "pa": 463,
+    "wins5": 12,
+    "losses5": 45,
+    "spPlus": 13.5,
+    "spPlusRank": 200,
+    "region": "midwest",
+    "tier": 7,
+    "subdivision": "fcs",
+    "rivals": [
+      "98"
+    ]
+  },
+  {
     "id": "2449",
     "name": "North Dakota State Bison",
     "shortName": "N Dakota St",
@@ -2211,6 +2640,7 @@
     "tier": 6,
     "subdivision": "fcs",
     "rivals": [
+      "311",
       "227"
     ]
   },
@@ -2276,11 +2706,31 @@
     "spPlus": 18.2,
     "spPlusRank": 199,
     "region": "south",
-    "tier": 6,
+    "tier": 7,
     "subdivision": "fcs",
     "rivals": [
       "2545"
     ]
+  },
+  {
+    "id": "2453",
+    "name": "North Alabama Lions",
+    "shortName": "North Alabama",
+    "abbreviation": "UNA",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2453.png",
+    "state": "AL",
+    "wins": 2,
+    "losses": 10,
+    "pf": 303,
+    "pa": 470,
+    "wins5": 12,
+    "losses5": 45,
+    "spPlus": 13.8,
+    "spPlusRank": 220,
+    "region": "south",
+    "tier": 7,
+    "subdivision": "fcs",
+    "rivals": []
   },
   {
     "id": "153",
@@ -2368,6 +2818,26 @@
     "spPlusRank": 167,
     "region": "west",
     "tier": 6,
+    "subdivision": "fcs",
+    "rivals": []
+  },
+  {
+    "id": "2458",
+    "name": "Northern Colorado Bears",
+    "shortName": "Northern Colorado",
+    "abbreviation": "UNCO",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2458.png",
+    "state": "CO",
+    "wins": 4,
+    "losses": 8,
+    "pf": 243,
+    "pa": 341,
+    "wins5": 11,
+    "losses5": 46,
+    "spPlus": 17.8,
+    "spPlusRank": 191,
+    "region": "west",
+    "tier": 7,
     "subdivision": "fcs",
     "rivals": []
   },
@@ -2622,6 +3092,26 @@
     ]
   },
   {
+    "id": "219",
+    "name": "Pennsylvania Quakers",
+    "shortName": "Penn",
+    "abbreviation": "PENN",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/219.png",
+    "state": "PA",
+    "wins": 6,
+    "losses": 4,
+    "pf": 271,
+    "pa": 265,
+    "wins5": 27,
+    "losses5": 23,
+    "spPlus": 31.0,
+    "spPlusRank": 175,
+    "region": "east",
+    "tier": 6,
+    "subdivision": "fcs",
+    "rivals": []
+  },
+  {
     "id": "213",
     "name": "Penn State Nittany Lions",
     "shortName": "Penn State",
@@ -2668,6 +3158,26 @@
       "183",
       "277"
     ]
+  },
+  {
+    "id": "2502",
+    "name": "Portland State Vikings",
+    "shortName": "Portland State",
+    "abbreviation": "PRST",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2502.png",
+    "state": "OR",
+    "wins": 1,
+    "losses": 11,
+    "pf": 194,
+    "pa": 512,
+    "wins5": 18,
+    "losses5": 38,
+    "spPlus": 12.0,
+    "spPlusRank": 205,
+    "region": "west",
+    "tier": 7,
+    "subdivision": "fcs",
+    "rivals": []
   },
   {
     "id": "2509",
@@ -2753,11 +3263,31 @@
     "spPlus": 21.1,
     "spPlusRank": 196,
     "region": "east",
-    "tier": 6,
+    "tier": 7,
     "subdivision": "fcs",
     "rivals": [
       "2729"
     ]
+  },
+  {
+    "id": "2523",
+    "name": "Robert Morris Colonials",
+    "shortName": "Robert Morris",
+    "abbreviation": "RMU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2523.png",
+    "state": "PA",
+    "wins": 3,
+    "losses": 9,
+    "pf": 182,
+    "pa": 299,
+    "wins5": 18,
+    "losses5": 38,
+    "spPlus": 16.0,
+    "spPlusRank": 218,
+    "region": "midwest",
+    "tier": 7,
+    "subdivision": "fcs",
+    "rivals": []
   },
   {
     "id": "164",
@@ -2882,7 +3412,7 @@
     "spPlus": 19.4,
     "spPlusRank": 197,
     "region": "midwest",
-    "tier": 6,
+    "tier": 7,
     "subdivision": "fcs",
     "rivals": []
   },
@@ -2904,7 +3434,9 @@
     "region": "west",
     "tier": 5,
     "subdivision": "fcs",
-    "rivals": []
+    "rivals": [
+      "2916"
+    ]
   },
   {
     "id": "2567",
@@ -2973,6 +3505,26 @@
     "rivals": [
       "326"
     ]
+  },
+  {
+    "id": "2535",
+    "name": "Samford Bulldogs",
+    "shortName": "Samford",
+    "abbreviation": "SAM",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2535.png",
+    "state": "AL",
+    "wins": 1,
+    "losses": 11,
+    "pf": 175,
+    "pa": 455,
+    "wins5": 26,
+    "losses5": 32,
+    "spPlus": 15.0,
+    "spPlusRank": 194,
+    "region": "south",
+    "tier": 7,
+    "subdivision": "fcs",
+    "rivals": []
   },
   {
     "id": "301",
@@ -3147,7 +3699,7 @@
     "spPlus": 14.8,
     "spPlusRank": 227,
     "region": "south",
-    "tier": 6,
+    "tier": 7,
     "subdivision": "fcs",
     "rivals": [
       "2755"
@@ -3240,6 +3792,26 @@
       "23",
       "30"
     ]
+  },
+  {
+    "id": "2619",
+    "name": "Stony Brook Seawolves",
+    "shortName": "Stony Brook",
+    "abbreviation": "STBK",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2619.png",
+    "state": "NY",
+    "wins": 6,
+    "losses": 6,
+    "pf": 336,
+    "pa": 309,
+    "wins5": 21,
+    "losses5": 35,
+    "spPlus": 21.2,
+    "spPlusRank": 210,
+    "region": "east",
+    "tier": 7,
+    "subdivision": "fcs",
+    "rivals": []
   },
   {
     "id": "183",
@@ -3604,6 +4176,26 @@
     ]
   },
   {
+    "id": "399",
+    "name": "UAlbany Great Danes",
+    "shortName": "UAlbany",
+    "abbreviation": "ALB",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/399.png",
+    "state": "NY",
+    "wins": 2,
+    "losses": 10,
+    "pf": 201,
+    "pa": 387,
+    "wins5": 22,
+    "losses5": 38,
+    "spPlus": 14.0,
+    "spPlusRank": 219,
+    "region": "east",
+    "tier": 7,
+    "subdivision": "fcs",
+    "rivals": []
+  },
+  {
     "id": "302",
     "name": "UC Davis Aggies",
     "shortName": "UC Davis",
@@ -3622,6 +4214,7 @@
     "tier": 6,
     "subdivision": "fcs",
     "rivals": [
+      "13",
       "16"
     ]
   },
@@ -3731,7 +4324,7 @@
     "spPlus": 16.0,
     "spPlusRank": 216,
     "region": "east",
-    "tier": 6,
+    "tier": 7,
     "subdivision": "fbs",
     "rivals": [
       "107",
@@ -3783,6 +4376,26 @@
       "24",
       "26"
     ]
+  },
+  {
+    "id": "2630",
+    "name": "UT Martin Skyhawks",
+    "shortName": "UT Martin",
+    "abbreviation": "UTM",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2630.png",
+    "state": "TN",
+    "wins": 6,
+    "losses": 6,
+    "pf": 248,
+    "pa": 287,
+    "wins5": 40,
+    "losses5": 21,
+    "spPlus": 26.8,
+    "spPlusRank": 177,
+    "region": "south",
+    "tier": 6,
+    "subdivision": "fcs",
+    "rivals": []
   },
   {
     "id": "2638",
@@ -3897,6 +4510,46 @@
       "254",
       "2751"
     ]
+  },
+  {
+    "id": "3101",
+    "name": "Utah Tech Trailblazers",
+    "shortName": "Utah Tech",
+    "abbreviation": "UTU",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/3101.png",
+    "state": "UT",
+    "wins": 2,
+    "losses": 10,
+    "pf": 192,
+    "pa": 352,
+    "wins5": 10,
+    "losses5": 47,
+    "spPlus": 12.5,
+    "spPlusRank": 223,
+    "region": "west",
+    "tier": 7,
+    "subdivision": "fcs",
+    "rivals": []
+  },
+  {
+    "id": "2674",
+    "name": "Valparaiso Beacons",
+    "shortName": "Valparaiso",
+    "abbreviation": "VAL",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2674.png",
+    "state": "IN",
+    "wins": 2,
+    "losses": 10,
+    "pf": 244,
+    "pa": 427,
+    "wins5": 18,
+    "losses5": 39,
+    "spPlus": 13.2,
+    "spPlusRank": 222,
+    "region": "midwest",
+    "tier": 7,
+    "subdivision": "fcs",
+    "rivals": []
   },
   {
     "id": "238",
@@ -4097,7 +4750,7 @@
     "spPlus": 23.5,
     "spPlusRank": 179,
     "region": "west",
-    "tier": 6,
+    "tier": 7,
     "subdivision": "fcs",
     "rivals": []
   },
@@ -4160,7 +4813,7 @@
     "spPlus": 17.0,
     "spPlusRank": 207,
     "region": "midwest",
-    "tier": 6,
+    "tier": 7,
     "subdivision": "fcs",
     "rivals": []
   },
@@ -4183,7 +4836,8 @@
     "tier": 3,
     "subdivision": "fbs",
     "rivals": [
-      "2393"
+      "2393",
+      "93"
     ]
   },
   {
@@ -4232,6 +4886,28 @@
       "2294",
       "135",
       "158"
+    ]
+  },
+  {
+    "id": "2747",
+    "name": "Wofford Terriers",
+    "shortName": "Wofford",
+    "abbreviation": "WOF",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2747.png",
+    "state": "SC",
+    "wins": 6,
+    "losses": 6,
+    "pf": 274,
+    "pa": 207,
+    "wins5": 17,
+    "losses5": 40,
+    "spPlus": 20.0,
+    "spPlusRank": 212,
+    "region": "south",
+    "tier": 6,
+    "subdivision": "fcs",
+    "rivals": [
+      "231"
     ]
   },
   {

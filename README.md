@@ -2,7 +2,7 @@
 
 A conference-free map: **four regions**, **8-team tiers** (as many as a region needs), optional protected rivals, a 13-week calendar with a league-wide bye, promotion/relegation, and a **24-team all-autobid playoff** for Tiers I–III.
 
-The pool is **192 clubs** (136 FBS + 56 FCS). Each region has **six complete 8-team tiers**. Starting tiers use **2025 SP+**. Former FCS programs cannot occupy Tiers I–II. 2026 is simulated on the current slates (Ole Miss wins every game and the playoff; LSU loses every game; other results follow SP+).
+The pool is **224 clubs** (136 FBS + 88 FCS). Each region has **seven complete 8-team tiers**. Starting tiers use **2025 SP+**. Former FCS programs cannot occupy Tiers I–II. 2026 is simulated on the current slates (Ole Miss wins every game and the playoff; LSU loses every game; other results follow SP+).
 
 ## Schedule (12 games + 1 bye, no 13th contest)
 

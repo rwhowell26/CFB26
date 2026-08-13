@@ -174,5 +174,17 @@
   ["NICH", "SELA"],
   ["TOW", "DEL"],
   ["UNI", "NDSU"],
-  ["USD", "SDSU"]
+  ["USD", "SDSU"],
+  ["FAMU", "BCU"],
+  ["IDHO", "IDST"],
+  ["ALST", "AAMU"],
+  ["JKST", "ALCN"],
+  ["MCN", "UL"],
+  ["ILST", "EIU"],
+  ["UIW", "SFA"],
+  ["CP", "UCD"],
+  ["MUR", "WKU"],
+  ["ME", "UNH"],
+  ["COLG", "HC"],
+  ["WOF", "FUR"]
 ]

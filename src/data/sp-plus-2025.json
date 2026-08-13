@@ -1150,5 +1150,197 @@
     "name": "Southern Jaguars",
     "rating": 14.8,
     "record": "2-10"
+  },
+  {
+    "rank": 175,
+    "name": "Penn",
+    "rating": 31.0,
+    "record": "6-4"
+  },
+  {
+    "rank": 176,
+    "name": "Incarnate Word",
+    "rating": 28.0,
+    "record": "5-7"
+  },
+  {
+    "rank": 177,
+    "name": "UT Martin",
+    "rating": 26.8,
+    "record": "6-6"
+  },
+  {
+    "rank": 178,
+    "name": "Idaho State",
+    "rating": 25.5,
+    "record": "6-6"
+  },
+  {
+    "rank": 183,
+    "name": "Butler",
+    "rating": 24.8,
+    "record": "6-6"
+  },
+  {
+    "rank": 185,
+    "name": "Lindenwood",
+    "rating": 24.0,
+    "record": "6-6"
+  },
+  {
+    "rank": 186,
+    "name": "Bethune-Cookman",
+    "rating": 23.2,
+    "record": "6-6"
+  },
+  {
+    "rank": 187,
+    "name": "Alcorn State",
+    "rating": 21.5,
+    "record": "5-7"
+  },
+  {
+    "rank": 188,
+    "name": "McNeese",
+    "rating": 20.8,
+    "record": "5-7"
+  },
+  {
+    "rank": 189,
+    "name": "Cal Poly",
+    "rating": 19.0,
+    "record": "4-8"
+  },
+  {
+    "rank": 190,
+    "name": "Alabama A&M",
+    "rating": 18.6,
+    "record": "4-8"
+  },
+  {
+    "rank": 191,
+    "name": "Northern Colorado",
+    "rating": 17.8,
+    "record": "4-8"
+  },
+  {
+    "rank": 193,
+    "name": "Eastern Illinois",
+    "rating": 15.5,
+    "record": "3-9"
+  },
+  {
+    "rank": 194,
+    "name": "Samford",
+    "rating": 15.0,
+    "record": "1-11"
+  },
+  {
+    "rank": 200,
+    "name": "Murray State",
+    "rating": 13.5,
+    "record": "1-11"
+  },
+  {
+    "rank": 205,
+    "name": "Portland State",
+    "rating": 12.0,
+    "record": "1-11"
+  },
+  {
+    "rank": 192,
+    "name": "Lamar",
+    "rating": 27.2,
+    "record": "8-5"
+  },
+  {
+    "rank": 208,
+    "name": "Maine",
+    "rating": 22.0,
+    "record": "6-6"
+  },
+  {
+    "rank": 209,
+    "name": "Elon",
+    "rating": 21.8,
+    "record": "6-6"
+  },
+  {
+    "rank": 210,
+    "name": "Stony Brook",
+    "rating": 21.2,
+    "record": "6-6"
+  },
+  {
+    "rank": 211,
+    "name": "Morehead State",
+    "rating": 20.5,
+    "record": "6-6"
+  },
+  {
+    "rank": 212,
+    "name": "Wofford",
+    "rating": 20.0,
+    "record": "6-6"
+  },
+  {
+    "rank": 213,
+    "name": "Colgate",
+    "rating": 19.5,
+    "record": "5-7"
+  },
+  {
+    "rank": 214,
+    "name": "Howard",
+    "rating": 19.2,
+    "record": "5-7"
+  },
+  {
+    "rank": 217,
+    "name": "Eastern Kentucky",
+    "rating": 18.8,
+    "record": "5-7"
+  },
+  {
+    "rank": 218,
+    "name": "Robert Morris",
+    "rating": 16.0,
+    "record": "3-9"
+  },
+  {
+    "rank": 219,
+    "name": "Albany",
+    "rating": 14.0,
+    "record": "2-10"
+  },
+  {
+    "rank": 220,
+    "name": "North Alabama",
+    "rating": 13.8,
+    "record": "2-10"
+  },
+  {
+    "rank": 222,
+    "name": "Valparaiso",
+    "rating": 13.2,
+    "record": "2-10"
+  },
+  {
+    "rank": 223,
+    "name": "Utah Tech",
+    "rating": 12.5,
+    "record": "2-10"
+  },
+  {
+    "rank": 224,
+    "name": "Houston Christian",
+    "rating": 11.8,
+    "record": "2-10"
+  },
+  {
+    "rank": 225,
+    "name": "Fordham",
+    "rating": 11.5,
+    "record": "1-11"
   }
 ]

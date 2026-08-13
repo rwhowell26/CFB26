@@ -103,7 +103,7 @@ export function RegionsTab({
     <div className="stack">
       <p className="lede">
         Tiers follow last year’s SP+ inside whatever region a club is in. Added clubs
-        cannot sit above Tier III. Each region now has six full 8-team buckets; gold
+        cannot sit above Tier III. Each region has seven full 8-team buckets; gold
         means a group is not at 8. Drop onto “New tier” to add another group.
       </p>
       <DndContext
