@@ -1,4 +1,4 @@
-import { buildPlayoffField } from "./playoff";
+import { buildPlayoffBracket, buildPlayoffField } from "./playoff";
 import { teamsIn, tiersInRegion } from "./rankings";
 import { isRealRivalry, traditionalDate } from "./rivalries";
 import { clearRival } from "./rivals";
@@ -138,7 +138,34 @@ export function validateModel() {
   assert(field.every((entry) => entry.bid !== undefined), "all autobids");
   assert(field.filter((entry) => entry.bye).length === 8, "expected 8 byes");
   assert(field.filter((entry) => entry.bid === "tier-champion").length === 12, "12 champions");
-  assert(field.filter((entry) => entry.bid === "tier-runner-up").length === 12, "12 runners-up");
+  assert(field.filter((entry) => entry.bid === "tier-runner-up").length === 8, "8 runners-up");
+  assert(field.filter((entry) => entry.bid === "tier-third").length === 4, "4 third-place bids");
+  const t1 = field.filter((entry) => assignment[entry.teamId].tier === 1);
+  const t2 = field.filter((entry) => assignment[entry.teamId].tier === 2);
+  const t3 = field.filter((entry) => assignment[entry.teamId].tier === 3);
+  assert(t1.length === 12, "3 Tier I teams per region");
+  assert(t2.length === 8, "2 Tier II teams per region");
+  assert(t3.length === 4, "1 Tier III team per region");
+  assert(
+    field.filter((entry) => entry.seed <= 4).every((entry) => assignment[entry.teamId].tier === 1 && entry.bid === "tier-champion"),
+    "seeds 1–4 should be Tier I champions",
+  );
+  const regionOf = (seed: number) => {
+    const entry = field.find((item) => item.seed === seed);
+    return entry ? assignment[entry.teamId].region : null;
+  };
+  for (let high = 9; high <= 16; high += 1) {
+    const low = 25 - high;
+    assert(regionOf(high) !== regionOf(low), `first round ${high} vs ${low} same region`);
+  }
+  for (let seed = 1; seed <= 8; seed += 1) {
+    const a = 17 - seed;
+    const b = 16 + seed;
+    const home = regionOf(seed);
+    assert(home !== regionOf(a) && home !== regionOf(b), `bye ${seed} can open against own region`);
+  }
+  const bracket = buildPlayoffBracket(field);
+  assert(bracket.some((game) => game.round === "first"), "first round exists");
 
   return {
     teams: TEAMS.length,

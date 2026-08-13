@@ -53,7 +53,7 @@ export type CalendarGame = {
   label: string;
 };
 
-export type PlayoffBidKind = "tier-champion" | "tier-runner-up";
+export type PlayoffBidKind = "tier-champion" | "tier-runner-up" | "tier-third";
 
 export type PlayoffTeam = {
   teamId: string;

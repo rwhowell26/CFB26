@@ -15,9 +15,11 @@ export function PlayoffTab({ assignment }: { assignment: Assignment }) {
   return (
     <div className="stack">
       <p className="lede">
-        A 24-team playoff made entirely of autobids. The champion and runner-up of each
-        region’s Tiers I, II, and III (4 × 3 × 2) are in. Tiers IV and below play for
-        promotion, not the national bracket. Seeds 1–8 receive a first-round bye.
+        Each region sends **3 from Tier I, 2 from Tier II, and 1 from Tier III** (24 autobids).
+        Seeds follow place and tier — Tier I champions 1–4, then Tier I runners-up, then
+        3rd place, then Tier II, then the Tier III champions — not 2025 record. Opening
+        games are always cross-region. Tiers IV and below play for promotion only. Seeds
+        1–8 receive a first-round bye.
       </p>
       <div className="stat-row">
         <div className="stat"><b>{summary.fieldSize}</b><span>team field</span></div>
@@ -29,7 +31,7 @@ export function PlayoffTab({ assignment }: { assignment: Assignment }) {
         <section className="panel">
           <header className="panel-head">
             <h2>Field</h2>
-            <span>All autobids · projected from 2025 records</span>
+            <span>All autobids · seeded by tier and place</span>
           </header>
           <ol className="seed-list">
             {field.map((entry) => {
@@ -54,7 +56,7 @@ export function PlayoffTab({ assignment }: { assignment: Assignment }) {
         <section className="panel">
           <header className="panel-head">
             <h2>Bracket</h2>
-            <span>Higher 2025 win% is treated as the projected winner</span>
+            <span>Projected winners still use 2025 win%</span>
           </header>
           <div className="bracket">
             {ROUNDS.map((round) => {

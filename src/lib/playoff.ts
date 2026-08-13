@@ -1,9 +1,30 @@
-import { teamsIn, tiersInRegion } from "./rankings";
-import { compareRecords, getTeam, PLAYOFF_TIERS, regionName, REGIONS, tierName } from "./teams";
-import type { Assignment, PlayoffGame, PlayoffTeam, Team } from "./types";
+import { teamsIn } from "./rankings";
+import { compareRecords, getTeam, PLAYOFF_TIERS, regionName, tierName } from "./teams";
+import type { Assignment, PlayoffGame, PlayoffTeam, RegionId, Team } from "./types";
 
 const FIELD_SIZE = 24;
 const BYES = 8;
+
+const PLACE_LABEL = ["champion", "runner-up", "3rd"];
+
+const BANDS: Array<{ tier: number; place: number }> = [
+  { tier: 1, place: 0 },
+  { tier: 1, place: 1 },
+  { tier: 1, place: 2 },
+  { tier: 2, place: 0 },
+  { tier: 2, place: 1 },
+  { tier: 3, place: 0 },
+];
+
+/** Region for each seed 1–24 so opening games are never same-region. */
+const REGION_BY_SEED: RegionId[] = [
+  "east", "south", "midwest", "west",
+  "east", "south", "midwest", "west",
+  "south", "east", "west", "midwest",
+  "east", "south", "midwest", "west",
+  "south", "east", "west", "midwest",
+  "south", "east", "west", "midwest",
+];
 
 function projectedWinner(aId: string | null, bId: string | null): string | null {
   if (!aId) return bId;
@@ -11,38 +32,43 @@ function projectedWinner(aId: string | null, bId: string | null): string | null 
   return compareRecords(getTeam(aId), getTeam(bId)) < 0 ? aId : bId;
 }
 
+export function playoffBidCount(tier: number): number {
+  if (tier === 1) return 3;
+  if (tier === 2) return 2;
+  if (tier === 3) return 1;
+  return 0;
+}
+
 export function playoffTeamsInGroup(group: Team[], tier: number): Team[] {
   if (tier > PLAYOFF_TIERS) return [];
-  return group.slice(0, 2);
+  return group.slice(0, playoffBidCount(tier));
+}
+
+function bidForPlace(place: number): PlayoffTeam["bid"] {
+  if (place === 0) return "tier-champion";
+  if (place === 1) return "tier-runner-up";
+  return "tier-third";
 }
 
 export function buildPlayoffField(assignment: Assignment): PlayoffTeam[] {
   const selected: PlayoffTeam[] = [];
 
-  for (const region of REGIONS) {
-    for (const tier of tiersInRegion(assignment, region.id)) {
-      if (tier > PLAYOFF_TIERS) continue;
-      const group = teamsIn(assignment, region.id, tier);
-      const bids = playoffTeamsInGroup(group, tier);
-      bids.forEach((team, index) => {
-        selected.push({
-          teamId: team.id,
-          seed: 0,
-          bid: index === 0 ? "tier-champion" : "tier-runner-up",
-          bidLabel: `${regionName(region.id)} ${tierName(tier)} ${index === 0 ? "champion" : "runner-up"}`,
-          bye: false,
-        });
-      });
-    }
+  for (let seed = 1; seed <= FIELD_SIZE; seed += 1) {
+    const band = BANDS[Math.floor((seed - 1) / 4)];
+    const region = REGION_BY_SEED[seed - 1];
+    const group = teamsIn(assignment, region, band.tier);
+    const team = group[band.place];
+    if (!team) continue;
+    selected.push({
+      teamId: team.id,
+      seed,
+      bid: bidForPlace(band.place),
+      bidLabel: `${regionName(region)} ${tierName(band.tier)} ${PLACE_LABEL[band.place]}`,
+      bye: seed <= BYES,
+    });
   }
 
-  return selected
-    .sort((a, b) => compareRecords(getTeam(a.teamId), getTeam(b.teamId)))
-    .map((entry, index) => ({
-      ...entry,
-      seed: index + 1,
-      bye: index < BYES,
-    }));
+  return selected;
 }
 
 export function buildPlayoffBracket(field: PlayoffTeam[]): PlayoffGame[] {

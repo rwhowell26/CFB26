@@ -1,5 +1,6 @@
 "use client";
 
+import { playoffBidCount } from "@/lib/playoff";
 import { teamsIn, tiersInRegion } from "@/lib/rankings";
 import { PLAYOFF_TIERS, REGIONS, recordLabel, tierName, winPct } from "@/lib/teams";
 import type { Assignment } from "@/lib/types";
@@ -8,8 +9,8 @@ export function RankingsTab({ assignment }: { assignment: Assignment }) {
   return (
     <div className="stack">
       <p className="lede">
-        2025 standings inside each 8-team tier. Top two in Tiers I–III are autobids.
-        These lists also drive promotion games and crossovers.
+        2025 standings inside each 8-team tier. Autobids: top 3 in Tier I, top 2 in
+        Tier II, champion of Tier III. These lists also drive promotion games and crossovers.
       </p>
       <div className="region-grid">
         {REGIONS.map((region) => {
@@ -33,7 +34,7 @@ export function RankingsTab({ assignment }: { assignment: Assignment }) {
                     </header>
                     <ol className="rank-list">
                       {ranked.map((team, index) => {
-                        const playoff = tier <= PLAYOFF_TIERS && index < 2;
+                        const playoff = index < playoffBidCount(tier);
                         return (
                           <li key={team.id}>
                             <span className="rank-num">{index + 1}</span>

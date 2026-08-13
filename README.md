@@ -14,7 +14,7 @@ The pool is **160 clubs**. Starting tiers use **2021–2025 records**. Former FC
 
 ## Playoff (24, all autobids)
 
-Champion **and** runner-up from each region’s Tiers I, II, and III (4 × 3 × 2). No at-large. Seeds 1–8 get a bye. Tiers IV+ play for promotion only.
+Each region sends **3 Tier I, 2 Tier II, and 1 Tier III** (place in the 8-team standings). Seeds are by **tier and place**, not record: the four Tier I champions are 1–4, then Tier I runners-up, then 3rd place, then Tier II, then the four Tier III champions. Opening games are **cross-region**. Seeds 1–8 get a bye. Tiers IV+ play for promotion only.
 
 ## Movement
 
