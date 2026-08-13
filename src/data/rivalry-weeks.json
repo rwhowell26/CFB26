@@ -31,5 +31,8 @@
   {"a": "MONT", "b": "MTST", "week": 13, "name": "Brawl of the Wild"},
   {"a": "NEV", "b": "UNLV", "week": 13, "name": "Fremont Cannon"},
   {"a": "PITT", "b": "WVU", "week": 13, "name": "Backyard Brawl"},
-  {"a": "UK", "b": "LOU", "week": 13, "name": "Governor's Cup"}
+  {"a": "UK", "b": "LOU", "week": 13, "name": "Governor's Cup"},
+  {"a": "HARV", "b": "YALE", "week": 12, "name": "Harvard–Yale"},
+  {"a": "LAF", "b": "LEH", "week": 12, "name": "The Rivalry"},
+  {"a": "GRAM", "b": "SOU", "week": 13, "name": "Bayou Classic"}
 ]

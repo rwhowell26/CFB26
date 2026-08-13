@@ -52,6 +52,10 @@ STATE = {
     "70": "ID", "331": "WA", "16": "CA", "302": "CA",
     "2627": "TX", "2329": "PA", "108": "MA", "2617": "TX",
     "2635": "TN", "2545": "LA", "79": "IL", "2900": "MN",
+    "322": "PA", "43": "CT", "159": "NH", "2405": "NJ", "119": "MD", "2569": "SC",
+    "2755": "LA", "2582": "LA", "2046": "TN", "2193": "TN", "2698": "GA", "2447": "LA",
+    "2460": "IA", "282": "IN", "2181": "IA", "2168": "OH", "2710": "IL", "2546": "MO",
+    "301": "CA", "2000": "TX", "292": "TX", "2464": "AZ", "253": "UT", "2692": "UT",
 }
 
 EAST = {
@@ -60,6 +64,7 @@ EAST = {
     "WAKE", "ECU", "CLT", "APP", "CLEM", "SC", "CCU", "MRSH", "BUFF", "CIN",
     "LOU", "UK", "WKU",
     "VILL", "RICH", "W&M", "UNH", "HC", "URI", "LEH", "HARV",
+    "LAF", "YALE", "DART", "MONM", "TOW", "SCST",
 }
 SOUTH = {
     "MIA", "FSU", "FLA", "UCF", "USF", "FAU", "FIU", "UGA", "GT", "GASO", "GAST",
@@ -67,6 +72,7 @@ SOUTH = {
     "UL", "ULM", "LT", "TULN", "ARK", "ARST", "MEM", "TENN", "VAN", "MTSU",
     "UAB", "TA&M", "HOU",
     "FUR", "UTC", "MER", "JKST", "FAMU", "ALST", "TNTC", "SELA",
+    "GRAM", "SOU", "APSU", "ETSU", "WES", "NICH",
 }
 MIDWEST = {
     "OSU", "OHIO", "AKR", "KENT", "BGSU", "TOL", "M-OH", "MICH", "MSU", "WMU",
@@ -74,8 +80,12 @@ MIDWEST = {
     "ISU", "MIZ", "MOST", "KU", "KSU", "NEB", "OU", "OKST", "NIU", "TLSA",
     "UNT", "BAY", "TCU",
     "NDSU", "SDST", "SDAK", "UND", "ILST", "YSU", "SIU", "STMN",
+    "UNI", "INST", "DRKE", "DAY", "WIU", "SEMO",
 }
-WEST_FCS = {"MONT", "MTST", "IDHO", "EWU", "SAC", "UCD", "TAR", "SFA"}
+WEST_FCS = {
+    "MONT", "MTST", "IDHO", "EWU", "SAC", "UCD", "TAR", "SFA",
+    "USD", "ACU", "RGV", "NAU", "SUU", "WEB",
+}
 
 
 def apply_real_rivals(teams: list[dict]) -> None:
@@ -203,6 +213,31 @@ SP_PLUS_ALIASES = {
     "jacksonvillest": "JVST",
     "georgiasouthern": "GASO",
     "northernillinois": "NIU",
+    "yale": "YALE",
+    "dartmouth": "DART",
+    "lafayette": "LAF",
+    "monmouth": "MONM",
+    "towson": "TOW",
+    "southcarolinast": "SCST",
+    "grambling": "GRAM",
+    "southern": "SOU",
+    "austinpeay": "APSU",
+    "easttennesseest": "ETSU",
+    "westgeorgia": "WES",
+    "nicholls": "NICH",
+    "northerniowa": "UNI",
+    "indianast": "INST",
+    "drake": "DRKE",
+    "dayton": "DAY",
+    "westernillinois": "WIU",
+    "semissouri": "SEMO",
+    "southeastmissouri": "SEMO",
+    "sandiego": "USD",
+    "abilenechristian": "ACU",
+    "utriograndevalley": "RGV",
+    "northernarizona": "NAU",
+    "southernutah": "SUU",
+    "weberst": "WEB",
 }
 
 
@@ -257,9 +292,13 @@ def main() -> None:
     years = [2021, 2022, 2023, 2024, 2025]
     fcs_keep = {
         "VILL", "RICH", "W&M", "UNH", "HC", "URI", "LEH", "HARV",
+        "LAF", "YALE", "DART", "MONM", "TOW", "SCST",
         "FUR", "UTC", "MER", "JKST", "FAMU", "ALST", "TNTC", "SELA",
+        "GRAM", "SOU", "APSU", "ETSU", "WES", "NICH",
         "NDSU", "SDST", "SDAK", "UND", "ILST", "YSU", "SIU", "STMN",
+        "UNI", "INST", "DRKE", "DAY", "WIU", "SEMO",
         "MONT", "MTST", "IDHO", "EWU", "SAC", "UCD", "TAR", "SFA",
+        "USD", "ACU", "RGV", "NAU", "SUU", "WEB",
     }
     latest_fbs = fetch_standings(80, 2025)
     latest_fcs = [row for row in fetch_standings(81, 2025) if row["abbreviation"] in fcs_keep]
@@ -324,8 +363,8 @@ def main() -> None:
     for t in teams:
         counts[t["region"]] += 1
     print("region counts", dict(counts), "total", len(teams))
-    if set(counts.values()) != {42}:
-        raise SystemExit(f"Regions not balanced to 42: {dict(counts)}")
+    if set(counts.values()) != {48}:
+        raise SystemExit(f"Regions not balanced to 48: {dict(counts)}")
 
     apply_sp_plus(teams, sp_plus)
     for region in ("east", "south", "midwest", "west"):

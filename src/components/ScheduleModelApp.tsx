@@ -54,7 +54,7 @@ export function ScheduleModelApp() {
           <p className="kicker">CFB26 · realignment lab</p>
           <h1 className="brand">Four Regions. Eight-Team Tiers.</h1>
           <p className="subhead">
-            168 clubs, full round-robins, named-rivalry protected games, a 13-week
+            192 clubs, full round-robins, named-rivalry protected games, a 13-week
             calendar with a league-wide bye, promotion and relegation, and a 24-team
             all-autobid playoff for Tiers I–III. 2026 is played out on this slate:
             Ole Miss wins every game and the playoff, LSU loses every game, and

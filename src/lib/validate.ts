@@ -1,4 +1,5 @@
 import { buildPlayoffBracket, buildPlayoffField } from "./playoff";
+import { planAllMovement } from "./promotion";
 import { teamsIn, tiersInRegion } from "./rankings";
 import { isRealRivalry, traditionalDate } from "./rivalries";
 import { clearRival } from "./rivals";
@@ -26,8 +27,8 @@ function assert(condition: unknown, message: string): asserts condition {
 export function validateModel() {
   const assignment = defaultAssignment();
   const rivals = defaultRivals();
-  assert(TEAMS.length === 168, `Expected 168 teams, got ${TEAMS.length}`);
-  assert(TEAMS.filter((team) => team.subdivision === "fcs").length === 32, "expected 32 extra clubs");
+  assert(TEAMS.length === 192, `Expected 192 teams, got ${TEAMS.length}`);
+  assert(TEAMS.filter((team) => team.subdivision === "fcs").length === 56, "expected 56 extra clubs");
   assert(
     TEAMS.every((team) => team.subdivision !== "fcs" || team.tier >= 3),
     "no extra club may start above Tier III",
@@ -54,18 +55,18 @@ export function validateModel() {
 
   for (const region of REGIONS) {
     const count = teamsIn(assignment, region.id).length;
-    assert(count === 42, `${region.name} has ${count} teams`);
+    assert(count === 48, `${region.name} has ${count} teams`);
     const tiers = tiersInRegion(assignment, region.id);
-    assert(tiers.length >= 5, `${region.name} should have at least 5 tiers`);
+    assert(tiers.length === 6, `${region.name} should have 6 full tiers`);
     for (const tier of tiers) {
       const size = teamsIn(assignment, region.id, tier).length;
-      if (tier === tiers[tiers.length - 1]) {
-        assert(size > 0 && size <= TIER_SIZE, `${region.name} last tier size ${size}`);
-      } else {
-        assert(size === TIER_SIZE, `${region.name} tier ${tier} size`);
-      }
+      assert(size === TIER_SIZE, `${region.name} tier ${tier} size ${size}`);
     }
   }
+  assert(
+    planAllMovement(assignment).every((plan) => plan.complete),
+    "full 8-team tiers should unlock movement in every region",
+  );
 
   for (const team of TEAMS) {
     assert(rivals[team.id].length <= MAX_RIVALS, `${team.abbreviation} has more than ${MAX_RIVALS} rivals`);
@@ -125,7 +126,13 @@ export function validateModel() {
   const tenn = TEAMS.find((team) => team.abbreviation === "TENN");
   const miss = TEAMS.find((team) => team.abbreviation === "MISS");
   const msst = TEAMS.find((team) => team.abbreviation === "MSST");
-  assert(ala && tenn && miss && msst, "named rivalry teams missing");
+  const harv = TEAMS.find((team) => team.abbreviation === "HARV");
+  const yale = TEAMS.find((team) => team.abbreviation === "YALE");
+  const laf = TEAMS.find((team) => team.abbreviation === "LAF");
+  const leh = TEAMS.find((team) => team.abbreviation === "LEH");
+  const gram = TEAMS.find((team) => team.abbreviation === "GRAM");
+  const sou = TEAMS.find((team) => team.abbreviation === "SOU");
+  assert(ala && tenn && miss && msst && harv && yale && laf && leh && gram && sou, "named rivalry teams missing");
   assert(
     schedules[ala.id].games.find((game) => game.opponentId === tenn.id)?.week === 8,
     "Alabama–Tennessee belongs on the Third Saturday in October",
@@ -133,6 +140,18 @@ export function validateModel() {
   assert(
     schedules[miss.id].games.find((game) => game.opponentId === msst.id)?.week === 13,
     "Egg Bowl belongs on Thanksgiving week",
+  );
+  assert(
+    schedules[harv.id].games.find((game) => game.opponentId === yale.id)?.week === 12,
+    "Harvard–Yale belongs the week before Thanksgiving",
+  );
+  assert(
+    schedules[laf.id].games.find((game) => game.opponentId === leh.id)?.week === 12,
+    "The Rivalry belongs the week before Thanksgiving",
+  );
+  assert(
+    schedules[gram.id].games.find((game) => game.opponentId === sou.id)?.week === 13,
+    "Bayou Classic belongs on Thanksgiving week",
   );
 
   let sparse = defaultRivals();

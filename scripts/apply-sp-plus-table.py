@@ -10,7 +10,9 @@ from pathlib import Path
 ROOT = Path("/workspace")
 TEAMS_PATH = ROOT / "src/data/teams.json"
 SP_PATH = ROOT / "src/data/sp-plus-2025.json"
+RIVALRIES = ROOT / "src/data/rivalries.json"
 TIER_SIZE = 8
+MAX_RIVALS = 3
 
 # User-provided 2025 SP+ (name as in the table).
 TABLE: list[tuple[int, str, float, str]] = [
@@ -182,6 +184,30 @@ TABLE: list[tuple[int, str, float, str]] = [
     (228, "Furman", 14.5, "6-6"),
     (241, "Chattanooga", 12.8, "4-8"),
     (273, "Florida A&M", 9.2, "6-6"),
+    (141, "Yale", 36.8, "9-3"),
+    (148, "Dartmouth", 35.0, "7-3"),
+    (151, "Monmouth", 33.8, "9-3"),
+    (156, "Lafayette", 32.8, "8-4"),
+    (159, "South Carolina State", 32.3, "10-3"),
+    (160, "UT Rio Grande Valley", 32.1, "9-3"),
+    (161, "Abilene Christian", 31.3, "9-5"),
+    (162, "West Georgia", 30.7, "8-3"),
+    (164, "San Diego", 30.4, "8-4"),
+    (166, "Drake", 29.9, "8-4"),
+    (167, "Northern Arizona", 29.3, "7-5"),
+    (168, "Grambling", 28.9, "7-5"),
+    (169, "Austin Peay", 28.6, "7-5"),
+    (170, "Dayton", 28.5, "7-4"),
+    (171, "East Tennessee State", 27.9, "7-5"),
+    (172, "Southern Utah", 27.5, "7-5"),
+    (174, "Towson", 26.2, "6-6"),
+    (179, "Weber State", 23.5, "4-8"),
+    (184, "Northern Iowa", 22.8, "3-9"),
+    (197, "Southeast Missouri", 19.4, "4-8"),
+    (199, "Nicholls", 18.2, "4-8"),
+    (207, "Western Illinois", 17.0, "4-8"),
+    (215, "Indiana State", 16.2, "3-9"),
+    (227, "Southern Jaguars", 14.8, "2-10"),
 ]
 
 NAME_TO_ABBR = {
@@ -228,6 +254,14 @@ NAME_TO_ABBR = {
     "William & Mary": "W&M", "New Hampshire": "UNH", "Richmond": "RICH", "Idaho": "IDHO",
     "Holy Cross": "HC", "Massachusetts": "MASS", "Eastern Washington": "EWU", "Furman": "FUR",
     "Chattanooga": "UTC", "Florida A&M": "FAMU",
+    "Yale": "YALE", "Dartmouth": "DART", "Monmouth": "MONM", "Lafayette": "LAF",
+    "South Carolina State": "SCST", "UT Rio Grande Valley": "RGV", "Abilene Christian": "ACU",
+    "West Georgia": "WES", "San Diego": "USD", "Drake": "DRKE", "Northern Arizona": "NAU",
+    "Grambling": "GRAM", "Austin Peay": "APSU", "Dayton": "DAY",
+    "East Tennessee State": "ETSU", "Southern Utah": "SUU", "Towson": "TOW",
+    "Weber State": "WEB", "Northern Iowa": "UNI", "Southeast Missouri": "SEMO",
+    "Nicholls": "NICH", "Western Illinois": "WIU", "Indiana State": "INST",
+    "Southern Jaguars": "SOU",
 }
 
 NEW_FCS = [
@@ -263,6 +297,126 @@ NEW_FCS = [
         "id": "2900", "name": "St. Thomas Tommies", "shortName": "St. Thomas",
         "abbreviation": "STMN", "state": "MN", "region": "midwest", "wins": 7, "losses": 5,
     },
+    {
+        "id": "322", "name": "Lafayette Leopards", "shortName": "Lafayette",
+        "abbreviation": "LAF", "state": "PA", "region": "east", "wins": 8, "losses": 4,
+        "pf": 403, "pa": 345, "wins5": 30, "losses5": 28,
+    },
+    {
+        "id": "43", "name": "Yale Bulldogs", "shortName": "Yale",
+        "abbreviation": "YALE", "state": "CT", "region": "east", "wins": 9, "losses": 3,
+        "pf": 352, "pa": 235, "wins5": 36, "losses5": 16,
+    },
+    {
+        "id": "159", "name": "Dartmouth Big Green", "shortName": "Dartmouth",
+        "abbreviation": "DART", "state": "NH", "region": "east", "wins": 7, "losses": 3,
+        "pf": 264, "pa": 213, "wins5": 33, "losses5": 17,
+    },
+    {
+        "id": "2405", "name": "Monmouth Hawks", "shortName": "Monmouth",
+        "abbreviation": "MONM", "state": "NJ", "region": "east", "wins": 9, "losses": 3,
+        "pf": 480, "pa": 333, "wins5": 31, "losses5": 26,
+    },
+    {
+        "id": "119", "name": "Towson Tigers", "shortName": "Towson",
+        "abbreviation": "TOW", "state": "MD", "region": "east", "wins": 6, "losses": 6,
+        "pf": 321, "pa": 301, "wins5": 28, "losses5": 29,
+    },
+    {
+        "id": "2569", "name": "South Carolina State Bulldogs", "shortName": "SC State",
+        "abbreviation": "SCST", "state": "SC", "region": "east", "wins": 10, "losses": 3,
+        "pf": 421, "pa": 354, "wins5": 33, "losses5": 25,
+    },
+    {
+        "id": "2755", "name": "Grambling Tigers", "shortName": "Grambling",
+        "abbreviation": "GRAM", "state": "LA", "region": "south", "wins": 7, "losses": 5,
+        "pf": 289, "pa": 313, "wins5": 24, "losses5": 33,
+    },
+    {
+        "id": "2582", "name": "Southern Jaguars", "shortName": "Southern",
+        "abbreviation": "SOU", "state": "LA", "region": "south", "wins": 2, "losses": 10,
+        "pf": 223, "pa": 433, "wins5": 27, "losses5": 32,
+    },
+    {
+        "id": "2046", "name": "Austin Peay Governors", "shortName": "Austin Peay",
+        "abbreviation": "APSU", "state": "TN", "region": "south", "wins": 7, "losses": 5,
+        "pf": 421, "pa": 328, "wins5": 33, "losses5": 25,
+    },
+    {
+        "id": "2193", "name": "East Tennessee State Buccaneers", "shortName": "ETSU",
+        "abbreviation": "ETSU", "state": "TN", "region": "south", "wins": 7, "losses": 5,
+        "pf": 390, "pa": 346, "wins5": 31, "losses5": 28,
+    },
+    {
+        "id": "2698", "name": "West Georgia Wolves", "shortName": "West Georgia",
+        "abbreviation": "WES", "state": "GA", "region": "south", "wins": 8, "losses": 3,
+        "pf": 281, "pa": 233, "wins5": 12, "losses5": 10,
+    },
+    {
+        "id": "2447", "name": "Nicholls Colonels", "shortName": "Nicholls",
+        "abbreviation": "NICH", "state": "LA", "region": "south", "wins": 4, "losses": 8,
+        "pf": 219, "pa": 299, "wins5": 23, "losses5": 34,
+    },
+    {
+        "id": "2460", "name": "Northern Iowa Panthers", "shortName": "Northern Iowa",
+        "abbreviation": "UNI", "state": "IA", "region": "midwest", "wins": 3, "losses": 9,
+        "pf": 207, "pa": 321, "wins5": 24, "losses5": 34,
+    },
+    {
+        "id": "282", "name": "Indiana State Sycamores", "shortName": "Indiana State",
+        "abbreviation": "INST", "state": "IN", "region": "midwest", "wins": 3, "losses": 9,
+        "pf": 254, "pa": 475, "wins5": 15, "losses5": 42,
+    },
+    {
+        "id": "2181", "name": "Drake Bulldogs", "shortName": "Drake",
+        "abbreviation": "DRKE", "state": "IA", "region": "midwest", "wins": 8, "losses": 4,
+        "pf": 304, "pa": 212, "wins5": 29, "losses5": 27,
+    },
+    {
+        "id": "2168", "name": "Dayton Flyers", "shortName": "Dayton",
+        "abbreviation": "DAY", "state": "OH", "region": "midwest", "wins": 7, "losses": 4,
+        "pf": 306, "pa": 191, "wins5": 31, "losses5": 23,
+    },
+    {
+        "id": "2710", "name": "Western Illinois Leathernecks", "shortName": "Western Illinois",
+        "abbreviation": "WIU", "state": "IL", "region": "midwest", "wins": 4, "losses": 8,
+        "pf": 277, "pa": 417, "wins5": 10, "losses5": 47,
+    },
+    {
+        "id": "2546", "name": "Southeast Missouri State Redhawks", "shortName": "SE Missouri",
+        "abbreviation": "SEMO", "state": "MO", "region": "midwest", "wins": 4, "losses": 8,
+        "pf": 278, "pa": 361, "wins5": 30, "losses5": 29,
+    },
+    {
+        "id": "301", "name": "San Diego Toreros", "shortName": "San Diego",
+        "abbreviation": "USD", "state": "CA", "region": "west", "wins": 8, "losses": 4,
+        "pf": 341, "pa": 292, "wins5": 32, "losses5": 23,
+    },
+    {
+        "id": "2000", "name": "Abilene Christian Wildcats", "shortName": "Abilene Christian",
+        "abbreviation": "ACU", "state": "TX", "region": "west", "wins": 9, "losses": 5,
+        "pf": 414, "pa": 370, "wins5": 35, "losses5": 26,
+    },
+    {
+        "id": "292", "name": "UT Rio Grande Valley Vaqueros", "shortName": "UTRGV",
+        "abbreviation": "RGV", "state": "TX", "region": "west", "wins": 9, "losses": 3,
+        "pf": 475, "pa": 226, "wins5": 9, "losses5": 3,
+    },
+    {
+        "id": "2464", "name": "Northern Arizona Lumberjacks", "shortName": "Northern Arizona",
+        "abbreviation": "NAU", "state": "AZ", "region": "west", "wins": 7, "losses": 5,
+        "pf": 380, "pa": 375, "wins5": 28, "losses5": 30,
+    },
+    {
+        "id": "253", "name": "Southern Utah Thunderbirds", "shortName": "Southern Utah",
+        "abbreviation": "SUU", "state": "UT", "region": "west", "wins": 7, "losses": 5,
+        "pf": 405, "pa": 355, "wins5": 26, "losses5": 31,
+    },
+    {
+        "id": "2692", "name": "Weber State Wildcats", "shortName": "Weber State",
+        "abbreviation": "WEB", "state": "UT", "region": "west", "wins": 4, "losses": 8,
+        "pf": 277, "pa": 460, "wins5": 30, "losses5": 29,
+    },
 ]
 
 
@@ -279,6 +433,37 @@ def assign_tiers(group: list[dict]) -> None:
             team["tier"] = max(team["tier"], 3)
 
 
+def apply_real_rivals(teams: list[dict]) -> None:
+    pairs: list[list[str]] = json.loads(RIVALRIES.read_text())
+    abbr_to_id = {t["abbreviation"]: t["id"] for t in teams}
+    unknown = [
+        pair for pair in pairs if pair[0] not in abbr_to_id or pair[1] not in abbr_to_id
+    ]
+    if unknown:
+        raise SystemExit(f"Unknown rivalry abbreviations: {unknown[:8]}")
+    adj: dict[str, list[str]] = {t["id"]: [] for t in teams}
+    kept = skipped = 0
+    seen: set[tuple[str, str]] = set()
+    for a, b in pairs:
+        key = (a, b) if a < b else (b, a)
+        if key in seen:
+            continue
+        seen.add(key)
+        u, v = abbr_to_id[a], abbr_to_id[b]
+        if u == v or v in adj[u]:
+            continue
+        if len(adj[u]) >= MAX_RIVALS or len(adj[v]) >= MAX_RIVALS:
+            skipped += 1
+            continue
+        adj[u].append(v)
+        adj[v].append(u)
+        kept += 1
+    id_to_team = {t["id"]: t for t in teams}
+    for t in teams:
+        t["rivals"] = sorted(adj[t["id"]], key=lambda rid: id_to_team[rid]["shortName"])
+    print(f"named rivalries kept={kept} capped={skipped}")
+
+
 def main() -> None:
     teams: list[dict] = json.loads(TEAMS_PATH.read_text())
     by_abbr = {t["abbreviation"]: t for t in teams}
@@ -289,11 +474,11 @@ def main() -> None:
             continue
         row = {
             **extra,
-            "logo": f"https://a.espncdn.com/i/teamlogos/ncaa/500/{extra['id']}.png",
-            "pf": 0,
-            "pa": 0,
-            "wins5": extra["wins"],
-            "losses5": extra["losses"],
+            "logo": extra.get("logo") or f"https://a.espncdn.com/i/teamlogos/ncaa/500/{extra['id']}.png",
+            "pf": extra.get("pf", 0),
+            "pa": extra.get("pa", 0),
+            "wins5": extra.get("wins5", extra["wins"]),
+            "losses5": extra.get("losses5", extra["losses"]),
             "tier": 3,
             "subdivision": "fcs",
             "rivals": [],
@@ -324,6 +509,15 @@ def main() -> None:
     for region in ("east", "south", "midwest", "west"):
         assign_tiers([t for t in teams if t["region"] == region])
 
+    apply_real_rivals(teams)
+    fields = [
+        "id", "name", "shortName", "abbreviation", "logo", "state",
+        "wins", "losses", "pf", "pa", "wins5", "losses5",
+        "spPlus", "spPlusRank", "region", "tier", "subdivision", "rivals",
+    ]
+    teams = [{key: team[key] for key in fields} for team in teams]
+    by_abbr = {t["abbreviation"]: t for t in teams}
+
     teams.sort(key=lambda t: t["shortName"])
     TEAMS_PATH.write_text(json.dumps(teams, indent=2) + "\n")
     SP_PATH.write_text(json.dumps(payload, indent=2) + "\n")
@@ -332,9 +526,15 @@ def main() -> None:
     for t in teams:
         counts[t["region"]] += 1
     print("wrote", len(teams), "teams", dict(counts))
-    for abbr in ("IU", "OSU", "NDSU", "TAR", "HARV", "LEH", "SFA", "TNTC", "SELA", "SIU", "STMN", "FAMU"):
+    sizes = defaultdict(list)
+    for t in teams:
+        sizes[(t["region"], t["tier"])].append(t["abbreviation"])
+    for region in ("east", "south", "midwest", "west"):
+        tiers = sorted({tier for (reg, tier) in sizes if reg == region})
+        print(region, " ".join(f"T{tier}={len(sizes[(region, tier)])}" for tier in tiers))
+    for abbr in ("IU", "YALE", "LAF", "GRAM", "UNI", "USD", "WEB", "NDSU"):
         t = by_abbr[abbr]
-        print(abbr, "region", t["region"], "tier", t["tier"], "SP+", t["spPlusRank"], t["spPlus"])
+        print(abbr, "region", t["region"], "tier", t["tier"], "SP+", t["spPlusRank"], t["spPlus"], "rivals", len(t["rivals"]))
 
 
 if __name__ == "__main__":
