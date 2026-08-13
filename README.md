@@ -7,7 +7,7 @@ The pool is **160 clubs**. Starting tiers use **2021–2025 records**. Former FC
 ## Schedule (12 games + 1 bye, no 13th contest)
 
 - Full **round-robin inside the 8-team tier** (7 games). A protected rival in that tier counts toward those 7.
-- Teams may have **0–3 protected rivals**. Remaining rivals outside the tier are still played every year.
+- Teams may have **0–3 protected rivals**, and only **named college football series** (Iron Bowl, Army–Navy, Apple Cup, etc.). Slots are not padded with nearby clubs.
 - **One balanced crossover** from each of the other three regions (strong vs weak mixed with same-band and offset pairings so SOS is closer to even).
 - Open slots fill with **other clubs in the same region, different tier**.
 - **Weeks 1–5:** games outside the tier. **Week 6:** bye for every team. **Weeks 7–13:** the round-robin.

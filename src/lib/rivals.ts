@@ -1,3 +1,4 @@
+import { isRealRivalry } from "./rivalries";
 import { defaultRivals, MAX_RIVALS, TEAMS } from "./teams";
 import type { RivalMap } from "./types";
 
@@ -28,7 +29,7 @@ function capLists(map: RivalMap) {
 
 /** Replace or fill one protected-rival slot. Lists stay symmetric; 0–3 rivals is allowed. */
 export function setRival(rivals: RivalMap, teamId: string, slot: number, newRivalId: string): RivalMap {
-  if (teamId === newRivalId) return rivals;
+  if (teamId === newRivalId || !isRealRivalry(teamId, newRivalId)) return rivals;
   const next = clone({ ...defaultRivals(), ...rivals });
   const current = [...(next[teamId] ?? [])];
   while (current.length < MAX_RIVALS) current.push("");

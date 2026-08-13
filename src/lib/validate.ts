@@ -1,5 +1,6 @@
 import { buildPlayoffField } from "./playoff";
 import { teamsIn, tiersInRegion } from "./rankings";
+import { isRealRivalry } from "./rivalries";
 import { clearRival } from "./rivals";
 import { allSchedules, roundRobinRounds } from "./schedule";
 import {
@@ -44,8 +45,12 @@ export function validateModel() {
     assert(rivals[team.id].length <= MAX_RIVALS, `${team.abbreviation} has more than ${MAX_RIVALS} rivals`);
     for (const rivalId of rivals[team.id]) {
       assert(rivals[rivalId].includes(team.id), `${team.abbreviation} rival not symmetric`);
+      assert(isRealRivalry(team.id, rivalId), `${team.abbreviation} vs non-rivalry`);
     }
   }
+  assert(TEAMS.some((team) => rivals[team.id].length === 0), "some clubs have no named rivalry in this pool");
+  assert(TEAMS.some((team) => rivals[team.id].length === 3), "primary rivalries should fill 3 slots");
+  assert(TEAMS.some((team) => rivals[team.id].length > 0 && rivals[team.id].length < 3), "named series are not padded to 3");
 
   const sample = teamsIn(assignment, "east", 1).map((team) => team.id);
   const rr = roundRobinRounds(sample);

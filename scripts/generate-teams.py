@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build seeded FBS + FCS team data: geography, 2025 records, and 3 protected rivals."""
+"""Build seeded FBS + FCS team data: geography, 2025 records, and named-rivalry slots."""
 
 from __future__ import annotations
 
@@ -9,7 +9,9 @@ from collections import defaultdict
 from pathlib import Path
 
 OUT = Path("/workspace/src/data/teams.json")
+RIVALRIES = Path("/workspace/src/data/rivalries.json")
 TIER_SIZE = 8
+MAX_RIVALS = 3
 
 STATE = {
     "2005": "CO", "2006": "OH", "333": "AL", "2026": "NC", "12": "AZ", "9": "AZ",
@@ -65,95 +67,41 @@ MIDWEST = {
 }
 WEST_FCS = {"MONT", "MTST", "IDHO", "EWU", "SAC", "UCD"}
 
-PRIORITY_PAIRS = [
-    ("ARMY", "NAVY"), ("AFA", "ARMY"), ("AFA", "NAVY"),
-    ("OSU", "MICH"), ("MICH", "MSU"), ("OSU", "PSU"),
-    ("ALA", "AUB"), ("UGA", "FLA"), ("UGA", "GT"), ("UGA", "AUB"),
-    ("FLA", "FSU"), ("FSU", "MIA"), ("MIA", "USF"),
-    ("CLEM", "SC"), ("UNC", "NCSU"), ("UNC", "DUKE"), ("DUKE", "WAKE"),
-    ("UVA", "VT"), ("PITT", "WVU"), ("UK", "LOU"),
-    ("TEX", "OU"), ("TEX", "TA&M"), ("OU", "OKST"),
-    ("USC", "UCLA"), ("CAL", "STAN"), ("ORE", "ORST"), ("WASH", "WSU"),
-    ("UTAH", "BYU"), ("ARIZ", "ASU"), ("COLO", "CSU"),
-    ("IU", "PUR"), ("IOWA", "ISU"), ("KU", "KSU"), ("MINN", "WIS"),
-    ("MISS", "MSST"), ("TENN", "VAN"), ("LSU", "ARK"),
-    ("BAY", "TCU"), ("SMU", "TCU"), ("HOU", "RICE"),
-    ("NEV", "UNLV"), ("UNM", "NMSU"), ("SDSU", "SJSU"),
-    ("ND", "USC"), ("ND", "MICH"), ("PSU", "PITT"),
-    ("ALA", "TENN"), ("ALA", "LSU"), ("AUB", "LSU"),
-    ("FSU", "CLEM"), ("SC", "CLEM"),
-    ("TA&M", "LSU"), ("TA&M", "ARK"),
-    ("TEX", "TTU"), ("TTU", "BAY"), ("TTU", "TCU"),
-    ("SMU", "HOU"), ("UNT", "SMU"), ("UTSA", "TXST"),
-    ("UCF", "USF"), ("UCF", "FLA"), ("FAU", "FIU"),
-    ("GT", "CLEM"), ("NCSU", "WAKE"), ("NCSU", "ECU"),
-    ("JMU", "ODU"), ("UVA", "MD"), ("VT", "W&M"),
-    ("MRSH", "WVU"), ("MRSH", "OHIO"), ("CIN", "LOU"),
-    ("CIN", "OSU"), ("UK", "TENN"), ("LOU", "UK"),
-    ("IOWA", "MINN"), ("IOWA", "WIS"), ("NEB", "IOWA"),
-    ("ILL", "NU"), ("ILL", "PUR"), ("ND", "PUR"),
-    ("MICH", "OSU"), ("MSU", "PENN"),
-    ("WMU", "CMU"), ("CMU", "EMU"), ("TOL", "BGSU"),
-    ("AKR", "KENT"), ("OHIO", "M-OH"), ("BALL", "IU"),
-    ("MIZ", "KU"), ("MIZ", "ARK"), ("MOST", "MIZ"),
-    ("OKST", "TLSA"), ("UNT", "TLSA"), ("BAY", "TEX"),
-    ("ORE", "WASH"), ("USC", "STAN"), ("CAL", "UCLA"),
-    ("UTAH", "COLO"), ("BYU", "USU"), ("BOIS", "USU"),
-    ("FRES", "SJSU"), ("FRES", "HAW"), ("SDSU", "UNLV"),
-    ("WYO", "CSU"), ("WYO", "AFA"), ("NEV", "FRES"),
-    ("ARIZ", "UNM"), ("ASU", "UA"), ("UTEP", "NMSU"),
-    ("UTEP", "UNM"), ("SHSU", "TXST"), ("RICE", "UH"),
-    ("GASO", "GAST"), ("GASO", "APP"), ("APP", "CLT"),
-    ("CCU", "APP"), ("KENN", "GAST"), ("TROY", "USA"),
-    ("JVST", "TROY"), ("USM", "MEM"), ("UAB", "MEM"),
-    ("UAB", "AUB"), ("UL", "ULM"), ("UL", "LT"), ("LT", "USM"),
-    ("ARST", "ARK"), ("MTSU", "VAN"), ("WKU", "MTSU"),
-    ("LIB", "VT"), ("DEL", "MD"), ("CONN", "MASS"),
-    ("BC", "SYR"), ("SYR", "PITT"), ("RUTG", "PSU"),
-    ("TEM", "PSU"), ("ARMY", "ND"), ("NAVY", "ND"),
-    ("BUFF", "SYR"), ("ECU", "CLT"), ("WAKE", "UVA"),
-    ("ODU", "ECU"), ("JMU", "LIB"), ("CIN", "M-OH"),
-    ("TOL", "OHIO"), ("BGSU", "KENT"), ("EMU", "WMU"),
-    ("NIU", "ILL"), ("WIS", "NU"), ("MINN", "NEB"),
-    ("ISU", "KU"), ("KSU", "NEB"), ("OU", "MIZ"),
-    ("OKST", "KU"), ("TCU", "HOU"), ("SMU", "RICE"),
-    ("UTSA", "HOU"), ("TXST", "UTSA"), ("SHSU", "RICE"),
-    ("COLO", "UTAH"), ("CSU", "AFA"), ("BOIS", "FRES"),
-    ("HAW", "SDSU"), ("ORST", "WSU"), ("WASH", "STAN"),
-    ("UCLA", "CAL"), ("USC", "ORE"), ("BYU", "UTAH"),
-    ("USU", "WYO"), ("UNLV", "BOIS"), ("SJSU", "STAN"),
-    ("NMSU", "UTEP"), ("UNM", "CSU"), ("ARIZ", "COLO"),
-    ("ASU", "UTAH"), ("TLSA", "HOU"), ("UNT", "TXST"),
-    ("BAY", "HOU"), ("MEM", "MISS"), ("TULN", "LSU"),
-    ("TULN", "USF"), ("FAU", "MIA"), ("FIU", "USA"),
-    ("KENN", "GT"), ("GASO", "TROY"), ("JVST", "UAB"),
-    ("MSST", "UAB"), ("VAN", "UGA"), ("TENN", "UGA"),
-    ("FLA", "TENN"), ("AUB", "MSST"), ("MISS", "LSU"),
-    ("ARK", "MISS"), ("TA&M", "TEX"), ("HOU", "TA&M"),
-    ("WKU", "LOU"), ("UK", "CIN"), ("LIB", "JMU"),
-    ("ODU", "UVA"), ("MD", "PSU"), ("WVU", "PITT"),
-    ("MRSH", "APP"), ("SC", "UGA"), ("CLEM", "UGA"),
-    ("FSU", "UCF"), ("MIA", "FLA"), ("USF", "FAU"),
-    ("CONN", "BC"), ("MASS", "BC"), ("ARMY", "RUTG"),
-    ("NAVY", "TEM"), ("DEL", "TEMPLE"), ("BUFF", "RUTG"),
-    ("CLT", "SC"), ("ECU", "APP"), ("WAKE", "DUKE"),
-    ("NCSU", "UNC"), ("VT", "UVA"), ("JMU", "VT"),
-    ("IU", "ND"), ("PUR", "ILL"), ("OSU", "MICH"),
-    ("MSU", "ND"), ("WMU", "MSU"), ("CMU", "MSU"),
-    ("BALL", "PUR"), ("NIU", "NU"), ("WIS", "IOWA"),
-    ("MINN", "IOWA"), ("NEB", "WIS"), ("ISU", "NEB"),
-    ("KU", "OU"), ("KSU", "OU"), ("MIZ", "OKST"),
-    ("MOST", "KU"), ("TCU", "TEX"), ("BAY", "SMU"),
-    ("UNT", "RICE"), ("TLSA", "OKST"),
-    ("NDSU", "SDST"), ("NDSU", "UND"), ("SDST", "SDAK"), ("UND", "SDAK"),
-    ("MONT", "MTST"), ("IDHO", "WSU"), ("IDHO", "MTST"), ("EWU", "IDHO"),
-    ("SAC", "UCD"), ("SAC", "FRES"), ("UCD", "CAL"),
-    ("VILL", "TEM"), ("VILL", "PSU"), ("RICH", "W&M"), ("RICH", "UVA"),
-    ("UNH", "URI"), ("HC", "BC"), ("URI", "CONN"),
-    ("FUR", "CLEM"), ("UTC", "TENN"), ("MER", "UGA"), ("JKST", "ALST"),
-    ("FAMU", "FSU"), ("ALST", "AUB"), ("ILST", "ILL"), ("YSU", "OSU"),
-    ("NDSU", "MINN"), ("SDAK", "NEB"), ("MONT", "WSU"), ("MTST", "BOIS"),
-]
+
+def apply_real_rivals(teams: list[dict]) -> None:
+    """Fill protected-rival slots from named series only. 0–3 per team; no padding."""
+    pairs: list[list[str]] = json.loads(RIVALRIES.read_text())
+    abbr_to_id = {t["abbreviation"]: t["id"] for t in teams}
+    unknown = [
+        pair for pair in pairs if pair[0] not in abbr_to_id or pair[1] not in abbr_to_id
+    ]
+    if unknown:
+        raise SystemExit(f"Unknown rivalry abbreviations: {unknown[:8]}")
+    adj: dict[str, list[str]] = {t["id"]: [] for t in teams}
+    kept = skipped = 0
+    seen: set[tuple[str, str]] = set()
+    for a, b in pairs:
+        key = (a, b) if a < b else (b, a)
+        if key in seen:
+            continue
+        seen.add(key)
+        u, v = abbr_to_id[a], abbr_to_id[b]
+        if u == v or v in adj[u]:
+            continue
+        if len(adj[u]) >= MAX_RIVALS or len(adj[v]) >= MAX_RIVALS:
+            skipped += 1
+            continue
+        adj[u].append(v)
+        adj[v].append(u)
+        kept += 1
+    id_to_team = {t["id"]: t for t in teams}
+    for t in teams:
+        t["rivals"] = sorted(adj[t["id"]], key=lambda rid: id_to_team[rid]["shortName"])
+    counts = [len(t["rivals"]) for t in teams]
+    print(
+        f"named rivalries kept={kept} capped={skipped} "
+        f"slots 0/1/2/3={counts.count(0)}/{counts.count(1)}/{counts.count(2)}/{counts.count(3)}"
+    )
 
 
 def region_for(abbr: str) -> str:
@@ -171,18 +119,6 @@ def parse_overall(overall: str | None) -> tuple[int, int]:
         return 0, 0
     a, b = str(overall).replace("–", "-").split("-")[:2]
     return int(a), int(b)
-
-
-def add_edge(adj: dict[str, set[str]], a: str, b: str) -> bool:
-    if a == b:
-        return False
-    if b in adj[a] or a in adj[b]:
-        return False
-    if len(adj[a]) >= 3 or len(adj[b]) >= 3:
-        return False
-    adj[a].add(b)
-    adj[b].add(a)
-    return True
 
 
 def fetch_standings(group: int, year: int) -> list[dict]:
@@ -323,77 +259,8 @@ def main() -> None:
     if fcs_high:
         raise SystemExit(f"FCS above Tier III: {fcs_high}")
 
-    abbr_to_id = {t["abbreviation"]: t["id"] for t in teams}
+    apply_real_rivals(teams)
     id_to_team = {t["id"]: t for t in teams}
-    region_order = {"east": 0, "south": 1, "midwest": 2, "west": 3}
-    ids = [
-        t["id"]
-        for t in sorted(teams, key=lambda t: (region_order[t["region"]], t["state"], t["shortName"]))
-    ]
-    n = len(ids)
-    adj: dict[str, set[str]] = {tid: set() for tid in ids}
-    locked: set[tuple[str, str]] = set()
-
-    def key(a: str, b: str) -> tuple[str, str]:
-        return (a, b) if a < b else (b, a)
-
-    def is_locked(a: str, b: str) -> bool:
-        return key(a, b) in locked
-
-    # 3-regular seed: Hamiltonian cycle + opposite matching.
-    for i, tid in enumerate(ids):
-        add_edge(adj, tid, ids[(i + 1) % n])
-        add_edge(adj, tid, ids[(i + n // 2) % n])
-
-    def remove_edge(a: str, b: str) -> None:
-        adj[a].discard(b)
-        adj[b].discard(a)
-
-    def insert_rival(u: str, v: str) -> bool:
-        if u == v:
-            return False
-        if v in adj[u]:
-            locked.add(key(u, v))
-            return True
-        # 2-swap using unlocked edges only, so earlier rivalries stay put.
-        for x in list(adj[u]):
-            if is_locked(u, x):
-                continue
-            for y in list(adj[v]):
-                if is_locked(v, y):
-                    continue
-                if x == y or x == v or y == u:
-                    continue
-                if y in adj[x]:
-                    continue
-                remove_edge(u, x)
-                remove_edge(v, y)
-                add_edge(adj, u, v)
-                add_edge(adj, x, y)
-                locked.add(key(u, v))
-                return True
-        return False
-
-    inserted = 0
-    skipped = 0
-    for a, b in PRIORITY_PAIRS:
-        if a not in abbr_to_id or b not in abbr_to_id:
-            continue
-        if insert_rival(abbr_to_id[a], abbr_to_id[b]):
-            inserted += 1
-        else:
-            skipped += 1
-    print(f"priority rival inserts={inserted} skipped={skipped} locked={len(locked)}")
-
-    leftover = [(id_to_team[i]["abbreviation"], len(adj[i])) for i in ids if len(adj[i]) != 3]
-    if leftover:
-        raise SystemExit(f"Rival graph is not 3-regular: {leftover}")
-
-    for t in teams:
-        rivals = sorted(adj[t["id"]], key=lambda rid: id_to_team[rid]["shortName"])
-        if len(rivals) != 3:
-            raise SystemExit(f"{t['abbreviation']} has {len(rivals)} rivals")
-        t["rivals"] = rivals
 
     # Drop helper fields that the app recomputes
     out = []

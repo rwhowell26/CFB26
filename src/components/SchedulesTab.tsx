@@ -125,7 +125,7 @@ export function SchedulesTab({
           Weeks 1–5 are games outside the tier (leftover rivals, balanced crossovers, and
           same-region clubs from other tiers). Week 6 is a bye for every team. Weeks 7–13 are
           the 8-team round-robin. Still 12 games — the bye is not a 13th contest. Protected
-          rivals are optional (0–3); open slots fill in-region, out of tier.
+          rivals are named series only (0–3); open slots fill in-region, out of tier.
         </p>
       </section>
     </div>

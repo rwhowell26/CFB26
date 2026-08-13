@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { TeamChip, TeamRow, useTeamSearch } from "@/components/TeamChip";
 import { tenYearFrequencies } from "@/lib/schedule";
+import { realRivalIds } from "@/lib/rivalries";
 import { rivalsOf, setRival, clearRival } from "@/lib/rivals";
 import { TEAMS, getTeam, recordLabel, regionName, tierName } from "@/lib/teams";
 import type { Assignment, RivalMap } from "@/lib/types";
@@ -32,9 +33,10 @@ export function BuilderTab({
     () => tenYearFrequencies(assignment, rivals, selectedId),
     [assignment, rivals, selectedId],
   );
+  const knownRivalIds = realRivalIds(selectedId);
   const rivalChoices = useTeamSearch(
-    [...TEAMS]
-      .filter((team) => team.id !== selectedId)
+    knownRivalIds
+      .map(getTeam)
       .sort((a, b) => a.shortName.localeCompare(b.shortName)),
     rivalQuery,
   );
@@ -77,9 +79,10 @@ export function BuilderTab({
 
         <h3 className="section-title">Protected rivals · 0 to 3</h3>
         <p className="footnote" style={{ marginTop: 0 }}>
-          Rivals are optional. Click a slot to add or replace, or clear it. A rival in the
-          same 8-team tier already counts toward the round-robin. Empty slots are filled with
-          other clubs in this region, not the same tier.
+          Only named college football rivalries can occupy these slots (max 3). Click to add
+          or replace from that list, or clear a slot. A rival in the same 8-team tier already
+          counts toward the round-robin. Open slots fill with other clubs in this region,
+          not the same tier.
         </p>
         <div className="rival-row">
           {[0, 1, 2].map((slot) => {
@@ -125,20 +128,26 @@ export function BuilderTab({
             <input
               value={rivalQuery}
               onChange={(event) => setRivalQuery(event.target.value)}
-              placeholder="Replace with…"
+              placeholder="Search named rivalries"
               aria-label="Choose a new protected rival"
             />
             <div className="scroll picker-list">
-              {rivalChoices.slice(0, 40).map((team) => (
-                <TeamRow
-                  key={team.id}
-                  team={team}
-                  onClick={() => {
-                    onChangeRivals(setRival(rivals, selectedId, editingSlot, team.id));
-                    setEditingSlot(null);
-                  }}
-                />
-              ))}
+              {rivalChoices.length ? (
+                rivalChoices.map((team) => (
+                  <TeamRow
+                    key={team.id}
+                    team={team}
+                    onClick={() => {
+                      onChangeRivals(setRival(rivals, selectedId, editingSlot, team.id));
+                      setEditingSlot(null);
+                    }}
+                  />
+                ))
+              ) : (
+                <p className="footnote" style={{ margin: 0 }}>
+                  No named rivalry in this pool for this club.
+                </p>
+              )}
             </div>
             <button
               type="button"
