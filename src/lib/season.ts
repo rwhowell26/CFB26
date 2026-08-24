@@ -9,7 +9,7 @@ export const LEGACY_STORAGE_KEY = `cfb26-rankings-v1-${SEASON_YEAR}`;
 export const AUTH_COOKIE = "cfb26_auth";
 
 export function formatWeekLabel(week: number, fallbackLabel?: string): string {
+  if (week === PRESEASON_WEEK) return "Week 0";
   if (fallbackLabel) return fallbackLabel;
-  if (week === PRESEASON_WEEK) return "Preseason";
   return `Week ${week}`;
 }
