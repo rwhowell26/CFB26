@@ -72,7 +72,7 @@ export function TeamResume({
             <img src={team.logo} alt="" className="team-logo lg" />
           ) : null}
           <div>
-            <p className="eyebrow">Team resume · games played</p>
+            <p className="eyebrow">Team resume · full schedule</p>
             <h2>
               {teamResolved ? `${formatResumeRank(teamResolved, true)} ` : ""}
               {team.name}
