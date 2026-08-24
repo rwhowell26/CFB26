@@ -7,6 +7,7 @@ import {
   gamesForTeam,
   recordFromGames,
 } from "@/lib/ranking-logic";
+import { formatGameWeekShort } from "@/lib/season";
 import type { Game, Team } from "@/lib/types";
 
 type Props = {
@@ -81,7 +82,7 @@ export function CompareTool({ teams, games, ranks }: Props) {
             <ul className="game-list">
               {played.map((g) => (
                 <li key={g.gameId} className={`game-row result-${g.result?.toLowerCase()}`}>
-                  <span className="game-week">W{g.week}</span>
+                  <span className="game-week">{formatGameWeekShort(g.week)}</span>
                   <span className="game-loc">
                     {g.location === "home" ? "vs" : g.location === "away" ? "@" : "n"}
                   </span>

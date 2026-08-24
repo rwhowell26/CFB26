@@ -8,6 +8,7 @@ import {
   gamesForTeam,
   recordFromGames,
 } from "@/lib/ranking-logic";
+import { formatGameWeekShort } from "@/lib/season";
 import type { Game, Team, TeamGameView } from "@/lib/types";
 
 type Props = {
@@ -153,7 +154,7 @@ function SchedulePopup({
                 key={g.gameId}
                 className={`game-row ${g.result ? `result-${g.result.toLowerCase()}` : ""}`}
               >
-                <span className="game-week">W{g.week}</span>
+                <span className="game-week">{formatGameWeekShort(g.week)}</span>
                 <span className="game-loc">{locLabel(g.location)}</span>
                 <span className="game-opp">
                   {formatRank(g.opponentRank, g.opponentIsFbs)} {g.opponentName}

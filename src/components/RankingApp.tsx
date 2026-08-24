@@ -39,7 +39,7 @@ import {
   useRankingStore,
 } from "@/lib/storage";
 import type { Game, SeasonWeek, Team } from "@/lib/types";
-import { ensurePreseasonWeek } from "@/lib/weeks";
+import { ensureSeasonWeeks } from "@/lib/weeks";
 
 type Tab = "rank" | "board" | "slate" | "conferences" | "sos" | "compare" | "history" | "movers";
 
@@ -128,7 +128,7 @@ export function RankingApp() {
   const teams = useMemo(() => data?.teams ?? [], [data]);
   const games = useMemo(() => data?.games ?? [], [data]);
   const weeks = useMemo(
-    () => ensurePreseasonWeek(data?.weeks ?? []),
+    () => ensureSeasonWeeks(data?.weeks ?? []),
     [data?.weeks],
   );
   const teamsById = useMemo(() => new Map(teams.map((t) => [t.id, t])), [teams]);

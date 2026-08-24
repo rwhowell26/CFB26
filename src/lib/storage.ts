@@ -7,12 +7,13 @@ import {
   PRESEASON_WEEK,
   SEASON_YEAR,
   STORAGE_KEY,
+  WEEK_ZERO,
   formatWeekLabel,
 } from "./season";
 import type { RankingStore, WeekSnapshot } from "./types";
 
 /** Bump when storage shape/migration rules change. */
-export const STORE_SCHEMA_VERSION = 3;
+export const STORE_SCHEMA_VERSION = 4;
 
 function emptyStore(activeWeek = PRESEASON_WEEK): RankingStore {
   return {
@@ -21,6 +22,49 @@ function emptyStore(activeWeek = PRESEASON_WEEK): RankingStore {
     activeWeek,
     drafts: {},
     snapshots: {},
+  };
+}
+
+/**
+ * Move ballot data from old Week-0 slot (key "0") into Preseason (-1),
+ * since Week 0 is now reserved for early-season games.
+ */
+export function migrateWeekZeroSlotToPreseason(store: RankingStore): RankingStore {
+  const preKey = String(PRESEASON_WEEK);
+  const oldKey = String(WEEK_ZERO);
+  const drafts = { ...store.drafts };
+  const snapshots = { ...store.snapshots };
+
+  const hasPre = (drafts[preKey]?.length ?? 0) > 0 || Boolean(snapshots[preKey]);
+  const hasOld = (drafts[oldKey]?.length ?? 0) > 0 || Boolean(snapshots[oldKey]);
+
+  if (hasOld && !hasPre) {
+    if (drafts[oldKey]) {
+      drafts[preKey] = [...drafts[oldKey]];
+      delete drafts[oldKey];
+    }
+    if (snapshots[oldKey]) {
+      snapshots[preKey] = {
+        ...snapshots[oldKey],
+        week: PRESEASON_WEEK,
+        label: formatWeekLabel(PRESEASON_WEEK),
+      };
+      delete snapshots[oldKey];
+    }
+  }
+
+  let activeWeek = store.activeWeek;
+  if (activeWeek === WEEK_ZERO && ((drafts[preKey]?.length ?? 0) > 0 || snapshots[preKey])) {
+    activeWeek = PRESEASON_WEEK;
+  }
+  if (typeof activeWeek !== "number") activeWeek = PRESEASON_WEEK;
+
+  return {
+    ...store,
+    drafts,
+    snapshots,
+    activeWeek,
+    schemaVersion: STORE_SCHEMA_VERSION,
   };
 }
 
@@ -100,8 +144,11 @@ function normalizeStore(parsed: RankingStore): RankingStore {
   };
 
   const version = store.schemaVersion ?? 1;
-  if (version < STORE_SCHEMA_VERSION) {
+  if (version < 3) {
     store = migrateRankingsToPreseason(store);
+  }
+  if (version < 4) {
+    store = migrateWeekZeroSlotToPreseason(store);
   }
 
   return {

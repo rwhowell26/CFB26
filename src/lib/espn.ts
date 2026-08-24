@@ -1,6 +1,6 @@
-import { PRESEASON_WEEK, SEASON_YEAR } from "./season";
+import { PRESEASON_WEEK, SEASON_YEAR, WEEK_ZERO, weekZeroCutoffIso } from "./season";
 import type { Game, GameStatus, SeasonWeek, Team } from "./types";
-import { ensurePreseasonWeek } from "./weeks";
+import { ensureSeasonWeeks } from "./weeks";
 
 const ESPN_SITE = "https://site.api.espn.com/apis/site/v2/sports/football/college-football";
 const ESPN_V2 = "https://site.api.espn.com/apis/v2/sports/football/college-football";
@@ -139,12 +139,12 @@ type ScoreboardResponse = {
   }>;
 };
 
-function withPreseasonWeek(regularWeeks: SeasonWeek[], year = SEASON_YEAR): SeasonWeek[] {
-  return ensurePreseasonWeek(regularWeeks, year);
+function withSeasonWeeks(regularWeeks: SeasonWeek[], year = SEASON_YEAR): SeasonWeek[] {
+  return ensureSeasonWeeks(regularWeeks, year);
 }
 
 export async function fetchSeasonWeeks(year = SEASON_YEAR): Promise<SeasonWeek[]> {
-  return cachedFetch(`weeks-preseason-${year}`, 60 * 60 * 1000, async () => {
+  return cachedFetch(`weeks-split-w0-${year}`, 60 * 60 * 1000, async () => {
     const data = await getJson<ScoreboardResponse>(
       `${ESPN_SITE}/scoreboard?year=${year}&week=1&seasontype=2&groups=80&limit=10`,
     );
@@ -157,8 +157,20 @@ export async function fetchSeasonWeeks(year = SEASON_YEAR): Promise<SeasonWeek[]
       startDate: e.startDate,
       endDate: e.endDate,
     }));
-    return withPreseasonWeek(regularWeeks, year);
+    return withSeasonWeeks(regularWeeks, year);
   });
+}
+
+/** Remap ESPN Week 1 early games into Week 0. */
+export function displayWeekForGame(
+  espnWeek: number,
+  date: string,
+  year = SEASON_YEAR,
+): number {
+  if (espnWeek === 1 && new Date(date).getTime() < new Date(weekZeroCutoffIso(year)).getTime()) {
+    return WEEK_ZERO;
+  }
+  return espnWeek;
 }
 
 function parseScoreboardGames(
@@ -205,10 +217,13 @@ function parseScoreboardGames(
       awayScore = Number.isFinite(awayScore) ? awayScore : null;
     }
 
+    const date = competition.date || event.date;
+    const espnWeek = event.week?.number ?? data.week?.number ?? weekFallback;
+
     games.push({
       id: String(competition.id || event.id),
-      week: event.week?.number ?? data.week?.number ?? weekFallback,
-      date: competition.date || event.date,
+      week: displayWeekForGame(espnWeek, date),
+      date,
       neutralSite: Boolean(competition.neutralSite),
       status,
       homeTeamId: homeId,
@@ -231,16 +246,19 @@ export async function fetchAllGames(year = SEASON_YEAR): Promise<{
   weeks: SeasonWeek[];
   games: Game[];
 }> {
-  return cachedFetch(`all-games-preseason-${year}`, 5 * 60 * 1000, async () => {
+  return cachedFetch(`all-games-split-w0-${year}`, 5 * 60 * 1000, async () => {
     const [teams, weeks] = await Promise.all([
       fetchFbsTeams(year),
       fetchSeasonWeeks(year),
     ]);
     const fbsIds = new Set(teams.map((t) => t.id));
 
-    // Scoreboards are regular-season weeks only (skip preseason ballot week)
+    // Fetch ESPN regular-season weeks (1+). Week 0 games are split out of Week 1 by date.
+    // Skip Preseason (-1); do not call ESPN week=0 (empty).
     const weekNumbers = weeks.length
-      ? weeks.map((w) => w.number).filter((n) => n !== PRESEASON_WEEK)
+      ? weeks
+          .map((w) => w.number)
+          .filter((n) => n >= 1)
       : Array.from({ length: 15 }, (_, i) => i + 1);
 
     const scoreboards = await Promise.all(

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { formatRank, gamesForSlateWeek } from "@/lib/ranking-logic";
-import { PRESEASON_WEEK, formatWeekLabel } from "@/lib/season";
+import { PRESEASON_WEEK, WEEK_ZERO, formatWeekLabel } from "@/lib/season";
 import type { Game, SeasonWeek } from "@/lib/types";
 
 type Props = {
@@ -16,11 +16,18 @@ type Props = {
 };
 
 function resolveSlateWeek(seasonWeek: number, weeks: SeasonWeek[], games: Game[]): number {
-  if (seasonWeek !== PRESEASON_WEEK && seasonWeek > 0) return seasonWeek;
+  // Prefer current calendar week when it has games (Week 0+)
+  if (seasonWeek >= WEEK_ZERO && games.some((g) => g.week === seasonWeek)) {
+    return seasonWeek;
+  }
+  if (seasonWeek === PRESEASON_WEEK || seasonWeek < WEEK_ZERO) {
+    const week0 = weeks.find((w) => w.number === WEEK_ZERO);
+    if (week0 && games.some((g) => g.week === WEEK_ZERO)) return WEEK_ZERO;
+  }
   const withGames = weeks
-    .filter((w) => w.number > 0)
+    .filter((w) => w.number >= WEEK_ZERO)
     .find((w) => games.some((g) => g.week === w.number));
-  return withGames?.number ?? 1;
+  return withGames?.number ?? WEEK_ZERO;
 }
 
 function statusLabel(game: Game): string {
@@ -112,7 +119,7 @@ export function SlateTab({
   selectedTeamId,
 }: Props) {
   const defaultWeek = resolveSlateWeek(seasonWeek, weeks, games);
-  const regularWeeks = useMemo(() => weeks.filter((w) => w.number > 0), [weeks]);
+  const regularWeeks = useMemo(() => weeks.filter((w) => w.number >= WEEK_ZERO), [weeks]);
   const [viewWeek, setViewWeek] = useState<number | null>(null);
   const slateWeek =
     viewWeek != null && regularWeeks.some((w) => w.number === viewWeek)
@@ -133,7 +140,7 @@ export function SlateTab({
   const label = formatWeekLabel(slateWeek, weekMeta?.label);
   const preseasonNote =
     seasonWeek === PRESEASON_WEEK
-      ? "Season hasn’t kicked off yet — showing the first week with games."
+      ? "Preseason ballot week — showing Week 0 games when available."
       : null;
 
   return (

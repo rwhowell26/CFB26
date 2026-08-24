@@ -7,6 +7,7 @@ import {
   recordFromGames,
 } from "@/lib/ranking-logic";
 import { shortConferenceName } from "@/lib/conferences";
+import { formatGameWeekShort } from "@/lib/season";
 import type { PriorRank, ResumeRank } from "@/lib/storage";
 import { resolveResumeRank } from "@/lib/storage";
 import type { Game, Team } from "@/lib/types";
@@ -130,7 +131,7 @@ export function TeamResume({
         <ul className="game-list">
           {played.map((g) => (
             <li key={g.gameId} className={`game-row result-${g.result?.toLowerCase()}`}>
-              <span className="game-week">W{g.week}</span>
+              <span className="game-week">{formatGameWeekShort(g.week)}</span>
               <span className="game-loc">{locLabel(g.location)}</span>
               <span className="game-opp">
                 {oppLabel(g.opponentId, g.opponentIsFbs)} {g.opponentName}
@@ -150,7 +151,7 @@ export function TeamResume({
         <ul className="game-list muted">
           {upcoming.slice(0, 6).map((g) => (
             <li key={g.gameId} className="game-row">
-              <span className="game-week">W{g.week}</span>
+              <span className="game-week">{formatGameWeekShort(g.week)}</span>
               <span className="game-loc">{locLabel(g.location)}</span>
               <span className="game-opp">
                 {oppLabel(g.opponentId, g.opponentIsFbs)} {g.opponentName}

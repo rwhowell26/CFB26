@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { formatWeekLabel } from "@/lib/season";
+import { formatGameWeekShort, formatWeekLabel } from "@/lib/season";
 import { teamRankHistory } from "@/lib/storage";
 import type { RankingStore, Team, WeekSnapshot } from "@/lib/types";
 
@@ -120,7 +120,7 @@ export function HistoryTab({ store, teams, onLoadWeek }: Props) {
                     title={`${formatWeekLabel(h.week, h.label)}: #${h.rank}`}
                   >
                     <div className="spark-bar" style={{ height: `${Math.max(8, 100 - pct)}%` }} />
-                    <span>{h.week === 0 ? "PS" : `W${h.week}`}</span>
+                    <span>{formatGameWeekShort(h.week)}</span>
                   </div>
                 );
               })}
