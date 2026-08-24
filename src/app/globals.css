@@ -460,6 +460,25 @@ input[type="password"],
   margin: 1rem 0 0.45rem;
 }
 
+.resume-schedule-count {
+  display: inline-block;
+  margin-left: 0.55rem;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 500;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.resume-schedule {
+  max-height: min(70vh, 42rem);
+  overflow: auto;
+}
+
+.game-row.muted-row {
+  opacity: 0.85;
+}
+
 .sos-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -46,8 +46,9 @@ export function TeamResume({
   resumeRanks,
   onClose,
 }: Props) {
-  const played = gamesForTeam(team.id, games, resumeRanks, { playedOnly: true });
-  const upcoming = gamesForTeam(team.id, games, resumeRanks).filter((g) => g.status !== "final");
+  const schedule = gamesForTeam(team.id, games, resumeRanks);
+  const played = schedule.filter((g) => g.status === "final");
+  const upcoming = schedule.filter((g) => g.status !== "final");
   const record = recordFromGames(team.id, games);
   const sos = computeSos(team.id, games, resumeRanks);
   const teamResolved = resolveResumeRank(team.id, currentRanks, priorRanks);
@@ -126,47 +127,40 @@ export function TeamResume({
         (`#12·W3`).
       </p>
 
-      <h3 className="section-label">Played</h3>
-      {played.length ? (
-        <ul className="game-list">
-          {played.map((g) => (
-            <li key={g.gameId} className={`game-row result-${g.result?.toLowerCase()}`}>
-              <span className="game-week">{formatGameWeekShort(g.week)}</span>
-              <span className="game-loc">{locLabel(g.location)}</span>
-              <span className="game-opp">
-                {oppLabel(g.opponentId, g.opponentIsFbs)} {g.opponentName}
-              </span>
-              <span className="game-score">
-                {g.result} {g.teamScore}-{g.opponentScore}
-              </span>
-            </li>
-          ))}
+      <h3 className="section-label">
+        Schedule
+        <span className="resume-schedule-count">
+          {played.length} played · {upcoming.length} remaining
+        </span>
+      </h3>
+      {schedule.length ? (
+        <ul className="game-list resume-schedule">
+          {schedule.map((g) => {
+            const final = g.status === "final";
+            return (
+              <li
+                key={g.gameId}
+                className={`game-row${final && g.result ? ` result-${g.result.toLowerCase()}` : ""}${final ? "" : " muted-row"}`}
+              >
+                <span className="game-week">{formatGameWeekShort(g.week)}</span>
+                <span className="game-loc">{locLabel(g.location)}</span>
+                <span className="game-opp">
+                  {oppLabel(g.opponentId, g.opponentIsFbs)} {g.opponentName}
+                </span>
+                <span className="game-score">
+                  {final && g.result != null
+                    ? `${g.result} ${g.teamScore}-${g.opponentScore}`
+                    : new Date(g.date).toLocaleDateString(undefined, {
+                        month: "short",
+                        day: "numeric",
+                      })}
+                </span>
+              </li>
+            );
+          })}
         </ul>
       ) : (
-        <div className="empty-state">No games played yet this season.</div>
-      )}
-
-      <h3 className="section-label">Upcoming</h3>
-      {upcoming.length ? (
-        <ul className="game-list muted">
-          {upcoming.slice(0, 6).map((g) => (
-            <li key={g.gameId} className="game-row">
-              <span className="game-week">{formatGameWeekShort(g.week)}</span>
-              <span className="game-loc">{locLabel(g.location)}</span>
-              <span className="game-opp">
-                {oppLabel(g.opponentId, g.opponentIsFbs)} {g.opponentName}
-              </span>
-              <span className="game-score">
-                {new Date(g.date).toLocaleDateString(undefined, {
-                  month: "short",
-                  day: "numeric",
-                })}
-              </span>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <div className="empty-state">No upcoming games loaded.</div>
+        <div className="empty-state">No schedule loaded for this team.</div>
       )}
     </section>
   );
