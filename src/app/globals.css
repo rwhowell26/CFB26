@@ -48,7 +48,7 @@ main {
 }
 
 .app-shell {
-  width: min(1400px, calc(100% - 2rem));
+  width: min(1600px, calc(100% - 2rem));
   margin: 0 auto;
   padding: 1.25rem 0 3rem;
 }
@@ -145,6 +145,12 @@ input[type="password"],
   font-weight: 600;
 }
 
+.primary-btn:disabled,
+.ghost-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 .ghost-btn:hover,
 .file-btn:hover,
 .tabs button:hover {
@@ -181,7 +187,6 @@ input[type="password"],
 
 .rank-page {
   display: grid;
-  grid-template-columns: 1.4fr 0.9fr;
   gap: 1rem;
   align-items: start;
 }
@@ -593,6 +598,77 @@ input[type="password"],
 
 .warnings > .suggest-apply {
   margin-bottom: 0.35rem;
+}
+
+.conflict-queue {
+  display: grid;
+  gap: 1rem;
+}
+
+.find-replace {
+  border-color: rgba(138, 75, 22, 0.28);
+}
+
+.find-replace-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: start;
+  margin-bottom: 0.85rem;
+}
+
+.find-replace-bar h2 {
+  margin: 0.1rem 0 0.2rem;
+}
+
+.find-replace-bar p {
+  margin: 0;
+}
+
+.find-replace-nav,
+.find-replace-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.find-replace-match {
+  margin-bottom: 0.85rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 14px;
+  background: rgba(138, 75, 22, 0.08);
+  border: 1px solid rgba(138, 75, 22, 0.18);
+}
+
+.find-replace-headline {
+  margin: 0;
+  font-weight: 700;
+}
+
+.find-replace-result {
+  margin: 0.3rem 0 0;
+  color: var(--muted);
+}
+
+.find-replace-actions {
+  margin-bottom: 1rem;
+}
+
+.resume-compare-wrap {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.resume-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.resume-compare .resume-schedule {
+  max-height: min(55vh, 34rem);
 }
 
 .slate-wrap {
@@ -1169,6 +1245,7 @@ input[type="password"],
   .rank-page,
   .rank-layout,
   .compare-grid,
+  .resume-compare,
   .history-wrap,
   .conference-grid,
   .movers-grid {

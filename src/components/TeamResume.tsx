@@ -21,6 +21,7 @@ type Props = {
   priorRanks: Map<string, PriorRank>;
   /** Effective ranks for SOS / opponent display (current with prior fallback) */
   resumeRanks: Map<string, number>;
+  roleLabel?: string;
   onClose?: () => void;
 };
 
@@ -44,6 +45,7 @@ export function TeamResume({
   currentRanks,
   priorRanks,
   resumeRanks,
+  roleLabel,
   onClose,
 }: Props) {
   const schedule = gamesForTeam(team.id, games, resumeRanks);
@@ -72,7 +74,7 @@ export function TeamResume({
             <img src={team.logo} alt="" className="team-logo lg" />
           ) : null}
           <div>
-            <p className="eyebrow">Team resume · full schedule</p>
+            <p className="eyebrow">{roleLabel ?? "Team resume · full schedule"}</p>
             <h2>
               {teamResolved ? `${formatResumeRank(teamResolved, true)} ` : ""}
               {team.name}

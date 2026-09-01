@@ -251,6 +251,52 @@ export function getDraftOrder(store: RankingStore, week: number): string[] {
   return store.drafts[weekKey(week)] ?? [];
 }
 
+export type PriorBallot = {
+  week: number;
+  label: string;
+  rankedIds: string[];
+  source: "snapshot" | "draft";
+};
+
+/** Nearest earlier week that has a saved snapshot or a non-empty draft. */
+export function previousWeekBallot(
+  store: RankingStore,
+  currentWeek: number,
+): PriorBallot | null {
+  const weeks = new Set<number>();
+  for (const key of Object.keys(store.drafts)) {
+    const n = Number(key);
+    if (Number.isFinite(n)) weeks.add(n);
+  }
+  for (const key of Object.keys(store.snapshots)) {
+    const n = Number(key);
+    if (Number.isFinite(n)) weeks.add(n);
+  }
+
+  const prior = [...weeks].filter((w) => w < currentWeek).sort((a, b) => b - a);
+  for (const w of prior) {
+    const snap = store.snapshots[weekKey(w)];
+    if (snap?.rankedIds.length) {
+      return {
+        week: w,
+        label: snap.label || formatWeekLabel(w),
+        rankedIds: [...snap.rankedIds],
+        source: "snapshot",
+      };
+    }
+    const draft = store.drafts[weekKey(w)];
+    if (draft?.length) {
+      return {
+        week: w,
+        label: formatWeekLabel(w),
+        rankedIds: [...draft],
+        source: "draft",
+      };
+    }
+  }
+  return null;
+}
+
 export function setDraftOrder(
   store: RankingStore,
   week: number,

@@ -344,6 +344,37 @@ export function resultMoveSuggestions(
   return suggestions;
 }
 
+/** One row per H2H pair (drops the duplicate behind-after-win copy). */
+export function uniqueH2hConflicts(suggestions: MoveSuggestion[]): MoveSuggestion[] {
+  const seen = new Set<string>();
+  const unique: MoveSuggestion[] = [];
+  for (const suggestion of suggestions) {
+    const key = `${suggestion.winnerId}:${suggestion.loserId}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    unique.push(suggestion);
+  }
+  return unique;
+}
+
+export function h2hPairKey(winnerId: string, loserId: string): string {
+  return `${winnerId}:${loserId}`;
+}
+
+export function findDirectH2hGame(
+  games: Game[],
+  teamAId: string,
+  teamBId: string,
+): Game | null {
+  const matches = games.filter((game) => {
+    if (game.status !== "final") return false;
+    const ids = new Set([game.homeTeamId, game.awayTeamId]);
+    return ids.has(teamAId) && ids.has(teamBId);
+  });
+  matches.sort((a, b) => b.date.localeCompare(a.date));
+  return matches[0] ?? null;
+}
+
 /** Put the winner immediately above the loser on the ballot. */
 export function applyWinnerAboveLoser(
   rankedIds: string[],

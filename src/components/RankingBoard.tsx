@@ -52,7 +52,7 @@ type Props = {
   records: Map<string, { wins: number; losses: number }>;
   onChange: (rankedIds: string[]) => void;
   onSelectTeam: (teamId: string) => void;
-  selectedTeamId: string | null;
+  selectedTeamIds?: string[];
   search: string;
 };
 
@@ -232,9 +232,10 @@ export function RankingBoard({
   records,
   onChange,
   onSelectTeam,
-  selectedTeamId,
+  selectedTeamIds = [],
   search,
 }: Props) {
+  const selectedSet = useMemo(() => new Set(selectedTeamIds), [selectedTeamIds]);
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
   );
@@ -351,7 +352,7 @@ export function RankingBoard({
                       team={team}
                       rank={index + 1}
                       record={records.get(id) ?? { wins: 0, losses: 0 }}
-                      selected={selectedTeamId === id}
+                      selected={selectedSet.has(id)}
                       onSelect={() => onSelectTeam(id)}
                       onMoveUp={() => moveTeam(id, "up")}
                       onMoveDown={() => moveTeam(id, "down")}
@@ -387,7 +388,7 @@ export function RankingBoard({
                     id={id}
                     team={team}
                     record={record}
-                    selected={selectedTeamId === id}
+                    selected={selectedSet.has(id)}
                     onSelect={() => onSelectTeam(id)}
                     onAddTop={() => addTeam(id, "top")}
                     onAddBottom={() => addTeam(id, "bottom")}
