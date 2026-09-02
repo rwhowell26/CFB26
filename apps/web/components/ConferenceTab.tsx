@@ -12,13 +12,16 @@ export function ConferenceTab({ season, order }: { season: SeasonPayload; order:
     [season.schools],
   );
   const [open, setOpen] = useState(groups[0]?.conference ?? "");
+  const selected = groups.find((g) => g.conference === open);
 
   return (
     <div className="flex flex-col gap-4">
       <p className="text-sm text-[var(--muted)]">
         Conferences are grouped from men’s basketball membership when available, otherwise
-        football. Average rank uses the current board (formula or your opinion).
+        football. Average rank uses the current board (formula or your opinion). Click a
+        conference to see its schools.
       </p>
+      <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_24rem]">
       <div className="overflow-auto rounded-2xl border border-[var(--line)]">
         <table className="w-full min-w-[36rem] border-collapse text-left text-sm">
           <thead className="sticky top-0 bg-[#10182a] text-xs uppercase tracking-wide text-[var(--muted)]">
@@ -31,13 +34,13 @@ export function ConferenceTab({ season, order }: { season: SeasonPayload; order:
           </thead>
           <tbody>
             {groups.map((group, index) => (
-              <tr key={group.conference} className="border-t border-[var(--line)]">
+              <tr
+                key={group.conference}
+                className={`cursor-pointer border-t border-[var(--line)] hover:bg-white/5 ${open === group.conference ? "bg-white/10" : ""}`}
+                onClick={() => setOpen(group.conference)}
+              >
                 <td className="px-3 py-2 font-mono text-[var(--muted)]">{index + 1}</td>
-                <td className="px-3 py-2">
-                  <button type="button" className="text-left hover:underline" onClick={() => setOpen(group.conference)}>
-                    {group.conference}
-                  </button>
-                </td>
+                <td className="px-3 py-2">{group.conference}</td>
                 <td className="px-3 py-2">{group.schoolIds.length}</td>
                 <td className="px-3 py-2 font-mono">{group.averageRank.toFixed(1)}</td>
               </tr>
@@ -45,13 +48,13 @@ export function ConferenceTab({ season, order }: { season: SeasonPayload; order:
           </tbody>
         </table>
       </div>
-      {open ? (
+      {selected ? (
         <section className="rounded-2xl border border-[var(--line)] p-5">
           <h2 className="text-xl" style={{ fontFamily: "var(--font-display), serif" }}>
-            {open}
+            {selected.conference}
           </h2>
           <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-            {(groups.find((g) => g.conference === open)?.schoolIds ?? []).map((id) => {
+            {selected.schoolIds.map((id) => {
               const school = schoolById.get(id);
               const rank = order.indexOf(id) + 1;
               return school ? (
@@ -64,6 +67,7 @@ export function ConferenceTab({ season, order }: { season: SeasonPayload; order:
           </ul>
         </section>
       ) : null}
+      </div>
     </div>
   );
 }
