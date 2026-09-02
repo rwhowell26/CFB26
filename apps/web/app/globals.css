@@ -39,3 +39,23 @@ body {
 a {
   color: inherit;
 }
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+.icon-btn {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.icon-btn:hover {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.04);
+}

@@ -15,9 +15,9 @@ const display = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "New site",
+  title: "Dept success",
   description:
-    "A separate Next.js app in the CFB26 repo, deployed as its own Vercel project.",
+    "Rank Division I athletic departments by football, men’s basketball, and baseball postseason.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

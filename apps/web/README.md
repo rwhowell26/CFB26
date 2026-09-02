@@ -1,6 +1,6 @@
-# New site (`apps/web`)
+# Athletic department tracker (`apps/web`)
 
-Separate Next.js app in the CFB26 repo. It is not the rankings webapp.
+Ranks Division I schools by football, men’s basketball, and baseball postseason results. This app is separate from the CFB26 rankings site at the repo root.
 
 ## Run locally
 
@@ -10,12 +10,6 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3001](http://localhost:3001). Rankings continue to use port 3000 from the repo root.
+Open [http://localhost:3001](http://localhost:3001).
 
-## Deploy without replacing rankings
-
-1. In Vercel, **Add New → Project** and import this same GitHub repository.
-2. Set **Root Directory** to `apps/web`.
-3. Deploy.
-
-Leave the existing rankings Vercel project’s Root Directory at the repository root.
+Data comes from ESPN public APIs. Opinion edits are stored in the browser (`localStorage`).
