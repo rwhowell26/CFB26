@@ -1,6 +1,6 @@
 # Athletic department tracker (`apps/web`)
 
-Ranks Division I schools by football, men’s basketball, and baseball postseason results. This app is separate from the CFB26 rankings site at the repo root.
+Ranks Division I schools by the average of their football, men’s basketball, and baseball ranks (postseason round, then win percentage). This app is separate from the CFB26 rankings site at the repo root.
 
 ## Run locally
 

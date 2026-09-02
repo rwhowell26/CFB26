@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { SeasonPayload } from "@/lib/types";
-import { formatRecord, resultMap } from "@/lib/ranking";
+import { averageSportRank, formatRecord, resultMap, sportRankMaps } from "@/lib/ranking";
 import { SchoolMark } from "./SchoolMark";
 
 export function BoardTab({
@@ -27,6 +27,7 @@ export function BoardTab({
   const football = useMemo(() => resultMap(season.results.football), [season.results.football]);
   const basketball = useMemo(() => resultMap(season.results.basketball), [season.results.basketball]);
   const baseball = useMemo(() => resultMap(season.results.baseball), [season.results.baseball]);
+  const ranks = useMemo(() => sportRankMaps(season), [season]);
 
   const filtered = order
     .map((id, index) => ({ id, index }))
@@ -64,8 +65,9 @@ export function BoardTab({
         </button>
       </div>
       <p className="text-sm text-[var(--muted)]">
-        Auto-rank uses furthest postseason round, then win percentage. Move teams to overlay
-        your opinion. Formula order is saved separately from your edits.
+        Department order is the average of each school’s football, basketball, and baseball
+        ranks. Sports a school does not play are left out of the average. Move teams to
+        overlay your opinion.
       </p>
       <div className="overflow-auto rounded-2xl border border-[var(--line)]">
         <table className="w-full min-w-[64rem] border-collapse text-left text-sm">
@@ -73,6 +75,7 @@ export function BoardTab({
             <tr>
               <th className="px-3 py-3">#</th>
               <th className="px-3 py-3">School</th>
+              <th className="px-3 py-3">Avg</th>
               <th className="px-3 py-3">Football</th>
               <th className="px-3 py-3">M Basketball</th>
               <th className="px-3 py-3">Baseball</th>
@@ -86,20 +89,22 @@ export function BoardTab({
               const fb = football.get(id);
               const mbb = basketball.get(id);
               const bb = baseball.get(id);
+              const avg = averageSportRank(season, id, ranks);
               return (
                 <tr key={id} className="border-t border-[var(--line)]">
                   <td className="px-3 py-2 font-mono text-[var(--muted)]">{index + 1}</td>
                   <td className="px-3 py-2">
                     <SchoolMark school={school} />
                   </td>
+                  <td className="px-3 py-2 font-mono">{avg ? avg.average.toFixed(1) : "—"}</td>
                   <td className="px-3 py-2 align-top">
-                    <SportCell result={fb} />
+                    <SportCell result={fb} rank={ranks.football.get(id)} />
                   </td>
                   <td className="px-3 py-2 align-top">
-                    <SportCell result={mbb} />
+                    <SportCell result={mbb} rank={ranks.basketball.get(id)} />
                   </td>
                   <td className="px-3 py-2 align-top">
-                    <SportCell result={bb} />
+                    <SportCell result={bb} rank={ranks.baseball.get(id)} />
                   </td>
                   <td className="px-3 py-2">
                     <div className="flex flex-wrap items-center gap-1">
@@ -157,13 +162,18 @@ export function BoardTab({
 
 function SportCell({
   result,
+  rank,
 }: {
   result: ReturnType<typeof resultMap> extends Map<string, infer R> ? R | undefined : never;
+  rank?: number;
 }) {
   if (!result) return <span className="text-[var(--muted)]">—</span>;
   return (
     <span className="flex flex-col">
-      <span>{result.roundLabel}</span>
+      <span>
+        {rank ? `#${rank} · ` : ""}
+        {result.roundLabel}
+      </span>
       <span className="text-xs text-[var(--muted)]">
         {formatRecord(result)}
         {result.subdivision ? ` · ${result.subdivision}` : ""}

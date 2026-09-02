@@ -1,6 +1,6 @@
 import type { OpinionStore } from "./types";
 
-const KEY = "cfb26-dept-success-v1";
+const KEY = "cfb26-dept-success-v2";
 
 function empty(): OpinionStore {
   return { schemaVersion: 1, seasons: {} };

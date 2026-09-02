@@ -17,13 +17,14 @@ export function AllTimeTab({ seasons }: { seasons: SeasonPayload[] }) {
   const rows = [...scores.entries()]
     .map(([id, row]) => ({ id, ...row, school: schoolById.get(id) }))
     .filter((row) => row.school)
-    .sort((a, b) => b.points - a.points || a.avgRank - b.avgRank);
+    .sort((a, b) => a.avgRank - b.avgRank || a.avgSportRank - b.avgSportRank);
 
   return (
     <div className="flex flex-col gap-4">
       <p className="text-sm text-[var(--muted)]">
-        Combined formula points across loaded seasons ({seasons.map((s) => s.label).join(", ")}
-        ). Average rank is the mean department finish.
+        Mean department finish across loaded seasons ({seasons.map((s) => s.label).join(", ")}
+        ). Lower average rank is better. Sport-rank average is the mean of each year’s
+        football/basketball/baseball ranks.
       </p>
       <div className="overflow-auto rounded-2xl border border-[var(--line)]">
         <table className="w-full min-w-[40rem] border-collapse text-left text-sm">
@@ -32,8 +33,8 @@ export function AllTimeTab({ seasons }: { seasons: SeasonPayload[] }) {
               <th className="px-3 py-3">#</th>
               <th className="px-3 py-3">School</th>
               <th className="px-3 py-3">Years</th>
-              <th className="px-3 py-3">Avg rank</th>
-              <th className="px-3 py-3">Points</th>
+              <th className="px-3 py-3">Avg finish</th>
+              <th className="px-3 py-3">Avg sport rank</th>
             </tr>
           </thead>
           <tbody>
@@ -45,7 +46,7 @@ export function AllTimeTab({ seasons }: { seasons: SeasonPayload[] }) {
                 </td>
                 <td className="px-3 py-2">{row.years}</td>
                 <td className="px-3 py-2 font-mono">{row.avgRank.toFixed(1)}</td>
-                <td className="px-3 py-2 font-mono">{Math.round(row.points).toLocaleString()}</td>
+                <td className="px-3 py-2 font-mono">{row.avgSportRank.toFixed(1)}</td>
               </tr>
             ))}
           </tbody>

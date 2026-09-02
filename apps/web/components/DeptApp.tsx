@@ -172,11 +172,11 @@ export function DeptApp() {
 
       <aside className="rounded-2xl border border-[var(--line)] bg-[#10182a]/70 p-4 text-sm leading-6 text-[var(--muted)]">
         <p>
-          Assumptions for this first pass: bowls do not count; football postseason is the CFP
-          and FCS playoffs, with FBS conference champions in a tier under first-round teams.
-          Basketball is the NCAA tournament only (not the NIT). Baseball is the NCAA
-          tournament through the CWS. Missing sports do not add points. Localhost only —
-          opinion edits stay in this browser.
+          Assumptions: bowls do not count; football postseason is the CFP and FCS playoffs,
+          with FBS and FCS titles in the same champion tier and FBS conference champions
+          below first-round teams. Basketball is the NCAA tournament only (not the NIT).
+          Baseball is the NCAA tournament through the CWS. Department rank is the average
+          of a school’s ranks in the sports it plays. Opinion edits stay in this browser.
         </p>
       </aside>
     </main>

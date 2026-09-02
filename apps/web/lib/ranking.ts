@@ -1,4 +1,4 @@
-import type { SeasonPayload, SportResult } from "./types";
+import type { SeasonPayload, Sport, SportResult } from "./types";
 import { SPORTS } from "./season";
 
 export function resultMap(results: SportResult[]): Map<string, SportResult> {
@@ -17,19 +17,54 @@ export function sortSportResults(results: SportResult[]): SportResult[] {
   });
 }
 
-export function compositeScore(payload: SeasonPayload, schoolId: string): number {
-  let total = 0;
+export function sportRankMap(results: SportResult[]): Map<string, number> {
+  const sorted = sortSportResults(results);
+  const map = new Map<string, number>();
+  sorted.forEach((row, index) => map.set(row.schoolId, index + 1));
+  return map;
+}
+
+export function sportRankMaps(payload: SeasonPayload): Record<Sport, Map<string, number>> {
+  return {
+    football: sportRankMap(payload.results.football),
+    basketball: sportRankMap(payload.results.basketball),
+    baseball: sportRankMap(payload.results.baseball),
+  };
+}
+
+export function averageSportRank(
+  payload: SeasonPayload,
+  schoolId: string,
+  ranks?: Record<Sport, Map<string, number>>,
+): { average: number; sports: number } | null {
+  const maps = ranks ?? sportRankMaps(payload);
+  const used: number[] = [];
   for (const sport of SPORTS) {
-    const row = payload.results[sport].find((r) => r.schoolId === schoolId);
-    if (row) total += sportScore(row);
+    const rank = maps[sport].get(schoolId);
+    if (rank != null) used.push(rank);
   }
-  return total;
+  if (!used.length) return null;
+  return {
+    average: used.reduce((sum, n) => sum + n, 0) / used.length,
+    sports: used.length,
+  };
 }
 
 export function autoRankSchools(payload: SeasonPayload): string[] {
+  const ranks = sportRankMaps(payload);
   return [...payload.schools]
-    .map((school) => ({ id: school.id, score: compositeScore(payload, school.id) }))
-    .sort((a, b) => b.score - a.score || a.id.localeCompare(b.id))
+    .map((school) => {
+      const avg = averageSportRank(payload, school.id, ranks);
+      return {
+        id: school.id,
+        average: avg?.average ?? Number.POSITIVE_INFINITY,
+        sports: avg?.sports ?? 0,
+      };
+    })
+    .sort(
+      (a, b) =>
+        a.average - b.average || b.sports - a.sports || a.id.localeCompare(b.id),
+    )
     .map((row) => row.id);
 }
 
@@ -60,13 +95,6 @@ export function moveTeam(order: string[], id: string, toIndex: number): string[]
   return next;
 }
 
-export function sportRankMap(results: SportResult[]): Map<string, number> {
-  const sorted = sortSportResults(results);
-  const map = new Map<string, number>();
-  sorted.forEach((row, index) => map.set(row.schoolId, index + 1));
-  return map;
-}
-
 export function conferenceGroups(
   payload: SeasonPayload,
   order: string[],
@@ -92,20 +120,27 @@ export function conferenceGroups(
     .sort((a, b) => a.averageRank - b.averageRank);
 }
 
-export function allTimeScores(seasons: SeasonPayload[]): Map<string, { points: number; years: number; avgRank: number }> {
-  const totals = new Map<string, { points: number; rankSum: number; years: number }>();
+export function allTimeScores(
+  seasons: SeasonPayload[],
+): Map<string, { years: number; avgRank: number; avgSportRank: number }> {
+  const totals = new Map<string, { rankSum: number; sportRankSum: number; years: number }>();
   for (const season of seasons) {
+    const ranks = sportRankMaps(season);
     season.autoRankIds.forEach((id, index) => {
-      const cur = totals.get(id) ?? { points: 0, rankSum: 0, years: 0 };
-      cur.points += compositeScore(season, id);
+      const cur = totals.get(id) ?? { rankSum: 0, sportRankSum: 0, years: 0 };
       cur.rankSum += index + 1;
+      cur.sportRankSum += averageSportRank(season, id, ranks)?.average ?? index + 1;
       cur.years += 1;
       totals.set(id, cur);
     });
   }
-  const out = new Map<string, { points: number; years: number; avgRank: number }>();
+  const out = new Map<string, { years: number; avgRank: number; avgSportRank: number }>();
   for (const [id, row] of totals) {
-    out.set(id, { points: row.points, years: row.years, avgRank: row.rankSum / row.years });
+    out.set(id, {
+      years: row.years,
+      avgRank: row.rankSum / row.years,
+      avgSportRank: row.sportRankSum / row.years,
+    });
   }
   return out;
 }
