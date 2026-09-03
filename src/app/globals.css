@@ -439,25 +439,6 @@ input[type="password"],
   color: var(--loss);
 }
 
-.resume-header {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  align-items: start;
-}
-
-.resume-title {
-  display: flex;
-  gap: 0.75rem;
-  align-items: center;
-}
-
-.resume-rank-note {
-  margin: 0.25rem 0 0;
-  color: var(--muted);
-  font-size: 0.88rem;
-}
-
 .eyebrow,
 .section-label,
 .sos-label {
@@ -472,44 +453,125 @@ input[type="password"],
   margin: 1rem 0 0.45rem;
 }
 
-.resume-schedule-count {
-  display: inline-block;
-  margin-left: 0.55rem;
-  text-transform: none;
-  letter-spacing: 0;
-  font-weight: 500;
+/* ── Compact resume card ── */
+
+.resume-compact {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.75rem 0.45rem;
+}
+
+.rc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.rc-id {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  min-width: 0;
+}
+
+.rc-id h3 {
+  margin: 0;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  font-size: 1.15rem;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rc-sub {
+  margin: 0;
   color: var(--muted);
   font-size: 0.78rem;
 }
 
-.resume-schedule {
-  max-height: min(70vh, 42rem);
+.rc-close {
+  padding: 0.2rem 0.45rem;
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.rc-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.65rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.rc-schedule {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: min(50vh, 30rem);
   overflow: auto;
 }
 
-.game-row.muted-row {
-  opacity: 0.85;
-}
-
-.sos-grid {
+.rc-game {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
+  grid-template-columns: 1.8rem 1.2rem 1fr auto;
+  gap: 0.3rem;
+  align-items: center;
+  padding: 0.22rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.82rem;
 }
 
-.sos-grid > div {
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 0.75rem;
-  background: rgba(255, 255, 255, 0.55);
-  display: grid;
-  gap: 0.15rem;
+.rc-wk {
+  font-weight: 600;
+  color: var(--muted);
+  font-size: 0.72rem;
 }
 
-.sos-grid strong {
-  font-family: var(--font-display), "Barlow Condensed", sans-serif;
-  font-size: 1.8rem;
+.rc-loc {
+  text-transform: lowercase;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 0.72rem;
 }
+
+.rc-opp {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.rc-sc {
+  white-space: nowrap;
+  font-size: 0.78rem;
+}
+
+.rc-game.muted-row {
+  opacity: 0.8;
+}
+
+.rc-game.result-w .rc-sc { color: var(--win); font-weight: 700; }
+.rc-game.result-l .rc-sc { color: var(--loss); font-weight: 700; }
+
+.recommend-panel .rc-schedule {
+  max-height: min(38vh, 20rem);
+}
+
+.resume-compare .rc-schedule {
+  max-height: min(50vh, 28rem);
+}
+
+.find-replace .rc-schedule {
+  max-height: min(45vh, 24rem);
+}
+
+/* ── Legacy game-row (used on SOS, Compare tab, etc.) ── */
 
 .game-row {
   display: grid;
@@ -519,6 +581,10 @@ input[type="password"],
   padding: 0.45rem 0.2rem;
   border-bottom: 1px solid var(--line);
   font-size: 0.95rem;
+}
+
+.game-row.muted-row {
+  opacity: 0.85;
 }
 
 .game-list.muted {
@@ -674,8 +740,8 @@ input[type="password"],
   align-items: start;
 }
 
-.resume-compare .resume-schedule {
-  max-height: min(55vh, 34rem);
+.resume-compare .rc-schedule {
+  max-height: min(50vh, 28rem);
 }
 
 .slate-wrap {
@@ -750,8 +816,8 @@ input[type="password"],
   margin-top: 0.35rem;
 }
 
-.recommend-panel .resume-schedule {
-  max-height: min(38vh, 22rem);
+.recommend-panel .rc-schedule {
+  max-height: min(38vh, 20rem);
 }
 
 .slate-game {
