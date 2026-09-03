@@ -209,36 +209,43 @@ export function RecommendPanel({
         ) : null}
       </section>
 
-      {recommended ? (
-        <TeamResume
-          team={recommended}
-          games={games}
-          currentRanks={currentRanks}
-          priorRanks={priorRanks}
-          resumeRanks={resumeRanks}
-          roleLabel="Recommended · not yet ranked"
-        />
-      ) : null}
+      <div className="recommend-resumes">
+        {recommended ? (
+          <TeamResume
+            team={recommended}
+            games={games}
+            currentRanks={currentRanks}
+            priorRanks={priorRanks}
+            resumeRanks={resumeRanks}
+            roleLabel="Recommended · not yet ranked"
+          />
+        ) : (
+          <section className="resume-compact">
+            <p className="rc-sub">No remaining teams match your search.</p>
+          </section>
+        )}
 
-      {selectedRanked ? (
-        <TeamResume
-          team={selectedRanked}
-          games={games}
-          currentRanks={currentRanks}
-          priorRanks={priorRanks}
-          resumeRanks={resumeRanks}
-          roleLabel="Selected on this week's ballot"
-          onClose={onClearRanked}
-        />
-      ) : (
-        <section className="panel">
-          <header className="panel-header">
-            <p className="eyebrow">Selected on ballot</p>
-            <h2>Click a ranked team</h2>
-            <p>Park a placed team here to line it up against the recommendation.</p>
-          </header>
-        </section>
-      )}
+        {selectedRanked ? (
+          <TeamResume
+            team={selectedRanked}
+            games={games}
+            currentRanks={currentRanks}
+            priorRanks={priorRanks}
+            resumeRanks={resumeRanks}
+            roleLabel="Selected on ballot"
+            onClose={onClearRanked}
+          />
+        ) : (
+          <section className="resume-compact">
+            <header className="rc-header">
+              <div>
+                <p className="eyebrow">Selected on ballot</p>
+                <h3 className="rc-id">Click a ranked team</h3>
+              </div>
+            </header>
+          </section>
+        )}
+      </div>
     </aside>
   );
 }

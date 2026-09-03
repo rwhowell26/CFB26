@@ -552,11 +552,11 @@ input[type="password"],
   text-overflow: ellipsis;
   white-space: nowrap;
   min-width: 0;
+  margin-right: 0.25rem;
 }
 
 .rc-sc {
   flex-shrink: 0;
-  margin-left: auto;
   white-space: nowrap;
   font-size: 0.68rem;
 }
@@ -739,7 +739,7 @@ input[type="password"],
 }
 
 .resume-compare .rc-schedule {
-  max-height: min(50vh, 28rem);
+  max-height: min(42vh, 24rem);
 }
 
 .slate-wrap {
@@ -800,22 +800,48 @@ input[type="password"],
 
 .recommend-panel {
   display: grid;
-  gap: 1rem;
+  gap: 0.5rem;
+}
+
+.recommend-resumes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  align-items: start;
+}
+
+.recommend-panel .panel {
+  padding: 0.5rem 0.65rem;
+}
+
+.recommend-panel .panel-header h2 {
+  font-size: 1.1rem;
+}
+
+.recommend-panel .panel-header p {
+  font-size: 0.78rem;
 }
 
 .recommend-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-bottom: 0.75rem;
+  gap: 0.3rem;
+  margin-bottom: 0.35rem;
+}
+
+.recommend-actions .primary-btn,
+.recommend-actions .ghost-btn {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.78rem;
 }
 
 .recommend-pick {
-  margin-top: 0.35rem;
+  margin-top: 0.15rem;
+  font-size: 0.82rem;
 }
 
 .recommend-panel .rc-schedule {
-  max-height: min(38vh, 20rem);
+  max-height: min(34vh, 18rem);
 }
 
 .slate-game {
@@ -1381,6 +1407,7 @@ input[type="password"],
   .rank-workspace,
   .compare-grid,
   .resume-compare,
+  .recommend-resumes,
   .history-wrap,
   .conference-grid,
   .movers-grid,
