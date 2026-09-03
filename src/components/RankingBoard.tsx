@@ -18,7 +18,7 @@ import {
   rectSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { useMemo, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { shortConferenceName } from "@/lib/conferences";
 import type { Team } from "@/lib/types";
 
@@ -89,6 +89,21 @@ function SortableRankedItem({
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
     useSortable({ id, data: { container: "ranked" } });
+  const rowRef = useRef<HTMLLIElement>(null);
+
+  useEffect(() => {
+    if (selected && rowRef.current) {
+      rowRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }, [selected]);
+
+  const setRefs = useCallback(
+    (node: HTMLLIElement | null) => {
+      setNodeRef(node);
+      (rowRef as React.MutableRefObject<HTMLLIElement | null>).current = node;
+    },
+    [setNodeRef],
+  );
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -97,7 +112,7 @@ function SortableRankedItem({
   };
 
   return (
-    <li ref={setNodeRef} style={style} className={`rank-item ${selected ? "selected" : ""}`}>
+    <li ref={setRefs} style={style} className={`rank-item ${selected ? "selected" : ""}`}>
       <button
         type="button"
         className="drag-handle"
