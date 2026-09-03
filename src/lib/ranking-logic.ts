@@ -503,8 +503,5 @@ export function formatResumeRank(
 ): string {
   if (!isFbs) return "FCS";
   if (!resolved) return "NR";
-  if (resolved.source === "prior") {
-    return `#${resolved.rank}·W${resolved.week ?? "?"}`;
-  }
   return `#${resolved.rank}`;
 }
