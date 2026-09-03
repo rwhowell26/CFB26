@@ -8,9 +8,9 @@ import { FullBoardTab } from "@/components/FullBoardTab";
 import { HistoryTab } from "@/components/HistoryTab";
 import { MoversTab } from "@/components/MoversTab";
 import { RankingBoard } from "@/components/RankingBoard";
+import { RecommendPanel } from "@/components/RecommendPanel";
 import { SlateTab } from "@/components/SlateTab";
 import { SosTab } from "@/components/SosTab";
-import { TeamResume } from "@/components/TeamResume";
 import {
   applyWinnerAboveLoser,
   philosophyWarnings,
@@ -141,6 +141,11 @@ export function RankingApp() {
     [teams, rankedSet],
   );
   const lastWeekBallot = useMemo(() => previousWeekBallot(store, week), [store, week]);
+  const lastWeekRanks = useMemo(() => {
+    const map = new Map<string, number>();
+    lastWeekBallot?.rankedIds.forEach((id, index) => map.set(id, index + 1));
+    return map;
+  }, [lastWeekBallot]);
 
   useEffect(() => {
     if (selectedRankedId && !rankedSet.has(selectedRankedId)) {
@@ -193,8 +198,6 @@ export function RankingApp() {
   }, [rankedIds, games, teamsById]);
   const seasonWeek = data?.currentWeek ?? PRESEASON_WEEK;
 
-  const rankedCompare = selectedRankedId ? teamsById.get(selectedRankedId) : null;
-  const unrankedCompare = selectedUnrankedId ? teamsById.get(selectedUnrankedId) : null;
   const selectedTeamId = selectedRankedId ?? selectedUnrankedId;
   const weekMeta = weeks.find((w) => w.number === week);
   const snapshotExists = Boolean(store.snapshots[String(week)]);
@@ -263,6 +266,17 @@ export function RankingApp() {
     const copied = lastWeekBallot.rankedIds.filter((id) => valid.has(id));
     updateRanked(copied);
     setMessage(`Copied ${lastWeekBallot.label} into ${label}.`);
+  };
+
+  const insertUnrankedAt = (teamId: string, index: number) => {
+    if (rankedIds.includes(teamId)) return;
+    const next = [...rankedIds];
+    const clamped = Math.max(0, Math.min(index, next.length));
+    next.splice(clamped, 0, teamId);
+    updateRanked(next);
+    setSelectedUnrankedId(null);
+    const teamName = teamsById.get(teamId)?.shortName ?? "Team";
+    setMessage(`Placed ${teamName} at #${clamped + 1}.`);
   };
 
   const handleAutoRank = () => {
@@ -443,7 +457,7 @@ export function RankingApp() {
       <div className="toolbar">
         <input
           type="search"
-          placeholder="Search teams or conferences"
+          placeholder="Search remaining teams or conferences"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -472,79 +486,46 @@ export function RankingApp() {
 
       {tab === "rank" ? (
         <div className="rank-page">
-          <RankingBoard
-            teamsById={teamsById}
-            rankedIds={rankedIds}
-            unrankedIds={unrankedIds}
-            records={records}
-            onChange={updateRanked}
-            onSelectTeam={handleSelectTeam}
-            selectedTeamIds={[selectedRankedId, selectedUnrankedId].filter(
-              (id): id is string => Boolean(id),
-            )}
-            search={search}
-          />
-
-          <section className="resume-compare-wrap">
-            <header className="panel-header">
-              <h2>Resume compare</h2>
-              <p>
-                Left is a team already on this week&apos;s ballot. Right is a team still in the
-                unranked pool. Click one from each list to compare.
-              </p>
-            </header>
-            <div className="resume-compare">
-              {rankedCompare ? (
-                <TeamResume
-                  team={rankedCompare}
-                  games={games}
-                  currentRanks={ranks}
-                  priorRanks={priorRanks}
-                  resumeRanks={resumeRanks}
-                  roleLabel="On this week's ballot"
-                  onClose={() => setSelectedRankedId(null)}
-                />
-              ) : (
-                <section className="panel">
-                  <header className="panel-header">
-                    <p className="eyebrow">On this week&apos;s ballot</p>
-                    <h2>Select a ranked team</h2>
-                    <p>Click a team in Your rankings to park it here.</p>
-                  </header>
-                </section>
+          <div className="rank-workspace">
+            <RankingBoard
+              teamsById={teamsById}
+              rankedIds={rankedIds}
+              totalTeams={teams.length || FBS_TEAM_COUNT}
+              records={records}
+              onChange={updateRanked}
+              onSelectTeam={handleSelectTeam}
+              selectedTeamIds={[selectedRankedId, selectedUnrankedId].filter(
+                (id): id is string => Boolean(id),
               )}
-              {unrankedCompare ? (
-                <TeamResume
-                  team={unrankedCompare}
-                  games={games}
-                  currentRanks={ranks}
-                  priorRanks={priorRanks}
-                  resumeRanks={resumeRanks}
-                  roleLabel="Not yet ranked"
-                  onClose={() => setSelectedUnrankedId(null)}
-                />
-              ) : (
-                <section className="panel">
-                  <header className="panel-header">
-                    <p className="eyebrow">Not yet ranked</p>
-                    <h2>Select an unranked team</h2>
-                    <p>Click a team in the unranked pool to park it here.</p>
-                  </header>
-                </section>
-              )}
-            </div>
-            {selectedRankedId ? (
-              <button
-                type="button"
-                className="ghost-btn"
-                onClick={() =>
-                  updateRanked(rankedIds.filter((id) => id !== selectedRankedId))
-                }
-              >
-                Remove left team from ballot
-              </button>
-            ) : null}
-          </section>
+            />
+            <RecommendPanel
+              teamsById={teamsById}
+              unrankedIds={unrankedIds}
+              rankedIds={rankedIds}
+              records={records}
+              lastWeekBallot={lastWeekBallot}
+              lastWeekRanks={lastWeekRanks}
+              search={search}
+              selectedRankedId={selectedRankedId}
+              games={games}
+              currentRanks={ranks}
+              priorRanks={priorRanks}
+              resumeRanks={resumeRanks}
+              onClearRanked={() => setSelectedRankedId(null)}
+              onInsert={insertUnrankedAt}
+            />
+          </div>
+          {selectedRankedId ? (
+            <button
+              type="button"
+              className="ghost-btn"
+              onClick={() =>
+                updateRanked(rankedIds.filter((id) => id !== selectedRankedId))
+              }
+            >
+              Remove selected team from ballot
+            </button>
+          ) : null}
 
           <ConflictQueue
             key={week}

@@ -5,7 +5,6 @@ import {
   DragOverlay,
   PointerSensor,
   closestCorners,
-  useDraggable,
   useDroppable,
   useSensor,
   useSensors,
@@ -16,44 +15,23 @@ import {
   SortableContext,
   arrayMove,
   useSortable,
-  verticalListSortingStrategy,
+  rectSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useMemo, useState, type ReactNode } from "react";
 import { shortConferenceName } from "@/lib/conferences";
-import { insertIndexByRecord, sortTeamIdsByRecord } from "@/lib/ranking-logic";
 import type { Team } from "@/lib/types";
 
-function teamMatchesSearch(team: Team, query: string): boolean {
-  const q = query.trim().toLowerCase();
-  if (!q) return true;
-  const confShort = shortConferenceName(team.conference).toLowerCase();
-  const confFull = team.conference.toLowerCase();
-  const compact = (value: string) => value.replace(/[\s.-]/g, "");
-  const qCompact = compact(q);
-  return (
-    team.name.toLowerCase().includes(q) ||
-    team.shortName.toLowerCase().includes(q) ||
-    team.abbreviation.toLowerCase().includes(q) ||
-    confFull.includes(q) ||
-    confShort.includes(q) ||
-    compact(confFull).includes(qCompact) ||
-    compact(confShort).includes(qCompact)
-  );
-}
-
 const RANKED_CONTAINER = "ranked-container";
-const UNRANKED_CONTAINER = "unranked-container";
 
 type Props = {
   teamsById: Map<string, Team>;
   rankedIds: string[];
-  unrankedIds: string[];
+  totalTeams: number;
   records: Map<string, { wins: number; losses: number }>;
   onChange: (rankedIds: string[]) => void;
   onSelectTeam: (teamId: string) => void;
   selectedTeamIds?: string[];
-  search: string;
 };
 
 function TeamRowContent({
@@ -156,58 +134,6 @@ function SortableRankedItem({
   );
 }
 
-function DraggablePoolItem({
-  id,
-  team,
-  record,
-  selected,
-  onSelect,
-  onAddTop,
-  onAddBottom,
-}: {
-  id: string;
-  team: Team;
-  record: { wins: number; losses: number };
-  selected: boolean;
-  onSelect: () => void;
-  onAddTop: () => void;
-  onAddBottom: () => void;
-}) {
-  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
-    id,
-    data: { container: "unranked" },
-  });
-
-  return (
-    <li
-      ref={setNodeRef}
-      className={`pool-item ${selected ? "selected" : ""} ${isDragging ? "is-dragging" : ""}`}
-      style={{ opacity: isDragging ? 0.35 : 1 }}
-    >
-      <button
-        type="button"
-        className="drag-handle"
-        aria-label="Drag into rankings"
-        {...attributes}
-        {...listeners}
-      >
-        ⋮⋮
-      </button>
-      <button type="button" className="team-select" onClick={onSelect}>
-        <TeamRowContent team={team} rank={null} record={record} active={selected} />
-      </button>
-      <div className="pool-actions">
-        <button type="button" onClick={onAddTop} title="Add to top">
-          Top
-        </button>
-        <button type="button" onClick={onAddBottom} title="Add to bottom">
-          Bottom
-        </button>
-      </div>
-    </li>
-  );
-}
-
 function DroppableList({
   id,
   className,
@@ -228,36 +154,17 @@ function DroppableList({
 export function RankingBoard({
   teamsById,
   rankedIds,
-  unrankedIds,
+  totalTeams,
   records,
   onChange,
   onSelectTeam,
   selectedTeamIds = [],
-  search,
 }: Props) {
   const selectedSet = useMemo(() => new Set(selectedTeamIds), [selectedTeamIds]);
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
   );
   const [activeId, setActiveId] = useState<string | null>(null);
-
-  const filteredUnranked = useMemo(() => {
-    const filtered = unrankedIds.filter((id) => {
-      const t = teamsById.get(id);
-      if (!t) return false;
-      return teamMatchesSearch(t, search);
-    });
-
-    return sortTeamIdsByRecord(filtered, records, (id) => teamsById.get(id)?.name ?? id);
-  }, [search, teamsById, unrankedIds, records]);
-
-  const containerOf = (id: string): "ranked" | "unranked" | null => {
-    if (id === RANKED_CONTAINER) return "ranked";
-    if (id === UNRANKED_CONTAINER) return "unranked";
-    if (rankedIds.includes(id)) return "ranked";
-    if (unrankedIds.includes(id) || filteredUnranked.includes(id)) return "unranked";
-    return null;
-  };
 
   const onDragStart = (event: DragStartEvent) => {
     setActiveId(String(event.active.id));
@@ -270,50 +177,16 @@ export function RankingBoard({
 
     const activeTeamId = String(active.id);
     const overId = String(over.id);
-    const from = containerOf(activeTeamId);
-    const to = containerOf(overId);
-    if (!from || !to) return;
-
-    // Reorder within rankings
-    if (from === "ranked" && to === "ranked") {
-      if (activeTeamId === overId) return;
-      if (overId === RANKED_CONTAINER) return;
-      const oldIndex = rankedIds.indexOf(activeTeamId);
-      const newIndex = rankedIds.indexOf(overId);
-      if (oldIndex < 0 || newIndex < 0) return;
-      onChange(arrayMove(rankedIds, oldIndex, newIndex));
-      return;
-    }
-
-    // Drag from pool into rankings
-    if (from === "unranked" && to === "ranked") {
-      if (rankedIds.includes(activeTeamId)) return;
-      const next = [...rankedIds];
-      if (overId === RANKED_CONTAINER || next.length === 0) {
-        next.splice(insertIndexByRecord(next, activeTeamId, records), 0, activeTeamId);
-      } else {
-        const overIndex = next.indexOf(overId);
-        next.splice(overIndex < 0 ? next.length : overIndex, 0, activeTeamId);
-      }
-      onChange(next);
-      return;
-    }
-
-    // Drag from rankings back to pool
-    if (from === "ranked" && to === "unranked") {
-      onChange(rankedIds.filter((id) => id !== activeTeamId));
-    }
+    if (activeTeamId === overId || overId === RANKED_CONTAINER) return;
+    const oldIndex = rankedIds.indexOf(activeTeamId);
+    const newIndex = rankedIds.indexOf(overId);
+    if (oldIndex < 0 || newIndex < 0) return;
+    onChange(arrayMove(rankedIds, oldIndex, newIndex));
   };
 
   const activeTeam = activeId ? teamsById.get(activeId) : null;
   const activeRank =
     activeId && rankedIds.includes(activeId) ? rankedIds.indexOf(activeId) + 1 : null;
-
-  const addTeam = (teamId: string, position: "top" | "bottom") => {
-    if (rankedIds.includes(teamId)) return;
-    if (position === "top") onChange([teamId, ...rankedIds]);
-    else onChange([...rankedIds, teamId]);
-  };
 
   const moveTeam = (teamId: string, direction: "up" | "down") => {
     const index = rankedIds.indexOf(teamId);
@@ -330,80 +203,45 @@ export function RankingBoard({
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
     >
-      <div className="rank-layout">
-        <section className="panel">
-          <header className="panel-header">
-            <h2>Your rankings</h2>
-            <p>
-              {rankedIds.length} / {rankedIds.length + unrankedIds.length} placed · drag to
-              reorder · drop pool teams here
-            </p>
-          </header>
-          <DroppableList id={RANKED_CONTAINER} className="rank-drop-zone">
-            <SortableContext items={rankedIds} strategy={verticalListSortingStrategy}>
-              <ol className="rank-list">
-                {rankedIds.map((id, index) => {
-                  const team = teamsById.get(id);
-                  if (!team) return null;
-                  return (
-                    <SortableRankedItem
-                      key={id}
-                      id={id}
-                      team={team}
-                      rank={index + 1}
-                      record={records.get(id) ?? { wins: 0, losses: 0 }}
-                      selected={selectedSet.has(id)}
-                      onSelect={() => onSelectTeam(id)}
-                      onMoveUp={() => moveTeam(id, "up")}
-                      onMoveDown={() => moveTeam(id, "down")}
-                      canMoveUp={index > 0}
-                      canMoveDown={index < rankedIds.length - 1}
-                    />
-                  );
-                })}
-              </ol>
-            </SortableContext>
-            {!rankedIds.length && (
-              <div className="empty-state drop-hint">
-                Drag teams from the unranked pool into this ballot.
-              </div>
-            )}
-          </DroppableList>
-        </section>
-
-        <section className="panel">
-          <header className="panel-header">
-            <h2>Unranked pool</h2>
-            <p>Sorted by record. Drag in, or use Top / Bottom.</p>
-          </header>
-          <DroppableList id={UNRANKED_CONTAINER} className="pool-drop-zone">
-            <ul className="pool-list">
-              {filteredUnranked.map((id) => {
+      <section className="panel rank-ballot-panel">
+        <header className="panel-header">
+          <h2>Your rankings</h2>
+          <p>
+            {rankedIds.length} / {totalTeams} placed · odd ranks left, even ranks right · drag to
+            reorder
+          </p>
+        </header>
+        <DroppableList id={RANKED_CONTAINER} className="rank-drop-zone">
+          <SortableContext items={rankedIds} strategy={rectSortingStrategy}>
+            <ol className="rank-list rank-list-2col">
+              {rankedIds.map((id, index) => {
                 const team = teamsById.get(id);
                 if (!team) return null;
-                const record = records.get(id) ?? { wins: 0, losses: 0 };
                 return (
-                  <DraggablePoolItem
+                  <SortableRankedItem
                     key={id}
                     id={id}
                     team={team}
-                    record={record}
+                    rank={index + 1}
+                    record={records.get(id) ?? { wins: 0, losses: 0 }}
                     selected={selectedSet.has(id)}
                     onSelect={() => onSelectTeam(id)}
-                    onAddTop={() => addTeam(id, "top")}
-                    onAddBottom={() => addTeam(id, "bottom")}
+                    onMoveUp={() => moveTeam(id, "up")}
+                    onMoveDown={() => moveTeam(id, "down")}
+                    canMoveUp={index > 0}
+                    canMoveDown={index < rankedIds.length - 1}
                   />
                 );
               })}
-            </ul>
-            {!filteredUnranked.length && (
-              <div className="empty-state">
-                {unrankedIds.length ? "No teams match your search." : "All 138 teams are ranked."}
-              </div>
-            )}
-          </DroppableList>
-        </section>
-      </div>
+            </ol>
+          </SortableContext>
+          {!rankedIds.length && (
+            <div className="empty-state drop-hint">
+              Place the recommended team, or copy last week, to start this ballot.
+            </div>
+          )}
+        </DroppableList>
+      </section>
 
       <DragOverlay>
         {activeTeam ? (

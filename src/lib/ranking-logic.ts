@@ -83,6 +83,59 @@ export function insertIndexByRecord(
   return rankedIds.length;
 }
 
+/**
+ * Unranked teams in placement order: last week's rank first (1 is best),
+ * then current record, then name.
+ */
+export function orderUnrankedCandidates(
+  unrankedIds: string[],
+  records: Map<string, { wins: number; losses: number }>,
+  lastWeekRanks: Map<string, number>,
+  nameFor?: (id: string) => string,
+): string[] {
+  return [...unrankedIds].sort((left, right) => {
+    const leftPrior = lastWeekRanks.get(left);
+    const rightPrior = lastWeekRanks.get(right);
+    if (leftPrior != null && rightPrior != null && leftPrior !== rightPrior) {
+      return leftPrior - rightPrior;
+    }
+    if (leftPrior != null && rightPrior == null) return -1;
+    if (leftPrior == null && rightPrior != null) return 1;
+    const rec = compareRecords(
+      records.get(left) ?? { wins: 0, losses: 0 },
+      records.get(right) ?? { wins: 0, losses: 0 },
+    );
+    if (rec !== 0) return rec;
+    return (nameFor?.(left) ?? left).localeCompare(nameFor?.(right) ?? right);
+  });
+}
+
+/** Where this unranked team would sit using last week, falling back to record. */
+export function suggestedInsertIndex(
+  rankedIds: string[],
+  teamId: string,
+  records: Map<string, { wins: number; losses: number }>,
+  lastWeekRanks: Map<string, number>,
+): number {
+  const incomingPrior = lastWeekRanks.get(teamId);
+  if (incomingPrior != null) {
+    for (let i = 0; i < rankedIds.length; i++) {
+      const currentPrior = lastWeekRanks.get(rankedIds[i]);
+      if (currentPrior != null) {
+        if (incomingPrior < currentPrior) return i;
+        continue;
+      }
+      const rec = compareRecords(
+        records.get(teamId) ?? { wins: 0, losses: 0 },
+        records.get(rankedIds[i]) ?? { wins: 0, losses: 0 },
+      );
+      if (rec < 0) return i;
+    }
+    return rankedIds.length;
+  }
+  return insertIndexByRecord(rankedIds, teamId, records);
+}
+
 export function gamesForTeam(
   teamId: string,
   games: Game[],

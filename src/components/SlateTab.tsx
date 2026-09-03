@@ -30,17 +30,27 @@ function resolveSlateWeek(seasonWeek: number, weeks: SeasonWeek[], games: Game[]
   return withGames?.number ?? WEEK_ZERO;
 }
 
-function statusLabel(game: Game): string {
+function kickoffTime(game: Game): string {
   if (game.status === "final" && game.homeScore != null && game.awayScore != null) {
-    return `${game.awayScore}-${game.homeScore}`;
+    return `Final ${game.awayScore}-${game.homeScore}`;
   }
   if (game.status === "in_progress") return "LIVE";
-  return new Date(game.date).toLocaleString(undefined, {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
+  return new Date(game.date).toLocaleTimeString(undefined, {
     hour: "numeric",
     minute: "2-digit",
+  });
+}
+
+function localDayKey(iso: string): string {
+  const date = new Date(iso);
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+}
+
+function localDayLabel(iso: string): string {
+  return new Date(iso).toLocaleDateString(undefined, {
+    weekday: "long",
+    month: "short",
+    day: "numeric",
   });
 }
 
@@ -90,8 +100,6 @@ function SlateGameRow({
           onClick={() => game.homeIsFbs && onSelectTeam?.(game.homeTeamId)}
           disabled={!game.homeIsFbs}
         >
-          <strong>{displayName(game.homeName)}</strong>
-          <span className="slate-rank">{formatRank(homeRank, game.homeIsFbs)}</span>
           {game.homeLogo ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={game.homeLogo} alt="" className="team-logo" />
@@ -100,11 +108,13 @@ function SlateGameRow({
               ·
             </span>
           )}
+          <span className="slate-rank">{formatRank(homeRank, game.homeIsFbs)}</span>
+          <strong>{displayName(game.homeName)}</strong>
         </button>
       </div>
       <div className="slate-meta">
         {game.neutralSite ? <span className="slate-neutral">Neutral</span> : null}
-        <span>{statusLabel(game)}</span>
+        <span>{kickoffTime(game)}</span>
       </div>
     </li>
   );
@@ -135,6 +145,21 @@ export function SlateTab({
     () => [...slate].sort((a, b) => b.interest - a.interest).slice(0, 10),
     [slate],
   );
+
+  const slateByDay = useMemo(() => {
+    const groups = new Map<string, typeof slate>();
+    for (const row of slate) {
+      const key = localDayKey(row.game.date);
+      const list = groups.get(key) ?? [];
+      list.push(row);
+      groups.set(key, list);
+    }
+    return [...groups.entries()].map(([key, rows]) => ({
+      key,
+      label: localDayLabel(rows[0]!.game.date),
+      rows,
+    }));
+  }, [slate]);
 
   const weekMeta = weeks.find((w) => w.number === slateWeek);
   const label = formatWeekLabel(slateWeek, weekMeta?.label);
@@ -178,7 +203,7 @@ export function SlateTab({
         {!best.length ? (
           <div className="empty-state">No games found for {label}.</div>
         ) : (
-          <ol className="slate-list">
+          <ol className="slate-list slate-list-3col">
             {best.map((row, index) => (
               <SlateGameRow
                 key={row.game.id}
@@ -198,24 +223,36 @@ export function SlateTab({
         <header className="panel-header">
           <h2>Full slate · {label}</h2>
           <p>
-            {slate.length} game{slate.length === 1 ? "" : "s"} · sorted by kickoff
+            {slate.length} game{slate.length === 1 ? "" : "s"} · grouped by day
           </p>
         </header>
         {!slate.length ? (
           <div className="empty-state">No games found for {label}.</div>
         ) : (
-          <ul className="slate-list">
-            {slate.map((row) => (
-              <SlateGameRow
-                key={row.game.id}
-                game={row.game}
-                homeRank={row.homeRank}
-                awayRank={row.awayRank}
-                onSelectTeam={onSelectTeam}
-                selectedTeamId={selectedTeamId}
-              />
+          <div className="slate-days">
+            {slateByDay.map((day) => (
+              <section key={day.key} className="slate-day">
+                <h3 className="slate-day-heading">
+                  {day.label}
+                  <span>
+                    {day.rows.length} game{day.rows.length === 1 ? "" : "s"}
+                  </span>
+                </h3>
+                <ul className="slate-list slate-list-3col">
+                  {day.rows.map((row) => (
+                    <SlateGameRow
+                      key={row.game.id}
+                      game={row.game}
+                      homeRank={row.homeRank}
+                      awayRank={row.awayRank}
+                      onSelectTeam={onSelectTeam}
+                      selectedTeamId={selectedTeamId}
+                    />
+                  ))}
+                </ul>
+              </section>
             ))}
-          </ul>
+          </div>
         )}
       </section>
     </div>
