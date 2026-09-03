@@ -142,7 +142,7 @@ export function SlateTab({
   );
 
   const best = useMemo(
-    () => [...slate].sort((a, b) => b.interest - a.interest).slice(0, 10),
+    () => [...slate].sort((a, b) => b.interest - a.interest).slice(0, 12),
     [slate],
   );
 
