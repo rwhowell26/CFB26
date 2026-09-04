@@ -31,14 +31,40 @@ function resolveSlateWeek(seasonWeek: number, weeks: SeasonWeek[], games: Game[]
 }
 
 function kickoffTime(game: Game): string {
-  if (game.status === "final" && game.homeScore != null && game.awayScore != null) {
-    return `Final ${game.awayScore}-${game.homeScore}`;
-  }
+  if (game.status === "final") return "Final";
   if (game.status === "in_progress") return "LIVE";
   return new Date(game.date).toLocaleTimeString(undefined, {
     hour: "numeric",
     minute: "2-digit",
   });
+}
+
+function scoreTone(
+  teamScore: number | null,
+  oppScore: number | null,
+  status: Game["status"],
+): "winner" | "loser" | undefined {
+  if (status !== "final" || teamScore == null || oppScore == null || teamScore === oppScore) {
+    return undefined;
+  }
+  return teamScore > oppScore ? "winner" : "loser";
+}
+
+function TeamScore({
+  score,
+  oppScore,
+  status,
+}: {
+  score: number | null;
+  oppScore: number | null;
+  status: Game["status"];
+}) {
+  const tone = scoreTone(score, oppScore, status);
+  return (
+    <span className={`slate-score${tone ? ` ${tone}` : ""}`}>
+      {score != null ? score : ""}
+    </span>
+  );
 }
 
 function localDayKey(iso: string): string {
@@ -92,6 +118,7 @@ function SlateGameRow({
           )}
           <span className="slate-rank">{formatRank(awayRank, game.awayIsFbs)}</span>
           <strong>{displayName(game.awayName)}</strong>
+          <TeamScore score={game.awayScore} oppScore={game.homeScore} status={game.status} />
         </button>
         <span className="slate-at">@</span>
         <button
@@ -110,6 +137,7 @@ function SlateGameRow({
           )}
           <span className="slate-rank">{formatRank(homeRank, game.homeIsFbs)}</span>
           <strong>{displayName(game.homeName)}</strong>
+          <TeamScore score={game.homeScore} oppScore={game.awayScore} status={game.status} />
         </button>
       </div>
       <div className="slate-meta">

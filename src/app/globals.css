@@ -793,9 +793,16 @@ input[type="password"],
 
 .slate-list-3col .slate-team,
 .slate-list-3col .slate-team.slate-home {
-  grid-template-columns: 1.6rem auto 1fr;
+  grid-template-columns: 1.6rem auto minmax(0, 1fr) auto;
   text-align: left;
   justify-items: start;
+}
+
+.slate-list-3col .slate-team.slate-home .team-logo,
+.slate-list-3col .slate-team.slate-home .slate-rank,
+.slate-list-3col .slate-team.slate-home strong,
+.slate-list-3col .slate-team.slate-home .slate-score {
+  order: 0;
 }
 
 .recommend-panel {
@@ -867,7 +874,7 @@ input[type="password"],
 
 .slate-team {
   display: grid;
-  grid-template-columns: 1.6rem auto 1fr;
+  grid-template-columns: 1.6rem auto minmax(0, 1fr) auto;
   gap: 0.4rem;
   align-items: center;
   margin: 0;
@@ -894,9 +901,25 @@ input[type="password"],
 }
 
 .slate-team.slate-home {
-  grid-template-columns: 1fr auto 1.6rem;
+  grid-template-columns: auto minmax(0, 1fr) auto 1.6rem;
   text-align: right;
   justify-items: end;
+}
+
+.slate-team.slate-home .slate-score {
+  order: 1;
+}
+
+.slate-team.slate-home strong {
+  order: 2;
+}
+
+.slate-team.slate-home .slate-rank {
+  order: 3;
+}
+
+.slate-team.slate-home .team-logo {
+  order: 4;
 }
 
 .slate-team strong {
@@ -910,6 +933,26 @@ input[type="password"],
   font-weight: 700;
   color: var(--turf-deep);
   font-size: 0.95rem;
+}
+
+.slate-score {
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  min-width: 1.5rem;
+  text-align: right;
+  color: var(--ink);
+}
+
+.slate-score.winner {
+  color: var(--turf-deep);
+}
+
+.slate-score.loser {
+  color: var(--muted);
+  font-weight: 600;
 }
 
 .slate-at {
@@ -1444,7 +1487,7 @@ input[type="password"],
   }
 
   .slate-team.slate-home {
-    grid-template-columns: 1.6rem auto 1fr;
+    grid-template-columns: 1.6rem auto minmax(0, 1fr) auto;
     text-align: left;
     justify-items: start;
   }
@@ -1459,5 +1502,9 @@ input[type="password"],
 
   .slate-team.slate-home strong {
     order: 3;
+  }
+
+  .slate-team.slate-home .slate-score {
+    order: 4;
   }
 }
