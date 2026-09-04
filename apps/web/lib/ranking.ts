@@ -24,9 +24,24 @@ export function sportRankMap(results: SportResult[]): Map<string, number> {
   return map;
 }
 
+export function footballRankMap(results: SportResult[]): Map<string, number> {
+  const map = new Map<string, number>();
+  for (const subdivision of ["FBS", "FCS"] as const) {
+    sortSportResults(results.filter((row) => row.subdivision === subdivision)).forEach((row, index) => {
+      map.set(row.schoolId, index + 1);
+    });
+  }
+  sortSportResults(results.filter((row) => row.subdivision !== "FBS" && row.subdivision !== "FCS")).forEach(
+    (row, index) => {
+      map.set(row.schoolId, index + 1);
+    },
+  );
+  return map;
+}
+
 export function sportRankMaps(payload: SeasonPayload): Record<Sport, Map<string, number>> {
   return {
-    football: sportRankMap(payload.results.football),
+    football: footballRankMap(payload.results.football),
     basketball: sportRankMap(payload.results.basketball),
     baseball: sportRankMap(payload.results.baseball),
   };

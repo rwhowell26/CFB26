@@ -5,7 +5,7 @@ import { AVAILABLE_YEARS } from "@/lib/season";
 export const dynamic = "force-dynamic";
 export const maxDuration = 120;
 
-const CACHE_VERSION = 2;
+const CACHE_VERSION = 3;
 const cache = new Map<string, { expires: number; payload: unknown }>();
 
 export async function GET(

@@ -2,15 +2,14 @@ import type { School, SeasonPayload, Sport, SportResult, Subdivision } from "./t
 import { footballYearFor, seasonLabel } from "./season";
 import {
   eachDate,
-  fetchBaseballRecord,
   fetchScoreboards,
   fetchStandings,
   fetchTeamList,
-  mapPool,
   type EspnGame,
   type EspnStanding,
   type EspnTeam,
 } from "./espn";
+import { fetchBaseballRecords } from "./baseball-records";
 import {
   FOOTBALL_ROUNDS,
   betterPlayoffRound,
@@ -241,32 +240,34 @@ export async function buildSeason(year: number): Promise<SeasonPayload> {
   for (const team of fbTeams) remember(team, "football");
   for (const team of mbbTeams) remember(team, "basketball");
 
-  const baseballD1 = bbTeams.filter((t) => mbbIds.has(t.ncaaId) || schools.has(t.ncaaId));
-  for (const team of baseballD1) {
-    remember(team, "baseball");
-    upsertSchool(schools, team, "baseball");
-  }
-
+  const baseballCandidates = bbTeams.filter((t) => mbbIds.has(t.ncaaId) || schools.has(t.ncaaId));
   const fbsIds = new Set(fbs.map((t) => t.ncaaId));
   const fcsIds = new Set(fcs.map((t) => t.ncaaId));
 
-  const [fbGames, mbbGames, bbGames, baseballRecords] = await Promise.all([
+  const [fbGames, mbbGames, bbGames, baseballStandings] = await Promise.all([
     fetchScoreboards("football/college-football", footballQueries(footballYear)),
     fetchScoreboards(
       "basketball/mens-college-basketball",
       basketballDates(basketballSeason).map((d) => `dates=${d}&limit=100`),
     ),
     fetchScoreboards("baseball/college-baseball", baseballRanges(baseballSeason)),
-    mapPool(baseballD1, 8, async (team) => ({
-      ncaaId: team.ncaaId,
-      ...(await fetchBaseballRecord(team.espnId, baseballSeason)),
-    })),
+    fetchBaseballRecords(baseballSeason, baseballCandidates),
   ]);
+
+  const baseballByEspn = new Map(baseballStandings.map((row) => [row.espnId, row]));
+  for (const team of baseballCandidates) {
+    const rec = baseballByEspn.get(team.espnId);
+    if (!rec || rec.wins + rec.losses + rec.ties < 1) continue;
+    remember(team, "baseball");
+    upsertSchool(schools, team, "baseball", rec.conference);
+  }
 
   const fbPost = applyPlayoffGames(fbGames, "football", espnToNcaa);
   const mbbPost = applyPlayoffGames(mbbGames, "basketball", espnToNcaa);
   const bbPost = applyPlayoffGames(bbGames, "baseball", espnToNcaa);
-  const baseballById = new Map(baseballRecords.map((row) => [row.ncaaId, row]));
+  const baseballById = new Map(
+    baseballStandings.map((row) => [espnToNcaa.get(`baseball:${row.espnId}`) || row.ncaaId, row]),
+  );
 
   const footballResults: SportResult[] = [];
   const basketballResults: SportResult[] = [];
@@ -292,21 +293,9 @@ export async function buildSeason(year: number): Promise<SeasonPayload> {
     }
     if (school.sports.includes("baseball")) {
       const rec = baseballById.get(school.id);
-      if (rec) {
-        if (rec.conference) school.conferences.baseball = rec.conference;
-        baseballResults.push(
-          resultFrom(
-            school,
-            "baseball",
-            rec,
-            bbPost.get(school.id),
-          ),
-        );
-      } else {
-        baseballResults.push(
-          resultFrom(school, "baseball", { wins: 0, losses: 0, ties: 0, winPct: 0, conference: null }, bbPost.get(school.id)),
-        );
-      }
+      if (!rec || rec.wins + rec.losses + rec.ties < 1) continue;
+      if (rec.conference) school.conferences.baseball = rec.conference;
+      baseballResults.push(resultFrom(school, "baseball", rec, bbPost.get(school.id)));
     }
   }
 

@@ -174,7 +174,8 @@ export function DeptApp() {
         <p>
           Assumptions: bowls do not count; football postseason is the CFP and FCS playoffs,
           with FBS and FCS titles in the same champion tier and FBS conference champions
-          below first-round teams. Basketball is the NCAA tournament only (not the NIT).
+          below first-round teams. Football ranks are within FBS or FCS, not one combined
+          list. Basketball is the NCAA tournament only (not the NIT).
           Baseball is the NCAA tournament through the CWS. Department rank is the average
           of a school’s ranks in the sports it plays. Opinion edits stay in this browser.
         </p>

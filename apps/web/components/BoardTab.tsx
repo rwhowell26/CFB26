@@ -66,8 +66,8 @@ export function BoardTab({
       </div>
       <p className="text-sm text-[var(--muted)]">
         Department order is the average of each school’s football, basketball, and baseball
-        ranks. Sports a school does not play are left out of the average. Move teams to
-        overlay your opinion.
+        ranks. Football ranks are within FBS or FCS. Sports a school does not play are left
+        out of the average. Move teams to overlay your opinion.
       </p>
       <div className="overflow-auto rounded-2xl border border-[var(--line)]">
         <table className="w-full min-w-[64rem] border-collapse text-left text-sm">
@@ -171,13 +171,10 @@ function SportCell({
   return (
     <span className="flex flex-col">
       <span>
-        {rank ? `#${rank} · ` : ""}
+        {rank ? `#${rank}${result.subdivision ? ` ${result.subdivision}` : ""} · ` : ""}
         {result.roundLabel}
       </span>
-      <span className="text-xs text-[var(--muted)]">
-        {formatRecord(result)}
-        {result.subdivision ? ` · ${result.subdivision}` : ""}
-      </span>
+      <span className="text-xs text-[var(--muted)]">{formatRecord(result)}</span>
     </span>
   );
 }
