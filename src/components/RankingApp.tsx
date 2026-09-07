@@ -67,13 +67,8 @@ export function RankingApp() {
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
-    // Re-read localStorage after mount so current ballot → Preseason migration applies
-    const hydrated = hydrateStoreFromLocalStorage();
-    queueMicrotask(() => {
-      setWeek(
-        typeof hydrated.activeWeek === "number" ? hydrated.activeWeek : PRESEASON_WEEK,
-      );
-    });
+    // Re-read localStorage after mount so ballot migrations apply before first paint of the board
+    hydrateStoreFromLocalStorage();
   }, []);
 
   useEffect(() => {
@@ -89,18 +84,14 @@ export function RankingApp() {
         if (cancelled) return;
         setData(json);
 
-        // Prefer Preseason / the week that actually has ballot data
-        setWeek((prev) => {
-          const preDraft = store.drafts[String(PRESEASON_WEEK)];
-          if (preDraft?.length || store.snapshots[String(PRESEASON_WEEK)]) {
-            return PRESEASON_WEEK;
-          }
-          if (store.drafts[String(prev)]?.length || store.snapshots[String(prev)]) {
-            return prev;
-          }
-          if (typeof store.activeWeek === "number") return store.activeWeek;
-          return typeof json.currentWeek === "number" ? json.currentWeek : prev;
-        });
+        // Always open the season's current week — not Preseason, even if that ballot exists
+        const seasonWeek =
+          typeof json.currentWeek === "number" ? json.currentWeek : PRESEASON_WEEK;
+        setWeek(seasonWeek);
+        const latest = hydrateStoreFromLocalStorage();
+        if (latest.activeWeek !== seasonWeek) {
+          setStore({ ...latest, activeWeek: seasonWeek });
+        }
       } catch (err) {
         if (!cancelled) {
           const message =
