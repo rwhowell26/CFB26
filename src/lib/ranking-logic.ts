@@ -104,7 +104,7 @@ export function repairOrderForDirectH2h(
 ): string[] {
   const idSet = new Set(order);
   const edges: Array<{ winnerId: string; loserId: string }> = [];
-  for (const game of games) {
+  for (const game of games ?? []) {
     if (!game.homeIsFbs || !game.awayIsFbs) continue;
     const result = finalWinnerAndLoser(game);
     if (!result) continue;
