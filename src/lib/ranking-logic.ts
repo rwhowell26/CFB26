@@ -83,17 +83,63 @@ export function insertIndexByRecord(
   return rankedIds.length;
 }
 
+function finalWinnerAndLoser(game: Game): { winnerId: string; loserId: string } | null {
+  if (game.status !== "final") return null;
+  if (game.homeScore == null || game.awayScore == null) return null;
+  if (game.homeScore === game.awayScore) return null;
+  if (game.homeScore > game.awayScore) {
+    return { winnerId: game.homeTeamId, loserId: game.awayTeamId };
+  }
+  return { winnerId: game.awayTeamId, loserId: game.homeTeamId };
+}
+
+/**
+ * Greedily keep direct winners ahead of teams they beat.
+ * Cycles stop after a bounded number of passes.
+ */
+export function repairOrderForDirectH2h(
+  order: string[],
+  games: Game[],
+  maxPasses = 60,
+): string[] {
+  const idSet = new Set(order);
+  const edges: Array<{ winnerId: string; loserId: string }> = [];
+  for (const game of games) {
+    if (!game.homeIsFbs || !game.awayIsFbs) continue;
+    const result = finalWinnerAndLoser(game);
+    if (!result) continue;
+    if (!idSet.has(result.winnerId) || !idSet.has(result.loserId)) continue;
+    edges.push(result);
+  }
+
+  let next = [...order];
+  for (let pass = 0; pass < maxPasses; pass++) {
+    let changed = false;
+    for (const { winnerId, loserId } of edges) {
+      const repaired = applyWinnerAboveLoser(next, winnerId, loserId);
+      if (repaired.some((id, i) => id !== next[i])) {
+        next = repaired;
+        changed = true;
+      }
+    }
+    if (!changed) break;
+  }
+  return next;
+}
+
 /**
  * Unranked teams in placement order: last week's rank first (1 is best),
- * then current record, then name.
+ * then current record, then name. Direct H2H then lifts a winner ahead of
+ * a team they beat whenever that does not fight a cycle.
  */
 export function orderUnrankedCandidates(
   unrankedIds: string[],
   records: Map<string, { wins: number; losses: number }>,
   lastWeekRanks: Map<string, number>,
+  games: Game[],
   nameFor?: (id: string) => string,
 ): string[] {
-  return [...unrankedIds].sort((left, right) => {
+  const seed = [...unrankedIds].sort((left, right) => {
     const leftPrior = lastWeekRanks.get(left);
     const rightPrior = lastWeekRanks.get(right);
     if (leftPrior != null && rightPrior != null && leftPrior !== rightPrior) {
@@ -108,32 +154,86 @@ export function orderUnrankedCandidates(
     if (rec !== 0) return rec;
     return (nameFor?.(left) ?? left).localeCompare(nameFor?.(right) ?? right);
   });
+  return repairOrderForDirectH2h(seed, games);
 }
 
-/** Where this unranked team would sit using last week, falling back to record. */
-export function suggestedInsertIndex(
+/** Next team to recommend, keeping skipped IDs until the rest of the pool is gone. */
+export function nextRecommendId(
+  candidates: string[],
+  deferredIds: readonly string[],
+  pickedId?: string | null,
+): string | null {
+  if (pickedId && candidates.includes(pickedId)) return pickedId;
+  const deferred = new Set(deferredIds);
+  const fresh = candidates.find((id) => !deferred.has(id));
+  if (fresh) return fresh;
+  return candidates.find((id) => deferred.has(id)) ?? null;
+}
+
+/** Move a skipped team to the end of the deferred queue. */
+export function deferRecommendId(deferredIds: string[], teamId: string): string[] {
+  return [...deferredIds.filter((id) => id !== teamId), teamId];
+}
+
+function insertIndexByLastWeekOrRecord(
   rankedIds: string[],
   teamId: string,
   records: Map<string, { wins: number; losses: number }>,
   lastWeekRanks: Map<string, number>,
 ): number {
   const incomingPrior = lastWeekRanks.get(teamId);
-  if (incomingPrior != null) {
-    for (let i = 0; i < rankedIds.length; i++) {
-      const currentPrior = lastWeekRanks.get(rankedIds[i]);
-      if (currentPrior != null) {
-        if (incomingPrior < currentPrior) return i;
-        continue;
-      }
-      const rec = compareRecords(
-        records.get(teamId) ?? { wins: 0, losses: 0 },
-        records.get(rankedIds[i]) ?? { wins: 0, losses: 0 },
-      );
-      if (rec < 0) return i;
-    }
-    return rankedIds.length;
+  if (incomingPrior == null) {
+    return insertIndexByRecord(rankedIds, teamId, records);
   }
-  return insertIndexByRecord(rankedIds, teamId, records);
+  for (let i = 0; i < rankedIds.length; i++) {
+    const currentPrior = lastWeekRanks.get(rankedIds[i]);
+    if (currentPrior != null) {
+      if (incomingPrior < currentPrior) return i;
+      continue;
+    }
+    const rec = compareRecords(
+      records.get(teamId) ?? { wins: 0, losses: 0 },
+      records.get(rankedIds[i]) ?? { wins: 0, losses: 0 },
+    );
+    if (rec < 0) return i;
+  }
+  return rankedIds.length;
+}
+
+/** Where this unranked team would sit using last week, record, then H2H vs ranked teams. */
+export function suggestedInsertIndex(
+  rankedIds: string[],
+  teamId: string,
+  records: Map<string, { wins: number; losses: number }>,
+  lastWeekRanks: Map<string, number>,
+  games: Game[] = [],
+): number {
+  let index = insertIndexByLastWeekOrRecord(rankedIds, teamId, records, lastWeekRanks);
+
+  for (let i = 0; i < rankedIds.length; i++) {
+    const otherId = rankedIds[i];
+    const game = findDirectH2hGame(games, teamId, otherId);
+    if (!game?.homeIsFbs || !game.awayIsFbs) continue;
+    const result = finalWinnerAndLoser(game);
+    if (!result) continue;
+    if (result.winnerId === teamId) {
+      index = Math.min(index, i);
+    }
+  }
+
+  // Losses win conflicts: never suggest sitting ahead of a team they lost to
+  for (let i = 0; i < rankedIds.length; i++) {
+    const otherId = rankedIds[i];
+    const game = findDirectH2hGame(games, teamId, otherId);
+    if (!game?.homeIsFbs || !game.awayIsFbs) continue;
+    const result = finalWinnerAndLoser(game);
+    if (!result) continue;
+    if (result.loserId === teamId) {
+      index = Math.max(index, i + 1);
+    }
+  }
+
+  return Math.max(0, Math.min(index, rankedIds.length));
 }
 
 export function gamesForTeam(

@@ -3,7 +3,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { TeamResume } from "@/components/TeamResume";
 import { shortConferenceName } from "@/lib/conferences";
-import { orderUnrankedCandidates, suggestedInsertIndex } from "@/lib/ranking-logic";
+import {
+  deferRecommendId,
+  nextRecommendId,
+  orderUnrankedCandidates,
+  suggestedInsertIndex,
+} from "@/lib/ranking-logic";
 import type { PriorRank, PriorBallot } from "@/lib/storage";
 import type { Game, Team } from "@/lib/types";
 
@@ -53,7 +58,7 @@ export function RecommendPanel({
   onClearRanked,
   onInsert,
 }: Props) {
-  const [skip, setSkip] = useState(0);
+  const [deferredIds, setDeferredIds] = useState<string[]>([]);
   const [pickedId, setPickedId] = useState<string | null>(null);
 
   const candidates = useMemo(() => {
@@ -61,6 +66,7 @@ export function RecommendPanel({
       unrankedIds,
       records,
       lastWeekRanks,
+      games,
       (id) => teamsById.get(id)?.name ?? id,
     );
     if (!search.trim()) return ordered;
@@ -68,19 +74,13 @@ export function RecommendPanel({
       const team = teamsById.get(id);
       return team ? teamMatchesSearch(team, search) : false;
     });
-  }, [unrankedIds, records, lastWeekRanks, teamsById, search]);
+  }, [unrankedIds, records, lastWeekRanks, games, teamsById, search]);
 
   useEffect(() => {
-    setSkip(0);
     setPickedId(null);
-  }, [candidates[0], search]);
+  }, [search]);
 
-  const recommendedId =
-    pickedId && candidates.includes(pickedId)
-      ? pickedId
-      : candidates.length
-        ? candidates[skip % candidates.length]
-        : null;
+  const recommendedId = nextRecommendId(candidates, deferredIds, pickedId);
   const recommended = recommendedId ? teamsById.get(recommendedId) : null;
   const selectedRanked = selectedRankedId ? teamsById.get(selectedRankedId) : null;
   const record = recommended
@@ -88,15 +88,16 @@ export function RecommendPanel({
     : null;
   const lastWeekRank = recommended ? lastWeekRanks.get(recommended.id) : undefined;
   const suggestedIndex = recommended
-    ? suggestedInsertIndex(rankedIds, recommended.id, records, lastWeekRanks)
+    ? suggestedInsertIndex(rankedIds, recommended.id, records, lastWeekRanks, games)
     : 0;
+  const deferredSet = useMemo(() => new Set(deferredIds), [deferredIds]);
   const selectedIndex = selectedRankedId ? rankedIds.indexOf(selectedRankedId) : -1;
 
   const placeAt = (index: number) => {
     if (!recommended) return;
     onInsert(recommended.id, index);
-    setSkip(0);
     setPickedId(null);
+    setDeferredIds((ids) => ids.filter((id) => id !== recommended.id));
   };
 
   if (!unrankedIds.length) {
@@ -172,9 +173,11 @@ export function RecommendPanel({
               className="ghost-btn"
               disabled={candidates.length < 2}
               onClick={() => {
+                if (!recommendedId) return;
                 setPickedId(null);
-                setSkip((n) => n + 1);
+                setDeferredIds((ids) => deferRecommendId(ids, recommendedId));
               }}
+              title="Hold this team until the rest of the remaining pool has been shown"
             >
               Skip
             </button>
@@ -188,8 +191,7 @@ export function RecommendPanel({
               value={recommendedId ?? ""}
               onChange={(e) => {
                 setPickedId(e.target.value);
-                const idx = candidates.indexOf(e.target.value);
-                if (idx >= 0) setSkip(idx);
+                setDeferredIds((ids) => ids.filter((id) => id !== e.target.value));
               }}
             >
               {candidates.map((id) => {
@@ -201,6 +203,7 @@ export function RecommendPanel({
                   <option key={id} value={id}>
                     {team.shortName} · {rec.wins}-{rec.losses}
                     {prior != null ? ` · LW #${prior}` : ""}
+                    {deferredSet.has(id) ? " · skipped" : ""}
                   </option>
                 );
               })}
