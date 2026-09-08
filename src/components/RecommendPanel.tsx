@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { TeamResume } from "@/components/TeamResume";
 import { shortConferenceName } from "@/lib/conferences";
 import {
+  computeSos,
   deferRecommendId,
   nextRecommendId,
   orderUnrankedCandidates,
@@ -67,6 +68,7 @@ export function RecommendPanel({
       records,
       lastWeekRanks,
       games,
+      resumeRanks,
       (id) => teamsById.get(id)?.name ?? id,
     );
     if (!search.trim()) return ordered;
@@ -74,7 +76,7 @@ export function RecommendPanel({
       const team = teamsById.get(id);
       return team ? teamMatchesSearch(team, search) : false;
     });
-  }, [unrankedIds, records, lastWeekRanks, games, teamsById, search]);
+  }, [unrankedIds, records, lastWeekRanks, games, resumeRanks, teamsById, search]);
 
   useEffect(() => {
     setPickedId(null);
@@ -88,8 +90,16 @@ export function RecommendPanel({
     : null;
   const lastWeekRank = recommended ? lastWeekRanks.get(recommended.id) : undefined;
   const suggestedIndex = recommended
-    ? suggestedInsertIndex(rankedIds, recommended.id, records, lastWeekRanks, games)
+    ? suggestedInsertIndex(
+        rankedIds,
+        recommended.id,
+        records,
+        lastWeekRanks,
+        games,
+        resumeRanks,
+      )
     : 0;
+  const sos = recommended ? computeSos(recommended.id, games, resumeRanks) : null;
   const deferredSet = useMemo(() => new Set(deferredIds), [deferredIds]);
   const selectedIndex = selectedRankedId ? rankedIds.indexOf(selectedRankedId) : -1;
 
@@ -134,13 +144,18 @@ export function RecommendPanel({
           {recommended && record ? (
             <p>
               {record.wins}-{record.losses}
+              {sos?.playedAvgRank != null
+                ? ` · SOS ${sos.playedAvgRank.toFixed(1)}`
+                : sos?.totalAvgRank != null
+                  ? ` · SOS ${sos.totalAvgRank.toFixed(1)}`
+                  : ""}
               {lastWeekRank != null
                 ? ` · ${lastWeekBallot?.label ?? "Last week"} #${lastWeekRank}`
                 : lastWeekBallot
                   ? ` · not on ${lastWeekBallot.label}`
                   : " · no prior ballot"}
               {" · "}
-              suggested #{suggestedIndex + 1}
+              suggested #{suggestedIndex + 1} (H2H · record · SOS · last week)
             </p>
           ) : (
             <p>Search doesn’t match any remaining teams.</p>

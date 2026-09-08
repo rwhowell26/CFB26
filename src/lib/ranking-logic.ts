@@ -127,34 +127,139 @@ export function repairOrderForDirectH2h(
   return next;
 }
 
+/** Lower average opponent rank = tougher SOS = ahead. Missing SOS sorts last. */
+export function compareSosAvg(
+  a: number | null | undefined,
+  b: number | null | undefined,
+): number {
+  if (a == null && b == null) return 0;
+  if (a == null) return 1;
+  if (b == null) return -1;
+  if (a === b) return 0;
+  return a - b;
+}
+
+export function compareLastWeekRank(
+  leftId: string,
+  rightId: string,
+  lastWeekRanks: Map<string, number>,
+): number {
+  const leftPrior = lastWeekRanks.get(leftId);
+  const rightPrior = lastWeekRanks.get(rightId);
+  if (leftPrior != null && rightPrior != null && leftPrior !== rightPrior) {
+    return leftPrior - rightPrior;
+  }
+  if (leftPrior != null && rightPrior == null) return -1;
+  if (leftPrior == null && rightPrior != null) return 1;
+  return 0;
+}
+
+function recommendSosAvg(
+  teamId: string,
+  games: Game[],
+  sosRanks: Map<string, number>,
+): number | null {
+  const sos = computeSos(teamId, games, sosRanks);
+  return sos.playedAvgRank ?? sos.totalAvgRank;
+}
+
+function recommendSosAvgMap(
+  teamIds: string[],
+  games: Game[],
+  sosRanks: Map<string, number>,
+): Map<string, number | null> {
+  const map = new Map<string, number | null>();
+  for (const id of teamIds) {
+    map.set(id, recommendSosAvg(id, games, sosRanks));
+  }
+  return map;
+}
+
+/** Record, then SOS, then last week, then name. H2H is applied separately. */
+export function compareRecommendTiebreakers(
+  leftId: string,
+  rightId: string,
+  records: Map<string, { wins: number; losses: number }>,
+  sosAvg: Map<string, number | null>,
+  lastWeekRanks: Map<string, number>,
+  nameFor?: (id: string) => string,
+): number {
+  const rec = compareRecords(
+    records.get(leftId) ?? { wins: 0, losses: 0 },
+    records.get(rightId) ?? { wins: 0, losses: 0 },
+  );
+  if (rec !== 0) return rec;
+  const sos = compareSosAvg(sosAvg.get(leftId), sosAvg.get(rightId));
+  if (sos !== 0) return sos;
+  const prior = compareLastWeekRank(leftId, rightId, lastWeekRanks);
+  if (prior !== 0) return prior;
+  return (nameFor?.(leftId) ?? leftId).localeCompare(nameFor?.(rightId) ?? rightId);
+}
+
+function uniqueDirectH2hEdges(
+  teamIds: string[],
+  games: Game[],
+): Array<{ winnerId: string; loserId: string }> {
+  const idSet = new Set(teamIds);
+  const byPair = new Map<string, { winnerId: string; loserId: string; date: string }>();
+  for (const game of games ?? []) {
+    if (!game.homeIsFbs || !game.awayIsFbs) continue;
+    const result = finalWinnerAndLoser(game);
+    if (!result) continue;
+    if (!idSet.has(result.winnerId) || !idSet.has(result.loserId)) continue;
+    const pair = [result.winnerId, result.loserId].sort().join(":");
+    const prev = byPair.get(pair);
+    if (!prev || game.date.localeCompare(prev.date) >= 0) {
+      byPair.set(pair, { ...result, date: game.date });
+    }
+  }
+  return [...byPair.values()].map(({ winnerId, loserId }) => ({ winnerId, loserId }));
+}
+
 /**
- * Unranked teams in placement order: last week's rank first (1 is best),
- * then current record, then name. Direct H2H then lifts a winner ahead of
- * a team they beat whenever that does not fight a cycle.
+ * Unranked teams in placement order: head-to-head first, then record, SOS,
+ * last week's rank, and name. Direct winners stay ahead of teams they beat
+ * whenever that does not fight a cycle.
  */
 export function orderUnrankedCandidates(
   unrankedIds: string[],
   records: Map<string, { wins: number; losses: number }>,
   lastWeekRanks: Map<string, number>,
   games: Game[],
+  sosRanks: Map<string, number> = new Map(),
   nameFor?: (id: string) => string,
 ): string[] {
-  const seed = [...unrankedIds].sort((left, right) => {
-    const leftPrior = lastWeekRanks.get(left);
-    const rightPrior = lastWeekRanks.get(right);
-    if (leftPrior != null && rightPrior != null && leftPrior !== rightPrior) {
-      return leftPrior - rightPrior;
+  const sosAvg = recommendSosAvgMap(unrankedIds, games, sosRanks);
+  const compare = (left: string, right: string) =>
+    compareRecommendTiebreakers(left, right, records, sosAvg, lastWeekRanks, nameFor);
+
+  const incoming = new Map<string, number>();
+  const outgoing = new Map<string, string[]>();
+  for (const id of unrankedIds) {
+    incoming.set(id, 0);
+    outgoing.set(id, []);
+  }
+  for (const { winnerId, loserId } of uniqueDirectH2hEdges(unrankedIds, games)) {
+    outgoing.get(winnerId)!.push(loserId);
+    incoming.set(loserId, (incoming.get(loserId) ?? 0) + 1);
+  }
+
+  const remaining = new Set(unrankedIds);
+  const ordered: string[] = [];
+  while (remaining.size) {
+    const ready = [...remaining].filter((id) => (incoming.get(id) ?? 0) === 0);
+    const pool = ready.length ? ready : [...remaining];
+    pool.sort(compare);
+    const pick = pool[0];
+    ordered.push(pick);
+    remaining.delete(pick);
+    for (const loserId of outgoing.get(pick) ?? []) {
+      if (remaining.has(loserId)) {
+        incoming.set(loserId, Math.max(0, (incoming.get(loserId) ?? 1) - 1));
+      }
     }
-    if (leftPrior != null && rightPrior == null) return -1;
-    if (leftPrior == null && rightPrior != null) return 1;
-    const rec = compareRecords(
-      records.get(left) ?? { wins: 0, losses: 0 },
-      records.get(right) ?? { wins: 0, losses: 0 },
-    );
-    if (rec !== 0) return rec;
-    return (nameFor?.(left) ?? left).localeCompare(nameFor?.(right) ?? right);
-  });
-  return repairOrderForDirectH2h(seed, games);
+  }
+  return ordered;
 }
 
 /** Next team to recommend, keeping skipped IDs until the rest of the pool is gone. */
@@ -175,65 +280,39 @@ export function deferRecommendId(deferredIds: string[], teamId: string): string[
   return [...deferredIds.filter((id) => id !== teamId), teamId];
 }
 
-function insertIndexByLastWeekOrRecord(
-  rankedIds: string[],
-  teamId: string,
-  records: Map<string, { wins: number; losses: number }>,
-  lastWeekRanks: Map<string, number>,
-): number {
-  const incomingPrior = lastWeekRanks.get(teamId);
-  if (incomingPrior == null) {
-    return insertIndexByRecord(rankedIds, teamId, records);
-  }
-  for (let i = 0; i < rankedIds.length; i++) {
-    const currentPrior = lastWeekRanks.get(rankedIds[i]);
-    if (currentPrior != null) {
-      if (incomingPrior < currentPrior) return i;
-      continue;
-    }
-    const rec = compareRecords(
-      records.get(teamId) ?? { wins: 0, losses: 0 },
-      records.get(rankedIds[i]) ?? { wins: 0, losses: 0 },
-    );
-    if (rec < 0) return i;
-  }
-  return rankedIds.length;
-}
-
-/** Where this unranked team would sit using last week, record, then H2H vs ranked teams. */
+/**
+ * Where this unranked team would sit: H2H vs already-ranked teams, then record,
+ * SOS, and last week among the legal window.
+ */
 export function suggestedInsertIndex(
   rankedIds: string[],
   teamId: string,
   records: Map<string, { wins: number; losses: number }>,
   lastWeekRanks: Map<string, number>,
   games: Game[] = [],
+  sosRanks: Map<string, number> = new Map(),
 ): number {
-  let index = insertIndexByLastWeekOrRecord(rankedIds, teamId, records, lastWeekRanks);
+  const sosAvg = recommendSosAvgMap([...rankedIds, teamId], games, sosRanks);
+  const compare = (left: string, right: string) =>
+    compareRecommendTiebreakers(left, right, records, sosAvg, lastWeekRanks);
 
+  let minIndex = 0;
+  let maxIndex = rankedIds.length;
   for (let i = 0; i < rankedIds.length; i++) {
     const otherId = rankedIds[i];
     const game = findDirectH2hGame(games, teamId, otherId);
     if (!game?.homeIsFbs || !game.awayIsFbs) continue;
     const result = finalWinnerAndLoser(game);
     if (!result) continue;
-    if (result.winnerId === teamId) {
-      index = Math.min(index, i);
-    }
+    if (result.winnerId === teamId) maxIndex = Math.min(maxIndex, i);
+    if (result.loserId === teamId) minIndex = Math.max(minIndex, i + 1);
   }
+  if (minIndex > maxIndex) maxIndex = minIndex;
 
-  // Losses win conflicts: never suggest sitting ahead of a team they lost to
-  for (let i = 0; i < rankedIds.length; i++) {
-    const otherId = rankedIds[i];
-    const game = findDirectH2hGame(games, teamId, otherId);
-    if (!game?.homeIsFbs || !game.awayIsFbs) continue;
-    const result = finalWinnerAndLoser(game);
-    if (!result) continue;
-    if (result.loserId === teamId) {
-      index = Math.max(index, i + 1);
-    }
+  for (let i = minIndex; i < maxIndex; i++) {
+    if (compare(teamId, rankedIds[i]) < 0) return i;
   }
-
-  return Math.max(0, Math.min(index, rankedIds.length));
+  return Math.max(0, Math.min(maxIndex, rankedIds.length));
 }
 
 export function gamesForTeam(
