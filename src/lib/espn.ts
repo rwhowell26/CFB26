@@ -1,3 +1,4 @@
+import { applyGameOverrides } from "./game-overrides";
 import { PRESEASON_WEEK, SEASON_YEAR, WEEK_ZERO, weekZeroCutoffIso } from "./season";
 import type { Game, GameStatus, SeasonWeek, Team } from "./types";
 import { ensureSeasonWeeks } from "./weeks";
@@ -246,7 +247,7 @@ export async function fetchAllGames(year = SEASON_YEAR): Promise<{
   weeks: SeasonWeek[];
   games: Game[];
 }> {
-  return cachedFetch(`all-games-split-w0-${year}`, 5 * 60 * 1000, async () => {
+  return cachedFetch(`all-games-split-w0-overrides-${year}`, 5 * 60 * 1000, async () => {
     const [teams, weeks] = await Promise.all([
       fetchFbsTeams(year),
       fetchSeasonWeeks(year),
@@ -277,10 +278,12 @@ export async function fetchAllGames(year = SEASON_YEAR): Promise<{
       }
     }
 
-    const games = Array.from(byId.values()).sort((a, b) => {
-      if (a.week !== b.week) return a.week - b.week;
-      return a.date.localeCompare(b.date);
-    });
+    const games = applyGameOverrides(
+      Array.from(byId.values()).sort((a, b) => {
+        if (a.week !== b.week) return a.week - b.week;
+        return a.date.localeCompare(b.date);
+      }),
+    );
 
     return { teams, weeks, games };
   });
