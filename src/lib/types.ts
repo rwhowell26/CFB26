@@ -70,8 +70,7 @@ export type WeekSnapshot = {
   locked: boolean;
 };
 
-export type PairwiseCheckpoint = {
-  rankedIds: string[];
+export type PairwiseCursor = {
   queue: string[];
   insertingId: string | null;
   lo: number;
@@ -79,8 +78,12 @@ export type PairwiseCheckpoint = {
   sincePair: number;
 };
 
-/** In-progress Build-tab pairwise session for one week. */
-export type PairwiseSession = PairwiseCheckpoint & {
+export type PairwiseCheckpoint = PairwiseCursor & {
+  rankedIds: string[];
+};
+
+/** In-progress Build-tab pairwise session. Ballot order lives in drafts. */
+export type PairwiseSession = PairwiseCursor & {
   week: number;
   history: PairwiseCheckpoint[];
 };
