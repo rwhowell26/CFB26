@@ -10,10 +10,10 @@ import {
   WEEK_ZERO,
   formatWeekLabel,
 } from "./season";
-import type { RankingStore, WeekSnapshot } from "./types";
+import type { PairwiseSession, RankingStore, WeekSnapshot } from "./types";
 
 /** Bump when storage shape/migration rules change. */
-export const STORE_SCHEMA_VERSION = 4;
+export const STORE_SCHEMA_VERSION = 5;
 
 function emptyStore(activeWeek = PRESEASON_WEEK): RankingStore {
   return {
@@ -153,7 +153,23 @@ function normalizeStore(parsed: RankingStore): RankingStore {
 
   return {
     ...store,
+    pairwise: sanitizePairwise(store.pairwise),
     schemaVersion: STORE_SCHEMA_VERSION,
+  };
+}
+
+function sanitizePairwise(value: RankingStore["pairwise"]): PairwiseSession | undefined {
+  if (!value || typeof value.week !== "number" || !Array.isArray(value.queue)) {
+    return undefined;
+  }
+  return {
+    week: value.week,
+    queue: [...value.queue],
+    insertingId: typeof value.insertingId === "string" ? value.insertingId : null,
+    lo: typeof value.lo === "number" ? value.lo : 0,
+    hi: typeof value.hi === "number" ? value.hi : 0,
+    sincePair: typeof value.sincePair === "number" ? value.sincePair : 0,
+    history: Array.isArray(value.history) ? value.history : [],
   };
 }
 
@@ -309,6 +325,18 @@ export function setDraftOrder(
       ...store.drafts,
       [weekKey(week)]: rankedIds,
     },
+  };
+}
+
+export function setPairwiseProgress(
+  store: RankingStore,
+  week: number,
+  rankedIds: string[],
+  pairwise: PairwiseSession | undefined,
+): RankingStore {
+  return {
+    ...setDraftOrder(store, week, rankedIds),
+    pairwise,
   };
 }
 

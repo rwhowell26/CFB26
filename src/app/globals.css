@@ -817,6 +817,44 @@ input[type="password"],
   align-items: start;
 }
 
+.build-wrap {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.build-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.build-resumes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  align-items: start;
+}
+
+.build-pick {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+
+.build-pick:hover,
+.build-pick:focus-visible {
+  border-color: rgba(31, 107, 69, 0.4);
+  background: rgba(31, 107, 69, 0.05);
+}
+
 .recommend-panel .panel {
   padding: 0.5rem 0.65rem;
 }
@@ -1451,6 +1489,7 @@ input[type="password"],
   .compare-grid,
   .resume-compare,
   .recommend-resumes,
+  .build-resumes,
   .history-wrap,
   .conference-grid,
   .movers-grid,

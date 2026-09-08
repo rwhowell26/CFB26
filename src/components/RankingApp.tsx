@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState, useTransition } from "react";
+import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
+import { BuildTab } from "@/components/BuildTab";
 import { CompareTool } from "@/components/CompareTool";
 import { ConferenceTab } from "@/components/ConferenceTab";
 import { ConflictQueue } from "@/components/ConflictQueue";
@@ -24,6 +25,7 @@ import {
   buildTransitiveWins,
   findCyclePairs,
 } from "@/lib/results-rank";
+import { seedRankedIds } from "@/lib/pairwise-build";
 import { FBS_TEAM_COUNT, PRESEASON_WEEK, SEASON_YEAR, formatWeekLabel } from "@/lib/season";
 import {
   clearDraft,
@@ -36,12 +38,22 @@ import {
   resumeRankMap,
   saveSnapshot,
   setDraftOrder,
+  setPairwiseProgress,
   useRankingStore,
 } from "@/lib/storage";
-import type { Game, SeasonWeek, Team } from "@/lib/types";
+import type { Game, PairwiseSession, SeasonWeek, Team } from "@/lib/types";
 import { ensureSeasonWeeks } from "@/lib/weeks";
 
-type Tab = "rank" | "board" | "slate" | "conferences" | "sos" | "compare" | "history" | "movers";
+type Tab =
+  | "build"
+  | "rank"
+  | "board"
+  | "slate"
+  | "conferences"
+  | "sos"
+  | "compare"
+  | "history"
+  | "movers";
 
 type GamesPayload = {
   season: number;
@@ -59,7 +71,10 @@ export function RankingApp() {
   const [week, setWeek] = useState(() =>
     typeof store.activeWeek === "number" ? store.activeWeek : PRESEASON_WEEK,
   );
-  const [tab, setTab] = useState<Tab>("rank");
+  const [tab, setTab] = useState<Tab>(() => {
+    const startWeek = typeof store.activeWeek === "number" ? store.activeWeek : PRESEASON_WEEK;
+    return getDraftOrder(store, startWeek).length >= FBS_TEAM_COUNT ? "rank" : "build";
+  });
   const [selectedRankedId, setSelectedRankedId] = useState<string | null>(null);
   const [selectedUnrankedId, setSelectedUnrankedId] = useState<string | null>(null);
   const [search, setSearch] = useState("");
@@ -116,6 +131,14 @@ export function RankingApp() {
     // Mount-only season fetch
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (!data) return;
+    if (getDraftOrder(store, week).length) return;
+    const seeded = seedRankedIds(store, week);
+    if (!seeded.length) return;
+    setStore(setDraftOrder(store, week, seeded));
+  }, [data, week, store, setStore]);
 
   const teams = useMemo(() => data?.teams ?? [], [data]);
   const games = useMemo(() => data?.games ?? [], [data]);
@@ -301,17 +324,25 @@ export function RankingApp() {
   const changeWeek = (nextWeek: number) => {
     setWeek(nextWeek);
     const next = { ...store, activeWeek: nextWeek };
-    if (!next.drafts[String(nextWeek)] && !next.snapshots[String(nextWeek)]) {
-      next.drafts = { ...next.drafts, [String(nextWeek)]: [] };
-    } else if (next.snapshots[String(nextWeek)] && !next.drafts[String(nextWeek)]) {
+    if (next.snapshots[String(nextWeek)] && !next.drafts[String(nextWeek)]) {
       next.drafts = {
         ...next.drafts,
         [String(nextWeek)]: [...next.snapshots[String(nextWeek)].rankedIds],
       };
+    } else if (!next.drafts[String(nextWeek)]?.length) {
+      const seeded = seedRankedIds(next, nextWeek);
+      next.drafts = { ...next.drafts, [String(nextWeek)]: seeded };
     }
     setStore(next);
     setMessage(null);
   };
+
+  const handlePairwiseCommit = useCallback(
+    (nextRanked: string[], pairwise: PairwiseSession) => {
+      setStore(setPairwiseProgress(store, week, nextRanked, pairwise));
+    },
+    [setStore, store, week],
+  );
 
   const handleSaveSnapshot = () => {
     try {
@@ -328,6 +359,7 @@ export function RankingApp() {
     if (!confirm(`Clear ${label} draft and start fresh?`)) return;
     const next = clearDraft(store, week);
     next.drafts[String(week)] = [];
+    next.pairwise = undefined;
     setStore(next);
     setMessage(`${label} draft cleared.`);
   };
@@ -424,6 +456,7 @@ export function RankingApp() {
       <nav className="tabs" aria-label="Main">
         {(
           [
+            ["build", "Build"],
             ["rank", "Rank"],
             ["board", "Board"],
             ["slate", "Slate"],
@@ -474,6 +507,28 @@ export function RankingApp() {
       </div>
 
       {message ? <div className="toast">{message}</div> : null}
+
+      {tab === "build" ? (
+        <BuildTab
+          week={week}
+          weekLabel={weekMeta?.label}
+          teams={teams}
+          teamsById={teamsById}
+          rankedIds={rankedIds}
+          session={store.pairwise}
+          games={games}
+          records={records}
+          lastWeekRanks={lastWeekRanks}
+          currentRanks={ranks}
+          priorRanks={priorRanks}
+          resumeRanks={resumeRanks}
+          onCommit={handlePairwiseCommit}
+          onOpenRank={() => {
+            setTab("rank");
+            setMessage("Ballot complete — edit on Rank.");
+          }}
+        />
+      ) : null}
 
       {tab === "rank" ? (
         <div className="rank-page">

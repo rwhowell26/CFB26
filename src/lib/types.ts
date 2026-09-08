@@ -70,6 +70,21 @@ export type WeekSnapshot = {
   locked: boolean;
 };
 
+export type PairwiseCheckpoint = {
+  rankedIds: string[];
+  queue: string[];
+  insertingId: string | null;
+  lo: number;
+  hi: number;
+  sincePair: number;
+};
+
+/** In-progress Build-tab pairwise session for one week. */
+export type PairwiseSession = PairwiseCheckpoint & {
+  week: number;
+  history: PairwiseCheckpoint[];
+};
+
 export type RankingStore = {
   season: number;
   /** 4+ splits Preseason (-1) from Week 0; 3+ remigrates ballot into Preseason */
@@ -77,6 +92,7 @@ export type RankingStore = {
   activeWeek: number;
   drafts: Record<string, string[]>;
   snapshots: Record<string, WeekSnapshot>;
+  pairwise?: PairwiseSession;
 };
 
 export type PhilosophyWarning = {

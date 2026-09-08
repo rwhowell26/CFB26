@@ -6,6 +6,8 @@ export const FCS_SOS_RANK = FBS_TEAM_COUNT + 1;
 export const PRESEASON_WEEK = -1;
 /** Early-season games ESPN bundles into Week 1 (before Sept) */
 export const WEEK_ZERO = 0;
+/** First regular ranking week after Week 0 */
+export const WEEK_ONE = 1;
 export const STORAGE_KEY = `cfb26-rankings-v2-${SEASON_YEAR}`;
 export const LEGACY_STORAGE_KEY = `cfb26-rankings-v1-${SEASON_YEAR}`;
 export const AUTH_COOKIE = "cfb26_auth";
