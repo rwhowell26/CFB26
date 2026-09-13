@@ -25,7 +25,6 @@ import {
   buildTransitiveWins,
   findCyclePairs,
 } from "@/lib/results-rank";
-import { seedRankedIds } from "@/lib/pairwise-build";
 import { FBS_TEAM_COUNT, PRESEASON_WEEK, SEASON_YEAR, formatWeekLabel } from "@/lib/season";
 import {
   clearDraft,
@@ -131,14 +130,6 @@ export function RankingApp() {
     // Mount-only season fetch
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    if (!data) return;
-    if (getDraftOrder(store, week).length) return;
-    const seeded = seedRankedIds(store, week);
-    if (!seeded.length) return;
-    setStore(setDraftOrder(store, week, seeded));
-  }, [data, week, store, setStore]);
 
   const teams = useMemo(() => data?.teams ?? [], [data]);
   const games = useMemo(() => data?.games ?? [], [data]);
@@ -329,9 +320,8 @@ export function RankingApp() {
         ...next.drafts,
         [String(nextWeek)]: [...next.snapshots[String(nextWeek)].rankedIds],
       };
-    } else if (!next.drafts[String(nextWeek)]?.length) {
-      const seeded = seedRankedIds(next, nextWeek);
-      next.drafts = { ...next.drafts, [String(nextWeek)]: seeded };
+    } else if (!next.drafts[String(nextWeek)]) {
+      next.drafts = { ...next.drafts, [String(nextWeek)]: [] };
     }
     setStore(next);
     setMessage(null);

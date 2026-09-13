@@ -7,13 +7,14 @@ import {
   PRESEASON_WEEK,
   SEASON_YEAR,
   STORAGE_KEY,
+  WEEK_ONE,
   WEEK_ZERO,
   formatWeekLabel,
 } from "./season";
 import type { PairwiseSession, RankingStore, WeekSnapshot } from "./types";
 
 /** Bump when storage shape/migration rules change. */
-export const STORE_SCHEMA_VERSION = 5;
+export const STORE_SCHEMA_VERSION = 6;
 
 function emptyStore(activeWeek = PRESEASON_WEEK): RankingStore {
   return {
@@ -150,11 +151,56 @@ function normalizeStore(parsed: RankingStore): RankingStore {
   if (version < 4) {
     store = migrateWeekZeroSlotToPreseason(store);
   }
+  if (version < 6) {
+    store = migrateWeekTwoBallotToWeekOne(store);
+  }
 
   return {
     ...store,
     pairwise: sanitizePairwise(store.pairwise),
     schemaVersion: STORE_SCHEMA_VERSION,
+  };
+}
+
+/**
+ * The Build tab wrote the Week 1 ballot into Week 2 when ESPN rolled
+ * to Week 2. Move that list back to Week 1 and leave Week 2 empty.
+ */
+export function migrateWeekTwoBallotToWeekOne(store: RankingStore): RankingStore {
+  const w1 = String(WEEK_ONE);
+  const w2 = "2";
+  const drafts = { ...store.drafts };
+  const snapshots = { ...store.snapshots };
+  const week2Draft = drafts[w2] ?? [];
+  const week2Snap = snapshots[w2];
+  const source = week2Draft.length ? week2Draft : week2Snap?.rankedIds ?? [];
+
+  if (!source.length) {
+    return { ...store, drafts, snapshots };
+  }
+
+  drafts[w1] = [...source];
+  delete drafts[w2];
+
+  if (week2Snap) {
+    snapshots[w1] = {
+      ...week2Snap,
+      week: WEEK_ONE,
+      label: formatWeekLabel(WEEK_ONE),
+    };
+    delete snapshots[w2];
+  }
+
+  const pairwiseWeek = store.pairwise?.week;
+  const pairwise =
+    pairwiseWeek === WEEK_ONE || pairwiseWeek === 2 ? undefined : store.pairwise;
+
+  return {
+    ...store,
+    drafts,
+    snapshots,
+    pairwise,
+    activeWeek: 2,
   };
 }
 

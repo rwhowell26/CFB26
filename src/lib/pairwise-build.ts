@@ -1,4 +1,4 @@
-import { FBS_TEAM_COUNT, WEEK_ONE } from "./season";
+import { FBS_TEAM_COUNT } from "./season";
 import type { PairwiseCheckpoint, PairwiseSession, RankingStore } from "./types";
 
 export type PairwiseKind = "seed" | "pick-next" | "insert";
@@ -49,17 +49,9 @@ function withHistory(
   return { ...session, history };
 }
 
-/** Week 1 draft/snapshot when the current week is empty; otherwise the current ballot. */
+/** Current week's draft only — do not copy a finished prior week onto a new week. */
 export function seedRankedIds(store: RankingStore, week: number): string[] {
-  const current = store.drafts[String(week)] ?? [];
-  if (current.length) return [...current];
-  if (week !== WEEK_ONE) {
-    const week1Draft = store.drafts[String(WEEK_ONE)] ?? [];
-    if (week1Draft.length) return [...week1Draft];
-    const week1Snap = store.snapshots[String(WEEK_ONE)];
-    if (week1Snap?.rankedIds.length) return [...week1Snap.rankedIds];
-  }
-  return [];
+  return [...(store.drafts[String(week)] ?? [])];
 }
 
 export function initPairwiseSession(
