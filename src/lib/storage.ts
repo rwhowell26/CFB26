@@ -320,43 +320,50 @@ export type PriorBallot = {
   source: "snapshot" | "draft";
 };
 
+/** Weeks that have a saved snapshot or a non-empty draft, oldest first. */
+export function ballotWeeks(store: RankingStore): number[] {
+  const weeks = new Set<number>();
+  for (const [key, ids] of Object.entries(store.drafts)) {
+    const n = Number(key);
+    if (Number.isFinite(n) && ids.length > 0) weeks.add(n);
+  }
+  for (const snap of Object.values(store.snapshots)) {
+    if (snap.rankedIds.length > 0) weeks.add(snap.week);
+  }
+  return [...weeks].sort((a, b) => a - b);
+}
+
+/** Snapshot ballot when saved; otherwise the in-progress draft. */
+export function ballotForWeek(store: RankingStore, week: number): PriorBallot | null {
+  const snap = store.snapshots[weekKey(week)];
+  if (snap?.rankedIds.length) {
+    return {
+      week,
+      label: snap.label || formatWeekLabel(week),
+      rankedIds: [...snap.rankedIds],
+      source: "snapshot",
+    };
+  }
+  const draft = store.drafts[weekKey(week)];
+  if (draft?.length) {
+    return {
+      week,
+      label: formatWeekLabel(week),
+      rankedIds: [...draft],
+      source: "draft",
+    };
+  }
+  return null;
+}
+
 /** Nearest earlier week that has a saved snapshot or a non-empty draft. */
 export function previousWeekBallot(
   store: RankingStore,
   currentWeek: number,
 ): PriorBallot | null {
-  const weeks = new Set<number>();
-  for (const key of Object.keys(store.drafts)) {
-    const n = Number(key);
-    if (Number.isFinite(n)) weeks.add(n);
-  }
-  for (const key of Object.keys(store.snapshots)) {
-    const n = Number(key);
-    if (Number.isFinite(n)) weeks.add(n);
-  }
-
-  const prior = [...weeks].filter((w) => w < currentWeek).sort((a, b) => b - a);
-  for (const w of prior) {
-    const snap = store.snapshots[weekKey(w)];
-    if (snap?.rankedIds.length) {
-      return {
-        week: w,
-        label: snap.label || formatWeekLabel(w),
-        rankedIds: [...snap.rankedIds],
-        source: "snapshot",
-      };
-    }
-    const draft = store.drafts[weekKey(w)];
-    if (draft?.length) {
-      return {
-        week: w,
-        label: formatWeekLabel(w),
-        rankedIds: [...draft],
-        source: "draft",
-      };
-    }
-  }
-  return null;
+  const prior = ballotWeeks(store).filter((w) => w < currentWeek);
+  const week = prior.length ? prior[prior.length - 1] : undefined;
+  return week == null ? null : ballotForWeek(store, week);
 }
 
 export function setDraftOrder(
@@ -434,17 +441,22 @@ export function importStoreJson(raw: string): RankingStore {
   return normalizeStore(parsed);
 }
 
-export function teamRankHistory(
-  store: RankingStore,
-  teamId: string,
-): Array<{ week: number; rank: number | null; label: string }> {
-  const weeks = Object.values(store.snapshots).sort((a, b) => a.week - b.week);
-  return weeks.map((snap) => {
-    const idx = snap.rankedIds.indexOf(teamId);
+export type TeamRankPoint = {
+  week: number;
+  rank: number | null;
+  label: string;
+  source: "snapshot" | "draft";
+};
+
+export function teamRankHistory(store: RankingStore, teamId: string): TeamRankPoint[] {
+  return ballotWeeks(store).map((week) => {
+    const ballot = ballotForWeek(store, week);
+    const idx = ballot?.rankedIds.indexOf(teamId) ?? -1;
     return {
-      week: snap.week,
-      label: snap.label,
+      week,
+      label: ballot?.label ?? formatWeekLabel(week),
       rank: idx >= 0 ? idx + 1 : null,
+      source: ballot?.source ?? "draft",
     };
   });
 }
