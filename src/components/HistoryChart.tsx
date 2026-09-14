@@ -21,30 +21,16 @@ type Props = {
 };
 
 const WIDTH = 640;
-const HEIGHT = 360;
-const PAD = { top: 18, right: 18, bottom: 36, left: 44 };
-
-function yTicks(min: number, max: number): number[] {
-  const span = Math.max(1, max - min);
-  const step = span <= 8 ? 1 : span <= 20 ? 2 : span <= 40 ? 5 : 10;
-  const ticks: number[] = [];
-  const start = Math.ceil(min / step) * step;
-  for (let v = start; v <= max; v += step) ticks.push(v);
-  if (!ticks.includes(min)) ticks.unshift(min);
-  if (!ticks.includes(max)) ticks.push(max);
+const HEIGHT = 400;
+const PAD = { top: 18, right: 18, bottom: 36, left: 52 };
+const RANK_MIN = 1;
+const RANK_MAX = FBS_TEAM_COUNT;
+const Y_TICKS = (() => {
+  const ticks = [RANK_MIN];
+  for (let v = 10; v < RANK_MAX; v += 10) ticks.push(v);
+  if (ticks[ticks.length - 1] !== RANK_MAX) ticks.push(RANK_MAX);
   return ticks;
-}
-
-function rankDomain(series: HistorySeries[]): { min: number; max: number } {
-  const ranks = series.flatMap((s) => s.points.map((p) => p.rank).filter((r): r is number => r != null));
-  if (!ranks.length) return { min: 1, max: 25 };
-  const lo = Math.min(...ranks);
-  const hi = Math.max(...ranks);
-  return {
-    min: Math.max(1, lo - 2),
-    max: Math.min(FBS_TEAM_COUNT, Math.max(hi + 2, lo + 4)),
-  };
-}
+})();
 
 function linePaths(
   xs: number[],
@@ -70,8 +56,9 @@ function linePaths(
 export function HistoryChart({ weeks, series, hoveredWeek, onHoverWeek, onFocusTeam }: Props) {
   const innerW = WIDTH - PAD.left - PAD.right;
   const innerH = HEIGHT - PAD.top - PAD.bottom;
-  const { min, max } = useMemo(() => rankDomain(series), [series]);
-  const ticks = useMemo(() => yTicks(min, max), [min, max]);
+  const min = RANK_MIN;
+  const max = RANK_MAX;
+  const ticks = Y_TICKS;
 
   const xs = useMemo(() => {
     if (weeks.length <= 1) return weeks.map(() => PAD.left + innerW / 2);
@@ -110,7 +97,7 @@ export function HistoryChart({ weeks, series, hoveredWeek, onHoverWeek, onFocusT
   }
 
   if (!weeks.length) {
-    return <div className="empty-state">No weekly ballots to plot yet.</div>;
+    return <div className="empty-state">No saved weeks to plot yet.</div>;
   }
 
   return (

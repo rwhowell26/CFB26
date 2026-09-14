@@ -445,18 +445,26 @@ export type TeamRankPoint = {
   week: number;
   rank: number | null;
   label: string;
-  source: "snapshot" | "draft";
+  source: "snapshot";
 };
 
+/** Saved snapshot weeks only, oldest first. Includes Preseason and Week 0 when saved. */
+export function snapshotWeeks(store: RankingStore): number[] {
+  return Object.values(store.snapshots)
+    .filter((snap) => snap.rankedIds.length > 0)
+    .map((snap) => snap.week)
+    .sort((a, b) => a - b);
+}
+
 export function teamRankHistory(store: RankingStore, teamId: string): TeamRankPoint[] {
-  return ballotWeeks(store).map((week) => {
-    const ballot = ballotForWeek(store, week);
-    const idx = ballot?.rankedIds.indexOf(teamId) ?? -1;
+  return snapshotWeeks(store).map((week) => {
+    const snap = store.snapshots[weekKey(week)];
+    const idx = snap?.rankedIds.indexOf(teamId) ?? -1;
     return {
       week,
-      label: ballot?.label ?? formatWeekLabel(week),
+      label: snap?.label || formatWeekLabel(week),
       rank: idx >= 0 ? idx + 1 : null,
-      source: ballot?.source ?? "draft",
+      source: "snapshot",
     };
   });
 }

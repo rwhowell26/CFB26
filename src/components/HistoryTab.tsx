@@ -2,9 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { HistoryChart, type HistorySeries } from "@/components/HistoryChart";
-import { shortConferenceName } from "@/lib/conferences";
-import { formatWeekLabel } from "@/lib/season";
-import { ballotWeeks, teamRankHistory } from "@/lib/storage";
+import { normalizeConferenceName, shortConferenceName } from "@/lib/conferences";
+import { FBS_TEAM_COUNT, formatWeekLabel } from "@/lib/season";
+import { snapshotWeeks, teamRankHistory } from "@/lib/storage";
 import type { RankingStore, Team } from "@/lib/types";
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
 };
 
 const HISTORY_SELECTED_KEY = "cfb26-history-selected-teams";
-const MAX_TEAMS = 8;
+const MAX_TEAMS = 20;
 const TEAM_COLORS = [
   "#1f6b45",
   "#8a4b16",
@@ -24,6 +24,18 @@ const TEAM_COLORS = [
   "#0e7490",
   "#b45309",
   "#365314",
+  "#be185d",
+  "#1d4ed8",
+  "#047857",
+  "#a16207",
+  "#7c2d12",
+  "#4338ca",
+  "#0f766e",
+  "#9f1239",
+  "#3f6212",
+  "#701a75",
+  "#155e75",
+  "#854d0e",
 ];
 
 function loadSelectedIds(): string[] {
@@ -78,6 +90,7 @@ export function HistoryTab({ store, teams, onLoadWeek }: Props) {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [ready, setReady] = useState(false);
   const [focusIndex, setFocusIndex] = useState(0);
+  const [confPick, setConfPick] = useState("");
   const [hoveredWeek, setHoveredWeek] = useState<number | null>(null);
 
   const teamsById = useMemo(() => new Map(teams.map((t) => [t.id, t])), [teams]);
@@ -85,7 +98,31 @@ export function HistoryTab({ store, teams, onLoadWeek }: Props) {
     () => [...teams].sort((a, b) => a.name.localeCompare(b.name)),
     [teams],
   );
-  const weeks = useMemo(() => ballotWeeks(store), [store]);
+  const weeks = useMemo(() => snapshotWeeks(store), [store]);
+  const conferences = useMemo(() => {
+    const latestWeek = weeks[weeks.length - 1];
+    const latest = latestWeek == null ? null : store.snapshots[String(latestWeek)];
+    const rankOf = (id: string) => {
+      const idx = latest?.rankedIds.indexOf(id) ?? -1;
+      return idx >= 0 ? idx : 999;
+    };
+    const groups = new Map<string, Team[]>();
+    for (const team of teams) {
+      const key = normalizeConferenceName(team.conference);
+      const list = groups.get(key) ?? [];
+      list.push(team);
+      groups.set(key, list);
+    }
+    return Array.from(groups.entries())
+      .map(([name, members]) => ({
+        name,
+        short: shortConferenceName(name),
+        ids: [...members]
+          .sort((a, b) => rankOf(a.id) - rankOf(b.id) || a.name.localeCompare(b.name))
+          .map((t) => t.id),
+      }))
+      .sort((a, b) => a.short.localeCompare(b.short));
+  }, [teams, store, weeks]);
 
   const selectedTeams = useMemo(
     () => selectedIds.map((id) => teamsById.get(id)).filter((t): t is Team => Boolean(t)),
@@ -147,6 +184,24 @@ export function HistoryTab({ store, teams, onLoadWeek }: Props) {
     setQuery("");
   }
 
+  function addConference(confName: string) {
+    const conf = conferences.find((c) => c.name === confName);
+    if (!conf) return;
+    setSelectedIds((prev) => {
+      const incoming = conf.ids.filter((id) => !prev.includes(id));
+      if (!incoming.length) return prev;
+      if (prev.length + incoming.length <= MAX_TEAMS) {
+        const next = [...prev, ...incoming];
+        setFocusIndex(prev.length);
+        return next;
+      }
+      setFocusIndex(0);
+      return conf.ids.slice(0, MAX_TEAMS);
+    });
+    setQuery("");
+    setConfPick("");
+  }
+
   function removeTeam(id: string) {
     setSelectedIds((prev) => {
       const next = prev.filter((x) => x !== id);
@@ -172,27 +227,43 @@ export function HistoryTab({ store, teams, onLoadWeek }: Props) {
         <header className="panel-header">
           <h2>Team history</h2>
           <p>
-            Plot one or more teams across your weekly ballots. Rank 1 is at the top of the
-            chart.
+            Plot saved weekly snapshots, including Preseason and Week 0. Rank 1 is at the
+            top of a 1–{FBS_TEAM_COUNT} scale.
           </p>
         </header>
 
-        <label className="block-label">
-          Add a team
-          <input
-            type="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && suggestions[0]) {
-                e.preventDefault();
-                addTeam(suggestions[0].id);
-              }
-            }}
-            placeholder="Search name, abbreviation, or conference"
-            disabled={selectedIds.length >= MAX_TEAMS}
-          />
-        </label>
+        <div className="history-add-row">
+          <label className="block-label">
+            Add a team
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && suggestions[0]) {
+                  e.preventDefault();
+                  addTeam(suggestions[0].id);
+                }
+              }}
+              placeholder="Search name, abbreviation, or conference"
+              disabled={selectedIds.length >= MAX_TEAMS}
+            />
+          </label>
+          <label className="block-label">
+            Add a conference
+            <select
+              value={confPick}
+              onChange={(e) => addConference(e.target.value)}
+            >
+              <option value="">Choose conference</option>
+              {conferences.map((c) => (
+                <option key={c.name} value={c.name}>
+                  {c.short} · {c.ids.length}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
 
         {query.trim() ? (
           suggestions.length ? (
@@ -246,14 +317,17 @@ export function HistoryTab({ store, teams, onLoadWeek }: Props) {
             </button>
           </div>
         ) : (
-          <div className="empty-state">Search above to add teams. You can plot up to {MAX_TEAMS}.</div>
+          <div className="empty-state">
+            Search a team or add a whole conference. You can plot up to {MAX_TEAMS}.
+          </div>
         )}
       </section>
 
       {!weeks.length ? (
         <section className="panel">
           <div className="empty-state">
-            No weekly ballots yet. Rank teams and save a week to start a trajectory.
+            No saved weeks yet. Rank all {FBS_TEAM_COUNT} and hit Save week to start a
+            trajectory.
           </div>
         </section>
       ) : !focusedTeam ? null : (
@@ -310,7 +384,6 @@ export function HistoryTab({ store, teams, onLoadWeek }: Props) {
                     >
                       <span className="history-week-label">
                         {formatWeekLabel(week, point?.label)}
-                        {point?.source === "draft" ? <em>unsaved</em> : null}
                       </span>
                       <strong>{point?.rank != null ? `#${point.rank}` : "NR"}</strong>
                       {delta ? (
