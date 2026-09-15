@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { TeamLogo } from "@/components/TeamLogo";
 import { shortConferenceName } from "@/lib/conferences";
 import {
   computeSos,
@@ -121,10 +122,7 @@ function SchedulePopup({
       >
         <header className="modal-header">
           <div className="resume-title">
-            {team.logo ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={team.logo} alt="" className="team-logo lg" />
-            ) : null}
+            <TeamLogo team={team} className="lg" />
             <div>
               <p className="eyebrow">Full schedule</p>
               <h2>
@@ -270,14 +268,7 @@ export function SosTab({ teams, games, ranks, records, search = "" }: Props) {
                       onClick={() => setPopupTeamId(row.team.id)}
                     >
                       <span className="rank-badge">{sosRank}</span>
-                      {row.team.logo ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={row.team.logo} alt="" className="team-logo" />
-                      ) : (
-                        <span className="team-logo team-logo-fallback" aria-hidden>
-                          ·
-                        </span>
-                      )}
+                      <TeamLogo team={row.team} />
                       <span className="sos-rank-team">
                         <strong>{row.team.shortName}</strong>
                         <em>

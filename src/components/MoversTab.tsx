@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { TeamLogo } from "@/components/TeamLogo";
 import { rankMapFromOrder } from "@/lib/ranking-logic";
 import { formatWeekLabel } from "@/lib/season";
 import type { RankingStore, Team, WeekSnapshot } from "@/lib/types";
@@ -79,10 +80,7 @@ function MoverList({
                   onClick={() => onSelectTeam?.(m.team.id)}
                 >
                   <span className="rank-badge">{index + 1}</span>
-                  {m.team.logo ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={m.team.logo} alt="" className="team-logo" />
-                  ) : null}
+                  <TeamLogo team={m.team} />
                   <span className="movers-team">
                     <strong>{m.team.shortName}</strong>
                     <em>

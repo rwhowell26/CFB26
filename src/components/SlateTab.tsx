@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { TeamLogo } from "@/components/TeamLogo";
 import { formatRank, gamesForSlateWeek } from "@/lib/ranking-logic";
 import { PRESEASON_WEEK, WEEK_ZERO, formatWeekLabel } from "@/lib/season";
 import type { Game, SeasonWeek } from "@/lib/types";
@@ -108,14 +109,13 @@ function SlateGameRow({
           onClick={() => game.awayIsFbs && onSelectTeam?.(game.awayTeamId)}
           disabled={!game.awayIsFbs}
         >
-          {game.awayLogo ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={game.awayLogo} alt="" className="team-logo" />
-          ) : (
-            <span className="team-logo-fallback team-logo" aria-hidden>
-              ·
-            </span>
-          )}
+          <TeamLogo
+            team={{
+              logo: game.awayLogo,
+              color: game.awayColor,
+              alternateColor: game.awayAlternateColor,
+            }}
+          />
           <span className="slate-rank">{formatRank(awayRank, game.awayIsFbs)}</span>
           <strong>{displayName(game.awayName)}</strong>
           <TeamScore score={game.awayScore} oppScore={game.homeScore} status={game.status} />
@@ -127,14 +127,13 @@ function SlateGameRow({
           onClick={() => game.homeIsFbs && onSelectTeam?.(game.homeTeamId)}
           disabled={!game.homeIsFbs}
         >
-          {game.homeLogo ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={game.homeLogo} alt="" className="team-logo" />
-          ) : (
-            <span className="team-logo-fallback team-logo" aria-hidden>
-              ·
-            </span>
-          )}
+          <TeamLogo
+            team={{
+              logo: game.homeLogo,
+              color: game.homeColor,
+              alternateColor: game.homeAlternateColor,
+            }}
+          />
           <span className="slate-rank">{formatRank(homeRank, game.homeIsFbs)}</span>
           <strong>{displayName(game.homeName)}</strong>
           <TeamScore score={game.homeScore} oppScore={game.awayScore} status={game.status} />

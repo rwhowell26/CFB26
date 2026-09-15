@@ -5,6 +5,10 @@ export type Team = {
   abbreviation: string;
   conference: string;
   logo: string | null;
+  /** ESPN primary hex */
+  color: string | null;
+  /** ESPN secondary/alternate hex */
+  alternateColor: string | null;
 };
 
 export type GameStatus = "scheduled" | "in_progress" | "final";
@@ -23,6 +27,10 @@ export type Game = {
   awayName: string;
   homeLogo: string | null;
   awayLogo: string | null;
+  homeColor: string | null;
+  awayColor: string | null;
+  homeAlternateColor: string | null;
+  awayAlternateColor: string | null;
   homeIsFbs: boolean;
   awayIsFbs: boolean;
 };

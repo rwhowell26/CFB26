@@ -1,5 +1,6 @@
 "use client";
 
+import { TeamLogo } from "@/components/TeamLogo";
 import {
   computeSos,
   formatResumeRank,
@@ -55,10 +56,7 @@ export function TeamResume({
     <section className="resume-compact">
       <header className="rc-header">
         <div className="rc-id">
-          {team.logo ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={team.logo} alt="" className="team-logo" />
-          ) : null}
+          <TeamLogo team={team} />
           <div>
             {roleLabel ? <p className="eyebrow">{roleLabel}</p> : null}
             <h3>

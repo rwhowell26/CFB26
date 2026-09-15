@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { HistoryChart, type HistorySeries } from "@/components/HistoryChart";
+import { TeamLogo } from "@/components/TeamLogo";
 import { normalizeConferenceName, shortConferenceName } from "@/lib/conferences";
 import { FBS_TEAM_COUNT, formatWeekLabel } from "@/lib/season";
 import { snapshotWeeks, teamRankHistory } from "@/lib/storage";
@@ -69,20 +70,6 @@ function deltaLabel(current: number | null, previous: number | null): { text: st
   if (delta > 0) return { text: `▲ ${delta}`, dir: "up" };
   if (delta < 0) return { text: `▼ ${Math.abs(delta)}`, dir: "down" };
   return { text: "—", dir: "flat" };
-}
-
-function TeamMark({ team }: { team: Team }) {
-  if (team.logo) {
-    return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img src={team.logo} alt="" className="team-logo" />
-    );
-  }
-  return (
-    <span className="team-logo team-logo-fallback" aria-hidden>
-      {team.abbreviation.slice(0, 2)}
-    </span>
-  );
 }
 
 export function HistoryTab({ store, teams, onLoadWeek }: Props) {
@@ -271,7 +258,7 @@ export function HistoryTab({ store, teams, onLoadWeek }: Props) {
               {suggestions.map((team) => (
                 <li key={team.id}>
                   <button type="button" onClick={() => addTeam(team.id)}>
-                    <TeamMark team={team} />
+                    <TeamLogo team={team} />
                     <span>
                       <strong>{team.shortName}</strong>
                       <em>{shortConferenceName(team.conference)}</em>
@@ -298,7 +285,7 @@ export function HistoryTab({ store, teams, onLoadWeek }: Props) {
                     onClick={() => setFocusIndex(index)}
                   >
                     <span className="history-swatch" style={{ background: color }} />
-                    <TeamMark team={team} />
+                    <TeamLogo team={team} />
                     {team.shortName}
                   </button>
                   <button
@@ -345,7 +332,7 @@ export function HistoryTab({ store, teams, onLoadWeek }: Props) {
                 </button>
               ) : null}
               <div className="history-focus">
-                <TeamMark team={focusedTeam} />
+                <TeamLogo team={focusedTeam} />
                 <div>
                   <h2>{focusedTeam.shortName}</h2>
                   <p>

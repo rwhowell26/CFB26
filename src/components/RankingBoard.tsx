@@ -19,6 +19,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { TeamLogo } from "@/components/TeamLogo";
 import { shortConferenceName } from "@/lib/conferences";
 import type { Team } from "@/lib/types";
 
@@ -48,12 +49,7 @@ function TeamRowContent({
   return (
     <div className={`team-row ${active ? "team-row-active" : ""}`}>
       <span className="rank-badge">{rank ?? "—"}</span>
-      {team.logo ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={team.logo} alt="" className="team-logo" />
-      ) : (
-        <span className="team-logo team-logo-fallback">{team.abbreviation.slice(0, 2)}</span>
-      )}
+      <TeamLogo team={team} />
       <div className="team-meta">
         <div className="team-name">{team.shortName}</div>
         <div className="team-sub">

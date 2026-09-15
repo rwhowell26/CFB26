@@ -1,5 +1,6 @@
 import { applyGameOverrides } from "./game-overrides";
 import { PRESEASON_WEEK, SEASON_YEAR, WEEK_ZERO, weekZeroCutoffIso } from "./season";
+import { normalizeHex } from "./team-colors";
 import type { Game, GameStatus, SeasonWeek, Team } from "./types";
 import { ensureSeasonWeeks } from "./weeks";
 
@@ -66,24 +67,56 @@ type StandingsNode = {
   children?: StandingsNode[];
 };
 
+type ColorRecord = { color: string | null; alternateColor: string | null };
+
+async function fetchTeamColorMap(): Promise<Map<string, ColorRecord>> {
+  return cachedFetch("team-color-map", 60 * 60 * 1000, async () => {
+    const data = await getJson<{
+      sports?: Array<{
+        leagues?: Array<{
+          teams?: Array<{
+            team?: { id?: string; color?: string; alternateColor?: string };
+          }>;
+        }>;
+      }>;
+    }>(`${ESPN_SITE}/teams?limit=1000`);
+
+    const map = new Map<string, ColorRecord>();
+    for (const row of data.sports?.[0]?.leagues?.[0]?.teams ?? []) {
+      const team = row.team;
+      if (!team?.id) continue;
+      map.set(String(team.id), {
+        color: normalizeHex(team.color),
+        alternateColor: normalizeHex(team.alternateColor),
+      });
+    }
+    return map;
+  });
+}
+
 export async function fetchFbsTeams(year = SEASON_YEAR): Promise<Team[]> {
-  return cachedFetch(`teams-${year}`, 60 * 60 * 1000, async () => {
-    const data = await getJson<StandingsNode>(
-      `${ESPN_V2}/standings?group=80&season=${year}`,
-    );
+  return cachedFetch(`teams-colors-${year}`, 60 * 60 * 1000, async () => {
+    const [data, colors] = await Promise.all([
+      getJson<StandingsNode>(`${ESPN_V2}/standings?group=80&season=${year}`),
+      fetchTeamColorMap(),
+    ]);
     const teams: Team[] = [];
 
     const walk = (node: StandingsNode, conference?: string) => {
       const conf = node.name ?? conference;
       for (const entry of node.standings?.entries ?? []) {
         const t = entry.team;
+        const id = String(t.id);
+        const swatch = colors.get(id);
         teams.push({
-          id: String(t.id),
+          id,
           name: t.displayName,
           shortName: t.shortDisplayName || t.displayName,
           abbreviation: t.abbreviation || t.shortDisplayName || t.displayName,
           conference: conf || "FBS",
           logo: logoFromTeam(t),
+          color: swatch?.color ?? null,
+          alternateColor: swatch?.alternateColor ?? null,
         });
       }
       for (const child of node.children ?? []) {
@@ -178,6 +211,7 @@ function parseScoreboardGames(
   data: ScoreboardResponse,
   fbsIds: Set<string>,
   weekFallback: number,
+  colors: Map<string, ColorRecord>,
 ): Game[] {
   const games: Game[] = [];
   for (const event of data.events ?? []) {
@@ -221,6 +255,9 @@ function parseScoreboardGames(
     const date = competition.date || event.date;
     const espnWeek = event.week?.number ?? data.week?.number ?? weekFallback;
 
+    const homeSwatch = colors.get(homeId);
+    const awaySwatch = colors.get(awayId);
+
     games.push({
       id: String(competition.id || event.id),
       week: displayWeekForGame(espnWeek, date),
@@ -235,6 +272,10 @@ function parseScoreboardGames(
       awayName: away.team.displayName,
       homeLogo: logoFromTeam(home.team),
       awayLogo: logoFromTeam(away.team),
+      homeColor: homeSwatch?.color ?? null,
+      awayColor: awaySwatch?.color ?? null,
+      homeAlternateColor: homeSwatch?.alternateColor ?? null,
+      awayAlternateColor: awaySwatch?.alternateColor ?? null,
       homeIsFbs: fbsIds.has(homeId),
       awayIsFbs: fbsIds.has(awayId),
     });
@@ -247,10 +288,11 @@ export async function fetchAllGames(year = SEASON_YEAR): Promise<{
   weeks: SeasonWeek[];
   games: Game[];
 }> {
-  return cachedFetch(`all-games-split-w0-overrides-${year}`, 5 * 60 * 1000, async () => {
-    const [teams, weeks] = await Promise.all([
+  return cachedFetch(`all-games-colors-${year}`, 5 * 60 * 1000, async () => {
+    const [teams, weeks, colors] = await Promise.all([
       fetchFbsTeams(year),
       fetchSeasonWeeks(year),
+      fetchTeamColorMap(),
     ]);
     const fbsIds = new Set(teams.map((t) => t.id));
 
@@ -267,7 +309,7 @@ export async function fetchAllGames(year = SEASON_YEAR): Promise<{
         const data = await getJson<ScoreboardResponse>(
           `${ESPN_SITE}/scoreboard?year=${year}&week=${week}&seasontype=2&groups=80&limit=300`,
         );
-        return parseScoreboardGames(data, fbsIds, week);
+        return parseScoreboardGames(data, fbsIds, week, colors);
       }),
     );
 

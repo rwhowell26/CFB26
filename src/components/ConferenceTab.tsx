@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { TeamLogo } from "@/components/TeamLogo";
 import { normalizeConferenceName, shortConferenceName } from "@/lib/conferences";
 import type { Team } from "@/lib/types";
 
@@ -117,10 +118,7 @@ export function ConferenceTab({
                       onClick={() => onSelectTeam?.(team.id)}
                     >
                       <span className="rank-badge">{index + 1}</span>
-                      {team.logo ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={team.logo} alt="" className="team-logo" />
-                      ) : null}
+                      <TeamLogo team={team} />
                       <span className="conference-team">
                         <strong>{team.shortName}</strong>
                         <em>

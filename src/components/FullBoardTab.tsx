@@ -1,5 +1,6 @@
 "use client";
 
+import { TeamLogo } from "@/components/TeamLogo";
 import type { Team } from "@/lib/types";
 
 type Props = {
@@ -47,14 +48,7 @@ export function FullBoardTab({
                 aria-label={`Rank ${rank}, ${team.name}`}
               >
                 <span className="full-board-rank">{rank}</span>
-                {team.logo ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={team.logo} alt="" className="full-board-logo" />
-                ) : (
-                  <span className="team-logo-fallback full-board-logo" aria-hidden>
-                    {team.abbreviation.slice(0, 3)}
-                  </span>
-                )}
+                <TeamLogo team={team} className="full-board-logo" />
               </button>
             </li>
           );
