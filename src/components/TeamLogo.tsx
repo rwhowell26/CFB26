@@ -17,9 +17,29 @@ type Props = {
 };
 
 export function TeamLogo({ team, className = "", fallback }: Props) {
-  const { src, style } = logoAppearance(team.color, team.alternateColor, team.logo, team.id);
+  const { src, style, markColor } = logoAppearance(
+    team.color,
+    team.alternateColor,
+    team.logo,
+    team.id,
+  );
   const classes = ["team-logo", className].filter(Boolean).join(" ");
   const mark = fallback ?? team.abbreviation?.slice(0, 2) ?? "·";
+
+  if (src && markColor) {
+    return (
+      <span className={classes} style={style} aria-hidden>
+        <span
+          className="team-logo-mark"
+          style={{
+            backgroundColor: markColor,
+            WebkitMaskImage: `url("${src}")`,
+            maskImage: `url("${src}")`,
+          }}
+        />
+      </span>
+    );
+  }
 
   if (src) {
     return (

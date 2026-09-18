@@ -61,7 +61,12 @@ const FILL_OVERRIDES: Record<string, string> = {
 };
 
 /** Keep the default colored ESPN mark instead of the 500-dark (white) variant. */
-const LOGO_FORCE_COLOR = new Set(["197", "277"]); // Oklahoma State orange, West Virginia yellow
+const LOGO_FORCE_COLOR = new Set(["197"]); // Oklahoma State orange
+
+/** Tint the 500-dark (white) silhouette; ESPN has no yellow West Virginia 500 mark. */
+const LOGO_TINT: Record<string, string> = {
+  "277": "#eaaa00", // West Virginia gold
+};
 
 function pickFill(primary: string | null, secondary: string | null, teamId?: string | null): string {
   if (teamId && FILL_OVERRIDES[teamId]) return FILL_OVERRIDES[teamId];
@@ -70,6 +75,12 @@ function pickFill(primary: string | null, secondary: string | null, teamId?: str
 
 function colorLogoHref(href: string): string {
   if (href.includes("/ncaa/500-dark/")) return href.replace("/ncaa/500-dark/", "/ncaa/500/");
+  return href;
+}
+
+function lightLogoHref(href: string): string {
+  if (href.includes("/ncaa/500-dark/")) return href;
+  if (href.includes("/ncaa/500/")) return href.replace("/ncaa/500/", "/ncaa/500-dark/");
   return href;
 }
 
@@ -113,8 +124,13 @@ export function logoAppearance(
   alternateColor?: string | null,
   logoHref?: string | null,
   teamId?: string | null,
-): { src: string | null; style: LogoSwatch } {
+): { src: string | null; style: LogoSwatch; markColor: string | null } {
   const style = logoSwatch(color, alternateColor, teamId);
-  const src = logoHref ? espnContrastLogo(logoHref, style.backgroundColor, teamId) : null;
-  return { src, style };
+  const markColor = teamId ? LOGO_TINT[teamId] ?? null : null;
+  const src = logoHref
+    ? markColor
+      ? lightLogoHref(logoHref)
+      : espnContrastLogo(logoHref, style.backgroundColor, teamId)
+    : null;
+  return { src, style, markColor };
 }
