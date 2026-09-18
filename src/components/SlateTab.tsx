@@ -111,6 +111,7 @@ function SlateGameRow({
         >
           <TeamLogo
             team={{
+              id: game.awayTeamId,
               logo: game.awayLogo,
               color: game.awayColor,
               alternateColor: game.awayAlternateColor,
@@ -129,6 +130,7 @@ function SlateGameRow({
         >
           <TeamLogo
             team={{
+              id: game.homeTeamId,
               logo: game.homeLogo,
               color: game.homeColor,
               alternateColor: game.homeAlternateColor,

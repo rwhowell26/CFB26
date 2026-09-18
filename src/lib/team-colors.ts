@@ -43,12 +43,43 @@ function usableFill(hex: string | null): string | null {
 const FALLBACK_FILL = "#1e293b";
 const DARK_FILL = 0.38;
 
-function pickFill(primary: string | null, secondary: string | null): string {
+/** Disc fills keyed by ESPN team id (overrides secondary-first default). */
+const FILL_OVERRIDES: Record<string, string> = {
+  "145": "#13294b", // Ole Miss navy
+  "87": "#062340", // Notre Dame navy
+  "258": "#232d4b", // Virginia navy
+  "259": "#6a2c3e", // Virginia Tech maroon
+  "167": "#ba0c2f", // New Mexico red
+  "2": "#002b5c", // Auburn navy
+  "235": "#004991", // Memphis blue
+  "344": "#5d1725", // Mississippi State maroon
+  "153": "#7bafd4", // North Carolina carolina blue
+  "256": "#450084", // James Madison purple
+  "66": "#ae192d", // Iowa State red
+  "2305": "#0051ba", // Kansas blue
+  "309": "#ce181e", // Louisiana red
+};
+
+/** Keep the default colored ESPN mark instead of the 500-dark (white) variant. */
+const LOGO_FORCE_COLOR = new Set(["197", "277"]); // Oklahoma State orange, West Virginia yellow
+
+function pickFill(primary: string | null, secondary: string | null, teamId?: string | null): string {
+  if (teamId && FILL_OVERRIDES[teamId]) return FILL_OVERRIDES[teamId];
   return usableFill(secondary) ?? usableFill(primary) ?? FALLBACK_FILL;
 }
 
+function colorLogoHref(href: string): string {
+  if (href.includes("/ncaa/500-dark/")) return href.replace("/ncaa/500-dark/", "/ncaa/500/");
+  return href;
+}
+
 /** ESPN's 500-dark marks are light-on-transparent; use them on dark discs. */
-export function espnContrastLogo(href: string, fillHex: string): string {
+export function espnContrastLogo(
+  href: string,
+  fillHex: string,
+  teamId?: string | null,
+): string {
+  if (teamId && LOGO_FORCE_COLOR.has(teamId)) return colorLogoHref(href);
   const darkFill = relativeLuminance(fillHex) < DARK_FILL;
   if (!darkFill) return href;
   if (href.includes("/ncaa/500-dark/")) return href;
@@ -64,10 +95,11 @@ export type LogoSwatch = {
 export function logoSwatch(
   color?: string | null,
   alternateColor?: string | null,
+  teamId?: string | null,
 ): LogoSwatch {
   const primary = normalizeHex(color);
   const secondary = normalizeHex(alternateColor);
-  const backgroundColor = pickFill(primary, secondary);
+  const backgroundColor = pickFill(primary, secondary, teamId);
   const darkFill = relativeLuminance(backgroundColor) < DARK_FILL;
   const ring = darkFill ? "rgba(255, 255, 255, 0.28)" : "rgba(20, 32, 26, 0.22)";
   return {
@@ -80,8 +112,9 @@ export function logoAppearance(
   color?: string | null,
   alternateColor?: string | null,
   logoHref?: string | null,
+  teamId?: string | null,
 ): { src: string | null; style: LogoSwatch } {
-  const style = logoSwatch(color, alternateColor);
-  const src = logoHref ? espnContrastLogo(logoHref, style.backgroundColor) : null;
+  const style = logoSwatch(color, alternateColor, teamId);
+  const src = logoHref ? espnContrastLogo(logoHref, style.backgroundColor, teamId) : null;
   return { src, style };
 }

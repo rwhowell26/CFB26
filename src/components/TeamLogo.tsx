@@ -3,6 +3,7 @@
 import { logoAppearance } from "@/lib/team-colors";
 
 export type TeamLogoSource = {
+  id?: string | null;
   logo?: string | null;
   abbreviation?: string;
   color?: string | null;
@@ -16,7 +17,7 @@ type Props = {
 };
 
 export function TeamLogo({ team, className = "", fallback }: Props) {
-  const { src, style } = logoAppearance(team.color, team.alternateColor, team.logo);
+  const { src, style } = logoAppearance(team.color, team.alternateColor, team.logo, team.id);
   const classes = ["team-logo", className].filter(Boolean).join(" ");
   const mark = fallback ?? team.abbreviation?.slice(0, 2) ?? "·";
 
