@@ -3,7 +3,7 @@ import { QuizHub } from "@/components/QuizHub";
 
 export const metadata: Metadata = {
   title: "Practice quizzes",
-  description: "Choose an ACCY practice quiz. Questions stay in the deck until you get them right twice in a row.",
+  description: "Choose a practice quiz. Questions stay in the deck until you get them right twice in a row.",
 };
 
 export default function QuizIndexPage() {
