@@ -1,0 +1,4992 @@
+{
+  "id": "it-audit-1",
+  "title": "IT Audit 1",
+  "subtitle": "Practice test",
+  "source": "Auditing review, OS, networks, databases, and integrated practice questions",
+  "questions": [
+    {
+      "id": 1,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Who is primarily responsible for adopting sound accounting policies, maintaining adequate internal controls, and making fair financial statement representations?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "External Auditors"
+        },
+        {
+          "letter": "B",
+          "text": "Internal Auditors"
+        },
+        {
+          "letter": "C",
+          "text": "Management"
+        },
+        {
+          "letter": "D",
+          "text": "The Audit Committee"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The correct answer is C: Management."
+    },
+    {
+      "id": 2,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Management certification of quarterly and annual financial statements by CEOs and CFOs is required for:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "All corporations globally"
+        },
+        {
+          "letter": "B",
+          "text": "U.S. public companies only"
+        },
+        {
+          "letter": "C",
+          "text": "Non-profit organizations only"
+        },
+        {
+          "letter": "D",
+          "text": "Private companies with over 500 employees"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: U.S. public companies only."
+    },
+    {
+      "id": 3,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "What is the primary objective of an external financial statement audit?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "To guarantee that no fraud has occurred within the company"
+        },
+        {
+          "letter": "B",
+          "text": "To design and implement the company's IT infrastructure"
+        },
+        {
+          "letter": "C",
+          "text": "To obtain reasonable assurance about whether financial statements are free from material misstatement and express an opinion"
+        },
+        {
+          "letter": "D",
+          "text": "To train internal auditors on regulatory compliance"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The correct answer is C: To obtain reasonable assurance about whether financial statements are free from material misstatement and express an opinion."
+    },
+    {
+      "id": 4,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "External auditors of U.S. public companies must provide an opinion on whether internal controls over financial reporting (ICFR) are effective for:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "U.S. public companies only"
+        },
+        {
+          "letter": "B",
+          "text": "Private entities only"
+        },
+        {
+          "letter": "C",
+          "text": "Governmental entities only"
+        },
+        {
+          "letter": "D",
+          "text": "All commercial entities"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: U.S. public companies only."
+    },
+    {
+      "id": 5,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Under PCAOB AS 2110, external auditors must obtain an understanding of the company’s information system related to financial reporting, specifically:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "How the company uses IT and how IT affects the financial statements"
+        },
+        {
+          "letter": "B",
+          "text": "The cost of all IT hardware purchased in the last 10 years"
+        },
+        {
+          "letter": "C",
+          "text": "The exact programming code of every application"
+        },
+        {
+          "letter": "D",
+          "text": "Personal social media profiles of IT executives"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: How the company uses IT and how IT affects the financial statements."
+    },
+    {
+      "id": 6,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Which organization issues Information Systems Auditing Standards (ISASs)?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "PCAOB"
+        },
+        {
+          "letter": "B",
+          "text": "AICPA"
+        },
+        {
+          "letter": "C",
+          "text": "ISACA"
+        },
+        {
+          "letter": "D",
+          "text": "COSO"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The correct answer is C: ISACA."
+    },
+    {
+      "id": 7,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Professional certification holders expected to comply with Information Systems Auditing Standards (ISASs) are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "CPAs"
+        },
+        {
+          "letter": "B",
+          "text": "CISAs"
+        },
+        {
+          "letter": "C",
+          "text": "CIAs"
+        },
+        {
+          "letter": "D",
+          "text": "CMAs"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: CISAs."
+    },
+    {
+      "id": 8,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Internal auditors can only assist external auditors in an audit engagement if they report directly to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The Chief Information Officer (CIO)"
+        },
+        {
+          "letter": "B",
+          "text": "The Chief Executive Officer (CEO)"
+        },
+        {
+          "letter": "C",
+          "text": "The Audit Committee"
+        },
+        {
+          "letter": "D",
+          "text": "The Treasurer"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The correct answer is C: The Audit Committee."
+    },
+    {
+      "id": 9,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "In the United States, an internal audit department is required for companies trading on the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "NASDAQ only"
+        },
+        {
+          "letter": "B",
+          "text": "New York Stock Exchange (NYSE)"
+        },
+        {
+          "letter": "C",
+          "text": "Over-The-Counter (OTC) Market"
+        },
+        {
+          "letter": "D",
+          "text": "Chicago Board Options Exchange"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: New York Stock Exchange (NYSE)."
+    },
+    {
+      "id": 10,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "According to the Institute of Internal Auditors, internal auditors are expected to evaluate:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "IT governance and effectiveness"
+        },
+        {
+          "letter": "B",
+          "text": "External auditor independence"
+        },
+        {
+          "letter": "C",
+          "text": "Tax compliance for international subsidiaries"
+        },
+        {
+          "letter": "D",
+          "text": "Product advertising strategies"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: IT governance and effectiveness."
+    },
+    {
+      "id": 11,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Which framework identifies 3 main objectives and 5 components of internal control?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "COBIT"
+        },
+        {
+          "letter": "B",
+          "text": "NIST"
+        },
+        {
+          "letter": "C",
+          "text": "COSO Internal Control Framework"
+        },
+        {
+          "letter": "D",
+          "text": "ISO 27001"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The correct answer is C: COSO Internal Control Framework."
+    },
+    {
+      "id": 12,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "The three main objectives of internal control on the COSO cube columns are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Operations, Reporting, Compliance"
+        },
+        {
+          "letter": "B",
+          "text": "Risk, Control, Monitoring"
+        },
+        {
+          "letter": "C",
+          "text": "Financial, Operational, IT General"
+        },
+        {
+          "letter": "D",
+          "text": "Planning, Testing, Reporting"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Operations, Reporting, Compliance."
+    },
+    {
+      "id": 13,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "How many fundamental principles map to the 5 components in the COSO framework?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "5"
+        },
+        {
+          "letter": "B",
+          "text": "10"
+        },
+        {
+          "letter": "C",
+          "text": "17"
+        },
+        {
+          "letter": "D",
+          "text": "25"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The correct answer is C: 17."
+    },
+    {
+      "id": 14,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "An example of a non-IT authorization control activity is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Requiring a physical signature before extending a customer’s credit limit"
+        },
+        {
+          "letter": "B",
+          "text": "Password complexity rules"
+        },
+        {
+          "letter": "C",
+          "text": "Firewall log reviews"
+        },
+        {
+          "letter": "D",
+          "text": "Daily database backups"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Requiring a physical signature before extending a customer’s credit limit."
+    },
+    {
+      "id": 15,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Separating transaction processing from transaction authorization is an example of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Independent verification"
+        },
+        {
+          "letter": "B",
+          "text": "Separation of duties"
+        },
+        {
+          "letter": "C",
+          "text": "Physical controls"
+        },
+        {
+          "letter": "D",
+          "text": "Supervision and reviews"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Separation of duties."
+    },
+    {
+      "id": 16,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "A supervisor signing off on a subordinate’s cash reconciliation work is a form of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Physical access control"
+        },
+        {
+          "letter": "B",
+          "text": "Supervision and review"
+        },
+        {
+          "letter": "C",
+          "text": "Automated application control"
+        },
+        {
+          "letter": "D",
+          "text": "Disaster recovery planning"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Supervision and review."
+    },
+    {
+      "id": 17,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Controls designed to reduce the frequency of undesirable events occurring are classified by intention as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Detective"
+        },
+        {
+          "letter": "B",
+          "text": "Corrective"
+        },
+        {
+          "letter": "C",
+          "text": "Preventive"
+        },
+        {
+          "letter": "D",
+          "text": "Compensating"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The correct answer is C: Preventive."
+    },
+    {
+      "id": 18,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Controls designed to identify and expose undesirable events that elude preventive controls are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Preventive"
+        },
+        {
+          "letter": "B",
+          "text": "Detective"
+        },
+        {
+          "letter": "C",
+          "text": "Corrective"
+        },
+        {
+          "letter": "D",
+          "text": "Environmental"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Detective."
+    },
+    {
+      "id": 19,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Controls designed to fix identified problems are categorized as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Preventive"
+        },
+        {
+          "letter": "B",
+          "text": "Detective"
+        },
+        {
+          "letter": "C",
+          "text": "Corrective"
+        },
+        {
+          "letter": "D",
+          "text": "General"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The correct answer is C: Corrective."
+    },
+    {
+      "id": 20,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Controls part of the underlying IT infrastructure upon which accounting systems depend are called:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Application Controls"
+        },
+        {
+          "letter": "B",
+          "text": "IT General Controls (ITGCs)"
+        },
+        {
+          "letter": "C",
+          "text": "Financial Controls"
+        },
+        {
+          "letter": "D",
+          "text": "Input Controls"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: IT General Controls (ITGCs)."
+    },
+    {
+      "id": 21,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "ITGCs are considered \"entity-level\" controls because they:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only apply to top executives"
+        },
+        {
+          "letter": "B",
+          "text": "Pertain to entity-wide IT infrastructure"
+        },
+        {
+          "letter": "C",
+          "text": "Replace all manual control procedures"
+        },
+        {
+          "letter": "D",
+          "text": "Apply strictly to paper document storage"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Pertain to entity-wide IT infrastructure."
+    },
+    {
+      "id": 22,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Transaction processing controls that are embedded directly within the Accounting Information System (AIS) are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "IT General Controls"
+        },
+        {
+          "letter": "B",
+          "text": "Application Controls"
+        },
+        {
+          "letter": "C",
+          "text": "Environmental Controls"
+        },
+        {
+          "letter": "D",
+          "text": "Access Controls"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Application Controls."
+    },
+    {
+      "id": 23,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Pervasive controls that mitigate the risk of unauthorized access across systems are known as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Access Controls"
+        },
+        {
+          "letter": "B",
+          "text": "Output Controls"
+        },
+        {
+          "letter": "C",
+          "text": "Construction Controls"
+        },
+        {
+          "letter": "D",
+          "text": "Location Controls"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Access Controls."
+    },
+    {
+      "id": 24,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "In the Audit Risk Model ($DR = AR / (IR \\times CR)$), if Control Risk ($CR$) decreases because controls are tested and effective, Detection Risk ($DR$) can:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Decrease"
+        },
+        {
+          "letter": "B",
+          "text": "Increase (allowing for audit efficiency)"
+        },
+        {
+          "letter": "C",
+          "text": "Remain strictly zero"
+        },
+        {
+          "letter": "D",
+          "text": "Double Detection Risk exponentially"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Increase (allowing for audit efficiency)."
+    },
+    {
+      "id": 25,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Exceptions discovered during tests of controls:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Always prove financial statement fraud"
+        },
+        {
+          "letter": "B",
+          "text": "Do not necessarily indicate a monetary misstatement"
+        },
+        {
+          "letter": "C",
+          "text": "Require immediate audit termination"
+        },
+        {
+          "letter": "D",
+          "text": "Automatically trigger a restatement of income"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Do not necessarily indicate a monetary misstatement."
+    },
+    {
+      "id": 26,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Substantive testing aimed at income statement transactions is known as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Substantive tests of details of account balances"
+        },
+        {
+          "letter": "B",
+          "text": "Substantive tests of transactions"
+        },
+        {
+          "letter": "C",
+          "text": "Tests of design effectiveness"
+        },
+        {
+          "letter": "D",
+          "text": "Environmental reviews"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Substantive tests of transactions."
+    },
+    {
+      "id": 27,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Substantive testing aimed at balance sheet accounts is known as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Substantive tests of account balances"
+        },
+        {
+          "letter": "B",
+          "text": "Substantive tests of transactions"
+        },
+        {
+          "letter": "C",
+          "text": "System architecture testing"
+        },
+        {
+          "letter": "D",
+          "text": "Walkthrough testing"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Substantive tests of account balances."
+    },
+    {
+      "id": 28,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Which assertion addresses whether recorded transactions actually occurred during the accounting period?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Completeness"
+        },
+        {
+          "letter": "B",
+          "text": "Occurrence"
+        },
+        {
+          "letter": "C",
+          "text": "Accuracy"
+        },
+        {
+          "letter": "D",
+          "text": "Cutoff"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Occurrence."
+    },
+    {
+      "id": 29,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Which assertion addresses whether all transactions that should have been recorded are actually recorded?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Existence"
+        },
+        {
+          "letter": "B",
+          "text": "Completeness"
+        },
+        {
+          "letter": "C",
+          "text": "Valuation"
+        },
+        {
+          "letter": "D",
+          "text": "Rights and Obligations"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Completeness."
+    },
+    {
+      "id": 30,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Which assertion ensures transactions are recorded in the proper accounting period?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Cutoff"
+        },
+        {
+          "letter": "B",
+          "text": "Classification"
+        },
+        {
+          "letter": "C",
+          "text": "Accuracy"
+        },
+        {
+          "letter": "D",
+          "text": "Existence"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Cutoff."
+    },
+    {
+      "id": 31,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Which assertion ensures recorded balance sheet assets exist at the balance sheet date?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Existence"
+        },
+        {
+          "letter": "B",
+          "text": "Completeness"
+        },
+        {
+          "letter": "C",
+          "text": "Rights & Obligations"
+        },
+        {
+          "letter": "D",
+          "text": "Valuation"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Existence."
+    },
+    {
+      "id": 32,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Which balance assertion addresses whether assets are the rights of the entity and liabilities are obligations of the entity?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Valuation"
+        },
+        {
+          "letter": "B",
+          "text": "Rights and Obligations"
+        },
+        {
+          "letter": "C",
+          "text": "Cutoff"
+        },
+        {
+          "letter": "D",
+          "text": "Occurrence"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Rights and Obligations."
+    },
+    {
+      "id": 33,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "In the client-server model, a server is best described as a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "User's local web browser"
+        },
+        {
+          "letter": "B",
+          "text": "Powerful host computer providing services to multiple client computers"
+        },
+        {
+          "letter": "C",
+          "text": "Physical wire connecting keyboard to monitor"
+        },
+        {
+          "letter": "D",
+          "text": "Peripheral backup printer"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Powerful host computer providing services to multiple client computers."
+    },
+    {
+      "id": 34,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "What step in the external audit cycle involves IT auditors working separately from the financial audit team?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Developing the audit plan"
+        },
+        {
+          "letter": "B",
+          "text": "Evaluation of internal controls"
+        },
+        {
+          "letter": "C",
+          "text": "Understanding the complexity of the entity’s IT"
+        },
+        {
+          "letter": "D",
+          "text": "Substantive testing"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The correct answer is C: Understanding the complexity of the entity’s IT."
+    },
+    {
+      "id": 35,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Providing management with IT-related recommendations at the end of an external audit cycle is performed by:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Financial audit team separately"
+        },
+        {
+          "letter": "B",
+          "text": "IT auditors separately from the financial audit team"
+        },
+        {
+          "letter": "C",
+          "text": "Client's internal audit team only"
+        },
+        {
+          "letter": "D",
+          "text": "External regulatory bodies"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: IT auditors separately from the financial audit team."
+    },
+    {
+      "id": 36,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "A substantive analytical procedure typically requires comparing a client's recorded balance against:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "An independently developed expectation"
+        },
+        {
+          "letter": "B",
+          "text": "Last week's log-in attempts"
+        },
+        {
+          "letter": "C",
+          "text": "The server's physical CPU temperature"
+        },
+        {
+          "letter": "D",
+          "text": "The system librarian's shift schedule"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: An independently developed expectation."
+    },
+    {
+      "id": 37,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Which COSO control component includes management’s tone at the top, ethical values, and organizational structure?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Monitoring"
+        },
+        {
+          "letter": "B",
+          "text": "Control Environment"
+        },
+        {
+          "letter": "C",
+          "text": "Control Activities"
+        },
+        {
+          "letter": "D",
+          "text": "Information and Communication"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Control Environment."
+    },
+    {
+      "id": 38,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Reperforming client control procedures is a procedure used during:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Substantive analytical testing"
+        },
+        {
+          "letter": "B",
+          "text": "Tests of controls"
+        },
+        {
+          "letter": "C",
+          "text": "Engagement letter negotiation"
+        },
+        {
+          "letter": "D",
+          "text": "Management assertion drafting"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Tests of controls."
+    },
+    {
+      "id": 39,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Physical controls over assets and records fall under which COSO component?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Risk Assessment"
+        },
+        {
+          "letter": "B",
+          "text": "Control Activities"
+        },
+        {
+          "letter": "C",
+          "text": "Monitoring"
+        },
+        {
+          "letter": "D",
+          "text": "Information & Communication"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Control Activities."
+    },
+    {
+      "id": 40,
+      "module": "Auditing Review & Intro to IT Audit",
+      "prompt": "Are PCAOB AS 2110 requirements regarding understanding IT controls relevant if the auditor plans a non-reliance (substantive) strategy?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "No, IT is completely ignored"
+        },
+        {
+          "letter": "B",
+          "text": "Yes, auditors must still understand IT to assess risk of material misstatement"
+        },
+        {
+          "letter": "C",
+          "text": "Only if the client uses cloud computing"
+        },
+        {
+          "letter": "D",
+          "text": "Only if requested by the internal audit team"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Yes, auditors must still understand IT to assess risk of material misstatement."
+    },
+    {
+      "id": 41,
+      "module": "Operating Systems (OS)",
+      "prompt": "Which of the following is NOT one of the three main tasks performed by an operating system?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Scheduling and prioritizing jobs"
+        },
+        {
+          "letter": "B",
+          "text": "Allocating computer resources"
+        },
+        {
+          "letter": "C",
+          "text": "Translating program language into machine-executable language"
+        },
+        {
+          "letter": "D",
+          "text": "Authorizing physical entry into the building server room"
+        }
+      ],
+      "answer": "D",
+      "explanation": "The correct answer is D: Authorizing physical entry into the building server room."
+    },
+    {
+      "id": 42,
+      "module": "Operating Systems (OS)",
+      "prompt": "Why is OS security critical to the Accounting Information System (AIS)?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "If OS integrity is compromised, application-level controls can be bypassed"
+        },
+        {
+          "letter": "B",
+          "text": "The OS contains physical paper records"
+        },
+        {
+          "letter": "C",
+          "text": "The OS replaces the need for a database management system"
+        },
+        {
+          "letter": "D",
+          "text": "The OS prevents power grid failure"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: If OS integrity is compromised, application-level controls can be bypassed."
+    },
+    {
+      "id": 43,
+      "module": "Operating Systems (OS)",
+      "prompt": "Which group of employees typically poses the highest threat to OS security due to elevated privileges?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Entry-level data entry clerks"
+        },
+        {
+          "letter": "B",
+          "text": "Power users / system administrators"
+        },
+        {
+          "letter": "C",
+          "text": "External sales representatives"
+        },
+        {
+          "letter": "D",
+          "text": "Physical security guards"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Power users / system administrators."
+    },
+    {
+      "id": 44,
+      "module": "Operating Systems (OS)",
+      "prompt": "Password policies requiring at least 14 characters apply primarily to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Multi-factor authentication PINs"
+        },
+        {
+          "letter": "B",
+          "text": "Reusable passwords"
+        },
+        {
+          "letter": "C",
+          "text": "One-time passcodes"
+        },
+        {
+          "letter": "D",
+          "text": "Database queries"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Reusable passwords."
+    },
+    {
+      "id": 45,
+      "module": "Operating Systems (OS)",
+      "prompt": "For multi-factor authentication (MFA), the recommended minimum password length according to CIS guidelines is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "4 characters"
+        },
+        {
+          "letter": "B",
+          "text": "8 characters"
+        },
+        {
+          "letter": "C",
+          "text": "14 characters"
+        },
+        {
+          "letter": "D",
+          "text": "20 characters"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: 8 characters."
+    },
+    {
+      "id": 46,
+      "module": "Operating Systems (OS)",
+      "prompt": "Passwords that are defined once and reused over a specific timeframe (e.g., 6 weeks) are called:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "One-time passwords"
+        },
+        {
+          "letter": "B",
+          "text": "Reusable passwords"
+        },
+        {
+          "letter": "C",
+          "text": "Dynamic tokens"
+        },
+        {
+          "letter": "D",
+          "text": "Biometric keys"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Reusable passwords."
+    },
+    {
+      "id": 47,
+      "module": "Operating Systems (OS)",
+      "prompt": "An RSA token that generates a dynamic code paired with a PIN is an example of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Single-factor authentication"
+        },
+        {
+          "letter": "B",
+          "text": "Reusable credentialing"
+        },
+        {
+          "letter": "C",
+          "text": "Multi-factor authentication (MFA) / One-time password"
+        },
+        {
+          "letter": "D",
+          "text": "Physical construction control"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The correct answer is C: Multi-factor authentication (MFA) / One-time password."
+    },
+    {
+      "id": 48,
+      "module": "Operating Systems (OS)",
+      "prompt": "What is considered the \"gold standard\" for text-based authentication credentials?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Simple 6-digit PINs"
+        },
+        {
+          "letter": "B",
+          "text": "Standard single words"
+        },
+        {
+          "letter": "C",
+          "text": "Passphrases"
+        },
+        {
+          "letter": "D",
+          "text": "User birthday dates"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The correct answer is C: Passphrases."
+    },
+    {
+      "id": 49,
+      "module": "Operating Systems (OS)",
+      "prompt": "Combining fingerprint recognition and facial recognition in a single access mechanism is known as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Dual-factor tokenization"
+        },
+        {
+          "letter": "B",
+          "text": "Multimodal biometric authentication"
+        },
+        {
+          "letter": "C",
+          "text": "Reusable biometric matching"
+        },
+        {
+          "letter": "D",
+          "text": "Asymmetric authorization"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Multimodal biometric authentication."
+    },
+    {
+      "id": 50,
+      "module": "Operating Systems (OS)",
+      "prompt": "Best practice for storing OS password files involves:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Plain text files in root directory"
+        },
+        {
+          "letter": "B",
+          "text": "Encrypting or hashing"
+        },
+        {
+          "letter": "C",
+          "text": "Storing on public websites"
+        },
+        {
+          "letter": "D",
+          "text": "Printing hard copies for the librarian"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Encrypting or hashing."
+    },
+    {
+      "id": 51,
+      "module": "Operating Systems (OS)",
+      "prompt": "A cryptographic process that transforms input data into a fixed-length output string and is irreversible is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Symmetric encryption"
+        },
+        {
+          "letter": "B",
+          "text": "Hashing"
+        },
+        {
+          "letter": "C",
+          "text": "Masking"
+        },
+        {
+          "letter": "D",
+          "text": "Token swapping"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Hashing."
+    },
+    {
+      "id": 52,
+      "module": "Operating Systems (OS)",
+      "prompt": "Audit trails that log every individual action and character entered by a user are performing:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Event monitoring"
+        },
+        {
+          "letter": "B",
+          "text": "Keystroke monitoring"
+        },
+        {
+          "letter": "C",
+          "text": "Echo checking"
+        },
+        {
+          "letter": "D",
+          "text": "Parity checking"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Keystroke monitoring."
+    },
+    {
+      "id": 53,
+      "module": "Operating Systems (OS)",
+      "prompt": "Audit trails that summarize key activities and system resources accessed are performing:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Event monitoring"
+        },
+        {
+          "letter": "B",
+          "text": "Keystroke logging"
+        },
+        {
+          "letter": "C",
+          "text": "Packet sniffing"
+        },
+        {
+          "letter": "D",
+          "text": "Buffer overflowing"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Event monitoring."
+    },
+    {
+      "id": 54,
+      "module": "Operating Systems (OS)",
+      "prompt": "How do auditors verify that OS access privileges are appropriate?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "By allowing all employees admin rights during testing"
+        },
+        {
+          "letter": "B",
+          "text": "By sampling users and checking access against job functions"
+        },
+        {
+          "letter": "C",
+          "text": "By shutting down the server during operating hours"
+        },
+        {
+          "letter": "D",
+          "text": "By disabling anti-virus software"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: By sampling users and checking access against job functions."
+    },
+    {
+      "id": 55,
+      "module": "Operating Systems (OS)",
+      "prompt": "Preventing users from installing unauthorized software on company computers mitigates the threat of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Hardware overheating"
+        },
+        {
+          "letter": "B",
+          "text": "Malicious/destructive programs"
+        },
+        {
+          "letter": "C",
+          "text": "Natural disasters"
+        },
+        {
+          "letter": "D",
+          "text": "Power surges"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Malicious/destructive programs."
+    },
+    {
+      "id": 56,
+      "module": "Operating Systems (OS)",
+      "prompt": "What is a key drawback of biometric authentication devices?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "They cannot be integrated with systems"
+        },
+        {
+          "letter": "B",
+          "text": "Privacy concerns, false acceptance/rejection rates, and cost"
+        },
+        {
+          "letter": "C",
+          "text": "They require users to memorize 20-digit codes"
+        },
+        {
+          "letter": "D",
+          "text": "They are strictly prohibited by auditing standards"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Privacy concerns, false acceptance/rejection rates, and cost."
+    },
+    {
+      "id": 57,
+      "module": "Operating Systems (OS)",
+      "prompt": "How do auditors test whether OS audit trail controls are effective?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Inspecting architectural blueprints"
+        },
+        {
+          "letter": "B",
+          "text": "Observing whether trails are enabled and scanning logs for unusual activity"
+        },
+        {
+          "letter": "C",
+          "text": "Testing fire suppression systems"
+        },
+        {
+          "letter": "D",
+          "text": "Reviewing employee credit scores"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Observing whether trails are enabled and scanning logs for unusual activity."
+    },
+    {
+      "id": 58,
+      "module": "Operating Systems (OS)",
+      "prompt": "An accidental threat to an operating system includes:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "System admin deliberately deleting logs"
+        },
+        {
+          "letter": "B",
+          "text": "OS crash due to hardware malfunction"
+        },
+        {
+          "letter": "C",
+          "text": "Hacker launching a ransomware attack"
+        },
+        {
+          "letter": "D",
+          "text": "Unauthorized user stealing hard drives"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: OS crash due to hardware malfunction."
+    },
+    {
+      "id": 59,
+      "module": "Operating Systems (OS)",
+      "prompt": "Password policies should explicitly prohibit credentials using:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Passphrases"
+        },
+        {
+          "letter": "B",
+          "text": "Personal information (e.g., pet names, birth dates)"
+        },
+        {
+          "letter": "C",
+          "text": "Random symbols"
+        },
+        {
+          "letter": "D",
+          "text": "Mixed capitalization"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Personal information (e.g., pet names, birth dates)."
+    },
+    {
+      "id": 60,
+      "module": "Operating Systems (OS)",
+      "prompt": "Routine anti-virus software updates are designed to prevent:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Denial of Service attacks on routers"
+        },
+        {
+          "letter": "B",
+          "text": "Malicious program execution"
+        },
+        {
+          "letter": "C",
+          "text": "Unauthorized physical access"
+        },
+        {
+          "letter": "D",
+          "text": "Database schema alteration"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Malicious program execution."
+    },
+    {
+      "id": 61,
+      "module": "Networks",
+      "prompt": "A network covering a small geographic area such as a single office building is a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "WAN"
+        },
+        {
+          "letter": "B",
+          "text": "LAN (Local Area Network)"
+        },
+        {
+          "letter": "C",
+          "text": "MAN"
+        },
+        {
+          "letter": "D",
+          "text": "Internet"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: LAN (Local Area Network)."
+    },
+    {
+      "id": 62,
+      "module": "Networks",
+      "prompt": "A network covering large geographic locations across multiple sites or cities is a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "LAN"
+        },
+        {
+          "letter": "B",
+          "text": "WAN (Wide Area Network)"
+        },
+        {
+          "letter": "C",
+          "text": "Intranet"
+        },
+        {
+          "letter": "D",
+          "text": "SAN"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: WAN (Wide Area Network)."
+    },
+    {
+      "id": 63,
+      "module": "Networks",
+      "prompt": "A restricted, closed network accessible only to a specific internal group is an:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Internet"
+        },
+        {
+          "letter": "B",
+          "text": "Extranet"
+        },
+        {
+          "letter": "C",
+          "text": "Intranet"
+        },
+        {
+          "letter": "D",
+          "text": "Open WiFi network"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The correct answer is C: Intranet."
+    },
+    {
+      "id": 64,
+      "module": "Networks",
+      "prompt": "Individual computers or peripheral devices (like printers) connected to a network are called:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Routers"
+        },
+        {
+          "letter": "B",
+          "text": "Nodes"
+        },
+        {
+          "letter": "C",
+          "text": "Switches"
+        },
+        {
+          "letter": "D",
+          "text": "Gateways"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Nodes."
+    },
+    {
+      "id": 65,
+      "module": "Networks",
+      "prompt": "Which network hardware component configures connections to optimize and preserve network bandwidth?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Router"
+        },
+        {
+          "letter": "B",
+          "text": "Switch"
+        },
+        {
+          "letter": "C",
+          "text": "Fire extinguisher"
+        },
+        {
+          "letter": "D",
+          "text": "Modem"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Switch."
+    },
+    {
+      "id": 66,
+      "module": "Networks",
+      "prompt": "Which network component selects the most efficient path for transmitting data messages?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Node"
+        },
+        {
+          "letter": "B",
+          "text": "Router"
+        },
+        {
+          "letter": "C",
+          "text": "Switch"
+        },
+        {
+          "letter": "D",
+          "text": "Bridge"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Router."
+    },
+    {
+      "id": 67,
+      "module": "Networks",
+      "prompt": "Data transmissions over networks are chopped into smaller pieces called:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Nodes"
+        },
+        {
+          "letter": "B",
+          "text": "Bytes"
+        },
+        {
+          "letter": "C",
+          "text": "Packets"
+        },
+        {
+          "letter": "D",
+          "text": "Tokens"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The correct answer is C: Packets."
+    },
+    {
+      "id": 68,
+      "module": "Networks",
+      "prompt": "A firewall technique that permits or blocks incoming and outgoing packets based on IP addresses is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Packet filtering"
+        },
+        {
+          "letter": "B",
+          "text": "Keystroke logging"
+        },
+        {
+          "letter": "C",
+          "text": "Parity checking"
+        },
+        {
+          "letter": "D",
+          "text": "Echo checking"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Packet filtering."
+    },
+    {
+      "id": 69,
+      "module": "Networks",
+      "prompt": "A system designed to evaluate packet contents against a database of known signatures to block malicious traffic is an:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Intrusion Prevention System (IPS)"
+        },
+        {
+          "letter": "B",
+          "text": "Uninterruptible Power Supply (UPS)"
+        },
+        {
+          "letter": "C",
+          "text": "Access Control Matrix"
+        },
+        {
+          "letter": "D",
+          "text": "Application Server"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Intrusion Prevention System (IPS)."
+    },
+    {
+      "id": 70,
+      "module": "Networks",
+      "prompt": "In public key (asymmetric) encryption, data encrypted with a public key can only be decrypted using:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The same public key"
+        },
+        {
+          "letter": "B",
+          "text": "The receiver's private key"
+        },
+        {
+          "letter": "C",
+          "text": "A hash digest"
+        },
+        {
+          "letter": "D",
+          "text": "An echo check"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: The receiver's private key."
+    },
+    {
+      "id": 71,
+      "module": "Networks",
+      "prompt": "Digital certificates are issued by a trusted third party known as a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Database Administrator"
+        },
+        {
+          "letter": "B",
+          "text": "Certification Authority (CA)"
+        },
+        {
+          "letter": "C",
+          "text": "Program Librarian"
+        },
+        {
+          "letter": "D",
+          "text": "Network Interface Card"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Certification Authority (CA)."
+    },
+    {
+      "id": 72,
+      "module": "Networks",
+      "prompt": "To ensure that network messages have not been deleted, duplicated, or reordered, companies implement:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Message Sequence Numbering"
+        },
+        {
+          "letter": "B",
+          "text": "Parity Checking"
+        },
+        {
+          "letter": "C",
+          "text": "Echo Checking"
+        },
+        {
+          "letter": "D",
+          "text": "Firewalls"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Message Sequence Numbering."
+    },
+    {
+      "id": 73,
+      "module": "Networks",
+      "prompt": "A technique where the receiver returns a copy of the received message to the sender for comparison is an:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Echo Check"
+        },
+        {
+          "letter": "B",
+          "text": "Parity Check"
+        },
+        {
+          "letter": "C",
+          "text": "Request-Response Technique"
+        },
+        {
+          "letter": "D",
+          "text": "Indirect Verification"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Echo Check."
+    },
+    {
+      "id": 74,
+      "module": "Networks",
+      "prompt": "Parity checks add a bit to data packets to test whether the sum of 1s in the transmission is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Greater than 100"
+        },
+        {
+          "letter": "B",
+          "text": "Odd or even"
+        },
+        {
+          "letter": "C",
+          "text": "Equal to zero"
+        },
+        {
+          "letter": "D",
+          "text": "Negative"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Odd or even."
+    },
+    {
+      "id": 75,
+      "module": "Networks",
+      "prompt": "What emerging technology poses a significant threat to current public key encryption schemes due to immense decryption capabilities?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Optical storage"
+        },
+        {
+          "letter": "B",
+          "text": "Quantum computing"
+        },
+        {
+          "letter": "C",
+          "text": "Solid State Drives"
+        },
+        {
+          "letter": "D",
+          "text": "Magnetic Core Memory"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Quantum computing."
+    },
+    {
+      "id": 76,
+      "module": "Networks",
+      "prompt": "Embedding hidden identification details into standard multimedia files to protect copyright is called:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Watermarking"
+        },
+        {
+          "letter": "B",
+          "text": "Masking"
+        },
+        {
+          "letter": "C",
+          "text": "Hashing"
+        },
+        {
+          "letter": "D",
+          "text": "Tokenization"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Watermarking."
+    },
+    {
+      "id": 77,
+      "module": "Networks",
+      "prompt": "An attack designed to flood a network server with traffic so legitimate users cannot access services is a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "SQL Injection"
+        },
+        {
+          "letter": "B",
+          "text": "Denial of Service (DoS) attack"
+        },
+        {
+          "letter": "C",
+          "text": "Buffer Overflow"
+        },
+        {
+          "letter": "D",
+          "text": "Cross-Site Scripting"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Denial of Service (DoS) attack."
+    },
+    {
+      "id": 78,
+      "module": "Networks",
+      "prompt": "Periodic control messages sent across a network to verify that connections are active and unintercepted are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Request-Response Techniques"
+        },
+        {
+          "letter": "B",
+          "text": "Parity Bits"
+        },
+        {
+          "letter": "C",
+          "text": "Watermarks"
+        },
+        {
+          "letter": "D",
+          "text": "Digital Signatures"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Request-Response Techniques."
+    },
+    {
+      "id": 79,
+      "module": "Networks",
+      "prompt": "Network risk caused by internal employees improperly altering sensitive data on the corporate network is an:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Intranet risk"
+        },
+        {
+          "letter": "B",
+          "text": "External perimeter threat"
+        },
+        {
+          "letter": "C",
+          "text": "Internet physical failure"
+        },
+        {
+          "letter": "D",
+          "text": "Empty shell hazard"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Intranet risk."
+    },
+    {
+      "id": 80,
+      "module": "Networks",
+      "prompt": "How do auditors test network equipment failure controls?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Reviewing employee credit reports"
+        },
+        {
+          "letter": "B",
+          "text": "Inquiring/observing echo or parity checks and reviewing transaction logs for transmission errors"
+        },
+        {
+          "letter": "C",
+          "text": "Inspecting perimeter security fences"
+        },
+        {
+          "letter": "D",
+          "text": "Reviewing user views in SQL"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Inquiring/observing echo or parity checks and reviewing transaction logs for transmission errors."
+    },
+    {
+      "id": 81,
+      "module": "Databases",
+      "prompt": "An organization’s database is defined as a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Collection of physical paper filing cabinets"
+        },
+        {
+          "letter": "B",
+          "text": "Structured set of digitally stored data"
+        },
+        {
+          "letter": "C",
+          "text": "Single Excel spreadsheet saved locally"
+        },
+        {
+          "letter": "D",
+          "text": "Computer center cooling unit"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Structured set of digitally stored data."
+    },
+    {
+      "id": 82,
+      "module": "Databases",
+      "prompt": "What is a primary disadvantage of the traditional flat-file database approach?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Extreme speed of multi-user data sharing"
+        },
+        {
+          "letter": "B",
+          "text": "Data redundancy, inefficiency, and inconsistency"
+        },
+        {
+          "letter": "C",
+          "text": "Built-in SQL query generation"
+        },
+        {
+          "letter": "D",
+          "text": "Automatic cloud back-ups"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Data redundancy, inefficiency, and inconsistency."
+    },
+    {
+      "id": 83,
+      "module": "Databases",
+      "prompt": "Under the Database Management System (DBMS) approach, data is stored:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Multiple times across every user's C-drive"
+        },
+        {
+          "letter": "B",
+          "text": "Once, reducing redundancy and update conflicts"
+        },
+        {
+          "letter": "C",
+          "text": "Exclusively on magnetic tape"
+        },
+        {
+          "letter": "D",
+          "text": "In hard copy binders"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Once, reducing redundancy and update conflicts."
+    },
+    {
+      "id": 84,
+      "module": "Databases",
+      "prompt": "The specialized programming language used by a DBMS to define user permissions and database structures is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Data Definition Language (DDL)"
+        },
+        {
+          "letter": "B",
+          "text": "Python"
+        },
+        {
+          "letter": "C",
+          "text": "HTML"
+        },
+        {
+          "letter": "D",
+          "text": "C++"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Data Definition Language (DDL)."
+    },
+    {
+      "id": 85,
+      "module": "Databases",
+      "prompt": "The level of database view that describes how data is physically stored on media is the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "User view / Subschema"
+        },
+        {
+          "letter": "B",
+          "text": "Conceptual view / Schema"
+        },
+        {
+          "letter": "C",
+          "text": "Physical internal view"
+        },
+        {
+          "letter": "D",
+          "text": "Network layer"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The correct answer is C: Physical internal view."
+    },
+    {
+      "id": 86,
+      "module": "Databases",
+      "prompt": "The level of database view defining the specific subsets of data visible to individual end-users is the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Subschema / User View"
+        },
+        {
+          "letter": "B",
+          "text": "Internal view"
+        },
+        {
+          "letter": "C",
+          "text": "Physical schema"
+        },
+        {
+          "letter": "D",
+          "text": "Core memory view"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Subschema / User View."
+    },
+    {
+      "id": 87,
+      "module": "Databases",
+      "prompt": "Relational databases link data files across tables using:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Physical location coordinates"
+        },
+        {
+          "letter": "B",
+          "text": "Common key fields"
+        },
+        {
+          "letter": "C",
+          "text": "Keystroke records"
+        },
+        {
+          "letter": "D",
+          "text": "IP addresses"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Common key fields."
+    },
+    {
+      "id": 88,
+      "module": "Databases",
+      "prompt": "The standard language used for querying relational databases is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "DDL"
+        },
+        {
+          "letter": "B",
+          "text": "SQL (Structured Query Language)"
+        },
+        {
+          "letter": "C",
+          "text": "Alteryx"
+        },
+        {
+          "letter": "D",
+          "text": "HTML"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: SQL (Structured Query Language)."
+    },
+    {
+      "id": 89,
+      "module": "Databases",
+      "prompt": "To prevent unauthorized access, a DBMS checks user requests against a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Building access log"
+        },
+        {
+          "letter": "B",
+          "text": "Data authorization table"
+        },
+        {
+          "letter": "C",
+          "text": "Fire marshal report"
+        },
+        {
+          "letter": "D",
+          "text": "DRP manual"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Data authorization table."
+    },
+    {
+      "id": 90,
+      "module": "Databases",
+      "prompt": "A control that prevents users from deducing unauthorized sensitive statistics by restricting queries returning very few records is an:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Access Control"
+        },
+        {
+          "letter": "B",
+          "text": "Inference Control"
+        },
+        {
+          "letter": "C",
+          "text": "Equipment Failure Control"
+        },
+        {
+          "letter": "D",
+          "text": "Echo Control"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Inference Control."
+    },
+    {
+      "id": 91,
+      "module": "Databases",
+      "prompt": "Under inference controls, a query result returning fewer than 2 records will generally be:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Displayed with a warning"
+        },
+        {
+          "letter": "B",
+          "text": "Blocked/Suppressed by the system"
+        },
+        {
+          "letter": "C",
+          "text": "Sent to the external auditor"
+        },
+        {
+          "letter": "D",
+          "text": "Automatically deleted from the drive"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Blocked/Suppressed by the system."
+    },
+    {
+      "id": 92,
+      "module": "Databases",
+      "prompt": "Masking sensitive data (such as showing an SSN as xxx-xx-1234) protects data:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "In transit over local switches only"
+        },
+        {
+          "letter": "B",
+          "text": "By obfuscating sensitive content in end-user views"
+        },
+        {
+          "letter": "C",
+          "text": "By converting files into magnetic core loops"
+        },
+        {
+          "letter": "D",
+          "text": "By eliminating the need for passwords"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: By obfuscating sensitive content in end-user views."
+    },
+    {
+      "id": 93,
+      "module": "Databases",
+      "prompt": "Who should hold exclusive responsibility for designing user views and updating the data authorization table?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Any system user"
+        },
+        {
+          "letter": "B",
+          "text": "External audit staff"
+        },
+        {
+          "letter": "C",
+          "text": "Database Administrator (DBA)"
+        },
+        {
+          "letter": "D",
+          "text": "Chief Financial Officer"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The correct answer is C: Database Administrator (DBA)."
+    },
+    {
+      "id": 94,
+      "module": "Databases",
+      "prompt": "How do auditors verify that DBAs maintain proper separation of duties?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Reviewing access logs to confirm only DBAs program user views and checking job descriptions"
+        },
+        {
+          "letter": "B",
+          "text": "Testing fire alarms"
+        },
+        {
+          "letter": "C",
+          "text": "Inspecting building construction materials"
+        },
+        {
+          "letter": "D",
+          "text": "Running network speed tests"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Reviewing access logs to confirm only DBAs program user views and checking job descriptions."
+    },
+    {
+      "id": 95,
+      "module": "Databases",
+      "prompt": "Database backup controls require creating a full copy of the database at least:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Once a year"
+        },
+        {
+          "letter": "B",
+          "text": "Once a month"
+        },
+        {
+          "letter": "C",
+          "text": "Once a day (or more frequently)"
+        },
+        {
+          "letter": "D",
+          "text": "Every 5 years"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The correct answer is C: Once a day (or more frequently)."
+    },
+    {
+      "id": 96,
+      "module": "Databases",
+      "prompt": "Modern physical data storage in solid-state drives (SSDs) relies on:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Vacuum tubes"
+        },
+        {
+          "letter": "B",
+          "text": "Silicon integrated circuits"
+        },
+        {
+          "letter": "C",
+          "text": "Stacks of rotating metal discs with magnetic spots"
+        },
+        {
+          "letter": "D",
+          "text": "Magnetic core wire loops"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Silicon integrated circuits."
+    },
+    {
+      "id": 97,
+      "module": "Databases",
+      "prompt": "Older physical storage consisting of metal discs with magnetic spots written on them describes:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Solid State Drives"
+        },
+        {
+          "letter": "B",
+          "text": "Hard Disks"
+        },
+        {
+          "letter": "C",
+          "text": "Core Memory"
+        },
+        {
+          "letter": "D",
+          "text": "Optical Flash"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Hard Disks."
+    },
+    {
+      "id": 98,
+      "module": "Databases",
+      "prompt": "Storing backup copies of physical data files must occur:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "In the server room directly on top of the host rack"
+        },
+        {
+          "letter": "B",
+          "text": "At an off-site location"
+        },
+        {
+          "letter": "C",
+          "text": "On the CEO's personal desktop"
+        },
+        {
+          "letter": "D",
+          "text": "In the employee breakroom"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: At an off-site location."
+    },
+    {
+      "id": 99,
+      "module": "Databases",
+      "prompt": "If a database is corrupted or compromised, what is the immediate impact on the AIS?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The AIS continues running without impact"
+        },
+        {
+          "letter": "B",
+          "text": "The AIS fails because it depends directly on the database"
+        },
+        {
+          "letter": "C",
+          "text": "The AIS converts to paper mode automatically"
+        },
+        {
+          "letter": "D",
+          "text": "The network bandwidth doubles"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: The AIS fails because it depends directly on the database."
+    },
+    {
+      "id": 100,
+      "module": "Databases",
+      "prompt": "Audit testing of inference controls involves:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Inspecting water pipes in the basement"
+        },
+        {
+          "letter": "B",
+          "text": "Performing interviews and attempting to \"back into\" sensitive data via creative queries"
+        },
+        {
+          "letter": "C",
+          "text": "Reviewing employee background check files"
+        },
+        {
+          "letter": "D",
+          "text": "Checking router configurations"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Performing interviews and attempting to \"back into\" sensitive data via creative queries."
+    },
+    {
+      "id": 101,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "Who should initiate system change requests?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Systems programmers"
+        },
+        {
+          "letter": "B",
+          "text": "End-users responsible for specifying business needs"
+        },
+        {
+          "letter": "C",
+          "text": "External audit staff"
+        },
+        {
+          "letter": "D",
+          "text": "System librarians"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: End-users responsible for specifying business needs."
+    },
+    {
+      "id": 102,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "Requests for low-risk IT changes generally require authorization review by:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "High-level executive steering committees"
+        },
+        {
+          "letter": "B",
+          "text": "Low-level IT personnel"
+        },
+        {
+          "letter": "C",
+          "text": "The Board of Directors"
+        },
+        {
+          "letter": "D",
+          "text": "External regulatory bodies"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Low-level IT personnel."
+    },
+    {
+      "id": 103,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "System changes should be rigorously tested in which environment prior to live deployment?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Production environment"
+        },
+        {
+          "letter": "B",
+          "text": "Development environment"
+        },
+        {
+          "letter": "C",
+          "text": "Alternate cold site"
+        },
+        {
+          "letter": "D",
+          "text": "Disaster recovery vault"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Development environment."
+    },
+    {
+      "id": 104,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "The live software environment used to run daily business operations is the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Development environment"
+        },
+        {
+          "letter": "B",
+          "text": "Production environment"
+        },
+        {
+          "letter": "C",
+          "text": "Staging sandbox"
+        },
+        {
+          "letter": "D",
+          "text": "Test environment"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Production environment."
+    },
+    {
+      "id": 105,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "Programmers should NOT have regular, unrestricted access to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Development environments"
+        },
+        {
+          "letter": "B",
+          "text": "Production environment source code"
+        },
+        {
+          "letter": "C",
+          "text": "Programming manuals"
+        },
+        {
+          "letter": "D",
+          "text": "User training documentation"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Production environment source code."
+    },
+    {
+      "id": 106,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "Who controls access to production environments and grants temporary passwords after receiving testing proof?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Database Administrator"
+        },
+        {
+          "letter": "B",
+          "text": "Program Librarian"
+        },
+        {
+          "letter": "C",
+          "text": "Chief Executive Officer"
+        },
+        {
+          "letter": "D",
+          "text": "Network Administrator"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Program Librarian."
+    },
+    {
+      "id": 107,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "An development methodology characterized by quick, iterative, incremental software modifications is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Waterfall change"
+        },
+        {
+          "letter": "B",
+          "text": "Agile change"
+        },
+        {
+          "letter": "C",
+          "text": "Static change"
+        },
+        {
+          "letter": "D",
+          "text": "Batch processing"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Agile change."
+    },
+    {
+      "id": 108,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "How do auditors test change management controls?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Inspecting water sprinklers"
+        },
+        {
+          "letter": "B",
+          "text": "Selecting a sample of changes to verify user initiation, authorization, and testing"
+        },
+        {
+          "letter": "C",
+          "text": "Reviewing employee payroll deductions"
+        },
+        {
+          "letter": "D",
+          "text": "Testing biometric eye scanners"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Selecting a sample of changes to verify user initiation, authorization, and testing."
+    },
+    {
+      "id": 109,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "To reduce flood and foot-traffic risks, a computer center should ideally be located:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "In a basement room"
+        },
+        {
+          "letter": "B",
+          "text": "On a top floor or raised floor of its own building"
+        },
+        {
+          "letter": "C",
+          "text": "Next to a main water line"
+        },
+        {
+          "letter": "D",
+          "text": "In a shared cafeteria"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: On a top floor or raised floor of its own building."
+    },
+    {
+      "id": 110,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "Computer center building construction controls mandate that windows should:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Open wide for natural ventilation"
+        },
+        {
+          "letter": "B",
+          "text": "Not open"
+        },
+        {
+          "letter": "C",
+          "text": "Be made of standard single-pane glass"
+        },
+        {
+          "letter": "D",
+          "text": "Face high-hazard chemical storage"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Not open."
+    },
+    {
+      "id": 111,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "High humidity levels in a data center environment primarily increase the risk of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Static electricity buildup"
+        },
+        {
+          "letter": "B",
+          "text": "Mold growth"
+        },
+        {
+          "letter": "C",
+          "text": "Excessive CPU speed"
+        },
+        {
+          "letter": "D",
+          "text": "Gas line explosions"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Mold growth."
+    },
+    {
+      "id": 112,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "Low humidity levels in a computer center increase the risk of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Mold growth"
+        },
+        {
+          "letter": "B",
+          "text": "Static electricity"
+        },
+        {
+          "letter": "C",
+          "text": "Water pipe bursting"
+        },
+        {
+          "letter": "D",
+          "text": "System freezing"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Static electricity."
+    },
+    {
+      "id": 113,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "An uninterruptible power supply (UPS) such as a generator acts as a control against:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Cyber phishing"
+        },
+        {
+          "letter": "B",
+          "text": "Power outages and utility failures"
+        },
+        {
+          "letter": "C",
+          "text": "Data redundancy"
+        },
+        {
+          "letter": "D",
+          "text": "Keystroke logging"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Power outages and utility failures."
+    },
+    {
+      "id": 114,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "A system's capacity to continue operating smoothly even when a component fails is called:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Multitenancy"
+        },
+        {
+          "letter": "B",
+          "text": "Fault tolerance"
+        },
+        {
+          "letter": "C",
+          "text": "High latency"
+        },
+        {
+          "letter": "D",
+          "text": "Single point of failure"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Fault tolerance."
+    },
+    {
+      "id": 115,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "Redundant Array of Independent Disks (RAID) uses multiple hard drives to enable error recovery via:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Hot-swapping"
+        },
+        {
+          "letter": "B",
+          "text": "Cold sites"
+        },
+        {
+          "letter": "C",
+          "text": "Batch updating"
+        },
+        {
+          "letter": "D",
+          "text": "Manual data entry"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Hot-swapping."
+    },
+    {
+      "id": 116,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "The general industry benchmark timeframe target for business recovery following a disaster is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "1 hour"
+        },
+        {
+          "letter": "B",
+          "text": "72 hours (3 days)"
+        },
+        {
+          "letter": "C",
+          "text": "30 days"
+        },
+        {
+          "letter": "D",
+          "text": "6 months"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: 72 hours (3 days)."
+    },
+    {
+      "id": 117,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "A formal set of enterprise-wide procedures designed to restore normal operations after a disaster is a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Incident Response Plan"
+        },
+        {
+          "letter": "B",
+          "text": "Disaster Recovery Plan (DRP)"
+        },
+        {
+          "letter": "C",
+          "text": "Maintenance log"
+        },
+        {
+          "letter": "D",
+          "text": "Service Level Agreement"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Disaster Recovery Plan (DRP)."
+    },
+    {
+      "id": 118,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "Plans focused specifically on maintaining continuous business operations during an ongoing disaster are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Incident Response Plans"
+        },
+        {
+          "letter": "B",
+          "text": "Business Continuity / Contingency Plans"
+        },
+        {
+          "letter": "C",
+          "text": "System subschemas"
+        },
+        {
+          "letter": "D",
+          "text": "Physical access logs"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Business Continuity / Contingency Plans."
+    },
+    {
+      "id": 119,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "Plans focused on rapidly detecting and containing security incidents (like a data breach) to minimize damage are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Disaster Recovery Plans"
+        },
+        {
+          "letter": "B",
+          "text": "Incident Response (IR) Plans"
+        },
+        {
+          "letter": "C",
+          "text": "Physical construction plans"
+        },
+        {
+          "letter": "D",
+          "text": "Database schema plans"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Incident Response (IR) Plans."
+    },
+    {
+      "id": 120,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "The point in the future by which an organization target to be back up and running (maximum acceptable downtime) is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Recovery Point Objective (RPO)"
+        },
+        {
+          "letter": "B",
+          "text": "Recovery Time Objective (RTO)"
+        },
+        {
+          "letter": "C",
+          "text": "Mean Time Between Failures"
+        },
+        {
+          "letter": "D",
+          "text": "Service Level Indicator"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Recovery Time Objective (RTO)."
+    },
+    {
+      "id": 121,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "The maximum acceptable data loss measured in time prior to an outage is the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Recovery Point Objective (RPO)"
+        },
+        {
+          "letter": "B",
+          "text": "Recovery Time Objective (RTO)"
+        },
+        {
+          "letter": "C",
+          "text": "System response threshold"
+        },
+        {
+          "letter": "D",
+          "text": "Echo check limit"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Recovery Point Objective (RPO)."
+    },
+    {
+      "id": 122,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "Disaster recovery teams focus primarily on:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Strictly enforcing separation of duties rules during the crisis"
+        },
+        {
+          "letter": "B",
+          "text": "Rapid execution of critical recovery duties without strict separation of duties"
+        },
+        {
+          "letter": "C",
+          "text": "External financial audit reporting"
+        },
+        {
+          "letter": "D",
+          "text": "Processing payroll for non-essential staff"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Rapid execution of critical recovery duties without strict separation of duties."
+    },
+    {
+      "id": 123,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "A disaster recovery site arrangement where two companies agree to handle each other’s processing needs is a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Mutual Aid Pact"
+        },
+        {
+          "letter": "B",
+          "text": "Hot Site"
+        },
+        {
+          "letter": "C",
+          "text": "Cold Site"
+        },
+        {
+          "letter": "D",
+          "text": "Recovery Operations Center"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Mutual Aid Pact."
+    },
+    {
+      "id": 124,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "An empty building leased for disaster recovery without installed computer hardware is a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Cold Site / Empty Shell"
+        },
+        {
+          "letter": "B",
+          "text": "Hot Site"
+        },
+        {
+          "letter": "C",
+          "text": "Internally Provided Backup"
+        },
+        {
+          "letter": "D",
+          "text": "ROC"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Cold Site / Empty Shell."
+    },
+    {
+      "id": 125,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "A fully equipped data center operated by a third party and shared among multiple subscribers is a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Cold Site"
+        },
+        {
+          "letter": "B",
+          "text": "Recovery Operations Center (ROC)"
+        },
+        {
+          "letter": "C",
+          "text": "Mutual Aid Pact"
+        },
+        {
+          "letter": "D",
+          "text": "Local Area Network"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Recovery Operations Center (ROC)."
+    },
+    {
+      "id": 126,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "A fully equipped, company-owned backup computer center dedicated solely to that firm is an:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Internally Provided Backup / Hot Site"
+        },
+        {
+          "letter": "B",
+          "text": "Empty Shell"
+        },
+        {
+          "letter": "C",
+          "text": "Mutual Aid Pact"
+        },
+        {
+          "letter": "D",
+          "text": "Outsourced network"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Internally Provided Backup / Hot Site."
+    },
+    {
+      "id": 127,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "A virtual, cloud-based container storing encrypted recovery data that automatically activates upon primary database loss is a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Vault"
+        },
+        {
+          "letter": "B",
+          "text": "Tape deck"
+        },
+        {
+          "letter": "C",
+          "text": "Switch"
+        },
+        {
+          "letter": "D",
+          "text": "Core memory ring"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Vault."
+    },
+    {
+      "id": 128,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "A DRP test where individuals read the recovery document independently and offer written feedback is a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Cutover test"
+        },
+        {
+          "letter": "B",
+          "text": "Paper test"
+        },
+        {
+          "letter": "C",
+          "text": "Simulation"
+        },
+        {
+          "letter": "D",
+          "text": "Parallel test"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Paper test."
+    },
+    {
+      "id": 129,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "A DRP test where key teams meet around a table to discuss operational responses step-by-step is a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Walkthrough test"
+        },
+        {
+          "letter": "B",
+          "text": "Cutover test"
+        },
+        {
+          "letter": "C",
+          "text": "Parallel test"
+        },
+        {
+          "letter": "D",
+          "text": "Live test"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Walkthrough test."
+    },
+    {
+      "id": 130,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "A DRP test where primary systems are completely shut off while business operations run on backup systems is a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Simulation"
+        },
+        {
+          "letter": "B",
+          "text": "Cutover test"
+        },
+        {
+          "letter": "C",
+          "text": "Walkthrough test"
+        },
+        {
+          "letter": "D",
+          "text": "Paper test"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Cutover test."
+    },
+    {
+      "id": 131,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "A DRP test where backup systems process live transaction data simultaneously while primary systems remain active is a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Parallel test"
+        },
+        {
+          "letter": "B",
+          "text": "Cutover test"
+        },
+        {
+          "letter": "C",
+          "text": "Walkthrough test"
+        },
+        {
+          "letter": "D",
+          "text": "Paper test"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Parallel test."
+    },
+    {
+      "id": 132,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "How do auditors evaluate the adequacy of a client's DRP?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "By reviewing employee vacation schedules"
+        },
+        {
+          "letter": "B",
+          "text": "Inspecting critical application lists, interviewing recovery teams, and checking site documentation"
+        },
+        {
+          "letter": "C",
+          "text": "Inspecting sales invoices for math errors"
+        },
+        {
+          "letter": "D",
+          "text": "Checking physical asset depreciation tables"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Inspecting critical application lists, interviewing recovery teams, and checking site documentation."
+    },
+    {
+      "id": 133,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "Mission-critical applications prioritized in a DRP typically include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Internal employee social events planning"
+        },
+        {
+          "letter": "B",
+          "text": "Cash-generating functions, AR collections, and vendor payments"
+        },
+        {
+          "letter": "C",
+          "text": "Historical press release archives"
+        },
+        {
+          "letter": "D",
+          "text": "Retired software documentation"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Cash-generating functions, AR collections, and vendor payments."
+    },
+    {
+      "id": 134,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "Which site recovery option carries the risk that the helper organization may face its own crisis and refuse access?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Internally provided backup"
+        },
+        {
+          "letter": "B",
+          "text": "Mutual Aid Pact"
+        },
+        {
+          "letter": "C",
+          "text": "Cold site"
+        },
+        {
+          "letter": "D",
+          "text": "Cloud vault"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Mutual Aid Pact."
+    },
+    {
+      "id": 135,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "Physical computer center access controls typically include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Locked doors accessible via keypads/keycards and video surveillance"
+        },
+        {
+          "letter": "B",
+          "text": "Open access for all visitors"
+        },
+        {
+          "letter": "C",
+          "text": "Public password posted on entryways"
+        },
+        {
+          "letter": "D",
+          "text": "Paper sign-in sheets without verification"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Locked doors accessible via keypads/keycards and video surveillance."
+    },
+    {
+      "id": 136,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "What type of fire suppression system is appropriate for host computer rooms?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Standard overhead water sprinklers"
+        },
+        {
+          "letter": "B",
+          "text": "Clean agent / non-water gas suppression systems"
+        },
+        {
+          "letter": "C",
+          "text": "Halon gas (banned)"
+        },
+        {
+          "letter": "D",
+          "text": "Manual foam buckets"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Clean agent / non-water gas suppression systems."
+    },
+    {
+      "id": 137,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "Fire alarms in a secure computer center should be connected directly to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The local fire station"
+        },
+        {
+          "letter": "B",
+          "text": "The external auditor's desk"
+        },
+        {
+          "letter": "C",
+          "text": "The marketing department"
+        },
+        {
+          "letter": "D",
+          "text": "An off-site printing vendor"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: The local fire station."
+    },
+    {
+      "id": 138,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "Examining change logs for unusual off-hours entry by unauthorized developers tests:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Change management controls"
+        },
+        {
+          "letter": "B",
+          "text": "Inference controls"
+        },
+        {
+          "letter": "C",
+          "text": "Parity controls"
+        },
+        {
+          "letter": "D",
+          "text": "Echo controls"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Change management controls."
+    },
+    {
+      "id": 139,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "Which DRP site option represents the most expensive choice for an organization?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Mutual aid pact"
+        },
+        {
+          "letter": "B",
+          "text": "Cold site"
+        },
+        {
+          "letter": "C",
+          "text": "Internally provided hot site"
+        },
+        {
+          "letter": "D",
+          "text": "Paper backup"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The correct answer is C: Internally provided hot site."
+    },
+    {
+      "id": 140,
+      "module": "Change Management, Physical Controls, & DRPs",
+      "prompt": "Verifying system fault tolerance during an audit involves testing whether:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The server shuts down whenever any error occurs"
+        },
+        {
+          "letter": "B",
+          "text": "Operations continue seamlessly when an individual system component fails"
+        },
+        {
+          "letter": "C",
+          "text": "Users can guess administrative passwords"
+        },
+        {
+          "letter": "D",
+          "text": "Software changes bypass the librarian"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Operations continue seamlessly when an individual system component fails."
+    },
+    {
+      "id": 141,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "The protection of network systems, operating software, and digital data from compromise is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Financial accounting"
+        },
+        {
+          "letter": "B",
+          "text": "Cybersecurity"
+        },
+        {
+          "letter": "C",
+          "text": "Data Definition Language"
+        },
+        {
+          "letter": "D",
+          "text": "External reporting"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Cybersecurity."
+    },
+    {
+      "id": 142,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Cyber attacks targeting employees via deceptive emails to fraudulently disburse cash are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "SQL injections"
+        },
+        {
+          "letter": "B",
+          "text": "Email schemes / Business Email Compromise"
+        },
+        {
+          "letter": "C",
+          "text": "Buffer overflows"
+        },
+        {
+          "letter": "D",
+          "text": "Cross-site scripting"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Email schemes / Business Email Compromise."
+    },
+    {
+      "id": 143,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Malicious software designed to record every key pressed by an end-user is a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Keystroke logger"
+        },
+        {
+          "letter": "B",
+          "text": "Parity check"
+        },
+        {
+          "letter": "C",
+          "text": "Firewall"
+        },
+        {
+          "letter": "D",
+          "text": "Switch"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Keystroke logger."
+    },
+    {
+      "id": 144,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Malware that encrypts company data assets and demands payment in exchange for decryption keys is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Ransomware"
+        },
+        {
+          "letter": "B",
+          "text": "Cross-site scripting"
+        },
+        {
+          "letter": "C",
+          "text": "Buffer overflow"
+        },
+        {
+          "letter": "D",
+          "text": "Enumeration"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Ransomware."
+    },
+    {
+      "id": 145,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "An attack where a perpetrator impersonates a legitimate officer to manipulate staff into revealing credentials is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Social engineering"
+        },
+        {
+          "letter": "B",
+          "text": "SQL injection"
+        },
+        {
+          "letter": "C",
+          "text": "Evil Twin"
+        },
+        {
+          "letter": "D",
+          "text": "Buffer overflow"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Social engineering."
+    },
+    {
+      "id": 146,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "A rogue Wi-Fi access point configured to mimic a legitimate network to intercept user traffic is an:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Evil Twin"
+        },
+        {
+          "letter": "B",
+          "text": "Covert channel"
+        },
+        {
+          "letter": "C",
+          "text": "Enumeration attack"
+        },
+        {
+          "letter": "D",
+          "text": "Accent check"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Evil Twin."
+    },
+    {
+      "id": 147,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Sending a volume of data exceeding system buffer capacity to crash or gain access to a system is a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Buffer overflow / overrun"
+        },
+        {
+          "letter": "B",
+          "text": "SQL injection"
+        },
+        {
+          "letter": "C",
+          "text": "Race condition"
+        },
+        {
+          "letter": "D",
+          "text": "Digital signature"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Buffer overflow / overrun."
+    },
+    {
+      "id": 148,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "An attack bypassing firewalls by embedding stolen data in unused header spaces or transmission timing of packets uses:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Covert channels"
+        },
+        {
+          "letter": "B",
+          "text": "Parity checks"
+        },
+        {
+          "letter": "C",
+          "text": "SQL injections"
+        },
+        {
+          "letter": "D",
+          "text": "Evil Twins"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Covert channels."
+    },
+    {
+      "id": 149,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Exploiting system timing to force a system designed for sequential processing to perform concurrent tasks is a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Race condition / TOCTTOU"
+        },
+        {
+          "letter": "B",
+          "text": "SQL injection"
+        },
+        {
+          "letter": "C",
+          "text": "Cross-site scripting"
+        },
+        {
+          "letter": "D",
+          "text": "Buffer overflow"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Race condition / TOCTTOU."
+    },
+    {
+      "id": 150,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Manipulating trusted web application code to execute malicious scripts inside a victim’s web browser is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Cross-Site Scripting (XSS)"
+        },
+        {
+          "letter": "B",
+          "text": "SQL injection"
+        },
+        {
+          "letter": "C",
+          "text": "Enumeration"
+        },
+        {
+          "letter": "D",
+          "text": "Packet filtering"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Cross-Site Scripting (XSS)."
+    },
+    {
+      "id": 151,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Injecting malicious commands into a database entry field to alter backend database queries is a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "SQL injection (SQLi)"
+        },
+        {
+          "letter": "B",
+          "text": "Buffer overflow"
+        },
+        {
+          "letter": "C",
+          "text": "Cross-site scripting"
+        },
+        {
+          "letter": "D",
+          "text": "Covert channel"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: SQL injection (SQLi)."
+    },
+    {
+      "id": 152,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Using automated brute-force attempts to systematically uncover valid server database usernames and passwords is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Enumeration"
+        },
+        {
+          "letter": "B",
+          "text": "Race condition"
+        },
+        {
+          "letter": "C",
+          "text": "Echo checking"
+        },
+        {
+          "letter": "D",
+          "text": "Watermarking"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Enumeration."
+    },
+    {
+      "id": 153,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Eavesdropping on network traffic, intercepting packets, and modifying message contents to deceive recipients is a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Man-in-the-Middle / Interception attack"
+        },
+        {
+          "letter": "B",
+          "text": "Buffer overflow"
+        },
+        {
+          "letter": "C",
+          "text": "Cold site deployment"
+        },
+        {
+          "letter": "D",
+          "text": "Physical access breach"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Man-in-the-Middle / Interception attack."
+    },
+    {
+      "id": 154,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Malicious software designed to travel across connected systems without user interaction, modifying files without consent, is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Malicious Mobile Code (MMC)"
+        },
+        {
+          "letter": "B",
+          "text": "Digital certificate"
+        },
+        {
+          "letter": "C",
+          "text": "Passphrase"
+        },
+        {
+          "letter": "D",
+          "text": "DDL script"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Malicious Mobile Code (MMC)."
+    },
+    {
+      "id": 155,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Software deployment policies allowing employees to connect personal smartphones to enterprise databases are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Mobile Device Management (MDM)"
+        },
+        {
+          "letter": "B",
+          "text": "Bring Your Own Device (BYOD)"
+        },
+        {
+          "letter": "C",
+          "text": "Corporate Owned Personally Enabled"
+        },
+        {
+          "letter": "D",
+          "text": "Intrusion Prevention Systems"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Bring Your Own Device (BYOD)."
+    },
+    {
+      "id": 156,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Enforcing security capabilities (remote wipe, forced updates) on mobile devices accessing corporate data is executed through:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Mobile Device Management (MDM) software"
+        },
+        {
+          "letter": "B",
+          "text": "Parity checking"
+        },
+        {
+          "letter": "C",
+          "text": "Physical lock boxes"
+        },
+        {
+          "letter": "D",
+          "text": "Public key certificates"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Mobile Device Management (MDM) software."
+    },
+    {
+      "id": 157,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Which Wi-Fi security standard offers enhanced data encryption compared to the outdated WEP standard?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Wi-Fi Protected Access (WPA)"
+        },
+        {
+          "letter": "B",
+          "text": "HTTP"
+        },
+        {
+          "letter": "C",
+          "text": "FTP"
+        },
+        {
+          "letter": "D",
+          "text": "Telnet"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Wi-Fi Protected Access (WPA)."
+    },
+    {
+      "id": 158,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Cloud computing risks stemming from multiple clients sharing physical server resources are caused by:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Multitenancy / Shared infrastructure"
+        },
+        {
+          "letter": "B",
+          "text": "Cold sites"
+        },
+        {
+          "letter": "C",
+          "text": "Keystroke logs"
+        },
+        {
+          "letter": "D",
+          "text": "Echo checks"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Multitenancy / Shared infrastructure."
+    },
+    {
+      "id": 159,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Unapproved employee usage of cloud applications or IT devices without central IT department authorization is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Shadow usage / Shadow IT"
+        },
+        {
+          "letter": "B",
+          "text": "Covert channel"
+        },
+        {
+          "letter": "C",
+          "text": "Race condition"
+        },
+        {
+          "letter": "D",
+          "text": "Multimodal access"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Shadow usage / Shadow IT."
+    },
+    {
+      "id": 160,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Vendor-locking constraints that prevent clients from easily transferring data between cloud providers create:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Portability restrictions"
+        },
+        {
+          "letter": "B",
+          "text": "Buffer overflows"
+        },
+        {
+          "letter": "C",
+          "text": "Evil twins"
+        },
+        {
+          "letter": "D",
+          "text": "SQL injections"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Portability restrictions."
+    },
+    {
+      "id": 161,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Financial statement risks arising from successful cyber attacks include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Unrecorded revenue growth"
+        },
+        {
+          "letter": "B",
+          "text": "Asset impairments, material liabilities, and fraudulent transactions"
+        },
+        {
+          "letter": "C",
+          "text": "Excessive inventory valuation"
+        },
+        {
+          "letter": "D",
+          "text": "Lower tax audit probabilities"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Asset impairments, material liabilities, and fraudulent transactions."
+    },
+    {
+      "id": 162,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Systematically identifying hardware vulnerabilities, adversary objectives, and countermeasures to optimize defense is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Threat modeling"
+        },
+        {
+          "letter": "B",
+          "text": "Cutover testing"
+        },
+        {
+          "letter": "C",
+          "text": "Parallel processing"
+        },
+        {
+          "letter": "D",
+          "text": "ETL processing"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Threat modeling."
+    },
+    {
+      "id": 163,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Utilizing multiple distinct lines of defense to secure a broad perimeter of enterprise assets is known as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Layered security"
+        },
+        {
+          "letter": "B",
+          "text": "Defense in depth"
+        },
+        {
+          "letter": "C",
+          "text": "Single-factor security"
+        },
+        {
+          "letter": "D",
+          "text": "Access matrix security"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Defense in depth."
+    },
+    {
+      "id": 164,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "In ETL operations, the letter \"T\" stands for:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Transfer"
+        },
+        {
+          "letter": "B",
+          "text": "Transform"
+        },
+        {
+          "letter": "C",
+          "text": "Terminate"
+        },
+        {
+          "letter": "D",
+          "text": "Translate"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Transform."
+    },
+    {
+      "id": 165,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "The ETL phase where data is extracted from source systems and cleaned/aggregated for analytical software is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Extract"
+        },
+        {
+          "letter": "B",
+          "text": "Transform"
+        },
+        {
+          "letter": "C",
+          "text": "Load"
+        },
+        {
+          "letter": "D",
+          "text": "Validate"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Transform."
+    },
+    {
+      "id": 166,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Alteryx software is primarily utilized during audit engagements to perform:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Physical keycard printing"
+        },
+        {
+          "letter": "B",
+          "text": "Data transformation (ETL) and analytics workflow automation"
+        },
+        {
+          "letter": "C",
+          "text": "Operating system compilation"
+        },
+        {
+          "letter": "D",
+          "text": "Network switch installation"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Data transformation (ETL) and analytics workflow automation."
+    },
+    {
+      "id": 167,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Symbolic or compliance-driven cybersecurity investments are typically:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "More effective than integrated investments"
+        },
+        {
+          "letter": "B",
+          "text": "Less effective at reducing data breaches than substantial, integrated security investments"
+        },
+        {
+          "letter": "C",
+          "text": "Standard requirements under PCAOB AS 2110"
+        },
+        {
+          "letter": "D",
+          "text": "Prohibited by internal auditing standards"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Less effective at reducing data breaches than substantial, integrated security investments."
+    },
+    {
+      "id": 168,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Internal audit departments detect significantly more security incidents when staff members are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Tech-savvy and collaborate closely with information security departments"
+        },
+        {
+          "letter": "B",
+          "text": "Completely isolated from the IT division"
+        },
+        {
+          "letter": "C",
+          "text": "Restricted from accessing database systems"
+        },
+        {
+          "letter": "D",
+          "text": "Trained exclusively in manual bookkeeping"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Tech-savvy and collaborate closely with information security departments."
+    },
+    {
+      "id": 169,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "What mechanism allows a company to transfer a portion of financial loss associated with cyber breaches?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Cybersecurity Insurance"
+        },
+        {
+          "letter": "B",
+          "text": "Mutual Aid Pacts"
+        },
+        {
+          "letter": "C",
+          "text": "Cold sites"
+        },
+        {
+          "letter": "D",
+          "text": "Parity bits"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Cybersecurity Insurance."
+    },
+    {
+      "id": 170,
+      "module": "Cybersecurity & Cyber Risks",
+      "prompt": "Cyber attacks that corrupt inventory balances directly impact management’s assertion of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Rights & Obligations"
+        },
+        {
+          "letter": "B",
+          "text": "Valuation / Accuracy"
+        },
+        {
+          "letter": "C",
+          "text": "Presentation"
+        },
+        {
+          "letter": "D",
+          "text": "Cutoff"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Valuation / Accuracy."
+    },
+    {
+      "id": 171,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "If a database administrator wants to restrict an employee's ability to corrupt or destroy data, they should consider:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Restricting the employee's user view (subschema)"
+        },
+        {
+          "letter": "B",
+          "text": "Restricting the employee's write-access in the data authorization table"
+        },
+        {
+          "letter": "C",
+          "text": "Restricting queries with inference controls"
+        },
+        {
+          "letter": "D",
+          "text": "Both A and B"
+        }
+      ],
+      "answer": "D",
+      "explanation": "The correct answer is D: Both A and B."
+    },
+    {
+      "id": 172,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "Which security mechanism most reliably authenticates the identity of the sender of encrypted data?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Digital certificates"
+        },
+        {
+          "letter": "B",
+          "text": "Echo check"
+        },
+        {
+          "letter": "C",
+          "text": "Parity check"
+        },
+        {
+          "letter": "D",
+          "text": "Buffer overflow"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Digital certificates."
+    },
+    {
+      "id": 173,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "Which of the following functions is NOT performed by an operating system?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Assigns memory across users"
+        },
+        {
+          "letter": "B",
+          "text": "Facilitates information exchange between nodes"
+        },
+        {
+          "letter": "C",
+          "text": "Translates program language into machine-readable language"
+        },
+        {
+          "letter": "D",
+          "text": "Prioritizes job processing"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Facilitates information exchange between nodes."
+    },
+    {
+      "id": 174,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "Which of the following statements regarding the client-server model is TRUE?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "In order for clients to provide servers with requested information, clients must access the database directly"
+        },
+        {
+          "letter": "B",
+          "text": "Physical database data today is most often stored using magnetic core memory"
+        },
+        {
+          "letter": "C",
+          "text": "Disruption to the model from DoS attacks is mitigated if an Intrusion Prevention System is integrated deep within system perimeters"
+        },
+        {
+          "letter": "D",
+          "text": "Operating system effectiveness is irrelevant to client-server performance"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The correct answer is C: Disruption to the model from DoS attacks is mitigated if an Intrusion Prevention System is integrated deep within system perimeters."
+    },
+    {
+      "id": 175,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "True or False? A company operates exemplar ITGCs if it allows program librarians to make adjustments to the production environment during system changes, includes departmental representatives on its DRP team, and regularly tests fire alarm connections.",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "True"
+        },
+        {
+          "letter": "B",
+          "text": "False"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Programmers—not program librarians—make changes after approval; librarians manage passwords/access"
+    },
+    {
+      "id": 176,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "Cyber criminals exploit system vulnerabilities when using:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Covert channels, in which firewalls are bypassed by tiny bits of hidden information in unexpected portions or timing of data packets"
+        },
+        {
+          "letter": "B",
+          "text": "SQL injections, to force sequential tasks to execute simultaneously"
+        },
+        {
+          "letter": "C",
+          "text": "Threat modeling, to run brute-force database password searches"
+        },
+        {
+          "letter": "D",
+          "text": "Enumeration, to set up rogue Wi-Fi access points"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Covert channels, in which firewalls are bypassed by tiny bits of hidden information in unexpected portions or timing of data packets."
+    },
+    {
+      "id": 177,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "True or False? Cyber-attacks that are particularly risky for unauthorized mobile access include shadow usage, WPA encryption, and evil twinning.",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "True"
+        },
+        {
+          "letter": "B",
+          "text": "False"
+        }
+      ],
+      "answer": "B",
+      "explanation": "WPA encryption is a security control, not a cyber-attack"
+    },
+    {
+      "id": 178,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "External financial auditors test IT General Controls primarily to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Evaluate whether they can rely on automated controls and reduce substantive testing"
+        },
+        {
+          "letter": "B",
+          "text": "Determine corporate tax liabilities"
+        },
+        {
+          "letter": "C",
+          "text": "Select marketing strategies"
+        },
+        {
+          "letter": "D",
+          "text": "Replace the board of directors"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Evaluate whether they can rely on automated controls and reduce substantive testing."
+    },
+    {
+      "id": 179,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "A control that requires two signatures for wire transfers above $100,000 is an example of an:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "IT General Control"
+        },
+        {
+          "letter": "B",
+          "text": "Manual Authorization Control"
+        },
+        {
+          "letter": "C",
+          "text": "Automated Application Control"
+        },
+        {
+          "letter": "D",
+          "text": "Operating System Control"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Manual Authorization Control."
+    },
+    {
+      "id": 180,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "Internal auditors report operational control deficiencies to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The SEC"
+        },
+        {
+          "letter": "B",
+          "text": "Management and the Audit Committee"
+        },
+        {
+          "letter": "C",
+          "text": "External news media"
+        },
+        {
+          "letter": "D",
+          "text": "Competitors"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Management and the Audit Committee."
+    },
+    {
+      "id": 181,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "What component of the COSO framework involves evaluating control design and operation on an ongoing basis?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Control Environment"
+        },
+        {
+          "letter": "B",
+          "text": "Monitoring Activities"
+        },
+        {
+          "letter": "C",
+          "text": "Control Activities"
+        },
+        {
+          "letter": "D",
+          "text": "Risk Assessment"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Monitoring Activities."
+    },
+    {
+      "id": 182,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "Storing operating system user passwords in plain, unencrypted text files is a violation of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Physical construction standards"
+        },
+        {
+          "letter": "B",
+          "text": "OS Password Control Best Practices"
+        },
+        {
+          "letter": "C",
+          "text": "DRP Cutover protocols"
+        },
+        {
+          "letter": "D",
+          "text": "Public key encryption"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: OS Password Control Best Practices."
+    },
+    {
+      "id": 183,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "To prevent unauthorized personnel from tapping physical network cables, wiring should be:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Hung across public hallways"
+        },
+        {
+          "letter": "B",
+          "text": "Run through secure conduit or buried underground"
+        },
+        {
+          "letter": "C",
+          "text": "Attached to perimeter fences"
+        },
+        {
+          "letter": "D",
+          "text": "Left exposed for easy inspection"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Run through secure conduit or buried underground."
+    },
+    {
+      "id": 184,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "SQL injection attacks primarily target vulnerabilities in:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Physical access card readers"
+        },
+        {
+          "letter": "B",
+          "text": "Database query input fields"
+        },
+        {
+          "letter": "C",
+          "text": "Uninterruptible power supplies"
+        },
+        {
+          "letter": "D",
+          "text": "Network parity bits"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Database query input fields."
+    },
+    {
+      "id": 185,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "Restricting programmer access to production source code prevents:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Authorized software deployment"
+        },
+        {
+          "letter": "B",
+          "text": "Unauthorized or untested code modifications to live systems"
+        },
+        {
+          "letter": "C",
+          "text": "Development environment backups"
+        },
+        {
+          "letter": "D",
+          "text": "Automated test scripting"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Unauthorized or untested code modifications to live systems."
+    },
+    {
+      "id": 186,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "During a disaster, if an organization switches processing to a third-party ROC host facility, it may experience:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Zero monthly utility fees"
+        },
+        {
+          "letter": "B",
+          "text": "Resource contention if a widespread disaster affects multiple subscribers simultaneously"
+        },
+        {
+          "letter": "C",
+          "text": "Loss of all legal ownership of data"
+        },
+        {
+          "letter": "D",
+          "text": "Immediate physical destruction of primary systems"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Resource contention if a widespread disaster affects multiple subscribers simultaneously."
+    },
+    {
+      "id": 187,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "Which analytical tool was specified in course materials to build visual dashboards during cyber audit cases?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Excel"
+        },
+        {
+          "letter": "B",
+          "text": "Tableau"
+        },
+        {
+          "letter": "C",
+          "text": "PowerBI"
+        },
+        {
+          "letter": "D",
+          "text": "Access"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Tableau."
+    },
+    {
+      "id": 188,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "An audit procedure that involves watching employees perform data backups is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Inquiry"
+        },
+        {
+          "letter": "B",
+          "text": "Observation"
+        },
+        {
+          "letter": "C",
+          "text": "Inspection"
+        },
+        {
+          "letter": "D",
+          "text": "Reperformance"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Observation."
+    },
+    {
+      "id": 189,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "An audit procedure that involves examining signed server access logs is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Observation"
+        },
+        {
+          "letter": "B",
+          "text": "Inspection"
+        },
+        {
+          "letter": "C",
+          "text": "Inquiry"
+        },
+        {
+          "letter": "D",
+          "text": "Analytical review"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Inspection."
+    },
+    {
+      "id": 190,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "What risk increases if a company adopts a Bring Your Own Device (BYOD) policy without MDM software?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Increased hardware acquisition costs"
+        },
+        {
+          "letter": "B",
+          "text": "Unauthorized access and data leakage via unmonitored mobile endpoints"
+        },
+        {
+          "letter": "C",
+          "text": "Enhanced network logging"
+        },
+        {
+          "letter": "D",
+          "text": "Automatic database hashing"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Unauthorized access and data leakage via unmonitored mobile endpoints."
+    },
+    {
+      "id": 191,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "A hot site differs from a cold site because a hot site includes:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Physical office space only"
+        },
+        {
+          "letter": "B",
+          "text": "Fully configured computer hardware, software, and network connections"
+        },
+        {
+          "letter": "C",
+          "text": "Higher vulnerability to floods"
+        },
+        {
+          "letter": "D",
+          "text": "Free setup provided by local government"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Fully configured computer hardware, software, and network connections."
+    },
+    {
+      "id": 192,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "Transaction cutoff testing for revenue balances ensures sales are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Billed at maximum price"
+        },
+        {
+          "letter": "B",
+          "text": "Recorded in the correct accounting period"
+        },
+        {
+          "letter": "C",
+          "text": "Collected in cash within 24 hours"
+        },
+        {
+          "letter": "D",
+          "text": "Transferred to off-site vaults"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Recorded in the correct accounting period."
+    },
+    {
+      "id": 193,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "The management assertion that all recorded liabilities represent legitimate obligations of the entity is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Completeness"
+        },
+        {
+          "letter": "B",
+          "text": "Rights & Obligations"
+        },
+        {
+          "letter": "C",
+          "text": "Valuation"
+        },
+        {
+          "letter": "D",
+          "text": "Existence"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Rights & Obligations."
+    },
+    {
+      "id": 194,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "A firewall technique that inspects the actual data payload within packets rather than just header addresses is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Simple packet filtering"
+        },
+        {
+          "letter": "B",
+          "text": "Deep packet inspection / Intrusion Prevention Systems"
+        },
+        {
+          "letter": "C",
+          "text": "Parity checking"
+        },
+        {
+          "letter": "D",
+          "text": "Echo checking"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Deep packet inspection / Intrusion Prevention Systems."
+    },
+    {
+      "id": 195,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "Which type of database model uses parent-child relationships where a child record can have only one parent?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Relational model"
+        },
+        {
+          "letter": "B",
+          "text": "Hierarchical model"
+        },
+        {
+          "letter": "C",
+          "text": "Network model"
+        },
+        {
+          "letter": "D",
+          "text": "Flat-file model"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Hierarchical model."
+    },
+    {
+      "id": 196,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "Which database model allows a child record to have multiple parent records?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Hierarchical model"
+        },
+        {
+          "letter": "B",
+          "text": "Network model"
+        },
+        {
+          "letter": "C",
+          "text": "Relational model"
+        },
+        {
+          "letter": "D",
+          "text": "Linear model"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Network model."
+    },
+    {
+      "id": 197,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "A control designed to detect data entry errors by calculating checksums on keyed numbers is an example of an:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Application Control"
+        },
+        {
+          "letter": "B",
+          "text": "IT General Control"
+        },
+        {
+          "letter": "C",
+          "text": "Environmental Control"
+        },
+        {
+          "letter": "D",
+          "text": "Physical Control"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Application Control."
+    },
+    {
+      "id": 198,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "Disaster recovery plans are considered a subset of a broader enterprise agenda called:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Business Continuity Management"
+        },
+        {
+          "letter": "B",
+          "text": "Tax compliance"
+        },
+        {
+          "letter": "C",
+          "text": "Marketing operations"
+        },
+        {
+          "letter": "D",
+          "text": "External auditing"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The correct answer is A: Business Continuity Management."
+    },
+    {
+      "id": 199,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "Using multiple tools to mitigate a single specific vector of cyber attack is known as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Defense in depth"
+        },
+        {
+          "letter": "B",
+          "text": "Layered security"
+        },
+        {
+          "letter": "C",
+          "text": "Multitenancy"
+        },
+        {
+          "letter": "D",
+          "text": "Shadow usage"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: Layered security."
+    },
+    {
+      "id": 200,
+      "module": "Integrated Comprehensive Practice Questions",
+      "prompt": "What is the primary purpose of executing a DRP simulation test?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "To satisfy fire marshal regulations"
+        },
+        {
+          "letter": "B",
+          "text": "To evaluate employee operational readiness under a hypothetical disaster scenario"
+        },
+        {
+          "letter": "C",
+          "text": "To shut down all business operations permanently"
+        },
+        {
+          "letter": "D",
+          "text": "To train external auditors on system programming"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The correct answer is B: To evaluate employee operational readiness under a hypothetical disaster scenario."
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 import { BuildTab } from "@/components/BuildTab";
 import { CompareTool } from "@/components/CompareTool";
@@ -404,6 +405,9 @@ export function RankingApp() {
           </p>
         </div>
         <div className="top-actions">
+          <Link className="ghost-btn" href="/quiz">
+            Practice quizzes
+          </Link>
           <label className="week-select">
             Ranking week
             <select
