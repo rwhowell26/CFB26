@@ -9,11 +9,9 @@ import {
   isComplete,
   MASTERY_STREAK,
   pendingStreakCount,
-  quizMeta,
-  quizQuestionMap,
-  quizQuestions,
   type DisplayChoice,
 } from "@/lib/quiz";
+import { quizQuestionIds, quizQuestionMap, type QuizDefinition } from "@/lib/quizzes";
 import { saveQuizState, useIsClient, useQuizStore } from "@/lib/quiz-store";
 
 type Feedback = {
@@ -22,32 +20,34 @@ type Feedback = {
   streak: number;
 };
 
-export function QuizApp() {
+export function QuizApp({ quiz }: { quiz: QuizDefinition }) {
   const isClient = useIsClient();
-  const [state, setState] = useQuizStore();
+  const [state, setState] = useQuizStore(quiz);
   const [reviewId, setReviewId] = useState<number | null>(null);
   const [deal, setDeal] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<Feedback | null>(null);
 
+  const ids = useMemo(() => quizQuestionIds(quiz), [quiz]);
+  const questions = useMemo(() => quizQuestionMap(quiz), [quiz]);
   const activeId = reviewId ?? state.queue[0] ?? null;
-  const question = activeId != null ? quizQuestionMap.get(activeId) ?? null : null;
+  const question = activeId != null ? questions.get(activeId) ?? null : null;
   const choices = useMemo((): DisplayChoice[] => {
     if (activeId == null) {
       return [];
     }
-    const nextQuestion = quizQuestionMap.get(activeId);
+    const nextQuestion = questions.get(activeId);
     if (!nextQuestion) {
       return [];
     }
     void deal;
     return displayChoices(nextQuestion.choices);
-  }, [activeId, deal]);
+  }, [activeId, deal, questions]);
 
   const completed = state.mastered.length;
-  const total = quizQuestions.length;
-  const oneAway = pendingStreakCount(state);
-  const complete = isComplete(state);
+  const total = quiz.questions.length;
+  const oneAway = pendingStreakCount(state, ids);
+  const complete = isComplete(state, total);
   const currentStreak = activeId != null ? (state.streaks[String(activeId)] ?? 0) : 0;
   const progressLabel = `${completed} of ${total} questions completed`;
 
@@ -55,7 +55,7 @@ export function QuizApp() {
     if (selected == null || !question || feedback) {
       return;
     }
-    const result = applyAnswer(state, selected);
+    const result = applyAnswer(state, selected, questions);
     setReviewId(result.questionId);
     setState(result.state);
     setFeedback({
@@ -80,7 +80,7 @@ export function QuizApp() {
     setSelected(null);
     setReviewId(null);
     setDeal((value) => value + 1);
-    saveQuizState(createInitialState());
+    saveQuizState(quiz, createInitialState(ids));
   };
 
   if (!isClient) {
@@ -95,11 +95,14 @@ export function QuizApp() {
     <div className="quiz-shell">
       <header className="quiz-top">
         <div>
-          <p className="eyebrow">{quizMeta.title}</p>
-          <h1 className="quiz-title">Exam 1 practice quiz</h1>
-          <p className="tagline">{quizMeta.source}</p>
+          <p className="eyebrow">{quiz.title}</p>
+          <h1 className="quiz-title">{quiz.subtitle}</h1>
+          <p className="tagline">{quiz.source}</p>
         </div>
         <div className="quiz-top-actions">
+          <Link className="ghost-btn" href="/quiz">
+            All quizzes
+          </Link>
           <Link className="ghost-btn" href="/">
             Rankings
           </Link>

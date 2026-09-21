@@ -4,54 +4,86 @@ import { useCallback, useSyncExternalStore } from "react";
 import {
   createInitialState,
   loadQuizState,
-  quizQuestionIds,
   writeQuizState,
   type QuizState,
 } from "@/lib/quiz";
+import { quizQuestionIds, type QuizDefinition } from "@/lib/quizzes";
 
-const listeners = new Set<() => void>();
-const serverSnapshot = createInitialState(quizQuestionIds, () => 0.5);
-let memoryStore: QuizState = serverSnapshot;
-let didHydrate = false;
+type QuizBucket = {
+  listeners: Set<() => void>;
+  serverSnapshot: QuizState;
+  memory: QuizState;
+  didHydrate: boolean;
+};
 
-function emit(): void {
-  for (const listener of listeners) {
+const buckets = new Map<string, QuizBucket>();
+
+function getBucket(quiz: QuizDefinition): QuizBucket {
+  const existing = buckets.get(quiz.id);
+  if (existing) {
+    return existing;
+  }
+  const ids = quizQuestionIds(quiz);
+  const serverSnapshot = createInitialState(ids, () => 0.5);
+  const created: QuizBucket = {
+    listeners: new Set(),
+    serverSnapshot,
+    memory: serverSnapshot,
+    didHydrate: false,
+  };
+  buckets.set(quiz.id, created);
+  return created;
+}
+
+function emit(quizId: string): void {
+  const bucket = buckets.get(quizId);
+  if (!bucket) {
+    return;
+  }
+  for (const listener of bucket.listeners) {
     listener();
   }
 }
 
-function subscribe(listener: () => void): () => void {
-  listeners.add(listener);
-  return () => {
-    listeners.delete(listener);
-  };
-}
-
-export function saveQuizState(state: QuizState): void {
-  memoryStore = state;
+export function saveQuizState(quiz: QuizDefinition, state: QuizState): void {
+  const bucket = getBucket(quiz);
+  bucket.memory = state;
   if (typeof window !== "undefined") {
-    writeQuizState(state);
+    writeQuizState(quiz.storageKey, state);
   }
-  emit();
+  emit(quiz.id);
 }
 
-function getSnapshot(): QuizState {
-  if (!didHydrate) {
-    didHydrate = true;
-    memoryStore = loadQuizState();
-  }
-  return memoryStore;
-}
+export function useQuizStore(quiz: QuizDefinition): [QuizState, (next: QuizState) => void] {
+  const subscribe = useCallback(
+    (listener: () => void) => {
+      const bucket = getBucket(quiz);
+      bucket.listeners.add(listener);
+      return () => {
+        bucket.listeners.delete(listener);
+      };
+    },
+    [quiz],
+  );
 
-function getServerSnapshot(): QuizState {
-  return serverSnapshot;
-}
+  const getSnapshot = useCallback(() => {
+    const bucket = getBucket(quiz);
+    if (!bucket.didHydrate) {
+      bucket.didHydrate = true;
+      bucket.memory = loadQuizState(quiz.storageKey, quizQuestionIds(quiz));
+    }
+    return bucket.memory;
+  }, [quiz]);
 
-export function useQuizStore(): [QuizState, (next: QuizState) => void] {
+  const getServerSnapshot = useCallback(() => getBucket(quiz).serverSnapshot, [quiz]);
+
   const store = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
-  const setStore = useCallback((next: QuizState) => {
-    saveQuizState(next);
-  }, []);
+  const setStore = useCallback(
+    (next: QuizState) => {
+      saveQuizState(quiz, next);
+    },
+    [quiz],
+  );
   return [store, setStore];
 }
 

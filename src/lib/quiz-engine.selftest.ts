@@ -80,6 +80,7 @@ const restored = parseStoredState(
     mastered: [999],
     queue: [1],
   }),
+  [1, 2],
 );
 assert(restored, "valid stored state should parse");
 assert(!restored?.mastered.includes(999), "unknown mastered ids should be dropped");

@@ -406,7 +406,7 @@ export function RankingApp() {
         </div>
         <div className="top-actions">
           <Link className="ghost-btn" href="/quiz">
-            ACCY 6100 quiz
+            Practice quizzes
           </Link>
           <label className="week-select">
             Ranking week

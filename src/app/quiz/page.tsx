@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import { QuizApp } from "@/components/QuizApp";
+import { QuizHub } from "@/components/QuizHub";
 
 export const metadata: Metadata = {
-  title: "ACCY 6100 Exam 1 Quiz",
-  description:
-    "Practice multiple-choice quiz for ACCY 6100 Exam 1. Questions stay in the deck until you get them right twice in a row.",
+  title: "Practice quizzes",
+  description: "Choose an ACCY practice quiz. Questions stay in the deck until you get them right twice in a row.",
 };
 
-export default function QuizPage() {
+export default function QuizIndexPage() {
   return (
     <main>
-      <QuizApp />
+      <QuizHub />
     </main>
   );
 }

@@ -1,7 +1,4 @@
-import bank from "@/data/accy-6100-questions.json";
-
 export const MASTERY_STREAK = 2;
-export const QUIZ_STORAGE_KEY = "accy6100-exam1-quiz-v1";
 
 export type QuizChoice = {
   letter: string;
@@ -33,16 +30,6 @@ export type AnswerResult = {
 
 const LETTERS = ["A", "B", "C", "D"] as const;
 
-export const quizMeta = {
-  title: bank.title,
-  subtitle: bank.subtitle,
-  source: bank.source,
-};
-
-export const quizQuestions: QuizQuestion[] = bank.questions;
-export const quizQuestionMap = new Map(quizQuestions.map((question) => [question.id, question]));
-export const quizQuestionIds = quizQuestions.map((question) => question.id);
-
 export function shuffle<T>(items: readonly T[], random: () => number = Math.random): T[] {
   const next = [...items];
   for (let i = next.length - 1; i > 0; i -= 1) {
@@ -68,7 +55,7 @@ export function insertIntoShuffle(
 }
 
 export function createInitialState(
-  ids: readonly number[] = quizQuestionIds,
+  ids: readonly number[],
   random: () => number = Math.random,
 ): QuizState {
   return {
@@ -82,14 +69,14 @@ export function currentQuestionId(state: QuizState): number | null {
   return state.queue[0] ?? null;
 }
 
-export function isComplete(state: QuizState, total = quizQuestionIds.length): boolean {
+export function isComplete(state: QuizState, total: number): boolean {
   return state.mastered.length >= total && state.queue.length === 0;
 }
 
 export function applyAnswer(
   state: QuizState,
   selectedLetter: string,
-  questions = quizQuestionMap,
+  questions: Map<number, QuizQuestion>,
   random: () => number = Math.random,
 ): AnswerResult {
   const questionId = state.queue[0];
@@ -157,7 +144,7 @@ export function displayChoices(
   }));
 }
 
-export function parseStoredState(raw: string | null): QuizState | null {
+export function parseStoredState(raw: string | null, ids: readonly number[]): QuizState | null {
   if (!raw) {
     return null;
   }
@@ -166,19 +153,17 @@ export function parseStoredState(raw: string | null): QuizState | null {
     if (!parsed || !Array.isArray(parsed.queue) || !Array.isArray(parsed.mastered) || !parsed.streaks) {
       return null;
     }
-    const known = new Set(quizQuestionIds);
+    const known = new Set(ids);
     const queue = parsed.queue.filter((id) => known.has(id) && !parsed.mastered?.includes(id));
     const mastered = parsed.mastered.filter((id) => known.has(id));
     const streaks: Record<string, number> = {};
-    for (const id of quizQuestionIds) {
+    for (const id of ids) {
       const value = parsed.streaks[String(id)];
       streaks[String(id)] = mastered.includes(id)
         ? MASTERY_STREAK
         : Math.max(0, Math.min(MASTERY_STREAK - 1, Number(value) || 0));
     }
-    const missing = quizQuestionIds.filter(
-      (id) => !mastered.includes(id) && !queue.includes(id),
-    );
+    const missing = ids.filter((id) => !mastered.includes(id) && !queue.includes(id));
     return {
       streaks,
       mastered,
@@ -189,19 +174,19 @@ export function parseStoredState(raw: string | null): QuizState | null {
   }
 }
 
-export function loadQuizState(): QuizState {
+export function loadQuizState(storageKey: string, ids: readonly number[]): QuizState {
   if (typeof window === "undefined") {
-    return createInitialState(quizQuestionIds, () => 0.5);
+    return createInitialState(ids, () => 0.5);
   }
-  return parseStoredState(window.localStorage.getItem(QUIZ_STORAGE_KEY)) ?? createInitialState();
+  return parseStoredState(window.localStorage.getItem(storageKey), ids) ?? createInitialState(ids);
 }
 
-export function writeQuizState(state: QuizState): void {
-  window.localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify(state));
+export function writeQuizState(storageKey: string, state: QuizState): void {
+  window.localStorage.setItem(storageKey, JSON.stringify(state));
 }
 
-export function pendingStreakCount(state: QuizState): number {
-  return quizQuestionIds.filter((id) => {
+export function pendingStreakCount(state: QuizState, ids: readonly number[]): number {
+  return ids.filter((id) => {
     if (state.mastered.includes(id)) {
       return false;
     }
