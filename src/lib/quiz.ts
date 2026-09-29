@@ -12,6 +12,8 @@ export type QuizQuestion = {
   choices: QuizChoice[];
   answer: string;
   explanation: string;
+  /** Optional lesson shown before the question so the quiz can teach, not just test. */
+  context?: string;
 };
 
 export type QuizState = {

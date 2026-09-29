@@ -1,5 +1,6 @@
 import accy from "@/data/accy-6100-questions.json";
 import accy6900 from "@/data/accy-6900-h1-h3-questions.json";
+import accy6900Timeline from "@/data/accy-6900-h2-timeline-questions.json";
 import itAudit from "@/data/it-audit-1-questions.json";
 import type { QuizQuestion } from "@/lib/quiz";
 
@@ -40,6 +41,15 @@ export const quizzes: QuizDefinition[] = [
     source: accy6900.source,
     storageKey: "accy-6900-h1-h3-quiz-v1",
     questions: accy6900.questions,
+  },
+  {
+    id: "accy-6900-h2-timeline",
+    href: "/quiz/accy-6900-h2-timeline",
+    title: accy6900Timeline.title,
+    subtitle: accy6900Timeline.subtitle,
+    source: accy6900Timeline.source,
+    storageKey: "accy-6900-h2-timeline-quiz-v1",
+    questions: accy6900Timeline.questions,
   },
 ];
 

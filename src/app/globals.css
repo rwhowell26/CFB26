@@ -1806,6 +1806,26 @@ a.primary-btn {
   font-weight: 600;
 }
 
+.quiz-context {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0 0 1.1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(31, 107, 69, 0.22);
+  background: rgba(231, 237, 223, 0.65);
+}
+
+.quiz-context .section-label {
+  margin: 0;
+}
+
+.quiz-context-body,
+.quiz-explanation {
+  white-space: pre-wrap;
+  line-height: 1.55;
+}
+
 .quiz-prompt {
   margin: 0 0 1rem;
   font-size: 1.25rem;
