@@ -1733,7 +1733,7 @@ a.primary-btn {
 }
 
 .quiz-shell {
-  width: min(820px, calc(100% - 2rem));
+  width: min(980px, calc(100% - 2rem));
   margin: 0 auto;
   padding: 1.25rem 0 3rem;
   display: grid;
@@ -1918,15 +1918,11 @@ a.primary-btn {
     flex-direction: column;
     align-items: start;
   }
-
-  .quiz-hub-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 .quiz-hub-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   gap: 1rem;
 }
 

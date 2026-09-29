@@ -1,4 +1,5 @@
 import accy from "@/data/accy-6100-questions.json";
+import accy6900 from "@/data/accy-6900-h1-h3-questions.json";
 import itAudit from "@/data/it-audit-1-questions.json";
 import type { QuizQuestion } from "@/lib/quiz";
 
@@ -30,6 +31,15 @@ export const quizzes: QuizDefinition[] = [
     source: itAudit.source,
     storageKey: "it-audit-1-quiz-v1",
     questions: itAudit.questions,
+  },
+  {
+    id: "accy-6900-h1-h3",
+    href: "/quiz/accy-6900-h1-h3",
+    title: accy6900.title,
+    subtitle: accy6900.subtitle,
+    source: accy6900.source,
+    storageKey: "accy-6900-h1-h3-quiz-v1",
+    questions: accy6900.questions,
   },
 ];
 
