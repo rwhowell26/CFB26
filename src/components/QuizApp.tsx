@@ -150,10 +150,10 @@ export function QuizApp({ quiz }: { quiz: QuizDefinition }) {
             Question {question.id} of {total}
             {feedback ? null : ` · ${Math.min(currentStreak, MASTERY_STREAK)}/${MASTERY_STREAK} in a row`}
           </p>
-          {question.context ? (
-            <aside className="quiz-context" aria-label="Background for this question">
+          {question.lesson ? (
+            <aside className="quiz-lesson" aria-label="Background for this question">
               <p className="section-label">Read this first</p>
-              <p className="quiz-context-body">{question.context}</p>
+              <p className="quiz-lesson-body">{question.lesson}</p>
             </aside>
           ) : null}
           <h2 id="quiz-prompt" className="quiz-prompt">

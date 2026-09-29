@@ -7,7 +7,6 @@
     {
       "id": 1,
       "module": "1787\u20131896: A federal government, markets, and the first CPAs",
-      "context": "Handout #2 is a U.S. timeline of how accounting, auditing, and financial regulation grew up. It does not start with bookkeeping. It starts with government, because later tax laws, banking rules, securities laws, and CPA licensing all assume there is a working federal system that can write and enforce rules.\n\nAfter independence, the country first tried the Articles of Confederation. That national government was too weak: it could not tax or coordinate well, and the states behaved almost like separate countries. In 1787 a new Constitution was written. The handout notes immense problems, especially slavery, but says the federal system proved effective.",
       "prompt": "Why does the Handout #2 timeline begin with the Constitution of 1787 instead of with Pacioli or the first CPA exam?",
       "choices": [
         {
@@ -28,12 +27,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "The timeline is a story of public power responding to private abuse. None of that works without a government that can actually govern.\n\nThe Articles of Confederation failed that test. The 1787 Constitution created a federal system strong enough, over time, to tax (Civil War; later the income tax), regulate railroads and monopolies, license professions through the states, and eventually create the Fed, FTC, and SEC.\n\nSlavery is flagged as an immense problem the founding did not solve. The handout still treats the federal design as effective enough to be the starting point for U.S. accounting history."
+      "explanation": "The timeline is a story of public power responding to private abuse. None of that works without a government that can actually govern.\n\nThe Articles of Confederation failed that test. The 1787 Constitution created a federal system strong enough, over time, to tax (Civil War; later the income tax), regulate railroads and monopolies, license professions through the states, and eventually create the Fed, FTC, and SEC.\n\nSlavery is flagged as an immense problem the founding did not solve. The handout still treats the federal design as effective enough to be the starting point for U.S. accounting history.",
+      "lesson": "Handout #2 is a U.S. timeline of how accounting, auditing, and financial regulation grew up. It does not start with bookkeeping. It starts with government, because later tax laws, banking rules, securities laws, and CPA licensing all assume there is a working federal system that can write and enforce rules.\n\nAfter independence, the country first tried the Articles of Confederation. That national government was too weak: it could not tax or coordinate well, and the states behaved almost like separate countries. In 1787 a new Constitution was written. The handout notes immense problems, especially slavery, but says the federal system proved effective."
     },
     {
       "id": 2,
       "module": "1787\u20131896: A federal government, markets, and the first CPAs",
-      "context": "The Articles of Confederation were the United States\u2019 first national charter. Under them, the central government lacked the tools it needed to function: it could not reliably raise money or make the states act together. The 1787 Constitution was written because that arrangement had already failed.",
       "prompt": "What problem with the Articles of Confederation does the handout say made a new constitution necessary?",
       "choices": [
         {
@@ -54,12 +53,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "If you remember only one phrase from this row of the timeline, remember \u201cunable to function adequately.\u201d\n\nThat is the handout\u2019s reason for 1787. Later rows keep repeating the same pattern at a smaller scale: when a system cannot function (weak audits, weak banking rules, weak disclosure), lawmakers rewrite the rules."
+      "explanation": "If you remember only one phrase from this row of the timeline, remember \u201cunable to function adequately.\u201d\n\nThat is the handout\u2019s reason for 1787. Later rows keep repeating the same pattern at a smaller scale: when a system cannot function (weak audits, weak banking rules, weak disclosure), lawmakers rewrite the rules.",
+      "lesson": "The Articles of Confederation were the United States\u2019 first national charter. Under them, the central government lacked the tools it needed to function: it could not reliably raise money or make the states act together. The 1787 Constitution was written because that arrangement had already failed."
     },
     {
       "id": 3,
       "module": "1787\u20131896: A federal government, markets, and the first CPAs",
-      "context": "A political machine is an organized party operation that holds power by dispensing jobs, contracts, and favors, often with corruption attached. The handout\u2019s example is Tammany Hall, New York City\u2019s Democratic machine from the early 19th century. It became a long-term source of power and corruption, and other local and state governments copied the model nationwide.",
       "prompt": "What was Tammany Hall in the handout\u2019s timeline?",
       "choices": [
         {
@@ -80,12 +79,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Tammany Hall is in an accounting timeline because corruption is a demand driver for accounting.\n\nWhen public money, contracts, and votes can be bought, someone eventually asks for books, audits, and rules that make the stealing visible. The handout is planting that idea early: American government and American business grew up with organized corruption, not after it."
+      "explanation": "Tammany Hall is in an accounting timeline because corruption is a demand driver for accounting.\n\nWhen public money, contracts, and votes can be bought, someone eventually asks for books, audits, and rules that make the stealing visible. The handout is planting that idea early: American government and American business grew up with organized corruption, not after it.",
+      "lesson": "A political machine is an organized party operation that holds power by dispensing jobs, contracts, and favors, often with corruption attached. The handout\u2019s example is Tammany Hall, New York City\u2019s Democratic machine from the early 19th century. It became a long-term source of power and corruption, and other local and state governments copied the model nationwide."
     },
     {
       "id": 4,
       "module": "1787\u20131896: A federal government, markets, and the first CPAs",
-      "context": "Wars are expensive. The Union side of the Civil War (1861\u20131865) could not pay for armies with the old, tiny federal toolkit. The handout says Union financing required two big institutional changes: substantial new tax laws, and an updated banking system regulated by the Treasury Department.",
       "prompt": "According to the timeline, Union financing of the Civil War required which pair of changes?",
       "choices": [
         {
@@ -106,12 +105,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "This is the first time the timeline ties money, tax, and banking together.\n\nTaxes create a reason to measure income. A Treasury-regulated banking system creates a reason to measure capital, reserves, and notes. Accounting is useful in peacetime; it becomes unavoidable when a government must raise and track huge sums.\n\nThe CPA profession does not appear until 1896, but the federal need for reliable numbers starts here."
+      "explanation": "This is the first time the timeline ties money, tax, and banking together.\n\nTaxes create a reason to measure income. A Treasury-regulated banking system creates a reason to measure capital, reserves, and notes. Accounting is useful in peacetime; it becomes unavoidable when a government must raise and track huge sums.\n\nThe CPA profession does not appear until 1896, but the federal need for reliable numbers starts here.",
+      "lesson": "Wars are expensive. The Union side of the Civil War (1861\u20131865) could not pay for armies with the old, tiny federal toolkit. The handout says Union financing required two big institutional changes: substantial new tax laws, and an updated banking system regulated by the Treasury Department."
     },
     {
       "id": 5,
       "module": "1787\u20131896: A federal government, markets, and the first CPAs",
-      "context": "By the late 1800s, railroads and industrial trusts (huge combinations of companies) dominated the economy. In 1887 Congress created the Interstate Commerce Commission to regulate railroads. In 1890 the Sherman Antitrust Act let the federal government attack monopolies. The handout\u2019s \u201cwins\u201d include breaking up the Northern Pacific Railroad and Rockefeller\u2019s Standard Oil.",
       "prompt": "Which two federal moves does the handout group as the start of U.S. market regulation in this era?",
       "choices": [
         {
@@ -132,12 +131,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Before there is an SEC, there is railroad and monopoly regulation.\n\nThe ICC (1887) is about a network industry that could overcharge shippers. Sherman (1890) is about concentrated private power. Both require financial facts: what does the railroad earn, what does Standard Oil control, how is the trust financed?\n\nAccounting is already becoming a public tool, not just a merchant\u2019s private notebook."
+      "explanation": "Before there is an SEC, there is railroad and monopoly regulation.\n\nThe ICC (1887) is about a network industry that could overcharge shippers. Sherman (1890) is about concentrated private power. Both require financial facts: what does the railroad earn, what does Standard Oil control, how is the trust financed?\n\nAccounting is already becoming a public tool, not just a merchant\u2019s private notebook.",
+      "lesson": "By the late 1800s, railroads and industrial trusts (huge combinations of companies) dominated the economy. In 1887 Congress created the Interstate Commerce Commission to regulate railroads. In 1890 the Sherman Antitrust Act let the federal government attack monopolies. The handout\u2019s \u201cwins\u201d include breaking up the Northern Pacific Railroad and Rockefeller\u2019s Standard Oil."
     },
     {
       "id": 6,
       "module": "1787\u20131896: A federal government, markets, and the first CPAs",
-      "context": "A certified public accountant (CPA) is a state-licensed professional allowed to audit other people\u2019s books and, eventually, to sign opinions that outsiders rely on. The handout says New York was the first U.S. state to grant that license, starting in 1896. The test was not a political appointment. It was experience plus a written exam. Every other state later copied the idea.",
       "prompt": "How did the first U.S. CPA licenses, in New York from 1896, get issued?",
       "choices": [
         {
@@ -158,12 +157,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "1896 is the profession\u2019s birthday in this timeline.\n\nLicensing says: not everyone who can add is an auditor. You need supervised experience and you need to pass an exam. That is how a craft becomes a profession.\n\nNotice what has not happened yet. There is still no SEC, no FASB, no PCAOB. The states, not Washington, created the CPA."
+      "explanation": "1896 is the profession\u2019s birthday in this timeline.\n\nLicensing says: not everyone who can add is an auditor. You need supervised experience and you need to pass an exam. That is how a craft becomes a profession.\n\nNotice what has not happened yet. There is still no SEC, no FASB, no PCAOB. The states, not Washington, created the CPA.",
+      "lesson": "A certified public accountant (CPA) is a state-licensed professional allowed to audit other people\u2019s books and, eventually, to sign opinions that outsiders rely on. The handout says New York was the first U.S. state to grant that license, starting in 1896. The test was not a political appointment. It was experience plus a written exam. Every other state later copied the idea."
     },
     {
       "id": 7,
       "module": "1787\u20131896: A federal government, markets, and the first CPAs",
-      "context": "Put the 19th-century rows in order in your head: 1787 Constitution \u2192 political machines and corruption \u2192 Civil War tax and Treasury banking \u2192 1887/1890 railroad and antitrust regulation \u2192 1896 CPA licensing.\n\nThe pattern is: public power expands as private and political abuse becomes visible, and a licensed measuring profession appears once there is something important to measure.",
       "prompt": "Which sequence matches the handout\u2019s 19th-century order?",
       "choices": [
         {
@@ -184,12 +183,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Order matters because each step creates the next demand.\n\nA federal government can tax and charter banks. Taxes and banks need books. Railroads and trusts need regulation, which needs books. Once outsiders rely on those books, states invent a licensed auditor.\n\nIf you reverse the order (CPAs before a federal government, or the SEC in the 1800s), you are mixing later chapters into this one."
+      "explanation": "Order matters because each step creates the next demand.\n\nA federal government can tax and charter banks. Taxes and banks need books. Railroads and trusts need regulation, which needs books. Once outsiders rely on those books, states invent a licensed auditor.\n\nIf you reverse the order (CPAs before a federal government, or the SEC in the 1800s), you are mixing later chapters into this one.",
+      "lesson": "Put the 19th-century rows in order in your head: 1787 Constitution \u2192 political machines and corruption \u2192 Civil War tax and Treasury banking \u2192 1887/1890 railroad and antitrust regulation \u2192 1896 CPA licensing.\n\nThe pattern is: public power expands as private and political abuse becomes visible, and a licensed measuring profession appears once there is something important to measure."
     },
     {
       "id": 8,
       "module": "1913\u20131924: Progressive reform, Ponzi, Teapot Dome, and Ultramares",
-      "context": "The Pujo hearings (named for Congressman Ars\u00e8ne Pujo) were 1912\u20131913 investigations into the \u201cmoney trust\u201d: a small circle of New York bankers who seemed to control credit. The handout says substantial federal reform followed in 1913\u20131914: a permanent federal income tax (Sixteenth Amendment), the Federal Reserve, the Federal Trade Commission, and new antitrust law including the Clayton Act.",
       "prompt": "What does the handout say the 1913\u20131914 burst of federal reform followed?",
       "choices": [
         {
@@ -210,12 +209,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Think of 1913\u20131914 as the Progressive Era\u2019s financial package.\n\nIncome tax (16th Amendment) gives Washington a permanent claim on private profits, which is why tax accounting becomes a career. The Federal Reserve is a central bank: it can create liquidity and supervise banks. The FTC polices unfair competition. Clayton tightens antitrust.\n\nThe trigger in this handout is not a single corporate fraud. It is a congressional investigation of concentrated finance."
+      "explanation": "Think of 1913\u20131914 as the Progressive Era\u2019s financial package.\n\nIncome tax (16th Amendment) gives Washington a permanent claim on private profits, which is why tax accounting becomes a career. The Federal Reserve is a central bank: it can create liquidity and supervise banks. The FTC polices unfair competition. Clayton tightens antitrust.\n\nThe trigger in this handout is not a single corporate fraud. It is a congressional investigation of concentrated finance.",
+      "lesson": "The Pujo hearings (named for Congressman Ars\u00e8ne Pujo) were 1912\u20131913 investigations into the \u201cmoney trust\u201d: a small circle of New York bankers who seemed to control credit. The handout says substantial federal reform followed in 1913\u20131914: a permanent federal income tax (Sixteenth Amendment), the Federal Reserve, the Federal Trade Commission, and new antitrust law including the Clayton Act."
     },
     {
       "id": 9,
       "module": "1913\u20131924: Progressive reform, Ponzi, Teapot Dome, and Ultramares",
-      "context": "The Sixteenth Amendment (1913) let Congress tax income. Before that, federal money came mostly from tariffs and excises. A permanent income tax means the government cares how \u201cincome\u201d is measured, year after year, for millions of people and firms.",
       "prompt": "In the 1913\u20131914 cluster, which reform most directly created a lasting federal demand for income measurement?",
       "choices": [
         {
@@ -236,12 +235,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Antitrust and the Fed matter for markets. The income tax matters for the definition of income itself.\n\nOnce Washington taxes profits, accounting choices (when is revenue earned? what is deductible?) become legal questions, not just management questions. That is a second profession-building force beside CPA licensing."
+      "explanation": "Antitrust and the Fed matter for markets. The income tax matters for the definition of income itself.\n\nOnce Washington taxes profits, accounting choices (when is revenue earned? what is deductible?) become legal questions, not just management questions. That is a second profession-building force beside CPA licensing.",
+      "lesson": "The Sixteenth Amendment (1913) let Congress tax income. Before that, federal money came mostly from tariffs and excises. A permanent income tax means the government cares how \u201cincome\u201d is measured, year after year, for millions of people and firms."
     },
     {
       "id": 10,
       "module": "1913\u20131924: Progressive reform, Ponzi, Teapot Dome, and Ultramares",
-      "context": "The Federal Reserve System (1913) is the U.S. central bank. It was created so the country would not depend on a handful of private New York bankers for credit in a panic. The Federal Trade Commission (1914) is a civilian agency that polices unfair methods of competition. Both appear in the same 1913\u20131914 row as the income tax and Clayton Act.",
       "prompt": "Which pair was created in the 1913\u20131914 reforms listed in the timeline?",
       "choices": [
         {
@@ -262,12 +261,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Do not jump ahead to 1934 (SEC) or 2002 (PCAOB). In 1913\u20131914 Washington built a central bank and a competition watchdog.\n\nThe Fed will return in this timeline as the crisis firefighter (LTCM, Bear Stearns, Lehman aftermath, AIG, TARP-era liquidity). The FTC is the cousin of antitrust, not of securities disclosure."
+      "explanation": "Do not jump ahead to 1934 (SEC) or 2002 (PCAOB). In 1913\u20131914 Washington built a central bank and a competition watchdog.\n\nThe Fed will return in this timeline as the crisis firefighter (LTCM, Bear Stearns, Lehman aftermath, AIG, TARP-era liquidity). The FTC is the cousin of antitrust, not of securities disclosure.",
+      "lesson": "The Federal Reserve System (1913) is the U.S. central bank. It was created so the country would not depend on a handful of private New York bankers for credit in a panic. The Federal Trade Commission (1914) is a civilian agency that polices unfair methods of competition. Both appear in the same 1913\u20131914 row as the income tax and Clayton Act."
     },
     {
       "id": 11,
       "module": "1913\u20131924: Progressive reform, Ponzi, Teapot Dome, and Ultramares",
-      "context": "A Ponzi scheme pays old investors with money taken from new investors. There is no real engine of profit, or not enough of one. The scheme dies when new cash slows down.\n\nCharles Ponzi (1920) promised a 50% return in 45 days using International Reply Coupons (postal vouchers that could, in theory, be bought cheap in one country and redeemed dear in another). He paid early \u201cinvestors\u201d so they would brag and recruit. He was shut down within months after collecting millions, imprisoned, and deported to Italy.",
       "prompt": "What made Ponzi\u2019s 1920 operation a \u201cPonzi scheme\u201d as the handout describes it?",
       "choices": [
         {
@@ -288,12 +287,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Learn the mechanics, not just the name.\n\nStep 1: promise an impossible or implausible return. Step 2: pay the first arrivals so they become advertisements. Step 3: take the next arrivals\u2019 cash to fund those payouts. Step 4: collapse when recruitment fails.\n\nPonzi used postal reply coupons as the cover story and was gone in months. Eighty-eight years later, Bernard Madoff will run the same logic for decades. Same species, different scale."
+      "explanation": "Learn the mechanics, not just the name.\n\nStep 1: promise an impossible or implausible return. Step 2: pay the first arrivals so they become advertisements. Step 3: take the next arrivals\u2019 cash to fund those payouts. Step 4: collapse when recruitment fails.\n\nPonzi used postal reply coupons as the cover story and was gone in months. Eighty-eight years later, Bernard Madoff will run the same logic for decades. Same species, different scale.",
+      "lesson": "A Ponzi scheme pays old investors with money taken from new investors. There is no real engine of profit, or not enough of one. The scheme dies when new cash slows down.\n\nCharles Ponzi (1920) promised a 50% return in 45 days using International Reply Coupons (postal vouchers that could, in theory, be bought cheap in one country and redeemed dear in another). He paid early \u201cinvestors\u201d so they would brag and recruit. He was shut down within months after collecting millions, imprisoned, and deported to Italy."
     },
     {
       "id": 12,
       "module": "1913\u20131924: Progressive reform, Ponzi, Teapot Dome, and Ultramares",
-      "context": "Ponzi\u2019s cover story was International Reply Coupons, not a hedge fund or a gas-trading operation. He promised 50% in 45 days. That speed is part of the tell: legitimate businesses rarely advertise guaranteed 50% returns in a month and a half.",
       "prompt": "What return did Ponzi promise, and how quickly?",
       "choices": [
         {
@@ -314,12 +313,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "The numbers are memorable on purpose.\n\n50% in 45 days is not \u201ca good year in the market.\u201d It is a billboard that the economics cannot be real. Paying early investors is how the billboard stays lit. Prison and deportation are how the 1920 chapter ends. The idea of the scheme does not end; it waits for Madoff."
+      "explanation": "The numbers are memorable on purpose.\n\n50% in 45 days is not \u201ca good year in the market.\u201d It is a billboard that the economics cannot be real. Paying early investors is how the billboard stays lit. Prison and deportation are how the 1920 chapter ends. The idea of the scheme does not end; it waits for Madoff.",
+      "lesson": "Ponzi\u2019s cover story was International Reply Coupons, not a hedge fund or a gas-trading operation. He promised 50% in 45 days. That speed is part of the tell: legitimate businesses rarely advertise guaranteed 50% returns in a month and a half."
     },
     {
       "id": 13,
       "module": "1913\u20131924: Progressive reform, Ponzi, Teapot Dome, and Ultramares",
-      "context": "Teapot Dome is a government corruption scandal, not a corporate earnings fraud. The handout says Warren G. Harding\u2019s presidency was essentially \u201cbought\u201d by oil interests. The Interior Department leased the Teapot Dome oil reserve (and other oil properties) to oilmen in exchange for bribes to Interior Secretary Albert Fall. When it was discovered, the leases were cancelled and Fall went to jail for bribery.",
       "prompt": "Who took the bribes at the center of Teapot Dome, and what happened when the scheme was found out?",
       "choices": [
         {
@@ -340,12 +339,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Teapot Dome is about public office for sale.\n\nThe product being stolen is not a fake receivable. It is access to national oil reserves through a Cabinet secretary. Cancellation of the leases plus jail for Fall is the handout\u2019s resolution.\n\nCompare it with Tammany Hall: both are political corruption. Teapot Dome is federal, spectacular, and ends in a criminal conviction of a Cabinet officer."
+      "explanation": "Teapot Dome is about public office for sale.\n\nThe product being stolen is not a fake receivable. It is access to national oil reserves through a Cabinet secretary. Cancellation of the leases plus jail for Fall is the handout\u2019s resolution.\n\nCompare it with Tammany Hall: both are political corruption. Teapot Dome is federal, spectacular, and ends in a criminal conviction of a Cabinet officer.",
+      "lesson": "Teapot Dome is a government corruption scandal, not a corporate earnings fraud. The handout says Warren G. Harding\u2019s presidency was essentially \u201cbought\u201d by oil interests. The Interior Department leased the Teapot Dome oil reserve (and other oil properties) to oilmen in exchange for bribes to Interior Secretary Albert Fall. When it was discovered, the leases were cancelled and Fall went to jail for bribery."
     },
     {
       "id": 14,
       "module": "1913\u20131924: Progressive reform, Ponzi, Teapot Dome, and Ultramares",
-      "context": "An audit opinion is the auditor\u2019s public conclusion on the financial statements. An unqualified (clean) opinion says, in substance, the statements are fairly presented. In Ultramares (1924), auditor Touche Niven gave that clean opinion even though substantial fraud was present. Ultramares, a lender who had relied on the statements, sued the auditor.",
       "prompt": "In the Ultramares case, what had the auditor done that set up the lawsuit?",
       "choices": [
         {
@@ -366,12 +365,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "This is the timeline\u2019s first famous auditor-liability case.\n\nA lender used audited numbers to decide whether to extend credit. The numbers were rotten. The auditor had still signed a clean opinion. The legal question is not \u201cwas there fraud at the company?\u201d It is \u201cdoes the auditor owe that lender a recovery?\u201d"
+      "explanation": "This is the timeline\u2019s first famous auditor-liability case.\n\nA lender used audited numbers to decide whether to extend credit. The numbers were rotten. The auditor had still signed a clean opinion. The legal question is not \u201cwas there fraud at the company?\u201d It is \u201cdoes the auditor owe that lender a recovery?\u201d",
+      "lesson": "An audit opinion is the auditor\u2019s public conclusion on the financial statements. An unqualified (clean) opinion says, in substance, the statements are fairly presented. In Ultramares (1924), auditor Touche Niven gave that clean opinion even though substantial fraud was present. Ultramares, a lender who had relied on the statements, sued the auditor."
     },
     {
       "id": 15,
       "module": "1913\u20131924: Progressive reform, Ponzi, Teapot Dome, and Ultramares",
-      "context": "Courts distinguish negligence (carelessness; you should have done better) from fraud (you intended to deceive, or you were so reckless that the law treats it as deceit). In Ultramares, the court found Touche negligent but not fraudulent, and therefore not liable to the lender. That distinction became a landmark limit on who can sue auditors, and for what.",
       "prompt": "What did the Ultramares court conclude about Touche?",
       "choices": [
         {
@@ -392,12 +391,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Carry this sentence with you: negligent but not fraudulent, therefore not liable.\n\nTo a student, that sounds like a loophole. To the 1924 legal world, it was a line: ordinary third parties could not treat a careless audit as if the auditor had guaranteed the loan.\n\nLater, Continental Vending (1969) will show the opposite edge: even following GAAS may not save you from criminal fraud charges if the statements are known to be false. Ultramares is about civil liability to a lender. Continental Vending is about criminal guilt."
+      "explanation": "Carry this sentence with you: negligent but not fraudulent, therefore not liable.\n\nTo a student, that sounds like a loophole. To the 1924 legal world, it was a line: ordinary third parties could not treat a careless audit as if the auditor had guaranteed the loan.\n\nLater, Continental Vending (1969) will show the opposite edge: even following GAAS may not save you from criminal fraud charges if the statements are known to be false. Ultramares is about civil liability to a lender. Continental Vending is about criminal guilt.",
+      "lesson": "Courts distinguish negligence (carelessness; you should have done better) from fraud (you intended to deceive, or you were so reckless that the law treats it as deceit). In Ultramares, the court found Touche negligent but not fraudulent, and therefore not liable to the lender. That distinction became a landmark limit on who can sue auditors, and for what."
     },
     {
       "id": 16,
       "module": "1933\u20131959: New Deal, the SEC, and the first GAAP and audit rules",
-      "context": "The 1929 crash and the investigations that followed convinced Congress that Wall Street and many corporations had been a swamp of abuse. Under Franklin D. Roosevelt\u2019s New Deal, the Securities Act of 1933 and the Securities Exchange Act of 1934 created the Securities and Exchange Commission (SEC).\n\nThe SEC\u2019s job in this handout is twofold: regulate securities markets, and require adequate disclosure of public corporations\u2019 finances. Disclosure means outsiders can see the numbers, not that the numbers are guaranteed true.",
       "prompt": "What did the Securities Acts of 1933\u20131934 create, and for what two purposes does the handout name?",
       "choices": [
         {
@@ -418,12 +417,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "1933\u20131934 is the disclosure revolution.\n\nBefore the SEC, a public company\u2019s finances could be a private conversation among insiders. After the SEC, periodic public reporting is a legal duty. That is why 10-Ks, 10-Qs, and audited financials become central to the profession.\n\nThe SEC does not yet write all of GAAP itself in this story; it will later look to private-sector boards (CAP, APB, FASB). But it is the cop on the securities beat."
+      "explanation": "1933\u20131934 is the disclosure revolution.\n\nBefore the SEC, a public company\u2019s finances could be a private conversation among insiders. After the SEC, periodic public reporting is a legal duty. That is why 10-Ks, 10-Qs, and audited financials become central to the profession.\n\nThe SEC does not yet write all of GAAP itself in this story; it will later look to private-sector boards (CAP, APB, FASB). But it is the cop on the securities beat.",
+      "lesson": "The 1929 crash and the investigations that followed convinced Congress that Wall Street and many corporations had been a swamp of abuse. Under Franklin D. Roosevelt\u2019s New Deal, the Securities Act of 1933 and the Securities Exchange Act of 1934 created the Securities and Exchange Commission (SEC).\n\nThe SEC\u2019s job in this handout is twofold: regulate securities markets, and require adequate disclosure of public corporations\u2019 finances. Disclosure means outsiders can see the numbers, not that the numbers are guaranteed true."
     },
     {
       "id": 17,
       "module": "1933\u20131959: New Deal, the SEC, and the first GAAP and audit rules",
-      "context": "McKesson & Robbins (1937) was a pharmaceutical company whose president ran a massive fraud: inventory that did not exist, and receivables (money customers supposedly owed) that did not exist. Price Waterhouse was the auditor. The fraud ran for years because PW did not audit inventory or receivables. The public demand that followed was for audit regulation, not just better manners.",
       "prompt": "Why, according to the handout, was the McKesson & Robbins fraud able to continue for years?",
       "choices": [
         {
@@ -444,12 +443,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "If you do not look at the stuff, and you do not ask the customers, a liar can invent both the warehouse and the customers.\n\nInventory observation and receivable confirmation sound boring. McKesson is why they became mandatory. The failure is not \u201cPW missed a subtle judgment.\u201d It is \u201cPW skipped the two accounts that were entirely fake.\u201d"
+      "explanation": "If you do not look at the stuff, and you do not ask the customers, a liar can invent both the warehouse and the customers.\n\nInventory observation and receivable confirmation sound boring. McKesson is why they became mandatory. The failure is not \u201cPW missed a subtle judgment.\u201d It is \u201cPW skipped the two accounts that were entirely fake.\u201d",
+      "lesson": "McKesson & Robbins (1937) was a pharmaceutical company whose president ran a massive fraud: inventory that did not exist, and receivables (money customers supposedly owed) that did not exist. Price Waterhouse was the auditor. The fraud ran for years because PW did not audit inventory or receivables. The public demand that followed was for audit regulation, not just better manners."
     },
     {
       "id": 18,
       "module": "1933\u20131959: New Deal, the SEC, and the first GAAP and audit rules",
-      "context": "After McKesson, the Committee on Audit Procedures was established in 1939 to issue auditing standards. Its first move, in this handout, was to require auditors to physically conduct (observe) inventory and to confirm receivables with the supposed customers. Those procedures are still core fieldwork.",
       "prompt": "What did the 1939 Committee on Audit Procedures require first?",
       "choices": [
         {
@@ -470,12 +469,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "This is cause and effect in one pair of dates: 1937 fraud, 1939 procedure.\n\n\u201cPhysically conduct inventory\u201d means go to the warehouse. \u201cConfirm receivables\u201d means ask the customer, in writing, whether the balance is real. You are no longer allowed to take management\u2019s word for the two accounts McKesson invented.\n\nAuditing standards here are a private-sector committee\u2019s answer. Seventy years later, SOX will put a public board (the PCAOB) over public-company audit standards."
+      "explanation": "This is cause and effect in one pair of dates: 1937 fraud, 1939 procedure.\n\n\u201cPhysically conduct inventory\u201d means go to the warehouse. \u201cConfirm receivables\u201d means ask the customer, in writing, whether the balance is real. You are no longer allowed to take management\u2019s word for the two accounts McKesson invented.\n\nAuditing standards here are a private-sector committee\u2019s answer. Seventy years later, SOX will put a public board (the PCAOB) over public-company audit standards.",
+      "lesson": "After McKesson, the Committee on Audit Procedures was established in 1939 to issue auditing standards. Its first move, in this handout, was to require auditors to physically conduct (observe) inventory and to confirm receivables with the supposed customers. Those procedures are still core fieldwork."
     },
     {
       "id": 19,
       "module": "1933\u20131959: New Deal, the SEC, and the first GAAP and audit rules",
-      "context": "GAAP means generally accepted accounting principles: the rules for how companies measure and present results. In 1938 the Committee on Accounting Procedures (CAP) was created to establish GAAP. Its vehicle was the Accounting Research Bulletin (ARB). The handout says 51 ARBs were issued over 20 years (1938\u20131959). Many became fundamental standards still in the DNA of U.S. GAAP, even though the particulars changed.",
       "prompt": "How did the Committee on Accounting Procedures set GAAP from 1938 to 1959?",
       "choices": [
         {
@@ -496,12 +495,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "CAP is the first named U.S. GAAP factory in this timeline.\n\nIt is a committee of the profession, not a government agency. ARBs are the product. 51 documents in 20 years is a lot of rule-writing, and the handout\u2019s point is that the foundations of today\u2019s GAAP start here.\n\nCAP will be replaced because the process, not only the rules, came to look inadequate."
+      "explanation": "CAP is the first named U.S. GAAP factory in this timeline.\n\nIt is a committee of the profession, not a government agency. ARBs are the product. 51 documents in 20 years is a lot of rule-writing, and the handout\u2019s point is that the foundations of today\u2019s GAAP start here.\n\nCAP will be replaced because the process, not only the rules, came to look inadequate.",
+      "lesson": "GAAP means generally accepted accounting principles: the rules for how companies measure and present results. In 1938 the Committee on Accounting Procedures (CAP) was created to establish GAAP. Its vehicle was the Accounting Research Bulletin (ARB). The handout says 51 ARBs were issued over 20 years (1938\u20131959). Many became fundamental standards still in the DNA of U.S. GAAP, even though the particulars changed."
     },
     {
       "id": 20,
       "module": "1933\u20131959: New Deal, the SEC, and the first GAAP and audit rules",
-      "context": "In 1959 the Accounting Principles Board (APB) replaced CAP. The handout also misspells it \u201cABP\u201d in one place; it means APB. New procedures were used, but \u201cmany of the problems of the previous organization\u201d remained. So 1959 is not a happy ending. It is a halfway reform.",
       "prompt": "What is the handout\u2019s verdict on the Accounting Principles Board that replaced CAP in 1959?",
       "choices": [
         {
@@ -522,12 +521,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Standard-setting has a succession: CAP (1938) \u2192 APB (1959) \u2192 FASB (1973).\n\nEach replacement is an admission that the last process lost legitimacy. APB is the awkward middle child: new procedures, old problems. FASB will be sold as better process, governance, and public involvement.\n\nIf an exam asks \u201cwho writes GAAP now?\u201d, the timeline\u2019s answer after 1973 is FASB, not CAP or APB."
+      "explanation": "Standard-setting has a succession: CAP (1938) \u2192 APB (1959) \u2192 FASB (1973).\n\nEach replacement is an admission that the last process lost legitimacy. APB is the awkward middle child: new procedures, old problems. FASB will be sold as better process, governance, and public involvement.\n\nIf an exam asks \u201cwho writes GAAP now?\u201d, the timeline\u2019s answer after 1973 is FASB, not CAP or APB.",
+      "lesson": "In 1959 the Accounting Principles Board (APB) replaced CAP. The handout also misspells it \u201cABP\u201d in one place; it means APB. New procedures were used, but \u201cmany of the problems of the previous organization\u201d remained. So 1959 is not a happy ending. It is a halfway reform."
     },
     {
       "id": 21,
       "module": "1933\u20131959: New Deal, the SEC, and the first GAAP and audit rules",
-      "context": "Hold the 1930s\u20131950s machinery in one picture. Congress creates the SEC (1933\u201334) to force disclosure. A corporate fraud (McKesson, 1937) shows that disclosure is worthless if the auditor never looks. 1938 CAP starts writing GAAP. 1939 audit procedures start requiring looking. 1959 APB tries to replace CAP and only partly succeeds.",
       "prompt": "Which pairing is correct in this era?",
       "choices": [
         {
@@ -548,12 +547,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Students mix these bodies because they all sound like alphabet soup. Separate them by job.\n\nSEC: public markets and disclosure. CAP/APB/FASB: measurement rules (GAAP). Committee on Audit Procedures (later other audit bodies, then PCAOB for public companies): how to audit. McKesson is the horror story that connects disclosure to fieldwork."
+      "explanation": "Students mix these bodies because they all sound like alphabet soup. Separate them by job.\n\nSEC: public markets and disclosure. CAP/APB/FASB: measurement rules (GAAP). Committee on Audit Procedures (later other audit bodies, then PCAOB for public companies): how to audit. McKesson is the horror story that connects disclosure to fieldwork.",
+      "lesson": "Hold the 1930s\u20131950s machinery in one picture. Congress creates the SEC (1933\u201334) to force disclosure. A corporate fraud (McKesson, 1937) shows that disclosure is worthless if the auditor never looks. 1938 CAP starts writing GAAP. 1939 audit procedures start requiring looking. 1959 APB tries to replace CAP and only partly succeeds."
     },
     {
       "id": 22,
       "module": "1963\u20131979: Salad oil, Continental Vending, FASB, FCPA, and lowballing",
-      "context": "The Great Salad Oil Swindle (1963) is almost a cartoon, which is why it teaches. Allied Crude Vegetable Oil filled tankers with water and poured a layer of salad oil on top. Inspectors for creditors \u201cconfirmed shipments of salad oil.\u201d Creditors lost millions. CEO Tino De Angelis spent seven years in jail.",
       "prompt": "How did Allied Crude fool the people who thought they were confirming salad-oil collateral?",
       "choices": [
         {
@@ -574,12 +573,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "McKesson taught \u201cgo look at the inventory.\u201d Salad oil teaches \u201clooking is not enough if you look stupidly.\u201d\n\nA dipstick in a tank of water with an oil film still \u201cproves\u201d oil if you never ask what is underneath. Confirmation of form (there is a tank; there is a paperwork shipment) is not confirmation of substance (there is salad oil).\n\nDe Angelis\u2019s seven years in jail is the personal ending. The professional lesson is skepticism about what an inspection has actually observed."
+      "explanation": "McKesson taught \u201cgo look at the inventory.\u201d Salad oil teaches \u201clooking is not enough if you look stupidly.\u201d\n\nA dipstick in a tank of water with an oil film still \u201cproves\u201d oil if you never ask what is underneath. Confirmation of form (there is a tank; there is a paperwork shipment) is not confirmation of substance (there is salad oil).\n\nDe Angelis\u2019s seven years in jail is the personal ending. The professional lesson is skepticism about what an inspection has actually observed.",
+      "lesson": "The Great Salad Oil Swindle (1963) is almost a cartoon, which is why it teaches. Allied Crude Vegetable Oil filled tankers with water and poured a layer of salad oil on top. Inspectors for creditors \u201cconfirmed shipments of salad oil.\u201d Creditors lost millions. CEO Tino De Angelis spent seven years in jail."
     },
     {
       "id": 23,
       "module": "1963\u20131979: Salad oil, Continental Vending, FASB, FCPA, and lowballing",
-      "context": "Continental Vending (1969) is a criminal case against auditors, not a civil lender lawsuit like Ultramares. Lybrand, Ross Bros. & Montgomery (a Big Eight ancestor of today\u2019s firms) certified financial statements known to be false. The shocking line in the handout: Lybrand did not violate GAAS (generally accepted auditing standards), yet three Lybrand auditors were found guilty of criminal fraud.",
       "prompt": "What is the unsettling holding of Continental Vending in this timeline?",
       "choices": [
         {
@@ -600,12 +599,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "GAAS is a professional checklist. Criminal fraud is about deceit.\n\nContinental Vending says you can follow the standards and still go to prison if you certify statements you know are false. \u201cWe did the procedures\u201d is not a magic shield.\n\nSet it next to Ultramares (1924): that case limited civil liability where the auditor was merely negligent. This case imposes criminal guilt where the statements were known to be false. Different axes: who can collect money vs. who can lose liberty."
+      "explanation": "GAAS is a professional checklist. Criminal fraud is about deceit.\n\nContinental Vending says you can follow the standards and still go to prison if you certify statements you know are false. \u201cWe did the procedures\u201d is not a magic shield.\n\nSet it next to Ultramares (1924): that case limited civil liability where the auditor was merely negligent. This case imposes criminal guilt where the statements were known to be false. Different axes: who can collect money vs. who can lose liberty.",
+      "lesson": "Continental Vending (1969) is a criminal case against auditors, not a civil lender lawsuit like Ultramares. Lybrand, Ross Bros. & Montgomery (a Big Eight ancestor of today\u2019s firms) certified financial statements known to be false. The shocking line in the handout: Lybrand did not violate GAAS (generally accepted auditing standards), yet three Lybrand auditors were found guilty of criminal fraud."
     },
     {
       "id": 24,
       "module": "1963\u20131979: Salad oil, Continental Vending, FASB, FCPA, and lowballing",
-      "context": "In 1973 the Financial Accounting Standards Board (FASB) was established to replace the APB. The selling points in the handout are not \u201csmarter accountants.\u201d They are improved process, governance, and public involvement. FASB is still the private-sector GAAP writer the SEC looks to in the U.S.",
       "prompt": "Why was FASB created in 1973?",
       "choices": [
         {
@@ -626,12 +625,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "FASB is the third GAAP factory: CAP \u2192 APB \u2192 FASB.\n\n\u201cProcess, governance, and public involvement\u201d means: not a closed club of the same firms writing rules for themselves without due process. Independent board, public comments, a conceptual framework later on.\n\nFASB does not inspect audits. That public-company job will belong to the PCAOB after 2002. Do not merge those institutions."
+      "explanation": "FASB is the third GAAP factory: CAP \u2192 APB \u2192 FASB.\n\n\u201cProcess, governance, and public involvement\u201d means: not a closed club of the same firms writing rules for themselves without due process. Independent board, public comments, a conceptual framework later on.\n\nFASB does not inspect audits. That public-company job will belong to the PCAOB after 2002. Do not merge those institutions.",
+      "lesson": "In 1973 the Financial Accounting Standards Board (FASB) was established to replace the APB. The selling points in the handout are not \u201csmarter accountants.\u201d They are improved process, governance, and public involvement. FASB is still the private-sector GAAP writer the SEC looks to in the U.S."
     },
     {
       "id": 25,
       "module": "1963\u20131979: Salad oil, Continental Vending, FASB, FCPA, and lowballing",
-      "context": "The Foreign Corrupt Practices Act (FCPA) of 1977 has two halves, and students often remember only the first. After bribery scandals involving foreign officials, Congress made it illegal to bribe foreign officials for business purposes. The same Act also mandated internal control requirements for public firms. Internal control means the company\u2019s own systems to authorize, record, and safeguard transactions.",
       "prompt": "Besides banning bribery of foreign officials for business, what else did the FCPA mandate?",
       "choices": [
         {
@@ -652,12 +651,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "FCPA is not only an anti-bribery criminal statute. It is an early internal-control statute for public companies.\n\nThat second half is the bridge to Sarbanes-Oxley Section 404 a generation later: management (and, after SOX, auditors) must take the control system seriously, not only the face of the income statement.\n\n1977: controls become federal law. 2002: controls become a certified, inspectable duty."
+      "explanation": "FCPA is not only an anti-bribery criminal statute. It is an early internal-control statute for public companies.\n\nThat second half is the bridge to Sarbanes-Oxley Section 404 a generation later: management (and, after SOX, auditors) must take the control system seriously, not only the face of the income statement.\n\n1977: controls become federal law. 2002: controls become a certified, inspectable duty.",
+      "lesson": "The Foreign Corrupt Practices Act (FCPA) of 1977 has two halves, and students often remember only the first. After bribery scandals involving foreign officials, Congress made it illegal to bribe foreign officials for business purposes. The same Act also mandated internal control requirements for public firms. Internal control means the company\u2019s own systems to authorize, record, and safeguard transactions."
     },
     {
       "id": 26,
       "module": "1963\u20131979: Salad oil, Continental Vending, FASB, FCPA, and lowballing",
-      "context": "Until 1979, audit firms in the U.S. were not supposed to advertise. Federal pressure forced the profession to lift that ban. The unintended consequence, says the handout, was \u201clowballing\u201d: bidding a very low fee to win the client. Through the 1980s and beyond, the audit was priced more and more as a commodity, possibly resulting in lower-quality audits.",
       "prompt": "What does the handout mean by \u201clowballing\u201d after the 1979 advertising-ban lift?",
       "choices": [
         {
@@ -678,12 +677,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "A commodity is something buyers pick by price because they think the product is the same everywhere. If audits are sold that way, the winning firm may cut hours, staff, or skepticism to make the cheap fee work.\n\nThe handout is careful: \u201cpossibly\u201d lower quality. It is not a lab proof. It is a warning that independence and effort are hard to sustain when the engagement was won by being cheapest.\n\nRemember the date: 1979 is culture and competition, not a new accounting standard."
+      "explanation": "A commodity is something buyers pick by price because they think the product is the same everywhere. If audits are sold that way, the winning firm may cut hours, staff, or skepticism to make the cheap fee work.\n\nThe handout is careful: \u201cpossibly\u201d lower quality. It is not a lab proof. It is a warning that independence and effort are hard to sustain when the engagement was won by being cheapest.\n\nRemember the date: 1979 is culture and competition, not a new accounting standard.",
+      "lesson": "Until 1979, audit firms in the U.S. were not supposed to advertise. Federal pressure forced the profession to lift that ban. The unintended consequence, says the handout, was \u201clowballing\u201d: bidding a very low fee to win the client. Through the 1980s and beyond, the audit was priced more and more as a commodity, possibly resulting in lower-quality audits."
     },
     {
       "id": 27,
       "module": "1963\u20131979: Salad oil, Continental Vending, FASB, FCPA, and lowballing",
-      "context": "Line up the 1960s\u20131970s lessons. Salad oil (1963): observation can be fooled. Continental Vending (1969): GAAS is not a criminal defense. FASB (1973): new GAAP governance. FCPA (1977): bribery plus internal control. Advertising (1979): price competition and lowballing.",
       "prompt": "Which statement best captures this stretch of the timeline?",
       "choices": [
         {
@@ -704,12 +703,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "This is the professionalization decade-plus.\n\nThe measurement board gets rebuilt (FASB). The law starts caring about control systems (FCPA). The business model of the audit firm changes (advertising and lowballing). Meanwhile two scandals say: looking isn\u2019t enough, and checking the GAAS box isn\u2019t enough."
+      "explanation": "This is the professionalization decade-plus.\n\nThe measurement board gets rebuilt (FASB). The law starts caring about control systems (FCPA). The business model of the audit firm changes (advertising and lowballing). Meanwhile two scandals say: looking isn\u2019t enough, and checking the GAAS box isn\u2019t enough.",
+      "lesson": "Line up the 1960s\u20131970s lessons. Salad oil (1963): observation can be fooled. Continental Vending (1969): GAAS is not a criminal defense. FASB (1973): new GAAP governance. FCPA (1977): bribery plus internal control. Advertising (1979): price competition and lowballing."
     },
     {
       "id": 28,
       "module": "1982\u20131995: Deregulation, junk bonds, ZZZZ Best, and the S&L bailout",
-      "context": "Savings and loans (S&Ls) were depositor-funded lenders, many of them focused on home mortgages. In the late 1970s and early 1980s, interest rates soared. S&Ls were stuck earning old, low mortgage rates while they had to pay high rates to keep deposits. The Garn-St. Germain Act (1982) deregulated them to stave off immediate bankruptcy. The handout\u2019s judgment: that helped in the short run but created a soon-to-be corrupt industry that would need a federal bailout. Much of the industry failed; dozens of executives were jailed.",
       "prompt": "What does the handout say Garn-St. Germain (1982) did, and what was the longer-run result?",
       "choices": [
         {
@@ -730,12 +729,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Deregulation here is a painkiller, not a cure.\n\nRising rates made the old S&L model insolvent. Congress loosened the rules so institutions could chase new, riskier profits. Some of those bets were fraud. The bill for that arrives at the end of the decade as the RTC bailout.\n\nWhenever a timeline says \u201cwe deregulated to avoid bankruptcy,\u201d ask what behavior the new freedom rewarded."
+      "explanation": "Deregulation here is a painkiller, not a cure.\n\nRising rates made the old S&L model insolvent. Congress loosened the rules so institutions could chase new, riskier profits. Some of those bets were fraud. The bill for that arrives at the end of the decade as the RTC bailout.\n\nWhenever a timeline says \u201cwe deregulated to avoid bankruptcy,\u201d ask what behavior the new freedom rewarded.",
+      "lesson": "Savings and loans (S&Ls) were depositor-funded lenders, many of them focused on home mortgages. In the late 1970s and early 1980s, interest rates soared. S&Ls were stuck earning old, low mortgage rates while they had to pay high rates to keep deposits. The Garn-St. Germain Act (1982) deregulated them to stave off immediate bankruptcy. The handout\u2019s judgment: that helped in the short run but created a soon-to-be corrupt industry that would need a federal bailout. Much of the industry failed; dozens of executives were jailed."
     },
     {
       "id": 29,
       "module": "1982\u20131995: Deregulation, junk bonds, ZZZZ Best, and the S&L bailout",
-      "context": "Junk bonds are high-yield, high-risk bonds: the issuer is less creditworthy, so investors demand more interest. Michael Milken, in the 1980s, specialized in making a market in them. The handout does not treat him as a mere innovator. It says he multiplied wealth by manipulating price data, insider trading, illegal outside deals, tax fraud, and other pieces of a vast criminal conspiracy. His downfall also forced Drexel Burnham into bankruptcy.",
       "prompt": "Besides making a market in junk bonds, what does the handout charge Milken with?",
       "choices": [
         {
@@ -756,12 +755,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "A market-maker is supposed to stand ready to buy and sell so that others can trade. That can be legitimate. The handout\u2019s Milken is a market-maker plus a criminal enterprise.\n\nDrexel Burnham is the firm that goes down with him. Keep this separate from the S&L story: both are 1980s finance, but Milken is junk-bond Wall Street, not a Midwestern thrift."
+      "explanation": "A market-maker is supposed to stand ready to buy and sell so that others can trade. That can be legitimate. The handout\u2019s Milken is a market-maker plus a criminal enterprise.\n\nDrexel Burnham is the firm that goes down with him. Keep this separate from the S&L story: both are 1980s finance, but Milken is junk-bond Wall Street, not a Midwestern thrift.",
+      "lesson": "Junk bonds are high-yield, high-risk bonds: the issuer is less creditworthy, so investors demand more interest. Michael Milken, in the 1980s, specialized in making a market in them. The handout does not treat him as a mere innovator. It says he multiplied wealth by manipulating price data, insider trading, illegal outside deals, tax fraud, and other pieces of a vast criminal conspiracy. His downfall also forced Drexel Burnham into bankruptcy."
     },
     {
       "id": 30,
       "module": "1982\u20131995: Deregulation, junk bonds, ZZZZ Best, and the S&L bailout",
-      "context": "ZZZZ Best (1986) was a small insurance-restoration company: it claimed to rebuild properties after fires and other damage. Founder Barry Minkow made it look successful with increasing levels of fraud. He was jailed in 1989. The lesson is not size. A small company with a charismatic founder can still manufacture revenue.",
       "prompt": "Who was ZZZZ Best\u2019s founder, and how does the handout date his fall?",
       "choices": [
         {
@@ -782,12 +781,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Minkow is the 1980s version of \u201cthe growth story was the fraud.\u201d\n\nInsurance restoration is a real business. Fake restoration contracts are a receivable-and-revenue fiction, cousin to McKesson\u2019s fake customers. Jail in 1989 closes the row. Do not confuse Minkow with Dunlap (Sunbeam), Ebbers (WorldCom), or Kozlowski (Tyco)."
+      "explanation": "Minkow is the 1980s version of \u201cthe growth story was the fraud.\u201d\n\nInsurance restoration is a real business. Fake restoration contracts are a receivable-and-revenue fiction, cousin to McKesson\u2019s fake customers. Jail in 1989 closes the row. Do not confuse Minkow with Dunlap (Sunbeam), Ebbers (WorldCom), or Kozlowski (Tyco).",
+      "lesson": "ZZZZ Best (1986) was a small insurance-restoration company: it claimed to rebuild properties after fires and other damage. Founder Barry Minkow made it look successful with increasing levels of fraud. He was jailed in 1989. The lesson is not size. A small company with a charismatic founder can still manufacture revenue."
     },
     {
       "id": 31,
       "module": "1982\u20131995: Deregulation, junk bonds, ZZZZ Best, and the S&L bailout",
-      "context": "The S&L crisis, with substantial fraud, failed more than 700 savings and loans. They were closed by the Resolution Trust Corporation (RTC). The handout labels it the \u201cRegulation Trust Corporation\u201d; the actual name is Resolution Trust Corporation. The RTC sold billions of dollars of S&L assets. Taxpayers were left with a net loss of almost $100 billion. The cleanup runs 1989 into the early 1990s.",
       "prompt": "What cleanup vehicle closed the failed S&Ls, and what does the handout say taxpayers lost?",
       "choices": [
         {
@@ -808,12 +807,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Connect 1982 to 1989. Garn-St. Germain postponed death; it did not prevent a corrupt boom. Then the government becomes the world\u2019s worst asset manager: take over 700-plus dead thrifts, sell the pieces, eat a ~$100 billion loss.\n\nThe RTC is a temporary warehouse for failed-institution assets. TARP (2008) will be a different tool: capital for living banks. Do not swap the acronyms."
+      "explanation": "Connect 1982 to 1989. Garn-St. Germain postponed death; it did not prevent a corrupt boom. Then the government becomes the world\u2019s worst asset manager: take over 700-plus dead thrifts, sell the pieces, eat a ~$100 billion loss.\n\nThe RTC is a temporary warehouse for failed-institution assets. TARP (2008) will be a different tool: capital for living banks. Do not swap the acronyms.",
+      "lesson": "The S&L crisis, with substantial fraud, failed more than 700 savings and loans. They were closed by the Resolution Trust Corporation (RTC). The handout labels it the \u201cRegulation Trust Corporation\u201d; the actual name is Resolution Trust Corporation. The RTC sold billions of dollars of S&L assets. Taxpayers were left with a net loss of almost $100 billion. The cleanup runs 1989 into the early 1990s."
     },
     {
       "id": 32,
       "module": "1982\u20131995: Deregulation, junk bonds, ZZZZ Best, and the S&L bailout",
-      "context": "In 1995 Congress passed accountant-friendly litigation reform (the handout\u2019s \u201cPublic Securities litigation Reform Act,\u201d usually called the Private Securities Litigation Reform Act, or PSLRA). It reduced potential legal liabilities of external auditors. The handout\u2019s worry: that could produce more aggressive audits, \u201cwhich seemed to be the result in the late 1990s and beyond.\u201d",
       "prompt": "What did the 1995 litigation-reform statute do to auditors, in the handout\u2019s telling?",
       "choices": [
         {
@@ -834,12 +833,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Liability is a brake. If you can be ruined for a missed fraud, you may audit more cautiously (or refuse risky clients). If liability shrinks, the brake loosens.\n\nThe handout is drawing a straight line from a 1995 legal change to the 1997\u20132002 explosion of accounting scandals. You should treat that as the course\u2019s causal story, whether or not every economist agrees."
+      "explanation": "Liability is a brake. If you can be ruined for a missed fraud, you may audit more cautiously (or refuse risky clients). If liability shrinks, the brake loosens.\n\nThe handout is drawing a straight line from a 1995 legal change to the 1997\u20132002 explosion of accounting scandals. You should treat that as the course\u2019s causal story, whether or not every economist agrees.",
+      "lesson": "In 1995 Congress passed accountant-friendly litigation reform (the handout\u2019s \u201cPublic Securities litigation Reform Act,\u201d usually called the Private Securities Litigation Reform Act, or PSLRA). It reduced potential legal liabilities of external auditors. The handout\u2019s worry: that could produce more aggressive audits, \u201cwhich seemed to be the result in the late 1990s and beyond.\u201d"
     },
     {
       "id": 33,
       "module": "1982\u20131995: Deregulation, junk bonds, ZZZZ Best, and the S&L bailout",
-      "context": "The 1980s\u2013mid-1990s block is: loosen S&Ls (1982) \u2192 junk-bond crime and Drexel (1980s) \u2192 Minkow (1986) \u2192 700 S&Ls die and RTC costs ~$100 billion (1989\u2013early 1990s) \u2192 1995 law makes it harder to sue auditors.",
       "prompt": "Which cause-and-effect chain is the one the timeline is telling?",
       "choices": [
         {
@@ -860,12 +859,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "This is the runway to Enron, not a random list.\n\nPublic losses at S&Ls show how costly bad accounting and bad incentives are. Then Congress, in 1995, eases auditor lawsuit risk. The next pages of the handout are Waste Management, Sunbeam, Cendant, Rite Aid, Enron, WorldCom. The handout wants you to feel that sequence as one story."
+      "explanation": "This is the runway to Enron, not a random list.\n\nPublic losses at S&Ls show how costly bad accounting and bad incentives are. Then Congress, in 1995, eases auditor lawsuit risk. The next pages of the handout are Waste Management, Sunbeam, Cendant, Rite Aid, Enron, WorldCom. The handout wants you to feel that sequence as one story.",
+      "lesson": "The 1980s\u2013mid-1990s block is: loosen S&Ls (1982) \u2192 junk-bond crime and Drexel (1980s) \u2192 Minkow (1986) \u2192 700 S&Ls die and RTC costs ~$100 billion (1989\u2013early 1990s) \u2192 1995 law makes it harder to sue auditors."
     },
     {
       "id": 34,
       "module": "1997\u20132001: Late-1990s accounting failures and Regulation FD",
-      "context": "Waste Management (1997) was a trash, landfill, and waste company. The handout calls that a metaphor for the accounting: overstated revenues, understated expenses, with a special focus on fraudulent accounting for property, plant, and equipment (PPE). PPE fraud often means stretching asset lives, inflating salvage values, or capitalizing costs that should be expenses, so depreciation stays too low and profits look too high. After restatements of over $1 billion covering five years, the firm failed.",
       "prompt": "Where did Waste Management\u2019s fraud especially sit, and how large were the restatements in the handout?",
       "choices": [
         {
@@ -886,12 +885,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Revenue fraud is easy to picture (fake sales). PPE fraud is quieter: change an assumption about how long a truck lasts, and this year\u2019s expense shrinks.\n\nOverstated revenues plus understated expenses is the complete earnings recipe. A $1 billion-plus five-year restatement means the lie was not a one-quarter miss. Then failure: you cannot un-dump the trash on the income statement and keep the same stock-market story."
+      "explanation": "Revenue fraud is easy to picture (fake sales). PPE fraud is quieter: change an assumption about how long a truck lasts, and this year\u2019s expense shrinks.\n\nOverstated revenues plus understated expenses is the complete earnings recipe. A $1 billion-plus five-year restatement means the lie was not a one-quarter miss. Then failure: you cannot un-dump the trash on the income statement and keep the same stock-market story.",
+      "lesson": "Waste Management (1997) was a trash, landfill, and waste company. The handout calls that a metaphor for the accounting: overstated revenues, understated expenses, with a special focus on fraudulent accounting for property, plant, and equipment (PPE). PPE fraud often means stretching asset lives, inflating salvage values, or capitalizing costs that should be expenses, so depreciation stays too low and profits look too high. After restatements of over $1 billion covering five years, the firm failed."
     },
     {
       "id": 35,
       "module": "1997\u20132001: Late-1990s accounting failures and Regulation FD",
-      "context": "Sunbeam (1998) made appliances and was failing. It hired Al Dunlap, a famous cost-cutter, to turn it around. Costs were cut and profits rose, but the profits were maintained only by fraudulent revenue recognition and other illegal acts. The company had to write off over $1 billion from previous years before declaring bankruptcy.\n\nRevenue recognition fraud means recording sales too early, too large, or that are not real sales (for example, stuffing channels or parking inventory).",
       "prompt": "What is the Sunbeam story in this timeline?",
       "choices": [
         {
@@ -912,12 +911,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "A turnaround can be real (cut waste, sell more). Sunbeam\u2019s reported turnaround was not.\n\nDunlap is the person to attach to this row, the way Minkow attaches to ZZZZ Best and Ebbers to WorldCom. The $1 billion write-off is the same order of magnitude as Waste Management\u2019s restatement: late-1990s frauds are now measured in ten figures."
+      "explanation": "A turnaround can be real (cut waste, sell more). Sunbeam\u2019s reported turnaround was not.\n\nDunlap is the person to attach to this row, the way Minkow attaches to ZZZZ Best and Ebbers to WorldCom. The $1 billion write-off is the same order of magnitude as Waste Management\u2019s restatement: late-1990s frauds are now measured in ten figures.",
+      "lesson": "Sunbeam (1998) made appliances and was failing. It hired Al Dunlap, a famous cost-cutter, to turn it around. Costs were cut and profits rose, but the profits were maintained only by fraudulent revenue recognition and other illegal acts. The company had to write off over $1 billion from previous years before declaring bankruptcy.\n\nRevenue recognition fraud means recording sales too early, too large, or that are not real sales (for example, stuffing channels or parking inventory)."
     },
     {
       "id": 36,
       "module": "1997\u20132001: Late-1990s accounting failures and Regulation FD",
-      "context": "Cendant (1998) is an acquisition story. A conglomerate called HFS grew profits by buying other companies. It acquired CUC International and renamed the combination Cendant. Only after the deal closed did it become clear that CUC had used fraudulent accounting for years. The buyer inherited a lie.",
       "prompt": "What went wrong in the Cendant / CUC deal as the handout tells it?",
       "choices": [
         {
@@ -938,12 +937,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Due diligence is supposed to include the accounting. Cendant is what happens when the target\u2019s earnings were a multi-year fiction.\n\nThis is different from Waste Management (the company\u2019s own PPE games) and Sunbeam (the company\u2019s own revenue games). Here the fraud is imported through M&A. That is why later dealmakers obsess over quality of earnings."
+      "explanation": "Due diligence is supposed to include the accounting. Cendant is what happens when the target\u2019s earnings were a multi-year fiction.\n\nThis is different from Waste Management (the company\u2019s own PPE games) and Sunbeam (the company\u2019s own revenue games). Here the fraud is imported through M&A. That is why later dealmakers obsess over quality of earnings.",
+      "lesson": "Cendant (1998) is an acquisition story. A conglomerate called HFS grew profits by buying other companies. It acquired CUC International and renamed the combination Cendant. Only after the deal closed did it become clear that CUC had used fraudulent accounting for years. The buyer inherited a lie."
     },
     {
       "id": 37,
       "module": "1997\u20132001: Late-1990s accounting failures and Regulation FD",
-      "context": "Long-Term Capital Management (LTCM, 1998) was a giant hedge fund, reputed to be run by the smartest financial experts. It used enormous leverage (borrowed money piled on a small sliver of equity) and ended up on the wrong side of huge bets, including the Russian ruble (the handout says \u201crubble\u201d) and other ill-advised hedges. A Federal Reserve\u2013backed bailout was needed to unwind the positions and \u201cprotect the financial world.\u201d",
       "prompt": "Why did LTCM require a Fed-backed rescue in 1998?",
       "choices": [
         {
@@ -964,12 +963,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "LTCM is not an earnings-restatement story. It is a leverage-and-contagion story.\n\nSmart people plus huge borrowed money plus a wrong-way bet can still threaten everyone they traded with. The Fed\u2019s interest is not saving the partners\u2019 pride. It is stopping a chain reaction.\n\nYou will see this logic again in 2008 with Bear, Lehman, and AIG. 1998 is the dress rehearsal."
+      "explanation": "LTCM is not an earnings-restatement story. It is a leverage-and-contagion story.\n\nSmart people plus huge borrowed money plus a wrong-way bet can still threaten everyone they traded with. The Fed\u2019s interest is not saving the partners\u2019 pride. It is stopping a chain reaction.\n\nYou will see this logic again in 2008 with Bear, Lehman, and AIG. 1998 is the dress rehearsal.",
+      "lesson": "Long-Term Capital Management (LTCM, 1998) was a giant hedge fund, reputed to be run by the smartest financial experts. It used enormous leverage (borrowed money piled on a small sliver of equity) and ended up on the wrong side of huge bets, including the Russian ruble (the handout says \u201crubble\u201d) and other ill-advised hedges. A Federal Reserve\u2013backed bailout was needed to unwind the positions and \u201cprotect the financial world.\u201d"
     },
     {
       "id": 38,
       "module": "1997\u20132001: Late-1990s accounting failures and Regulation FD",
-      "context": "Rite Aid (1999), a drugstore chain, had several accounting issues. Those led to earnings restatements, SEC and other investigations, and lawsuits. Executives were fired and jailed. It is a smaller brand than Enron, but the pattern is the same: bad numbers, restatement, enforcement, personal punishment.",
       "prompt": "What followed Rite Aid\u2019s accounting issues in the timeline?",
       "choices": [
         {
@@ -990,12 +989,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "By 1999 the late-1990s pipeline is fully open: restatement \u2192 SEC \u2192 civil suits \u2192 jail.\n\nRite Aid is useful because it shows the pattern is not reserved for energy traders and telecom giants. A drugstore chain can walk the same path."
+      "explanation": "By 1999 the late-1990s pipeline is fully open: restatement \u2192 SEC \u2192 civil suits \u2192 jail.\n\nRite Aid is useful because it shows the pattern is not reserved for energy traders and telecom giants. A drugstore chain can walk the same path.",
+      "lesson": "Rite Aid (1999), a drugstore chain, had several accounting issues. Those led to earnings restatements, SEC and other investigations, and lawsuits. Executives were fired and jailed. It is a smaller brand than Enron, but the pattern is the same: bad numbers, restatement, enforcement, personal punishment."
     },
     {
       "id": 39,
       "module": "1997\u20132001: Late-1990s accounting failures and Regulation FD",
-      "context": "Regulation FD (Fair Disclosure) in 2001 was an SEC rule against selective disclosure. Companies had been whispering earnings news to favored analysts and other investment insiders. FD required that when a company talks material information, the public hears it too. Earnings announcements were to be made public, usually through internet simulcasts.",
       "prompt": "What problem was Regulation FD designed to stop?",
       "choices": [
         {
@@ -1016,12 +1015,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Disclosure can be unfair even when the numbers are honest.\n\nIf a star analyst gets the miss an hour early, that analyst\u2019s clients trade on news the rest of the market does not have. FD is about equal access to the announcement, usually by putting the call on the internet.\n\nIt is not a GAAP standard and not an audit standard. It is a communications rule from the SEC, dated 2001, on the doorstep of Enron."
+      "explanation": "Disclosure can be unfair even when the numbers are honest.\n\nIf a star analyst gets the miss an hour early, that analyst\u2019s clients trade on news the rest of the market does not have. FD is about equal access to the announcement, usually by putting the call on the internet.\n\nIt is not a GAAP standard and not an audit standard. It is a communications rule from the SEC, dated 2001, on the doorstep of Enron.",
+      "lesson": "Regulation FD (Fair Disclosure) in 2001 was an SEC rule against selective disclosure. Companies had been whispering earnings news to favored analysts and other investment insiders. FD required that when a company talks material information, the public hears it too. Earnings announcements were to be made public, usually through internet simulcasts."
     },
     {
       "id": 40,
       "module": "1997\u20132001: Late-1990s accounting failures and Regulation FD",
-      "context": "Stack 1997\u20132001: Waste Management (PPE, $1B+, failure), Sunbeam (Dunlap, revenue recognition, $1B write-off, bankruptcy), Cendant (bought CUC\u2019s hidden fraud), LTCM (leverage, Fed-backed unwind), Rite Aid (restatements, jail), Regulation FD (no more whispered earnings).",
       "prompt": "Which theme ties this block together before Enron explodes?",
       "choices": [
         {
@@ -1042,12 +1041,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "The handout is stacking kindling.\n\nCorporate books are being cooked in several styles (PPE, revenue, M&A). A hedge fund shows that smart leverage can still need the Fed. FD tries to civilize the information game. Then Enron arrives as \u201cpossibly the biggest business scandal in American history.\u201d"
+      "explanation": "The handout is stacking kindling.\n\nCorporate books are being cooked in several styles (PPE, revenue, M&A). A hedge fund shows that smart leverage can still need the Fed. FD tries to civilize the information game. Then Enron arrives as \u201cpossibly the biggest business scandal in American history.\u201d",
+      "lesson": "Stack 1997\u20132001: Waste Management (PPE, $1B+, failure), Sunbeam (Dunlap, revenue recognition, $1B write-off, bankruptcy), Cendant (bought CUC\u2019s hidden fraud), LTCM (leverage, Fed-backed unwind), Rite Aid (restatements, jail), Regulation FD (no more whispered earnings)."
     },
     {
       "id": 41,
       "module": "2001\u20132002: Enron, WorldCom, and Sarbanes-Oxley",
-      "context": "Enron (2001) began as a stodgy gas-pipeline company and recast itself as a high-tech global trader. The facade, the handout says, was maintained through fraud: widespread special purpose entities (SPEs), derivatives, and deceptive use of trading profits. SPEs are legally separate vehicles; used honestly they isolate a project, used dishonestly they hide debt and manufacture earnings. The handout calls Enron possibly the biggest business scandal in American history. Several executives were jailed.",
       "prompt": "How does the handout say Enron kept the high-tech trading facade standing?",
       "choices": [
         {
@@ -1068,12 +1067,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Separate Enron from WorldCom. Enron is complexity: SPEs, derivatives, trading. WorldCom is simplicity: capitalize expenses that should have hit earnings.\n\nAn SPE can be a real bankruptcy-remote box. Enron\u2019s were used to keep ugly items off the mothership\u2019s balance sheet and to book income that was not economic. Derivatives can hedge; they can also mark a fantasy.\n\nJail for executives is the personal ending. Arthur Andersen\u2019s destruction (not detailed in this handout row) is the professional earthquake. SOX is the statutory ending."
+      "explanation": "Separate Enron from WorldCom. Enron is complexity: SPEs, derivatives, trading. WorldCom is simplicity: capitalize expenses that should have hit earnings.\n\nAn SPE can be a real bankruptcy-remote box. Enron\u2019s were used to keep ugly items off the mothership\u2019s balance sheet and to book income that was not economic. Derivatives can hedge; they can also mark a fantasy.\n\nJail for executives is the personal ending. Arthur Andersen\u2019s destruction (not detailed in this handout row) is the professional earthquake. SOX is the statutory ending.",
+      "lesson": "Enron (2001) began as a stodgy gas-pipeline company and recast itself as a high-tech global trader. The facade, the handout says, was maintained through fraud: widespread special purpose entities (SPEs), derivatives, and deceptive use of trading profits. SPEs are legally separate vehicles; used honestly they isolate a project, used dishonestly they hide debt and manufacture earnings. The handout calls Enron possibly the biggest business scandal in American history. Several executives were jailed."
     },
     {
       "id": 42,
       "module": "2001\u20132002: Enron, WorldCom, and Sarbanes-Oxley",
-      "context": "WorldCom (2002) was a large telecom. When actual profits collapsed, it hid the collapse with a simple fraud: it recorded operating expenses as capital assets, about $11 billion worth. Capitalizing an expense moves a cost from the income statement (where it kills profit now) to the balance sheet (where it is depreciated slowly). CEO Bernie Ebbers was among the executives jailed.",
       "prompt": "What was WorldCom\u2019s core accounting fraud in the handout?",
       "choices": [
         {
@@ -1094,12 +1093,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "$11 billion is the number to remember, and \u201copex as capex\u201d is the method.\n\nIf you spend $1 on a phone network\u2019s ordinary costs and call it an asset, you have invented profit. Do that at industrial scale and you can postpone looking bankrupt.\n\nEbbers is the WorldCom name, as Kozlowski is Tyco and the Rigas family is Adelphia. These 2002 rows arrive together for a reason: they are the political fuel for Sarbanes-Oxley."
+      "explanation": "$11 billion is the number to remember, and \u201copex as capex\u201d is the method.\n\nIf you spend $1 on a phone network\u2019s ordinary costs and call it an asset, you have invented profit. Do that at industrial scale and you can postpone looking bankrupt.\n\nEbbers is the WorldCom name, as Kozlowski is Tyco and the Rigas family is Adelphia. These 2002 rows arrive together for a reason: they are the political fuel for Sarbanes-Oxley.",
+      "lesson": "WorldCom (2002) was a large telecom. When actual profits collapsed, it hid the collapse with a simple fraud: it recorded operating expenses as capital assets, about $11 billion worth. Capitalizing an expense moves a cost from the income statement (where it kills profit now) to the balance sheet (where it is depreciated slowly). CEO Bernie Ebbers was among the executives jailed."
     },
     {
       "id": 43,
       "module": "2001\u20132002: Enron, WorldCom, and Sarbanes-Oxley",
-      "context": "Adelphia (2002) was a cable-TV empire. Accounting fraud was used in part to cover corporate-governance violations that benefited Rigas family members (the handout spells it \u201cRegas\u201d). Adelphia went bankrupt. Several Rigas employees, all on the board, went to jail. Governance here means: who controls the company, and whose pockets does it serve?",
       "prompt": "What extra ingredient does Adelphia add on top of accounting fraud?",
       "choices": [
         {
@@ -1120,12 +1119,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Enron hid risk in SPEs. WorldCom hid costs in assets. Adelphia hid the fact that the public company was a family piggy bank.\n\nWhen insiders sit on the board and the company pays their bills, independence is gone. Jail plus bankruptcy is the ending. SOX will answer with new rules on boards, audit committees, and related-party honesty."
+      "explanation": "Enron hid risk in SPEs. WorldCom hid costs in assets. Adelphia hid the fact that the public company was a family piggy bank.\n\nWhen insiders sit on the board and the company pays their bills, independence is gone. Jail plus bankruptcy is the ending. SOX will answer with new rules on boards, audit committees, and related-party honesty.",
+      "lesson": "Adelphia (2002) was a cable-TV empire. Accounting fraud was used in part to cover corporate-governance violations that benefited Rigas family members (the handout spells it \u201cRegas\u201d). Adelphia went bankrupt. Several Rigas employees, all on the board, went to jail. Governance here means: who controls the company, and whose pockets does it serve?"
     },
     {
       "id": 44,
       "module": "2001\u20132002: Enron, WorldCom, and Sarbanes-Oxley",
-      "context": "Tyco (2002) was a large conglomerate. It used aggressive merger accounting to increase earnings, plus other illicit practices. The company restated earnings and paid fines to settle SEC charges and class-action lawsuits. CEO Dennis Kozlowski and others went to prison. Merger accounting can become fraud when you twist purchase accounting, reserves, or \u201cone-time\u201d items to manufacture growth.",
       "prompt": "Which executive does the handout send to prison in the Tyco row?",
       "choices": [
         {
@@ -1146,12 +1145,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Match the person to the company: Kozlowski\u2013Tyco, Ebbers\u2013WorldCom, Dunlap\u2013Sunbeam, Minkow\u2013ZZZZ Best, Fall\u2013Teapot Dome.\n\nTyco\u2019s flavor is conglomerate plus aggressive acquisition accounting, not WorldCom\u2019s pure capitalization trick. Restatement, SEC, class actions, prison: the late-1990s/early-2000s enforcement package again."
+      "explanation": "Match the person to the company: Kozlowski\u2013Tyco, Ebbers\u2013WorldCom, Dunlap\u2013Sunbeam, Minkow\u2013ZZZZ Best, Fall\u2013Teapot Dome.\n\nTyco\u2019s flavor is conglomerate plus aggressive acquisition accounting, not WorldCom\u2019s pure capitalization trick. Restatement, SEC, class actions, prison: the late-1990s/early-2000s enforcement package again.",
+      "lesson": "Tyco (2002) was a large conglomerate. It used aggressive merger accounting to increase earnings, plus other illicit practices. The company restated earnings and paid fines to settle SEC charges and class-action lawsuits. CEO Dennis Kozlowski and others went to prison. Merger accounting can become fraud when you twist purchase accounting, reserves, or \u201cone-time\u201d items to manufacture growth."
     },
     {
       "id": 45,
       "module": "2001\u20132002: Enron, WorldCom, and Sarbanes-Oxley",
-      "context": "Sarbanes-Oxley (SOX, 2002) is the statutory climax of the Enron/WorldCom era. After those scandals \u201cand all the rest,\u201d Congress passed financial reform: new rules on corporate governance, internal control, and auditing, and it created the Public Company Accounting Oversight Board (PCAOB). The PCAOB is a nonprofit overseer, created by federal law, that sets and inspects public-company audit standards. It is not FASB.",
       "prompt": "What new overseer did Sarbanes-Oxley create, and what else did the Act change according to the handout?",
       "choices": [
         {
@@ -1172,12 +1171,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Before SOX, public-company auditors were largely self-regulated. After SOX, a public board inspects them.\n\nGovernance: boards and audit committees. Internal control: the FCPA idea, hardened. Auditing: standards and inspections. PCAOB: the institutional hammer.\n\nDo not say SOX created FASB (1973) or the SEC (1934). SOX created the PCAOB in 2002."
+      "explanation": "Before SOX, public-company auditors were largely self-regulated. After SOX, a public board inspects them.\n\nGovernance: boards and audit committees. Internal control: the FCPA idea, hardened. Auditing: standards and inspections. PCAOB: the institutional hammer.\n\nDo not say SOX created FASB (1973) or the SEC (1934). SOX created the PCAOB in 2002.",
+      "lesson": "Sarbanes-Oxley (SOX, 2002) is the statutory climax of the Enron/WorldCom era. After those scandals \u201cand all the rest,\u201d Congress passed financial reform: new rules on corporate governance, internal control, and auditing, and it created the Public Company Accounting Oversight Board (PCAOB). The PCAOB is a nonprofit overseer, created by federal law, that sets and inspects public-company audit standards. It is not FASB."
     },
     {
       "id": 46,
       "module": "2001\u20132002: Enron, WorldCom, and Sarbanes-Oxley",
-      "context": "Name the 2001\u20132002 cascade in order: Regulation FD (2001) \u2192 Enron (2001) \u2192 WorldCom, Adelphia, Tyco (2002) \u2192 Sarbanes-Oxley and the PCAOB (2002).",
       "prompt": "Which pair of headline scandals does the handout name as the immediate backdrop for SOX?",
       "choices": [
         {
@@ -1198,12 +1197,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "The handout\u2019s own words: after Enron and WorldCom and all the rest, Congress passed reform.\n\n\u201cAll the rest\u201d is Adelphia, Tyco, and the 1997\u20131999 restatement wave. But if you must pick two names that sold SOX to the public, they are Enron and WorldCom."
+      "explanation": "The handout\u2019s own words: after Enron and WorldCom and all the rest, Congress passed reform.\n\n\u201cAll the rest\u201d is Adelphia, Tyco, and the 1997\u20131999 restatement wave. But if you must pick two names that sold SOX to the public, they are Enron and WorldCom.",
+      "lesson": "Name the 2001\u20132002 cascade in order: Regulation FD (2001) \u2192 Enron (2001) \u2192 WorldCom, Adelphia, Tyco (2002) \u2192 Sarbanes-Oxley and the PCAOB (2002)."
     },
     {
       "id": 47,
       "module": "2003\u20132006: The first scandals after SOX",
-      "context": "HealthSouth (2003) ran inpatient rehabilitation hospitals. The handout flags it as the first post-Sarbanes-Oxley scandal. Profits were kept up with aggressive merger accounting, overcharging Medicare, and other fraud. It restated $2.5 billion of 2002 earnings and declared bankruptcy in 2003. SOX did not make fraud impossible; it made the next fraud a test of the new law.",
       "prompt": "Why is HealthSouth specially labeled in this timeline?",
       "choices": [
         {
@@ -1224,12 +1223,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "If you thought SOX was a force field, HealthSouth is the counterexample, dated one year later.\n\nThe techniques mix Tyco-like merger accounting with a government-program twist: overbilling Medicare. $2.5 billion is larger than Waste Management\u2019s or Sunbeam\u2019s $1 billion-class restatements. Bankruptcy in 2003 closes the row."
+      "explanation": "If you thought SOX was a force field, HealthSouth is the counterexample, dated one year later.\n\nThe techniques mix Tyco-like merger accounting with a government-program twist: overbilling Medicare. $2.5 billion is larger than Waste Management\u2019s or Sunbeam\u2019s $1 billion-class restatements. Bankruptcy in 2003 closes the row.",
+      "lesson": "HealthSouth (2003) ran inpatient rehabilitation hospitals. The handout flags it as the first post-Sarbanes-Oxley scandal. Profits were kept up with aggressive merger accounting, overcharging Medicare, and other fraud. It restated $2.5 billion of 2002 earnings and declared bankruptcy in 2003. SOX did not make fraud impossible; it made the next fraud a test of the new law."
     },
     {
       "id": 48,
       "module": "2003\u20132006: The first scandals after SOX",
-      "context": "Fannie Mae and, to a lesser extent, Freddie Mac were government-sponsored enterprises (GSEs) that bought and guaranteed mortgages. The handout calls them repeat violators of accounting rules, including ignoring derivative losses. In 2004 Fannie was forced to restate over $6 billion (the handout says \u201cby the SC,\u201d meaning the SEC). In 2008 both were placed into federal conservatorship: the government took them over to run them, without ordinary bankruptcy.",
       "prompt": "What accounting hit did Fannie Mae take in 2004, and what happened to Fannie and Freddie in 2008?",
       "choices": [
         {
@@ -1250,12 +1249,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Two dates, two problems.\n\n2004: earnings were wrong, including derivatives. $6 billion is the restatement. 2008: they were undercapitalized on a mountain of mortgage risk, so the government seized them.\n\nConservatorship is not the RTC selling S&L branches, and not Lehman\u2019s bankruptcy. It is \u201cthe feds run you now because your failure would wreck the mortgage market.\u201d"
+      "explanation": "Two dates, two problems.\n\n2004: earnings were wrong, including derivatives. $6 billion is the restatement. 2008: they were undercapitalized on a mountain of mortgage risk, so the government seized them.\n\nConservatorship is not the RTC selling S&L branches, and not Lehman\u2019s bankruptcy. It is \u201cthe feds run you now because your failure would wreck the mortgage market.\u201d",
+      "lesson": "Fannie Mae and, to a lesser extent, Freddie Mac were government-sponsored enterprises (GSEs) that bought and guaranteed mortgages. The handout calls them repeat violators of accounting rules, including ignoring derivative losses. In 2004 Fannie was forced to restate over $6 billion (the handout says \u201cby the SC,\u201d meaning the SEC). In 2008 both were placed into federal conservatorship: the government took them over to run them, without ordinary bankruptcy."
     },
     {
       "id": 49,
       "module": "2003\u20132006: The first scandals after SOX",
-      "context": "AIG (American International Group) was a giant insurer and a Dow Jones Industrial Average component. In 2005 it was cited for substantial internal-control weaknesses. An SEC fraud investigation produced a $1.6 billion fine and criminal charges against several executives. Remember this 2005 enforcement row separately from the 2008 $180 billion bailout. Same company, two chapters.",
       "prompt": "What did the 2005 AIG chapter in the timeline include?",
       "choices": [
         {
@@ -1276,12 +1275,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "$1.6 billion (2005 fine) is not $180 billion (2008 equity bailout).\n\nThe 2005 story is books and controls. The 2008 story is that AIG had written enormous insurance-like protection on mortgage securities and could not pay. Students who blend the numbers fail the timeline."
+      "explanation": "$1.6 billion (2005 fine) is not $180 billion (2008 equity bailout).\n\nThe 2005 story is books and controls. The 2008 story is that AIG had written enormous insurance-like protection on mortgage securities and could not pay. Students who blend the numbers fail the timeline.",
+      "lesson": "AIG (American International Group) was a giant insurer and a Dow Jones Industrial Average component. In 2005 it was cited for substantial internal-control weaknesses. An SEC fraud investigation produced a $1.6 billion fine and criminal charges against several executives. Remember this 2005 enforcement row separately from the 2008 $180 billion bailout. Same company, two chapters."
     },
     {
       "id": 50,
       "module": "2003\u20132006: The first scandals after SOX",
-      "context": "A stock option lets an executive buy shares at a set \u201cstrike\u201d price. If you secretly pick a past date when the stock was cheap, you make the option more valuable: that is backdating. In 2006 the SEC found dozens of companies doing it to fatten pay. Other games followed: exercise backdating, spring-loading (timing grants before good news), and speed vesting (accelerating when options become exercisable). Several executives were prosecuted.",
       "prompt": "What did the 2006 options scandal, at its core, involve?",
       "choices": [
         {
@@ -1302,12 +1301,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "This is compensation fraud, not revenue fraud.\n\nThe accounting and disclosure issue is that the company understated pay. Spring-loading and speed vesting are cousins: still gaming the option\u2019s value or timing. \u201cDozens of companies\u201d means it was a practice, not one rogue firm."
+      "explanation": "This is compensation fraud, not revenue fraud.\n\nThe accounting and disclosure issue is that the company understated pay. Spring-loading and speed vesting are cousins: still gaming the option\u2019s value or timing. \u201cDozens of companies\u201d means it was a practice, not one rogue firm.",
+      "lesson": "A stock option lets an executive buy shares at a set \u201cstrike\u201d price. If you secretly pick a past date when the stock was cheap, you make the option more valuable: that is backdating. In 2006 the SEC found dozens of companies doing it to fatten pay. Other games followed: exercise backdating, spring-loading (timing grants before good news), and speed vesting (accelerating when options become exercisable). Several executives were prosecuted."
     },
     {
       "id": 51,
       "module": "2003\u20132006: The first scandals after SOX",
-      "context": "After SOX: HealthSouth (2003) proves scandals continue; Fannie\u2019s 2004 restatement shows GSE accounting was rotten; AIG\u2019s 2005 fine shows a Dow insurer\u2019s controls failed; 2006 options backdating shows pay was being gamed. The next pages are housing.",
       "prompt": "What is the honest reading of 2003\u20132006 in this handout?",
       "choices": [
         {
@@ -1328,12 +1327,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "SOX is a response, not a cure-all.\n\nThe timeline refuses to stop at 2002. It marches through HealthSouth, Fannie, AIG, and options as a bridge into subprime. The profession\u2019s new overseer is in place, and the scandals keep coming, now with more housing and more leverage mixed in."
+      "explanation": "SOX is a response, not a cure-all.\n\nThe timeline refuses to stop at 2002. It marches through HealthSouth, Fannie, AIG, and options as a bridge into subprime. The profession\u2019s new overseer is in place, and the scandals keep coming, now with more housing and more leverage mixed in.",
+      "lesson": "After SOX: HealthSouth (2003) proves scandals continue; Fannie\u2019s 2004 restatement shows GSE accounting was rotten; AIG\u2019s 2005 fine shows a Dow insurer\u2019s controls failed; 2006 options backdating shows pay was being gamed. The next pages are housing."
     },
     {
       "id": 52,
       "module": "2007\u20132010: Housing, bailouts, Madoff, and Dodd-Frank",
-      "context": "Subprime loans go to borrowers with weaker credit. The 2007\u20132008 scandal, in the handout, is a three-part manipulation: predatory lending (loans designed to fail or to strip equity), structured finance that made mortgage bundles look high quality, and widespread speculation. The structure started to unravel in 2007 as housing prices declined. When prices fall, the collateral is no longer there.",
       "prompt": "When does the handout say the subprime scandals started to unravel, and why?",
       "choices": [
         {
@@ -1354,12 +1353,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Rising house prices hide bad loans: the borrower can refinance or sell. Falling prices reveal them.\n\nPredatory lending is the origination sin. Structured finance is the laundering step (slice the pool, label the top slice \u201csafe\u201d). Speculation is the crowd that piled on. 2007 is the year the tide goes out."
+      "explanation": "Rising house prices hide bad loans: the borrower can refinance or sell. Falling prices reveal them.\n\nPredatory lending is the origination sin. Structured finance is the laundering step (slice the pool, label the top slice \u201csafe\u201d). Speculation is the crowd that piled on. 2007 is the year the tide goes out.",
+      "lesson": "Subprime loans go to borrowers with weaker credit. The 2007\u20132008 scandal, in the handout, is a three-part manipulation: predatory lending (loans designed to fail or to strip equity), structured finance that made mortgage bundles look high quality, and widespread speculation. The structure started to unravel in 2007 as housing prices declined. When prices fall, the collateral is no longer there."
     },
     {
       "id": 53,
       "module": "2007\u20132010: Housing, bailouts, Madoff, and Dodd-Frank",
-      "context": "Bear Stearns was an investment bank that ran out of cash in March 2008: no liquidity to meet obligations. The Fed and Treasury engineered a rescue in which J.P. Morgan acquired Bear, and the government agreed to be responsible for up to $30 billion of toxic assets. Toxic assets here are mortgage-related positions nobody wanted to buy at yesterday\u2019s prices.",
       "prompt": "How was Bear Stearns resolved in the timeline?",
       "choices": [
         {
@@ -1380,12 +1379,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Bear is \u201crescued by shotgun marriage.\u201d\n\nThe buyer is J.P. Morgan. The public\u2019s skin is up to $30 billion of the ugly assets. Contrast Lehman, a few months later: no buyer, no backstop, bankruptcy. The timeline wants you to feel that policy inconsistency, because markets felt it too."
+      "explanation": "Bear is \u201crescued by shotgun marriage.\u201d\n\nThe buyer is J.P. Morgan. The public\u2019s skin is up to $30 billion of the ugly assets. Contrast Lehman, a few months later: no buyer, no backstop, bankruptcy. The timeline wants you to feel that policy inconsistency, because markets felt it too.",
+      "lesson": "Bear Stearns was an investment bank that ran out of cash in March 2008: no liquidity to meet obligations. The Fed and Treasury engineered a rescue in which J.P. Morgan acquired Bear, and the government agreed to be responsible for up to $30 billion of toxic assets. Toxic assets here are mortgage-related positions nobody wanted to buy at yesterday\u2019s prices."
     },
     {
       "id": 54,
       "module": "2007\u20132010: Housing, bailouts, Madoff, and Dodd-Frank",
-      "context": "In summer 2008 the government put Fannie Mae and Freddie Mac into conservatorship. The handout says the GSEs had lost billions, had negative equity (liabilities bigger than assets), and sat on trillions of dollars of mortgage securities and guarantees. Negative equity plus a nationally important mortgage book is why they were taken over rather than left to ordinary failure.",
       "prompt": "Why take Fannie and Freddie into conservatorship in 2008?",
       "choices": [
         {
@@ -1406,12 +1405,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Remember the 2004 restatement as a warning shot. 2008 is the solvency event.\n\nTrillions of guarantees mean: if they fall over, mortgage finance in the United States seizes. Conservatorship is the tool chosen instead of Lehman-style bankruptcy."
+      "explanation": "Remember the 2004 restatement as a warning shot. 2008 is the solvency event.\n\nTrillions of guarantees mean: if they fall over, mortgage finance in the United States seizes. Conservatorship is the tool chosen instead of Lehman-style bankruptcy.",
+      "lesson": "In summer 2008 the government put Fannie Mae and Freddie Mac into conservatorship. The handout says the GSEs had lost billions, had negative equity (liabilities bigger than assets), and sat on trillions of dollars of mortgage securities and guarantees. Negative equity plus a nationally important mortgage book is why they were taken over rather than left to ordinary failure."
     },
     {
       "id": 55,
       "module": "2007\u20132010: Housing, bailouts, Madoff, and Dodd-Frank",
-      "context": "After Bear was saved, Lehman Brothers was allowed to fail in 2008 (the handout says October; the bankruptcy filing was mid-September). It was the nation\u2019s largest bankruptcy. The reaction was almost complete paralysis of global credit markets. That freeze required multi-trillion-dollar liquidity packages from the Federal Reserve and the creation of TARP.",
       "prompt": "What does the handout say happened after Lehman was allowed to fail?",
       "choices": [
         {
@@ -1432,12 +1431,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Lehman is the timeline\u2019s demonstration of \u201ctoo big to fail\u201d in the negative: they let it fail, and the credit system stopped.\n\nThat panic is why AIG is rescued days later, why TARP is jammed through Congress, and why Dodd-Frank in 2010 will claim it wants to end too-big-to-fail. Whether it did so is the last debate on the last page."
+      "explanation": "Lehman is the timeline\u2019s demonstration of \u201ctoo big to fail\u201d in the negative: they let it fail, and the credit system stopped.\n\nThat panic is why AIG is rescued days later, why TARP is jammed through Congress, and why Dodd-Frank in 2010 will claim it wants to end too-big-to-fail. Whether it did so is the last debate on the last page.",
+      "lesson": "After Bear was saved, Lehman Brothers was allowed to fail in 2008 (the handout says October; the bankruptcy filing was mid-September). It was the nation\u2019s largest bankruptcy. The reaction was almost complete paralysis of global credit markets. That freeze required multi-trillion-dollar liquidity packages from the Federal Reserve and the creation of TARP."
     },
     {
       "id": 56,
       "module": "2007\u20132010: Housing, bailouts, Madoff, and Dodd-Frank",
-      "context": "After Lehman, the government bailed out AIG with about $180 billion of equity so the world\u2019s largest insurance company would not fail. AIG had sold protection on mortgage risks; when those risks went bad, AIG owed collateral it did not have. Equity from the government is ownership capital, not a small fine.",
       "prompt": "How large was the 2008 AIG bailout in the handout, and what was the purpose?",
       "choices": [
         {
@@ -1458,12 +1457,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Keep AIG\u2019s two numbers in separate pockets: $1.6 billion fine (2005) vs. $180 billion equity (2008).\n\nBear: $30 billion toxic-asset backstop for a buyer. AIG: $180 billion to own and stabilize the insurer. Lehman: $0, and a global seizure. Those three policy choices are the heart of the 2008 chapter."
+      "explanation": "Keep AIG\u2019s two numbers in separate pockets: $1.6 billion fine (2005) vs. $180 billion equity (2008).\n\nBear: $30 billion toxic-asset backstop for a buyer. AIG: $180 billion to own and stabilize the insurer. Lehman: $0, and a global seizure. Those three policy choices are the heart of the 2008 chapter.",
+      "lesson": "After Lehman, the government bailed out AIG with about $180 billion of equity so the world\u2019s largest insurance company would not fail. AIG had sold protection on mortgage risks; when those risks went bad, AIG owed collateral it did not have. Equity from the government is ownership capital, not a small fine."
     },
     {
       "id": 57,
       "module": "2007\u20132010: Housing, bailouts, Madoff, and Dodd-Frank",
-      "context": "TARP, the Troubled Asset Relief Program (2008), was sold after Treasury and Fed prodding. It provided billions of dollars of capital to failing banks. The bill was originally designed to bail out mortgage holders, which, the handout says, happened only to a limited extent. So the political story (help homeowners) and the operational story (recapitalize banks) diverged.",
       "prompt": "What did TARP primarily do in practice, according to the handout?",
       "choices": [
         {
@@ -1484,12 +1483,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "TARP is a bank-capital program that wore a homeowner label.\n\nThat gap matters for legitimacy: the public heard \u201csave houses,\u201d and much of the money recapitalized institutions. The Fed\u2019s separate liquidity facilities (mentioned in the Lehman row) are not TARP. TARP is the congressional capital injection."
+      "explanation": "TARP is a bank-capital program that wore a homeowner label.\n\nThat gap matters for legitimacy: the public heard \u201csave houses,\u201d and much of the money recapitalized institutions. The Fed\u2019s separate liquidity facilities (mentioned in the Lehman row) are not TARP. TARP is the congressional capital injection.",
+      "lesson": "TARP, the Troubled Asset Relief Program (2008), was sold after Treasury and Fed prodding. It provided billions of dollars of capital to failing banks. The bill was originally designed to bail out mortgage holders, which, the handout says, happened only to a limited extent. So the political story (help homeowners) and the operational story (recapitalize banks) diverged."
     },
     {
       "id": 58,
       "module": "2007\u20132010: Housing, bailouts, Madoff, and Dodd-Frank",
-      "context": "Bernard Madoff had been a NASDAQ innovator and trader. He also ran a multibillion-dollar Ponzi scheme for decades. When investor cash ran out in 2008, he confessed to fraud and theft and was sentenced to 150 years in jail. Compare Charles Ponzi (1920): months, millions, 50% in 45 days, deportation. Madoff: decades, billions, a respectable Wall Street face, 150 years.",
       "prompt": "How does Madoff\u2019s scheme, in this timeline, differ from Ponzi\u2019s 1920 operation?",
       "choices": [
         {
@@ -1510,12 +1509,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Same machine: pay old investors with new investors\u2019 money until the inflow stops.\n\nDifferent wrapper and duration. Ponzi\u2019s wrapper was postal coupons and greed for a 50% sprint. Madoff\u2019s wrapper was a famous market-maker\u2019s reputation and a supposedly steady, impossible track record. The 2008 crash is what finally stopped the inflow. 150 years is the court\u2019s way of saying the harm cannot be repaid in one lifetime."
+      "explanation": "Same machine: pay old investors with new investors\u2019 money until the inflow stops.\n\nDifferent wrapper and duration. Ponzi\u2019s wrapper was postal coupons and greed for a 50% sprint. Madoff\u2019s wrapper was a famous market-maker\u2019s reputation and a supposedly steady, impossible track record. The 2008 crash is what finally stopped the inflow. 150 years is the court\u2019s way of saying the harm cannot be repaid in one lifetime.",
+      "lesson": "Bernard Madoff had been a NASDAQ innovator and trader. He also ran a multibillion-dollar Ponzi scheme for decades. When investor cash ran out in 2008, he confessed to fraud and theft and was sentenced to 150 years in jail. Compare Charles Ponzi (1920): months, millions, 50% in 45 days, deportation. Madoff: decades, billions, a respectable Wall Street face, 150 years."
     },
     {
       "id": 59,
       "module": "2007\u20132010: Housing, bailouts, Madoff, and Dodd-Frank",
-      "context": "Dodd-Frank (2010) is the crisis statute, as SOX was the Enron statute. The handout quotes its purposes: promote financial stability by improving accountability and transparency; end \u201ctoo big to fail\u201d; protect taxpayers by ending bailouts; protect consumers from abusive financial-services practices; and other purposes. Then the last line: the potential effectiveness has been debated ever since.",
       "prompt": "Which cluster of purposes does the handout quote for Dodd-Frank, and what is the handout\u2019s closing note?",
       "choices": [
         {
@@ -1536,12 +1535,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Dodd-Frank is a mission statement plus an argument.\n\nThe mission: no more Lehman-style chaos, no more AIG-style rescues, no more predatory lending without a cop. The argument: maybe those goals conflict, and maybe the statute did not deliver them.\n\nThe timeline ends on that unresolved note on purpose. History, in this course, does not close with a bow."
+      "explanation": "Dodd-Frank is a mission statement plus an argument.\n\nThe mission: no more Lehman-style chaos, no more AIG-style rescues, no more predatory lending without a cop. The argument: maybe those goals conflict, and maybe the statute did not deliver them.\n\nThe timeline ends on that unresolved note on purpose. History, in this course, does not close with a bow.",
+      "lesson": "Dodd-Frank (2010) is the crisis statute, as SOX was the Enron statute. The handout quotes its purposes: promote financial stability by improving accountability and transparency; end \u201ctoo big to fail\u201d; protect taxpayers by ending bailouts; protect consumers from abusive financial-services practices; and other purposes. Then the last line: the potential effectiveness has been debated ever since."
     },
     {
       "id": 60,
       "module": "2007\u20132010: Housing, bailouts, Madoff, and Dodd-Frank",
-      "context": "Put 2007\u20132010 in order: housing prices fall and subprime unravels (2007) \u2192 Bear is sold with a $30B backstop (March 2008) \u2192 Fannie/Freddie conservatorship (summer 2008) \u2192 Lehman fails and credit freezes \u2192 AIG gets ~$180B \u2192 TARP recapitalizes banks (homeowner relief limited) \u2192 Madoff\u2019s cash runs out \u2192 Dodd-Frank (2010) tries to legislate an end to the era.",
       "prompt": "Which 2008 sequence matches the handout?",
       "choices": [
         {
@@ -1562,12 +1561,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Order is the exam.\n\nIf you put Lehman before Bear, you miss why people thought Bear was the template. If you put TARP before Lehman, you miss why Congress finally voted the money. If you confuse AIG\u2019s 2005 fine with the 2008 bailout, you miss the difference between an enforcement case and a systemic rescue."
+      "explanation": "Order is the exam.\n\nIf you put Lehman before Bear, you miss why people thought Bear was the template. If you put TARP before Lehman, you miss why Congress finally voted the money. If you confuse AIG\u2019s 2005 fine with the 2008 bailout, you miss the difference between an enforcement case and a systemic rescue.",
+      "lesson": "Put 2007\u20132010 in order: housing prices fall and subprime unravels (2007) \u2192 Bear is sold with a $30B backstop (March 2008) \u2192 Fannie/Freddie conservatorship (summer 2008) \u2192 Lehman fails and credit freezes \u2192 AIG gets ~$180B \u2192 TARP recapitalizes banks (homeowner relief limited) \u2192 Madoff\u2019s cash runs out \u2192 Dodd-Frank (2010) tries to legislate an end to the era."
     },
     {
       "id": 61,
       "module": "The big picture: how the timeline fits together",
-      "context": "A repeating engine in this timeline is: a visible abuse, then a new law or standard. Political machines and Teapot Dome are public corruption. Ponzi and Madoff are fake returns. McKesson is fake assets. Enron/WorldCom are fake earnings. Subprime is fake loan quality. Each time, someone writes a rule: CPA licenses, Sherman, the Fed, the SEC, inventory observation, FASB, FCPA, SOX/PCAOB, Dodd-Frank.",
       "prompt": "What pattern should you expect whenever the timeline shows a famous scandal?",
       "choices": [
         {
@@ -1588,12 +1587,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "You are not memorizing 46 trivia cards. You are learning a civic loop.\n\nAbuse \u2192 discovery \u2192 outrage \u2192 institution. The institutions pile up (SEC, FASB, PCAOB) instead of replacing the need for judgment. Continental Vending and HealthSouth exist to remind you that a new rule does not end the loop."
+      "explanation": "You are not memorizing 46 trivia cards. You are learning a civic loop.\n\nAbuse \u2192 discovery \u2192 outrage \u2192 institution. The institutions pile up (SEC, FASB, PCAOB) instead of replacing the need for judgment. Continental Vending and HealthSouth exist to remind you that a new rule does not end the loop.",
+      "lesson": "A repeating engine in this timeline is: a visible abuse, then a new law or standard. Political machines and Teapot Dome are public corruption. Ponzi and Madoff are fake returns. McKesson is fake assets. Enron/WorldCom are fake earnings. Subprime is fake loan quality. Each time, someone writes a rule: CPA licenses, Sherman, the Fed, the SEC, inventory observation, FASB, FCPA, SOX/PCAOB, Dodd-Frank."
     },
     {
       "id": 62,
       "module": "The big picture: how the timeline fits together",
-      "context": "Three statutes are easy to confuse because they all follow crises. 1933\u201334 Securities Acts: create the SEC, force disclosure after 1920s/crash abuses. 2002 SOX: create the PCAOB, tighten governance, controls, and audits after Enron/WorldCom. 2010 Dodd-Frank: financial-stability and too-big-to-fail agenda after 2008. Different villains, different tools.",
       "prompt": "Match the crisis statute to its core institutional move.",
       "choices": [
         {
@@ -1614,12 +1613,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "If you can make this match, you can navigate the whole handout.\n\nSEC = markets and disclosure. PCAOB = public-company auditors. Dodd-Frank = banks, bailouts, and consumers. FASB is not in this triplet; it is the 1973 GAAP successor to the APB."
+      "explanation": "If you can make this match, you can navigate the whole handout.\n\nSEC = markets and disclosure. PCAOB = public-company auditors. Dodd-Frank = banks, bailouts, and consumers. FASB is not in this triplet; it is the 1973 GAAP successor to the APB.",
+      "lesson": "Three statutes are easy to confuse because they all follow crises. 1933\u201334 Securities Acts: create the SEC, force disclosure after 1920s/crash abuses. 2002 SOX: create the PCAOB, tighten governance, controls, and audits after Enron/WorldCom. 2010 Dodd-Frank: financial-stability and too-big-to-fail agenda after 2008. Different villains, different tools."
     },
     {
       "id": 63,
       "module": "The big picture: how the timeline fits together",
-      "context": "GAAP writers in this timeline: Committee on Accounting Procedures (1938, ARBs) \u2192 Accounting Principles Board (1959, same problems) \u2192 FASB (1973, better process and public involvement). Audit-procedure shock: McKesson 1937 \u2192 Committee on Audit Procedures 1939 (observe inventory, confirm receivables). Public-company audit overseer: PCAOB (2002).",
       "prompt": "Which list correctly separates GAAP-setting from audit oversight?",
       "choices": [
         {
@@ -1640,12 +1639,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Job, not acronym soup.\n\nWho says how to measure? CAP/APB/FASB. Who said \u201cactually look at inventory\u201d? The 1939 audit committee after McKesson. Who inspects public-company auditors now? PCAOB. Who polices markets and disclosure? SEC. Keep those four jobs in four boxes and the timeline stops being a blur."
+      "explanation": "Job, not acronym soup.\n\nWho says how to measure? CAP/APB/FASB. Who said \u201cactually look at inventory\u201d? The 1939 audit committee after McKesson. Who inspects public-company auditors now? PCAOB. Who polices markets and disclosure? SEC. Keep those four jobs in four boxes and the timeline stops being a blur.",
+      "lesson": "GAAP writers in this timeline: Committee on Accounting Procedures (1938, ARBs) \u2192 Accounting Principles Board (1959, same problems) \u2192 FASB (1973, better process and public involvement). Audit-procedure shock: McKesson 1937 \u2192 Committee on Audit Procedures 1939 (observe inventory, confirm receivables). Public-company audit overseer: PCAOB (2002)."
     },
     {
       "id": 64,
       "module": "The big picture: how the timeline fits together",
-      "context": "Auditor legal risk swings. Ultramares (1924): negligent but not fraudulent \u2192 not liable to the lender. Continental Vending (1969): GAAS compliance did not block a criminal-fraud conviction. PSLRA (1995): Congress cuts civil liability, and the handout thinks audits got more aggressive. SOX (2002): inspections and control attestations raise the cost of a sloppy public-company audit again.",
       "prompt": "Which statement about auditor consequences is true in this handout?",
       "choices": [
         {
@@ -1666,12 +1665,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Liability is a pendulum.\n\nToo little, and careless or captured audits proliferate (the handout\u2019s reading of the late 1990s). Too much, and firms may refuse useful work. Ultramares, Continental Vending, the 1995 Act, and SOX are four waypoints on that pendulum, not four names for the same event."
+      "explanation": "Liability is a pendulum.\n\nToo little, and careless or captured audits proliferate (the handout\u2019s reading of the late 1990s). Too much, and firms may refuse useful work. Ultramares, Continental Vending, the 1995 Act, and SOX are four waypoints on that pendulum, not four names for the same event.",
+      "lesson": "Auditor legal risk swings. Ultramares (1924): negligent but not fraudulent \u2192 not liable to the lender. Continental Vending (1969): GAAS compliance did not block a criminal-fraud conviction. PSLRA (1995): Congress cuts civil liability, and the handout thinks audits got more aggressive. SOX (2002): inspections and control attestations raise the cost of a sloppy public-company audit again."
     },
     {
       "id": 65,
       "module": "The big picture: how the timeline fits together",
-      "context": "Several rows are about who hears the truth, not only whether the truth is in the footnotes. Tammany and Teapot Dome hide public deals. Regulation FD (2001) forbids whispering earnings to favorite analysts. SOX tries to make controls and audits more public. Dodd-Frank talks about transparency in the financial system. Disclosure is a running theme from 1934 through 2010.",
       "prompt": "Which event is specifically about ending selective, insider-first earnings news?",
       "choices": [
         {
@@ -1692,12 +1691,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Sherman is monopoly. Garn-St. Germain is S&L deregulation. CPA licensing is who may call themselves an auditor. Regulation FD is the microphone: if it is material, put it on the public webcast.\n\nThe SEC of 1934 invented the idea of adequate public disclosure. FD is that idea applied to the analyst phone call."
+      "explanation": "Sherman is monopoly. Garn-St. Germain is S&L deregulation. CPA licensing is who may call themselves an auditor. Regulation FD is the microphone: if it is material, put it on the public webcast.\n\nThe SEC of 1934 invented the idea of adequate public disclosure. FD is that idea applied to the analyst phone call.",
+      "lesson": "Several rows are about who hears the truth, not only whether the truth is in the footnotes. Tammany and Teapot Dome hide public deals. Regulation FD (2001) forbids whispering earnings to favorite analysts. SOX tries to make controls and audits more public. Dodd-Frank talks about transparency in the financial system. Disclosure is a running theme from 1934 through 2010."
     },
     {
       "id": 66,
       "module": "1787\u20131896: A federal government, markets, and the first CPAs",
-      "context": "The Interstate Commerce Commission (1887) targeted railroads. Sherman (1890) targeted trusts. The concrete \u201cwins\u201d named in the handout are the breakup of the Northern Pacific Railroad and of Rockefeller\u2019s Standard Oil. Those are demonstrations that federal law could actually dismember a private empire, not just pass a statute and hope.",
       "prompt": "Which breakups does the handout cite as government antitrust wins?",
       "choices": [
         {
@@ -1718,12 +1717,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Enron and WorldCom collapsed from scandal in 2001\u20132002; they were not Sherman Act breakups in 1890.\n\nNorthern Pacific and Standard Oil are the 19th-century trophies. They tell you why a federal government that can \u201cfunction adequately\u201d matters: it can take on the largest private organizations of its day."
+      "explanation": "Enron and WorldCom collapsed from scandal in 2001\u20132002; they were not Sherman Act breakups in 1890.\n\nNorthern Pacific and Standard Oil are the 19th-century trophies. They tell you why a federal government that can \u201cfunction adequately\u201d matters: it can take on the largest private organizations of its day.",
+      "lesson": "The Interstate Commerce Commission (1887) targeted railroads. Sherman (1890) targeted trusts. The concrete \u201cwins\u201d named in the handout are the breakup of the Northern Pacific Railroad and of Rockefeller\u2019s Standard Oil. Those are demonstrations that federal law could actually dismember a private empire, not just pass a statute and hope."
     },
     {
       "id": 67,
       "module": "1913\u20131924: Progressive reform, Ponzi, Teapot Dome, and Ultramares",
-      "context": "The Clayton Act (1914) is additional antitrust law in the Pujo-era package, alongside the Fed, the FTC, and the income tax. It is not the 1933 Securities Act and not SOX. When you see 1913\u20131914, think: tax + central bank + competition agencies + tighter antitrust.",
       "prompt": "The Clayton Act belongs in which bundle?",
       "choices": [
         {
@@ -1744,12 +1743,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Clayton is easy to lose in the list because it is not a new agency. It is more antitrust law.\n\nPujo hearings \u2192 16th Amendment, Federal Reserve, FTC, Clayton. If you put Clayton in 2002, you have mixed Progressive trust-busting with post-Enron audit reform."
+      "explanation": "Clayton is easy to lose in the list because it is not a new agency. It is more antitrust law.\n\nPujo hearings \u2192 16th Amendment, Federal Reserve, FTC, Clayton. If you put Clayton in 2002, you have mixed Progressive trust-busting with post-Enron audit reform.",
+      "lesson": "The Clayton Act (1914) is additional antitrust law in the Pujo-era package, alongside the Fed, the FTC, and the income tax. It is not the 1933 Securities Act and not SOX. When you see 1913\u20131914, think: tax + central bank + competition agencies + tighter antitrust."
     },
     {
       "id": 68,
       "module": "1933\u20131959: New Deal, the SEC, and the first GAAP and audit rules",
-      "context": "An unqualified opinion is a clean opinion. In Ultramares it was issued despite fraud. The plaintiff was not a shareholder class in the modern sense; it was Ultramares the lender. Lenders care about solvency and collateral. That is why a clean opinion on cooked books is such a dangerous piece of paper: it is used to extend credit.",
       "prompt": "Who sued the auditor in Ultramares, and in what role?",
       "choices": [
         {
@@ -1770,12 +1769,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Name the plaintiff: Ultramares. Role: lender. Defendant auditor: Touche Niven. Defect: clean opinion, substantial fraud. Holding: negligence, not fraud, so no liability in that case.\n\nIf you remember only \u201csome old lawsuit,\u201d you will mix it with Continental Vending\u2019s criminal case."
+      "explanation": "Name the plaintiff: Ultramares. Role: lender. Defendant auditor: Touche Niven. Defect: clean opinion, substantial fraud. Holding: negligence, not fraud, so no liability in that case.\n\nIf you remember only \u201csome old lawsuit,\u201d you will mix it with Continental Vending\u2019s criminal case.",
+      "lesson": "An unqualified opinion is a clean opinion. In Ultramares it was issued despite fraud. The plaintiff was not a shareholder class in the modern sense; it was Ultramares the lender. Lenders care about solvency and collateral. That is why a clean opinion on cooked books is such a dangerous piece of paper: it is used to extend credit."
     },
     {
       "id": 69,
       "module": "1963\u20131979: Salad oil, Continental Vending, FASB, FCPA, and lowballing",
-      "context": "Internal control is the company\u2019s own machinery: approvals, recordkeeping, segregation of duties, safeguarding of assets. The FCPA (1977) put a federal internal-control mandate on public firms at the same moment it banned foreign bribery. SOX later makes managers and auditors report on those controls. FCPA is the ancestor; SOX is the reinforcement.",
       "prompt": "Where do public-company internal-control requirements first show up as a statute in this timeline?",
       "choices": [
         {
@@ -1796,12 +1795,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "People think internal control begins in 2002 because that is when they memorized \u201cSection 404.\u201d This handout is older than that memory.\n\n1977: Congress says public firms must have controls (and must not bribe foreign officials). 2002: Congress says prove it, and lets the PCAOB inspect the auditors who attest."
+      "explanation": "People think internal control begins in 2002 because that is when they memorized \u201cSection 404.\u201d This handout is older than that memory.\n\n1977: Congress says public firms must have controls (and must not bribe foreign officials). 2002: Congress says prove it, and lets the PCAOB inspect the auditors who attest.",
+      "lesson": "Internal control is the company\u2019s own machinery: approvals, recordkeeping, segregation of duties, safeguarding of assets. The FCPA (1977) put a federal internal-control mandate on public firms at the same moment it banned foreign bribery. SOX later makes managers and auditors report on those controls. FCPA is the ancestor; SOX is the reinforcement."
     },
     {
       "id": 70,
       "module": "1982\u20131995: Deregulation, junk bonds, ZZZZ Best, and the S&L bailout",
-      "context": "Lowballing (after 1979) is about winning the audit with a cheap bid. The 1995 litigation reform is about shrinking the chance that a cheap or aggressive audit ends in a ruinous lawsuit. The handout treats both as pressures that can reduce audit quality going into the late 1990s.",
       "prompt": "Which pair does the handout present as professional-environment changes that may have weakened audits before the late-1990s scandals?",
       "choices": [
         {
@@ -1822,12 +1821,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Fieldwork standards (observe, confirm) were supposed to make audits more substantive after 1939. Decades later, the business and legal environment may have pushed the other way: price the job like a commodity, and face less lawsuit risk if you miss a fraud.\n\nThat is the handout\u2019s bridge from 1979/1995 into Waste Management, Sunbeam, Enron, and WorldCom."
+      "explanation": "Fieldwork standards (observe, confirm) were supposed to make audits more substantive after 1939. Decades later, the business and legal environment may have pushed the other way: price the job like a commodity, and face less lawsuit risk if you miss a fraud.\n\nThat is the handout\u2019s bridge from 1979/1995 into Waste Management, Sunbeam, Enron, and WorldCom.",
+      "lesson": "Lowballing (after 1979) is about winning the audit with a cheap bid. The 1995 litigation reform is about shrinking the chance that a cheap or aggressive audit ends in a ruinous lawsuit. The handout treats both as pressures that can reduce audit quality going into the late 1990s."
     },
     {
       "id": 71,
       "module": "1997\u20132001: Late-1990s accounting failures and Regulation FD",
-      "context": "Waste Management = PPE and mixed earnings inflation, then failure after $1B+ restatements. Sunbeam = Dunlap, fake revenue, $1B write-off, bankruptcy. Cendant = bought CUC\u2019s pre-existing fraud. Three styles of late-1990s corporate accounting failure, all before Enron\u2019s SPE cathedral.",
       "prompt": "Which matching of 1997\u20131998 fraud style is correct?",
       "choices": [
         {
@@ -1848,12 +1847,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Sorting by mechanism is how you stop mixing the names.\n\nPPE assumptions vs. revenue tricks vs. buying a dirty target. Regulation FD is 2001 and is about fair disclosure, not about these restatements."
+      "explanation": "Sorting by mechanism is how you stop mixing the names.\n\nPPE assumptions vs. revenue tricks vs. buying a dirty target. Regulation FD is 2001 and is about fair disclosure, not about these restatements.",
+      "lesson": "Waste Management = PPE and mixed earnings inflation, then failure after $1B+ restatements. Sunbeam = Dunlap, fake revenue, $1B write-off, bankruptcy. Cendant = bought CUC\u2019s pre-existing fraud. Three styles of late-1990s corporate accounting failure, all before Enron\u2019s SPE cathedral."
     },
     {
       "id": 72,
       "module": "2001\u20132002: Enron, WorldCom, and Sarbanes-Oxley",
-      "context": "Special purpose entities, derivatives, and trading-profit games (Enron) are not the same as capitalizing line costs (WorldCom). If an exam stem says \u201csimple fraud\u201d and \u201coperating expenses as capital assets,\u201d it is WorldCom. If it says \u201cpipeline company turned high-tech trader\u201d and \u201cSPEs,\u201d it is Enron.",
       "prompt": "A company records ordinary operating costs as long-lived assets to hide a profit collapse of about $11 billion. Which timeline scandal is that?",
       "choices": [
         {
@@ -1874,12 +1873,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "WorldCom\u2019s simplicity is the point. You do not need a derivative model. You need a journal entry that turns a cost into an asset.\n\nEnron needed a web of entities. Adelphia needed a family. Tyco needed merger accounting. Match the method, then the name, then the year, then SOX."
+      "explanation": "WorldCom\u2019s simplicity is the point. You do not need a derivative model. You need a journal entry that turns a cost into an asset.\n\nEnron needed a web of entities. Adelphia needed a family. Tyco needed merger accounting. Match the method, then the name, then the year, then SOX.",
+      "lesson": "Special purpose entities, derivatives, and trading-profit games (Enron) are not the same as capitalizing line costs (WorldCom). If an exam stem says \u201csimple fraud\u201d and \u201coperating expenses as capital assets,\u201d it is WorldCom. If it says \u201cpipeline company turned high-tech trader\u201d and \u201cSPEs,\u201d it is Enron."
     },
     {
       "id": 73,
       "module": "2001\u20132002: Enron, WorldCom, and Sarbanes-Oxley",
-      "context": "SOX\u2019s PCAOB is to auditors what the SEC is to markets: a public overseer created after a scandal cluster. The SEC is 1934. The PCAOB is 2002. FASB remains the GAAP writer. Mixing those three is the most common timeline error in the course.",
       "prompt": "After Enron and WorldCom, who was created to oversee public-company auditors?",
       "choices": [
         {
@@ -1900,12 +1899,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "CAP is 1938 GAAP. Tammany is 19th-century machine politics. The ICC is 1887 railroads. PCAOB is 2002 audit oversight.\n\nSay it as a sentence: Congress did not trust the profession to inspect itself on public companies anymore."
+      "explanation": "CAP is 1938 GAAP. Tammany is 19th-century machine politics. The ICC is 1887 railroads. PCAOB is 2002 audit oversight.\n\nSay it as a sentence: Congress did not trust the profession to inspect itself on public companies anymore.",
+      "lesson": "SOX\u2019s PCAOB is to auditors what the SEC is to markets: a public overseer created after a scandal cluster. The SEC is 1934. The PCAOB is 2002. FASB remains the GAAP writer. Mixing those three is the most common timeline error in the course."
     },
     {
       "id": 74,
       "module": "2003\u20132006: The first scandals after SOX",
-      "context": "Fannie (2004 restatement over $6B; 2008 conservatorship) and AIG (2005 $1.6B fine; 2008 $180B bailout) are two-step tragedies. First the books and controls are shown to be weak. Later the mortgage crash turns those firms into wards of the state. HealthSouth (2003) does not get a 2008 sequel in this handout; it is the immediate post-SOX corporate scandal.",
       "prompt": "Which pairing of \u201cearly warning\u201d and \u201ccrisis ending\u201d is accurate?",
       "choices": [
         {
@@ -1926,12 +1925,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "The handout is teaching you to read early enforcement as a credit event that has not happened yet.\n\nIf the accounting already cannot be trusted (Fannie) or the controls already failed (AIG), a housing collapse will not be a mild earnings miss. It will be a public rescue."
+      "explanation": "The handout is teaching you to read early enforcement as a credit event that has not happened yet.\n\nIf the accounting already cannot be trusted (Fannie) or the controls already failed (AIG), a housing collapse will not be a mild earnings miss. It will be a public rescue.",
+      "lesson": "Fannie (2004 restatement over $6B; 2008 conservatorship) and AIG (2005 $1.6B fine; 2008 $180B bailout) are two-step tragedies. First the books and controls are shown to be weak. Later the mortgage crash turns those firms into wards of the state. HealthSouth (2003) does not get a 2008 sequel in this handout; it is the immediate post-SOX corporate scandal."
     },
     {
       "id": 75,
       "module": "2007\u20132010: Housing, bailouts, Madoff, and Dodd-Frank",
-      "context": "Three 2008 official endings: Bear is bought (with a public backstop). Fannie and Freddie are conserved. Lehman is bankrupt. AIG is nationalized in all but name via $180B of equity. TARP then recapitalizes banks. That is not one policy. It is five, in a panic.",
       "prompt": "Which firm was allowed to fail in 2008, producing the nation\u2019s largest bankruptcy in this timeline?",
       "choices": [
         {
@@ -1952,12 +1951,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Bear lived inside J.P. Morgan. AIG lived on Treasury/Fed equity. Fannie and Freddie lived in conservatorship. Lehman died.\n\nThe death is what froze credit. That freeze is why \u201ctoo big to fail\u201d becomes the political slogan Dodd-Frank tries to retire."
+      "explanation": "Bear lived inside J.P. Morgan. AIG lived on Treasury/Fed equity. Fannie and Freddie lived in conservatorship. Lehman died.\n\nThe death is what froze credit. That freeze is why \u201ctoo big to fail\u201d becomes the political slogan Dodd-Frank tries to retire.",
+      "lesson": "Three 2008 official endings: Bear is bought (with a public backstop). Fannie and Freddie are conserved. Lehman is bankrupt. AIG is nationalized in all but name via $180B of equity. TARP then recapitalizes banks. That is not one policy. It is five, in a panic."
     },
     {
       "id": 76,
       "module": "2007\u20132010: Housing, bailouts, Madoff, and Dodd-Frank",
-      "context": "TARP\u2019s original public design, in the handout, was help for mortgage holders. In operation it was capital for failing banks, with only limited homeowner relief. If a question asks what TARP \u201cwas originally designed\u201d to do, the answer is mortgage holders. If it asks what TARP \u201cprovided,\u201d the answer is bank capital.",
       "prompt": "How should you answer a question about TARP\u2019s original design versus what it mainly delivered?",
       "choices": [
         {
@@ -1978,12 +1977,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Read the stem. \u201cOriginally designed\u201d points to homeowners. \u201cProvided billions of dollars of capital\u201d points to banks.\n\nThe handout is almost sarcastic: the political wrapping and the wiring diagram were not the same. That is part of why crisis policy stayed controversial into Dodd-Frank."
+      "explanation": "Read the stem. \u201cOriginally designed\u201d points to homeowners. \u201cProvided billions of dollars of capital\u201d points to banks.\n\nThe handout is almost sarcastic: the political wrapping and the wiring diagram were not the same. That is part of why crisis policy stayed controversial into Dodd-Frank.",
+      "lesson": "TARP\u2019s original public design, in the handout, was help for mortgage holders. In operation it was capital for failing banks, with only limited homeowner relief. If a question asks what TARP \u201cwas originally designed\u201d to do, the answer is mortgage holders. If it asks what TARP \u201cprovided,\u201d the answer is bank capital."
     },
     {
       "id": 77,
       "module": "The big picture: how the timeline fits together",
-      "context": "Ponzi 1920 and Madoff 2008 bookend the timeline\u2019s pure investment frauds. In between, most scandals are about companies\u2019 own financial statements (McKesson, Waste Management, Enron, WorldCom) or about public officials (Tammany, Teapot Dome) or about financial-system leverage (LTCM, S&Ls, subprime). Madoff arriving in the same year as Lehman and TARP shows that a crash reveals more than one kind of rot.",
       "prompt": "Why is Madoff placed in 2008 next to Lehman, AIG, and TARP rather than next to the 1920 Ponzi row only?",
       "choices": [
         {
@@ -2004,12 +2003,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "A Ponzi needs new cash. 2008 is when investors needed their cash back and stopped supplying more.\n\nThe handout could have listed Madoff only as a cousin of Ponzi. By dating him 2008, it ties a classic confidence game to a modern liquidity crisis. Both are \u201cthe money was never really there.\u201d"
+      "explanation": "A Ponzi needs new cash. 2008 is when investors needed their cash back and stopped supplying more.\n\nThe handout could have listed Madoff only as a cousin of Ponzi. By dating him 2008, it ties a classic confidence game to a modern liquidity crisis. Both are \u201cthe money was never really there.\u201d",
+      "lesson": "Ponzi 1920 and Madoff 2008 bookend the timeline\u2019s pure investment frauds. In between, most scandals are about companies\u2019 own financial statements (McKesson, Waste Management, Enron, WorldCom) or about public officials (Tammany, Teapot Dome) or about financial-system leverage (LTCM, S&Ls, subprime). Madoff arriving in the same year as Lehman and TARP shows that a crash reveals more than one kind of rot."
     },
     {
       "id": 78,
       "module": "The big picture: how the timeline fits together",
-      "context": "If you are cold-starting this course, here is the spine of Handout #2\u2019s U.S. timeline: build a federal government (1787); fight corruption and monopoly (Tammany, Sherman); license CPAs (1896); tax income and create the Fed (1913\u201314); invent the SEC after the crash (1933\u201334); force auditors to look (McKesson/1939); professionalize GAAP (CAP/APB/FASB); criminalize bribery and require controls (FCPA); watch audit pricing and liability shift (1979, 1995); endure a scandal wave (1997\u20132002); create the PCAOB (SOX); then watch housing leverage take down banks, insurers, and GSEs (2007\u201310) until Dodd-Frank.",
       "prompt": "Which is the best one-sentence summary of Handout #2\u2019s U.S. timeline?",
       "choices": [
         {
@@ -2030,12 +2029,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "You now have a story, not a heap of dates.\n\nFederal power makes rules possible. Scandals make new rules necessary. CPAs, GAAP boards, the SEC, and the PCAOB are the institutional sediment of those scandals. Dodd-Frank\u2019s last line is the course\u2019s attitude: we keep arguing whether the latest sediment is enough."
+      "explanation": "You now have a story, not a heap of dates.\n\nFederal power makes rules possible. Scandals make new rules necessary. CPAs, GAAP boards, the SEC, and the PCAOB are the institutional sediment of those scandals. Dodd-Frank\u2019s last line is the course\u2019s attitude: we keep arguing whether the latest sediment is enough.",
+      "lesson": "If you are cold-starting this course, here is the spine of Handout #2\u2019s U.S. timeline: build a federal government (1787); fight corruption and monopoly (Tammany, Sherman); license CPAs (1896); tax income and create the Fed (1913\u201314); invent the SEC after the crash (1933\u201334); force auditors to look (McKesson/1939); professionalize GAAP (CAP/APB/FASB); criminalize bribery and require controls (FCPA); watch audit pricing and liability shift (1979, 1995); endure a scandal wave (1997\u20132002); create the PCAOB (SOX); then watch housing leverage take down banks, insurers, and GSEs (2007\u201310) until Dodd-Frank."
     },
     {
       "id": 79,
       "module": "1933\u20131959: New Deal, the SEC, and the first GAAP and audit rules",
-      "context": "Fifty-one Accounting Research Bulletins in twenty years (1938\u20131959) means CAP was busy. The handout says those ARBs became many of the fundamental standards still in use, even though particulars changed. When FASB later codified GAAP, a lot of that DNA was still CAP-era thinking about assets, liabilities, and matching.",
       "prompt": "What does the handout claim about CAP\u2019s 51 ARBs?",
       "choices": [
         {
@@ -2056,12 +2055,12 @@
         }
       ],
       "answer": "B",
-      "explanation": "Old does not mean irrelevant.\n\nThe point of putting 1938\u201359 in a professionalism course is that today\u2019s accountant still lives inside decisions made when GAAP was first being written down. FASB changed the government of the rules. It did not vaporize the idea of the rules."
+      "explanation": "Old does not mean irrelevant.\n\nThe point of putting 1938\u201359 in a professionalism course is that today\u2019s accountant still lives inside decisions made when GAAP was first being written down. FASB changed the government of the rules. It did not vaporize the idea of the rules.",
+      "lesson": "Fifty-one Accounting Research Bulletins in twenty years (1938\u20131959) means CAP was busy. The handout says those ARBs became many of the fundamental standards still in use, even though particulars changed. When FASB later codified GAAP, a lot of that DNA was still CAP-era thinking about assets, liabilities, and matching."
     },
     {
       "id": 80,
       "module": "2007\u20132010: Housing, bailouts, Madoff, and Dodd-Frank",
-      "context": "Dodd-Frank\u2019s quoted purposes include ending bailouts and ending too-big-to-fail. The 2008 rows you just studied are those problems in the flesh: Bear backed, Lehman dropped, AIG owned, TARP filled, GSEs conserved. The Act is a promise about the next crisis. The handout refuses to say the promise has been kept.",
       "prompt": "How does the handout want you to treat claims that Dodd-Frank \u201csolved\u201d 2008?",
       "choices": [
         {
@@ -2082,7 +2081,8 @@
         }
       ],
       "answer": "B",
-      "explanation": "The last human sentence of the handout is a shrug, not a celebration.\n\nLearn the quoted purposes so you can recognize them on an exam. Then remember that this course treats financial reform as unfinished. That attitude is part of the content."
+      "explanation": "The last human sentence of the handout is a shrug, not a celebration.\n\nLearn the quoted purposes so you can recognize them on an exam. Then remember that this course treats financial reform as unfinished. That attitude is part of the content.",
+      "lesson": "Dodd-Frank\u2019s quoted purposes include ending bailouts and ending too-big-to-fail. The 2008 rows you just studied are those problems in the flesh: Bear backed, Lehman dropped, AIG owned, TARP filled, GSEs conserved. The Act is a promise about the next crisis. The handout refuses to say the promise has been kept."
     }
   ]
 }

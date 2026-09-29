@@ -13,7 +13,7 @@ export type QuizQuestion = {
   answer: string;
   explanation: string;
   /** Optional lesson shown before the question so the quiz can teach, not just test. */
-  context?: string;
+  lesson?: string;
 };
 
 export type QuizState = {
