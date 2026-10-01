@@ -98,13 +98,21 @@ export function RankingApp() {
         if (cancelled) return;
         setData(json);
 
-        // Always open the season's current week — not Preseason, even if that ballot exists
+        // Open the season's current week, unless Week 5 is empty because the
+        // latest build was moved back onto Week 4.
         const seasonWeek =
           typeof json.currentWeek === "number" ? json.currentWeek : PRESEASON_WEEK;
-        setWeek(seasonWeek);
         const latest = hydrateStoreFromLocalStorage();
-        if (latest.activeWeek !== seasonWeek) {
-          setStore({ ...latest, activeWeek: seasonWeek });
+        const currentCount = getDraftOrder(latest, seasonWeek).length;
+        const week4Count = getDraftOrder(latest, 4).length;
+        const openWeek =
+          seasonWeek === 5 && currentCount === 0 && week4Count >= FBS_TEAM_COUNT
+            ? 4
+            : seasonWeek;
+        setWeek(openWeek);
+        if (openWeek === 4 && week4Count >= FBS_TEAM_COUNT) setTab("rank");
+        if (latest.activeWeek !== openWeek) {
+          setStore({ ...latest, activeWeek: openWeek });
         }
       } catch (err) {
         if (!cancelled) {
