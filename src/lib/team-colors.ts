@@ -58,14 +58,28 @@ const FILL_OVERRIDES: Record<string, string> = {
   "66": "#ae192d", // Iowa State red
   "2305": "#0051ba", // Kansas blue
   "309": "#ce181e", // Louisiana red
+  "2132": "#000000", // Cincinnati black
+  "326": "#e6d5a8", // Texas State lighter gold
+  "5": "#1a5632", // UAB green
+  "62": "#005737", // Hawaii green
+  "59": "#002f6c", // Georgia Tech navy
+  "290": "#041e42", // Georgia Southern navy
+  "242": "#00205b", // Rice navy
+  "166": "#7e141b", // New Mexico State maroon
+  "2440": "#041e42", // Nevada navy
+  "2429": "#005035", // Charlotte green
 };
 
 /** Keep the default colored ESPN mark instead of the 500-dark (white) variant. */
 const LOGO_FORCE_COLOR = new Set(["197"]); // Oklahoma State orange
 
-/** Tint the 500-dark (white) silhouette; ESPN has no yellow West Virginia 500 mark. */
+/** Tint the 500-dark (white) silhouette to a brand color. */
 const LOGO_TINT: Record<string, string> = {
   "277": "#eaaa00", // West Virginia gold
+  "344": "#ffffff", // Mississippi State white script
+  "2649": "#0b2240", // Toledo blue wording
+  "2426": "#00225b", // Navy navy mark
+  "183": "#000e54", // Syracuse blue S
 };
 
 function pickFill(primary: string | null, secondary: string | null, teamId?: string | null): string {
