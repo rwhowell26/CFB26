@@ -87,6 +87,14 @@ function pickFill(primary: string | null, secondary: string | null, teamId?: str
   return usableFill(secondary) ?? usableFill(primary) ?? FALLBACK_FILL;
 }
 
+/** Brand color for chart lines: primary, then secondary, skipping white. */
+export function teamChartColor(
+  color?: string | null,
+  alternateColor?: string | null,
+): string {
+  return usableFill(normalizeHex(color)) ?? usableFill(normalizeHex(alternateColor)) ?? FALLBACK_FILL;
+}
+
 function colorLogoHref(href: string): string {
   if (href.includes("/ncaa/500-dark/")) return href.replace("/ncaa/500-dark/", "/ncaa/500/");
   return href;

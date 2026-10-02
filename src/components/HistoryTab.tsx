@@ -6,6 +6,7 @@ import { TeamLogo } from "@/components/TeamLogo";
 import { normalizeConferenceName, shortConferenceName } from "@/lib/conferences";
 import { FBS_TEAM_COUNT, formatWeekLabel } from "@/lib/season";
 import { snapshotWeeks, teamRankHistory } from "@/lib/storage";
+import { teamChartColor } from "@/lib/team-colors";
 import type { RankingStore, Team } from "@/lib/types";
 
 type Props = {
@@ -16,28 +17,6 @@ type Props = {
 
 const HISTORY_SELECTED_KEY = "cfb26-history-selected-teams";
 const MAX_TEAMS = 20;
-const TEAM_COLORS = [
-  "#1f6b45",
-  "#8a4b16",
-  "#2c4c8c",
-  "#8f2d2d",
-  "#6b3fa0",
-  "#0e7490",
-  "#b45309",
-  "#365314",
-  "#be185d",
-  "#1d4ed8",
-  "#047857",
-  "#a16207",
-  "#7c2d12",
-  "#4338ca",
-  "#0f766e",
-  "#9f1239",
-  "#3f6212",
-  "#701a75",
-  "#155e75",
-  "#854d0e",
-];
 
 function loadSelectedIds(): string[] {
   if (typeof window === "undefined") return [];
@@ -144,10 +123,10 @@ export function HistoryTab({ store, teams, onLoadWeek }: Props) {
 
   const series: HistorySeries[] = useMemo(
     () =>
-      selectedTeams.map((team, index) => ({
+      selectedTeams.map((team) => ({
         teamId: team.id,
         name: team.shortName,
-        color: TEAM_COLORS[index % TEAM_COLORS.length],
+        color: teamChartColor(team.color, team.alternateColor),
         points: teamRankHistory(store, team.id),
         focused: focusedTeam?.id === team.id,
       })),
@@ -275,7 +254,7 @@ export function HistoryTab({ store, teams, onLoadWeek }: Props) {
         {selectedTeams.length ? (
           <div className="history-chips">
             {selectedTeams.map((team, index) => {
-              const color = TEAM_COLORS[index % TEAM_COLORS.length];
+              const color = teamChartColor(team.color, team.alternateColor);
               const focused = focusedTeam?.id === team.id;
               return (
                 <div key={team.id} className={`history-chip ${focused ? "focused" : ""}`}>
