@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #070b14;
+  --bg-elevated: #10182a;
+  --ink: #eef2fb;
+  --muted: #9aa8c7;
+  --line: rgba(196, 214, 255, 0.14);
+  --accent: #8eb0ff;
+  --accent-deep: #4d74e8;
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--ink);
+  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-fraunces);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 12% -10%, rgba(77, 116, 232, 0.28), transparent 36%),
+    radial-gradient(circle at 90% 0%, rgba(142, 176, 255, 0.12), transparent 28%),
+    var(--bg);
+  font-family: var(--font-sans), "Geist", sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+.icon-btn {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.icon-btn:hover {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.04);
+}
