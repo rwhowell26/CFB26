@@ -1,0 +1,5008 @@
+{
+  "id": "accy-6100-m5-9",
+  "title": "ACCY 6100 \u2014 Auditing Seminar",
+  "subtitle": "Modules 5\u20139 practice quiz",
+  "source": "Engagement planning, materiality, the audit risk model, ICFR, and evidence (Module 9 slides 1\u201311 only)",
+  "questions": [
+    {
+      "id": 1,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "On the Module 5 engagement-risk slide, engagement risk is defined as the risk arising from:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Sampling error in tests of details"
+        },
+        {
+          "letter": "B",
+          "text": "The relationship with a specific client"
+        },
+        {
+          "letter": "C",
+          "text": "The Federal Reserve\u2019s interest-rate policy"
+        },
+        {
+          "letter": "D",
+          "text": "The PCAOB\u2019s inspection cycle only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Engagement risk is the risk arising from the relationship with a specific client. The slide groups it with the auditor\u2019s business risk, the client\u2019s business risk, and audit risk."
+    },
+    {
+      "id": 2,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "Which of the following is listed on the Module 5 slide as a distinct risk concept alongside engagement risk?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Translation risk under IFRS 9"
+        },
+        {
+          "letter": "B",
+          "text": "Audit risk"
+        },
+        {
+          "letter": "C",
+          "text": "Basis risk in derivatives only"
+        },
+        {
+          "letter": "D",
+          "text": "Key-person life-insurance risk"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The slide lists engagement risk, the auditor\u2019s business risk, the client\u2019s business risk, and audit risk."
+    },
+    {
+      "id": 3,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "According to the planning slide (AS 2101), the engagement partner is responsible for overall quality of the engagement but:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "May not assign any work to staff"
+        },
+        {
+          "letter": "B",
+          "text": "May delegate responsibilities"
+        },
+        {
+          "letter": "C",
+          "text": "Must personally perform all walkthroughs"
+        },
+        {
+          "letter": "D",
+          "text": "Must also serve as the specialist"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The engagement partner is responsible for overall quality but may delegate responsibilities."
+    },
+    {
+      "id": 4,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "Audit planning involves establishing which pair?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The tax provision and the deferred-tax rate"
+        },
+        {
+          "letter": "B",
+          "text": "The overall audit strategy and the audit plan"
+        },
+        {
+          "letter": "C",
+          "text": "The 10-K cover and the earnings release"
+        },
+        {
+          "letter": "D",
+          "text": "The board minutes and the proxy statement"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Planning involves establishing the overall audit strategy and the audit plan."
+    },
+    {
+      "id": 5,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "The slides describe audit planning as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A one-time meeting held only at client acceptance"
+        },
+        {
+          "letter": "B",
+          "text": "A continual and iterative process"
+        },
+        {
+          "letter": "C",
+          "text": "A PCAOB inspection procedure"
+        },
+        {
+          "letter": "D",
+          "text": "A task that ends when the engagement letter is signed"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Audit planning is a continual and iterative process, not a single kickoff meeting."
+    },
+    {
+      "id": 6,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "Which of the following is a preliminary engagement activity on the AS 2101 slide?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Issuing the audit opinion"
+        },
+        {
+          "letter": "B",
+          "text": "Perform procedures regarding continuance of the audit relationship and determine compliance with independence requirements"
+        },
+        {
+          "letter": "C",
+          "text": "Setting the client\u2019s stock price"
+        },
+        {
+          "letter": "D",
+          "text": "Filing the 10-K with the SEC"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Preliminary activities include procedures regarding continuance of the relationship, independence compliance, and establishing an understanding of the terms with the audit committee."
+    },
+    {
+      "id": 7,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "The auditor should establish an understanding of the terms of the engagement with:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The client\u2019s largest customer"
+        },
+        {
+          "letter": "B",
+          "text": "The audit committee"
+        },
+        {
+          "letter": "C",
+          "text": "The PCAOB inspections staff"
+        },
+        {
+          "letter": "D",
+          "text": "The company\u2019s competitors"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Establish an understanding of the terms of the engagement with the audit committee."
+    },
+    {
+      "id": 8,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "Judging whether to accept a new client (or retain an existing one) should occur:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only after the audit opinion is drafted"
+        },
+        {
+          "letter": "B",
+          "text": "Prior to or with preliminary engagement activities"
+        },
+        {
+          "letter": "C",
+          "text": "Only if the prior auditor was sanctioned"
+        },
+        {
+          "letter": "D",
+          "text": "After year-end substantive testing"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Acceptance/retention should occur prior to or with preliminary engagement activities and be consistent with the firm\u2019s ability to perform the engagement."
+    },
+    {
+      "id": 9,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "Client-acceptance considerations on the slide include whether the firm is independent and whether the services are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Cheaper than last year\u2019s fee"
+        },
+        {
+          "letter": "B",
+          "text": "Permissible and pre-approved by the audit committee"
+        },
+        {
+          "letter": "C",
+          "text": "Guaranteed to produce an unqualified opinion"
+        },
+        {
+          "letter": "D",
+          "text": "Limited to tax-only work"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Questions include: Is the firm independent? Are the services permissible and pre-approved by the audit committee? Can the auditor access necessary information and have the necessary resources?"
+    },
+    {
+      "id": 10,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "Client acceptance should be based on information about the integrity of the engagement and the integrity of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The PCAOB Board"
+        },
+        {
+          "letter": "B",
+          "text": "The client, including management and the audit committee"
+        },
+        {
+          "letter": "C",
+          "text": "The client\u2019s customers only"
+        },
+        {
+          "letter": "D",
+          "text": "The specialist\u2019s software vendor"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Base the decision on information about the integrity of the engagement and the integrity of the client (including management and the audit committee)."
+    },
+    {
+      "id": 11,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "Which of the following is an AS 2101 planning factor the auditor should consider?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The company\u2019s cafeteria menu"
+        },
+        {
+          "letter": "B",
+          "text": "Knowledge of the company\u2019s ICFR, industry/business matters, recent changes, and preliminary judgments about materiality and risk"
+        },
+        {
+          "letter": "C",
+          "text": "The CEO\u2019s golf handicap"
+        },
+        {
+          "letter": "D",
+          "text": "Whether the stock is in the Dow Jones Industrial Average"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Planning factors include ICFR knowledge, industry and business matters, recent changes, preliminary materiality and risk judgments, legal/regulatory matters, public information from acceptance/retention, and relative complexity."
+    },
+    {
+      "id": 12,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "The overall audit strategy sets which three elements and then guides the audit plan?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Fees, headcount, and the press release date"
+        },
+        {
+          "letter": "B",
+          "text": "Scope, timing, and direction of the audit"
+        },
+        {
+          "letter": "C",
+          "text": "Tax rate, discount rate, and salvage value"
+        },
+        {
+          "letter": "D",
+          "text": "Sample size, confirmation rate, and lockbox location"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Establish an overall audit strategy that sets the scope, timing, and direction of the audit and guides the audit plan."
+    },
+    {
+      "id": 13,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "The audit strategy is affected by the reporting objective of the audit and communication requirements of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The IASB"
+        },
+        {
+          "letter": "B",
+          "text": "The PCAOB"
+        },
+        {
+          "letter": "C",
+          "text": "The World Bank"
+        },
+        {
+          "letter": "D",
+          "text": "FINRA only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The strategy is affected by the reporting objective and PCAOB communication requirements, factors important in supervising the team, results of preliminary activities, and the nature, timing, and extent of resources required."
+    },
+    {
+      "id": 14,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "The audit plan (audit program) includes the planned nature, timing, and extent of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The client\u2019s product advertising"
+        },
+        {
+          "letter": "B",
+          "text": "Risk assessment procedures, tests of controls and substantive procedures, and other procedures required to comply with PCAOB standards"
+        },
+        {
+          "letter": "C",
+          "text": "Only the tax-accrual workpapers"
+        },
+        {
+          "letter": "D",
+          "text": "Only the engagement letter recitals"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The plan includes RAP, tests of controls and substantive procedures, and other planned procedures required to comply with PCAOB standards."
+    },
+    {
+      "id": 15,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "The audit plan should account for procedures performed:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only at headquarters"
+        },
+        {
+          "letter": "B",
+          "text": "At multiple locations"
+        },
+        {
+          "letter": "C",
+          "text": "Only in the subsequent-events window"
+        },
+        {
+          "letter": "D",
+          "text": "Only if the client has no subsidiaries"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The audit plan should account for procedures performed at multiple locations."
+    },
+    {
+      "id": 16,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "When the plan addresses use of a specialist, the auditor should have sufficient knowledge to communicate the objectives of that person\u2019s work, determine whether the procedures meet the auditor\u2019s objectives, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Set the specialist\u2019s billing rate"
+        },
+        {
+          "letter": "B",
+          "text": "Evaluate the results of that person\u2019s procedures"
+        },
+        {
+          "letter": "C",
+          "text": "Issue the specialist an audit opinion"
+        },
+        {
+          "letter": "D",
+          "text": "Prohibit the specialist from using IT"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The auditor needs enough knowledge to communicate objectives, determine whether the specialist\u2019s procedures meet the auditor\u2019s objectives, and evaluate the results."
+    },
+    {
+      "id": 17,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "The lead auditor is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Any intern who signed the independence confirmation"
+        },
+        {
+          "letter": "B",
+          "text": "The firm issuing the report on the client\u2019s financial statements"
+        },
+        {
+          "letter": "C",
+          "text": "Always the component auditor of the smallest subsidiary"
+        },
+        {
+          "letter": "D",
+          "text": "The PCAOB inspection team"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Lead auditor = the firm issuing the report on the client\u2019s financial statements."
+    },
+    {
+      "id": 18,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "The engagement team, as defined on the slide, includes accountants and other professional staff employed or engaged by the lead auditor who perform audit procedures, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The client\u2019s controller"
+        },
+        {
+          "letter": "B",
+          "text": "Specialists employed by the lead auditor who assist in obtaining or evaluating audit evidence"
+        },
+        {
+          "letter": "C",
+          "text": "The SEC staff attorney"
+        },
+        {
+          "letter": "D",
+          "text": "The referred-to auditor\u2019s entire national office"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Engagement team includes staff who perform procedures or assist the partner, plus specialists employed by the lead auditor who help obtain or evaluate evidence."
+    },
+    {
+      "id": 19,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "An other auditor is a member of the engagement team who is not:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A specialist employed by the client"
+        },
+        {
+          "letter": "B",
+          "text": "A partner or employee of the lead auditor, and not working under the lead auditor\u2019s direction as an employee"
+        },
+        {
+          "letter": "C",
+          "text": "Anyone who reviews a workpaper"
+        },
+        {
+          "letter": "D",
+          "text": "The engagement quality reviewer employed by the lead auditor"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Other auditor = a member of the engagement team who is not a partner or employee of the lead auditor and is not working under the lead auditor\u2019s direction and functioning as an employee."
+    },
+    {
+      "id": 20,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "A referred-to auditor is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The internal audit director"
+        },
+        {
+          "letter": "B",
+          "text": "An audit firm that audits and issues a report on the financial statements of one or more of the client\u2019s business units and is referred to in the lead auditor\u2019s report"
+        },
+        {
+          "letter": "C",
+          "text": "The tax preparer of the 1040"
+        },
+        {
+          "letter": "D",
+          "text": "A valuation specialist employed by the lead auditor"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Referred-to auditor = a firm that audits a business unit and is referred to in the lead auditor\u2019s report on the client\u2019s financial statements."
+    },
+    {
+      "id": 21,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "In the PwC / Client A / EY-Germany example, PwC must determine whether it may serve as lead auditor of Client A and use EY\u2019s work on Sub B, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Whether to fire the audit committee"
+        },
+        {
+          "letter": "B",
+          "text": "How using EY\u2019s work will affect the form and content of PwC\u2019s audit report for Client A"
+        },
+        {
+          "letter": "C",
+          "text": "Whether EY may set PwC\u2019s materiality"
+        },
+        {
+          "letter": "D",
+          "text": "Whether Client A must delist from the NYSE"
+        }
+      ],
+      "answer": "B",
+      "explanation": "PwC must decide whether it can be lead auditor and use EY\u2019s work, and how that use affects the form and content of PwC\u2019s report."
+    },
+    {
+      "id": 22,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "In determining whether the firm can serve as lead auditor, the engagement partner considers the significance of the portion audited by the firm compared to the financial statements as a whole, the importance of those portions compared with portions audited by other auditors, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The client\u2019s marketing budget"
+        },
+        {
+          "letter": "B",
+          "text": "The extent of supervision provided by the engagement partner over work performed by other auditors"
+        },
+        {
+          "letter": "C",
+          "text": "Whether the other auditor is cheaper"
+        },
+        {
+          "letter": "D",
+          "text": "The number of comment letters from the AICPA"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AS 2101 lead-auditor determination: significance of the portion the firm audited, importance of those portions vs. other auditors\u2019 portions, and extent of EP supervision over other auditors\u2019 work."
+    },
+    {
+      "id": 23,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "The lead auditor should obtain an understanding of the other auditor\u2019s knowledge of SEC and PCAOB independence and ethics requirements, experience applying those requirements, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The other auditor\u2019s cafeteria plan"
+        },
+        {
+          "letter": "B",
+          "text": "The knowledge, skill, and ability of the other auditor\u2019s engagement team members"
+        },
+        {
+          "letter": "C",
+          "text": "The other auditor\u2019s office lease"
+        },
+        {
+          "letter": "D",
+          "text": "The other auditor\u2019s lobbying expenditures"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Understand the other auditor\u2019s independence/ethics knowledge and experience, and the KSA of that team."
+    },
+    {
+      "id": 24,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "Regarding the other auditor, the lead auditor should obtain representations about policies ensuring SEC/PCAOB compliance, relationships that bear on independence, compliance with those requirements, and whether team members possess the knowledge, skill, and ability to perform assigned tasks. The lead auditor must also determine that it can:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Set the other auditor\u2019s partner compensation"
+        },
+        {
+          "letter": "B",
+          "text": "Communicate with the other auditor and access the other auditor\u2019s audit documentation"
+        },
+        {
+          "letter": "C",
+          "text": "Prohibit the other auditor from using specialists"
+        },
+        {
+          "letter": "D",
+          "text": "Issue the other auditor\u2019s local statutory report"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Determine that the lead auditor can communicate with the other auditor and access that auditor\u2019s documentation, and decide whether to refer to the other auditor in the lead auditor\u2019s report."
+    },
+    {
+      "id": 25,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "The engagement partner is the member of the engagement team with primary responsibility for the audit and is responsible for supervising the conduct of the audit and for:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Preparing the client\u2019s 10-K MD&A"
+        },
+        {
+          "letter": "B",
+          "text": "Compliance with audit standards"
+        },
+        {
+          "letter": "C",
+          "text": "The company\u2019s ICFR design"
+        },
+        {
+          "letter": "D",
+          "text": "Setting GAAP for the industry"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AS 1201: the EP has primary responsibility, supervises the audit, and is responsible for compliance with audit standards. The EP may delegate supervisory responsibilities."
+    },
+    {
+      "id": 26,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "Supervisors must inform other team members of their responsibilities, including the objectives of the procedures they are to perform, the nature, timing, and extent of those procedures, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The client\u2019s stock-option strike prices"
+        },
+        {
+          "letter": "B",
+          "text": "Matters that could impact the procedures or the interpretation of the results"
+        },
+        {
+          "letter": "C",
+          "text": "The partner\u2019s vacation calendar only"
+        },
+        {
+          "letter": "D",
+          "text": "The SEC\u2019s comment-letter queue"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AS 1201: inform team members of responsibilities, including objectives; nature, timing, and extent; and matters that could affect the procedures or interpretation of results. Direct them to bring significant issues to supervisors, and review their work."
+    },
+    {
+      "id": 27,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "The extent of supervision depends on the nature of the company, the nature of the assigned work, the risk of material misstatement, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Whether the client is in the S&P 500"
+        },
+        {
+          "letter": "B",
+          "text": "The knowledge, skill, and ability of the auditor performing the work"
+        },
+        {
+          "letter": "C",
+          "text": "The length of the engagement letter"
+        },
+        {
+          "letter": "D",
+          "text": "The number of board committees"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AS 1201: extent of supervision depends on the company, the assigned work, RMM, and the KSA of the auditor doing the work."
+    },
+    {
+      "id": 28,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "AS 1301 communications at appointment or retention and regarding audit planning include obtaining information relevant to the audit by asking the audit committee about their knowledge of relevant matters, and communicating:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The CEO\u2019s bonus formula only"
+        },
+        {
+          "letter": "B",
+          "text": "Overall audit strategy, timing, and risks"
+        },
+        {
+          "letter": "C",
+          "text": "The firm\u2019s national office headcount"
+        },
+        {
+          "letter": "D",
+          "text": "The inspection staff\u2019s names"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Planning communications: obtain information from the AC, and communicate overall strategy, timing, and risks."
+    },
+    {
+      "id": 29,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "Planning communications with the audit committee also cover the nature and extent of specialized skill or knowledge needed, use of internal audit, use of personnel under the direction of management, involvement of other auditors, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The company\u2019s product roadmap"
+        },
+        {
+          "letter": "B",
+          "text": "The basis for the auditor\u2019s determination that it can serve as lead auditor"
+        },
+        {
+          "letter": "C",
+          "text": "The partner\u2019s personal tax return"
+        },
+        {
+          "letter": "D",
+          "text": "The PCAOB\u2019s budget"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The slide lists specialized skill/knowledge needed, internal audit use, company personnel under management\u2019s direction, other auditors involved, and the basis for serving as lead auditor."
+    },
+    {
+      "id": 30,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "Detailed communications regarding the results of the audit are in AS 1301; the Module 5 slide says those communications:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Are optional if the opinion is unqualified"
+        },
+        {
+          "letter": "B",
+          "text": "Will be discussed in later modules"
+        },
+        {
+          "letter": "C",
+          "text": "Were repealed by SOX"
+        },
+        {
+          "letter": "D",
+          "text": "Are made only to the PCAOB"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The slide points to AS 1301 for results communications and notes they will be discussed later."
+    },
+    {
+      "id": 31,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "Which statement best captures the difference between the audit strategy and the audit plan on these slides?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "They are identical documents with two names"
+        },
+        {
+          "letter": "B",
+          "text": "The strategy sets scope, timing, and direction; the plan specifies the nature, timing, and extent of procedures"
+        },
+        {
+          "letter": "C",
+          "text": "The strategy is for tax; the plan is for ICFR only"
+        },
+        {
+          "letter": "D",
+          "text": "The plan is written by the audit committee"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Strategy = scope, timing, direction (and guides the plan). Plan/program = planned NTE of RAP, tests of controls, substantive procedures, and other PCAOB-required procedures."
+    },
+    {
+      "id": 32,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "Client acceptance must be consistent with:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The client\u2019s desired earnings per share"
+        },
+        {
+          "letter": "B",
+          "text": "The firm\u2019s ability to perform the engagement"
+        },
+        {
+          "letter": "C",
+          "text": "The lowest bid on the RFP"
+        },
+        {
+          "letter": "D",
+          "text": "Whether the prior auditor was a Big Four firm"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Acceptance/retention should be consistent with the firm\u2019s ability to perform the engagement (independence, permissible services, access, resources)."
+    },
+    {
+      "id": 33,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "Public information about the company and knowledge gained during client acceptance and retention is listed as a factor in:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Computing the tax rate"
+        },
+        {
+          "letter": "B",
+          "text": "Planning the audit under AS 2101"
+        },
+        {
+          "letter": "C",
+          "text": "Selecting the company\u2019s auditor of record at the SEC"
+        },
+        {
+          "letter": "D",
+          "text": "Setting the Federal Funds rate"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AS 2101 planning factors include public information and knowledge from acceptance/retention."
+    },
+    {
+      "id": 34,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "The lead auditor must determine whether to refer to the other auditor in:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The client\u2019s earnings press release"
+        },
+        {
+          "letter": "B",
+          "text": "The lead auditor\u2019s report"
+        },
+        {
+          "letter": "C",
+          "text": "The Form 4 filings of insiders"
+        },
+        {
+          "letter": "D",
+          "text": "The company\u2019s code of conduct"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Determine whether to refer to the other auditor in the lead auditor\u2019s report."
+    },
+    {
+      "id": 35,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "Directing team members to bring significant issues to the attention of supervisors is a responsibility of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The client\u2019s general counsel only"
+        },
+        {
+          "letter": "B",
+          "text": "Supervisors (the engagement partner and those to whom supervisory responsibilities have been delegated)"
+        },
+        {
+          "letter": "C",
+          "text": "The PCAOB only after an inspection"
+        },
+        {
+          "letter": "D",
+          "text": "The specialist\u2019s software vendor"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AS 1201 supervisors inform the team of responsibilities, direct them to escalate significant issues, and review their work."
+    },
+    {
+      "id": 36,
+      "module": "Module 5: Audit Planning \u2014 The Engagement",
+      "prompt": "Which standard is the Module 5 home for supervision of the audit engagement?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "AS 2201"
+        },
+        {
+          "letter": "B",
+          "text": "AS 1201"
+        },
+        {
+          "letter": "C",
+          "text": "AS 3101"
+        },
+        {
+          "letter": "D",
+          "text": "ISA 570"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Supervision is AS 1201. Planning is AS 2101. Audit-committee communications are AS 1301."
+    },
+    {
+      "id": 37,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "The opening materiality slide asks, for planning: \u201cHow much misstatement are you willing not to know about?\u201d That question is paired with effort, which asks:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "How large is the audit committee?"
+        },
+        {
+          "letter": "B",
+          "text": "How much audit evidence is enough?"
+        },
+        {
+          "letter": "C",
+          "text": "How many comment letters did the SEC send?"
+        },
+        {
+          "letter": "D",
+          "text": "How high is the stock price?"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Planning \u2194 how much misstatement you are willing not to know about. Effort \u2194 how much evidence is enough. Results evaluation, interpretation/value, and quality/legal-liability questions sit alongside. Audit risk and materiality are central to auditing."
+    },
+    {
+      "id": 38,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "The concept of materiality recognizes that some matters, facts, or misstatements of facts, individually or in the aggregate:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Must always be booked if they exceed $1"
+        },
+        {
+          "letter": "B",
+          "text": "Are important to decision makers while others are not"
+        },
+        {
+          "letter": "C",
+          "text": "Are relevant only to the tax provision"
+        },
+        {
+          "letter": "D",
+          "text": "Cannot affect an unqualified opinion"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Some matters, individually or in the aggregate, are important to decision makers; others are not."
+    },
+    {
+      "id": 39,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "The U.S. Supreme Court formulation quoted on the slide (and in AS 2105) is that a fact is material if there is a substantial likelihood that the reasonable investor would have viewed it as having significantly altered:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The company\u2019s credit rating only"
+        },
+        {
+          "letter": "B",
+          "text": "The \u201ctotal mix\u201d of information made available"
+        },
+        {
+          "letter": "C",
+          "text": "The auditor\u2019s hourly rate"
+        },
+        {
+          "letter": "D",
+          "text": "Management\u2019s bonus pool exclusively"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Substantial likelihood the fact would have been viewed by the reasonable investor as significantly altering the total mix of information made available. Determinations require delicate assessments of the inferences a reasonable shareholder would draw."
+    },
+    {
+      "id": 40,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "FASB Concepts Statement No. 8, as quoted, says an omission or misstatement is material if, in light of surrounding circumstances, the magnitude is such that it is probable that the judgment of a reasonable person would have been:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Unaffected if disclosed in a footnote only"
+        },
+        {
+          "letter": "B",
+          "text": "Changed by the inclusion or correction of the item"
+        },
+        {
+          "letter": "C",
+          "text": "Relevant solely to creditors, never investors"
+        },
+        {
+          "letter": "D",
+          "text": "Immaterial whenever it is less than 10% of assets"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Probable that the judgment of a reasonable person would have been changed by including or correcting the item."
+    },
+    {
+      "id": 41,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "Because of the nature of audit evidence and the characteristics of fraud, the auditor is able to obtain (AS 1001):",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Absolute assurance that all fraud is detected"
+        },
+        {
+          "letter": "B",
+          "text": "Reasonable, but not absolute, assurance that material misstatements are detected"
+        },
+        {
+          "letter": "C",
+          "text": "No assurance about fraud"
+        },
+        {
+          "letter": "D",
+          "text": "A guarantee of GAAP compliance"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Reasonable, not absolute, assurance that material misstatements are detected."
+    },
+    {
+      "id": 42,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "Audit risk is the risk that the auditor may unknowingly fail to appropriately modify his or her opinion on financial statements that are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Prepared on a tax basis"
+        },
+        {
+          "letter": "B",
+          "text": "Materially misstated"
+        },
+        {
+          "letter": "C",
+          "text": "Audited by a predecessor"
+        },
+        {
+          "letter": "D",
+          "text": "Filed late on EDGAR"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Audit risk is defined in terms of material misstatement. Therefore the auditor must determine materiality before she can assess risk."
+    },
+    {
+      "id": 43,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "A key takeaway on the materiality/audit-risk slide is that audit risk is defined in terms of materiality; therefore the auditor must determine materiality:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only after the opinion is signed"
+        },
+        {
+          "letter": "B",
+          "text": "Before she can assess risk"
+        },
+        {
+          "letter": "C",
+          "text": "Only if fraud is suspected"
+        },
+        {
+          "letter": "D",
+          "text": "Using the Supreme Court\u2019s numerical threshold of 5%"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Determine materiality first; then assess risk. The Supreme Court test is qualitative (\u201ctotal mix\u201d), not a bright-line percentage."
+    },
+    {
+      "id": 44,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "Materiality is based on the auditor\u2019s assessment of the needs of users. Which users?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Each individual known shareholder, whose needs are modeled separately"
+        },
+        {
+          "letter": "B",
+          "text": "Users as a group; the auditor does not consider the needs of individual users because those needs vary widely"
+        },
+        {
+          "letter": "C",
+          "text": "Only the CEO and CFO"
+        },
+        {
+          "letter": "D",
+          "text": "Only bank lenders with covenants"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Do not consider individual users\u2019 needs. Those needs vary widely."
+    },
+    {
+      "id": 45,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "According to ISA 320 as presented, reasonable shareholders have a reasonable knowledge of business and economic activities and accounting and a willingness to study the financial statements with:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "No effort, because audits replace reading"
+        },
+        {
+          "letter": "B",
+          "text": "Reasonable diligence"
+        },
+        {
+          "letter": "C",
+          "text": "A law degree"
+        },
+        {
+          "letter": "D",
+          "text": "Access to the general ledger"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Reasonable knowledge plus willingness to study the information with reasonable diligence."
+    },
+    {
+      "id": 46,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "ISA 320\u2019s reasonable shareholders understand that materiality is applied when financial statements are prepared, presented, and audited; recognize that uncertainties are inherent in estimates, judgment, and beliefs about future events; and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Never make decisions from the statements"
+        },
+        {
+          "letter": "B",
+          "text": "Make economic decisions based on the financial statements"
+        },
+        {
+          "letter": "C",
+          "text": "Use only non-GAAP metrics"
+        },
+        {
+          "letter": "D",
+          "text": "Ignore footnotes"
+        }
+      ],
+      "answer": "B",
+      "explanation": "They make economic decisions based on the financial statements."
+    },
+    {
+      "id": 47,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "For planning purposes, materiality is determined first for:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Each invoice in accounts payable"
+        },
+        {
+          "letter": "B",
+          "text": "The financial statements taken as a whole, expressed as a specific amount"
+        },
+        {
+          "letter": "C",
+          "text": "The subsequent-events period only"
+        },
+        {
+          "letter": "D",
+          "text": "The auditor\u2019s malpractice insurance deductible"
+        }
+      ],
+      "answer": "B",
+      "explanation": "First assess materiality for the FS as a whole, as a specific amount. That amount is not a threshold below which misstatements are automatically immaterial."
+    },
+    {
+      "id": 48,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "Planning materiality for the financial statements as a whole is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A threshold below which all misstatements are considered immaterial"
+        },
+        {
+          "letter": "B",
+          "text": "Not a threshold below which misstatements are considered immaterial"
+        },
+        {
+          "letter": "C",
+          "text": "Always $1 million"
+        },
+        {
+          "letter": "D",
+          "text": "Set by the audit committee, not the auditor"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The slide is explicit: this level is not a threshold below which misstatements are considered immaterial. (Hence the \u201cIs $1 million material?\u201d discussion prompt.)"
+    },
+    {
+      "id": 49,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "Materiality is determined in a quantitative and qualitative manner and will generally be:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A round number unrelated to the financial statements"
+        },
+        {
+          "letter": "B",
+          "text": "A percentage of a chosen benchmark"
+        },
+        {
+          "letter": "C",
+          "text": "The same dollar amount for every public company"
+        },
+        {
+          "letter": "D",
+          "text": "Zero, because of SAB 99"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Quantitative and qualitative. Generally a % of a benchmark. As the chosen benchmark grows, so does the assessment of materiality."
+    },
+    {
+      "id": 50,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "The auditor chooses a financial statement benchmark against which to assess materiality by considering the needs of users \u2014 specifically, which parts of the financial statements:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Are easiest to audit"
+        },
+        {
+          "letter": "B",
+          "text": "Impact user decisions or judgments the most"
+        },
+        {
+          "letter": "C",
+          "text": "Have the fewest estimates"
+        },
+        {
+          "letter": "D",
+          "text": "Are unaudited supplementary data"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Choose the benchmark by considering users: what parts of the FS impact their decisions most?"
+    },
+    {
+      "id": 51,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "For most profit-oriented companies, the slides say to base materiality on a measure of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Headcount"
+        },
+        {
+          "letter": "B",
+          "text": "Earnings (profit)"
+        },
+        {
+          "letter": "C",
+          "text": "Square footage of facilities"
+        },
+        {
+          "letter": "D",
+          "text": "The number of 8-Ks filed"
+        }
+      ],
+      "answer": "B",
+      "explanation": "For most profit-oriented companies, base materiality on a measure of profit/earnings, because that is what users typically focus on."
+    },
+    {
+      "id": 52,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "Why not always base materiality on earnings?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Because PCAOB rules forbid earnings-based materiality"
+        },
+        {
+          "letter": "B",
+          "text": "Earnings may not be useful (volatile, losses, etc.), or users may focus on other FS components"
+        },
+        {
+          "letter": "C",
+          "text": "Because only assets are allowed as a base"
+        },
+        {
+          "letter": "D",
+          "text": "Because ISA 320 requires headcount"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Use other bases when earnings are volatile, the company suffers losses, or investors focus on other components."
+    },
+    {
+      "id": 53,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "ISA 320 factors that may affect identification of an appropriate benchmark include the elements of the financial statements, items on which users\u2019 attention tends to be focused, the nature of the entity and where it is in its life cycle, the industry and economic environment, ownership and financing, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The partner\u2019s favorite ratio"
+        },
+        {
+          "letter": "B",
+          "text": "The relative volatility of the benchmark"
+        },
+        {
+          "letter": "C",
+          "text": "The stock ticker symbol"
+        },
+        {
+          "letter": "D",
+          "text": "The number of board meetings"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Plus: choosing the right basis is a matter of auditor judgment."
+    },
+    {
+      "id": 54,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "The first level of materiality is materiality for the financial statements as a whole: the maximum amount of misstatement that can exist and the FS still be considered fairly stated, determined by applying an appropriate % to the chosen basis. A problem for the auditor is that she is not likely to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Issue any opinion"
+        },
+        {
+          "letter": "B",
+          "text": "Find all misstatements that actually exist"
+        },
+        {
+          "letter": "C",
+          "text": "Meet with the audit committee"
+        },
+        {
+          "letter": "D",
+          "text": "Read the financial statements"
+        }
+      ],
+      "answer": "B",
+      "explanation": "She is not likely to find all misstatements that actually exist \u2014 which is why tolerable misstatement and an accumulation threshold sit below overall materiality."
+    },
+    {
+      "id": 55,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "Tolerable misstatement is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The same as a material weakness"
+        },
+        {
+          "letter": "B",
+          "text": "The maximum amount of misstatement in a specific balance or class of transactions the auditor is willing to accept, allowing for the aggregate of uncorrected and undetected misstatements"
+        },
+        {
+          "letter": "C",
+          "text": "The amount users will never notice, by statute"
+        },
+        {
+          "letter": "D",
+          "text": "Always 50% of net income"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Second level: tolerable misstatement at the balance/class level, allowing for uncorrected + undetected misstatements in the aggregate."
+    },
+    {
+      "id": 56,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "Under ASB and IAASB standards, \u201cperformance materiality\u201d is equivalent to the PCAOB\u2019s notion of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A material weakness"
+        },
+        {
+          "letter": "B",
+          "text": "\u201cTolerable\u201d misstatement"
+        },
+        {
+          "letter": "C",
+          "text": "Engagement risk"
+        },
+        {
+          "letter": "D",
+          "text": "The clearly trivial threshold only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "ASB 320 / ISA 320 \u201cperformance materiality\u201d \u2248 PCAOB \u201ctolerable\u201d misstatement. Under ASB/IAASB, \u201ctolerable misstatement\u201d is also used when planning specific procedures (e.g., sample size for a test of details)."
+    },
+    {
+      "id": 57,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "The third level is the threshold for accumulating misstatements: a threshold below which a misstatement would be:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Material by definition"
+        },
+        {
+          "letter": "B",
+          "text": "Clearly trivial; such misstatements are ignored for later individual and aggregate evaluation"
+        },
+        {
+          "letter": "C",
+          "text": "Automatically a fraud risk"
+        },
+        {
+          "letter": "D",
+          "text": "Reported to the SEC within four days"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Below the accumulation/clearly-trivial threshold, misstatements are ignored. Above it, they are evaluated individually and aggregated."
+    },
+    {
+      "id": 58,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "Overall FS materiality could be set at lower levels for certain accounts and disclosures when:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The partner wants a round number"
+        },
+        {
+          "letter": "B",
+          "text": "Circumstances indicate that user decisions could be affected by smaller amounts of misstatement"
+        },
+        {
+          "letter": "C",
+          "text": "The client requests a smaller number"
+        },
+        {
+          "letter": "D",
+          "text": "The prior year was a review, not an audit"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Rules of thumb on the slide include lowering materiality for particular accounts/disclosures when users could be affected by smaller misstatements."
+    },
+    {
+      "id": 59,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "In order, the three levels of materiality assessments on the slides are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "SAB 99, SOX 404, and AS 5"
+        },
+        {
+          "letter": "B",
+          "text": "FS as a whole; tolerable misstatement; threshold for accumulating (clearly trivial) misstatements"
+        },
+        {
+          "letter": "C",
+          "text": "IR, CR, and DR"
+        },
+        {
+          "letter": "D",
+          "text": "Design, operating, and entity-level"
+        }
+      ],
+      "answer": "B",
+      "explanation": "1st overall FS materiality, 2nd tolerable misstatement, 3rd accumulating/clearly trivial threshold."
+    },
+    {
+      "id": 60,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "\u201cDelicate assessments of the inferences a reasonable shareholder would draw\u201d is language from:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The Foreign Corrupt Practices Act"
+        },
+        {
+          "letter": "B",
+          "text": "The U.S. Supreme Court, as quoted in connection with AS 2105"
+        },
+        {
+          "letter": "C",
+          "text": "COSO\u2019s 2013 Framework appendix only"
+        },
+        {
+          "letter": "D",
+          "text": "The Turnbull Report"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The Supreme Court language is on the materiality slides and is tied to AS 2105."
+    },
+    {
+      "id": 61,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "Which statement about the $1 million discussion prompt is most faithful to the slides?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "$1 million is always material for every issuer"
+        },
+        {
+          "letter": "B",
+          "text": "Whether $1 million is material depends on surrounding circumstances and users; a raw dollar amount is not enough"
+        },
+        {
+          "letter": "C",
+          "text": "$1 million is the PCAOB\u2019s bright-line rule"
+        },
+        {
+          "letter": "D",
+          "text": "$1 million is clearly trivial for all public companies"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The slide asks \u201cIs $1 million material? Why or why not?\u201d precisely because overall planning materiality is a specific amount but is not a mechanical immateriality threshold, and qualitative context matters."
+    },
+    {
+      "id": 62,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "As the chosen benchmark grows, the assessment of materiality:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Falls to zero"
+        },
+        {
+          "letter": "B",
+          "text": "Grows as well"
+        },
+        {
+          "letter": "C",
+          "text": "Is replaced by tolerable misstatement"
+        },
+        {
+          "letter": "D",
+          "text": "Must switch from earnings to assets"
+        }
+      ],
+      "answer": "B",
+      "explanation": "As the chosen benchmark grows, so does the assessment of materiality."
+    },
+    {
+      "id": 63,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "Results evaluation on the opening slide asks:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "How many confirmations to send"
+        },
+        {
+          "letter": "B",
+          "text": "How much misstatement can you waive and still meet GAAP?"
+        },
+        {
+          "letter": "C",
+          "text": "How to compute planned DR"
+        },
+        {
+          "letter": "D",
+          "text": "Whether COSO is a recognized framework"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The five framing questions: planning (willing not to know), effort (enough evidence), results evaluation (waive and still meet GAAP), interpretation/value (how much users discount audited information), quality/legal (enough auditing to avoid legal liability)."
+    },
+    {
+      "id": 64,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "Quality evaluation on that same slide is framed as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Whether the 10-K used XBRL tags"
+        },
+        {
+          "letter": "B",
+          "text": "Have you done enough auditing to avoid legal liability?"
+        },
+        {
+          "letter": "C",
+          "text": "Whether earnings beat the Street"
+        },
+        {
+          "letter": "D",
+          "text": "Whether ICFR is a process"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Quality evaluation \u2194 enough auditing to avoid legal liability."
+    },
+    {
+      "id": 65,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "Interpretation (or value) asks how much audited (GAAP-based) information is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Ignored by the PCAOB"
+        },
+        {
+          "letter": "B",
+          "text": "Discounted by the user/decision maker"
+        },
+        {
+          "letter": "C",
+          "text": "Replaced by tax-basis numbers"
+        },
+        {
+          "letter": "D",
+          "text": "Converted to IFRS automatically"
+        }
+      ],
+      "answer": "B",
+      "explanation": "How much is audited GAAP information discounted by the user/decision maker?"
+    },
+    {
+      "id": 66,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "Choosing the right basis for determining materiality is based on:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A statutory table in the Securities Act"
+        },
+        {
+          "letter": "B",
+          "text": "Auditor judgment"
+        },
+        {
+          "letter": "C",
+          "text": "The client\u2019s requested materiality"
+        },
+        {
+          "letter": "D",
+          "text": "The prior auditor\u2019s exact dollar amount, reused forever"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The slide closes: choosing the right basis is based on auditor judgment, informed by ISA 320-type factors."
+    },
+    {
+      "id": 67,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "Under ASB/IAASB terminology as contrasted on the slide, \u201ctolerable misstatement\u201d is a level of materiality used to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Measure a material weakness"
+        },
+        {
+          "letter": "B",
+          "text": "Plan specific auditing procedures (e.g., determining a sample size for a test of details)"
+        },
+        {
+          "letter": "C",
+          "text": "Set the SEC\u2019s enforcement threshold"
+        },
+        {
+          "letter": "D",
+          "text": "Replace overall FS materiality"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Careful with vocabulary: PCAOB \u201ctolerable\u201d \u2248 ASB/IAASB \u201cperformance materiality.\u201d ASB/IAASB \u201ctolerable\u201d is used in planning specific procedures such as TOD sample size."
+    },
+    {
+      "id": 68,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "Misstatements below the accumulating threshold:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Must still be booked"
+        },
+        {
+          "letter": "B",
+          "text": "Are ignored"
+        },
+        {
+          "letter": "C",
+          "text": "Are always fraud"
+        },
+        {
+          "letter": "D",
+          "text": "Must be communicated as a material weakness"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Clearly trivial misstatements are ignored. Above the threshold, evaluate individually and in the aggregate."
+    },
+    {
+      "id": 69,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "The auditor applies an appropriate percentage to the chosen basis to compute:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Detection risk"
+        },
+        {
+          "letter": "B",
+          "text": "Materiality for the financial statements as a whole"
+        },
+        {
+          "letter": "C",
+          "text": "The SOX 302 certification date"
+        },
+        {
+          "letter": "D",
+          "text": "Control risk"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Overall FS materiality = appropriate % \u00d7 chosen basis = maximum misstatement that can exist with the FS still fairly stated."
+    },
+    {
+      "id": 70,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "Which sequence matches the course\u2019s logic connecting materiality to risk?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Assess ARM first, then ignore materiality"
+        },
+        {
+          "letter": "B",
+          "text": "Determine materiality, because audit risk is defined in terms of material misstatement, then assess risk"
+        },
+        {
+          "letter": "C",
+          "text": "Set DR first, then pick a benchmark at random"
+        },
+        {
+          "letter": "D",
+          "text": "Wait until the opinion date to think about users"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AR is the risk of failing to modify the opinion on materially misstated FS. Materiality comes first."
+    },
+    {
+      "id": 71,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "FASB CON 8\u2019s \u201cprobable that the judgment of a reasonable person would have been changed\u201d is presented as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A sampling formula"
+        },
+        {
+          "letter": "B",
+          "text": "A conceptual definition of materiality, alongside the Supreme Court\u2019s \u201ctotal mix\u201d language"
+        },
+        {
+          "letter": "C",
+          "text": "The definition of control risk"
+        },
+        {
+          "letter": "D",
+          "text": "A substitute for AS 2201"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Two definitions sit on the concept slide: FASB CON 8 (magnitude / reasonable person) and the Supreme Court (total mix / reasonable investor). The slide even asks what might be missing from those explanations."
+    },
+    {
+      "id": 72,
+      "module": "Module 6: Audit Planning \u2014 Materiality",
+      "prompt": "The Supreme Court notes that determinations of materiality require delicate assessments of inferences a reasonable shareholder would draw from a given set of facts and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The auditor\u2019s fee realization"
+        },
+        {
+          "letter": "B",
+          "text": "The significance of those inferences to him"
+        },
+        {
+          "letter": "C",
+          "text": "Whether the misstatement is in an unaudited exhibit"
+        },
+        {
+          "letter": "D",
+          "text": "The number of other auditors"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Quoted on multiple Module 6 slides: inferences a reasonable shareholder would draw, and the significance of those inferences to him."
+    },
+    {
+      "id": 73,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "A risk-based audit approach is designed to efficiently and effectively focus the nature, timing, and extent of procedures on areas with the most potential for causing:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Increases in audit fees"
+        },
+        {
+          "letter": "B",
+          "text": "Material misstatement(s) in the financial report"
+        },
+        {
+          "letter": "C",
+          "text": "PCAOB inspections"
+        },
+        {
+          "letter": "D",
+          "text": "Changes in the board"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Figure out where material misstatements are most likely and focus resources there to achieve a certain level of audit risk. Apply the ARM."
+    },
+    {
+      "id": 74,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "On the slides, Audit Risk = 1 \u2212 Assurance, and Acceptable Audit Risk = 1 \u2212 Reasonable assurance. Audit Risk also equals:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Inherent Risk \u2212 Control Risk"
+        },
+        {
+          "letter": "B",
+          "text": "Risk of Material Misstatement \u00d7 Detection Risk"
+        },
+        {
+          "letter": "C",
+          "text": "Materiality \u00d7 Sample size"
+        },
+        {
+          "letter": "D",
+          "text": "Engagement risk \u00f7 fees"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AR = RMM \u00d7 DR, and RMM = IR \u00d7 CR, so AR = IR \u00d7 CR \u00d7 DR."
+    },
+    {
+      "id": 75,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "The algebraic audit risk model on the slides is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "AR = IR + CR + DR"
+        },
+        {
+          "letter": "B",
+          "text": "AR = IR \u00d7 CR \u00d7 DR"
+        },
+        {
+          "letter": "C",
+          "text": "AR = DR / (IR \u00d7 CR)"
+        },
+        {
+          "letter": "D",
+          "text": "AR = materiality / evidence"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AR = IR \u00d7 CR \u00d7 DR. Planned DR is the residual: Planned DR = AR / (IR \u00d7 CR)."
+    },
+    {
+      "id": 76,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Who chooses (sets) the level of inherent risk?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The auditor, by picking sample size"
+        },
+        {
+          "letter": "B",
+          "text": "Management chooses lines of business and transactions that impact IR; other factors may be out of management\u2019s control. The auditor only assesses IR and does not control/choose it"
+        },
+        {
+          "letter": "C",
+          "text": "The PCAOB, in every inspection report"
+        },
+        {
+          "letter": "D",
+          "text": "The audit committee, by setting materiality"
+        }
+      ],
+      "answer": "B",
+      "explanation": "IR is the likelihood of a material misstatement without considering internal controls. Auditor assesses; does not choose."
+    },
+    {
+      "id": 77,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Inherent risk is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The risk the auditor\u2019s procedures fail"
+        },
+        {
+          "letter": "B",
+          "text": "The likelihood of a material misstatement without considering the effects of internal controls"
+        },
+        {
+          "letter": "C",
+          "text": "The risk controls fail to operate"
+        },
+        {
+          "letter": "D",
+          "text": "Acceptable audit risk"
+        }
+      ],
+      "answer": "B",
+      "explanation": "IR ignores controls by definition."
+    },
+    {
+      "id": 78,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Control risk is the likelihood that a material misstatement that would otherwise occur will not be:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Disclosed in MD&A"
+        },
+        {
+          "letter": "B",
+          "text": "Detected, prevented, or corrected by the internal control system"
+        },
+        {
+          "letter": "C",
+          "text": "Included in the audit plan"
+        },
+        {
+          "letter": "D",
+          "text": "Material under CON 8"
+        }
+      ],
+      "answer": "B",
+      "explanation": "CR is about the IC system\u2019s failure to prevent/detect/correct."
+    },
+    {
+      "id": 79,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Who chooses the level of control risk?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The auditor, by calculating planned DR"
+        },
+        {
+          "letter": "B",
+          "text": "Management chooses the quality of the IC system (investment in ICFR and the control environment). The auditor only assesses CR and does not control/choose it"
+        },
+        {
+          "letter": "C",
+          "text": "The courts, via Ultramares"
+        },
+        {
+          "letter": "D",
+          "text": "Users of the financial statements"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Management chooses IC quality; the auditor assesses CR."
+    },
+    {
+      "id": 80,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Detection risk is the likelihood that the audit will not detect material misstatements that occur and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Are still in the unaudited trial balance before any work"
+        },
+        {
+          "letter": "B",
+          "text": "Are not detected, prevented, or corrected by the internal control system"
+        },
+        {
+          "letter": "C",
+          "text": "Relate only to illegal acts"
+        },
+        {
+          "letter": "D",
+          "text": "Are clearly trivial"
+        }
+      ],
+      "answer": "B",
+      "explanation": "DR is residual after IR and CR: misstatements that occur and get through controls, then also get through the audit."
+    },
+    {
+      "id": 81,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Who chooses the level of detection risk?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Management, by investing in ICFR"
+        },
+        {
+          "letter": "B",
+          "text": "The auditor uses the ARM to calculate a planned level of detection risk"
+        },
+        {
+          "letter": "C",
+          "text": "The SEC, in Regulation S-K"
+        },
+        {
+          "letter": "D",
+          "text": "The specialist"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Planned DR = Audit Risk / (IR \u00d7 CR). That planned DR drives how persuasive substantive evidence needs to be (nature, timing, and extent)."
+    },
+    {
+      "id": 82,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "The formula on the detection-risk slide is Planned Detection Risk =",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "IR \u00d7 CR \u00d7 AR"
+        },
+        {
+          "letter": "B",
+          "text": "Audit Risk / (Inherent Risk \u00d7 Control Risk)"
+        },
+        {
+          "letter": "C",
+          "text": "Materiality \u00d7 RMM"
+        },
+        {
+          "letter": "D",
+          "text": "1 \u2212 Control Risk"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Planned DR = AR / (IR \u00d7 CR) = AR / RMM."
+    },
+    {
+      "id": 83,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "The calculated planned DR is used to determine:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Whether the firm is independent"
+        },
+        {
+          "letter": "B",
+          "text": "How persuasive the substantive evidence needs to be \u2014 the nature, timing, and extent of substantive procedures"
+        },
+        {
+          "letter": "C",
+          "text": "Management\u2019s ICFR framework"
+        },
+        {
+          "letter": "D",
+          "text": "The Supreme Court\u2019s total-mix test"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Planned DR \u2192 persuasiveness of substantive evidence (NTE)."
+    },
+    {
+      "id": 84,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Achieved DR (and consequently achieved audit risk) depends on:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The engagement letter date only"
+        },
+        {
+          "letter": "B",
+          "text": "The procedures actually chosen and the quality of their implementation"
+        },
+        {
+          "letter": "C",
+          "text": "Whether COSO or Turnbull is used"
+        },
+        {
+          "letter": "D",
+          "text": "The number of other auditors"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Planned DR is a target. Achieved DR depends on what you actually did and how well you did it."
+    },
+    {
+      "id": 85,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "When planned DR is higher, the auditor is willing to accept a higher probability of missing a misstatement that got through controls, and therefore can accept evidence that is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "More persuasive"
+        },
+        {
+          "letter": "B",
+          "text": "Less persuasive"
+        },
+        {
+          "letter": "C",
+          "text": "Limited to inquiry"
+        },
+        {
+          "letter": "D",
+          "text": "Obtained only after the report date"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Higher planned DR \u2192 less persuasive evidence is acceptable."
+    },
+    {
+      "id": 86,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "When planned DR is lower, the auditor must obtain evidence that is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Less persuasive"
+        },
+        {
+          "letter": "B",
+          "text": "More persuasive"
+        },
+        {
+          "letter": "C",
+          "text": "Replaced by management representations"
+        },
+        {
+          "letter": "D",
+          "text": "Limited to analytics"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Lower planned DR \u2192 more persuasive evidence."
+    },
+    {
+      "id": 87,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Each ARM component is defined in terms of materiality. Holding all else equal, increasing materiality decreases RMM, which:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Decreases planned DR and requires more persuasive evidence"
+        },
+        {
+          "letter": "B",
+          "text": "Increases planned DR and allows less persuasive evidence"
+        },
+        {
+          "letter": "C",
+          "text": "Sets CR to zero"
+        },
+        {
+          "letter": "D",
+          "text": "Eliminates inherent risk"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Increasing materiality >>> decreasing RMM >>> increasing Planned DR >>> less persuasive evidence. Decreasing materiality does the opposite."
+    },
+    {
+      "id": 88,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Decreasing materiality, holding all else equal, leads to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Increasing RMM, decreasing planned DR, more persuasive evidence"
+        },
+        {
+          "letter": "B",
+          "text": "n = 0 always"
+        },
+        {
+          "letter": "C",
+          "text": "CR chosen by the auditor"
+        },
+        {
+          "letter": "D",
+          "text": "Absolute assurance"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Decreasing materiality >>> increasing RMM >>> decreasing Planned DR >>> more persuasive evidence."
+    },
+    {
+      "id": 89,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Joe will buy a bag of 1,000 pearls if no more than 30 are defective. With AuR = 5% and IR \u00d7 CR = 100%, planned DR equals:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "30%"
+        },
+        {
+          "letter": "B",
+          "text": "5%"
+        },
+        {
+          "letter": "C",
+          "text": "95%"
+        },
+        {
+          "letter": "D",
+          "text": "100%"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Planned DR = AuR / (IR \u00d7 CR) = 5% / 100% = 5%. N = 1000; \u201cmateriality\u201d is 30 defectives."
+    },
+    {
+      "id": 90,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "If Joe draws 1 pearl and 30 defectives exist in 1,000, achieved DR = P(no defective drawn) =",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "3%"
+        },
+        {
+          "letter": "B",
+          "text": "97%"
+        },
+        {
+          "letter": "C",
+          "text": "5%"
+        },
+        {
+          "letter": "D",
+          "text": "30%"
+        }
+      ],
+      "answer": "B",
+      "explanation": "1 \u2212 (30/1000) = 970/1000 = 97%."
+    },
+    {
+      "id": 91,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Drawing 2 pearls (without replacement, 30 defectives in 1,000) gives achieved DR of about:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "5%"
+        },
+        {
+          "letter": "B",
+          "text": "94.09%"
+        },
+        {
+          "letter": "C",
+          "text": "50%"
+        },
+        {
+          "letter": "D",
+          "text": "1%"
+        }
+      ],
+      "answer": "B",
+      "explanation": "(970/1000) \u00d7 (969/999) \u2248 94.09%."
+    },
+    {
+      "id": 92,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Drawing 3 pearls in Joe\u2019s problem yields achieved DR of about:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "5%"
+        },
+        {
+          "letter": "B",
+          "text": "91.27%"
+        },
+        {
+          "letter": "C",
+          "text": "97%"
+        },
+        {
+          "letter": "D",
+          "text": "30%"
+        }
+      ],
+      "answer": "B",
+      "explanation": "\u2248 0.97\u00b3 = 91.27% on the slide\u2019s approximation."
+    },
+    {
+      "id": 93,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "To drive achieved DR down to about 4.9% (near the 5% planned DR) when materiality is 30 defectives in 1,000, Joe needs about how many pearls?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "3"
+        },
+        {
+          "letter": "B",
+          "text": "99"
+        },
+        {
+          "letter": "C",
+          "text": "1"
+        },
+        {
+          "letter": "D",
+          "text": "1000"
+        }
+      ],
+      "answer": "B",
+      "explanation": "99 pearls: achieved DR \u2248 4.9%."
+    },
+    {
+      "id": 94,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "If materiality increases to 60 defectives in 1,000, drawing 1 pearl gives achieved DR of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "97%"
+        },
+        {
+          "letter": "B",
+          "text": "94%"
+        },
+        {
+          "letter": "C",
+          "text": "5%"
+        },
+        {
+          "letter": "D",
+          "text": "60%"
+        }
+      ],
+      "answer": "B",
+      "explanation": "1 \u2212 (60/1000) = 94%. Larger materiality \u2192 a single observation is already a better (lower) DR."
+    },
+    {
+      "id": 95,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "With materiality of 60 defectives, about how many pearls get achieved DR to ~4.8%?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "99"
+        },
+        {
+          "letter": "B",
+          "text": "50"
+        },
+        {
+          "letter": "C",
+          "text": "199"
+        },
+        {
+          "letter": "D",
+          "text": "3"
+        }
+      ],
+      "answer": "B",
+      "explanation": "50 pearls \u2248 4.8%. Increasing materiality reduces required sample size."
+    },
+    {
+      "id": 96,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "If materiality decreases to 15 defectives, 1 pearl gives achieved DR of 98.5%, and getting to ~4.9% takes about:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "50 pearls"
+        },
+        {
+          "letter": "B",
+          "text": "199 pearls"
+        },
+        {
+          "letter": "C",
+          "text": "24 pearls"
+        },
+        {
+          "letter": "D",
+          "text": "0 pearls"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Tighter materiality \u2192 much more testing (199 vs 99 vs 50)."
+    },
+    {
+      "id": 97,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "In the pearl example, when RMM = 1, planned DR = .05 and n = 99. When RMM = .5, planned DR = .10 and n =",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "99"
+        },
+        {
+          "letter": "B",
+          "text": "77"
+        },
+        {
+          "letter": "C",
+          "text": "24"
+        },
+        {
+          "letter": "D",
+          "text": "0"
+        }
+      ],
+      "answer": "B",
+      "explanation": "RMM = .5 \u2192 Planned DR = .05/.5 = .10 \u2192 n = 77."
+    },
+    {
+      "id": 98,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "When RMM = .1, planned DR = .50 and n =",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "99"
+        },
+        {
+          "letter": "B",
+          "text": "24"
+        },
+        {
+          "letter": "C",
+          "text": "77"
+        },
+        {
+          "letter": "D",
+          "text": "0"
+        }
+      ],
+      "answer": "B",
+      "explanation": "RMM = .1 \u2192 DR = .05/.1 = .50 \u2192 n = 24."
+    },
+    {
+      "id": 99,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "When RMM = .05, planned DR = 1.0 and n =",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "99"
+        },
+        {
+          "letter": "B",
+          "text": "0"
+        },
+        {
+          "letter": "C",
+          "text": "24"
+        },
+        {
+          "letter": "D",
+          "text": "199"
+        }
+      ],
+      "answer": "B",
+      "explanation": "If RMM already equals acceptable AR, planned DR = 1 and n = 0 in the illustration \u2014 no substantive sample needed under the model\u2019s assumptions."
+    },
+    {
+      "id": 100,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "The pearl problem is meant to show that sample sizes fall as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Materiality falls and RMM rises"
+        },
+        {
+          "letter": "B",
+          "text": "RMM decreases (or materiality increases)"
+        },
+        {
+          "letter": "C",
+          "text": "The castle moat gets wider"
+        },
+        {
+          "letter": "D",
+          "text": "The partner reviews more files"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Lower RMM or higher materiality \u2192 higher planned DR \u2192 smaller n."
+    },
+    {
+      "id": 101,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Identifying and assessing RMM includes performing risk assessment procedures and obtaining an understanding of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only the specialist\u2019s resume"
+        },
+        {
+          "letter": "B",
+          "text": "The company and its environment"
+        },
+        {
+          "letter": "C",
+          "text": "The PCAOB\u2019s internal budget"
+        },
+        {
+          "letter": "D",
+          "text": "The auditor\u2019s malpractice insurer"
+        }
+      ],
+      "answer": "B",
+      "explanation": "First box: obtain an understanding of the company and its environment."
+    },
+    {
+      "id": 102,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Understanding the company and its environment includes relevant industry, regulatory, and other external factors; the nature of the company; the company\u2019s accounting principles; objectives and strategies; and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The partner\u2019s hobbies"
+        },
+        {
+          "letter": "B",
+          "text": "The company\u2019s measurement and analysis of its financial performance"
+        },
+        {
+          "letter": "C",
+          "text": "The SEC\u2019s EDGAR downtime calendar"
+        },
+        {
+          "letter": "D",
+          "text": "The number of referred-to auditors worldwide"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Also: structure/personnel, capital sources, investments, size/complexity, sources of earnings, key suppliers/customers; significant accounting changes, competencies, judgment, controversies, odd transactions, new laws; measures used in contracts/compensation, by outsiders, and by insiders."
+    },
+    {
+      "id": 103,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "The RMM identification slide also lists obtaining an understanding of ICFR, considering information from client acceptance and retention, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Skipping analytical procedures in planning"
+        },
+        {
+          "letter": "B",
+          "text": "Performing analytical procedures"
+        },
+        {
+          "letter": "C",
+          "text": "Setting sample size before understanding the company"
+        },
+        {
+          "letter": "D",
+          "text": "Issuing the opinion"
+        }
+      ],
+      "answer": "B",
+      "explanation": "RAP, company/environment, ICFR, acceptance/retention information, analytical procedures. Later: team discussion regarding RMM and inquiry of the audit committee."
+    },
+    {
+      "id": 104,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Analytical procedures are an evaluation of financial information made by a study of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only the legal docket"
+        },
+        {
+          "letter": "B",
+          "text": "Plausible relationships among both financial and nonfinancial data"
+        },
+        {
+          "letter": "C",
+          "text": "The auditor\u2019s time budget only"
+        },
+        {
+          "letter": "D",
+          "text": "COSO\u2019s five components exclusively"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AP: plausible relationships among financial and nonfinancial data."
+    },
+    {
+      "id": 105,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Planning analytical procedures are designed to enhance understanding of the client\u2019s business and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Replace the audit opinion"
+        },
+        {
+          "letter": "B",
+          "text": "Identify areas that might represent specific risks (unusual transactions, amounts, ratios, and trends)"
+        },
+        {
+          "letter": "C",
+          "text": "Compute planned DR algebraically"
+        },
+        {
+          "letter": "D",
+          "text": "Test operating effectiveness of every control"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Enhance understanding; identify risk areas."
+    },
+    {
+      "id": 106,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "In performing AP, the auditor should develop an expectation about plausible relationships and compare it to relationships from recorded amounts. Differences could indicate:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "That materiality is too high by definition"
+        },
+        {
+          "letter": "B",
+          "text": "A risk of material misstatement"
+        },
+        {
+          "letter": "C",
+          "text": "That IR is chosen by the auditor"
+        },
+        {
+          "letter": "D",
+          "text": "That sampling is prohibited"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Unexpected differences can indicate RMM."
+    },
+    {
+      "id": 107,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Data analytics, per Byrnes et al. 2017 as quoted, is discovering and analyzing patterns, identifying anomalies, and extracting other useful information in data underlying or related to the subject matter of an audit through analysis, modeling, and visualization for the purpose of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Setting the tax rate"
+        },
+        {
+          "letter": "B",
+          "text": "Planning or performing the audit"
+        },
+        {
+          "letter": "C",
+          "text": "Replacing the audit committee"
+        },
+        {
+          "letter": "D",
+          "text": "Computing COSO scores"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Quoted definition: planning or performing the audit."
+    },
+    {
+      "id": 108,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Using data analytics in risk assessment, the slides list: plan the procedure, access and prepare the data, consider relevance and reliability, perform the procedure, and evaluate results (identify notable items). Evaluating results can lead to identification of previously unidentified risk, modification of or support for the RMM assessment, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Automatic issuance of an adverse opinion"
+        },
+        {
+          "letter": "B",
+          "text": "Information to better design audit procedures to address RMM"
+        },
+        {
+          "letter": "C",
+          "text": "A requirement to use Turnbull instead of COSO"
+        },
+        {
+          "letter": "D",
+          "text": "Elimination of walkthroughs"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Three outcomes of notable items: new risk, change/support RMM, better-designed procedures."
+    },
+    {
+      "id": 109,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "After RAP, company/environment, ICFR, acceptance/retention info, and AP, the auditor should also:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Skip the team meeting if the client is large"
+        },
+        {
+          "letter": "B",
+          "text": "Conduct a team discussion regarding RMM and inquire of the audit committee"
+        },
+        {
+          "letter": "C",
+          "text": "Set CR equal to IR"
+        },
+        {
+          "letter": "D",
+          "text": "Compute Joe\u2019s n before understanding the business"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Team discussion on RMM; inquire of the AC."
+    },
+    {
+      "id": 110,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "The auditor should identify and assess RMM at:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only the engagement-letter level"
+        },
+        {
+          "letter": "B",
+          "text": "The financial statement level and the assertion level"
+        },
+        {
+          "letter": "C",
+          "text": "Only the industry level"
+        },
+        {
+          "letter": "D",
+          "text": "Only after the report date"
+        }
+      ],
+      "answer": "B",
+      "explanation": "FS level and assertion level."
+    },
+    {
+      "id": 111,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "In identifying and assessing RMM, the auditor should identify risks using RAP information and characteristics of accounts/disclosures, literally ask \u201cWhat could go wrong?\u201d, determine whether the risks are pervasive, determine what kinds of misstatements could occur, assess likelihood and magnitude, identify significant accounts/disclosures and relevant assertions, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Ignore fraud risks"
+        },
+        {
+          "letter": "B",
+          "text": "Determine whether any of the risks are significant risks"
+        },
+        {
+          "letter": "C",
+          "text": "Set all DR to 1"
+        },
+        {
+          "letter": "D",
+          "text": "Treat every account as clearly trivial"
+        }
+      ],
+      "answer": "B",
+      "explanation": "End by identifying significant risks that need special audit consideration."
+    },
+    {
+      "id": 112,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Risk factors for identifying significant accounts, disclosures, and relevant assertions include size and composition of the account, susceptibility to misstatement, volume/complexity/homogeneity of transactions, nature of the account, accounting complexities, exposure to losses, contingent liabilities, related-party transactions, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The color of the 10-K cover"
+        },
+        {
+          "letter": "B",
+          "text": "Changes from the prior period in account and disclosure characteristics"
+        },
+        {
+          "letter": "C",
+          "text": "Whether the ticker has four letters"
+        },
+        {
+          "letter": "D",
+          "text": "The number of audit-committee meetings last decade"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Evaluate qualitative and quantitative risk factors on line items and disclosures, including period-to-period changes."
+    },
+    {
+      "id": 113,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "A significant risk is one that requires special audit consideration because of the nature of the risk, its likelihood, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The partner\u2019s schedule"
+        },
+        {
+          "letter": "B",
+          "text": "Potential magnitude of misstatement"
+        },
+        {
+          "letter": "C",
+          "text": "Whether COSO is used"
+        },
+        {
+          "letter": "D",
+          "text": "The sample size in Joe\u2019s example"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Nature, likelihood, and potential magnitude."
+    },
+    {
+      "id": 114,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Factors used to identify significant risks include whether the risk is a fraud risk; relation to recent significant economic, accounting, or other developments; complexity of related transactions; related parties; high accounting complexity/judgment/uncertainty; significant unusual transactions; and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Whether the stock pays a dividend"
+        },
+        {
+          "letter": "B",
+          "text": "The effect of the quantitative and qualitative risk factors used in identifying significant accounts/disclosures"
+        },
+        {
+          "letter": "C",
+          "text": "The castle photograph"
+        },
+        {
+          "letter": "D",
+          "text": "The number of specialists on the tax team only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Start from the same qualitative/quantitative factors used for significant accounts, then layer fraud, developments, complexity, related parties, judgment, unusual transactions."
+    },
+    {
+      "id": 115,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "The slides ask who chooses audit risk and float the auditor, the market, the profession, and the courts. Regardless of that discussion, the operational definition used in the ARM is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The risk of losing the client"
+        },
+        {
+          "letter": "B",
+          "text": "The risk the auditor may unknowingly fail to appropriately modify the opinion on FS that are materially misstated"
+        },
+        {
+          "letter": "C",
+          "text": "The risk that controls are costly"
+        },
+        {
+          "letter": "D",
+          "text": "The risk that materiality is a percentage"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Same AR definition as Module 6, now plugged into IR \u00d7 CR \u00d7 DR."
+    },
+    {
+      "id": 116,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "RMM in the ARM is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "DR \u00d7 AR"
+        },
+        {
+          "letter": "B",
+          "text": "IR \u00d7 CR"
+        },
+        {
+          "letter": "C",
+          "text": "1 \u2212 materiality"
+        },
+        {
+          "letter": "D",
+          "text": "n / N"
+        }
+      ],
+      "answer": "B",
+      "explanation": "RMM = IR \u00d7 CR. AR = RMM \u00d7 DR."
+    },
+    {
+      "id": 117,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "The auditor does not choose IR or CR; the auditor:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Ignores them"
+        },
+        {
+          "letter": "B",
+          "text": "Assesses them and then solves for planned DR"
+        },
+        {
+          "letter": "C",
+          "text": "Sets them equal to 5% by policy"
+        },
+        {
+          "letter": "D",
+          "text": "Replaces them with engagement risk"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Assess IR and CR; calculate planned DR; then set NTE of substantive work."
+    },
+    {
+      "id": 118,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "\u201cThe nature of the company\u201d in the understanding slide includes structure and personnel, capital sources, investments, size/complexity, sources of earnings, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The auditor\u2019s realization rate"
+        },
+        {
+          "letter": "B",
+          "text": "Key suppliers/customers"
+        },
+        {
+          "letter": "C",
+          "text": "Joe\u2019s pearl bag"
+        },
+        {
+          "letter": "D",
+          "text": "The Turnbull Report date"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Nature of the company: structure/personnel, capital, investments, size/complexity, earnings sources, key suppliers/customers."
+    },
+    {
+      "id": 119,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Understanding the company\u2019s accounting principles includes significant changes, accounting competencies, use of judgment, accounting controversies, accounting for odd transactions, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The color of the binder"
+        },
+        {
+          "letter": "B",
+          "text": "New laws and regulations"
+        },
+        {
+          "letter": "C",
+          "text": "The number of walkthroughs in Module 8"
+        },
+        {
+          "letter": "D",
+          "text": "Whether planned DR is 5%"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Accounting principles understanding includes new laws and regulations."
+    },
+    {
+      "id": 120,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Performance measures the auditor should understand include measures for contractual commitments or compensation arrangements, measures used by outsiders, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Measures used by the PCAOB to grade the firm"
+        },
+        {
+          "letter": "B",
+          "text": "Measures used by insiders to monitor performance"
+        },
+        {
+          "letter": "C",
+          "text": "The Supreme Court\u2019s total-mix test"
+        },
+        {
+          "letter": "D",
+          "text": "Joe\u2019s n when RMM = 1"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Contracts/compensation, outsiders, and insiders\u2019 monitoring measures."
+    },
+    {
+      "id": 121,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "If planned DR is high because RMM is low, the pearl math and the strategy slides agree that the auditor can:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Do more testing"
+        },
+        {
+          "letter": "B",
+          "text": "Accept less persuasive evidence / a smaller sample, all else equal"
+        },
+        {
+          "letter": "C",
+          "text": "Set IR to zero"
+        },
+        {
+          "letter": "D",
+          "text": "Skip the understanding of the company"
+        }
+      ],
+      "answer": "B",
+      "explanation": "High planned DR = you can live with a higher chance of missing a remaining misstatement = less persuasion / smaller n."
+    },
+    {
+      "id": 122,
+      "module": "Module 7: The Audit Risk Model and Inherent Risk",
+      "prompt": "Identifying significant accounts is not a purely quantitative size test because the slide tells you to evaluate:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only whether the account exceeds materiality"
+        },
+        {
+          "letter": "B",
+          "text": "Qualitative and quantitative risk factors related to the line items and disclosures"
+        },
+        {
+          "letter": "C",
+          "text": "Only related-party notes"
+        },
+        {
+          "letter": "D",
+          "text": "Only last year\u2019s sample sizes"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Qualitative and quantitative risk factors \u2014 size, susceptibility, complexity, related parties, changes, etc."
+    },
+    {
+      "id": 123,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Internal control, on the Module 8 definition slide, is a process effected by an entity\u2019s board of directors, management, and other personnel, designed to provide reasonable assurance regarding achievement of objectives in specified categories. That wording matches:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A tax-basis compilation"
+        },
+        {
+          "letter": "B",
+          "text": "The COSO-style definition of internal control"
+        },
+        {
+          "letter": "C",
+          "text": "The Supreme Court\u2019s total-mix test"
+        },
+        {
+          "letter": "D",
+          "text": "Joe\u2019s pearl-sampling model"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Process; effected by BOD, management, and other personnel; reasonable assurance; objectives in the COSO categories (operations, reporting, compliance)."
+    },
+    {
+      "id": 124,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "The Foreign Corrupt Practices Act of 1977 books-and-records/internal-accounting-control provisions listed on the slide include transactions executed in accordance with management\u2019s authorization, prompt recording in the correct amount/accounts/period, access to assets only with authorization, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A required ICFR opinion for every issuer in 1977"
+        },
+        {
+          "letter": "B",
+          "text": "Recorded assets compared with existing assets at reasonable intervals, with appropriate action for differences"
+        },
+        {
+          "letter": "C",
+          "text": "A PCAOB inspection every year"
+        },
+        {
+          "letter": "D",
+          "text": "A prohibition on using COSO"
+        }
+      ],
+      "answer": "B",
+      "explanation": "FCPA 1977: authorization, recording, restricted access, and periodic comparison of recorded vs. existing assets."
+    },
+    {
+      "id": 125,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "FDICIA 1991, as described, applies to financial institutions with assets over:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "$50 million"
+        },
+        {
+          "letter": "B",
+          "text": "$500 million"
+        },
+        {
+          "letter": "C",
+          "text": "$5 billion"
+        },
+        {
+          "letter": "D",
+          "text": "Any amount"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Over $500 million. Management assessment of controls over financial reporting and regulatory compliance; the bank considers its own standards; the assessment must be audited by an external auditor; report filed with regulators."
+    },
+    {
+      "id": 126,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "SOX Section 302, in the 10-K and 10-Q, requires the CEO/CFO to certify (among other things) responsibility for IC, that they designed and maintained IC properly, evaluated effectiveness, reported conclusions, designed controls so material information is made known to them, disclosed significant IC deficiencies to the auditor and AC and material weaknesses in ICFR to the auditor, disclosed fraud by anyone with a significant role in IC, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Guaranteed that no misstatements exist"
+        },
+        {
+          "letter": "B",
+          "text": "Disclosed to the auditor any significant changes in IC"
+        },
+        {
+          "letter": "C",
+          "text": "Adopted Turnbull instead of COSO"
+        },
+        {
+          "letter": "D",
+          "text": "Set audit materiality"
+        }
+      ],
+      "answer": "B",
+      "explanation": "302 certifications include significant IC changes, plus the deficiency/MW/fraud disclosures listed on the slide."
+    },
+    {
+      "id": 127,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "SOX Section 404, in the 10-K, requires the CEO/CFO to state responsibility for ICFR and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Omit any assessment if the auditor agrees"
+        },
+        {
+          "letter": "B",
+          "text": "Contain management\u2019s assessment of ICFR effectiveness (and have the assessment and IC audited)"
+        },
+        {
+          "letter": "C",
+          "text": "Certify only the earnings release"
+        },
+        {
+          "letter": "D",
+          "text": "Replace the audit committee"
+        }
+      ],
+      "answer": "B",
+      "explanation": "404: responsibility + management assessment of effectiveness, with the assessment and IC audited."
+    },
+    {
+      "id": 128,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "AS 2201 describes ICFR as a process designed by the CEO and CFO and effected by the board, management, and other personnel to provide reasonable assurance regarding the reliability of financial reporting and the preparation of GAAP financial statements, including policies that pertain to maintenance of records reflecting transactions and dispositions of assets, reasonable assurance that transactions are recorded to permit GAAP FS and that receipts/expenditures are authorized, and reasonable assurance regarding:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The company\u2019s stock price"
+        },
+        {
+          "letter": "B",
+          "text": "Prevention or timely detection of unauthorized acquisition, use, or disposition of company assets that could have a material effect on the FS"
+        },
+        {
+          "letter": "C",
+          "text": "Absolute prevention of all fraud"
+        },
+        {
+          "letter": "D",
+          "text": "FDICIA\u2019s $500 million test for all issuers"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AS 2201 ICFR definition ends with safeguarding of assets that could materially affect the FS."
+    },
+    {
+      "id": 129,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "SEC rules require management to base its ICFR evaluation on a suitable, recognized control framework established by a body that followed due-process procedures, including broad distribution for public comment. Examples on the slide are COSO and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Joe\u2019s pearl model"
+        },
+        {
+          "letter": "B",
+          "text": "The Turnbull Report (FRC Internal Control Revised Guidance for Directors on the Combined Code, October 2005)"
+        },
+        {
+          "letter": "C",
+          "text": "ISA 320"
+        },
+        {
+          "letter": "D",
+          "text": "AS 1001"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Recognized framework; examples: COSO and Turnbull."
+    },
+    {
+      "id": 130,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "The auditor should obtain an understanding of each COSO component of ICFR. If management uses another acceptable framework:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The audit is invalid"
+        },
+        {
+          "letter": "B",
+          "text": "The components may differ"
+        },
+        {
+          "letter": "C",
+          "text": "The auditor must force a switch to COSO"
+        },
+        {
+          "letter": "D",
+          "text": "Walkthroughs are prohibited"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Understand each component of the framework actually used; components may differ if not COSO."
+    },
+    {
+      "id": 131,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "In the control environment, the auditor gains an understanding of whether effective ICFR is promoted. In risk assessment, the auditor understands management\u2019s process for identifying risks of misstatement, assessing the likelihood of resulting misstatements, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Setting planned DR"
+        },
+        {
+          "letter": "B",
+          "text": "Deciding how to respond to risks"
+        },
+        {
+          "letter": "C",
+          "text": "Selecting the audit opinion wording"
+        },
+        {
+          "letter": "D",
+          "text": "Choosing the specialist"
+        }
+      ],
+      "answer": "B",
+      "explanation": "COSO risk assessment: identify risks, assess likelihood of misstatements, decide how to respond."
+    },
+    {
+      "id": 132,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Understanding information and communication includes classes of significant transactions; how transactions are initiated, authorized, processed, recorded, and reported (and related documentation and the role of IT); methods/data/assumptions/specialists for estimates; and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The partner\u2019s review notes only"
+        },
+        {
+          "letter": "B",
+          "text": "The period-end financial reporting process"
+        },
+        {
+          "letter": "C",
+          "text": "Joe\u2019s sample-size table"
+        },
+        {
+          "letter": "D",
+          "text": "The FCPA\u2019s 1977 effective date only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Don\u2019t skip the period-end reporting process."
+    },
+    {
+      "id": 133,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "The auditor gains an understanding of control activities to assess the factors that affect control risk and to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Set materiality"
+        },
+        {
+          "letter": "B",
+          "text": "Design further audit procedures"
+        },
+        {
+          "letter": "C",
+          "text": "Write MD&A"
+        },
+        {
+          "letter": "D",
+          "text": "Select the COSO framework for management"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Control activities understanding \u2192 assess CR factors and design further procedures. Monitoring: activities to monitor ICFR effectiveness and how corrections are initiated."
+    },
+    {
+      "id": 134,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Walkthroughs can be used to help understand the flow of transactions, evaluate the design of controls, and determine whether those controls have been:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Outsourced to the PCAOB"
+        },
+        {
+          "letter": "B",
+          "text": "Implemented"
+        },
+        {
+          "letter": "C",
+          "text": "Replaced by analytics"
+        },
+        {
+          "letter": "D",
+          "text": "Certified under Section 302 only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Walkthroughs: understand the flow, evaluate design, determine implementation."
+    },
+    {
+      "id": 135,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "In a walkthrough, at points where important processing procedures occur, the auditor questions company personnel about their understanding of prescribed procedures and controls in order to understand the process, identify points at which a necessary control is missing or not designed effectively, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Set overall materiality"
+        },
+        {
+          "letter": "B",
+          "text": "Gain an understanding of the different types of significant transactions handled by the process"
+        },
+        {
+          "letter": "C",
+          "text": "Compute planned DR"
+        },
+        {
+          "letter": "D",
+          "text": "Issue the ICFR opinion that day"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Three walkthrough aims at those points: understand the process, spot missing/poorly designed controls, understand transaction types."
+    },
+    {
+      "id": 136,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "The auditor\u2019s objective in an ICFR audit is to express an opinion on the effectiveness of ICFR. Because ICFR cannot be considered effective if one or more material weaknesses exist, the auditor must plan and perform the audit to obtain appropriate evidence sufficient for reasonable assurance about whether material weaknesses exist:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "For the entire three-year period in the 10-K"
+        },
+        {
+          "letter": "B",
+          "text": "As of the date specified in management\u2019s assessment"
+        },
+        {
+          "letter": "C",
+          "text": "Only as of the prior year-end"
+        },
+        {
+          "letter": "D",
+          "text": "On a quarterly rolling basis only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "As of the date specified in management\u2019s assessment."
+    },
+    {
+      "id": 137,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "A material weakness in ICFR may exist even when financial statements are not:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Audited"
+        },
+        {
+          "letter": "B",
+          "text": "Materially misstated"
+        },
+        {
+          "letter": "C",
+          "text": "Prepared under GAAP"
+        },
+        {
+          "letter": "D",
+          "text": "Signed by the CEO"
+        }
+      ],
+      "answer": "B",
+      "explanation": "MW can exist even if the FS are not materially misstated."
+    },
+    {
+      "id": 138,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "AS 2201 ICFR audit procedures: the audit should be integrated, apply a top-down approach, assess fraud via controls over unusual transactions, period-end journal entries, related-party transactions, accounting estimates, and management incentives to manipulate the FS, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Ignore the work of others"
+        },
+        {
+          "letter": "B",
+          "text": "Use the work of others"
+        },
+        {
+          "letter": "C",
+          "text": "Test every redundant control"
+        },
+        {
+          "letter": "D",
+          "text": "Prohibit walkthroughs"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Integrated, top-down, fraud-related controls, use of others."
+    },
+    {
+      "id": 139,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "A top-down approach includes assessing entity-level controls, identifying and assessing risk in significant accounts and assertions (the same ones as the FS audit), understanding likely sources of misstatement (walkthroughs; ask \u201cwhat can go wrong\u201d), and selecting controls to test \u2014 only:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Every control in the COSO appendix"
+        },
+        {
+          "letter": "B",
+          "text": "Essential controls"
+        },
+        {
+          "letter": "C",
+          "text": "ITGCs, never process controls"
+        },
+        {
+          "letter": "D",
+          "text": "Detective controls, never preventive"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Only essential controls. Under AS 2 (which preceded AS 2201), many auditors felt obligated to test many redundant or unnecessary controls."
+    },
+    {
+      "id": 140,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Entity-level controls on the slide include the control environment (management\u2019s philosophy/operating style, integrity and ethical values, board/AC oversight), controls over management override, the company\u2019s risk assessment process, centralized processing and controls, monitoring of operations and of other controls (including internal audit, the AC, and self-assessment programs), controls over the period-end financial reporting process, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The auditor\u2019s sample size"
+        },
+        {
+          "letter": "B",
+          "text": "Policies that address significant business control and risk management practices"
+        },
+        {
+          "letter": "C",
+          "text": "Joe\u2019s n when RMM = 1"
+        },
+        {
+          "letter": "D",
+          "text": "The Turnbull page count"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Last bullet: policies addressing significant business control and risk management practices."
+    },
+    {
+      "id": 141,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "To understand likely sources of potential misstatements and select controls to test, the auditor should understand the flow of transactions for relevant assertions (initiated, authorized, processed, recorded), verify identification of points at which a misstatement could arise, identify controls that address those potential misstatements and controls over unauthorized acquisition/use/disposition of assets, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Ignore IT"
+        },
+        {
+          "letter": "B",
+          "text": "Understand how IT affects the company\u2019s flow of transactions"
+        },
+        {
+          "letter": "C",
+          "text": "Set CR equal to DR"
+        },
+        {
+          "letter": "D",
+          "text": "Skip period-end reporting"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Include IT\u2019s effect on the flow of transactions."
+    },
+    {
+      "id": 142,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "For each control tested, the auditor must evaluate design effectiveness and operating effectiveness. Design effectiveness asks: if operated by persons of authority and competence, would the control prevent or detect a material misstatement? Walkthroughs that include inquiry, observation, and document inspection are ordinarily:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Never enough for design"
+        },
+        {
+          "letter": "B",
+          "text": "Sufficient to evaluate design effectiveness"
+        },
+        {
+          "letter": "C",
+          "text": "Sufficient to evaluate operating effectiveness for the whole year"
+        },
+        {
+          "letter": "D",
+          "text": "Prohibited by AS 2201"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Walkthroughs (inquiry, observation, inspection) are ordinarily sufficient for design. Operating effectiveness asks: is the control operating as designed?"
+    },
+    {
+      "id": 143,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Key design-evaluation considerations include control purpose (preventive or detective), level of aggregation, consistency of performance, correlation with the relevant assertion, criteria for investigation (detective controls), precision of expectations (entity-level controls), whether the control is manual or automated, dependency on information produced by the entity, competence and authority of the person performing the control, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The stock\u2019s beta"
+        },
+        {
+          "letter": "B",
+          "text": "Dependence on other controls"
+        },
+        {
+          "letter": "C",
+          "text": "The number of pearls in Joe\u2019s bag"
+        },
+        {
+          "letter": "D",
+          "text": "Whether the 10-Q was filed early"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The last bullet on that design list is dependence on other controls."
+    },
+    {
+      "id": 144,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "When testing operating effectiveness, key considerations are risk, the nature of testing (inquiry, observation, inspection of documentation, reperformance), the extent of testing (more extensive \u2192 more evidence), the timing of testing (interim vs. after the balance-sheet date), and potential control changes. Interim testing creates:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A disclaimer automatically"
+        },
+        {
+          "letter": "B",
+          "text": "A roll-forward period between the testing date and the balance-sheet date"
+        },
+        {
+          "letter": "C",
+          "text": "A requirement to use Turnbull"
+        },
+        {
+          "letter": "D",
+          "text": "A significant deficiency by definition"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Interim testing \u21d2 roll-forward period. Roll-forward considerations include the risk of related accounts/assertions, the specific control and whether it may no longer be effective, planned reliance, sufficiency of interim evidence, and the length of the remaining period."
+    },
+    {
+      "id": 145,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "A control deficiency exists when design or operation of a control does not allow management or employees, in the normal course of duties, to prevent or detect misstatement on a timely basis. A material weakness is a deficiency (or combination) such that there is a reasonable possibility that a material misstatement of the FS will not be prevented or detected on a timely basis. A significant deficiency is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "More severe than a material weakness"
+        },
+        {
+          "letter": "B",
+          "text": "Less severe than a material weakness, yet important enough to merit attention of those charged with oversight of ICFR"
+        },
+        {
+          "letter": "C",
+          "text": "The same as clearly trivial"
+        },
+        {
+          "letter": "D",
+          "text": "Always a scope limitation"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Three-tier: deficiency \u2192 significant deficiency \u2192 material weakness. \u201cReasonable possibility\u201d = reasonably possible or probable under FAS 5."
+    },
+    {
+      "id": 146,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Severity of a deficiency considers whether there is a reasonable possibility a control will fail to prevent/detect misstatement and the magnitude of the potential misstatement, plus nature of the deficiency, magnitude for annual and interim FS, existence of redundant or compensating controls, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Whether the ticker is four letters"
+        },
+        {
+          "letter": "B",
+          "text": "Whether a prudent official would reach a different conclusion"
+        },
+        {
+          "letter": "C",
+          "text": "The auditor\u2019s fee"
+        },
+        {
+          "letter": "D",
+          "text": "Joe\u2019s achieved DR"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Prudent-official test is on the severity slide."
+    },
+    {
+      "id": 147,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Written representations from management in an ICFR audit include acknowledging responsibility for ICFR, that management performed an evaluation using specified criteria, that management did not use the audit as part of the basis for its assessment, management\u2019s conclusion on effectiveness, disclosure of all deficiencies, description of fraud that resulted in a material FS misstatement or that involved senior management or management with an ICFR role, whether deficiencies have been resolved, and subsequent changes in ICFR. Failure to obtain the representations is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Immaterial if the opinion is unqualified on the FS"
+        },
+        {
+          "letter": "B",
+          "text": "A scope limitation"
+        },
+        {
+          "letter": "C",
+          "text": "A significant deficiency only"
+        },
+        {
+          "letter": "D",
+          "text": "Cured by SOX 302"
+        }
+      ],
+      "answer": "B",
+      "explanation": "No written representations \u2192 scope limitation."
+    },
+    {
+      "id": 148,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Under AS 2201 reporting, report all ICFR deficiencies in writing to management. Report all significant deficiencies and material weaknesses in writing to management and the audit committee \u2014 and to the board if:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The company is an EGC"
+        },
+        {
+          "letter": "B",
+          "text": "The audit committee is judged ineffective"
+        },
+        {
+          "letter": "C",
+          "text": "The opinion on the FS is unqualified"
+        },
+        {
+          "letter": "D",
+          "text": "Turnbull is used"
+        }
+      ],
+      "answer": "B",
+      "explanation": "SD and MW \u2192 management and AC; also the board if the AC is ineffective."
+    },
+    {
+      "id": 149,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "If there is a material scope limitation on the ICFR audit, the auditor must:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Issue an \u201cexcept for\u201d opinion"
+        },
+        {
+          "letter": "B",
+          "text": "Disclaim an opinion on internal controls (\u201cexcept for\u201d opinions are not allowed)"
+        },
+        {
+          "letter": "C",
+          "text": "Issue an unqualified ICFR opinion with an explanatory paragraph"
+        },
+        {
+          "letter": "D",
+          "text": "Withdraw SOX 404"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Any material scope limitation \u2192 disclaimer. Except-for opinions are not allowed on ICFR."
+    },
+    {
+      "id": 150,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "The auditor should modify the ICFR report if management\u2019s annual report elements are incomplete or improperly presented, there is a scope restriction, the auditor refers to other auditors as a partial basis, there is other information in management\u2019s ICFR report, or:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The company changed auditors two years ago"
+        },
+        {
+          "letter": "B",
+          "text": "Management\u2019s SOX 302 certification is misstated"
+        },
+        {
+          "letter": "C",
+          "text": "Materiality is based on earnings"
+        },
+        {
+          "letter": "D",
+          "text": "Walkthroughs were used for design"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Appendix C conditions include a misstated 302 certification."
+    },
+    {
+      "id": 151,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Howard Electric evaluates ICFR using Turnbull instead of COSO. Based on the slides, that is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Automatically a material weakness"
+        },
+        {
+          "letter": "B",
+          "text": "Acceptable if Turnbull is a suitable recognized framework that followed due process"
+        },
+        {
+          "letter": "C",
+          "text": "A scope limitation requiring a disclaimer"
+        },
+        {
+          "letter": "D",
+          "text": "A violation of SOX 302"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The criteria slide explicitly lists Turnbull as an example recognized framework. Using it is not, by itself, a problem."
+    },
+    {
+      "id": 152,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "The auditor identifies a significant deficiency. Management\u2019s ICFR report does not discuss it. Under the reporting rules on the slides:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The ICFR opinion must be adverse"
+        },
+        {
+          "letter": "B",
+          "text": "SDs are reported in writing to management and the AC; management\u2019s public ICFR report is about effectiveness/MWs, not a requirement to discuss every SD"
+        },
+        {
+          "letter": "C",
+          "text": "The auditor must disclaim"
+        },
+        {
+          "letter": "D",
+          "text": "This is a FAS 5 probable loss"
+        }
+      ],
+      "answer": "B",
+      "explanation": "SD \u2192 written communication to management and AC. Public ICFR opinion/report centers on whether ICFR is effective (i.e., whether MWs exist), not on listing every SD."
+    },
+    {
+      "id": 153,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Management identifies a material weakness, describes it in detail in its ICFR report, and the auditor agrees. The ICFR opinion is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Unqualified"
+        },
+        {
+          "letter": "B",
+          "text": "Adverse (MW exists; management\u2019s report agrees)"
+        },
+        {
+          "letter": "C",
+          "text": "A disclaimer"
+        },
+        {
+          "letter": "D",
+          "text": "Except-for"
+        }
+      ],
+      "answer": "B",
+      "explanation": "MW (and management agrees) \u2192 adverse ICFR opinion. The slide\u2019s reporting grid: MW and management agrees / MW and management doesn\u2019t / no MW / scope limitation."
+    },
+    {
+      "id": 154,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "The auditor identifies four ICFR deficiencies, but the probability of a material misstatement due to them is remote. Those deficiencies are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Material weaknesses by definition"
+        },
+        {
+          "letter": "B",
+          "text": "Not material weaknesses, because MW requires a reasonable possibility (reasonably possible or probable under FAS 5), not a remote likelihood"
+        },
+        {
+          "letter": "C",
+          "text": "Automatic significant deficiencies"
+        },
+        {
+          "letter": "D",
+          "text": "Scope limitations"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Remote \u2260 reasonably possible/probable."
+    },
+    {
+      "id": 155,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "The auditor identifies a material weakness; management disagrees and refuses to modify its ICFR report. The auditor\u2019s ICFR report should:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Be unqualified"
+        },
+        {
+          "letter": "B",
+          "text": "Be modified because a MW exists and management\u2019s report does not agree"
+        },
+        {
+          "letter": "C",
+          "text": "Be an except-for opinion"
+        },
+        {
+          "letter": "D",
+          "text": "Omit any opinion"
+        }
+      ],
+      "answer": "B",
+      "explanation": "MW + management doesn\u2019t agree \u2192 modify. (Adverse opinion on ICFR plus language about the disagreement/inadequate management report.)"
+    },
+    {
+      "id": 156,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "KLM\u2019s auditor cannot test controls over estimation of the fair value of a material investment, but found no other ICFR deficiencies. This is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "An unqualified ICFR opinion"
+        },
+        {
+          "letter": "B",
+          "text": "A scope limitation; a material scope limitation requires a disclaimer, and except-for opinions are not allowed"
+        },
+        {
+          "letter": "C",
+          "text": "A significant deficiency only"
+        },
+        {
+          "letter": "D",
+          "text": "Irrelevant because the FS may still be fairly stated"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Inability to test controls over a material area is a scope limitation. Disclaimer if material; no except-for."
+    },
+    {
+      "id": 157,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "The auditor finds a material misstatement that management refuses to correct and plans a qualified opinion on the FS. For ICFR, a material misstatement that was not prevented or detected is ordinarily evidence of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Merely a clearly trivial item"
+        },
+        {
+          "letter": "B",
+          "text": "A material weakness (even though the FS opinion may be qualified)"
+        },
+        {
+          "letter": "C",
+          "text": "A clean ICFR opinion"
+        },
+        {
+          "letter": "D",
+          "text": "A Turnbull violation only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "An uncorrected material misstatement implies ICFR did not prevent or detect it \u2192 MW. MW can exist even when you also modify the FS opinion."
+    },
+    {
+      "id": 158,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "The auditor finds a material misstatement; management corrects it before issuance; the FS opinion is unqualified. The ICFR implication is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "ICFR must be effective because the FS are now correct"
+        },
+        {
+          "letter": "B",
+          "text": "A MW may still exist \u2014 a MW in ICFR may exist even when the financial statements are not (or are no longer) materially misstated"
+        },
+        {
+          "letter": "C",
+          "text": "A disclaimer is required"
+        },
+        {
+          "letter": "D",
+          "text": "Section 302 is automatically false"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The Module 8 objective slide: MW may exist even when FS are not materially misstated. Correction before issuance does not erase the control failure."
+    },
+    {
+      "id": 159,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Reno describes a capital-lease MW in vague terms. The auditor agrees a MW exists. The problem is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "There is no MW"
+        },
+        {
+          "letter": "B",
+          "text": "Management\u2019s report elements are incomplete/improperly presented (vague description), which is a condition for modifying the auditor\u2019s ICFR report"
+        },
+        {
+          "letter": "C",
+          "text": "A scope limitation"
+        },
+        {
+          "letter": "D",
+          "text": "Use of a non-COSO framework"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Appendix C: modify if management\u2019s annual report elements are incomplete or improperly presented."
+    },
+    {
+      "id": 160,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "During substantive testing of revenue, the auditor finds the controller intentionally recorded three 2019 sales for 2020 shipments. That is fraud by someone with a significant role in IC, which SOX 302 says must be disclosed to the auditor, and it is strong evidence of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A clearly trivial item"
+        },
+        {
+          "letter": "B",
+          "text": "A material weakness and a fraud risk involving management with an ICFR role"
+        },
+        {
+          "letter": "C",
+          "text": "An acceptable cutoff difference"
+        },
+        {
+          "letter": "D",
+          "text": "A reason to skip written representations"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Intentional premature revenue by the controller \u2192 fraud / ICFR failure, typically MW, and 302/representation implications."
+    },
+    {
+      "id": 161,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Management\u2019s SOX 302 certification is misstated; the auditor reports this to management and the AC; neither responds appropriately. The auditor should:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Ignore it if the FS are fairly stated"
+        },
+        {
+          "letter": "B",
+          "text": "Modify the ICFR report (Appendix C includes a misstated 302 certification) and consider communication/governance implications"
+        },
+        {
+          "letter": "C",
+          "text": "Issue except-for on ICFR"
+        },
+        {
+          "letter": "D",
+          "text": "Switch the company to Turnbull"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Misstated 302 certification is an explicit modify condition. Non-response by management/AC is a governance red flag on top of that."
+    },
+    {
+      "id": 162,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Before issuing the report, the auditor identifies a subsequent event that does not relate to conditions existing at the ICFR evaluation date but does materially impact ICFR effectiveness going forward. This is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Always a MW as of year-end"
+        },
+        {
+          "letter": "B",
+          "text": "A subsequent event that does not change the as-of-date opinion in the same way as a condition that existed at the evaluation date, but it can require disclosure/report treatment as a subsequent event"
+        },
+        {
+          "letter": "C",
+          "text": "A reason to use except-for"
+        },
+        {
+          "letter": "D",
+          "text": "Proof COSO is unsuitable"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The assignment flags a subsequent event not relating to conditions at the evaluation date but affecting ICFR going forward \u2014 treat as a subsequent event, not automatically as an as-of-date MW."
+    },
+    {
+      "id": 163,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "In the sales-process case, Risk #1 is \u201call orders shipped are not recorded as revenue.\u201d The relevant assertion is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Existence or occurrence"
+        },
+        {
+          "letter": "B",
+          "text": "Completeness"
+        },
+        {
+          "letter": "C",
+          "text": "Valuation or allocation"
+        },
+        {
+          "letter": "D",
+          "text": "Rights and obligations"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Shipped-but-not-recorded is completeness. The case marks it not a significant risk and not a fraud risk."
+    },
+    {
+      "id": 164,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Control #1 automatically records sales and generates invoices when goods are scanned/released in Warehouse K. It does not rely on IPE, is automated, and is evaluated as a preventive control at the transaction level. Planned operating-effectiveness testing at interim is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A sample of 40 days"
+        },
+        {
+          "letter": "B",
+          "text": "A test of one, following one transaction through the system, plus ITGCs (including program-change controls) to confirm no changes since the prior year"
+        },
+        {
+          "letter": "C",
+          "text": "Inquiry only of the CEO"
+        },
+        {
+          "letter": "D",
+          "text": "Reperformance of a detective review"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Automated control \u2192 test of one + ITGCs. Roll-forward: inquire of controller and IT manager about subsequent events/changes."
+    },
+    {
+      "id": 165,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Risk #2 is \u201crevenue is recorded for orders not shipped or fictitious sales.\u201d The relevant assertion is existence or occurrence. The case marks it as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Not significant and not fraud"
+        },
+        {
+          "letter": "B",
+          "text": "A significant risk and a fraud risk"
+        },
+        {
+          "letter": "C",
+          "text": "A valuation-only risk"
+        },
+        {
+          "letter": "D",
+          "text": "A completeness risk"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Existence/occurrence of fictitious or unshipped sales is a significant fraud risk in the case."
+    },
+    {
+      "id": 166,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Control #2 is a daily warehouse-director review of the Orders Shipped & Invoiced Report. It relies on IPE (the report from Warehouse K), is manual and detective, and because OE depends on accuracy and completeness of IPE the team will test ITGCs, report logic, and source-data controls. Planned OE testing is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A test of one at 9/30 only"
+        },
+        {
+          "letter": "B",
+          "text": "Select 40 days during the year (including some within two weeks of the balance-sheet date), inspect evidence of review, inquire, reperform, and check timely sign-off \u2014 apportioned through the year so no separate roll-forward is needed"
+        },
+        {
+          "letter": "C",
+          "text": "Monthly budget-to-actual at a $4 million threshold"
+        },
+        {
+          "letter": "D",
+          "text": "Confirmation of every customer"
+        }
+      ],
+      "answer": "B",
+      "explanation": "40 days, including near year-end; inspect, inquire, reperform, timely review. Because testing is spread through year-end, no extra roll-forward."
+    },
+    {
+      "id": 167,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Risk #3 is inaccurate quantities/prices on shipped orders. The relevant assertion is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Completeness"
+        },
+        {
+          "letter": "B",
+          "text": "Valuation or allocation"
+        },
+        {
+          "letter": "C",
+          "text": "Existence only"
+        },
+        {
+          "letter": "D",
+          "text": "Presentation and disclosure only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Quantities and prices \u2192 valuation/allocation. Not a significant risk and not a fraud risk in the case."
+    },
+    {
+      "id": 168,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Control #3 is a monthly controller review of the reporting package at the operations meeting, investigating differences > $4 million or fluctuations > 15% vs. prior year or budget. Materiality in the case is $5 million, so the control is described as sufficiently precise. IPE includes the monthly package (PeopleSoft query; test GITCs) and the budget (test the budget process directly). Planned testing includes inquiry and inspecting meeting minutes for two months, then:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A test of one automated invoice"
+        },
+        {
+          "letter": "B",
+          "text": "Roll-forward by selecting a Q4 month and repeating the procedures"
+        },
+        {
+          "letter": "C",
+          "text": "40 daily report sign-offs"
+        },
+        {
+          "letter": "D",
+          "text": "A disclaimer on ICFR"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Interim: inquiry + two months of minutes. Roll-forward: one Q4 month, same procedures."
+    },
+    {
+      "id": 169,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Control #1 is classified as preventive because:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "It identifies exceptions after shipment"
+        },
+        {
+          "letter": "B",
+          "text": "Automation records revenue when goods ship, preventing shipped goods from going unrecorded"
+        },
+        {
+          "letter": "C",
+          "text": "The warehouse director initials a report the next day"
+        },
+        {
+          "letter": "D",
+          "text": "The controller reviews budget variances monthly"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Preventive = stops the error from occurring. Detective (#2 and #3) identifies after the fact."
+    },
+    {
+      "id": 170,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Control #2 involves judgment with no specific dollar threshold, but the case still concludes it is sufficiently precise because all transactions are evaluated, the business is cyclical/predictable, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Materiality is $1"
+        },
+        {
+          "letter": "B",
+          "text": "The warehouse director has long tenure and knowledge of unusual customer/quantity patterns"
+        },
+        {
+          "letter": "C",
+          "text": "The control is automated"
+        },
+        {
+          "letter": "D",
+          "text": "IPE is not used"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Precision can come from a knowledgeable daily transaction-level review, not only from a dollar threshold."
+    },
+    {
+      "id": 171,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Which pairing of risk \u2192 assertion \u2192 control type matches the case?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Risk 1 completeness / automated preventive; Risk 2 existence / manual detective daily; Risk 3 valuation / monthly detective analytics"
+        },
+        {
+          "letter": "B",
+          "text": "All three are automated preventive completeness controls"
+        },
+        {
+          "letter": "C",
+          "text": "All three are fraud-significant existence controls"
+        },
+        {
+          "letter": "D",
+          "text": "Risk 3 is a completeness walkthrough only"
+        }
+      ],
+      "answer": "A",
+      "explanation": "That mapping is the case: completeness+automated; existence+daily detective+IPE; valuation+monthly review with quantitative thresholds."
+    },
+    {
+      "id": 172,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "AS 2 preceded AS 2201. The top-down slide\u2019s point about AS 2 is that many auditors felt obligated to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Disclaim every year"
+        },
+        {
+          "letter": "B",
+          "text": "Test many redundant or otherwise unnecessary controls"
+        },
+        {
+          "letter": "C",
+          "text": "Skip entity-level controls"
+        },
+        {
+          "letter": "D",
+          "text": "Use only Turnbull"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AS 2201\u2019s top-down, essential-controls approach is a reaction to that AS 2 experience."
+    },
+    {
+      "id": 173,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "\u201cIntegrated\u201d in AS 2201 means the ICFR audit and the financial-statement audit:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Must be done by different firms"
+        },
+        {
+          "letter": "B",
+          "text": "Should be performed as an integrated audit"
+        },
+        {
+          "letter": "C",
+          "text": "Cannot share significant accounts"
+        },
+        {
+          "letter": "D",
+          "text": "Cannot use walkthroughs"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Integrated audit; significant accounts and assertions are the same for FS and ICFR."
+    },
+    {
+      "id": 174,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "If there is no material weakness, the ICFR report (assuming no other modify conditions) is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Adverse"
+        },
+        {
+          "letter": "B",
+          "text": "Unqualified as to ICFR effectiveness"
+        },
+        {
+          "letter": "C",
+          "text": "A disclaimer"
+        },
+        {
+          "letter": "D",
+          "text": "Except-for"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Reporting grid: no MW \u2192 clean ICFR opinion (subject to Appendix C). MW \u2192 adverse. Scope limitation \u2192 disclaimer."
+    },
+    {
+      "id": 175,
+      "module": "Module 8: Auditing Internal Control over Financial Reporting",
+      "prompt": "Entity-level examples that monitor other controls include activities of the internal audit function, the audit committee, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The specialist\u2019s valuation model"
+        },
+        {
+          "letter": "B",
+          "text": "Self-assessment programs"
+        },
+        {
+          "letter": "C",
+          "text": "Joe\u2019s pearl formula"
+        },
+        {
+          "letter": "D",
+          "text": "The referred-to auditor\u2019s logo"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Monitoring of other controls: IA, AC, self-assessment programs."
+    },
+    {
+      "id": 176,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "AS 1000, as quoted, says the objective of the ordinary audit is the expression of an opinion on the fairness with which the FS present, in all material respects, financial position, results of operations, and cash flows in conformity with GAAP. The auditor must plan and perform the audit to obtain reasonable assurance about whether the FS are free of material misstatement, whether caused by:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Error only"
+        },
+        {
+          "letter": "B",
+          "text": "Error or fraud"
+        },
+        {
+          "letter": "C",
+          "text": "Fraud only"
+        },
+        {
+          "letter": "D",
+          "text": "Illegal acts only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Reasonable assurance as to material misstatement from error or fraud."
+    },
+    {
+      "id": 177,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "The financial statements are management\u2019s responsibility. The auditor\u2019s responsibility is to express an opinion. Management is responsible for adopting sound accounting policies and for establishing and maintaining internal control that will initiate, record, process, and report transactions consistent with:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The auditor\u2019s materiality worksheet"
+        },
+        {
+          "letter": "B",
+          "text": "Management\u2019s assertions embodied in the financial statements"
+        },
+        {
+          "letter": "C",
+          "text": "Planned detection risk"
+        },
+        {
+          "letter": "D",
+          "text": "The expanded ARM\u2019s TD factor"
+        }
+      ],
+      "answer": "B",
+      "explanation": "IC should produce transactions consistent with management\u2019s assertions in the FS."
+    },
+    {
+      "id": 178,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "Bell et al. 2005, as quoted, describe the audit as a process of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Fee-driven partner rotation"
+        },
+        {
+          "letter": "B",
+          "text": "Evidence-driven, belief-based, risk assessment"
+        },
+        {
+          "letter": "C",
+          "text": "Absolute assurance"
+        },
+        {
+          "letter": "D",
+          "text": "COSO certification only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Evidence-driven, belief-based, risk assessment."
+    },
+    {
+      "id": 179,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "The overall purpose of auditing, on the Module 9 purpose slide, is to lend the auditor\u2019s credibility to financial statements that would otherwise be untrustworthy due to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Sampling risk alone"
+        },
+        {
+          "letter": "B",
+          "text": "Conflicts of interest inherent in the corporate form"
+        },
+        {
+          "letter": "C",
+          "text": "The use of COSO"
+        },
+        {
+          "letter": "D",
+          "text": "ISA 320 benchmarks"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Conflicts of interest in the corporate form make unaudited FS untrustworthy; the audit lends credibility."
+    },
+    {
+      "id": 180,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "Planned DR is calculated at the financial statement level and at the assertion level. Planned DR = AuR / (IR \u00d7 CR) = AuR / RMM. The auditor addresses RMM (and achieves planned DR) through appropriate overall audit responses and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The engagement letter only"
+        },
+        {
+          "letter": "B",
+          "text": "(Specific) audit procedures"
+        },
+        {
+          "letter": "C",
+          "text": "Management\u2019s 302 certification"
+        },
+        {
+          "letter": "D",
+          "text": "The clearly trivial threshold"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AS 2301: overall responses plus specific procedures."
+    },
+    {
+      "id": 181,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "Overall audit responses listed include assigning responsibilities appropriately, providing appropriate supervision, being unpredictable (test other things, vary timing, vary testing thresholds, be unannounced, vary locations), evaluating accounting principles, making pervasive changes to overall audit strategy, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Reducing materiality to zero"
+        },
+        {
+          "letter": "B",
+          "text": "Being skeptical"
+        },
+        {
+          "letter": "C",
+          "text": "Omitting walkthroughs"
+        },
+        {
+          "letter": "D",
+          "text": "Setting CR = 0"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Be skeptical is the last overall response on the slide."
+    },
+    {
+      "id": 182,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "Specific audit procedures should be designed to address the specific risks identified. As RMM increases, obtain:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Less persuasive evidence"
+        },
+        {
+          "letter": "B",
+          "text": "More persuasive evidence"
+        },
+        {
+          "letter": "C",
+          "text": "Only inquiry"
+        },
+        {
+          "letter": "D",
+          "text": "No substantive procedures"
+        }
+      ],
+      "answer": "B",
+      "explanation": "As RMM increases, more persuasive evidence. Also consider the type of misstatements that could occur because of the risk."
+    },
+    {
+      "id": 183,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "Evidence is all the information used by the auditor in arriving at the conclusions on which the auditor\u2019s opinion is based \u2014 the information accumulated through audit procedures. The objective is to plan and perform the audit to obtain appropriate audit evidence that is sufficient to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Eliminate all detection risk"
+        },
+        {
+          "letter": "B",
+          "text": "Support the opinion expressed in the auditor\u2019s report"
+        },
+        {
+          "letter": "C",
+          "text": "Replace management\u2019s assertions"
+        },
+        {
+          "letter": "D",
+          "text": "Set inherent risk"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Appropriate and sufficient evidence to support the opinion."
+    },
+    {
+      "id": 184,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "Evidence sufficiency is a quantity determined by RMM and by the quality of collected evidence. All else equal, as risk increases, the necessary quantity of evidence:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Decreases"
+        },
+        {
+          "letter": "B",
+          "text": "Increases"
+        },
+        {
+          "letter": "C",
+          "text": "Becomes zero"
+        },
+        {
+          "letter": "D",
+          "text": "Is replaced by appropriateness"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Higher risk \u2192 more quantity. Higher quality evidence \u2192 less corroborating quantity needed."
+    },
+    {
+      "id": 185,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "As the quality of evidence increases, the necessary quantity of corroborating evidence:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Increases"
+        },
+        {
+          "letter": "B",
+          "text": "Decreases"
+        },
+        {
+          "letter": "C",
+          "text": "Is fixed by AS 2201"
+        },
+        {
+          "letter": "D",
+          "text": "Must equal n in Joe\u2019s example"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Better quality reduces the quantity of corroboration needed."
+    },
+    {
+      "id": 186,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "Evidence appropriateness is a quality determined by relevance (the relationship between the evidence and the assertion being tested) and reliability, which depends on the source of the evidence, including:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The length of the workpaper filename"
+        },
+        {
+          "letter": "B",
+          "text": "Level of source bias and level of source competence"
+        },
+        {
+          "letter": "C",
+          "text": "Whether the evidence was filed on EDGAR"
+        },
+        {
+          "letter": "D",
+          "text": "The COSO component count"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Reliability: source, source bias, source competence."
+    },
+    {
+      "id": 187,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "Non-substantive procedures include planning activities, risk assessment, reporting procedures, and tests of controls. Substantive procedures are activities performed to detect material misstatement or fraud at the assertion level and include tests of details of balances (or transactions) and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Client-acceptance independence checks"
+        },
+        {
+          "letter": "B",
+          "text": "Substantive analytical procedures (Module 10)"
+        },
+        {
+          "letter": "C",
+          "text": "The engagement letter"
+        },
+        {
+          "letter": "D",
+          "text": "AS 1301 appointment communications"
+        }
+      ],
+      "answer": "B",
+      "explanation": "TOC are not substantive. Substantive = TOD + substantive AP."
+    },
+    {
+      "id": 188,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "Tests of details evaluate account balances by testing the individual elements that comprise the balance. Examples on the slide include bank accounts making up cash, customer accounts/invoices making up AR, inventory items, prepaid insurance policies, and vendor amounts making up AP. Because balances often comprise many elements, tests of details often require:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A disclaimer"
+        },
+        {
+          "letter": "B",
+          "text": "Sampling"
+        },
+        {
+          "letter": "C",
+          "text": "A material weakness"
+        },
+        {
+          "letter": "D",
+          "text": "Use of Turnbull"
+        }
+      ],
+      "answer": "B",
+      "explanation": "TOD often require sampling \u2014 which is why Module 9 is titled Evidence and Audit sampling, even though these 11 slides stop at introducing TOD/sampling and the expanded ARM."
+    },
+    {
+      "id": 189,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "The expanded audit risk model on slide 11 is AuR = IR \u00d7 CR \u00d7 AP \u00d7 TD, where AP is the risk that substantive analytical procedures will not detect a material misstatement that occurred and was not prevented/detected by ICFR, and TD is the risk that tests of details will not detect a misstatement that occurred, got through ICFR, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Was clearly trivial"
+        },
+        {
+          "letter": "B",
+          "text": "Was not detected by the auditor\u2019s substantive analytical procedures"
+        },
+        {
+          "letter": "C",
+          "text": "Was a significant deficiency"
+        },
+        {
+          "letter": "D",
+          "text": "Was disclosed in the 302 certification"
+        }
+      ],
+      "answer": "B",
+      "explanation": "TD is residual after IR, CR, and AP. Rearranged: TD = AuR / (IR \u00d7 CR \u00d7 AP)."
+    },
+    {
+      "id": 190,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "In the expanded ARM, Planned DR is split into:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Engagement risk and business risk"
+        },
+        {
+          "letter": "B",
+          "text": "Substantive analytical procedures risk (AP) and tests of details risk (TD)"
+        },
+        {
+          "letter": "C",
+          "text": "Design effectiveness and operating effectiveness"
+        },
+        {
+          "letter": "D",
+          "text": "Lead auditor and other auditor"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Planned DR = AP \u00d7 TD."
+    },
+    {
+      "id": 191,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "If the auditor wants a given AuR and assesses high IR and CR, then to hold AuR the product AP \u00d7 TD must be:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Higher (less substantive work)"
+        },
+        {
+          "letter": "B",
+          "text": "Lower (more substantive work, more persuasive TOD/AP evidence)"
+        },
+        {
+          "letter": "C",
+          "text": "Equal to materiality"
+        },
+        {
+          "letter": "D",
+          "text": "Ignored, because TOC are substantive"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AuR = IR \u00d7 CR \u00d7 AP \u00d7 TD. High IR\u00d7CR forces low AP\u00d7TD \u2014 i.e., stronger substantive AP and/or TOD."
+    },
+    {
+      "id": 192,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "Which of the following is not a substantive procedure on these slides?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A test of details of the AR balance"
+        },
+        {
+          "letter": "B",
+          "text": "A test of controls"
+        },
+        {
+          "letter": "C",
+          "text": "A substantive analytical procedure"
+        },
+        {
+          "letter": "D",
+          "text": "Testing the individual insurance policies in prepaid insurance"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Tests of controls are listed as non-substantive, along with planning, risk assessment, and reporting procedures."
+    },
+    {
+      "id": 193,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "Unpredictability as an overall response includes testing other things, varying timing, varying testing thresholds, being unannounced, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Always visiting only headquarters"
+        },
+        {
+          "letter": "B",
+          "text": "Varying locations"
+        },
+        {
+          "letter": "C",
+          "text": "Telling the client the full sample in advance"
+        },
+        {
+          "letter": "D",
+          "text": "Repeating last year\u2019s exact selections"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Vary locations is on the unpredictability list."
+    },
+    {
+      "id": 194,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "Relevance of evidence is the relationship between the evidence and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The engagement fee"
+        },
+        {
+          "letter": "B",
+          "text": "The assertion being tested"
+        },
+        {
+          "letter": "C",
+          "text": "The COSO component"
+        },
+        {
+          "letter": "D",
+          "text": "The clearly trivial threshold"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Appropriateness = relevance (to the assertion) + reliability (source/bias/competence)."
+    },
+    {
+      "id": 195,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "Sufficiency is about quantity; appropriateness is about quality. The necessary quantity rises with RMM and falls as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Source bias increases"
+        },
+        {
+          "letter": "B",
+          "text": "The quality of evidence increases"
+        },
+        {
+          "letter": "C",
+          "text": "IR is assessed as high"
+        },
+        {
+          "letter": "D",
+          "text": "The auditor is less skeptical"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Quantity needed falls when quality rises."
+    },
+    {
+      "id": 196,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "An overall audit response that is about people, not procedures, is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Substantive AP"
+        },
+        {
+          "letter": "B",
+          "text": "Assign responsibilities appropriately and provide appropriate supervision"
+        },
+        {
+          "letter": "C",
+          "text": "Tests of details of inventory items"
+        },
+        {
+          "letter": "D",
+          "text": "The TD factor in the expanded ARM"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Assign responsibilities; supervise. Those sit with skepticism, unpredictability, evaluating accounting principles, and pervasive strategy changes."
+    },
+    {
+      "id": 197,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "Specific procedures should consider the type of misstatements that could occur due to the risk \u2014 the same \u201cwhat could go wrong\u201d idea as Module 7/8 \u2014 because evidence must be:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Random with respect to assertions"
+        },
+        {
+          "letter": "B",
+          "text": "Relevant to the assertion implied by that type of misstatement"
+        },
+        {
+          "letter": "C",
+          "text": "Limited to entity-level controls"
+        },
+        {
+          "letter": "D",
+          "text": "Obtained only from inquiry"
+        }
+      ],
+      "answer": "B",
+      "explanation": "As RMM rises, more persuasive evidence; match procedures to the type of misstatement / assertion."
+    },
+    {
+      "id": 198,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "The cash balance comprised of various bank accounts plus currency and coin is the slide\u2019s example that tests of details:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Always test only the total, never the parts"
+        },
+        {
+          "letter": "B",
+          "text": "Test the individual elements that comprise the balance"
+        },
+        {
+          "letter": "C",
+          "text": "Are the same as tests of controls"
+        },
+        {
+          "letter": "D",
+          "text": "Cannot use sampling"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Cash = bank accounts + cash on hand; AR = customers/invoices; inventory = items; etc."
+    },
+    {
+      "id": 199,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "Rearranging the expanded ARM, TD =",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "IR \u00d7 CR \u00d7 AP \u00d7 AuR"
+        },
+        {
+          "letter": "B",
+          "text": "AuR / (IR \u00d7 CR \u00d7 AP)"
+        },
+        {
+          "letter": "C",
+          "text": "AuR \u00d7 IR \u00d7 CR"
+        },
+        {
+          "letter": "D",
+          "text": "1 \u2212 materiality"
+        }
+      ],
+      "answer": "B",
+      "explanation": "TD = AuR / (IR \u00d7 CR \u00d7 AP). If AP is more effective (lower AP), allowable TD can be higher \u2014 less TOD, all else equal."
+    },
+    {
+      "id": 200,
+      "module": "Module 9: Evidence and Audit Sampling (slides 1\u201311)",
+      "prompt": "Which statement correctly ties Modules 7 and 9 together using only these slides?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Tests of controls are a component of planned DR in the expanded ARM"
+        },
+        {
+          "letter": "B",
+          "text": "Planned DR from the ARM is achieved through overall responses plus specific procedures; the expanded model splits planned DR into AP and TD (substantive work), while IR \u00d7 CR remain RMM"
+        },
+        {
+          "letter": "C",
+          "text": "Sufficiency replaces relevance when RMM is high"
+        },
+        {
+          "letter": "D",
+          "text": "Sampling is required for every walkthrough"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AR = RMM \u00d7 DR = IR \u00d7 CR \u00d7 AP \u00d7 TD. Overall responses + specific procedures (TOD and substantive AP) are how you hit planned DR. TOC are non-substantive and live in CR/RMM, not in AP\u00d7TD."
+    }
+  ]
+}
