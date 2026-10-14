@@ -1,0 +1,5008 @@
+{
+  "id": "accy-6900-h1-h3",
+  "title": "ACCY 6900 — Professionalism, Policy and Research",
+  "subtitle": "Handouts 1–3 practice quiz",
+  "source": "Introduction & demand for accounting; development of the profession; professional & regulatory standards; plus Handout #3 illustrative documents (SAB 99, Flanagan, International Paper filings, AS 2605 / AU-C 610, ASC)",
+  "questions": [
+    {
+      "id": 1,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "Handout #1 describes accounting as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A branch of computer science focused on databases"
+        },
+        {
+          "letter": "B",
+          "text": "The language of business"
+        },
+        {
+          "letter": "C",
+          "text": "A substitute for economics"
+        },
+        {
+          "letter": "D",
+          "text": "Only the recording of cash receipts"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The handout’s first bullet states that accounting is the language of business."
+    },
+    {
+      "id": 2,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "According to Handout #1, accounting measures and communicates about:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Sports statistics only"
+        },
+        {
+          "letter": "B",
+          "text": "Political campaign contributions only"
+        },
+        {
+          "letter": "C",
+          "text": "Economic activities"
+        },
+        {
+          "letter": "D",
+          "text": "Weather patterns"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Accounting measures and communicates about economic activities."
+    },
+    {
+      "id": 3,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "Accounting provides a way to communicate about how RESOURCES are consumed to create:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Inflation"
+        },
+        {
+          "letter": "B",
+          "text": "VALUE"
+        },
+        {
+          "letter": "C",
+          "text": "Taxation"
+        },
+        {
+          "letter": "D",
+          "text": "Regulation"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The handout says accounting communicates how RESOURCES are consumed to create VALUE."
+    },
+    {
+      "id": 4,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "The Vaught-Hemingway Stadium scoreboard analogy is meant to show that accounting:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Replaces the need for managers"
+        },
+        {
+          "letter": "B",
+          "text": "Is only useful in sports businesses"
+        },
+        {
+          "letter": "C",
+          "text": "Measures and communicates what is happening, like a scoreboard"
+        },
+        {
+          "letter": "D",
+          "text": "Guarantees a winning outcome"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The scoreboard measures and communicates what is happening on the field—the analogy for accounting."
+    },
+    {
+      "id": 5,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "Handout #1 says accounting has foundations in:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only marketing and advertising"
+        },
+        {
+          "letter": "B",
+          "text": "Sciences and humanities"
+        },
+        {
+          "letter": "C",
+          "text": "Only tax law"
+        },
+        {
+          "letter": "D",
+          "text": "Athletics administration"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The handout states that accounting has foundations in sciences & humanities."
+    },
+    {
+      "id": 6,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "Which of the following is listed in the handout’s “house” diagram as a foundation discipline for accounting?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Culinary arts"
+        },
+        {
+          "letter": "B",
+          "text": "Astronomy"
+        },
+        {
+          "letter": "C",
+          "text": "Economics"
+        },
+        {
+          "letter": "D",
+          "text": "Interior design"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The diagram lists Economics, Mathematics, Law, Linguistics, Philosophy, and more."
+    },
+    {
+      "id": 7,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "Besides economics, which pair appears in the sciences-and-humanities foundation box?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Law and linguistics"
+        },
+        {
+          "letter": "B",
+          "text": "Chemistry and geology"
+        },
+        {
+          "letter": "C",
+          "text": "Music theory and dance"
+        },
+        {
+          "letter": "D",
+          "text": "Agriculture and forestry"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The box includes Economics, Mathematics, Law, Linguistics, Philosophy, and “AND MANY MORE!!”"
+    },
+    {
+      "id": 8,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "In the diagram, “Application” sits:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Below sciences and humanities"
+        },
+        {
+          "letter": "B",
+          "text": "In a roof/peak above the sciences-and-humanities foundation"
+        },
+        {
+          "letter": "C",
+          "text": "Outside the house entirely"
+        },
+        {
+          "letter": "D",
+          "text": "Only inside the IRS"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Application is shown in the roof of the house, built on sciences & humanities."
+    },
+    {
+      "id": 9,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "To understand accounting, Handout #1 says we first need to consider:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Sports rankings"
+        },
+        {
+          "letter": "B",
+          "text": "Economics"
+        },
+        {
+          "letter": "C",
+          "text": "Social media strategy"
+        },
+        {
+          "letter": "D",
+          "text": "Office interior design"
+        }
+      ],
+      "answer": "B",
+      "explanation": "“So, to understand accounting, we first need to consider economics.”"
+    },
+    {
+      "id": 10,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "Economics, per the handout, deals with how we make the best use of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Unlimited resources"
+        },
+        {
+          "letter": "B",
+          "text": "Scarce resources"
+        },
+        {
+          "letter": "C",
+          "text": "Only gold reserves"
+        },
+        {
+          "letter": "D",
+          "text": "Unused trademarks"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Economics deals with how we make the best use of scarce resources."
+    },
+    {
+      "id": 11,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "“Scarcity,” as defined in Handout #1, means:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Prices are always falling"
+        },
+        {
+          "letter": "B",
+          "text": "You can’t have everything you want"
+        },
+        {
+          "letter": "C",
+          "text": "Markets never clear"
+        },
+        {
+          "letter": "D",
+          "text": "Accounting is optional"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Scarcity means that you can’t have everything you want."
+    },
+    {
+      "id": 12,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "In the handout’s market-economy diagram, what happens in the RESOURCE MARKET?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Households buy products and businesses sell products"
+        },
+        {
+          "letter": "B",
+          "text": "Households sell resources and businesses buy resources"
+        },
+        {
+          "letter": "C",
+          "text": "The government sets all prices"
+        },
+        {
+          "letter": "D",
+          "text": "Only foreign investors trade"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The resource market box: Households sell; Businesses buy."
+    },
+    {
+      "id": 13,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "In the PRODUCT MARKET, according to the diagram:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Businesses sell and households buy"
+        },
+        {
+          "letter": "B",
+          "text": "Households sell land to other households only"
+        },
+        {
+          "letter": "C",
+          "text": "Banks print money"
+        },
+        {
+          "letter": "D",
+          "text": "Auditors set prices"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Product market: Businesses sell; Households buy."
+    },
+    {
+      "id": 14,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "Households in the circular-flow diagram:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only buy resources and sell products"
+        },
+        {
+          "letter": "B",
+          "text": "Sell resources and buy products"
+        },
+        {
+          "letter": "C",
+          "text": "Neither buy nor sell"
+        },
+        {
+          "letter": "D",
+          "text": "Print currency"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Households sell resources and buy products."
+    },
+    {
+      "id": 15,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "Businesses in the circular-flow diagram:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Buy resources and sell products"
+        },
+        {
+          "letter": "B",
+          "text": "Only consume goods"
+        },
+        {
+          "letter": "C",
+          "text": "Do not participate in markets"
+        },
+        {
+          "letter": "D",
+          "text": "Set GAAP"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Businesses buy resources and sell products."
+    },
+    {
+      "id": 16,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "Which set of inputs do households sell into the resource market in the diagram?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Goods and services only"
+        },
+        {
+          "letter": "B",
+          "text": "Land, labor, capital, and entrepreneur"
+        },
+        {
+          "letter": "C",
+          "text": "10-K filings"
+        },
+        {
+          "letter": "D",
+          "text": "Audit opinions"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The arrows are labeled Land, Labor, Capital, Entrepreneur."
+    },
+    {
+      "id": 17,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "Factor payments flowing to households in the diagram include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only charitable donations"
+        },
+        {
+          "letter": "B",
+          "text": "Rent, wages, interest, and profits"
+        },
+        {
+          "letter": "C",
+          "text": "PCAOB inspection fees"
+        },
+        {
+          "letter": "D",
+          "text": "Proxy solicitor fees"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The return flow is labeled Rent, Wages, Interest, Profits."
+    },
+    {
+      "id": 18,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "The flow labeled “Goods and Services” in the diagram runs through the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Resource market only"
+        },
+        {
+          "letter": "B",
+          "text": "Product market"
+        },
+        {
+          "letter": "C",
+          "text": "PCAOB"
+        },
+        {
+          "letter": "D",
+          "text": "Federal Reserve exclusively"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Goods and Services connect businesses and households through the product market."
+    },
+    {
+      "id": 19,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "“Consumption Expenditures” in the diagram are associated with:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Households buying products"
+        },
+        {
+          "letter": "B",
+          "text": "Businesses selling land"
+        },
+        {
+          "letter": "C",
+          "text": "The SEC’s budget"
+        },
+        {
+          "letter": "D",
+          "text": "Inventory write-downs only"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Consumption expenditures are the household-to-product-market payment flow."
+    },
+    {
+      "id": 20,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "Why does the handout start with a football scoreboard?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "To argue that accounting is entertainment"
+        },
+        {
+          "letter": "B",
+          "text": "To illustrate measurement and communication of activity"
+        },
+        {
+          "letter": "C",
+          "text": "To replace financial statements with sports scores"
+        },
+        {
+          "letter": "D",
+          "text": "To claim Ole Miss sets GAAP"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The scoreboard is a visual for measuring and communicating what is happening."
+    },
+    {
+      "id": 21,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "Which statement best matches Handout #1’s view of accounting?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Accounting is unrelated to value creation"
+        },
+        {
+          "letter": "B",
+          "text": "Accounting communicates resource consumption and value creation"
+        },
+        {
+          "letter": "C",
+          "text": "Accounting is only taxation"
+        },
+        {
+          "letter": "D",
+          "text": "Accounting exists only inside the IRS"
+        }
+      ],
+      "answer": "B",
+      "explanation": "It communicates how resources are consumed to create value."
+    },
+    {
+      "id": 22,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "Mathematics appears in Handout #1 as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A foundation discipline under sciences & humanities"
+        },
+        {
+          "letter": "B",
+          "text": "A replacement for financial reporting"
+        },
+        {
+          "letter": "C",
+          "text": "The only source of GAAP"
+        },
+        {
+          "letter": "D",
+          "text": "An SEC filing form"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Mathematics is in the foundation box with economics, law, linguistics, and philosophy."
+    },
+    {
+      "id": 23,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "Philosophy is included in the handout’s foundation diagram to suggest that accounting:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Has no conceptual roots"
+        },
+        {
+          "letter": "B",
+          "text": "Draws on humanities as well as technical fields"
+        },
+        {
+          "letter": "C",
+          "text": "Is identical to metaphysics"
+        },
+        {
+          "letter": "D",
+          "text": "Requires a philosophy PhD to practice"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The house foundation includes philosophy among sciences & humanities."
+    },
+    {
+      "id": 24,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "A market economy, as sketched in Handout #1, features interaction between:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only governments and central banks"
+        },
+        {
+          "letter": "B",
+          "text": "Businesses and households through resource and product markets"
+        },
+        {
+          "letter": "C",
+          "text": "Auditors and the PCAOB only"
+        },
+        {
+          "letter": "D",
+          "text": "Universities and athletic departments only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The circular flow is businesses ↔ resource market ↔ households ↔ product market."
+    },
+    {
+      "id": 25,
+      "module": "Handout #1: Introduction and Demand for Accounting",
+      "prompt": "If households did not sell resources, the handout’s circular flow would break because:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Businesses would have nothing to buy in the resource market"
+        },
+        {
+          "letter": "B",
+          "text": "The SEC would cease to exist"
+        },
+        {
+          "letter": "C",
+          "text": "Double-entry bookkeeping would be invented sooner"
+        },
+        {
+          "letter": "D",
+          "text": "10-Ks would become quarterly"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Businesses buy land, labor, capital, and entrepreneurship from households in the resource market."
+    },
+    {
+      "id": 26,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "According to Handout #2, double-entry accounting originated in:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "New York in 1896"
+        },
+        {
+          "letter": "B",
+          "text": "Italy in the 1200s"
+        },
+        {
+          "letter": "C",
+          "text": "London after the South Sea Bubble"
+        },
+        {
+          "letter": "D",
+          "text": "Washington, D.C. in 1933"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Origins of double-entry: Italy in the 1200s."
+    },
+    {
+      "id": 27,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The handout says the rise of double-entry was fueled in large part by:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The invention of the computer"
+        },
+        {
+          "letter": "B",
+          "text": "The availability of paper"
+        },
+        {
+          "letter": "C",
+          "text": "The Sarbanes-Oxley Act"
+        },
+        {
+          "letter": "D",
+          "text": "The Federal Reserve"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Fueled, in large part, by the availability of paper."
+    },
+    {
+      "id": 28,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Which is listed as a key advantage of double-entry accounting?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Elimination of all fraud"
+        },
+        {
+          "letter": "B",
+          "text": "Quick calculation of profits"
+        },
+        {
+          "letter": "C",
+          "text": "Abolition of taxation"
+        },
+        {
+          "letter": "D",
+          "text": "Automatic SEC registration"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Key advantages include quick calculation of profits, remote operations, and complex income streams."
+    },
+    {
+      "id": 29,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Besides quick profit calculation, Handout #2 lists which advantage of double-entry?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Remote operations"
+        },
+        {
+          "letter": "B",
+          "text": "Free audits"
+        },
+        {
+          "letter": "C",
+          "text": "Unlimited credit"
+        },
+        {
+          "letter": "D",
+          "text": "Zero scarcity"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Advantages: quick calculation of profits, remote operations, complex income streams."
+    },
+    {
+      "id": 30,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Luca Pacioli published Summa de arithmetica, geometria, proportioni et proportionalita around:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "1200 in Florence"
+        },
+        {
+          "letter": "B",
+          "text": "1494 in Venice"
+        },
+        {
+          "letter": "C",
+          "text": "1776 in Philadelphia"
+        },
+        {
+          "letter": "D",
+          "text": "1933 in Washington"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Pacioli (handout: Pacoli, 1447–1517) published in Venice around 1494."
+    },
+    {
+      "id": 31,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Pacioli’s approximate life span given in the handout is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "1200–1280"
+        },
+        {
+          "letter": "B",
+          "text": "1447–1517"
+        },
+        {
+          "letter": "C",
+          "text": "1787–1865"
+        },
+        {
+          "letter": "D",
+          "text": "1933–2002"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Luca Pacioli (1447–1517)."
+    },
+    {
+      "id": 32,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The U.S. Constitution was written in:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "1776"
+        },
+        {
+          "letter": "B",
+          "text": "1787"
+        },
+        {
+          "letter": "C",
+          "text": "1865"
+        },
+        {
+          "letter": "D",
+          "text": "1933"
+        }
+      ],
+      "answer": "B",
+      "explanation": "American Constitution written in 1787."
+    },
+    {
+      "id": 33,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The new constitution was needed, per the timeline, because government was unable to function adequately under the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Sherman Antitrust Act"
+        },
+        {
+          "letter": "B",
+          "text": "Articles of Confederation"
+        },
+        {
+          "letter": "C",
+          "text": "Sarbanes-Oxley Act"
+        },
+        {
+          "letter": "D",
+          "text": "Dodd-Frank Act"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Unable to function adequately under the Articles of Confederation."
+    },
+    {
+      "id": 34,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Tammany Hall is discussed in the timeline as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The first CPA society"
+        },
+        {
+          "letter": "B",
+          "text": "New York City’s Democratic machine and a long-term source of power and corruption"
+        },
+        {
+          "letter": "C",
+          "text": "A federal reserve bank"
+        },
+        {
+          "letter": "D",
+          "text": "An auditing standard"
+        }
+      ],
+      "answer": "B",
+      "explanation": "NYC’s Democratic machine, Tammany Hall, became a long-term source of power and corruption."
+    },
+    {
+      "id": 35,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Union financing in the U.S. Civil War (1861–1865) required:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Repeal of all taxes"
+        },
+        {
+          "letter": "B",
+          "text": "Substantial new tax laws and an updated banking system regulated by the Treasury Department"
+        },
+        {
+          "letter": "C",
+          "text": "Creation of the PCAOB"
+        },
+        {
+          "letter": "D",
+          "text": "Adoption of IFRS"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Civil War financing required new tax laws and Treasury-regulated banking."
+    },
+    {
+      "id": 36,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The federal government began antitrust enforcement with the Sherman Act in:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "1787"
+        },
+        {
+          "letter": "B",
+          "text": "1890"
+        },
+        {
+          "letter": "C",
+          "text": "1933"
+        },
+        {
+          "letter": "D",
+          "text": "2002"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Sherman Antitrust Act, 1890."
+    },
+    {
+      "id": 37,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The Interstate Commerce Commission Act regulating railroads dates to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "1494"
+        },
+        {
+          "letter": "B",
+          "text": "1887"
+        },
+        {
+          "letter": "C",
+          "text": "1934"
+        },
+        {
+          "letter": "D",
+          "text": "2010"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Railroads were regulated with the ICC Act of 1887; Sherman followed in 1890."
+    },
+    {
+      "id": 38,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Government antitrust wins cited in the handout include the breakup of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Enron and WorldCom"
+        },
+        {
+          "letter": "B",
+          "text": "Northern Pacific Railroad and Rockefeller’s Standard Oil"
+        },
+        {
+          "letter": "C",
+          "text": "Deloitte and EY"
+        },
+        {
+          "letter": "D",
+          "text": "Fannie Mae and Freddie Mac only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Wins included breakup of the Northern Pacific Railroad and Rockefeller’s Standard Oil."
+    },
+    {
+      "id": 39,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The first U.S. state to license auditors as “certified public accountants” was:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "California"
+        },
+        {
+          "letter": "B",
+          "text": "New York"
+        },
+        {
+          "letter": "C",
+          "text": "Texas"
+        },
+        {
+          "letter": "D",
+          "text": "Illinois"
+        }
+      ],
+      "answer": "B",
+      "explanation": "From 1896, New York was the first state to license CPAs."
+    },
+    {
+      "id": 40,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Early CPA licensing was based on:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A presidential appointment only"
+        },
+        {
+          "letter": "B",
+          "text": "Experience and written exam results"
+        },
+        {
+          "letter": "C",
+          "text": "Stock ownership"
+        },
+        {
+          "letter": "D",
+          "text": "PCAOB inspection scores"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Licensing was based on experience and written exam results."
+    },
+    {
+      "id": 41,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The Sixteenth Amendment, Federal Reserve, FTC, and Clayton Act cluster in the timeline around:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "1861–1865"
+        },
+        {
+          "letter": "B",
+          "text": "1913–1914"
+        },
+        {
+          "letter": "C",
+          "text": "1933–1934"
+        },
+        {
+          "letter": "D",
+          "text": "2001–2002"
+        }
+      ],
+      "answer": "B",
+      "explanation": "1913–1914: substantial federal reform after the Pujo hearings."
+    },
+    {
+      "id": 42,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The 1913–1914 reforms followed which hearings?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Watergate"
+        },
+        {
+          "letter": "B",
+          "text": "Pujo hearings"
+        },
+        {
+          "letter": "C",
+          "text": "Teapot Dome only"
+        },
+        {
+          "letter": "D",
+          "text": "Enron hearings only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Substantial federal reform legislation followed the Pujo hearings."
+    },
+    {
+      "id": 43,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Charles Ponzi’s 1920 scheme used:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Special purpose entities"
+        },
+        {
+          "letter": "B",
+          "text": "International Reply Coupons, promising a 50% return in 45 days"
+        },
+        {
+          "letter": "C",
+          "text": "Capitalized line costs"
+        },
+        {
+          "letter": "D",
+          "text": "Cookie-jar reserves at Sunbeam"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Ponzi promised a 50% return in 45 days using International Reply Coupons."
+    },
+    {
+      "id": 44,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Ponzi paid early “investors” in order to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Comply with GAAP"
+        },
+        {
+          "letter": "B",
+          "text": "Entice more investors"
+        },
+        {
+          "letter": "C",
+          "text": "Fund the Federal Reserve"
+        },
+        {
+          "letter": "D",
+          "text": "Pay PCAOB fees"
+        }
+      ],
+      "answer": "B",
+      "explanation": "He paid off early “investors” to entice more."
+    },
+    {
+      "id": 45,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The Teapot Dome scandal involved leases of oil properties for bribes to Interior Secretary:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Bernie Ebbers"
+        },
+        {
+          "letter": "B",
+          "text": "Albert Fall"
+        },
+        {
+          "letter": "C",
+          "text": "Dennis Kozlowski"
+        },
+        {
+          "letter": "D",
+          "text": "Barry Minkow"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Interior Secretary Albert Fall took bribes; leases were cancelled and Fall jailed."
+    },
+    {
+      "id": 46,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Teapot Dome occurred during the presidency of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Franklin D. Roosevelt"
+        },
+        {
+          "letter": "B",
+          "text": "Warren G. Harding"
+        },
+        {
+          "letter": "C",
+          "text": "George W. Bush"
+        },
+        {
+          "letter": "D",
+          "text": "Woodrow Wilson only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The Harding presidency was essentially “bought” by oil interests."
+    },
+    {
+      "id": 47,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "In Ultramares (1924), auditor Touche Niven gave an unqualified opinion although:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The company had no inventory"
+        },
+        {
+          "letter": "B",
+          "text": "Substantial fraud was present"
+        },
+        {
+          "letter": "C",
+          "text": "The SEC had already delisted the firm"
+        },
+        {
+          "letter": "D",
+          "text": "SOX had banned the engagement"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Touche Niven gave an unqualified opinion although substantial fraud was present."
+    },
+    {
+      "id": 48,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The Ultramares court found Touche:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Fraudulent and therefore fully liable to the lender"
+        },
+        {
+          "letter": "B",
+          "text": "Negligent but not fraudulent and therefore not liable"
+        },
+        {
+          "letter": "C",
+          "text": "Innocent of any duty"
+        },
+        {
+          "letter": "D",
+          "text": "In violation of SOX Section 404"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The court found Touche negligent but not fraudulent and therefore not liable."
+    },
+    {
+      "id": 49,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The Securities Acts of 1933–1934 created the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "FASB"
+        },
+        {
+          "letter": "B",
+          "text": "SEC"
+        },
+        {
+          "letter": "C",
+          "text": "PCAOB"
+        },
+        {
+          "letter": "D",
+          "text": "IASB"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The Securities Acts under FDR’s New Deal created the SEC."
+    },
+    {
+      "id": 50,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The SEC was created to regulate securities markets and provide:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Free brokerage accounts"
+        },
+        {
+          "letter": "B",
+          "text": "Adequate disclosures of public corporations’ finances"
+        },
+        {
+          "letter": "C",
+          "text": "Deposit insurance for all banks"
+        },
+        {
+          "letter": "D",
+          "text": "CPA licenses in every state"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Created to regulate securities markets and provide adequate disclosures of public corporations’ finances."
+    },
+    {
+      "id": 51,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The McKesson & Robbins fraud (1937) included:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only tax evasion on stock options"
+        },
+        {
+          "letter": "B",
+          "text": "Nonexistent inventory and receivables"
+        },
+        {
+          "letter": "C",
+          "text": "A Ponzi scheme in reply coupons"
+        },
+        {
+          "letter": "D",
+          "text": "Junk-bond price manipulation"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Massive fraud including nonexistent inventory and receivables."
+    },
+    {
+      "id": 52,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "McKesson & Robbins continued for years because auditor Price Waterhouse:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Did not audit inventory or receivables"
+        },
+        {
+          "letter": "B",
+          "text": "Issued a qualified opinion each year"
+        },
+        {
+          "letter": "C",
+          "text": "Was banned by the PCAOB"
+        },
+        {
+          "letter": "D",
+          "text": "Confirmed every receivable twice"
+        }
+      ],
+      "answer": "A",
+      "explanation": "The fraud continued because PW did not audit either inventory or receivables."
+    },
+    {
+      "id": 53,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The Committee on Audit Procedures, established in 1939, began with requirements to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Ban all advertising"
+        },
+        {
+          "letter": "B",
+          "text": "Physically observe inventory and confirm receivables"
+        },
+        {
+          "letter": "C",
+          "text": "Create the FASB"
+        },
+        {
+          "letter": "D",
+          "text": "Adopt IFRS"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Beginning with requirements to physically conduct inventory and confirm receivables."
+    },
+    {
+      "id": 54,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The Committee on Accounting Procedures (CAP) was created in:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "1896"
+        },
+        {
+          "letter": "B",
+          "text": "1938"
+        },
+        {
+          "letter": "C",
+          "text": "1973"
+        },
+        {
+          "letter": "D",
+          "text": "2002"
+        }
+      ],
+      "answer": "B",
+      "explanation": "CAP created in 1938 to establish GAAP using Accounting Research Bulletins."
+    },
+    {
+      "id": 55,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "CAP issued GAAP using:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Accounting Standards Updates only"
+        },
+        {
+          "letter": "B",
+          "text": "Accounting Research Bulletins (ARBs)"
+        },
+        {
+          "letter": "C",
+          "text": "Staff Accounting Bulletins only"
+        },
+        {
+          "letter": "D",
+          "text": "Yellow Book chapters"
+        }
+      ],
+      "answer": "B",
+      "explanation": "CAP used Accounting Research Bulletins. Fifty-one ARBs were issued over 20 years (1938–59)."
+    },
+    {
+      "id": 56,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "How many ARBs did CAP issue over about 20 years?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "5"
+        },
+        {
+          "letter": "B",
+          "text": "17"
+        },
+        {
+          "letter": "C",
+          "text": "51"
+        },
+        {
+          "letter": "D",
+          "text": "99"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Fifty-one ARBs were issued over 20 years (1938–59)."
+    },
+    {
+      "id": 57,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The Accounting Principles Board replaced the CAP in:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "1933"
+        },
+        {
+          "letter": "B",
+          "text": "1959"
+        },
+        {
+          "letter": "C",
+          "text": "1973"
+        },
+        {
+          "letter": "D",
+          "text": "2002"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The APB replaced the CAP in 1959 (handout also writes ABP)."
+    },
+    {
+      "id": 58,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The Great Salad Oil Swindle (1963) involved Allied Crude Vegetable Oil filling tankers with:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Gold then oil"
+        },
+        {
+          "letter": "B",
+          "text": "Water topped off with salad oil"
+        },
+        {
+          "letter": "C",
+          "text": "Empty space certified by the Fed"
+        },
+        {
+          "letter": "D",
+          "text": "Receivables confirmations"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Tankers were filled with water and topped off with salad oil."
+    },
+    {
+      "id": 59,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The CEO in the Salad Oil Swindle who spent seven years in jail was:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Al Dunlap"
+        },
+        {
+          "letter": "B",
+          "text": "Tino De Angelis"
+        },
+        {
+          "letter": "C",
+          "text": "Bernie Ebbers"
+        },
+        {
+          "letter": "D",
+          "text": "Charles Ponzi"
+        }
+      ],
+      "answer": "B",
+      "explanation": "CEO Tino De Angelis spent seven years in jail."
+    },
+    {
+      "id": 60,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Continental Vending (1969) was notable because three Lybrand auditors were found guilty of criminal fraud even though:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "They had no clients"
+        },
+        {
+          "letter": "B",
+          "text": "Lybrand did not violate GAAS"
+        },
+        {
+          "letter": "C",
+          "text": "The SEC had approved the statements"
+        },
+        {
+          "letter": "D",
+          "text": "Inventory was fully observed"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Although Lybrand did not violate GAAS, three auditors were found guilty of criminal fraud."
+    },
+    {
+      "id": 61,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The FASB was established in 1973 to replace the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "SEC"
+        },
+        {
+          "letter": "B",
+          "text": "APB"
+        },
+        {
+          "letter": "C",
+          "text": "PCAOB"
+        },
+        {
+          "letter": "D",
+          "text": "IASB"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The FASB was established to replace the APB, with improved process, governance, and public involvement."
+    },
+    {
+      "id": 62,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The Foreign Corrupt Practices Act (1977) made bribery of foreign officials for business purposes illegal and also:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Created the IASB"
+        },
+        {
+          "letter": "B",
+          "text": "Mandated internal control requirements of public firms"
+        },
+        {
+          "letter": "C",
+          "text": "Banned all CPA advertising forever"
+        },
+        {
+          "letter": "D",
+          "text": "Repealed the securities acts"
+        }
+      ],
+      "answer": "B",
+      "explanation": "FCPA also mandated internal control requirements of public firms."
+    },
+    {
+      "id": 63,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The ban on advertising by audit firms was lifted in 1979, with an unintended consequence of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Higher audit quality automatically"
+        },
+        {
+          "letter": "B",
+          "text": "“Lowballing”—a very low bid to get a new client"
+        },
+        {
+          "letter": "C",
+          "text": "The end of public company audits"
+        },
+        {
+          "letter": "D",
+          "text": "Mandatory joint audits"
+        }
+      ],
+      "answer": "B",
+      "explanation": "An unintended consequence was lowballing; audits were increasingly priced as a commodity."
+    },
+    {
+      "id": 64,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The Garn-St. Germain Act (1982) deregulated:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Public company auditors"
+        },
+        {
+          "letter": "B",
+          "text": "The savings & loan industry"
+        },
+        {
+          "letter": "C",
+          "text": "The SEC"
+        },
+        {
+          "letter": "D",
+          "text": "Commodity futures only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Garn-St. Germain deregulated S&Ls because of problems caused by rising interest rates."
+    },
+    {
+      "id": 65,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Michael Milken specialized in making a market in:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Treasury bills only"
+        },
+        {
+          "letter": "B",
+          "text": "Junk bonds"
+        },
+        {
+          "letter": "C",
+          "text": "Municipal GO bonds only"
+        },
+        {
+          "letter": "D",
+          "text": "Farm credit"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Milken specialized in making a market in junk bonds; his downfall also forced Drexel Burnham into bankruptcy."
+    },
+    {
+      "id": 66,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "ZZZZ Best (1986) was a small insurance restoration company whose fraud was led by founder:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Ken Lay"
+        },
+        {
+          "letter": "B",
+          "text": "Barry Minkow"
+        },
+        {
+          "letter": "C",
+          "text": "Bernie Madoff"
+        },
+        {
+          "letter": "D",
+          "text": "Richard Scrushy"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Increasing levels of fraud by founder Barry Minkow, who was jailed in 1989."
+    },
+    {
+      "id": 67,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The S&L crisis resulted in the failure of over 700 S&Ls closed by the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "PCAOB"
+        },
+        {
+          "letter": "B",
+          "text": "Resolution Trust Corporation (RTC)"
+        },
+        {
+          "letter": "C",
+          "text": "IASB"
+        },
+        {
+          "letter": "D",
+          "text": "Municipal Bond Insurance Association"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Closed by the RTC (handout: Regulation Trust Corporation), which sold assets."
+    },
+    {
+      "id": 68,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The net loss to taxpayers from the S&L cleanup was almost:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "$1 billion"
+        },
+        {
+          "letter": "B",
+          "text": "$100 billion"
+        },
+        {
+          "letter": "C",
+          "text": "$1 trillion"
+        },
+        {
+          "letter": "D",
+          "text": "$180 billion (AIG only)"
+        }
+      ],
+      "answer": "B",
+      "explanation": "A net loss to taxpayers of almost $100 billion."
+    },
+    {
+      "id": 69,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The 1995 accountant-friendly legislation that reduced potential legal liabilities of external auditors is the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Sarbanes-Oxley Act"
+        },
+        {
+          "letter": "B",
+          "text": "Private Securities Litigation Reform Act"
+        },
+        {
+          "letter": "C",
+          "text": "Foreign Corrupt Practices Act"
+        },
+        {
+          "letter": "D",
+          "text": "Dodd-Frank Act"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Public/Private Securities Litigation Reform Act (1995) reduced potential legal liabilities of external auditors."
+    },
+    {
+      "id": 70,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Waste Management (1997) fraud focused especially on accounting for:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Stock option backdating only"
+        },
+        {
+          "letter": "B",
+          "text": "Property, plant, and equipment"
+        },
+        {
+          "letter": "C",
+          "text": "Oil leases at Teapot Dome"
+        },
+        {
+          "letter": "D",
+          "text": "Reply coupons"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Fraudulent accounting for PPE; restatements of over $1 billion for a five-year period."
+    },
+    {
+      "id": 71,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Sunbeam hired which executive in a turnaround that later involved fraudulent revenue recognition?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Dennis Kozlowski"
+        },
+        {
+          "letter": "B",
+          "text": "Al Dunlap"
+        },
+        {
+          "letter": "C",
+          "text": "John Rigas"
+        },
+        {
+          "letter": "D",
+          "text": "Jeffrey Skilling"
+        }
+      ],
+      "answer": "B",
+      "explanation": "A failing appliance manufacturer hired Al Dunlap; profits were maintained only by fraudulent revenue recognition."
+    },
+    {
+      "id": 72,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Cendant’s fraud was inherited when hFS acquired:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "WorldCom"
+        },
+        {
+          "letter": "B",
+          "text": "CUC International"
+        },
+        {
+          "letter": "C",
+          "text": "HealthSouth"
+        },
+        {
+          "letter": "D",
+          "text": "Bear Stearns"
+        }
+      ],
+      "answer": "B",
+      "explanation": "hFS acquired CUC International (and changed its name to Cendant); CUC had used fraudulent accounting for years."
+    },
+    {
+      "id": 73,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Long-Term Capital Management (1998) required a Federal Reserve–backed bailout after bets including the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Teapot Dome leases"
+        },
+        {
+          "letter": "B",
+          "text": "Russian ruble and other ill-advised hedging"
+        },
+        {
+          "letter": "C",
+          "text": "ZZZZ Best restorations"
+        },
+        {
+          "letter": "D",
+          "text": "Sunbeam appliances"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Overextended leverage and the wrong side of trillion-dollar bets on the Russian ruble and other hedging."
+    },
+    {
+      "id": 74,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Regulation FD (Full Disclosure), 2001, required that earnings announcements be made public, usually through:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Private letters to favored analysts only"
+        },
+        {
+          "letter": "B",
+          "text": "Internet simulcasts"
+        },
+        {
+          "letter": "C",
+          "text": "PCAOB inspection reports"
+        },
+        {
+          "letter": "D",
+          "text": "Yellow Book appendices"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Earnings announcements were required to be made public, usually through Internet simulcasts."
+    },
+    {
+      "id": 75,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Enron’s facade was maintained through fraud including widespread use of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Physical inventory observation"
+        },
+        {
+          "letter": "B",
+          "text": "Special purpose entities, derivatives, and deceptive trading profits"
+        },
+        {
+          "letter": "C",
+          "text": "Yellow Book audits"
+        },
+        {
+          "letter": "D",
+          "text": "Only cookie-jar reserves at a retailer"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Fraud included SPEs, derivatives, and deceptive use of trading profits."
+    },
+    {
+      "id": 76,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "WorldCom temporarily hid collapsing profits by recording operating expenses as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Tax refunds"
+        },
+        {
+          "letter": "B",
+          "text": "Capital assets—some $11 billion"
+        },
+        {
+          "letter": "C",
+          "text": "Treasury stock"
+        },
+        {
+          "letter": "D",
+          "text": "Pension income only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Recorded operating expenses as capital assets—some $11 billion. CEO Bernie Ebbers was among those jailed."
+    },
+    {
+      "id": 77,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Adelphia’s accounting fraud was used in part to benefit:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The PCAOB staff"
+        },
+        {
+          "letter": "B",
+          "text": "Rigas family members"
+        },
+        {
+          "letter": "C",
+          "text": "The Federal Reserve Board"
+        },
+        {
+          "letter": "D",
+          "text": "Only outside directors with no family role"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Corporate governance violations to benefit Rigas family members; several Rigas employees (all on the board) went to jail."
+    },
+    {
+      "id": 78,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Tyco’s CEO sent to prison in the handout’s 2002 entry is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Bernie Ebbers"
+        },
+        {
+          "letter": "B",
+          "text": "Dennis Kozlowski"
+        },
+        {
+          "letter": "C",
+          "text": "Ken Lay"
+        },
+        {
+          "letter": "D",
+          "text": "Richard Scrushy"
+        }
+      ],
+      "answer": "B",
+      "explanation": "CEO Dennis Kozlowski and others sent to prison."
+    },
+    {
+      "id": 79,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Sarbanes-Oxley (2002) created the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "FASB"
+        },
+        {
+          "letter": "B",
+          "text": "Public Company Accounting Oversight Board"
+        },
+        {
+          "letter": "C",
+          "text": "Federal Reserve"
+        },
+        {
+          "letter": "D",
+          "text": "IASB"
+        }
+      ],
+      "answer": "B",
+      "explanation": "SOX included new rules on governance, internal control, auditing, and creation of the PCAOB."
+    },
+    {
+      "id": 80,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "HealthSouth (2003) is described as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The first CPA licensing statute"
+        },
+        {
+          "letter": "B",
+          "text": "The first post-Sarbanes-Oxley scandal in the timeline"
+        },
+        {
+          "letter": "C",
+          "text": "A Teapot Dome sequel"
+        },
+        {
+          "letter": "D",
+          "text": "A junk-bond innovation"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Became the first post-Sarbanes-Oxley scandal; restated $2.5 billion for 2002."
+    },
+    {
+      "id": 81,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Fannie Mae was forced in 2004 to restate over $6 billion and later, with Freddie Mac, was placed into:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "PCAOB receivership"
+        },
+        {
+          "letter": "B",
+          "text": "Federal conservatorship in 2008"
+        },
+        {
+          "letter": "C",
+          "text": "NYSE delisting only in 1890"
+        },
+        {
+          "letter": "D",
+          "text": "IASB oversight"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Both Fannie and Freddie would be placed into federal conservatorship in 2008."
+    },
+    {
+      "id": 82,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "AIG’s 2005 SEC matter led to a fine of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "$1 million"
+        },
+        {
+          "letter": "B",
+          "text": "$1.6 billion"
+        },
+        {
+          "letter": "C",
+          "text": "$180 billion (the later bailout amount)"
+        },
+        {
+          "letter": "D",
+          "text": "$11 billion (WorldCom’s capitalization)"
+        }
+      ],
+      "answer": "B",
+      "explanation": "SEC fraud investigation led to a $1.6 billion fine and criminal charges against several executives."
+    },
+    {
+      "id": 83,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "In 2006 the SEC discovered dozens of companies were:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Refusing to file 10-Ks"
+        },
+        {
+          "letter": "B",
+          "text": "Backdating stock option awards to increase executive compensation"
+        },
+        {
+          "letter": "C",
+          "text": "Adopting IFRS voluntarily only"
+        },
+        {
+          "letter": "D",
+          "text": "Paying Ponzi returns in reply coupons"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Backdating stock option awards; other manipulations included exercise backdating, spring-loading, and speed vesting."
+    },
+    {
+      "id": 84,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The sub-prime loan scandal unraveled as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Gold prices froze"
+        },
+        {
+          "letter": "B",
+          "text": "Housing prices declined beginning around 2007"
+        },
+        {
+          "letter": "C",
+          "text": "The Constitution was rewritten"
+        },
+        {
+          "letter": "D",
+          "text": "CPA exams were canceled"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Scandals started to unravel in 2007 as housing prices declined."
+    },
+    {
+      "id": 85,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Bear Stearns was acquired in 2008 by J.P. Morgan after the feds agreed to be responsible for up to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "$1 billion in student loans"
+        },
+        {
+          "letter": "B",
+          "text": "$30 billion in toxic assets"
+        },
+        {
+          "letter": "C",
+          "text": "$180 billion of AIG equity"
+        },
+        {
+          "letter": "D",
+          "text": "$11 billion of WorldCom assets"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The feds agreed to be responsible for up to $30 billion in toxic assets."
+    },
+    {
+      "id": 86,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Lehman Brothers was:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Bailed out like AIG with $180 billion"
+        },
+        {
+          "letter": "B",
+          "text": "Allowed to fail in 2008, the nation’s largest bankruptcy"
+        },
+        {
+          "letter": "C",
+          "text": "Merged into Fannie Mae"
+        },
+        {
+          "letter": "D",
+          "text": "Converted into the PCAOB"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Lehman was allowed to fail; the reaction was almost complete paralysis of global credit markets."
+    },
+    {
+      "id": 87,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "After Lehman, the feds bailed out AIG by providing about:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "$30 billion of J.P. Morgan guarantees only"
+        },
+        {
+          "letter": "B",
+          "text": "$180 billion in equity"
+        },
+        {
+          "letter": "C",
+          "text": "$100 billion of S&L RTC losses only"
+        },
+        {
+          "letter": "D",
+          "text": "$6 billion Fannie restatement cash"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The feds bailed out AIG by providing $180 billion in equity."
+    },
+    {
+      "id": 88,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "TARP originally was designed to bail out:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The PCAOB"
+        },
+        {
+          "letter": "B",
+          "text": "Mortgage holders (which happened only to a limited extent)"
+        },
+        {
+          "letter": "C",
+          "text": "Italian double-entry teachers"
+        },
+        {
+          "letter": "D",
+          "text": "Only hedge funds"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The bill was originally designed to bail out mortgage holders, which happened only to a limited extent."
+    },
+    {
+      "id": 89,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Bernard Madoff was sentenced to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Seven years, like De Angelis"
+        },
+        {
+          "letter": "B",
+          "text": "150 years in jail"
+        },
+        {
+          "letter": "C",
+          "text": "A fine with no prison"
+        },
+        {
+          "letter": "D",
+          "text": "Community service at the Fed"
+        }
+      ],
+      "answer": "B",
+      "explanation": "He confessed to fraud and theft and was sentenced to 150 years in jail."
+    },
+    {
+      "id": 90,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Madoff is described as a NASDAQ innovator whose scheme lasted:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "45 days, like Ponzi"
+        },
+        {
+          "letter": "B",
+          "text": "Decades, until investor cash ran out in 2008"
+        },
+        {
+          "letter": "C",
+          "text": "Only the Harding administration"
+        },
+        {
+          "letter": "D",
+          "text": "From 1494 to 1517"
+        }
+      ],
+      "answer": "B",
+      "explanation": "A multibillion-dollar Ponzi scheme that lasted for decades; cash ran out in 2008."
+    },
+    {
+      "id": 91,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Dodd-Frank (2010) was passed “to promote the financial stability of the United States” including to end:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Double-entry bookkeeping"
+        },
+        {
+          "letter": "B",
+          "text": "“Too big to fail” and to protect consumers from abusive financial services practices"
+        },
+        {
+          "letter": "C",
+          "text": "The Federal Reserve"
+        },
+        {
+          "letter": "D",
+          "text": "CPA licensing"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The handout quotes the Act’s purposes, including ending “too big to fail” and protecting consumers."
+    },
+    {
+      "id": 92,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "SOX followed which pair of headline scandals in the timeline?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Ponzi and Teapot Dome"
+        },
+        {
+          "letter": "B",
+          "text": "Enron and WorldCom"
+        },
+        {
+          "letter": "C",
+          "text": "Ultramares and Salad Oil"
+        },
+        {
+          "letter": "D",
+          "text": "Madoff and LTCM only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "After the Enron and WorldCom scandals and all the rest, Congress passed SOX."
+    },
+    {
+      "id": 93,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Which body issued the first formal U.S. auditing-procedure response after McKesson & Robbins?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The IASB"
+        },
+        {
+          "letter": "B",
+          "text": "The Committee on Audit Procedures (1939)"
+        },
+        {
+          "letter": "C",
+          "text": "The PCAOB (which did not yet exist)"
+        },
+        {
+          "letter": "D",
+          "text": "NASBA"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The Committee on Audit Procedures was established in 1939 to issue auditing standards."
+    },
+    {
+      "id": 94,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "FASB’s 1973 creation emphasized improved:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Criminal prosecution of all auditors"
+        },
+        {
+          "letter": "B",
+          "text": "Process, governance, and public involvement relative to the APB"
+        },
+        {
+          "letter": "C",
+          "text": "Ban on all private-sector standards"
+        },
+        {
+          "letter": "D",
+          "text": "Replacement of the SEC"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Established with an improved process, governance, and public involvement."
+    },
+    {
+      "id": 95,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "“Lowballing” in the 1979 advertising-ban discussion means:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Overcharging for audits"
+        },
+        {
+          "letter": "B",
+          "text": "A very low bid to get a new client"
+        },
+        {
+          "letter": "C",
+          "text": "Refusing to bid"
+        },
+        {
+          "letter": "D",
+          "text": "Charging only for tax work"
+        }
+      ],
+      "answer": "B",
+      "explanation": "A very low bid to get a new client; audits priced more as a commodity."
+    },
+    {
+      "id": 96,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The Ultramares plaintiff was:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The SEC"
+        },
+        {
+          "letter": "B",
+          "text": "A lender, Ultramares"
+        },
+        {
+          "letter": "C",
+          "text": "The Federal Reserve"
+        },
+        {
+          "letter": "D",
+          "text": "Price Waterhouse"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Ultramares, the lender, sued the auditor."
+    },
+    {
+      "id": 97,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Which 1930s New Deal statutes created the SEC?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Sherman and Clayton Acts"
+        },
+        {
+          "letter": "B",
+          "text": "The Securities Acts of 1933 and 1934"
+        },
+        {
+          "letter": "C",
+          "text": "Garn-St. Germain and Dodd-Frank"
+        },
+        {
+          "letter": "D",
+          "text": "FCPA and SOX"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Securities Acts 1933–1934 based on findings of massive wrongdoing on Wall Street."
+    },
+    {
+      "id": 98,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Rite Aid (1999) in the timeline led to earnings restatements and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Creation of the FASB"
+        },
+        {
+          "letter": "B",
+          "text": "SEC and other investigations; executives fired and jailed"
+        },
+        {
+          "letter": "C",
+          "text": "Repeal of CPA licensing"
+        },
+        {
+          "letter": "D",
+          "text": "A successful Teapot Dome defense"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Accounting issues led to restatements, SEC and other investigations and lawsuits; executives were fired and jailed."
+    },
+    {
+      "id": 99,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "WorldCom’s jailed CEO named in the handout is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Dennis Kozlowski"
+        },
+        {
+          "letter": "B",
+          "text": "Bernie Ebbers"
+        },
+        {
+          "letter": "C",
+          "text": "Albert Fall"
+        },
+        {
+          "letter": "D",
+          "text": "Tino De Angelis"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Several executives were jailed including CEO Bernie Ebbers."
+    },
+    {
+      "id": 100,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "TARP provided billions of dollars of capital primarily to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Failing universities"
+        },
+        {
+          "letter": "B",
+          "text": "Failing banks"
+        },
+        {
+          "letter": "C",
+          "text": "The AICPA"
+        },
+        {
+          "letter": "D",
+          "text": "State boards of accountancy"
+        }
+      ],
+      "answer": "B",
+      "explanation": "TARP provided billions of dollars of capital to failing banks."
+    },
+    {
+      "id": 101,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Double-entry’s “complex income streams” advantage mattered historically because merchants needed to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Ignore remote branches"
+        },
+        {
+          "letter": "B",
+          "text": "Track profits across more complicated operations"
+        },
+        {
+          "letter": "C",
+          "text": "Avoid using paper"
+        },
+        {
+          "letter": "D",
+          "text": "Stop calculating profits"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Key advantages included complex income streams (and remote operations)."
+    },
+    {
+      "id": 102,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "The APB is described as replacing CAP but:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Solving every problem immediately"
+        },
+        {
+          "letter": "B",
+          "text": "Using new procedures but with many of the problems of the previous organization"
+        },
+        {
+          "letter": "C",
+          "text": "Becoming a government agency"
+        },
+        {
+          "letter": "D",
+          "text": "Issuing only SABs"
+        }
+      ],
+      "answer": "B",
+      "explanation": "New procedures but with many of the problems of the previous organization."
+    },
+    {
+      "id": 103,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Inspectors in the Salad Oil Swindle confirmed:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Empty tanks"
+        },
+        {
+          "letter": "B",
+          "text": "Shipments of salad oil (which were largely water)"
+        },
+        {
+          "letter": "C",
+          "text": "Gold bars"
+        },
+        {
+          "letter": "D",
+          "text": "Receivables at McKesson"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Inspectors for creditors confirmed shipments of salad oil."
+    },
+    {
+      "id": 104,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Continental Vending shows that complying with GAAS:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Automatically prevents criminal liability"
+        },
+        {
+          "letter": "B",
+          "text": "Did not prevent a criminal-fraud conviction of the auditors in that case"
+        },
+        {
+          "letter": "C",
+          "text": "Is irrelevant to audits"
+        },
+        {
+          "letter": "D",
+          "text": "Was invented in 2002"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Lybrand did not violate GAAS, yet three auditors were found guilty of criminal fraud."
+    },
+    {
+      "id": 105,
+      "module": "Handout #2: Development of the Accounting Profession",
+      "prompt": "Dodd-Frank’s potential effectiveness, according to the handout:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Has been universally agreed"
+        },
+        {
+          "letter": "B",
+          "text": "Has been debated ever since"
+        },
+        {
+          "letter": "C",
+          "text": "Ended all banking"
+        },
+        {
+          "letter": "D",
+          "text": "Replaced GAAP with tax basis"
+        }
+      ],
+      "answer": "B",
+      "explanation": "“The potential effectiveness has been debated ever since.”"
+    },
+    {
+      "id": 106,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Which body is listed first under Financial Accounting Standards in Handout #3?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "PCAOB"
+        },
+        {
+          "letter": "B",
+          "text": "Financial Accounting Standards Board (FASB)"
+        },
+        {
+          "letter": "C",
+          "text": "IRS"
+        },
+        {
+          "letter": "D",
+          "text": "GAO"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Financial Accounting Standards: FASB, SEC, GASB, IASB."
+    },
+    {
+      "id": 107,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Which of the following is listed under Auditing Standards (not financial accounting standards)?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "FASB"
+        },
+        {
+          "letter": "B",
+          "text": "PCAOB"
+        },
+        {
+          "letter": "C",
+          "text": "GASB"
+        },
+        {
+          "letter": "D",
+          "text": "IASB"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Auditing Standards: PCAOB, ASB, GAO, IAASB."
+    },
+    {
+      "id": 108,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Tax rules & regulations in the “big picture” are associated with:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The IASB and GASB"
+        },
+        {
+          "letter": "B",
+          "text": "The Department of the Treasury and the IRS"
+        },
+        {
+          "letter": "C",
+          "text": "The IIA only"
+        },
+        {
+          "letter": "D",
+          "text": "The IMA only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Tax Rules & Regulations: Department of the Treasury; Internal Revenue Service (IRS)."
+    },
+    {
+      "id": 109,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The AICPA’s ethical standards vehicle named in Handout #3 is the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Yellow Book"
+        },
+        {
+          "letter": "B",
+          "text": "Code of Professional Conduct (CPC)"
+        },
+        {
+          "letter": "C",
+          "text": "Accounting Standards Codification"
+        },
+        {
+          "letter": "D",
+          "text": "Staff Accounting Bulletin"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Ethical Standards: AICPA — Code of Professional Conduct (CPC)."
+    },
+    {
+      "id": 110,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "IFAC’s ethics code is referred to in the handout as the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Yellow Book"
+        },
+        {
+          "letter": "B",
+          "text": "“IFAC Code”"
+        },
+        {
+          "letter": "C",
+          "text": "ASC"
+        },
+        {
+          "letter": "D",
+          "text": "Form 10-K"
+        }
+      ],
+      "answer": "B",
+      "explanation": "International Federation of Accountants (IFAC) — “IFAC Code.”"
+    },
+    {
+      "id": 111,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The Committee on Accounting Procedures (1938–1959) was part of the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "SEC"
+        },
+        {
+          "letter": "B",
+          "text": "American Institute of Accountants (AIA), predecessor to the AICPA"
+        },
+        {
+          "letter": "C",
+          "text": "PCAOB"
+        },
+        {
+          "letter": "D",
+          "text": "IASB"
+        }
+      ],
+      "answer": "B",
+      "explanation": "CAP was part of the AIA, predecessor to the AICPA; rules called ARBs."
+    },
+    {
+      "id": 112,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The Accounting Principles Board (1959–1973) was part of the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "PCAOB"
+        },
+        {
+          "letter": "B",
+          "text": "AICPA"
+        },
+        {
+          "letter": "C",
+          "text": "Federal Reserve"
+        },
+        {
+          "letter": "D",
+          "text": "GAO"
+        }
+      ],
+      "answer": "B",
+      "explanation": "APB was part of the AICPA; rules called APB Statements and Opinions."
+    },
+    {
+      "id": 113,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Under the Constitution, the legislative branch:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Enforces the laws"
+        },
+        {
+          "letter": "B",
+          "text": "Makes the laws"
+        },
+        {
+          "letter": "C",
+          "text": "Interprets the laws"
+        },
+        {
+          "letter": "D",
+          "text": "Audits the IRS"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Legislative—makes the laws; Executive—enforces; Judicial—interprets."
+    },
+    {
+      "id": 114,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The executive branch’s constitutional role in the handout is to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Make the laws"
+        },
+        {
+          "letter": "B",
+          "text": "Enforce the laws"
+        },
+        {
+          "letter": "C",
+          "text": "Interpret the laws"
+        },
+        {
+          "letter": "D",
+          "text": "Write GAAP"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Executive—enforces the laws."
+    },
+    {
+      "id": 115,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The judicial branch:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Makes tax rates"
+        },
+        {
+          "letter": "B",
+          "text": "Interprets the laws"
+        },
+        {
+          "letter": "C",
+          "text": "Appoints all FASB members"
+        },
+        {
+          "letter": "D",
+          "text": "Issues 10-Qs"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Judicial—interprets the laws."
+    },
+    {
+      "id": 116,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Handout #3 notes that the PCAOB is technically:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A cabinet department"
+        },
+        {
+          "letter": "B",
+          "text": "Private, but has governmental authority"
+        },
+        {
+          "letter": "C",
+          "text": "A committee of the IASB"
+        },
+        {
+          "letter": "D",
+          "text": "Part of the IRS"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The PCAOB is technically private, but has governmental authority."
+    },
+    {
+      "id": 117,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "In the governmental-regulators org chart, the PCAOB sits under the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "IRS Commissioner only"
+        },
+        {
+          "letter": "B",
+          "text": "Securities & Exchange Commission (which sits under the President)"
+        },
+        {
+          "letter": "C",
+          "text": "FASB"
+        },
+        {
+          "letter": "D",
+          "text": "GASB"
+        }
+      ],
+      "answer": "B",
+      "explanation": "President → SEC → PCAOB; IRS Commissioner is a separate branch under the President."
+    },
+    {
+      "id": 118,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The IRS Commissioner in the chart reports up to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The PCAOB"
+        },
+        {
+          "letter": "B",
+          "text": "The President of the United States"
+        },
+        {
+          "letter": "C",
+          "text": "The AICPA"
+        },
+        {
+          "letter": "D",
+          "text": "The IASB"
+        }
+      ],
+      "answer": "B",
+      "explanation": "President of the United States above both the SEC and the IRS Commissioner."
+    },
+    {
+      "id": 119,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "One dimension for organizing standards in the handout is Authority of Issuing Body, which splits:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Tax vs. sports"
+        },
+        {
+          "letter": "B",
+          "text": "Governmental vs. private sector"
+        },
+        {
+          "letter": "C",
+          "text": "Debits vs. credits"
+        },
+        {
+          "letter": "D",
+          "text": "Cash vs. accrual only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Authority: Governmental or Private Sector."
+    },
+    {
+      "id": 120,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Areas of accounting practice listed include financial, audit, tax, managerial, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Athletics"
+        },
+        {
+          "letter": "B",
+          "text": "Ethics, licensing, & conduct"
+        },
+        {
+          "letter": "C",
+          "text": "Agriculture"
+        },
+        {
+          "letter": "D",
+          "text": "Meteorology"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Area of Accounting Practice Addressed includes Ethics, Licensing, & Conduct."
+    },
+    {
+      "id": 121,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Types of pronouncement listed include laws/rules/regulations, standards, ethics, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Tweets"
+        },
+        {
+          "letter": "B",
+          "text": "Concepts"
+        },
+        {
+          "letter": "C",
+          "text": "Campaign ads"
+        },
+        {
+          "letter": "D",
+          "text": "Sports scores"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Type of Pronouncement: Laws, Rules, and Regulations; Standards; Concepts; Ethics."
+    },
+    {
+      "id": 122,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Scope of guidance in the handout is split into:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Debit and credit"
+        },
+        {
+          "letter": "B",
+          "text": "U.S. and International"
+        },
+        {
+          "letter": "C",
+          "text": "Public and athletic"
+        },
+        {
+          "letter": "D",
+          "text": "Interim and perpetual"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Scope of Guidance: U.S. or International."
+    },
+    {
+      "id": 123,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "In the Standard-Setting Authorities table, the governmental body for financial accounting is the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "IMA"
+        },
+        {
+          "letter": "B",
+          "text": "SEC"
+        },
+        {
+          "letter": "C",
+          "text": "IASB"
+        },
+        {
+          "letter": "D",
+          "text": "ASB"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Governmental / Financial: SEC. Private: FASB, GASB, IASB."
+    },
+    {
+      "id": 124,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Private-sector financial standard setters in the table include FASB, GASB, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "IRS"
+        },
+        {
+          "letter": "B",
+          "text": "IASB"
+        },
+        {
+          "letter": "C",
+          "text": "PCAOB"
+        },
+        {
+          "letter": "D",
+          "text": "GAO"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Private / Financial: FASB, GASB, IASB."
+    },
+    {
+      "id": 125,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Governmental audit standard setters in the table are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "FASB and GASB"
+        },
+        {
+          "letter": "B",
+          "text": "PCAOB and GAO"
+        },
+        {
+          "letter": "C",
+          "text": "IMA and IIA"
+        },
+        {
+          "letter": "D",
+          "text": "IRS and Treasury only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Governmental / Audit: PCAOB, GAO."
+    },
+    {
+      "id": 126,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The ASB footnote in the table says it is part of the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "SEC"
+        },
+        {
+          "letter": "B",
+          "text": "AICPA"
+        },
+        {
+          "letter": "C",
+          "text": "IRS"
+        },
+        {
+          "letter": "D",
+          "text": "GAO"
+        }
+      ],
+      "answer": "B",
+      "explanation": "* Part of AICPA."
+    },
+    {
+      "id": 127,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "IAASB and IESBA are footnoted as part of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The SEC"
+        },
+        {
+          "letter": "B",
+          "text": "IFEA"
+        },
+        {
+          "letter": "C",
+          "text": "The IRS"
+        },
+        {
+          "letter": "D",
+          "text": "NASBA"
+        }
+      ],
+      "answer": "B",
+      "explanation": "** Part of IFEA."
+    },
+    {
+      "id": 128,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "NASBA in the table is footnoted as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Part of the IASB"
+        },
+        {
+          "letter": "B",
+          "text": "State Boards of Accountancy"
+        },
+        {
+          "letter": "C",
+          "text": "A United Nations agency"
+        },
+        {
+          "letter": "D",
+          "text": "A stock exchange"
+        }
+      ],
+      "answer": "B",
+      "explanation": "*** State Boards of Accountancy."
+    },
+    {
+      "id": 129,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The only governmental tax setter in the table is the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "IMA"
+        },
+        {
+          "letter": "B",
+          "text": "IRS"
+        },
+        {
+          "letter": "C",
+          "text": "FASB"
+        },
+        {
+          "letter": "D",
+          "text": "IIA"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Governmental / Tax: IRS. The private-sector tax cell is blank."
+    },
+    {
+      "id": 130,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Managerial accounting in the table is associated with the private-sector:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "PCAOB"
+        },
+        {
+          "letter": "B",
+          "text": "IMA"
+        },
+        {
+          "letter": "C",
+          "text": "GAO"
+        },
+        {
+          "letter": "D",
+          "text": "SEC"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Private / Managerial: IMA."
+    },
+    {
+      "id": 131,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The SEC’s mission includes protecting investors; maintaining fair, orderly, and efficient markets; and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Writing the Internal Revenue Code"
+        },
+        {
+          "letter": "B",
+          "text": "Facilitating capital formation"
+        },
+        {
+          "letter": "C",
+          "text": "Appointing FASB’s seven members"
+        },
+        {
+          "letter": "D",
+          "text": "Issuing Yellow Book standards"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Protect investors; maintain fair, orderly, and efficient markets; and facilitate capital formation."
+    },
+    {
+      "id": 132,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The SEC has how many commissioners?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Three, all from one party"
+        },
+        {
+          "letter": "B",
+          "text": "Five, appointed by the President and confirmed by the Senate, no more than three of the same political party"
+        },
+        {
+          "letter": "C",
+          "text": "Seven appointed by the FAF"
+        },
+        {
+          "letter": "D",
+          "text": "Nine elected by CPAs"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Five commissioners; presidential appointment and Senate confirmation; no more than three of the same party."
+    },
+    {
+      "id": 133,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Staff Accounting Bulletins (SABs) reflect:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Criminal indictments only"
+        },
+        {
+          "letter": "B",
+          "text": "Views about accounting-related disclosure practices"
+        },
+        {
+          "letter": "C",
+          "text": "State CPA exam questions"
+        },
+        {
+          "letter": "D",
+          "text": "Yellow Book chapters"
+        }
+      ],
+      "answer": "B",
+      "explanation": "SABs reflect views about accounting-related disclosure practices."
+    },
+    {
+      "id": 134,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Accounting and Enforcement Releases (AAERs) concern:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "FASB agenda decisions"
+        },
+        {
+          "letter": "B",
+          "text": "Financial-reporting-related enforcement actions concerning civil lawsuits brought by the Commission in federal court"
+        },
+        {
+          "letter": "C",
+          "text": "IASB due process"
+        },
+        {
+          "letter": "D",
+          "text": "NASBA mobility"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AAERs: financial reporting related enforcement actions concerning civil lawsuits brought by the Commission in federal court."
+    },
+    {
+      "id": 135,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Which SEC filing is the annual report in the handout’s list?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "10-Q"
+        },
+        {
+          "letter": "B",
+          "text": "10-K"
+        },
+        {
+          "letter": "C",
+          "text": "8-K only"
+        },
+        {
+          "letter": "D",
+          "text": "Yellow Book"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Annual Reports (10-K); Quarterly Reports (10-Q)."
+    },
+    {
+      "id": 136,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Quarterly reports are filed on Form:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "10-K"
+        },
+        {
+          "letter": "B",
+          "text": "10-Q"
+        },
+        {
+          "letter": "C",
+          "text": "ASC 310"
+        },
+        {
+          "letter": "D",
+          "text": "AU-C 610"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Quarterly Reports (10-Q)."
+    },
+    {
+      "id": 137,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Proxy statements in the handout’s list are associated with:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Form SK only"
+        },
+        {
+          "letter": "B",
+          "text": "DEFA14A"
+        },
+        {
+          "letter": "C",
+          "text": "Yellow Book"
+        },
+        {
+          "letter": "D",
+          "text": "IRC §"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Proxy Statements (DEFA14A). Registration Statements are listed as (SK)."
+    },
+    {
+      "id": 138,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The PCAOB is a nonprofit corporation established by Congress to oversee:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "All tax preparation"
+        },
+        {
+          "letter": "B",
+          "text": "The audits of public companies"
+        },
+        {
+          "letter": "C",
+          "text": "Municipal bond ratings"
+        },
+        {
+          "letter": "D",
+          "text": "State CPA exams"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Oversee the audits of public companies in order to protect investors and further the public interest in informative, accurate, and independent audit reports."
+    },
+    {
+      "id": 139,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "PCAOB members, including the Chair, are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Elected by audit clients"
+        },
+        {
+          "letter": "B",
+          "text": "Five members appointed to staggered five-year terms by the SEC"
+        },
+        {
+          "letter": "C",
+          "text": "The same as FASB’s seven FAF appointees"
+        },
+        {
+          "letter": "D",
+          "text": "Unlimited in number"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Five members including the Chair, appointed to staggered five-year terms by the SEC."
+    },
+    {
+      "id": 140,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "PCAOB auditing pronouncements are labeled:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "ARBs"
+        },
+        {
+          "letter": "B",
+          "text": "Auditing Standards (AS)"
+        },
+        {
+          "letter": "C",
+          "text": "ASC topics"
+        },
+        {
+          "letter": "D",
+          "text": "SABs"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Pronouncements: Auditing Standards (AS); also ET, QC, and AT."
+    },
+    {
+      "id": 141,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Besides AS, the PCAOB also issues:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only tax court rulings"
+        },
+        {
+          "letter": "B",
+          "text": "Ethics and Independence (ET), Quality Control (QC), and Attestation Standards (AT)"
+        },
+        {
+          "letter": "C",
+          "text": "The Internal Revenue Code"
+        },
+        {
+          "letter": "D",
+          "text": "Form 10-K instructions only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Also issue ET, QC, and AT. Inspection Reports & Disciplinary Orders also attract attention."
+    },
+    {
+      "id": 142,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The GAO is described as the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "“investor watchdog” of Wall Street"
+        },
+        {
+          "letter": "B",
+          "text": "“congressional watchdog,” an independent, non-partisan agency that works for Congress"
+        },
+        {
+          "letter": "C",
+          "text": "Private-sector FASB equivalent"
+        },
+        {
+          "letter": "D",
+          "text": "State board consortium"
+        }
+      ],
+      "answer": "B",
+      "explanation": "GAO is the “congressional watchdog.”"
+    },
+    {
+      "id": 143,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The GAO’s auditing pronouncement highlighted in the handout is the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "ASC"
+        },
+        {
+          "letter": "B",
+          "text": "Yellow Book: Government Auditing Standards"
+        },
+        {
+          "letter": "C",
+          "text": "SAB 99"
+        },
+        {
+          "letter": "D",
+          "text": "Form 10-Q"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Yellow Book: Government Auditing Standards (GGAS in the handout)."
+    },
+    {
+      "id": 144,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "IRS pronouncements listed include the Internal Revenue Code, Tax Court Rulings, and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Auditing Standards (AS)"
+        },
+        {
+          "letter": "B",
+          "text": "Private Letter Rulings"
+        },
+        {
+          "letter": "C",
+          "text": "GASB Concepts"
+        },
+        {
+          "letter": "D",
+          "text": "NYSE listing standards only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "IRC§, Tax Court Rulings, Private Letter Rulings, and many others."
+    },
+    {
+      "id": 145,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The FASB establishes and improves standards of financial accounting and reporting for:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The U.S. federal budget only"
+        },
+        {
+          "letter": "B",
+          "text": "Nongovernmental entities, providing decision-useful information to investors and other users"
+        },
+        {
+          "letter": "C",
+          "text": "Only public-company audits"
+        },
+        {
+          "letter": "D",
+          "text": "State CPA licensing"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Financial reporting by nongovernmental entities that provides decision-useful information."
+    },
+    {
+      "id": 146,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "FASB has how many board members (“commissioners” in the handout), and who appoints them?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Five, appointed by the President"
+        },
+        {
+          "letter": "B",
+          "text": "Seven, appointed by the Financial Accounting Foundation (FAF) to five-year terms, eligible for one additional term"
+        },
+        {
+          "letter": "C",
+          "text": "Nine, elected by the AICPA"
+        },
+        {
+          "letter": "D",
+          "text": "Three, appointed by the PCAOB"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Seven appointed by the FAF to five-year terms; may be reappointed to one additional five-year term."
+    },
+    {
+      "id": 147,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The Accounting Standards Codification (ASC) is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A PCAOB inspection checklist"
+        },
+        {
+          "letter": "B",
+          "text": "The only source of authoritative nongovernmental U.S. GAAP"
+        },
+        {
+          "letter": "C",
+          "text": "The Yellow Book"
+        },
+        {
+          "letter": "D",
+          "text": "Form 10-K Item 1"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Only source of authoritative nongovernmental U.S. GAAP; organizes pronouncements into topics; includes portions of SEC accounting guidance."
+    },
+    {
+      "id": 148,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "An Accounting Standards Update (ASU) is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A 10-Q amendment"
+        },
+        {
+          "letter": "B",
+          "text": "Any new standard issued by FASB"
+        },
+        {
+          "letter": "C",
+          "text": "A PCAOB disciplinary order"
+        },
+        {
+          "letter": "D",
+          "text": "An IRS private letter"
+        }
+      ],
+      "answer": "B",
+      "explanation": "ASU: any new standard issued by FASB."
+    },
+    {
+      "id": 149,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "In the ASC topic numbering, Assets are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "100–199"
+        },
+        {
+          "letter": "B",
+          "text": "300–399"
+        },
+        {
+          "letter": "C",
+          "text": "600–699"
+        },
+        {
+          "letter": "D",
+          "text": "900–999"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Assets 300–399. General Principles 100–199; Presentation 200–299."
+    },
+    {
+      "id": 150,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "ASC topic numbers 600–699 cover:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Liabilities"
+        },
+        {
+          "letter": "B",
+          "text": "Revenues"
+        },
+        {
+          "letter": "C",
+          "text": "Equity"
+        },
+        {
+          "letter": "D",
+          "text": "Industry"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Revenues 600–699. Liabilities 400–499; Equity 500–599."
+    },
+    {
+      "id": 151,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "ASC Broad Transactions topics are numbered:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "100–199"
+        },
+        {
+          "letter": "B",
+          "text": "800–899"
+        },
+        {
+          "letter": "C",
+          "text": "300–399"
+        },
+        {
+          "letter": "D",
+          "text": "200–299"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Broad Transactions 800–899. Industry 900–999."
+    },
+    {
+      "id": 152,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Expenses in the ASC are topics:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "200–299"
+        },
+        {
+          "letter": "B",
+          "text": "700–799"
+        },
+        {
+          "letter": "C",
+          "text": "400–499"
+        },
+        {
+          "letter": "D",
+          "text": "900–999"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Expenses 700–799."
+    },
+    {
+      "id": 153,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The Auditing Standards Board (ASB) is shown under the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "SEC"
+        },
+        {
+          "letter": "B",
+          "text": "AICPA"
+        },
+        {
+          "letter": "C",
+          "text": "IRS"
+        },
+        {
+          "letter": "D",
+          "text": "GAO"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AICPA, with ASB nested underneath."
+    },
+    {
+      "id": 154,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "NASBA is the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "National Association of State Boards of Accountancy"
+        },
+        {
+          "letter": "B",
+          "text": "North American Securities Bankers Association"
+        },
+        {
+          "letter": "C",
+          "text": "National Audit Standards Board of America"
+        },
+        {
+          "letter": "D",
+          "text": "New Accounting Standards Board of the AICPA"
+        }
+      ],
+      "answer": "A",
+      "explanation": "National Association of State Boards of Accountancy (NASBA)."
+    },
+    {
+      "id": 155,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "GASB is the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Governmental Accounting Standards Board"
+        },
+        {
+          "letter": "B",
+          "text": "Generally Accepted Securities Bureau"
+        },
+        {
+          "letter": "C",
+          "text": "Global Audit Standards Board"
+        },
+        {
+          "letter": "D",
+          "text": "Georgia Association of State Boards"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Governmental Accounting Standards Board (GASB)."
+    },
+    {
+      "id": 156,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The Institute of Internal Auditors is abbreviated:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "IMA"
+        },
+        {
+          "letter": "B",
+          "text": "IIA"
+        },
+        {
+          "letter": "C",
+          "text": "IFAC"
+        },
+        {
+          "letter": "D",
+          "text": "IAASB"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Institute of Internal Auditors (IIA)."
+    },
+    {
+      "id": 157,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The Institute of Management Accountants is abbreviated:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "IIA"
+        },
+        {
+          "letter": "B",
+          "text": "IMA"
+        },
+        {
+          "letter": "C",
+          "text": "IFEA"
+        },
+        {
+          "letter": "D",
+          "text": "IESBA"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Institute of Management Accountants (IMA)."
+    },
+    {
+      "id": 158,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The IASB is the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "International Accounting Standards Board"
+        },
+        {
+          "letter": "B",
+          "text": "Internal Audit Standards Bureau"
+        },
+        {
+          "letter": "C",
+          "text": "IRS Accounting Standards Board"
+        },
+        {
+          "letter": "D",
+          "text": "Iowa Accounting Standards Board"
+        }
+      ],
+      "answer": "A",
+      "explanation": "International Accounting Standards Board (IASB)."
+    },
+    {
+      "id": 159,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "IFEA, the International Foundation for Ethics and Audit, houses:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The SEC and IRS"
+        },
+        {
+          "letter": "B",
+          "text": "The IAASB and the IESBA"
+        },
+        {
+          "letter": "C",
+          "text": "FASB and GASB"
+        },
+        {
+          "letter": "D",
+          "text": "NASBA and the PCAOB"
+        }
+      ],
+      "answer": "B",
+      "explanation": "IFEA includes IAASB and IESBA."
+    },
+    {
+      "id": 160,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "The International Ethics Standards Board for Accountants is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "ASB"
+        },
+        {
+          "letter": "B",
+          "text": "IESBA"
+        },
+        {
+          "letter": "C",
+          "text": "GAO"
+        },
+        {
+          "letter": "D",
+          "text": "IMA"
+        }
+      ],
+      "answer": "B",
+      "explanation": "IESBA sits under IFEA in the handout."
+    },
+    {
+      "id": 161,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "IFAC is the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "International Federation of Accountants"
+        },
+        {
+          "letter": "B",
+          "text": "Internal FASB Advisory Committee"
+        },
+        {
+          "letter": "C",
+          "text": "Iowa Federation of Audit Committees"
+        },
+        {
+          "letter": "D",
+          "text": "International Form 10-K Association"
+        }
+      ],
+      "answer": "A",
+      "explanation": "International Federation of Accountants (IFAC)."
+    },
+    {
+      "id": 162,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Presentation topics in the ASC are numbered:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "100–199"
+        },
+        {
+          "letter": "B",
+          "text": "200–299"
+        },
+        {
+          "letter": "C",
+          "text": "500–599"
+        },
+        {
+          "letter": "D",
+          "text": "800–899"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Presentation 200–299. General Principles 100–199."
+    },
+    {
+      "id": 163,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Equity topics in the ASC are numbered:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "300–399"
+        },
+        {
+          "letter": "B",
+          "text": "500–599"
+        },
+        {
+          "letter": "C",
+          "text": "700–799"
+        },
+        {
+          "letter": "D",
+          "text": "900–999"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Equity 500–599."
+    },
+    {
+      "id": 164,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Which private-sector body in the table is associated with internal auditing?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "IMA"
+        },
+        {
+          "letter": "B",
+          "text": "IIA"
+        },
+        {
+          "letter": "C",
+          "text": "IRS"
+        },
+        {
+          "letter": "D",
+          "text": "SEC"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Private / Audit includes ASB, IAASB, and IIA."
+    },
+    {
+      "id": 165,
+      "module": "Handout #3: Professional & Regulatory Standards",
+      "prompt": "Governmental ethics, licensing, and conduct setters in the table include PCAOB and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "IMA"
+        },
+        {
+          "letter": "B",
+          "text": "NASBA"
+        },
+        {
+          "letter": "C",
+          "text": "IASB"
+        },
+        {
+          "letter": "D",
+          "text": "FASB"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Governmental / Ethics, Licensing, & Conduct: PCAOB, NASBA."
+    },
+    {
+      "id": 166,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "SEC Staff Accounting Bulletin No. 99 addresses:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Auditor advertising"
+        },
+        {
+          "letter": "B",
+          "text": "Materiality"
+        },
+        {
+          "letter": "C",
+          "text": "Yellow Book independence"
+        },
+        {
+          "letter": "D",
+          "text": "CPA mobility"
+        }
+      ],
+      "answer": "B",
+      "explanation": "SAB 99 is titled Materiality (August 12, 1999)."
+    },
+    {
+      "id": 167,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "SAB 99’s core view is that exclusive reliance on certain quantitative benchmarks to assess materiality is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Required by GAAP"
+        },
+        {
+          "letter": "B",
+          "text": "Inappropriate; misstatements are not immaterial simply because they fall beneath a numerical threshold"
+        },
+        {
+          "letter": "C",
+          "text": "The only legally accepted method"
+        },
+        {
+          "letter": "D",
+          "text": "Mandated by the Supreme Court"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Exclusive reliance on quantitative benchmarks is inappropriate."
+    },
+    {
+      "id": 168,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "In SAB 99’s fact pattern, combined misstatements overstate net income by 4% and no line item is misstated by more than 5%. Management concludes the deviation is immaterial. The staff’s question is whether a registrant may assume immateriality below a percentage threshold. The interpretive response is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Yes, 5% is a safe harbor"
+        },
+        {
+          "letter": "B",
+          "text": "No"
+        },
+        {
+          "letter": "C",
+          "text": "Only if the PCAOB agrees"
+        },
+        {
+          "letter": "D",
+          "text": "Only for estimates"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Interpretive Response: No."
+    },
+    {
+      "id": 169,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "The staff has no objection to a 5% “rule of thumb” as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A substitute for all analysis"
+        },
+        {
+          "letter": "B",
+          "text": "An initial step in assessing materiality"
+        },
+        {
+          "letter": "C",
+          "text": "A criminal defense"
+        },
+        {
+          "letter": "D",
+          "text": "The definition of fraud"
+        }
+      ],
+      "answer": "B",
+      "explanation": "A percentage threshold may provide a preliminary assumption; quantifying is only the beginning of the analysis."
+    },
+    {
+      "id": 170,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "FASB Concepts Statement No. 2, as quoted in SAB 99, says an item is material if it is probable that the judgment of a reasonable person relying on the report would have been:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Unchanged in all cases"
+        },
+        {
+          "letter": "B",
+          "text": "Changed or influenced by inclusion or correction of the item"
+        },
+        {
+          "letter": "C",
+          "text": "Delegated to the PCAOB"
+        },
+        {
+          "letter": "D",
+          "text": "Based only on 5% of assets"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Magnitude such that a reasonable person’s judgment would have been changed or influenced."
+    },
+    {
+      "id": 171,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "The Supreme Court formulation quoted in SAB 99 is that a fact is material if there is a substantial likelihood a reasonable investor would view it as significantly altering the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Auditor’s fee"
+        },
+        {
+          "letter": "B",
+          "text": "“Total mix” of information made available"
+        },
+        {
+          "letter": "C",
+          "text": "Number of 10-K pages"
+        },
+        {
+          "letter": "D",
+          "text": "PCAOB inspection cycle"
+        }
+      ],
+      "answer": "B",
+      "explanation": "TSC Industries formulation: total mix of information."
+    },
+    {
+      "id": 172,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "SAB 99 says financial management and the auditor must consider both:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Debits and credits only"
+        },
+        {
+          "letter": "B",
+          "text": "Quantitative and qualitative factors"
+        },
+        {
+          "letter": "C",
+          "text": "U.S. and IFRS only"
+        },
+        {
+          "letter": "D",
+          "text": "Tax and book income only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Consider both “quantitative” and “qualitative” factors."
+    },
+    {
+      "id": 173,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "The FASB rejected formulating general quantitative materiality standards because:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Investors never care about small amounts"
+        },
+        {
+          "letter": "B",
+          "text": "Materiality judgments can properly be made only by those who have all the facts"
+        },
+        {
+          "letter": "C",
+          "text": "The SEC forbade guidance"
+        },
+        {
+          "letter": "D",
+          "text": "Auditors already agree uniformly"
+        }
+      ],
+      "answer": "B",
+      "explanation": "No general standards of materiality could take into account all considerations in experienced human judgment."
+    },
+    {
+      "id": 174,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "Which qualitative factor may render a quantitatively small misstatement material under SAB 99?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Whether it masks a change in earnings or other trends"
+        },
+        {
+          "letter": "B",
+          "text": "Whether the font is 10-point or 12-point"
+        },
+        {
+          "letter": "C",
+          "text": "Whether the 10-K is filed on a Tuesday"
+        },
+        {
+          "letter": "D",
+          "text": "Whether the auditor’s office has a window"
+        }
+      ],
+      "answer": "A",
+      "explanation": "Among the listed considerations: masking a change in earnings or other trends."
+    },
+    {
+      "id": 175,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "Changing a loss into income (or vice versa) is listed in SAB 99 as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Always immaterial if under 5%"
+        },
+        {
+          "letter": "B",
+          "text": "A qualitative consideration that may make a small misstatement material"
+        },
+        {
+          "letter": "C",
+          "text": "Irrelevant to investors"
+        },
+        {
+          "letter": "D",
+          "text": "A tax-only issue"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Whether the misstatement changes a loss into income or vice versa."
+    },
+    {
+      "id": 176,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "A misstatement that helps management meet a bonus target is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Immaterial by definition"
+        },
+        {
+          "letter": "B",
+          "text": "A qualitative factor that may make a small amount material"
+        },
+        {
+          "letter": "C",
+          "text": "Required by GAAP"
+        },
+        {
+          "letter": "D",
+          "text": "Only an IRS matter"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Whether it increases management’s compensation, e.g., by satisfying bonus requirements."
+    },
+    {
+      "id": 177,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "SAB 99 warns that even small intentional misstatements to “manage” earnings:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Are always immaterial"
+        },
+        {
+          "letter": "B",
+          "text": "Should not be assumed immaterial"
+        },
+        {
+          "letter": "C",
+          "text": "Are required if under 5%"
+        },
+        {
+          "letter": "D",
+          "text": "Cannot be qualitative"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Do not assume even small intentional misstatements, e.g. earnings management, are immaterial."
+    },
+    {
+      "id": 178,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "When aggregating misstatements, SAB 99 says a material misstatement of an individual amount:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Can be offset by an equal error in the opposite direction always"
+        },
+        {
+          "letter": "B",
+          "text": "Cannot be eliminated by combining it with other misstatements"
+        },
+        {
+          "letter": "C",
+          "text": "Is ignored if under 5%"
+        },
+        {
+          "letter": "D",
+          "text": "Matters only for tax"
+        }
+      ],
+      "answer": "B",
+      "explanation": "If an individual amount causes the statements as a whole to be materially misstated, that effect cannot be eliminated by other misstatements."
+    },
+    {
+      "id": 179,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "Registrants and auditors should consider each misstatement:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only in aggregate, never separately"
+        },
+        {
+          "letter": "B",
+          "text": "Separately and in the aggregate"
+        },
+        {
+          "letter": "C",
+          "text": "Only if it exceeds 10% of assets"
+        },
+        {
+          "letter": "D",
+          "text": "Only if the CEO requests it"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Consider each misstatement separately and the aggregate effect of all misstatements."
+    },
+    {
+      "id": 180,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "The Flanagan matter is an SEC Accounting and Auditing Enforcement Release dated:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "August 12, 1999"
+        },
+        {
+          "letter": "B",
+          "text": "August 4, 2010"
+        },
+        {
+          "letter": "C",
+          "text": "December 15, 2014"
+        },
+        {
+          "letter": "D",
+          "text": "May 12, 2025"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AAER Release No. 3163 / August 4, 2010; Exchange Act Release 62636."
+    },
+    {
+      "id": 181,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "Thomas P. Flanagan was a partner and Vice Chairman at:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Price Waterhouse in 1937"
+        },
+        {
+          "letter": "B",
+          "text": "Deloitte & Touche LLP"
+        },
+        {
+          "letter": "C",
+          "text": "Arthur Andersen only in 2001"
+        },
+        {
+          "letter": "D",
+          "text": "Lybrand, Ross Bros. & Montgomery"
+        }
+      ],
+      "answer": "B",
+      "explanation": "A partner and Vice Chairman at Deloitte & Touche LLP."
+    },
+    {
+      "id": 182,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "Between December 2003 and July 2008, Flanagan made how many trades purchasing stock or options in Deloitte audit clients?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "9"
+        },
+        {
+          "letter": "B",
+          "text": "71 (62 of which were clients where he was the advisory partner)"
+        },
+        {
+          "letter": "C",
+          "text": "5"
+        },
+        {
+          "letter": "D",
+          "text": "150"
+        }
+      ],
+      "answer": "B",
+      "explanation": "71 trades in nine audit clients; 62 while serving on the engagement team as advisory partner."
+    },
+    {
+      "id": 183,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "Flanagan concealed his ownership and control of those securities from:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only the IRS"
+        },
+        {
+          "letter": "B",
+          "text": "Deloitte and the audit clients"
+        },
+        {
+          "letter": "C",
+          "text": "Only the NYSE"
+        },
+        {
+          "letter": "D",
+          "text": "Only NASBA"
+        }
+      ],
+      "answer": "B",
+      "explanation": "He concealed ownership and control from Deloitte and the audit clients."
+    },
+    {
+      "id": 184,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "While Flanagan owned those securities, Deloitte issued audit reports stating the financial statements had been audited by:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A non-CPA"
+        },
+        {
+          "letter": "B",
+          "text": "An independent auditor (which the SEC treated as false in this context)"
+        },
+        {
+          "letter": "C",
+          "text": "The PCAOB staff"
+        },
+        {
+          "letter": "D",
+          "text": "Internal audit only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Deloitte issued reports stating an independent auditor had audited the statements; clients filed those false reports."
+    },
+    {
+      "id": 185,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "Flanagan was a CPA licensed in:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "New York only, as in 1896"
+        },
+        {
+          "letter": "B",
+          "text": "Illinois, and lived in Chicago"
+        },
+        {
+          "letter": "C",
+          "text": "Italy, like Pacioli"
+        },
+        {
+          "letter": "D",
+          "text": "The United Kingdom only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "CPA licensed in Illinois; age 62, of Chicago."
+    },
+    {
+      "id": 186,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "The Flanagan order was instituted under Exchange Act Sections 4C and 21C and:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "ASC Topic 310"
+        },
+        {
+          "letter": "B",
+          "text": "Rule 102(e) of the Commission’s Rules of Practice"
+        },
+        {
+          "letter": "C",
+          "text": "AU-C 610 only"
+        },
+        {
+          "letter": "D",
+          "text": "Form 10-Q Item 2"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Sections 4C and 21C and Rule 102(e)(1)(ii) and (iii)."
+    },
+    {
+      "id": 187,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "The illustrative Form 10-K is for which registrant and fiscal year?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Deloitte & Touche, year ended 2008"
+        },
+        {
+          "letter": "B",
+          "text": "International Paper Company, year ended December 31, 2024"
+        },
+        {
+          "letter": "C",
+          "text": "Enron, year ended 2001"
+        },
+        {
+          "letter": "D",
+          "text": "Sunbeam, year ended 1998"
+        }
+      ],
+      "answer": "B",
+      "explanation": "INTERNATIONAL PAPER COMPANY, annual report for the fiscal year ended 12/31/2024."
+    },
+    {
+      "id": 188,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "International Paper’s principal executive offices on the 10-K cover are in:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Chicago, Illinois"
+        },
+        {
+          "letter": "B",
+          "text": "Memphis, Tennessee (6400 Poplar Avenue)"
+        },
+        {
+          "letter": "C",
+          "text": "Venice, Italy"
+        },
+        {
+          "letter": "D",
+          "text": "Washington, D.C."
+        }
+      ],
+      "answer": "B",
+      "explanation": "6400 Poplar Avenue, Memphis, Tennessee."
+    },
+    {
+      "id": 189,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "On the 10-K cover, International Paper is marked as a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Smaller reporting company only"
+        },
+        {
+          "letter": "B",
+          "text": "Large accelerated filer"
+        },
+        {
+          "letter": "C",
+          "text": "Shell company"
+        },
+        {
+          "letter": "D",
+          "text": "Emerging growth company that opted out of new standards"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Large accelerated filer is checked; not a shell company."
+    },
+    {
+      "id": 190,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "The 10-K cover indicates the registrant has filed a report on ICFR effectiveness under SOX:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Section 302 only"
+        },
+        {
+          "letter": "B",
+          "text": "Section 404(b)"
+        },
+        {
+          "letter": "C",
+          "text": "Section 101"
+        },
+        {
+          "letter": "D",
+          "text": "Section 109"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Checkbox that a report on ICFR under Section 404(b) has been filed / included."
+    },
+    {
+      "id": 191,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "Common shares of International Paper trade under the symbol IP on the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "NASDAQ only"
+        },
+        {
+          "letter": "B",
+          "text": "New York Stock Exchange (and IPC on the London Stock Exchange)"
+        },
+        {
+          "letter": "C",
+          "text": "Chicago Board Options Exchange only"
+        },
+        {
+          "letter": "D",
+          "text": "OTC Pink Sheets only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "IP on NYSE; IPC on London Stock Exchange."
+    },
+    {
+      "id": 192,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "In the 10-K index, Item 1C is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Mine Safety Disclosures"
+        },
+        {
+          "letter": "B",
+          "text": "Cybersecurity"
+        },
+        {
+          "letter": "C",
+          "text": "Executive Compensation"
+        },
+        {
+          "letter": "D",
+          "text": "Exhibits"
+        }
+      ],
+      "answer": "B",
+      "explanation": "ITEM 1C. CYBERSECURITY. Item 4 is Mine Safety Disclosures."
+    },
+    {
+      "id": 193,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "MD&A in the 10-K is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Item 1"
+        },
+        {
+          "letter": "B",
+          "text": "Item 7"
+        },
+        {
+          "letter": "C",
+          "text": "Item 11"
+        },
+        {
+          "letter": "D",
+          "text": "Item 15"
+        }
+      ],
+      "answer": "B",
+      "explanation": "ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS."
+    },
+    {
+      "id": 194,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "Audited financial statements and the auditor’s report appear in 10-K:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Item 1A"
+        },
+        {
+          "letter": "B",
+          "text": "Item 8"
+        },
+        {
+          "letter": "C",
+          "text": "Item 11"
+        },
+        {
+          "letter": "D",
+          "text": "Item 16 only"
+        }
+      ],
+      "answer": "B",
+      "explanation": "ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA, including Deloitte’s reports."
+    },
+    {
+      "id": 195,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "The independent registered public accounting firm named in Item 8 of the sample 10-K is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Price Waterhouse (1937)"
+        },
+        {
+          "letter": "B",
+          "text": "Deloitte & Touche LLP"
+        },
+        {
+          "letter": "C",
+          "text": "Lybrand Ross"
+        },
+        {
+          "letter": "D",
+          "text": "Arthur Andersen"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Reports of Deloitte & Touche LLP, Independent Registered Public Accounting Firm."
+    },
+    {
+      "id": 196,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "The sample Form 10-Q is a quarterly report for the period ended:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "December 31, 2024"
+        },
+        {
+          "letter": "B",
+          "text": "June 30, 2025"
+        },
+        {
+          "letter": "C",
+          "text": "March 14, 2025"
+        },
+        {
+          "letter": "D",
+          "text": "August 4, 2010"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Quarterly Period Ended June 30, 2025."
+    },
+    {
+      "id": 197,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "As of August 1, 2025, International Paper common shares outstanding on the 10-Q cover were:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "11 directors"
+        },
+        {
+          "letter": "B",
+          "text": "527,982,095 shares, par value $1.00"
+        },
+        {
+          "letter": "C",
+          "text": "71 trades"
+        },
+        {
+          "letter": "D",
+          "text": "51 ARBs"
+        }
+      ],
+      "answer": "B",
+      "explanation": "527,982,095 shares of common stock, par value $1.00 per share."
+    },
+    {
+      "id": 198,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "The sample proxy is a Schedule 14A Notice of Annual Meeting. The board recommends voting FOR ratification of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Arthur Andersen"
+        },
+        {
+          "letter": "B",
+          "text": "Deloitte & Touche LLP as independent auditor for 2025"
+        },
+        {
+          "letter": "C",
+          "text": "The PCAOB as company auditor"
+        },
+        {
+          "letter": "D",
+          "text": "The IRS as auditor"
+        }
+      ],
+      "answer": "B",
+      "explanation": "ITEM 2: Ratification of Deloitte & Touche LLP as independent auditor for 2025 — Board recommendation FOR."
+    },
+    {
+      "id": 199,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "On the International Paper proxy, the board recommends voting AGAINST:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Election of 11 directors"
+        },
+        {
+          "letter": "B",
+          "text": "A shareowner proposal concerning a report on the Company’s LGBTQIA+ equity and inclusion efforts"
+        },
+        {
+          "letter": "C",
+          "text": "Say-on-pay for named executive officers"
+        },
+        {
+          "letter": "D",
+          "text": "The 10-K itself"
+        }
+      ],
+      "answer": "B",
+      "explanation": "ITEM 4 shareowner proposal — Board recommendation AGAINST. Items 1–3 are FOR."
+    },
+    {
+      "id": 200,
+      "module": "Illustrative Documents for Handout #3",
+      "prompt": "AS 2605 is the PCAOB standard on consideration of the internal audit function. AU-C Section 610 is the ASB standard on:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Materiality in SAB 99"
+        },
+        {
+          "letter": "B",
+          "text": "Using the Work of Internal Auditors (SAS No. 128)"
+        },
+        {
+          "letter": "C",
+          "text": "Stock option backdating"
+        },
+        {
+          "letter": "D",
+          "text": "Form 10-Q Item 2"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AU-C 610, Using the Work of Internal Auditors, source SAS No. 128; AS 2605 is the PCAOB counterpart in the packet."
+    }
+  ]
+}
