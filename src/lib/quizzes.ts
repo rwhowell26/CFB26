@@ -1,5 +1,6 @@
 import accy from "@/data/accy-6100-questions.json";
 import accy6100m59 from "@/data/accy-6100-m5-9-questions.json";
+import accy6100guide from "@/data/accy-6100-practice-guide-questions.json";
 import accy6900 from "@/data/accy-6900-h1-h3-questions.json";
 import accy6900Timeline from "@/data/accy-6900-h2-timeline-questions.json";
 import itAudit from "@/data/it-audit-1-questions.json";
@@ -33,6 +34,15 @@ export const quizzes: QuizDefinition[] = [
     source: accy6100m59.source,
     storageKey: "accy-6100-m5-9-quiz-v1",
     questions: accy6100m59.questions,
+  },
+  {
+    id: "accy-6100-practice-guide",
+    href: "/quiz/accy-6100-practice-guide",
+    title: accy6100guide.title,
+    subtitle: accy6100guide.subtitle,
+    source: accy6100guide.source,
+    storageKey: "accy-6100-practice-guide-quiz-v1",
+    questions: accy6100guide.questions,
   },
   {
     id: "it-audit-1",
