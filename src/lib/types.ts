@@ -84,6 +84,8 @@ export type PairwiseCursor = {
   lo: number;
   hi: number;
   sincePair: number;
+  /** Same-record adjacent pairs already confirmed or swapped during the preference pass. */
+  scrubConfirmed?: string[];
 };
 
 export type PairwiseCheckpoint = PairwiseCursor & {

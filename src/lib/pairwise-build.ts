@@ -1,7 +1,8 @@
+import { applyWinnerAboveLoser, compareRecords } from "./ranking-logic";
 import { FBS_TEAM_COUNT } from "./season";
 import type { PairwiseCheckpoint, PairwiseSession, RankingStore } from "./types";
 
-export type PairwiseKind = "seed" | "pick-next" | "insert";
+export type PairwiseKind = "seed" | "pick-next" | "insert" | "scrub";
 
 export type PairwiseQuestion = {
   kind: PairwiseKind;
@@ -22,6 +23,7 @@ export function emptyPairwiseSession(week: number): PairwiseSession {
     lo: 0,
     hi: 0,
     sincePair: PAIRWISE_PICK_EVERY,
+    scrubConfirmed: [],
     history: [],
   };
 }
@@ -37,7 +39,63 @@ export function snapshotCheckpoint(
     lo: session.lo,
     hi: session.hi,
     sincePair: session.sincePair,
+    scrubConfirmed: [...(session.scrubConfirmed ?? [])],
   };
+}
+
+export function scrubPairKey(a: string, b: string) {
+  return a < b ? `${a}|${b}` : `${b}|${a}`;
+}
+
+function sameRecordAdjacent(
+  rankedIds: string[],
+  records: Map<string, { wins: number; losses: number }>,
+  confirmed: readonly string[],
+): Array<{ leftId: string; rightId: string }> {
+  const done = new Set(confirmed);
+  const pairs: Array<{ leftId: string; rightId: string }> = [];
+  for (let i = 0; i < rankedIds.length - 1; i++) {
+    const leftId = rankedIds[i];
+    const rightId = rankedIds[i + 1];
+    const rec = compareRecords(
+      records.get(leftId) ?? { wins: 0, losses: 0 },
+      records.get(rightId) ?? { wins: 0, losses: 0 },
+    );
+    if (rec !== 0) continue;
+    if (done.has(scrubPairKey(leftId, rightId))) continue;
+    pairs.push({ leftId, rightId });
+  }
+  return pairs;
+}
+
+export function nextScrubQuestion(
+  rankedIds: string[],
+  records: Map<string, { wins: number; losses: number }>,
+  confirmed: readonly string[],
+): PairwiseQuestion | null {
+  const next = sameRecordAdjacent(rankedIds, records, confirmed)[0];
+  if (!next) return null;
+  return { kind: "scrub", leftId: next.leftId, rightId: next.rightId };
+}
+
+export function remainingScrubCount(
+  rankedIds: string[],
+  records: Map<string, { wins: number; losses: number }>,
+  confirmed: readonly string[],
+): number {
+  return sameRecordAdjacent(rankedIds, records, confirmed).length;
+}
+
+export function confirmAllScrubPairs(
+  rankedIds: string[],
+  records: Map<string, { wins: number; losses: number }>,
+  confirmed: readonly string[],
+): string[] {
+  const keys = new Set(confirmed);
+  for (const pair of sameRecordAdjacent(rankedIds, records, [])) {
+    keys.add(scrubPairKey(pair.leftId, pair.rightId));
+  }
+  return [...keys];
 }
 
 function withHistory(
@@ -126,7 +184,26 @@ function insertAt(rankedIds: string[], teamId: string, index: number): string[] 
 export function preparePairwiseQuestion(
   session: PairwiseSession,
   rankedIds: string[],
+  records?: Map<string, { wins: number; losses: number }>,
+  totalTeams = FBS_TEAM_COUNT,
 ): { session: PairwiseSession; rankedIds: string[]; question: PairwiseQuestion | null } {
+  if (totalTeams > 0 && rankedIds.length >= totalTeams) {
+    const current: PairwiseSession = {
+      ...session,
+      queue: [],
+      insertingId: null,
+      lo: 0,
+      hi: 0,
+    };
+    return {
+      session: current,
+      rankedIds,
+      question: records
+        ? nextScrubQuestion(rankedIds, records, current.scrubConfirmed ?? [])
+        : null,
+    };
+  }
+
   const rankedSet = new Set(rankedIds);
   const queue = session.queue.filter((id) => !rankedSet.has(id) && id !== session.insertingId);
   let current: PairwiseSession =
@@ -148,12 +225,19 @@ export function preparePairwiseQuestion(
           sincePair: current.sincePair + 1,
         },
         nextRanked,
+        records,
+        totalTeams,
       );
     }
     const mid = Math.floor((current.lo + current.hi) / 2);
     const opp = rankedIds[mid];
     if (!opp || opp === current.insertingId) {
-      return preparePairwiseQuestion({ ...current, insertingId: null, lo: 0, hi: 0 }, rankedIds);
+      return preparePairwiseQuestion(
+        { ...current, insertingId: null, lo: 0, hi: 0 },
+        rankedIds,
+        records,
+        totalTeams,
+      );
     }
     return {
       session: current,
@@ -201,6 +285,8 @@ export function preparePairwiseQuestion(
       hi: rankedIds.length,
     },
     rankedIds,
+    records,
+    totalTeams,
   );
 }
 
@@ -209,8 +295,10 @@ export function applyPairwiseChoice(
   rankedIds: string[],
   winnerId: string,
   loserId: string,
+  records?: Map<string, { wins: number; losses: number }>,
+  totalTeams = FBS_TEAM_COUNT,
 ): { session: PairwiseSession; rankedIds: string[] } {
-  const prepared = preparePairwiseQuestion(session, rankedIds);
+  const prepared = preparePairwiseQuestion(session, rankedIds, records, totalTeams);
   const question = prepared.question;
   if (!question) {
     return { session: prepared.session, rankedIds: prepared.rankedIds };
@@ -222,6 +310,29 @@ export function applyPairwiseChoice(
   }
 
   const tracked = withHistory(prepared.rankedIds, prepared.session);
+
+  if (question.kind === "scrub") {
+    const winnerIdx = prepared.rankedIds.indexOf(winnerId);
+    const loserIdx = prepared.rankedIds.indexOf(loserId);
+    const ranked =
+      winnerIdx > loserIdx
+        ? applyWinnerAboveLoser(prepared.rankedIds, winnerId, loserId)
+        : prepared.rankedIds;
+    return {
+      rankedIds: ranked,
+      session: {
+        ...tracked,
+        insertingId: null,
+        lo: 0,
+        hi: 0,
+        queue: [],
+        scrubConfirmed: [
+          ...(tracked.scrubConfirmed ?? []),
+          scrubPairKey(winnerId, loserId),
+        ],
+      },
+    };
+  }
 
   if (question.kind === "seed") {
     return {
@@ -295,6 +406,7 @@ export function undoPairwiseChoice(
       lo: prev.lo,
       hi: prev.hi,
       sincePair: prev.sincePair,
+      scrubConfirmed: [...(prev.scrubConfirmed ?? [])],
       history,
     },
   };
@@ -315,6 +427,13 @@ export function questionCopy(kind: PairwiseKind): { eyebrow: string; prompt: str
     return {
       eyebrow: "Build · who goes next",
       prompt: "Who belongs higher among these two still-unplaced teams? Winner is inserted next.",
+    };
+  }
+  if (kind === "scrub") {
+    return {
+      eyebrow: "Build · preference",
+      prompt:
+        "Same record — formula used last week's SOW, then SOL. Keep the higher team or swap in your preference.",
     };
   }
   return {

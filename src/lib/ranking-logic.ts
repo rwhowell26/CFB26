@@ -154,6 +154,65 @@ export function compareLastWeekRank(
   return 0;
 }
 
+/** Record, then SOW, then SOL, then last week, then name. Lower SOW/SOL = tougher. */
+export function compareRecordSowSol(
+  leftId: string,
+  rightId: string,
+  records: Map<string, { wins: number; losses: number }>,
+  sow: Map<string, number | null>,
+  sol: Map<string, number | null>,
+  lastWeekRanks: Map<string, number>,
+  nameFor?: (id: string) => string,
+): number {
+  const rec = compareRecords(
+    records.get(leftId) ?? { wins: 0, losses: 0 },
+    records.get(rightId) ?? { wins: 0, losses: 0 },
+  );
+  if (rec !== 0) return rec;
+  const sowCmp = compareSosAvg(sow.get(leftId), sow.get(rightId));
+  if (sowCmp !== 0) return sowCmp;
+  const solCmp = compareSosAvg(sol.get(leftId), sol.get(rightId));
+  if (solCmp !== 0) return solCmp;
+  const prior = compareLastWeekRank(leftId, rightId, lastWeekRanks);
+  if (prior !== 0) return prior;
+  return (nameFor?.(leftId) ?? leftId).localeCompare(nameFor?.(rightId) ?? rightId);
+}
+
+export function sowSolMaps(
+  teamIds: string[],
+  games: Game[],
+  lastWeekRanks: Map<string, number>,
+): { sow: Map<string, number | null>; sol: Map<string, number | null> } {
+  const sow = new Map<string, number | null>();
+  const sol = new Map<string, number | null>();
+  for (const id of teamIds) {
+    const sos = computeSos(id, games, lastWeekRanks);
+    sow.set(id, sos.winAvgRank);
+    sol.set(id, sos.lossAvgRank);
+  }
+  return { sow, sol };
+}
+
+/**
+ * Full ballot from results: record first, then last week's SOW, then SOL.
+ * Does not apply H2H or transitive wins — preference happens on Build/Rank.
+ */
+export function buildRecordSowBallot(
+  teamIds: string[],
+  games: Game[],
+  lastWeekRanks: Map<string, number>,
+  options?: { teamsById?: Map<string, Team> },
+): string[] {
+  const records = new Map(
+    teamIds.map((id) => [id, recordFromGames(id, games)] as const),
+  );
+  const { sow, sol } = sowSolMaps(teamIds, games, lastWeekRanks);
+  const nameFor = (id: string) => options?.teamsById?.get(id)?.name ?? id;
+  return [...teamIds].sort((a, b) =>
+    compareRecordSowSol(a, b, records, sow, sol, lastWeekRanks, nameFor),
+  );
+}
+
 function recommendSosAvg(
   teamId: string,
   games: Game[],

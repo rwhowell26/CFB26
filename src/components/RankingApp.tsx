@@ -14,6 +14,7 @@ import { SlateTab } from "@/components/SlateTab";
 import { SosTab } from "@/components/SosTab";
 import {
   applyWinnerAboveLoser,
+  buildRecordSowBallot,
   philosophyWarnings,
   rankMapFromOrder,
   recordFromGames,
@@ -21,10 +22,10 @@ import {
 } from "@/lib/ranking-logic";
 import {
   buildDirectWinGraph,
-  buildResultsBallot,
   buildTransitiveWins,
   findCyclePairs,
 } from "@/lib/results-rank";
+import { emptyPairwiseSession } from "@/lib/pairwise-build";
 import { FBS_TEAM_COUNT, PRESEASON_WEEK, SEASON_YEAR, formatWeekLabel } from "@/lib/season";
 import {
   clearDraft,
@@ -40,7 +41,7 @@ import {
   setPairwiseProgress,
   useRankingStore,
 } from "@/lib/storage";
-import type { Game, PairwiseSession, SeasonWeek, Team } from "@/lib/types";
+import type { Game, PairwiseSession, RankingStore, SeasonWeek, Team } from "@/lib/types";
 import { ensureSeasonWeeks } from "@/lib/weeks";
 
 type Tab =
@@ -61,6 +62,44 @@ type GamesPayload = {
   weeks: SeasonWeek[];
   games: Game[];
 };
+
+function applyFormulaSeed(
+  currentStore: RankingStore,
+  targetWeek: number,
+  seedTeams: Team[],
+  seedGames: Game[],
+): RankingStore {
+  if (!seedTeams.length) return currentStore;
+  const lastWeek = previousWeekBallot(currentStore, targetWeek);
+  const lastWeekRanks = new Map<string, number>();
+  lastWeek?.rankedIds.forEach((id, index) => lastWeekRanks.set(id, index + 1));
+  const hasFinals = seedGames.some((game) => game.status === "final");
+  if (!hasFinals && lastWeekRanks.size === 0) return currentStore;
+
+  const teamsById = new Map(seedTeams.map((team) => [team.id, team]));
+  return setPairwiseProgress(
+    currentStore,
+    targetWeek,
+    buildRecordSowBallot(
+      seedTeams.map((team) => team.id),
+      seedGames,
+      lastWeekRanks,
+      { teamsById },
+    ),
+    emptyPairwiseSession(targetWeek),
+  );
+}
+
+function formulaSeedMessage(
+  week: number,
+  weekLabel: string | undefined,
+  lastWeekLabel: string | undefined,
+) {
+  const label = formatWeekLabel(week, weekLabel);
+  return lastWeekLabel
+    ? `Seeded ${label} by record, then SOW/SOL from ${lastWeekLabel}. Scrub same-record pairs on Build, or drag on Rank.`
+    : `Seeded ${label} by record. Scrub same-record pairs on Build, or drag on Rank.`;
+}
 
 export function RankingApp() {
   const [data, setData] = useState<GamesPayload | null>(null);
@@ -109,11 +148,23 @@ export function RankingApp() {
           seasonWeek === 6 && currentCount === 0 && week5Count >= FBS_TEAM_COUNT
             ? 5
             : seasonWeek;
+        let nextStore = latest.activeWeek === openWeek ? latest : { ...latest, activeWeek: openWeek };
+        if (getDraftOrder(nextStore, openWeek).length === 0) {
+          nextStore = applyFormulaSeed(nextStore, openWeek, json.teams, json.games);
+          if (getDraftOrder(nextStore, openWeek).length > 0) {
+            setTab("build");
+            setMessage(
+              formulaSeedMessage(
+                openWeek,
+                json.weeks.find((item) => item.number === openWeek)?.label,
+                previousWeekBallot(nextStore, openWeek)?.label,
+              ),
+            );
+          }
+        }
         setWeek(openWeek);
         if (openWeek === 5 && week5Count >= FBS_TEAM_COUNT) setTab("rank");
-        if (latest.activeWeek !== openWeek) {
-          setStore({ ...latest, activeWeek: openWeek });
-        }
+        if (nextStore !== latest) setStore(nextStore);
       } catch (err) {
         if (!cancelled) {
           const message =
@@ -214,6 +265,7 @@ export function RankingApp() {
   const selectedTeamId = selectedRankedId ?? selectedUnrankedId;
   const weekMeta = weeks.find((w) => w.number === week);
   const snapshotExists = Boolean(store.snapshots[String(week)]);
+  const formulaRanks = lastWeekRanks.size ? lastWeekRanks : resumeRanks;
 
   const handleSelectTeam = (teamId: string) => {
     if (rankedSet.has(teamId)) setSelectedRankedId(teamId);
@@ -277,8 +329,11 @@ export function RankingApp() {
     }
     const valid = new Set(teams.map((t) => t.id));
     const copied = lastWeekBallot.rankedIds.filter((id) => valid.has(id));
-    updateRanked(copied);
-    setMessage(`Copied ${lastWeekBallot.label} into ${label}.`);
+    setStore(
+      setPairwiseProgress(store, week, copied, emptyPairwiseSession(week)),
+    );
+    setTab("build");
+    setMessage(`Copied ${lastWeekBallot.label} into ${label}. Scrub same-record pairs on Build.`);
   };
 
   const insertUnrankedAt = (teamId: string, index: number) => {
@@ -296,40 +351,52 @@ export function RankingApp() {
     if (
       rankedIds.length > 0 &&
       !confirm(
-        "Replace the current ballot with a results-based order?\n\nUses record, head-to-head, transitive wins, and SOS. You can still drag afterward for early-season opinion.",
+        lastWeekBallot
+          ? `Replace the current ballot with record, then SOW/SOL from ${lastWeekBallot.label}?\n\nScrub same-record pairs on Build, or drag on Rank for preference.`
+          : "Replace the current ballot with a record-based order?\n\nScrub same-record pairs on Build, or drag on Rank for preference.",
       )
     ) {
       return;
     }
 
-    const prior = Object.values(store.snapshots).sort((a, b) => b.week - a.week)[0];
-    const preserveOrder =
-      rankedIds.length > 0 ? rankedIds : prior?.rankedIds ?? teams.map((t) => t.id);
-
-    const result = buildResultsBallot(
-      teams.map((t) => t.id),
-      games,
-      { preserveOrder, teamsById },
-    );
-
-    updateRanked(result.rankedIds);
-
-    const gapCount = result.cyclePairs.length;
+    setStore(applyFormulaSeed(store, week, teams, games));
+    setTab("build");
     setMessage(
-      `Auto-ranked by results · ${result.h2hRepairs} H2H repair${result.h2hRepairs === 1 ? "" : "s"} · ${result.remainingH2hConflicts} conflict${result.remainingH2hConflicts === 1 ? "" : "s"} left · ${gapCount} opinion gap${gapCount === 1 ? "" : "s"}`,
+      lastWeekBallot
+        ? `Auto-ranked by record, then SOW/SOL from ${lastWeekBallot.label}.`
+        : "Auto-ranked by record.",
     );
   };
 
   const changeWeek = (nextWeek: number) => {
     setWeek(nextWeek);
-    const next = { ...store, activeWeek: nextWeek };
+    let next = { ...store, activeWeek: nextWeek };
     if (next.snapshots[String(nextWeek)] && !next.drafts[String(nextWeek)]) {
-      next.drafts = {
-        ...next.drafts,
-        [String(nextWeek)]: [...next.snapshots[String(nextWeek)].rankedIds],
+      next = {
+        ...next,
+        drafts: {
+          ...next.drafts,
+          [String(nextWeek)]: [...next.snapshots[String(nextWeek)].rankedIds],
+        },
       };
-    } else if (!next.drafts[String(nextWeek)]) {
-      next.drafts = { ...next.drafts, [String(nextWeek)]: [] };
+    } else if (!next.drafts[String(nextWeek)]?.length) {
+      const seeded = applyFormulaSeed(next, nextWeek, teams, games);
+      if (getDraftOrder(seeded, nextWeek).length > 0) {
+        setStore(seeded);
+        setTab("build");
+        setMessage(
+          formulaSeedMessage(
+            nextWeek,
+            weeks.find((item) => item.number === nextWeek)?.label,
+            previousWeekBallot(seeded, nextWeek)?.label,
+          ),
+        );
+        return;
+      }
+      next = {
+        ...next,
+        drafts: { ...next.drafts, [String(nextWeek)]: [] },
+      };
     }
     setStore(next);
     setMessage(null);
@@ -354,12 +421,20 @@ export function RankingApp() {
 
   const handleFreshWeek = () => {
     const label = formatWeekLabel(week, weekMeta?.label);
-    if (!confirm(`Clear ${label} draft and start fresh?`)) return;
-    const next = clearDraft(store, week);
-    next.drafts[String(week)] = [];
-    next.pairwise = undefined;
-    setStore(next);
-    setMessage(`${label} draft cleared.`);
+    if (!confirm(`Clear ${label} and re-seed from record + last week's SOW/SOL?`)) return;
+    const cleared = clearDraft(store, week);
+    cleared.drafts[String(week)] = [];
+    cleared.pairwise = undefined;
+    const seeded = applyFormulaSeed(cleared, week, teams, games);
+    if (getDraftOrder(seeded, week).length === 0) {
+      setStore(cleared);
+      setTab("build");
+      setMessage(`${label} draft cleared.`);
+      return;
+    }
+    setStore(seeded);
+    setTab("build");
+    setMessage(`${label} re-seeded by record, then last week's SOW/SOL.`);
   };
 
   const handleExport = () => {
@@ -408,7 +483,7 @@ export function RankingApp() {
           <p className="brand">CFB{String(SEASON_YEAR).slice(2)}</p>
           <h1>Personal FBS Rankings</h1>
           <p className="tagline">
-            Drag-and-drop ballot · games played drive the resume · wins over everything
+            Seeded by record and last week&apos;s SOW/SOL · scrub preference on Build
           </p>
         </div>
         <div className="top-actions">
@@ -519,11 +594,12 @@ export function RankingApp() {
           lastWeekRanks={lastWeekRanks}
           currentRanks={ranks}
           priorRanks={priorRanks}
-          resumeRanks={resumeRanks}
+          resumeRanks={formulaRanks}
+          lastWeekLabel={lastWeekBallot?.label}
           onCommit={handlePairwiseCommit}
           onOpenRank={() => {
             setTab("rank");
-            setMessage("Ballot complete — edit on Rank.");
+            setMessage("Preference pass complete — edit on Rank.");
           }}
         />
       ) : null}

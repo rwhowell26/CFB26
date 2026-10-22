@@ -5,10 +5,14 @@ import { TeamResume } from "@/components/TeamResume";
 import { orderUnrankedCandidates } from "@/lib/ranking-logic";
 import {
   applyPairwiseChoice,
+  confirmAllScrubPairs,
+  emptyPairwiseSession,
   initPairwiseSession,
+  snapshotCheckpoint,
   preparePairwiseQuestion,
   questionCopy,
   reconcilePairwiseSession,
+  remainingScrubCount,
   undoPairwiseChoice,
 } from "@/lib/pairwise-build";
 import { FBS_TEAM_COUNT, formatWeekLabel } from "@/lib/season";
@@ -28,6 +32,7 @@ type Props = {
   currentRanks: Map<string, number>;
   priorRanks: Map<string, PriorRank>;
   resumeRanks: Map<string, number>;
+  lastWeekLabel?: string;
   onCommit: (rankedIds: string[], session: PairwiseSession) => void;
   onOpenRank: () => void;
 };
@@ -45,6 +50,7 @@ export function BuildTab({
   currentRanks,
   priorRanks,
   resumeRanks,
+  lastWeekLabel,
   onCommit,
   onOpenRank,
 }: Props) {
@@ -61,20 +67,30 @@ export function BuildTab({
       );
   }, [records, lastWeekRanks, games, resumeRanks, teamsById]);
 
+  const totalTeams = teams.length || FBS_TEAM_COUNT;
   const live = useMemo(() => {
+    if (rankedIds.length >= totalTeams) {
+      const base =
+        session?.week === week ? session : emptyPairwiseSession(week);
+      return preparePairwiseQuestion(base, rankedIds, records, totalTeams);
+    }
     const ranked = new Set(rankedIds);
     const remaining = orderRemaining(allIds.filter((id) => !ranked.has(id)));
     const base = session
       ? reconcilePairwiseSession(session, week, rankedIds, allIds, orderRemaining)
       : initPairwiseSession(week, rankedIds, remaining);
-    return preparePairwiseQuestion(base, rankedIds);
-  }, [allIds, orderRemaining, rankedIds, session, week]);
+    return preparePairwiseQuestion(base, rankedIds, records, totalTeams);
+  }, [allIds, orderRemaining, rankedIds, records, session, totalTeams, week]);
 
   const question = live.question;
   const left = question ? teamsById.get(question.leftId) : null;
   const right = question ? teamsById.get(question.rightId) : null;
   const copy = question ? questionCopy(question.kind) : null;
-  const complete = rankedIds.length >= FBS_TEAM_COUNT && !question;
+  const scrubbing = rankedIds.length >= totalTeams && totalTeams > 0;
+  const complete = scrubbing && !question;
+  const scrubLeft = scrubbing
+    ? remainingScrubCount(rankedIds, records, live.session.scrubConfirmed ?? [])
+    : 0;
 
   useEffect(() => {
     const sameRanked =
@@ -86,15 +102,23 @@ export function BuildTab({
       session?.lo === live.session.lo &&
       session?.hi === live.session.hi &&
       session?.sincePair === live.session.sincePair &&
-      session?.queue.length === live.session.queue.length;
+      session?.queue.length === live.session.queue.length &&
+      (session?.scrubConfirmed ?? []).join() ===
+        (live.session.scrubConfirmed ?? []).join();
     if (sameRanked && sameCursor) return;
     onCommit(live.rankedIds, live.session);
   }, [live, onCommit, rankedIds, session]);
 
   const pick = (winnerId: string, loserId: string) => {
-    const next = applyPairwiseChoice(live.session, live.rankedIds, winnerId, loserId);
+    const next = applyPairwiseChoice(
+      live.session,
+      live.rankedIds,
+      winnerId,
+      loserId,
+      records,
+      totalTeams,
+    );
     onCommit(next.rankedIds, next.session);
-    if (next.rankedIds.length >= FBS_TEAM_COUNT) onOpenRank();
   };
 
   const undo = () => {
@@ -105,15 +129,31 @@ export function BuildTab({
     onCommit(prev.rankedIds, prev.session);
   };
 
+  const keepRemaining = () => {
+    const history = [
+      ...live.session.history,
+      snapshotCheckpoint(rankedIds, live.session),
+    ];
+    onCommit(rankedIds, {
+      ...live.session,
+      history,
+      scrubConfirmed: confirmAllScrubPairs(
+        rankedIds,
+        records,
+        live.session.scrubConfirmed ?? [],
+      ),
+    });
+  };
+
   if (complete) {
     return (
       <section className="panel build-wrap">
         <header className="panel-header">
           <p className="eyebrow">Build · {formatWeekLabel(week, weekLabel)}</p>
-          <h2>Ballot complete</h2>
+          <h2>Preference pass complete</h2>
           <p>
-            All {FBS_TEAM_COUNT} teams are ranked from your team-vs-team picks. Further changes
-            happen on the Rank tab.
+            All {totalTeams} teams are seeded by record, then last week&apos;s SOW/SOL.
+            Your swaps are on the ballot. Drag on Rank for anything else.
           </p>
         </header>
         <button type="button" className="primary-btn" onClick={onOpenRank}>
@@ -135,6 +175,8 @@ export function BuildTab({
     );
   }
 
+  const sowSource = lastWeekLabel ?? "last week";
+
   return (
     <div className="build-wrap">
       <section className="panel">
@@ -143,8 +185,9 @@ export function BuildTab({
           <h2>Who belongs higher?</h2>
           <p>{copy.prompt}</p>
           <p>
-            {rankedIds.length}/{FBS_TEAM_COUNT} on the ballot · {live.session.queue.length}
-            {live.session.insertingId ? " + 1" : ""} left to place · no pair is decided for you
+            {scrubbing
+              ? `${scrubLeft} same-record pair${scrubLeft === 1 ? "" : "s"} left · SOW/SOL from ${sowSource}`
+              : `${rankedIds.length}/${totalTeams} on the ballot · ${live.session.queue.length}${live.session.insertingId ? " + 1" : ""} left to place`}
           </p>
         </header>
         <div className="build-actions">
@@ -154,6 +197,11 @@ export function BuildTab({
           <button type="button" className="primary-btn" onClick={() => pick(right.id, left.id)}>
             {right.shortName} higher
           </button>
+          {scrubbing ? (
+            <button type="button" className="ghost-btn" onClick={keepRemaining}>
+              Keep remaining
+            </button>
+          ) : null}
           <button
             type="button"
             className="ghost-btn"
@@ -173,7 +221,13 @@ export function BuildTab({
             currentRanks={currentRanks}
             priorRanks={priorRanks}
             resumeRanks={resumeRanks}
-            roleLabel={question.kind === "insert" ? "Unplaced team" : "Team A"}
+            roleLabel={
+              question.kind === "insert"
+                ? "Unplaced team"
+                : question.kind === "scrub"
+                  ? "Currently higher"
+                  : "Team A"
+            }
           />
         </button>
         <button type="button" className="build-pick" onClick={() => pick(right.id, left.id)}>
@@ -183,7 +237,13 @@ export function BuildTab({
             currentRanks={currentRanks}
             priorRanks={priorRanks}
             resumeRanks={resumeRanks}
-            roleLabel={question.kind === "insert" ? "Already on ballot" : "Team B"}
+            roleLabel={
+              question.kind === "insert"
+                ? "Already on ballot"
+                : question.kind === "scrub"
+                  ? "Currently lower"
+                  : "Team B"
+            }
           />
         </button>
       </div>

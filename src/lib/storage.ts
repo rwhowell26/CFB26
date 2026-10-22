@@ -305,6 +305,9 @@ function sanitizePairwise(value: RankingStore["pairwise"]): PairwiseSession | un
     lo: typeof value.lo === "number" ? value.lo : 0,
     hi: typeof value.hi === "number" ? value.hi : 0,
     sincePair: typeof value.sincePair === "number" ? value.sincePair : 0,
+    scrubConfirmed: Array.isArray(value.scrubConfirmed)
+      ? value.scrubConfirmed.filter((id): id is string => typeof id === "string")
+      : [],
     history: Array.isArray(value.history) ? value.history : [],
   };
 }
