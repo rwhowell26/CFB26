@@ -196,8 +196,8 @@ export function BuildTab({
     : question.kind === "blend"
       ? climbing
         ? `Phase 2 · ${right.shortName} climbing · SOW/SOL from this ballot`
-        : `Phase 2 · blending ${blendGroup ?? "?"}-loss teams into fewer losses`
-      : `Phase 1 · ${scrubLeft} same-loss pair${scrubLeft === 1 ? "" : "s"} left · seeded from ${seedNote}`;
+        : `Phase 2 · blending ${blendGroup ?? "?"}-loss teams into fewer losses · most losses first`
+      : `Phase 1 · ${scrubLeft} same-loss pair${scrubLeft === 1 ? "" : "s"} left · most losses first · seeded from ${seedNote}`;
 
   const leftRole =
     question.kind === "insert"

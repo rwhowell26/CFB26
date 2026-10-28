@@ -67,7 +67,7 @@ function sameLossAdjacent(
 ): Array<{ leftId: string; rightId: string }> {
   const done = new Set(confirmed);
   const pairs: Array<{ leftId: string; rightId: string }> = [];
-  for (let i = 0; i < rankedIds.length - 1; i++) {
+  for (let i = rankedIds.length - 2; i >= 0; i--) {
     const leftId = rankedIds[i];
     const rightId = rankedIds[i + 1];
     if (lossesOf(leftId, records) !== lossesOf(rightId, records)) continue;
@@ -87,17 +87,29 @@ export function nextScrubQuestion(
   return { kind: "scrub", leftId: next.leftId, rightId: next.rightId };
 }
 
-function nextLossCount(
+function maxLossCount(
+  rankedIds: string[],
+  records: Map<string, { wins: number; losses: number }>,
+): number | null {
+  let max = -Infinity;
+  for (const id of rankedIds) {
+    const losses = lossesOf(id, records);
+    if (losses > max) max = losses;
+  }
+  return Number.isFinite(max) ? max : null;
+}
+
+function prevLossCount(
   rankedIds: string[],
   records: Map<string, { wins: number; losses: number }>,
   current: number,
 ): number | null {
-  let min = Infinity;
+  let max = -Infinity;
   for (const id of rankedIds) {
     const losses = lossesOf(id, records);
-    if (losses > current && losses < min) min = losses;
+    if (losses < current && losses > max) max = losses;
   }
-  return Number.isFinite(min) ? min : null;
+  return Number.isFinite(max) ? max : null;
 }
 
 function firstBoundaryForGroup(
@@ -129,11 +141,11 @@ export function remainingScrubCount(
   if (phase >= 3) return 0;
   if (session.scrubClimbingId) return 1;
   let group = session.scrubBlendGroup;
-  if (group == null) group = nextLossCount(rankedIds, records, -1);
+  if (group == null) group = maxLossCount(rankedIds, records);
   let count = 0;
   while (group != null) {
     if (firstBoundaryForGroup(rankedIds, records, group, confirmed)) count += 1;
-    group = nextLossCount(rankedIds, records, group);
+    group = prevLossCount(rankedIds, records, group);
   }
   return count;
 }
@@ -201,10 +213,7 @@ function prepareScrubQuestion(
   }
 
   let group = current.scrubBlendGroup;
-  if (group == null) {
-    const fewest = nextLossCount(rankedIds, records, -1);
-    group = fewest == null ? null : nextLossCount(rankedIds, records, fewest);
-  }
+  if (group == null) group = maxLossCount(rankedIds, records);
 
   while (group != null) {
     const pair = firstBoundaryForGroup(rankedIds, records, group, confirmed);
@@ -220,7 +229,7 @@ function prepareScrubQuestion(
         question: { kind: "blend", leftId: pair.leftId, rightId: pair.rightId },
       };
     }
-    group = nextLossCount(rankedIds, records, group);
+    group = prevLossCount(rankedIds, records, group);
   }
 
   return {
@@ -470,7 +479,7 @@ export function applyPairwiseChoice(
       const wasClimbing = Boolean(tracked.scrubClimbingId);
       let blendGroup = tracked.scrubBlendGroup ?? null;
       if (!wasClimbing && records) {
-        blendGroup = nextLossCount(
+        blendGroup = prevLossCount(
           prepared.rankedIds,
           records,
           blendGroup ?? lossesOf(lowerId, records),

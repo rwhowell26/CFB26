@@ -90,7 +90,7 @@ export type PairwiseCursor = {
   scrubPhase?: 1 | 2 | 3;
   /** Team currently climbing in phase 2. */
   scrubClimbingId?: string | null;
-  /** More-loss group currently blending upward (1-loss, then 2-loss, …). */
+  /** More-loss group currently blending into fewer losses (most losses first). */
   scrubBlendGroup?: number | null;
 };
 
