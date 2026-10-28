@@ -154,7 +154,10 @@ export function compareLastWeekRank(
   return 0;
 }
 
-/** Record, then SOW, then SOL, then last week, then name. Lower SOW/SOL = tougher. */
+/**
+ * Fewer losses first (5-2 with 6-2), then more wins, then SOW, SOL, last week, name.
+ * Lower SOW/SOL = tougher.
+ */
 export function compareRecordSowSol(
   leftId: string,
   rightId: string,
@@ -164,11 +167,10 @@ export function compareRecordSowSol(
   lastWeekRanks: Map<string, number>,
   nameFor?: (id: string) => string,
 ): number {
-  const rec = compareRecords(
-    records.get(leftId) ?? { wins: 0, losses: 0 },
-    records.get(rightId) ?? { wins: 0, losses: 0 },
-  );
-  if (rec !== 0) return rec;
+  const left = records.get(leftId) ?? { wins: 0, losses: 0 };
+  const right = records.get(rightId) ?? { wins: 0, losses: 0 };
+  if (left.losses !== right.losses) return left.losses - right.losses;
+  if (left.wins !== right.wins) return right.wins - left.wins;
   const sowCmp = compareSosAvg(sow.get(leftId), sow.get(rightId));
   if (sowCmp !== 0) return sowCmp;
   const solCmp = compareSosAvg(sol.get(leftId), sol.get(rightId));
@@ -194,7 +196,7 @@ export function sowSolMaps(
 }
 
 /**
- * Full ballot from results: record first, then last week's SOW, then SOL.
+ * Full ballot from results: loss groups, then wins, then last week's SOW/SOL.
  * Does not apply H2H or transitive wins — preference happens on Build/Rank.
  */
 export function buildRecordSowBallot(

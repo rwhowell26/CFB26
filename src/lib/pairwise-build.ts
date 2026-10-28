@@ -1,8 +1,8 @@
-import { applyWinnerAboveLoser, compareRecords } from "./ranking-logic";
+import { applyWinnerAboveLoser } from "./ranking-logic";
 import { FBS_TEAM_COUNT } from "./season";
 import type { PairwiseCheckpoint, PairwiseSession, RankingStore } from "./types";
 
-export type PairwiseKind = "seed" | "pick-next" | "insert" | "scrub";
+export type PairwiseKind = "seed" | "pick-next" | "insert" | "scrub" | "blend";
 
 export type PairwiseQuestion = {
   kind: PairwiseKind;
@@ -24,6 +24,9 @@ export function emptyPairwiseSession(week: number): PairwiseSession {
     hi: 0,
     sincePair: PAIRWISE_PICK_EVERY,
     scrubConfirmed: [],
+    scrubPhase: 1,
+    scrubClimbingId: null,
+    scrubBlendGroup: null,
     history: [],
   };
 }
@@ -40,6 +43,9 @@ export function snapshotCheckpoint(
     hi: session.hi,
     sincePair: session.sincePair,
     scrubConfirmed: [...(session.scrubConfirmed ?? [])],
+    scrubPhase: session.scrubPhase ?? 1,
+    scrubClimbingId: session.scrubClimbingId ?? null,
+    scrubBlendGroup: session.scrubBlendGroup ?? null,
   };
 }
 
@@ -47,7 +53,14 @@ export function scrubPairKey(a: string, b: string) {
   return a < b ? `${a}|${b}` : `${b}|${a}`;
 }
 
-function sameRecordAdjacent(
+function lossesOf(
+  id: string,
+  records: Map<string, { wins: number; losses: number }>,
+) {
+  return records.get(id)?.losses ?? 0;
+}
+
+function sameLossAdjacent(
   rankedIds: string[],
   records: Map<string, { wins: number; losses: number }>,
   confirmed: readonly string[],
@@ -57,11 +70,7 @@ function sameRecordAdjacent(
   for (let i = 0; i < rankedIds.length - 1; i++) {
     const leftId = rankedIds[i];
     const rightId = rankedIds[i + 1];
-    const rec = compareRecords(
-      records.get(leftId) ?? { wins: 0, losses: 0 },
-      records.get(rightId) ?? { wins: 0, losses: 0 },
-    );
-    if (rec !== 0) continue;
+    if (lossesOf(leftId, records) !== lossesOf(rightId, records)) continue;
     if (done.has(scrubPairKey(leftId, rightId))) continue;
     pairs.push({ leftId, rightId });
   }
@@ -73,29 +82,152 @@ export function nextScrubQuestion(
   records: Map<string, { wins: number; losses: number }>,
   confirmed: readonly string[],
 ): PairwiseQuestion | null {
-  const next = sameRecordAdjacent(rankedIds, records, confirmed)[0];
+  const next = sameLossAdjacent(rankedIds, records, confirmed)[0];
   if (!next) return null;
   return { kind: "scrub", leftId: next.leftId, rightId: next.rightId };
+}
+
+function nextLossCount(
+  rankedIds: string[],
+  records: Map<string, { wins: number; losses: number }>,
+  current: number,
+): number | null {
+  let min = Infinity;
+  for (const id of rankedIds) {
+    const losses = lossesOf(id, records);
+    if (losses > current && losses < min) min = losses;
+  }
+  return Number.isFinite(min) ? min : null;
+}
+
+function firstBoundaryForGroup(
+  rankedIds: string[],
+  records: Map<string, { wins: number; losses: number }>,
+  group: number,
+  confirmed: readonly string[],
+): { leftId: string; rightId: string } | null {
+  const done = new Set(confirmed);
+  for (let i = 0; i < rankedIds.length - 1; i++) {
+    const leftId = rankedIds[i];
+    const rightId = rankedIds[i + 1];
+    if (lossesOf(rightId, records) !== group) continue;
+    if (lossesOf(leftId, records) >= group) continue;
+    if (done.has(scrubPairKey(leftId, rightId))) continue;
+    return { leftId, rightId };
+  }
+  return null;
 }
 
 export function remainingScrubCount(
   rankedIds: string[],
   records: Map<string, { wins: number; losses: number }>,
-  confirmed: readonly string[],
+  session: PairwiseSession,
 ): number {
-  return sameRecordAdjacent(rankedIds, records, confirmed).length;
+  const confirmed = session.scrubConfirmed ?? [];
+  const phase = session.scrubPhase ?? 1;
+  if (phase <= 1) return sameLossAdjacent(rankedIds, records, confirmed).length;
+  if (phase >= 3) return 0;
+  if (session.scrubClimbingId) return 1;
+  let group = session.scrubBlendGroup;
+  if (group == null) group = nextLossCount(rankedIds, records, -1);
+  let count = 0;
+  while (group != null) {
+    if (firstBoundaryForGroup(rankedIds, records, group, confirmed)) count += 1;
+    group = nextLossCount(rankedIds, records, group);
+  }
+  return count;
 }
 
-export function confirmAllScrubPairs(
+export function skipCurrentScrubPhase(session: PairwiseSession): PairwiseSession {
+  const phase = session.scrubPhase ?? 1;
+  if (phase <= 1) {
+    return {
+      ...session,
+      scrubPhase: 2,
+      scrubClimbingId: null,
+      scrubBlendGroup: null,
+    };
+  }
+  return {
+    ...session,
+    scrubPhase: 3,
+    scrubClimbingId: null,
+  };
+}
+
+function prepareScrubQuestion(
+  session: PairwiseSession,
   rankedIds: string[],
   records: Map<string, { wins: number; losses: number }>,
-  confirmed: readonly string[],
-): string[] {
-  const keys = new Set(confirmed);
-  for (const pair of sameRecordAdjacent(rankedIds, records, [])) {
-    keys.add(scrubPairKey(pair.leftId, pair.rightId));
+): { session: PairwiseSession; rankedIds: string[]; question: PairwiseQuestion | null } {
+  let current: PairwiseSession = {
+    ...session,
+    queue: [],
+    insertingId: null,
+    lo: 0,
+    hi: 0,
+  };
+  const confirmed = current.scrubConfirmed ?? [];
+  const phase = current.scrubPhase ?? 1;
+
+  if (phase <= 1) {
+    const question = nextScrubQuestion(rankedIds, records, confirmed);
+    if (question) {
+      return { session: { ...current, scrubPhase: 1 }, rankedIds, question };
+    }
+    current = {
+      ...current,
+      scrubPhase: 2,
+      scrubClimbingId: null,
+      scrubBlendGroup: current.scrubBlendGroup ?? null,
+    };
   }
-  return [...keys];
+
+  if ((current.scrubPhase ?? 2) >= 3) {
+    return { session: { ...current, scrubPhase: 3, scrubClimbingId: null }, rankedIds, question: null };
+  }
+
+  const climbingId = current.scrubClimbingId ?? null;
+  if (climbingId) {
+    const idx = rankedIds.indexOf(climbingId);
+    if (idx > 0) {
+      return {
+        session: { ...current, scrubPhase: 2 },
+        rankedIds,
+        question: { kind: "blend", leftId: rankedIds[idx - 1], rightId: climbingId },
+      };
+    }
+    current = { ...current, scrubClimbingId: null };
+  }
+
+  let group = current.scrubBlendGroup;
+  if (group == null) {
+    const fewest = nextLossCount(rankedIds, records, -1);
+    group = fewest == null ? null : nextLossCount(rankedIds, records, fewest);
+  }
+
+  while (group != null) {
+    const pair = firstBoundaryForGroup(rankedIds, records, group, confirmed);
+    if (pair) {
+      return {
+        session: {
+          ...current,
+          scrubPhase: 2,
+          scrubBlendGroup: group,
+          scrubClimbingId: null,
+        },
+        rankedIds,
+        question: { kind: "blend", leftId: pair.leftId, rightId: pair.rightId },
+      };
+    }
+    group = nextLossCount(rankedIds, records, group);
+  }
+
+  return {
+    session: { ...current, scrubPhase: 3, scrubClimbingId: null, scrubBlendGroup: group },
+    rankedIds,
+    question: null,
+  };
 }
 
 function withHistory(
@@ -188,20 +320,14 @@ export function preparePairwiseQuestion(
   totalTeams = FBS_TEAM_COUNT,
 ): { session: PairwiseSession; rankedIds: string[]; question: PairwiseQuestion | null } {
   if (totalTeams > 0 && rankedIds.length >= totalTeams) {
-    const current: PairwiseSession = {
-      ...session,
-      queue: [],
-      insertingId: null,
-      lo: 0,
-      hi: 0,
-    };
-    return {
-      session: current,
-      rankedIds,
-      question: records
-        ? nextScrubQuestion(rankedIds, records, current.scrubConfirmed ?? [])
-        : null,
-    };
+    if (!records) {
+      return {
+        session: { ...session, queue: [], insertingId: null, lo: 0, hi: 0 },
+        rankedIds,
+        question: null,
+      };
+    }
+    return prepareScrubQuestion(session, rankedIds, records);
   }
 
   const rankedSet = new Set(rankedIds);
@@ -311,9 +437,61 @@ export function applyPairwiseChoice(
 
   const tracked = withHistory(prepared.rankedIds, prepared.session);
 
-  if (question.kind === "scrub") {
+  if (question.kind === "scrub" || question.kind === "blend") {
     const winnerIdx = prepared.rankedIds.indexOf(winnerId);
     const loserIdx = prepared.rankedIds.indexOf(loserId);
+    const confirmed = [
+      ...(tracked.scrubConfirmed ?? []),
+      scrubPairKey(winnerId, loserId),
+    ];
+
+    if (question.kind === "blend") {
+      const lowerId = question.rightId;
+      if (winnerId === lowerId) {
+        const ranked =
+          winnerIdx > loserIdx
+            ? applyWinnerAboveLoser(prepared.rankedIds, winnerId, loserId)
+            : prepared.rankedIds;
+        return {
+          rankedIds: ranked,
+          session: {
+            ...tracked,
+            insertingId: null,
+            lo: 0,
+            hi: 0,
+            queue: [],
+            scrubPhase: 2,
+            scrubClimbingId: winnerId,
+            scrubConfirmed: confirmed,
+          },
+        };
+      }
+
+      const wasClimbing = Boolean(tracked.scrubClimbingId);
+      let blendGroup = tracked.scrubBlendGroup ?? null;
+      if (!wasClimbing && records) {
+        blendGroup = nextLossCount(
+          prepared.rankedIds,
+          records,
+          blendGroup ?? lossesOf(lowerId, records),
+        );
+      }
+      return {
+        rankedIds: prepared.rankedIds,
+        session: {
+          ...tracked,
+          insertingId: null,
+          lo: 0,
+          hi: 0,
+          queue: [],
+          scrubPhase: 2,
+          scrubClimbingId: null,
+          scrubBlendGroup: wasClimbing ? tracked.scrubBlendGroup ?? null : blendGroup,
+          scrubConfirmed: confirmed,
+        },
+      };
+    }
+
     const ranked =
       winnerIdx > loserIdx
         ? applyWinnerAboveLoser(prepared.rankedIds, winnerId, loserId)
@@ -326,10 +504,8 @@ export function applyPairwiseChoice(
         lo: 0,
         hi: 0,
         queue: [],
-        scrubConfirmed: [
-          ...(tracked.scrubConfirmed ?? []),
-          scrubPairKey(winnerId, loserId),
-        ],
+        scrubPhase: 1,
+        scrubConfirmed: confirmed,
       },
     };
   }
@@ -407,6 +583,9 @@ export function undoPairwiseChoice(
       hi: prev.hi,
       sincePair: prev.sincePair,
       scrubConfirmed: [...(prev.scrubConfirmed ?? [])],
+      scrubPhase: prev.scrubPhase ?? 1,
+      scrubClimbingId: prev.scrubClimbingId ?? null,
+      scrubBlendGroup: prev.scrubBlendGroup ?? null,
       history,
     },
   };
@@ -431,9 +610,16 @@ export function questionCopy(kind: PairwiseKind): { eyebrow: string; prompt: str
   }
   if (kind === "scrub") {
     return {
-      eyebrow: "Build · preference",
+      eyebrow: "Build · same losses",
       prompt:
-        "Same record — formula used last week's SOW, then SOL. Keep the higher team or swap in your preference.",
+        "Same number of losses — keep the higher team or swap in your preference.",
+    };
+  }
+  if (kind === "blend") {
+    return {
+      eyebrow: "Build · blend groups",
+      prompt:
+        "Fewer losses is currently higher. Promote the lower team to climb, or keep this order and return to the next seam.",
     };
   }
   return {

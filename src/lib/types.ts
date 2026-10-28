@@ -84,8 +84,14 @@ export type PairwiseCursor = {
   lo: number;
   hi: number;
   sincePair: number;
-  /** Same-record adjacent pairs already confirmed or swapped during the preference pass. */
+  /** Adjacent pairs already confirmed or swapped during the preference pass. */
   scrubConfirmed?: string[];
+  /** 1 = same-loss groups, 2 = blend across loss counts, 3 = done */
+  scrubPhase?: 1 | 2 | 3;
+  /** Team currently climbing in phase 2. */
+  scrubClimbingId?: string | null;
+  /** More-loss group currently blending upward (1-loss, then 2-loss, …). */
+  scrubBlendGroup?: number | null;
 };
 
 export type PairwiseCheckpoint = PairwiseCursor & {

@@ -874,6 +874,94 @@ input[type="password"],
   background: rgba(31, 107, 69, 0.05);
 }
 
+.build-context {
+  list-style: none;
+  margin: 0;
+  padding: 0.35rem;
+  display: grid;
+  gap: 0.15rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.build-context-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.18rem 0.4rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+}
+
+.build-context-row .team-logo {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.build-context-rank {
+  width: 2.1rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.build-context-name {
+  font-weight: 600;
+}
+
+.build-context-rec {
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.build-context-tag {
+  margin-left: auto;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.build-context-tag.muted {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.build-context-row.compared {
+  background: rgba(31, 107, 69, 0.12);
+}
+
+.build-wl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.45rem;
+}
+
+.build-wl-col h4 {
+  margin: 0 0 0.15rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  gap: 0.35rem;
+}
+
+.build-wl-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: min(38vh, 22rem);
+  overflow: auto;
+}
+
+.build-wl-empty {
+  color: var(--muted);
+  font-size: 0.72rem;
+  padding: 0.2rem 0;
+}
+
 .recommend-panel .panel {
   padding: 0.5rem 0.65rem;
 }

@@ -308,6 +308,10 @@ function sanitizePairwise(value: RankingStore["pairwise"]): PairwiseSession | un
     scrubConfirmed: Array.isArray(value.scrubConfirmed)
       ? value.scrubConfirmed.filter((id): id is string => typeof id === "string")
       : [],
+    scrubPhase:
+      value.scrubPhase === 2 || value.scrubPhase === 3 ? value.scrubPhase : 1,
+    scrubClimbingId: typeof value.scrubClimbingId === "string" ? value.scrubClimbingId : null,
+    scrubBlendGroup: typeof value.scrubBlendGroup === "number" ? value.scrubBlendGroup : null,
     history: Array.isArray(value.history) ? value.history : [],
   };
 }

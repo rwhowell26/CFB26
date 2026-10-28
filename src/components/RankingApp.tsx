@@ -97,8 +97,8 @@ function formulaSeedMessage(
 ) {
   const label = formatWeekLabel(week, weekLabel);
   return lastWeekLabel
-    ? `Seeded ${label} by record, then SOW/SOL from ${lastWeekLabel}. Scrub same-record pairs on Build, or drag on Rank.`
-    : `Seeded ${label} by record. Scrub same-record pairs on Build, or drag on Rank.`;
+    ? `Seeded ${label} by losses, then SOW/SOL from ${lastWeekLabel}. Scrub same-loss groups on Build, then blend seams.`
+    : `Seeded ${label} by losses. Scrub same-loss groups on Build, then blend seams.`;
 }
 
 export function RankingApp() {
@@ -265,7 +265,6 @@ export function RankingApp() {
   const selectedTeamId = selectedRankedId ?? selectedUnrankedId;
   const weekMeta = weeks.find((w) => w.number === week);
   const snapshotExists = Boolean(store.snapshots[String(week)]);
-  const formulaRanks = lastWeekRanks.size ? lastWeekRanks : resumeRanks;
 
   const handleSelectTeam = (teamId: string) => {
     if (rankedSet.has(teamId)) setSelectedRankedId(teamId);
@@ -333,7 +332,7 @@ export function RankingApp() {
       setPairwiseProgress(store, week, copied, emptyPairwiseSession(week)),
     );
     setTab("build");
-    setMessage(`Copied ${lastWeekBallot.label} into ${label}. Scrub same-record pairs on Build.`);
+    setMessage(`Copied ${lastWeekBallot.label} into ${label}. Scrub same-loss groups on Build.`);
   };
 
   const insertUnrankedAt = (teamId: string, index: number) => {
@@ -352,8 +351,8 @@ export function RankingApp() {
       rankedIds.length > 0 &&
       !confirm(
         lastWeekBallot
-          ? `Replace the current ballot with record, then SOW/SOL from ${lastWeekBallot.label}?\n\nScrub same-record pairs on Build, or drag on Rank for preference.`
-          : "Replace the current ballot with a record-based order?\n\nScrub same-record pairs on Build, or drag on Rank for preference.",
+          ? `Replace the current ballot with loss groups, then SOW/SOL from ${lastWeekBallot.label}?\n\nScrub same-loss pairs on Build, then blend seams.`
+          : "Replace the current ballot by losses, then wins / SOW / SOL?\n\nScrub same-loss pairs on Build, then blend seams.",
       )
     ) {
       return;
@@ -363,8 +362,8 @@ export function RankingApp() {
     setTab("build");
     setMessage(
       lastWeekBallot
-        ? `Auto-ranked by record, then SOW/SOL from ${lastWeekBallot.label}.`
-        : "Auto-ranked by record.",
+        ? `Auto-ranked by losses, then SOW/SOL from ${lastWeekBallot.label}.`
+        : "Auto-ranked by losses.",
     );
   };
 
@@ -421,7 +420,7 @@ export function RankingApp() {
 
   const handleFreshWeek = () => {
     const label = formatWeekLabel(week, weekMeta?.label);
-    if (!confirm(`Clear ${label} and re-seed from record + last week's SOW/SOL?`)) return;
+    if (!confirm(`Clear ${label} and re-seed from losses + last week's SOW/SOL?`)) return;
     const cleared = clearDraft(store, week);
     cleared.drafts[String(week)] = [];
     cleared.pairwise = undefined;
@@ -434,7 +433,7 @@ export function RankingApp() {
     }
     setStore(seeded);
     setTab("build");
-    setMessage(`${label} re-seeded by record, then last week's SOW/SOL.`);
+    setMessage(`${label} re-seeded by losses, then last week's SOW/SOL.`);
   };
 
   const handleExport = () => {
@@ -483,7 +482,7 @@ export function RankingApp() {
           <p className="brand">CFB{String(SEASON_YEAR).slice(2)}</p>
           <h1>Personal FBS Rankings</h1>
           <p className="tagline">
-            Seeded by record and last week&apos;s SOW/SOL · scrub preference on Build
+            Seeded by losses and last week&apos;s SOW/SOL · scrub and blend on Build
           </p>
         </div>
         <div className="top-actions">
@@ -594,7 +593,7 @@ export function RankingApp() {
           lastWeekRanks={lastWeekRanks}
           currentRanks={ranks}
           priorRanks={priorRanks}
-          resumeRanks={formulaRanks}
+          resumeRanks={ranks}
           lastWeekLabel={lastWeekBallot?.label}
           onCommit={handlePairwiseCommit}
           onOpenRank={() => {

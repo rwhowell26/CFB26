@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useMemo } from "react";
+import { BuildResultResume } from "@/components/BuildResultResume";
+import { TeamLogo } from "@/components/TeamLogo";
 import { TeamResume } from "@/components/TeamResume";
 import { orderUnrankedCandidates } from "@/lib/ranking-logic";
 import {
   applyPairwiseChoice,
-  confirmAllScrubPairs,
   emptyPairwiseSession,
   initPairwiseSession,
   snapshotCheckpoint,
@@ -13,6 +14,7 @@ import {
   questionCopy,
   reconcilePairwiseSession,
   remainingScrubCount,
+  skipCurrentScrubPhase,
   undoPairwiseChoice,
 } from "@/lib/pairwise-build";
 import { FBS_TEAM_COUNT, formatWeekLabel } from "@/lib/season";
@@ -36,6 +38,19 @@ type Props = {
   onCommit: (rankedIds: string[], session: PairwiseSession) => void;
   onOpenRank: () => void;
 };
+
+const CONTEXT_RADIUS = 5;
+
+function contextIds(rankedIds: string[], leftId: string, rightId: string) {
+  const left = rankedIds.indexOf(leftId);
+  const right = rankedIds.indexOf(rightId);
+  if (left < 0 || right < 0) return [];
+  const lo = Math.min(left, right);
+  const hi = Math.max(left, right);
+  const start = Math.max(0, lo - CONTEXT_RADIUS);
+  const end = Math.min(rankedIds.length, hi + CONTEXT_RADIUS + 1);
+  return rankedIds.slice(start, end);
+}
 
 export function BuildTab({
   week,
@@ -88,9 +103,10 @@ export function BuildTab({
   const copy = question ? questionCopy(question.kind) : null;
   const scrubbing = rankedIds.length >= totalTeams && totalTeams > 0;
   const complete = scrubbing && !question;
-  const scrubLeft = scrubbing
-    ? remainingScrubCount(rankedIds, records, live.session.scrubConfirmed ?? [])
-    : 0;
+  const climbing = Boolean(live.session.scrubClimbingId);
+  const scrubLeft = scrubbing ? remainingScrubCount(rankedIds, records, live.session) : 0;
+  const neighbors =
+    question && scrubbing ? contextIds(rankedIds, question.leftId, question.rightId) : [];
 
   useEffect(() => {
     const sameRanked =
@@ -104,7 +120,10 @@ export function BuildTab({
       session?.sincePair === live.session.sincePair &&
       session?.queue.length === live.session.queue.length &&
       (session?.scrubConfirmed ?? []).join() ===
-        (live.session.scrubConfirmed ?? []).join();
+        (live.session.scrubConfirmed ?? []).join() &&
+      (session?.scrubPhase ?? 1) === (live.session.scrubPhase ?? 1) &&
+      (session?.scrubClimbingId ?? null) === (live.session.scrubClimbingId ?? null) &&
+      (session?.scrubBlendGroup ?? null) === (live.session.scrubBlendGroup ?? null);
     if (sameRanked && sameCursor) return;
     onCommit(live.rankedIds, live.session);
   }, [live, onCommit, rankedIds, session]);
@@ -135,13 +154,8 @@ export function BuildTab({
       snapshotCheckpoint(rankedIds, live.session),
     ];
     onCommit(rankedIds, {
-      ...live.session,
+      ...skipCurrentScrubPhase(live.session),
       history,
-      scrubConfirmed: confirmAllScrubPairs(
-        rankedIds,
-        records,
-        live.session.scrubConfirmed ?? [],
-      ),
     });
   };
 
@@ -152,7 +166,7 @@ export function BuildTab({
           <p className="eyebrow">Build · {formatWeekLabel(week, weekLabel)}</p>
           <h2>Preference pass complete</h2>
           <p>
-            All {totalTeams} teams are seeded by record, then last week&apos;s SOW/SOL.
+            All {totalTeams} teams were seeded by losses, then last week&apos;s SOW/SOL.
             Your swaps are on the ballot. Drag on Rank for anything else.
           </p>
         </header>
@@ -175,7 +189,32 @@ export function BuildTab({
     );
   }
 
-  const sowSource = lastWeekLabel ?? "last week";
+  const seedNote = lastWeekLabel ?? "last week";
+  const blendGroup = live.session.scrubBlendGroup;
+  const progress = !scrubbing
+    ? `${rankedIds.length}/${totalTeams} on the ballot · ${live.session.queue.length}${live.session.insertingId ? " + 1" : ""} left to place`
+    : question.kind === "blend"
+      ? climbing
+        ? `Phase 2 · ${right.shortName} climbing · SOW/SOL from this ballot`
+        : `Phase 2 · blending ${blendGroup ?? "?"}-loss teams into fewer losses`
+      : `Phase 1 · ${scrubLeft} same-loss pair${scrubLeft === 1 ? "" : "s"} left · seeded from ${seedNote}`;
+
+  const leftRole =
+    question.kind === "insert"
+      ? "Unplaced team"
+      : question.kind === "blend" && climbing
+        ? "Team above"
+        : question.kind === "scrub" || question.kind === "blend"
+          ? "Currently higher"
+          : "Team A";
+  const rightRole =
+    question.kind === "insert"
+      ? "Already on ballot"
+      : question.kind === "blend" && climbing
+        ? "Climbing"
+        : question.kind === "scrub" || question.kind === "blend"
+          ? "Currently lower"
+          : "Team B";
 
   return (
     <div className="build-wrap">
@@ -184,11 +223,7 @@ export function BuildTab({
           <p className="eyebrow">{copy.eyebrow}</p>
           <h2>Who belongs higher?</h2>
           <p>{copy.prompt}</p>
-          <p>
-            {scrubbing
-              ? `${scrubLeft} same-record pair${scrubLeft === 1 ? "" : "s"} left · SOW/SOL from ${sowSource}`
-              : `${rankedIds.length}/${totalTeams} on the ballot · ${live.session.queue.length}${live.session.insertingId ? " + 1" : ""} left to place`}
-          </p>
+          <p>{progress}</p>
         </header>
         <div className="build-actions">
           <button type="button" className="primary-btn" onClick={() => pick(left.id, right.id)}>
@@ -199,7 +234,7 @@ export function BuildTab({
           </button>
           {scrubbing ? (
             <button type="button" className="ghost-btn" onClick={keepRemaining}>
-              Keep remaining
+              Skip rest of this phase
             </button>
           ) : null}
           <button
@@ -213,38 +248,78 @@ export function BuildTab({
         </div>
       </section>
 
+      {neighbors.length ? (
+        <ol className="build-context">
+          {neighbors.map((id, index) => {
+            const team = teamsById.get(id);
+            if (!team) return null;
+            const rank = rankedIds.indexOf(id) + 1;
+            const rec = records.get(id) ?? { wins: 0, losses: 0 };
+            const compared = id === left.id || id === right.id;
+            return (
+              <li
+                key={id}
+                className={`build-context-row${compared ? " compared" : ""}`}
+              >
+                <span className="build-context-rank">#{rank}</span>
+                <TeamLogo team={team} />
+                <span className="build-context-name">{team.shortName}</span>
+                <span className="build-context-rec">
+                  {rec.wins}-{rec.losses}
+                </span>
+                {compared ? (
+                  <span className="build-context-tag">
+                    {id === left.id ? "higher" : "lower"}
+                  </span>
+                ) : index === 0 && rank > 1 ? (
+                  <span className="build-context-tag muted">+{rank - 1} above</span>
+                ) : null}
+              </li>
+            );
+          })}
+        </ol>
+      ) : null}
+
       <div className="build-resumes">
         <button type="button" className="build-pick" onClick={() => pick(left.id, right.id)}>
-          <TeamResume
-            team={left}
-            games={games}
-            currentRanks={currentRanks}
-            priorRanks={priorRanks}
-            resumeRanks={resumeRanks}
-            roleLabel={
-              question.kind === "insert"
-                ? "Unplaced team"
-                : question.kind === "scrub"
-                  ? "Currently higher"
-                  : "Team A"
-            }
-          />
+          {scrubbing ? (
+            <BuildResultResume
+              team={left}
+              games={games}
+              currentRanks={currentRanks}
+              priorRanks={priorRanks}
+              roleLabel={leftRole}
+            />
+          ) : (
+            <TeamResume
+              team={left}
+              games={games}
+              currentRanks={currentRanks}
+              priorRanks={priorRanks}
+              resumeRanks={resumeRanks}
+              roleLabel={leftRole}
+            />
+          )}
         </button>
         <button type="button" className="build-pick" onClick={() => pick(right.id, left.id)}>
-          <TeamResume
-            team={right}
-            games={games}
-            currentRanks={currentRanks}
-            priorRanks={priorRanks}
-            resumeRanks={resumeRanks}
-            roleLabel={
-              question.kind === "insert"
-                ? "Already on ballot"
-                : question.kind === "scrub"
-                  ? "Currently lower"
-                  : "Team B"
-            }
-          />
+          {scrubbing ? (
+            <BuildResultResume
+              team={right}
+              games={games}
+              currentRanks={currentRanks}
+              priorRanks={priorRanks}
+              roleLabel={rightRole}
+            />
+          ) : (
+            <TeamResume
+              team={right}
+              games={games}
+              currentRanks={currentRanks}
+              priorRanks={priorRanks}
+              resumeRanks={resumeRanks}
+              roleLabel={rightRole}
+            />
+          )}
         </button>
       </div>
     </div>
