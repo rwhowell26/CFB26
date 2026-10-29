@@ -10,7 +10,6 @@ import {
   atLargePoolTeams,
   autoBidTeams,
   cfpRankMap,
-  conferenceGamesForTeam,
   conferenceRecord,
   cycleTeamStatus,
   eliminateFromAtLarge,
@@ -122,13 +121,13 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
             </button>
           </div>
           {pendingGroups.map((group) => (
-            <div key={group.conference} className="playoff-queue-group">
-              <h3>
+            <details key={group.conference} className="playoff-queue-group">
+              <summary>
                 {group.label}{" "}
                 <span>
                   {group.games.length} game{group.games.length === 1 ? "" : "s"}
                 </span>
-              </h3>
+              </summary>
               <ul>
                 {group.games.map((game) => {
                   const winnerId = gameWinnerId(game);
@@ -155,7 +154,7 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
                   );
                 })}
               </ul>
-            </div>
+            </details>
           ))}
         </section>
       ) : (
@@ -206,8 +205,6 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
                     team={team}
                     state={live}
                     cfpRank={ranks.get(team.id)}
-                    gamesInSeason={conferenceGamesForTeam(games, team.id)}
-                    showGamesCol={table.label === "ACC"}
                     onCycle={() => patch(cycleTeamStatus(live, team))}
                     onAdjust={(field, delta) =>
                       patch(adjustConferenceRecord(live, team.id, field, delta))
@@ -402,16 +399,12 @@ function TeamRow({
   team,
   state,
   cfpRank,
-  gamesInSeason,
-  showGamesCol,
   onCycle,
   onAdjust,
 }: {
   team: Team;
   state: PlayoffRaceState;
   cfpRank?: number;
-  gamesInSeason?: number;
-  showGamesCol?: boolean;
   onCycle: () => void;
   onAdjust: (field: "wins" | "losses", delta: number) => void;
 }) {
@@ -441,7 +434,6 @@ function TeamRow({
           L−
         </button>
       </span>
-      {showGamesCol ? <span className="playoff-games">{gamesInSeason ?? ""}</span> : null}
     </li>
   );
 }

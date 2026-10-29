@@ -1889,13 +1889,22 @@ input[type="password"],
   margin-bottom: 0.75rem;
 }
 
-.playoff-queue-group h3 {
-  margin: 0.85rem 0 0.4rem;
-  font-family: var(--font-display), "Barlow Condensed", sans-serif;
-  font-size: 1.15rem;
+.playoff-queue-group {
+  margin-top: 0.55rem;
 }
 
-.playoff-queue-group h3 span {
+.playoff-queue-group summary {
+  cursor: pointer;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  font-size: 1.15rem;
+  list-style: none;
+}
+
+.playoff-queue-group summary::-webkit-details-marker {
+  display: none;
+}
+
+.playoff-queue-group summary span {
   color: var(--muted);
   font-family: var(--font-sans), sans-serif;
   font-size: 0.85rem;
@@ -2020,7 +2029,7 @@ input[type="password"],
 
 .playoff-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.3rem;
   align-items: center;
   border-radius: 8px;
@@ -2077,6 +2086,17 @@ input[type="password"],
   padding: 0.05rem 0.28rem;
   font-size: 0.7rem;
   cursor: pointer;
+}
+
+.playoff-wl button {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.playoff-row:hover .playoff-wl button,
+.playoff-row:focus-within .playoff-wl button {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .playoff-games {
