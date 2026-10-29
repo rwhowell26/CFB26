@@ -1,0 +1,2182 @@
+{
+  "title": "ACCY 6100 — Auditing Seminar",
+  "subtitle": "Exam 1 Practice Question Bank",
+  "source": "Modules 1–4, plus the Meridien/Bond independence case study",
+  "questions": [
+    {
+      "id": 1,
+      "module": "Module 1: Theory, Purpose, and Origin of Auditing",
+      "prompt": "Who was Ivar Kreuger?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A US regulator who investigated early securities fraud"
+        },
+        {
+          "letter": "B",
+          "text": "A Swedish industrialist who built a global match monopoly financed by investor securities"
+        },
+        {
+          "letter": "C",
+          "text": "The founder of the first US public accounting firm"
+        },
+        {
+          "letter": "D",
+          "text": "A congressman who authored the Securities Act of 1933"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Kreuger was a Swedish industrialist who built a global match manufacturing/distribution monopoly financed by securities sold to investors, especially in the US."
+    },
+    {
+      "id": 2,
+      "module": "Module 1: Theory, Purpose, and Origin of Auditing",
+      "prompt": "What world event set the stage for Kreuger's rise to prominence?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The 1929 stock market crash"
+        },
+        {
+          "letter": "B",
+          "text": "World War I, which disrupted European economies and created capital demand"
+        },
+        {
+          "letter": "C",
+          "text": "The founding of the SEC"
+        },
+        {
+          "letter": "D",
+          "text": "World War II"
+        }
+      ],
+      "answer": "B",
+      "explanation": "WWI disrupted European economies and government finances, creating the capital demand Kreuger filled by lending to governments in exchange for match monopolies."
+    },
+    {
+      "id": 3,
+      "module": "Module 1: Theory, Purpose, and Origin of Auditing",
+      "prompt": "What did Kreuger's fraud actually involve, per Flesher & Flesher?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "He embezzled company cash and inventory directly"
+        },
+        {
+          "letter": "B",
+          "text": "He promised governments construction services and failed to deliver"
+        },
+        {
+          "letter": "C",
+          "text": "He paid dividends from new investor cash and misstated his financials"
+        },
+        {
+          "letter": "D",
+          "text": "He forged bank signatures to authorize transfers"
+        }
+      ],
+      "answer": "C",
+      "explanation": "Kreuger paid investors dividends using cash from new investors (Ponzi-like) rather than real earnings, and intentionally misstated his financial statements — not embezzlement or reneging on services."
+    },
+    {
+      "id": 4,
+      "module": "Module 1: Theory, Purpose, and Origin of Auditing",
+      "prompt": "Why did Kreuger's scheme ultimately fail?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A whistleblower auditor exposed the fraud"
+        },
+        {
+          "letter": "B",
+          "text": "The Great Depression cut off his ability to raise new capital"
+        },
+        {
+          "letter": "C",
+          "text": "A foreign government seized his monopolies"
+        },
+        {
+          "letter": "D",
+          "text": "Congress banned match monopolies directly"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The Great Depression cut off Kreuger's ability to raise new capital to cover the gaps created by his fabricated structure, leading to his 1932 collapse."
+    },
+    {
+      "id": 5,
+      "module": "Module 1: Theory, Purpose, and Origin of Auditing",
+      "prompt": "Which act do Flesher & Flesher credit Kreuger's fraud with contributing to?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The Securities Exchange Act of 1934"
+        },
+        {
+          "letter": "B",
+          "text": "The Securities Act of 1933"
+        },
+        {
+          "letter": "C",
+          "text": "The Sarbanes-Oxley Act of 2002"
+        },
+        {
+          "letter": "D",
+          "text": "The Foreign Corrupt Practices Act of 1977"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Flesher & Flesher credit Kreuger's fraud specifically with contributing to the Securities Act of 1933, not the 1934 Exchange Act or later reforms."
+    },
+    {
+      "id": 6,
+      "module": "Module 1: Theory, Purpose, and Origin of Auditing",
+      "prompt": "What is the auditor's fundamental obligation, per the readings?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "To serve client management and the audit committee"
+        },
+        {
+          "letter": "B",
+          "text": "To protect investors"
+        },
+        {
+          "letter": "C",
+          "text": "To detect all instances of fraud"
+        },
+        {
+          "letter": "D",
+          "text": "To guarantee the accuracy of every disclosure"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The reading frames the auditor's fundamental obligation as investor protection — broader than the AU-C 200 technical objective of reasonable assurance."
+    },
+    {
+      "id": 7,
+      "module": "Module 1: Theory, Purpose, and Origin of Auditing",
+      "prompt": "Per AU-C 200, what is the overall objective of an audit?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "To guarantee the F/S contain no errors"
+        },
+        {
+          "letter": "B",
+          "text": "To obtain reasonable assurance the F/S are free of material misstatement and report accordingly"
+        },
+        {
+          "letter": "C",
+          "text": "To prepare the F/S on management's behalf"
+        },
+        {
+          "letter": "D",
+          "text": "To design the company's internal controls"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AU-C 200 states the auditor's objectives are to obtain reasonable assurance the F/S are free of material misstatement and to report accordingly."
+    },
+    {
+      "id": 8,
+      "module": "Module 1: Theory, Purpose, and Origin of Auditing",
+      "prompt": "Reasonable assurance is best described as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A moderate level of assurance"
+        },
+        {
+          "letter": "B",
+          "text": "A high level of assurance"
+        },
+        {
+          "letter": "C",
+          "text": "Absolute assurance"
+        },
+        {
+          "letter": "D",
+          "text": "A guarantee no material misstatements go undetected"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Reasonable assurance is confirmed as a high level of assurance — not moderate, not absolute, and it does not guarantee zero undetected material misstatements."
+    },
+    {
+      "id": 9,
+      "module": "Module 1: Theory, Purpose, and Origin of Auditing",
+      "prompt": "Why is absolute assurance not required or achievable in an audit?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "It is required but auditors simply aren't held to it"
+        },
+        {
+          "letter": "B",
+          "text": "It isn't achievable due to inherent limitations like sampling and possible collusion"
+        },
+        {
+          "letter": "C",
+          "text": "It was eliminated by SOX in 2002"
+        },
+        {
+          "letter": "D",
+          "text": "It only applies to private companies"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Absolute assurance isn't achievable due to inherent limitations — sampling, the nature of evidence, and possible collusion or concealment."
+    },
+    {
+      "id": 10,
+      "module": "Module 1: Theory, Purpose, and Origin of Auditing",
+      "prompt": "What amount of assurance does the auditor obtain regarding IMMATERIAL misstatements?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The same reasonable assurance as material misstatements"
+        },
+        {
+          "letter": "B",
+          "text": "Little to none — the audit targets material misstatements"
+        },
+        {
+          "letter": "C",
+          "text": "Absolute assurance, since they're easier to verify"
+        },
+        {
+          "letter": "D",
+          "text": "A separate lower-tier opinion just for immaterial items"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Immaterial misstatements wouldn't influence a reasonable user's decisions, so the audit isn't designed to catch them — assurance is calibrated to material items."
+    },
+    {
+      "id": 11,
+      "module": "Module 1: Theory, Purpose, and Origin of Auditing",
+      "prompt": "Which of these is genuinely a management responsibility in a public company audit?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Selecting the auditor and negotiating engagement terms"
+        },
+        {
+          "letter": "B",
+          "text": "Preparing the F/S and maintaining internal controls"
+        },
+        {
+          "letter": "C",
+          "text": "Issuing the final audit opinion"
+        },
+        {
+          "letter": "D",
+          "text": "Setting PCAOB inspection schedules"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Management prepares the F/S, maintains internal controls, and supplies information; selecting the auditor and negotiating terms is the audit committee's job, not management's."
+    },
+    {
+      "id": 12,
+      "module": "Module 1: Theory, Purpose, and Origin of Auditing",
+      "prompt": "What are the two explanations for the origin/demand for auditing discussed in Module 1?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Regulatory mandate theory and market efficiency theory"
+        },
+        {
+          "letter": "B",
+          "text": "Agency/stewardship theory and the insurance hypothesis"
+        },
+        {
+          "letter": "C",
+          "text": "Signaling theory and deterrence theory"
+        },
+        {
+          "letter": "D",
+          "text": "Public interest theory and capture theory"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Agency/stewardship theory ties audit demand to monitoring management on owners' behalf; the insurance hypothesis holds investors demand audits partly to have someone to sue for recovery if losses occur."
+    },
+    {
+      "id": 13,
+      "module": "Module 1: Theory, Purpose, and Origin of Auditing",
+      "prompt": "An investor invests partly believing that if the audited F/S turn out wrong, she can sue the auditor to recover losses. Which explanation for audit demand is this?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Agency/stewardship theory"
+        },
+        {
+          "letter": "B",
+          "text": "The insurance hypothesis"
+        },
+        {
+          "letter": "C",
+          "text": "The expectations gap"
+        },
+        {
+          "letter": "D",
+          "text": "Adverse selection theory"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The insurance hypothesis holds investors demand audits partly because they believe auditors have deep pockets and can be sued to recover losses."
+    },
+    {
+      "id": 14,
+      "module": "Module 1: Theory, Purpose, and Origin of Auditing",
+      "prompt": "How do adverse selection and moral hazard differ?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Both occur only after capital is committed"
+        },
+        {
+          "letter": "B",
+          "text": "Adverse selection is pre-transaction; moral hazard is post-transaction"
+        },
+        {
+          "letter": "C",
+          "text": "Both are the same concept, just different names"
+        },
+        {
+          "letter": "D",
+          "text": "Adverse selection is post-transaction; moral hazard is pre-transaction"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Adverse selection is pre-transaction information asymmetry (can't tell good firms from bad before investing); moral hazard is post-transaction (unobservable actions after capital is committed)."
+    },
+    {
+      "id": 15,
+      "module": "Module 1: Theory, Purpose, and Origin of Auditing",
+      "prompt": "Why doesn't providing financial statements alone solve the adverse selection problem?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Because F/S are legally required to be false"
+        },
+        {
+          "letter": "B",
+          "text": "Managers have an incentive to misstate what they self-report, so unaudited F/S aren't credible on their own"
+        },
+        {
+          "letter": "C",
+          "text": "Because GAAP doesn't cover most transactions"
+        },
+        {
+          "letter": "D",
+          "text": "Because investors never read financial statements"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Managers prepare the F/S investors use to judge them, so self-reported statements aren't credible on their own — investors know this and may distrust or avoid unaudited F/S, shrinking the market to low-quality issuers."
+    },
+    {
+      "id": 16,
+      "module": "Module 1: Theory, Purpose, and Origin of Auditing",
+      "prompt": "How is adverse selection overcome so lemons markets can be avoided?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "By requiring all investors to conduct their own audits"
+        },
+        {
+          "letter": "B",
+          "text": "Through independent third-party verification that lacks a stake in favorable results"
+        },
+        {
+          "letter": "C",
+          "text": "By banning companies from issuing financial statements"
+        },
+        {
+          "letter": "D",
+          "text": "Through government price controls on securities"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Independent third-party verification (the audit) adds credibility because the verifier has no stake in favorable results, helping avoid a lemons market."
+    },
+    {
+      "id": 17,
+      "module": "Module 1: Theory, Purpose, and Origin of Auditing",
+      "prompt": "What characteristics make third-party information providers/assurers valuable?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Low cost and quick turnaround time"
+        },
+        {
+          "letter": "B",
+          "text": "Independence, competence, reputation, and accountability"
+        },
+        {
+          "letter": "C",
+          "text": "Close personal ties to company management"
+        },
+        {
+          "letter": "D",
+          "text": "A financial stake in the company's success"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Valuable third-party assurers are independent/free of conflicts, competent, reputable, and accountable (exposed to liability) — not simply cheap or fast."
+    },
+    {
+      "id": 18,
+      "module": "Module 1: Theory, Purpose, and Origin of Auditing",
+      "prompt": "Which event prompted the AICPA to create the Committee on Auditing Procedure in 1939, issuing the first formal US auditing standards?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The Ivar Kreuger collapse"
+        },
+        {
+          "letter": "B",
+          "text": "The McKesson and Robbins audit failure"
+        },
+        {
+          "letter": "C",
+          "text": "The Enron collapse"
+        },
+        {
+          "letter": "D",
+          "text": "The 1929 stock market crash"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The McKesson & Robbins fraud (inflated inventory/receivables) directly led the AICPA to create the Committee on Auditing Procedure in 1939, issuing the first formal US auditing standards."
+    },
+    {
+      "id": 19,
+      "module": "Module 2: Regulatory History, SOX, and AI in Auditing",
+      "prompt": "How did audit regulation change between 1980 and 2005, per Kinney?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "It became less regulated, moving toward pure self-regulation"
+        },
+        {
+          "letter": "B",
+          "text": "It shifted from self-regulation to independent government-mandated PCAOB oversight"
+        },
+        {
+          "letter": "C",
+          "text": "It remained essentially unchanged"
+        },
+        {
+          "letter": "D",
+          "text": "Regulation shifted entirely to state accountancy boards"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Audit regulation shifted from self-regulation to independent government-mandated PCAOB oversight, prompted by scandals and SOX (2002)."
+    },
+    {
+      "id": 20,
+      "module": "Module 2: Regulatory History, SOX, and AI in Auditing",
+      "prompt": "Which is NOT one of Kinney's three 'constants'?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The expectations gap"
+        },
+        {
+          "letter": "B",
+          "text": "The regulatory environment"
+        },
+        {
+          "letter": "C",
+          "text": "Determinants of information value"
+        },
+        {
+          "letter": "D",
+          "text": "Organization of audit firms and contracts"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Kinney's three constants are determinants of information value, the expectations gap, and organization of audit firms/contracts. 'Regulatory environment' is a confirmed false distractor."
+    },
+    {
+      "id": 21,
+      "module": "Module 2: Regulatory History, SOX, and AI in Auditing",
+      "prompt": "Which is NOT one of Kinney's three 'trends'?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The spirit of deregulation"
+        },
+        {
+          "letter": "B",
+          "text": "Adoption of increasingly rigorous auditing standards"
+        },
+        {
+          "letter": "C",
+          "text": "Development of information technology"
+        },
+        {
+          "letter": "D",
+          "text": "Increased social importance of audited financial statements"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Kinney's three trends are deregulation, increased social importance of audited F/S (aka triumph of the corporation), and information technology. 'Rigorous standards adoption' is a distractor."
+    },
+    {
+      "id": 22,
+      "module": "Module 2: Regulatory History, SOX, and AI in Auditing",
+      "prompt": "What is true of 'the expectations gap' relative to Kinney's trends?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "It reversed direction by 2002, due to SOX"
+        },
+        {
+          "letter": "B",
+          "text": "It is not a trend at all, but one of Kinney's constants"
+        },
+        {
+          "letter": "C",
+          "text": "It strengthened continuously after 2002"
+        },
+        {
+          "letter": "D",
+          "text": "It only applies to private company audits"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The expectations gap is public unawareness of audit/GAAP limitations, causing 'where were the auditors?' after failures — it's a constant, not a trend."
+    },
+    {
+      "id": 23,
+      "module": "Module 2: Regulatory History, SOX, and AI in Auditing",
+      "prompt": "Which trend reversed direction by 2002 due to SOX?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Triumph of the corporation"
+        },
+        {
+          "letter": "B",
+          "text": "The spirit of deregulation"
+        },
+        {
+          "letter": "C",
+          "text": "Information technology adoption"
+        },
+        {
+          "letter": "D",
+          "text": "The determinants of information value"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The deregulation trend (1970s-2000s) reversed with SOX in 2002, which significantly re-regulated the profession by creating the PCAOB."
+    },
+    {
+      "id": 24,
+      "module": "Module 2: Regulatory History, SOX, and AI in Auditing",
+      "prompt": "How has technology impacted investors' use of information?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "It increased the cost of trading and slowed information delivery"
+        },
+        {
+          "letter": "B",
+          "text": "It decreased the cost of information/trading and increased accessibility"
+        },
+        {
+          "letter": "C",
+          "text": "It had no measurable effect on investors"
+        },
+        {
+          "letter": "D",
+          "text": "It eliminated the need for financial disclosures entirely"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Technology decreased the cost of information/trading (online trading, no broker needed) and increased accessibility/timeliness (real-time disclosures vs. waiting for press releases)."
+    },
+    {
+      "id": 25,
+      "module": "Module 2: Regulatory History, SOX, and AI in Auditing",
+      "prompt": "What does SOX Section 101 do?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Establishes internal control requirements for issuers"
+        },
+        {
+          "letter": "B",
+          "text": "Establishes the PCAOB as a nonprofit corporation to oversee public company audits"
+        },
+        {
+          "letter": "C",
+          "text": "Requires CEO/CFO certification of financials"
+        },
+        {
+          "letter": "D",
+          "text": "Bans specific non-audit services"
+        }
+      ],
+      "answer": "B",
+      "explanation": "SOX Section 101 establishes the PCAOB itself as a nonprofit corporation to oversee public company audits."
+    },
+    {
+      "id": 26,
+      "module": "Module 2: Regulatory History, SOX, and AI in Auditing",
+      "prompt": "What does SOX Section 102 require?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Requires the PCAOB to inspect every audit annually"
+        },
+        {
+          "letter": "B",
+          "text": "Requires public accounting firms auditing issuers to register with the PCAOB"
+        },
+        {
+          "letter": "C",
+          "text": "Requires SEC approval of every audit report"
+        },
+        {
+          "letter": "D",
+          "text": "Establishes criminal penalties for audit fraud"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Section 102 requires public accounting firms auditing issuers to register with the PCAOB before providing audit services."
+    },
+    {
+      "id": 27,
+      "module": "Module 2: Regulatory History, SOX, and AI in Auditing",
+      "prompt": "What authority does SOX Section 103 give the PCAOB?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Authority to prosecute securities fraud criminally"
+        },
+        {
+          "letter": "B",
+          "text": "Authority to establish auditing, quality control, ethics, and independence standards"
+        },
+        {
+          "letter": "C",
+          "text": "Authority to set GAAP for all public companies"
+        },
+        {
+          "letter": "D",
+          "text": "Authority to appoint the SEC Chair"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Section 103 authorizes the PCAOB to establish auditing, quality control, ethics, and independence standards for registered public accounting firms."
+    },
+    {
+      "id": 28,
+      "module": "Module 2: Regulatory History, SOX, and AI in Auditing",
+      "prompt": "What does SOX Section 104 establish?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Auditing and independence standard-setting"
+        },
+        {
+          "letter": "B",
+          "text": "Ongoing inspections of registered firms, frequency based on issuer count"
+        },
+        {
+          "letter": "C",
+          "text": "Registration of public accounting firms"
+        },
+        {
+          "letter": "D",
+          "text": "PCAOB funding via accounting support fees"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Section 104 requires the PCAOB to conduct ongoing inspections of registered firms, with frequency based on the number of issuers they audit."
+    },
+    {
+      "id": 29,
+      "module": "Module 2: Regulatory History, SOX, and AI in Auditing",
+      "prompt": "What does SOX Section 109 establish?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Foreign accounting firm registration requirements"
+        },
+        {
+          "letter": "B",
+          "text": "PCAOB funding, primarily via mandatory accounting support fees on issuers"
+        },
+        {
+          "letter": "C",
+          "text": "SEC oversight authority over the Board"
+        },
+        {
+          "letter": "D",
+          "text": "Recognition of GAAP-setting bodies"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Section 109 establishes the PCAOB's funding, primarily via mandatory accounting support fees assessed on issuers based on relative market capitalization."
+    },
+    {
+      "id": 30,
+      "module": "Module 2: Regulatory History, SOX, and AI in Auditing",
+      "prompt": "Which statement about the PCAOB is NOT true?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "It sets audit and quality control standards"
+        },
+        {
+          "letter": "B",
+          "text": "It is a United States government agency"
+        },
+        {
+          "letter": "C",
+          "text": "It has 5 members"
+        },
+        {
+          "letter": "D",
+          "text": "It inspects registered accounting firms"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The PCAOB is a private nonprofit corporation with a government mandate — explicitly not a US government agency, despite its regulatory role."
+    },
+    {
+      "id": 31,
+      "module": "Module 2: Regulatory History, SOX, and AI in Auditing",
+      "prompt": "What is Generative AI (Gen-AI)?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "AI that runs exclusively on local, on-premise hardware"
+        },
+        {
+          "letter": "B",
+          "text": "Cloud-based large language models that create content from user prompts"
+        },
+        {
+          "letter": "C",
+          "text": "AI used only for image recognition"
+        },
+        {
+          "letter": "D",
+          "text": "A rules-based system with no learning capability"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Gen-AI refers to cloud-based LLMs that create content from prompts; strong at unstructured data but with privacy risks and hallucinations."
+    },
+    {
+      "id": 32,
+      "module": "Module 2: Regulatory History, SOX, and AI in Auditing",
+      "prompt": "What is the advantage of Edge AI over Generative AI?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "It incorporates more cutting-edge technology than Gen-AI"
+        },
+        {
+          "letter": "B",
+          "text": "It better ensures data confidentiality and data sovereignty"
+        },
+        {
+          "letter": "C",
+          "text": "It provides more complex analytical solutions"
+        },
+        {
+          "letter": "D",
+          "text": "It is more efficient at drafting long-form text"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Edge AI's advantage is that it better ensures data confidentiality and data sovereignty by processing on local devices rather than the cloud."
+    },
+    {
+      "id": 33,
+      "module": "Module 2: Regulatory History, SOX, and AI in Auditing",
+      "prompt": "What are example ways AI is currently used by auditors?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only replacing human judgment on materiality"
+        },
+        {
+          "letter": "B",
+          "text": "Drafting memos, interpreting standards, contract analysis, and anomaly detection"
+        },
+        {
+          "letter": "C",
+          "text": "Only scheduling client meetings"
+        },
+        {
+          "letter": "D",
+          "text": "Only marketing and business development"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Cited examples include drafting workpapers/memos, interpreting standards, contract/lease analysis, disclosure checklist review, and anomaly/fraud detection."
+    },
+    {
+      "id": 34,
+      "module": "Module 2: Regulatory History, SOX, and AI in Auditing",
+      "prompt": "What are key risks firms face in using Generative AI?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "AI in auditing carries no meaningful risks"
+        },
+        {
+          "letter": "B",
+          "text": "Data privacy breaches, hallucinations, and bias/explainability concerns"
+        },
+        {
+          "letter": "C",
+          "text": "Only higher software licensing costs"
+        },
+        {
+          "letter": "D",
+          "text": "Only that clients might refuse AI use entirely"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Key risks: data privacy/security breaches, hallucinations (confidently wrong outputs), and bias/lack of explainability from 'black box' models."
+    },
+    {
+      "id": 35,
+      "module": "Module 2: Regulatory History, SOX, and AI in Auditing",
+      "prompt": "What are the actual arguments FOR dismantling the PCAOB?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The PCAOB's authority is too limited to be effective"
+        },
+        {
+          "letter": "B",
+          "text": "The SEC could accomplish the objectives more efficiently, and PCAOB rule-making goes too far"
+        },
+        {
+          "letter": "C",
+          "text": "The PCAOB fails to accomplish its stated objectives"
+        },
+        {
+          "letter": "D",
+          "text": "The PCAOB has no enforcement power at all"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Confirmed arguments for dismantling: the SEC could do it more efficiently, and PCAOB rule-making goes too far."
+    },
+    {
+      "id": 36,
+      "module": "Module 2: Regulatory History, SOX, and AI in Auditing",
+      "prompt": "How did the PCAOB avoid being shuttered in the 2025 budget reconciliation fight?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Congress voted directly to preserve funding"
+        },
+        {
+          "letter": "B",
+          "text": "A parliamentarian ruled the provision was a policy change under the Byrd rule, requiring 60 votes"
+        },
+        {
+          "letter": "C",
+          "text": "The Supreme Court blocked the bill"
+        },
+        {
+          "letter": "D",
+          "text": "The AICPA lobbied the provision out"
+        }
+      ],
+      "answer": "B",
+      "explanation": "A Senate parliamentarian ruled the defunding provision was a policy change (not a budget matter) under the Byrd rule, requiring 60 votes it couldn't get."
+    },
+    {
+      "id": 37,
+      "module": "Module 3: The Sources and Purposes of Professional Standards",
+      "prompt": "Conceptually, what is a 'standard'?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A law passed by Congress governing a specific industry"
+        },
+        {
+          "letter": "B",
+          "text": "A benchmark or agreed-upon criterion specifying required actions or quality levels"
+        },
+        {
+          "letter": "C",
+          "text": "A voluntary suggestion with no enforcement mechanism"
+        },
+        {
+          "letter": "D",
+          "text": "A price ceiling set by a regulatory body"
+        }
+      ],
+      "answer": "B",
+      "explanation": "A standard is a benchmark or agreed-upon criterion specifying required (or presumptively required) actions/quality levels, creating consistency and a basis for evaluating performance."
+    },
+    {
+      "id": 38,
+      "module": "Module 3: The Sources and Purposes of Professional Standards",
+      "prompt": "What distinguishes a 'profession' from an 'occupation'?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A profession simply pays more than an occupation"
+        },
+        {
+          "letter": "B",
+          "text": "Specialized knowledge plus self-regulation/autonomy over that knowledge"
+        },
+        {
+          "letter": "C",
+          "text": "A profession requires a 4-year degree; an occupation does not"
+        },
+        {
+          "letter": "D",
+          "text": "There is no meaningful distinction between the terms"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Specialized knowledge unavailable to non-members, combined with self-regulation/autonomy over that knowledge, is what distinguishes a profession from an occupation."
+    },
+    {
+      "id": 39,
+      "module": "Module 3: The Sources and Purposes of Professional Standards",
+      "prompt": "Why do professions establish standards?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Purely to increase billing rates for members"
+        },
+        {
+          "letter": "B",
+          "text": "To serve the public good, signal quality, and preempt heavier government regulation"
+        },
+        {
+          "letter": "C",
+          "text": "Because government agencies mandate it for every profession"
+        },
+        {
+          "letter": "D",
+          "text": "To eliminate all competition from other professions"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Professions set standards to ensure knowledge serves the public good, signal quality assurance, and preempt heavier external/government regulation."
+    },
+    {
+      "id": 40,
+      "module": "Module 3: The Sources and Purposes of Professional Standards",
+      "prompt": "What is 'legitimacy' in the context of standard-setting, and why does it matter?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A legal certification issued by a government agency"
+        },
+        {
+          "letter": "B",
+          "text": "A perception that an entity's actions are socially desirable and proper"
+        },
+        {
+          "letter": "C",
+          "text": "A synonym for 'profitability' in the standard-setting context"
+        },
+        {
+          "letter": "D",
+          "text": "A measure of how many firms comply with a given standard"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Legitimacy is a generalized perception that an entity's actions are socially desirable/proper; it matters because standard-setters have an inherent conflict of interest regulating their own profession."
+    },
+    {
+      "id": 41,
+      "module": "Module 3: The Sources and Purposes of Professional Standards",
+      "prompt": "What are two approaches by which standard-setters obtain legitimacy?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Litigation and lobbying"
+        },
+        {
+          "letter": "B",
+          "text": "Representative inclusion of stakeholders, and expertise/rigorous due process"
+        },
+        {
+          "letter": "C",
+          "text": "Advertising and public relations campaigns"
+        },
+        {
+          "letter": "D",
+          "text": "Mandatory licensing exams for all members"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Representative legitimacy comes from including diverse stakeholders; expertise/due-process legitimacy comes from technical competence and a rigorous process."
+    },
+    {
+      "id": 42,
+      "module": "Module 3: The Sources and Purposes of Professional Standards",
+      "prompt": "What is the main trade-off of the representative approach to legitimacy?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "It has no real cost — it is purely beneficial"
+        },
+        {
+          "letter": "B",
+          "text": "Increased cost, slower process, and potential for watered-down standards"
+        },
+        {
+          "letter": "C",
+          "text": "It eliminates the need for public comment periods"
+        },
+        {
+          "letter": "D",
+          "text": "It automatically guarantees SEC approval"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The representative approach trades speed for buy-in — more stakeholders means higher coordination costs, a slower process, and potential compromise/watered-down standards."
+    },
+    {
+      "id": 43,
+      "module": "Module 3: The Sources and Purposes of Professional Standards",
+      "prompt": "What three themes characterize codes of ethics, per Perliss et al.?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Legal, illegal, and quasi-legal"
+        },
+        {
+          "letter": "B",
+          "text": "Aspirational, educational, and regulatory"
+        },
+        {
+          "letter": "C",
+          "text": "Federal, state, and local"
+        },
+        {
+          "letter": "D",
+          "text": "Mandatory, optional, and voluntary"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Codes of ethics are aspirational (goals/ideals), educational (commentary/explanation), or regulatory (rules with enforcement) — most codes blend all three."
+    },
+    {
+      "id": 44,
+      "module": "Module 3: The Sources and Purposes of Professional Standards",
+      "prompt": "What is a key criticism of self-regulation through codes of ethics?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Codes are too strictly enforced, leaving no room for judgment"
+        },
+        {
+          "letter": "B",
+          "text": "Codes can be self-serving window dressing/economic protectionism"
+        },
+        {
+          "letter": "C",
+          "text": "Codes are always written by government regulators"
+        },
+        {
+          "letter": "D",
+          "text": "Codes have never been shown to affect professional practice"
+        }
+      ],
+      "answer": "B",
+      "explanation": "A key criticism is that self-regulating codes can be self-serving 'window dressing'/economic protectionism, promoting the profession's interests over the public's."
+    },
+    {
+      "id": 45,
+      "module": "Module 3: The Sources and Purposes of Professional Standards",
+      "prompt": "What authority does SOX Section 103 give the PCAOB?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Authority to prosecute securities fraud criminally"
+        },
+        {
+          "letter": "B",
+          "text": "Authority to establish auditing, quality control, ethics, and independence standards"
+        },
+        {
+          "letter": "C",
+          "text": "Authority to set GAAP for all public companies"
+        },
+        {
+          "letter": "D",
+          "text": "Authority to appoint the SEC Chair"
+        }
+      ],
+      "answer": "B",
+      "explanation": "SOX Section 103 authorizes the PCAOB to establish auditing, quality control, ethics, and independence standards for registered public accounting firms."
+    },
+    {
+      "id": 46,
+      "module": "Module 3: The Sources and Purposes of Professional Standards",
+      "prompt": "What process does the PCAOB follow in developing new standards?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A closed-door process with no external input"
+        },
+        {
+          "letter": "B",
+          "text": "A notice-and-comment process seeking public comment on proposed standards"
+        },
+        {
+          "letter": "C",
+          "text": "A direct congressional vote on every standard"
+        },
+        {
+          "letter": "D",
+          "text": "A process relying solely on academic peer review"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The PCAOB follows a notice-and-comment process: seeking public comment on concept releases and proposed/re-proposed standards before finalizing them."
+    },
+    {
+      "id": 47,
+      "module": "Module 3: The Sources and Purposes of Professional Standards",
+      "prompt": "Which is NOT one of the PCAOB's four elements of economic impact analysis?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The need for the new rule or standard"
+        },
+        {
+          "letter": "B",
+          "text": "Prevailing costs of capital in the current environment"
+        },
+        {
+          "letter": "C",
+          "text": "Reasonable alternatives to the proposed rule"
+        },
+        {
+          "letter": "D",
+          "text": "The economic impact of the rule and its alternatives"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The PCAOB's four elements are the need for the rule, the baseline, alternatives considered, and the economic impact of the rule and alternatives. 'Prevailing costs of capital' is not one of them."
+    },
+    {
+      "id": 48,
+      "module": "Module 3: The Sources and Purposes of Professional Standards",
+      "prompt": "Which statement about the ASB is NOT true?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The ASB may issue audit, attest, or quality management standards"
+        },
+        {
+          "letter": "B",
+          "text": "The ASB sets standards for auditors of non-issuers in the US"
+        },
+        {
+          "letter": "C",
+          "text": "The ASB is responsible for inspecting auditors annually"
+        },
+        {
+          "letter": "D",
+          "text": "The ASB has 19 members"
+        }
+      ],
+      "answer": "C",
+      "explanation": "The ASB has 19 members (a quiz question flags '18' as a confirmed typo) and does NOT conduct annual inspections — that's a PCAOB function, not the ASB's."
+    },
+    {
+      "id": 49,
+      "module": "Module 3: The Sources and Purposes of Professional Standards",
+      "prompt": "The PCAOB sets standards in every category EXCEPT which one?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Quality control standards"
+        },
+        {
+          "letter": "B",
+          "text": "Consulting standards"
+        },
+        {
+          "letter": "C",
+          "text": "Ethics standards"
+        },
+        {
+          "letter": "D",
+          "text": "Audit standards"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The PCAOB sets audit, quality control, and ethics/independence standards — it does NOT set 'consulting standards,' which falls outside its authority."
+    },
+    {
+      "id": 50,
+      "module": "Module 3: The Sources and Purposes of Professional Standards",
+      "prompt": "Which statement about the IAASB is true?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "It is overseen by the SEC Practice Section"
+        },
+        {
+          "letter": "B",
+          "text": "It is part of an umbrella organization called IFEA"
+        },
+        {
+          "letter": "C",
+          "text": "It has 5 full-time members"
+        },
+        {
+          "letter": "D",
+          "text": "Its standards have been directly adopted in the US"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The IAASB sits under the International Foundation for Ethics and Audit (IFEA) as of 2023, has 16 members, and its standards aren't directly adopted for US public company audits."
+    },
+    {
+      "id": 51,
+      "module": "Module 3: The Sources and Purposes of Professional Standards",
+      "prompt": "What is the general convergence/divergence trend among the ASB, IAASB, and PCAOB?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "All three standard-setters use identical numbering and structure"
+        },
+        {
+          "letter": "B",
+          "text": "ASB and IAASB converged via the Clarification Project; PCAOB diverges more"
+        },
+        {
+          "letter": "C",
+          "text": "PCAOB and IAASB converged; ASB remains entirely separate"
+        },
+        {
+          "letter": "D",
+          "text": "There has been no meaningful convergence effort among any of the three"
+        }
+      ],
+      "answer": "B",
+      "explanation": "ASB and IAASB largely converged through the Clarification Project; PCAOB standards diverge more, especially regarding the auditor's report."
+    },
+    {
+      "id": 52,
+      "module": "Module 3: The Sources and Purposes of Professional Standards",
+      "prompt": "In auditing standards, what does the word 'should' signal?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Unconditional — always required with no exceptions"
+        },
+        {
+          "letter": "B",
+          "text": "Presumptively mandatory — required unless alternatives are shown sufficient"
+        },
+        {
+          "letter": "C",
+          "text": "Purely optional, a matter of judgment"
+        },
+        {
+          "letter": "D",
+          "text": "No formal meaning — stylistic word choice"
+        }
+      ],
+      "answer": "B",
+      "explanation": "'Should' signals a presumptively mandatory requirement — required unless the auditor demonstrates alternative actions were sufficient."
+    },
+    {
+      "id": 53,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "Which of these is NOT a requirement of an auditor identified by AS 1000?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Independence and ethics"
+        },
+        {
+          "letter": "B",
+          "text": "Patience"
+        },
+        {
+          "letter": "C",
+          "text": "Due professional care"
+        },
+        {
+          "letter": "D",
+          "text": "Competence"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AS 1000's three requirements are independence/ethics, due professional care, and competence. 'Patience' was a joke distractor confirming the real list."
+    },
+    {
+      "id": 54,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "What is the overall purpose of auditing, per the 'division of responsibility' framing?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "To prepare the financial statements for management"
+        },
+        {
+          "letter": "B",
+          "text": "To lend credibility to F/S that would otherwise be suspect due to conflicts of interest"
+        },
+        {
+          "letter": "C",
+          "text": "To guarantee the company's future profitability"
+        },
+        {
+          "letter": "D",
+          "text": "To replace internal accounting staff"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The auditor's role is to lend credibility to financial statements that would otherwise be suspect, given conflicts of interest inherent in the corporate structure."
+    },
+    {
+      "id": 55,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "What does 'competence' mean under AS 1000, and how is it developed?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Solely obtaining a CPA license"
+        },
+        {
+          "letter": "B",
+          "text": "Training and proficiency built through education, licensure, and experience, maintained over time"
+        },
+        {
+          "letter": "C",
+          "text": "Automatic once hired by an accounting firm"
+        },
+        {
+          "letter": "D",
+          "text": "Only years of tenure, regardless of formal training"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Competence is having the training/proficiency needed, built through education, licensure, and practical experience, and must be maintained via continuing education."
+    },
+    {
+      "id": 56,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "A newly licensed CPA claims she is now automatically competent under AS 1000. Is this appropriate?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Appropriate — the CPA license is sufficient for all future engagements"
+        },
+        {
+          "letter": "B",
+          "text": "Inappropriate — competence is engagement-specific and must be continually maintained"
+        },
+        {
+          "letter": "C",
+          "text": "Appropriate, but only for the first five years post-licensure"
+        },
+        {
+          "letter": "D",
+          "text": "Inappropriate — licensure has no bearing on competence at all"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Licensure is a baseline, not a guarantee of competence for every engagement; competence is engagement-specific and must be continually maintained."
+    },
+    {
+      "id": 57,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "How does independence in fact differ from independence in appearance?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "They are the same concept described two different ways"
+        },
+        {
+          "letter": "B",
+          "text": "In fact is the actual state of mind; in appearance is how a reasonable third party would view it"
+        },
+        {
+          "letter": "C",
+          "text": "Only 'in fact' matters legally; 'in appearance' is just good practice"
+        },
+        {
+          "letter": "D",
+          "text": "Only 'in appearance' is testable; 'in fact' can never be verified"
+        }
+      ],
+      "answer": "B",
+      "explanation": "In fact = actual state of mind, unaffected by influences that compromise judgment. In appearance = avoidance of circumstances a reasonable, informed third party would view as compromising."
+    },
+    {
+      "id": 58,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "Why do both independence in fact AND independence in appearance matter?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "In fact matters for legal liability only; appearance has no real-world importance"
+        },
+        {
+          "letter": "B",
+          "text": "In fact is the substance enabling an unbiased opinion; in appearance sustains public trust even absent actual bias"
+        },
+        {
+          "letter": "C",
+          "text": "Neither actually matters if the audit opinion is ultimately correct"
+        },
+        {
+          "letter": "D",
+          "text": "Appearance matters only for public companies, not private ones"
+        }
+      ],
+      "answer": "B",
+      "explanation": "In-fact independence is the substance that lets the auditor's opinion be genuinely unbiased; in-appearance independence matters because public trust in audited F/S depends on perceived independence."
+    },
+    {
+      "id": 59,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "A speaker tells high schoolers that independence just means avoiding financial interests in a client. Is this correct?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Correct — independence is entirely about financial interests"
+        },
+        {
+          "letter": "B",
+          "text": "Incorrect — SEC rules also cover employment, business relationships, non-audit services, and contingent fees"
+        },
+        {
+          "letter": "C",
+          "text": "Correct, but only for engagement partners specifically"
+        },
+        {
+          "letter": "D",
+          "text": "Incorrect — SEC rules only cover appearance, not financial interests at all"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Financial-interest rules are only one category; SEC rules also cover employment relationships, business relationships, non-audit services, and contingent fees."
+    },
+    {
+      "id": 60,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "What is due professional care?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Simply completing all required checklists regardless of quality"
+        },
+        {
+          "letter": "B",
+          "text": "Exercising the skill/diligence of a reasonably prudent, competent auditor, with critical review of work"
+        },
+        {
+          "letter": "C",
+          "text": "Following management's instructions on how to conduct the audit"
+        },
+        {
+          "letter": "D",
+          "text": "A purely subjective standard with no defined benchmark"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Due professional care is exercising the skill/diligence of a reasonably prudent, competent auditor — careful performance and critical review of work at every level."
+    },
+    {
+      "id": 61,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "Professional skepticism involves a critical assessment of which of these specifically?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The financial statements as a whole"
+        },
+        {
+          "letter": "B",
+          "text": "Audit evidence"
+        },
+        {
+          "letter": "C",
+          "text": "Internal controls over financial reporting only"
+        },
+        {
+          "letter": "D",
+          "text": "Management's general trustworthiness"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Professional skepticism involves a critical assessment specifically of audit evidence — not the F/S generally, ICFR alone, or management's trustworthiness as people."
+    },
+    {
+      "id": 62,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "A manager advises new staff to always view management as dishonest to maintain skepticism. Is this appropriate?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Appropriate — assuming dishonesty is the safest form of skepticism"
+        },
+        {
+          "letter": "B",
+          "text": "Inappropriate — the standard is a neutral, evidence-driven mindset, not assumed dishonesty"
+        },
+        {
+          "letter": "C",
+          "text": "Appropriate, but only for public company audits"
+        },
+        {
+          "letter": "D",
+          "text": "Inappropriate — auditors should generally trust management by default"
+        }
+      ],
+      "answer": "B",
+      "explanation": "AU-C 200 says the auditor should neither assume dishonesty nor unquestioned honesty — skepticism is a neutral, evidence-driven questioning mindset, not a presumption of guilt."
+    },
+    {
+      "id": 63,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "What did EY actually do in the Sealed Air independence case?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "EY hired the client's former controller into a senior role"
+        },
+        {
+          "letter": "B",
+          "text": "EY solicited confidential RFP and audit committee information from the client's CAO"
+        },
+        {
+          "letter": "C",
+          "text": "EY held a direct financial interest in the client's stock"
+        },
+        {
+          "letter": "D",
+          "text": "EY provided prohibited bookkeeping services to the client"
+        }
+      ],
+      "answer": "B",
+      "explanation": "EY solicited and received confidential competitive intelligence and confidential audit committee information from Sealed Air's then-CAO during the RFP process."
+    },
+    {
+      "id": 64,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "Which independence standard did the Sealed Air conduct actually violate?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The specific $10,000 credit card balance threshold"
+        },
+        {
+          "letter": "B",
+          "text": "The general 'reasonable investor' appearance-of-independence standard"
+        },
+        {
+          "letter": "C",
+          "text": "The direct financial interest prohibition"
+        },
+        {
+          "letter": "D",
+          "text": "The mandatory partner rotation requirement"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The SEC applied the general 'reasonable investor' appearance-of-independence standard under Rule 2-01(b), not one of the itemized financial/employment prohibitions."
+    },
+    {
+      "id": 65,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "What did Judge, Goodson, and Stefaniak (2024) actually find?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Tenure disclosure has no measurable effect on investor perceptions"
+        },
+        {
+          "letter": "B",
+          "text": "Long tenure disclosure impairs perceived independence, but rotation disclosure mitigates it"
+        },
+        {
+          "letter": "C",
+          "text": "Partner rotation disclosure alone impairs perceived independence"
+        },
+        {
+          "letter": "D",
+          "text": "Investors ignore both tenure and rotation disclosures entirely"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Long tenure disclosure makes investors perceive impaired independence and invest less; this is mitigated when investors learn the engagement partner is rotated."
+    },
+    {
+      "id": 66,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "What research method did Judge, Goodson, and Stefaniak use?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A purely theoretical/mathematical model"
+        },
+        {
+          "letter": "B",
+          "text": "An experiment with online nonprofessional-investor participants reviewing manipulated disclosures"
+        },
+        {
+          "letter": "C",
+          "text": "A meta-analysis of prior published studies only"
+        },
+        {
+          "letter": "D",
+          "text": "A single-company case study"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The study used an experiment with online participants who are nonprofessional investors, reviewing manipulated audit report disclosures and judging independence."
+    },
+    {
+      "id": 67,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "Under what circumstances may an auditor hold direct vs. indirect financial interests in a client?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Both are prohibited only above a materiality threshold"
+        },
+        {
+          "letter": "B",
+          "text": "Direct interests are prohibited at any amount; indirect interests only matter if material"
+        },
+        {
+          "letter": "C",
+          "text": "Neither type of interest is ever prohibited"
+        },
+        {
+          "letter": "D",
+          "text": "Indirect interests are prohibited at any amount; direct interests only if material"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Direct financial interests are prohibited at any amount — materiality is irrelevant. Indirect interests only impair independence if material to the covered person."
+    },
+    {
+      "id": 68,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "What is a 'covered person' under SEC independence rules?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Any employee of the firm, regardless of role"
+        },
+        {
+          "letter": "B",
+          "text": "The engagement team, chain of command, certain nonaudit-service providers, and the lead partner's office"
+        },
+        {
+          "letter": "C",
+          "text": "Only the engagement partner personally"
+        },
+        {
+          "letter": "D",
+          "text": "Only individuals who have signed the audit report"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Covered person includes the engagement team, the chain of command, certain nonaudit-service providers, and partners from the lead partner's office."
+    },
+    {
+      "id": 69,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "How does SEC rule define 'immediate family member' vs. 'close family member'?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The two terms mean exactly the same thing"
+        },
+        {
+          "letter": "B",
+          "text": "Immediate = spouse/spousal equivalent/dependents; close = immediate plus parent, nondependent child, sibling"
+        },
+        {
+          "letter": "C",
+          "text": "Immediate family includes cousins and in-laws; close family does not"
+        },
+        {
+          "letter": "D",
+          "text": "Neither term includes the auditor's spouse"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Immediate family = spouse, spousal equivalent, dependents. Close family = spouse, spousal equivalent, parent, dependent, nondependent child, sibling."
+    },
+    {
+      "id": 70,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "Under what circumstances can an auditor have loans from or deposit accounts with an audit client?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Any loan is permitted as long as the balance stays under $10,000"
+        },
+        {
+          "letter": "B",
+          "text": "Generally prohibited, except specific exceptions like auto loans, cash-collateralized loans, and pre-covered-person mortgages/student loans"
+        },
+        {
+          "letter": "C",
+          "text": "All loans from clients are permitted under normal lending terms"
+        },
+        {
+          "letter": "D",
+          "text": "Loans are only prohibited if they exceed $1 million"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Loans are generally prohibited except auto loans (collateralized, normal terms), cash-collateralized loans, and mortgage/student loans obtained BEFORE the individual became a covered person."
+    },
+    {
+      "id": 71,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "What do SEC rules prohibit regarding employment relationships with audit clients?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only prohibits the auditor's own spouse from working at the client"
+        },
+        {
+          "letter": "B",
+          "text": "Prohibits current partners employed by/on the board of the client, and close family in financial-reporting oversight roles there"
+        },
+        {
+          "letter": "C",
+          "text": "Only applies to former partners, never current staff"
+        },
+        {
+          "letter": "D",
+          "text": "Has no exceptions once a violation occurs"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Employment prohibitions include a current partner/professional employed by or on the client's board, and a close family member in an accounting/financial-reporting oversight role there."
+    },
+    {
+      "id": 72,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "Under what circumstance would an individual's independence impairment NOT impair the audit firm's independence?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Never — one impaired individual always impairs the firm"
+        },
+        {
+          "letter": "B",
+          "text": "When the firm lacked knowledge, corrected it promptly, and has adequate quality controls"
+        },
+        {
+          "letter": "C",
+          "text": "Whenever the client consents in writing"
+        },
+        {
+          "letter": "D",
+          "text": "Only if the impaired individual resigns immediately"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Firm independence survives an individual's impairment if the firm didn't know of it, corrected it promptly, and has an adequate quality control system."
+    },
+    {
+      "id": 73,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "After how many consecutive years must the lead audit partner rotate off a public company engagement?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "3 years"
+        },
+        {
+          "letter": "B",
+          "text": "5 years"
+        },
+        {
+          "letter": "C",
+          "text": "7 years"
+        },
+        {
+          "letter": "D",
+          "text": "10 years"
+        }
+      ],
+      "answer": "B",
+      "explanation": "SEC rules require the lead/concurring partner to rotate off after 5 consecutive years."
+    },
+    {
+      "id": 74,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "What does the 'cooling-off period' rule generally require for a former audit team member taking a financial reporting role at that client?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "No restriction — the former auditor can start immediately"
+        },
+        {
+          "letter": "B",
+          "text": "Generally prohibited without approval for 1 year after providing attest services"
+        },
+        {
+          "letter": "C",
+          "text": "Prohibited for 5 years, matching partner rotation"
+        },
+        {
+          "letter": "D",
+          "text": "Prohibited permanently with no path to the role"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The SEC imposes a 1-year cooling-off period before a former attest team member can take a financial reporting oversight role at that client, absent specific approval."
+    },
+    {
+      "id": 75,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "Which tax-related service is specifically PROHIBITED under PCAOB independence rules?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "General tax planning and advice"
+        },
+        {
+          "letter": "B",
+          "text": "Contingent fee arrangements for tax services"
+        },
+        {
+          "letter": "C",
+          "text": "Tax return preparation"
+        },
+        {
+          "letter": "D",
+          "text": "Tax compliance services"
+        }
+      ],
+      "answer": "B",
+      "explanation": "PCAOB rules specifically prohibit contingent fee arrangements for tax services — fees tied to a tax outcome create too strong an incentive toward aggressive positions."
+    },
+    {
+      "id": 76,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "Under what conditions does a covered person's trust beneficiary interest impair independence?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only if the trust exceeds $1 million in total value"
+        },
+        {
+          "letter": "B",
+          "text": "If the interest is material to the covered person, they created the trust, or they control its investments"
+        },
+        {
+          "letter": "C",
+          "text": "Never — trust interests are always exempt"
+        },
+        {
+          "letter": "D",
+          "text": "Always — any beneficiary interest automatically impairs independence"
+        }
+      ],
+      "answer": "B",
+      "explanation": "For a covered-person trust beneficiary, independence is impaired if the interest is material to them, they created the trust, or they control the trust's investments/assets."
+    },
+    {
+      "id": 77,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "When does the 'professional engagement period' begin?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The date the audit report is signed"
+        },
+        {
+          "letter": "B",
+          "text": "Whichever comes first: signing the initial engagement letter or beginning audit procedures"
+        },
+        {
+          "letter": "C",
+          "text": "The first day of the client's fiscal year"
+        },
+        {
+          "letter": "D",
+          "text": "The date the client publicly announces the auditor"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The professional engagement period begins at whichever comes first: signing the initial engagement letter, or beginning audit/review/attest procedures."
+    },
+    {
+      "id": 78,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "John has a $2,500 deposit account with client bank ABC, material to him personally, under normal banking terms. Is he independent?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Not independent — the balance is material to him personally"
+        },
+        {
+          "letter": "B",
+          "text": "Likely independent — FDIC-insured deposit accounts under normal terms are generally permitted"
+        },
+        {
+          "letter": "C",
+          "text": "Not independent — any bank account with a client is prohibited"
+        },
+        {
+          "letter": "D",
+          "text": "Independent, but only if he closes the account within 30 days"
+        }
+      ],
+      "answer": "B",
+      "explanation": "John's FDIC-insured deposit account is generally permitted under normal terms — personal materiality isn't the controlling test for insured deposit accounts specifically."
+    },
+    {
+      "id": 79,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "Kerry owns 1 share of client stock worth $6, immaterial to her. Is she independent?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Independent — the amount is immaterial to her"
+        },
+        {
+          "letter": "B",
+          "text": "Not independent — any direct financial interest is prohibited regardless of amount"
+        },
+        {
+          "letter": "C",
+          "text": "Independent — only indirect interests are restricted"
+        },
+        {
+          "letter": "D",
+          "text": "Depends solely on whether she is the engagement partner"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Kerry's 1 share is a direct financial interest, which is prohibited at any amount regardless of materiality — unlike indirect interests."
+    },
+    {
+      "id": 80,
+      "module": "Module 4: The Qualities of the Auditor (Competence, Independence, Due Care)",
+      "prompt": "Elizabeth, the engagement partner, obtains a $2.5M mortgage from client bank ABC under normal lending terms while already serving on the engagement. Is she independent?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Independent — the loan was made under normal lending terms"
+        },
+        {
+          "letter": "B",
+          "text": "Not independent — the mortgage exception only covers loans obtained before becoming a covered person"
+        },
+        {
+          "letter": "C",
+          "text": "Independent, as long as the loan amount is immaterial to her"
+        },
+        {
+          "letter": "D",
+          "text": "Not independent — all loans from any bank are prohibited for any auditor"
+        }
+      ],
+      "answer": "B",
+      "explanation": "The mortgage exception only protects loans obtained BEFORE becoming a covered person; Elizabeth is already the engagement partner, so a new mortgage from the client impairs independence."
+    },
+    {
+      "id": 81,
+      "module": "Bonus: The Meridien/Bond Independence Case Study (Unassigned In-Class Case)",
+      "prompt": "Michael Rose has a Bond credit card with a $12,000 balance (being paid down) plus Bond checking/savings totaling $54,000. Is he independent?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Independent — he's actively paying the balance down"
+        },
+        {
+          "letter": "B",
+          "text": "Not independent — the $12,000 balance exceeds the $10,000 threshold"
+        },
+        {
+          "letter": "C",
+          "text": "Independent — credit cards are never restricted"
+        },
+        {
+          "letter": "D",
+          "text": "Not independent — his checking/savings accounts are the problem"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Credit card balances with a client bank must stay under $10,000. Michael's $12,000 balance exceeds this regardless of his intent to pay it down."
+    },
+    {
+      "id": 82,
+      "module": "Bonus: The Meridien/Bond Independence Case Study (Unassigned In-Class Case)",
+      "prompt": "Peter Valvo holds a Bond brokerage account with ~$150,000 in cash. Is he independent?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Independent — $150,000 in cash isn't material to a large firm like Bond"
+        },
+        {
+          "letter": "B",
+          "text": "Not independent — brokerage accounts at a client broker-dealer are prohibited for covered persons regardless of amount"
+        },
+        {
+          "letter": "C",
+          "text": "Independent, as long as no trades are made in the account"
+        },
+        {
+          "letter": "D",
+          "text": "Not independent, but only because of his separate auto loan"
+        }
+      ],
+      "answer": "B",
+      "explanation": "Brokerage accounts with cash/securities on deposit at a client broker-dealer are prohibited outright for covered persons, regardless of amount."
+    },
+    {
+      "id": 83,
+      "module": "Bonus: The Meridien/Bond Independence Case Study (Unassigned In-Class Case)",
+      "prompt": "David Wallace is the beneficiary of a trust (created by his grandparents) that holds Bond stock material to his net worth. He has no control over the trust's investment decisions. Is he independent?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Independent — he has no control over the trust's investments"
+        },
+        {
+          "letter": "B",
+          "text": "Not independent — the Bond holdings are material to his net worth"
+        },
+        {
+          "letter": "C",
+          "text": "Independent — he didn't create the trust himself"
+        },
+        {
+          "letter": "D",
+          "text": "Not independent — only because his grandparents are the trustees"
+        }
+      ],
+      "answer": "B",
+      "explanation": "David's trust interest is material to his net worth, which alone impairs independence — even without control over the trust's decisions."
+    },
+    {
+      "id": 84,
+      "module": "Bonus: The Meridien/Bond Independence Case Study (Unassigned In-Class Case)",
+      "prompt": "Adam Whittcamp's girlfriend (3 months living together, separate finances, temporary arrangement, no marriage plans) has Bond stock in her 401(k). Is Adam independent?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Not independent — any live-in partner's assets are automatically attributed"
+        },
+        {
+          "letter": "B",
+          "text": "Likely independent — the facts (3 months, separate finances, temporary) likely don't meet the 'spousal equivalent' bar"
+        },
+        {
+          "letter": "C",
+          "text": "Not independent — dating history is irrelevant to the analysis"
+        },
+        {
+          "letter": "D",
+          "text": "Independent only if they get married within the year"
+        }
+      ],
+      "answer": "B",
+      "explanation": "A spousal equivalent requires continuous cohabitation and a committed, marriage-like relationship. These facts likely fall short of that bar."
+    },
+    {
+      "id": 85,
+      "module": "Bonus: The Meridien/Bond Independence Case Study (Unassigned In-Class Case)",
+      "prompt": "Catlyn Frederick's husband is a Bond employee holding unvested Bond stock options through the company's compensation plan. Is Catlyn independent?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Independent — the options are unvested, so they don't count yet"
+        },
+        {
+          "letter": "B",
+          "text": "Not independent — her husband's direct financial interest (the options) is prohibited regardless of vesting or materiality"
+        },
+        {
+          "letter": "C",
+          "text": "Independent — spousal employment never affects independence"
+        },
+        {
+          "letter": "D",
+          "text": "Not independent, but only because Tim works as a broker specifically"
+        }
+      ],
+      "answer": "B",
+      "explanation": "A spouse's direct financial interest in the client is prohibited regardless of materiality or vesting status — it's still a direct equity interest."
+    },
+    {
+      "id": 86,
+      "module": "Bonus: The Meridien/Bond Independence Case Study (Unassigned In-Class Case)",
+      "prompt": "Lisbeth Roberts's father holds a small, immaterial indirect interest in Bond preferred stock via an IRA. Lisbeth is not claimed as her parents' dependent. Is Lisbeth independent?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Not independent — her father counts as close family and any interest disqualifies her"
+        },
+        {
+          "letter": "B",
+          "text": "Independent — the father's interest is indirect and immaterial, even though he counts as close family"
+        },
+        {
+          "letter": "C",
+          "text": "Independent — her father isn't close family since she isn't his dependent"
+        },
+        {
+          "letter": "D",
+          "text": "Not independent — living at home with her parents is itself disqualifying"
+        }
+      ],
+      "answer": "B",
+      "explanation": "A parent is always close family regardless of the child's dependent status, but the father's interest is indirect and immaterial — so no impairment."
+    },
+    {
+      "id": 87,
+      "module": "Bonus: The Meridien/Bond Independence Case Study (Unassigned In-Class Case)",
+      "prompt": "Jeannette Smith dates a friend of the CEO's son and occasionally attends events at the CEO's home. Is she independent under a rules-based analysis?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Not independent — any social contact with a client's CEO is disqualifying"
+        },
+        {
+          "letter": "B",
+          "text": "Likely independent under the itemized rules, though it raises a fair appearance question"
+        },
+        {
+          "letter": "C",
+          "text": "Not independent — dating anyone connected to a client always impairs independence"
+        },
+        {
+          "letter": "D",
+          "text": "Independent, and there is no appearance concern worth discussing"
+        }
+      ],
+      "answer": "B",
+      "explanation": "No financial interest, no employment relationship, and an attenuated personal connection doesn't trigger any itemized prohibition — though it raises a fair appearance discussion."
+    }
+  ]
+}
