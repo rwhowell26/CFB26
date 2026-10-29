@@ -19,12 +19,12 @@ import {
   gameWinnerId,
   independentEliminated,
   isNotreDame,
-  lastConferenceLossDate,
   pendingConferenceGames,
   pendingGamesForConference,
   playoffTables,
   PLAYOFF_STATUS_LABEL,
   restoreToAtLarge,
+  setEliminatedOn,
   setNotreDameRecord,
   teamPlayoffStatus,
   undoLastAppliedGame,
@@ -226,7 +226,7 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
                     <button
                       type="button"
                       className="ghost-btn"
-                      onClick={() => patch(eliminateFromAtLarge(live, team.id))}
+                      onClick={() => patch(eliminateFromAtLarge(live, team.id, games))}
                     >
                       Eliminate
                     </button>
@@ -235,36 +235,6 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
               })}
             </ul>
           ) : null}
-        </section>
-
-        <section className="playoff-rail-card eliminated">
-          <header>
-            <h3>Independents</h3>
-          </header>
-          <ol>
-            {independents.map((team) => (
-              <li key={team.id}>
-                <TeamLogo team={team} />
-                <div>
-                  <strong>{team.shortName}</strong>
-                  {isNotreDame(team) ? (
-                    <em>
-                      {live.notreDameRecord.wins}-{live.notreDameRecord.losses} overall
-                    </em>
-                  ) : null}
-                </div>
-                {isNotreDame(team) ? (
-                  <button
-                    type="button"
-                    className="ghost-btn"
-                    onClick={() => patch(restoreToAtLarge(live, team.id))}
-                  >
-                    Restore
-                  </button>
-                ) : null}
-              </li>
-            ))}
-          </ol>
         </section>
       </div>
 
@@ -298,10 +268,11 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
                     state={live}
                     games={games}
                     cfpRank={ranks.get(team.id)}
-                    onCycle={() => patch(cycleTeamStatus(live, team))}
+                    onCycle={() => patch(cycleTeamStatus(live, team, games))}
                     onAdjust={(field, delta) =>
                       patch(adjustConferenceRecord(live, team.id, field, delta))
                     }
+                    onDateChange={(date) => patch(setEliminatedOn(live, team.id, date))}
                   />
                 ))}
               </ol>
@@ -316,10 +287,11 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
                         state={live}
                         games={games}
                         cfpRank={ranks.get(team.id)}
-                        onCycle={() => patch(cycleTeamStatus(live, team))}
+                        onCycle={() => patch(cycleTeamStatus(live, team, games))}
                         onAdjust={(field, delta) =>
                           patch(adjustConferenceRecord(live, team.id, field, delta))
                         }
+                        onDateChange={(date) => patch(setEliminatedOn(live, team.id, date))}
                       />
                     ))}
                   </ol>
@@ -328,6 +300,37 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
             </section>
           );
         })}
+        <section className="playoff-table playoff-independents">
+          <header>
+            <h3>Independents</h3>
+          </header>
+          <ol>
+            {independents.map((team) => (
+              <li key={team.id} className="playoff-row eliminated">
+                <button type="button" className="playoff-row-main" disabled>
+                  <TeamLogo team={team} />
+                  <span className="playoff-row-name">{team.shortName}</span>
+                </button>
+                <span className="playoff-wl">
+                  {isNotreDame(team) ? (
+                    <strong>
+                      {live.notreDameRecord.wins}-{live.notreDameRecord.losses}
+                    </strong>
+                  ) : null}
+                  {isNotreDame(team) ? (
+                    <button
+                      type="button"
+                      className="ghost-btn"
+                      onClick={() => patch(restoreToAtLarge(live, team.id))}
+                    >
+                      Restore
+                    </button>
+                  ) : null}
+                </span>
+              </li>
+            ))}
+          </ol>
+        </section>
       </div>
     </div>
   );
@@ -375,6 +378,7 @@ function TeamRow({
   cfpRank,
   onCycle,
   onAdjust,
+  onDateChange,
 }: {
   team: Team;
   state: PlayoffRaceState;
@@ -382,6 +386,7 @@ function TeamRow({
   cfpRank?: number;
   onCycle: () => void;
   onAdjust: (field: "wins" | "losses", delta: number) => void;
+  onDateChange: (date: string) => void;
 }) {
   const rec = conferenceRecord(state, team.id);
   const status = teamPlayoffStatus(state, team);
@@ -389,8 +394,7 @@ function TeamRow({
     playoffTableLabel(team.conference) === "ACC"
       ? conferenceGamesForTeam(games, team.id)
       : 0;
-  const lossDate =
-    status === "eliminated" ? lastConferenceLossDate(games, team.id) : null;
+  const elimDate = status === "eliminated" ? state.eliminatedOn?.[team.id] : undefined;
   return (
     <li className={`playoff-row ${STATUS_CLASS[status]}`}>
       <button type="button" className="playoff-row-main" onClick={onCycle}>
@@ -403,8 +407,17 @@ function TeamRow({
           {rec.wins}-{rec.losses}
           {accGames ? `\u00A0\u00A0${accGames}` : ""}
         </strong>
-        {lossDate ? (
-          <span className="playoff-elim-date">{formatPlayoffLossDate(lossDate)}</span>
+        {status === "eliminated" ? (
+          <label className="playoff-elim-date">
+            <span>{elimDate ? formatPlayoffLossDate(elimDate) : "date"}</span>
+            <input
+              type="date"
+              value={elimDate ?? ""}
+              onClick={(event) => event.stopPropagation()}
+              onChange={(event) => onDateChange(event.target.value)}
+              aria-label={`${team.shortName} eliminated date`}
+            />
+          </label>
         ) : null}
         <span className="playoff-stepper">
           <button type="button" onClick={() => onAdjust("wins", 1)}>

@@ -2052,10 +2052,28 @@ input[type="password"],
 }
 
 .playoff-elim-date {
+  position: relative;
+  display: inline-grid;
+  justify-items: end;
   font-size: 0.68rem;
   color: inherit;
-  opacity: 0.85;
+  opacity: 0.9;
   font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+.playoff-elim-date input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  border: 0;
+  background: transparent;
+}
+
+.playoff-independents {
+  outline: 2px solid #ff2600;
 }
 
 .playoff-wl .playoff-stepper {

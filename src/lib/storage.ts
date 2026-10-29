@@ -341,6 +341,17 @@ function sanitizeRecordMap(
   return next;
 }
 
+function sanitizeEliminatedOn(value: unknown): Record<string, string> {
+  if (!value || typeof value !== "object") return {};
+  const next: Record<string, string> = {};
+  for (const [id, item] of Object.entries(value as Record<string, unknown>)) {
+    if (typeof item === "string" && /^\d{4}-\d{2}-\d{2}/.test(item)) {
+      next[id] = item.slice(0, 10);
+    }
+  }
+  return next;
+}
+
 function sanitizePlayoffRace(value: RankingStore["playoffRace"]): PlayoffRaceState {
   if (!value || typeof value !== "object") return emptyPlayoffRace();
   const status: Record<string, PlayoffStatus> = {};
@@ -371,6 +382,7 @@ function sanitizePlayoffRace(value: RankingStore["playoffRace"]): PlayoffRaceSta
     playoffEliminatedIds: Array.isArray(value.playoffEliminatedIds)
       ? value.playoffEliminatedIds.filter((id): id is string => typeof id === "string")
       : [],
+    eliminatedOn: sanitizeEliminatedOn(value.eliminatedOn),
     seedVersion:
       typeof value.seedVersion === "number" && value.seedVersion >= 0
         ? value.seedVersion

@@ -41,6 +41,7 @@ export function emptyPlayoffRace(): PlayoffRaceState {
     appliedGameIds: [],
     notreDameRecord: { wins: 0, losses: 0 },
     playoffEliminatedIds: [],
+    eliminatedOn: {},
     seedVersion: 0,
   };
 }
@@ -58,16 +59,20 @@ export function hydratePlayoffSeed(
     status[id] = row.status;
   }
 
-  return {
-    records,
-    status,
-    appliedGameIds: pendingConferenceGames(games, emptyPlayoffRace())
-      .filter((game) => game.date.slice(0, 10) <= PLAYOFF_SEED_AS_OF)
-      .map((game) => game.id),
-    notreDameRecord: { ...PLAYOFF_NOTRE_DAME_SEED },
-    playoffEliminatedIds: [],
-    seedVersion: PLAYOFF_SEED_VERSION,
-  };
+  return fillEliminatedDates(
+    {
+      records,
+      status,
+      appliedGameIds: pendingConferenceGames(games, emptyPlayoffRace())
+        .filter((game) => game.date.slice(0, 10) <= PLAYOFF_SEED_AS_OF)
+        .map((game) => game.id),
+      notreDameRecord: { ...PLAYOFF_NOTRE_DAME_SEED },
+      playoffEliminatedIds: [],
+      eliminatedOn: {},
+      seedVersion: PLAYOFF_SEED_VERSION,
+    },
+    games,
+  );
 }
 
 export function isNotreDame(team: Team): boolean {
@@ -137,6 +142,7 @@ export function adjustConferenceRecord(
 export function cycleTeamStatus(
   state: PlayoffRaceState,
   team: Team,
+  games: Game[] = [],
 ): PlayoffRaceState {
   if (isUConn(team)) return state;
   const current = teamPlayoffStatus(state, team);
@@ -145,23 +151,66 @@ export function cycleTeamStatus(
     next === "eliminated"
       ? state.playoffEliminatedIds
       : state.playoffEliminatedIds.filter((id) => id !== team.id);
+  const eliminatedOn = { ...(state.eliminatedOn ?? {}) };
+  if (next === "eliminated") {
+    const played = lastPlayedDate(games, team.id);
+    if (played) eliminatedOn[team.id] = played;
+  } else {
+    delete eliminatedOn[team.id];
+  }
   return {
     ...state,
     status: { ...state.status, [team.id]: next },
     playoffEliminatedIds,
+    eliminatedOn,
   };
 }
 
 export function eliminateFromAtLarge(
   state: PlayoffRaceState,
   teamId: string,
+  games: Game[] = [],
 ): PlayoffRaceState {
   if (state.playoffEliminatedIds.includes(teamId)) return state;
+  const eliminatedOn = { ...(state.eliminatedOn ?? {}) };
+  const played = lastPlayedDate(games, teamId);
+  if (played) eliminatedOn[teamId] = played;
   return {
     ...state,
     status: { ...state.status, [teamId]: "eliminated" },
     playoffEliminatedIds: [...state.playoffEliminatedIds, teamId],
+    eliminatedOn,
   };
+}
+
+export function setEliminatedOn(
+  state: PlayoffRaceState,
+  teamId: string,
+  date: string,
+): PlayoffRaceState {
+  const trimmed = date.trim();
+  const eliminatedOn = { ...(state.eliminatedOn ?? {}) };
+  if (!trimmed) delete eliminatedOn[teamId];
+  else eliminatedOn[teamId] = trimmed;
+  return { ...state, eliminatedOn };
+}
+
+/** Fill missing knockout dates from each team's last played final. */
+export function fillEliminatedDates(
+  state: PlayoffRaceState,
+  games: Game[],
+): PlayoffRaceState {
+  const eliminatedOn = { ...(state.eliminatedOn ?? {}) };
+  let changed = !state.eliminatedOn;
+  for (const [id, status] of Object.entries(state.status)) {
+    if (status !== "eliminated" || eliminatedOn[id]) continue;
+    const played = lastPlayedDate(games, id);
+    if (!played) continue;
+    eliminatedOn[id] = played;
+    changed = true;
+  }
+  if (!changed) return state;
+  return { ...state, eliminatedOn };
 }
 
 export function restoreToAtLarge(
@@ -344,22 +393,25 @@ function compareStandings(a: Team, b: Team, state: PlayoffRaceState): number {
   return a.name.localeCompare(b.name);
 }
 
-/** Date of the team's most recent conference loss, from ESPN finals. */
-export function lastConferenceLossDate(games: Game[], teamId: string): string | null {
+/** Chicago calendar date of the team's most recent final. */
+export function lastPlayedDate(games: Game[], teamId: string): string | null {
   let latest: string | null = null;
   for (const game of games) {
-    if (!game.conferenceGame || game.championshipGame) continue;
-    if (game.status !== "final" || !game.homeIsFbs || !game.awayIsFbs) continue;
+    if (game.status !== "final") continue;
     if (game.homeTeamId !== teamId && game.awayTeamId !== teamId) continue;
-    const winnerId = gameWinnerId(game);
-    if (!winnerId || winnerId === teamId) continue;
     if (!latest || game.date > latest) latest = game.date;
   }
-  return latest;
+  return latest ? toChicagoYmd(latest) : null;
 }
 
-export function formatPlayoffLossDate(iso: string): string {
-  const date = new Date(iso);
+function toChicagoYmd(iso: string): string {
+  return new Date(iso).toLocaleDateString("en-CA", { timeZone: "America/Chicago" });
+}
+
+export function formatPlayoffLossDate(ymd: string): string {
+  const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(ymd);
+  if (match) return `${Number(match[2])}/${Number(match[3])}`;
+  const date = new Date(ymd);
   if (Number.isNaN(date.getTime())) return "";
   return date.toLocaleDateString("en-US", {
     month: "numeric",

@@ -13,7 +13,12 @@ import { RecommendPanel } from "@/components/RecommendPanel";
 import { PlayoffRaceTab } from "@/components/PlayoffRaceTab";
 import { SlateTab } from "@/components/SlateTab";
 import { SosTab } from "@/components/SosTab";
-import { emptyPlayoffRace, hydratePlayoffSeed, PLAYOFF_SEED_VERSION } from "@/lib/playoff-race";
+import {
+  emptyPlayoffRace,
+  fillEliminatedDates,
+  hydratePlayoffSeed,
+  PLAYOFF_SEED_VERSION,
+} from "@/lib/playoff-race";
 import {
   applyWinnerAboveLoser,
   buildRecordSowBallot,
@@ -166,11 +171,12 @@ export function RankingApp() {
             );
           }
         }
-        const playoffRace = hydratePlayoffSeed(
-          nextStore.playoffRace ?? emptyPlayoffRace(),
+        const currentRace = nextStore.playoffRace ?? emptyPlayoffRace();
+        const playoffRace = fillEliminatedDates(
+          hydratePlayoffSeed(currentRace, json.games),
           json.games,
         );
-        if (playoffRace.seedVersion !== (nextStore.playoffRace?.seedVersion ?? 0)) {
+        if (playoffRace !== currentRace) {
           nextStore = { ...nextStore, playoffRace };
         }
         setWeek(openWeek);
@@ -207,8 +213,12 @@ export function RankingApp() {
   useEffect(() => {
     if (!games.length) return;
     const current = store.playoffRace ?? emptyPlayoffRace();
-    if ((current.seedVersion ?? 0) >= PLAYOFF_SEED_VERSION) return;
-    setStore({ ...store, playoffRace: hydratePlayoffSeed(current, games) });
+    let next = current;
+    if ((current.seedVersion ?? 0) < PLAYOFF_SEED_VERSION) {
+      next = hydratePlayoffSeed(current, games);
+    }
+    next = fillEliminatedDates(next, games);
+    if (next !== current) setStore({ ...store, playoffRace: next });
   }, [games, store, setStore]);
 
   const cfp = useMemo(
