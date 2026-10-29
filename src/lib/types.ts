@@ -131,6 +131,8 @@ export type PlayoffRaceState = {
   notreDameRecord: { wins: number; losses: number };
   /** Ranked, conference-eliminated teams the user dropped from at-large. */
   playoffEliminatedIds: string[];
+  /** Spreadsheet seed applied; bump PLAYOFF_SEED_VERSION to refresh. */
+  seedVersion?: number;
 };
 
 export type CfpPoll = {

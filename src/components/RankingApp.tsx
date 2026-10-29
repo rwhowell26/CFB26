@@ -13,7 +13,7 @@ import { RecommendPanel } from "@/components/RecommendPanel";
 import { PlayoffRaceTab } from "@/components/PlayoffRaceTab";
 import { SlateTab } from "@/components/SlateTab";
 import { SosTab } from "@/components/SosTab";
-import { emptyPlayoffRace } from "@/lib/playoff-race";
+import { emptyPlayoffRace, hydratePlayoffSeed, PLAYOFF_SEED_VERSION } from "@/lib/playoff-race";
 import {
   applyWinnerAboveLoser,
   buildRecordSowBallot,
@@ -166,6 +166,13 @@ export function RankingApp() {
             );
           }
         }
+        const playoffRace = hydratePlayoffSeed(
+          nextStore.playoffRace ?? emptyPlayoffRace(),
+          json.games,
+        );
+        if (playoffRace.seedVersion !== (nextStore.playoffRace?.seedVersion ?? 0)) {
+          nextStore = { ...nextStore, playoffRace };
+        }
         setWeek(openWeek);
         if (openWeek === 5 && week5Count >= FBS_TEAM_COUNT) setTab("rank");
         if (nextStore !== latest) setStore(nextStore);
@@ -196,6 +203,14 @@ export function RankingApp() {
 
   const teams = useMemo(() => data?.teams ?? [], [data]);
   const games = useMemo(() => data?.games ?? [], [data]);
+
+  useEffect(() => {
+    if (!games.length) return;
+    const current = store.playoffRace ?? emptyPlayoffRace();
+    if ((current.seedVersion ?? 0) >= PLAYOFF_SEED_VERSION) return;
+    setStore({ ...store, playoffRace: hydratePlayoffSeed(current, games) });
+  }, [games, store, setStore]);
+
   const cfp = useMemo(
     () => data?.cfp ?? { published: false, week: null, weekLabel: null, ranks: [] },
     [data],

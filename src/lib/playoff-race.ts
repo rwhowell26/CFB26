@@ -4,6 +4,11 @@ import {
   playoffTableLabel,
   playoffTableSortKey,
 } from "./conferences";
+import {
+  PLAYOFF_NOTRE_DAME_SEED,
+  PLAYOFF_SEED_VERSION,
+  PLAYOFF_TEAM_SEED,
+} from "./playoff-race-seed";
 import type {
   CfpPoll,
   Game,
@@ -11,6 +16,8 @@ import type {
   PlayoffStatus,
   Team,
 } from "./types";
+
+export { PLAYOFF_SEED_VERSION } from "./playoff-race-seed";
 
 export const PLAYOFF_STATUSES: PlayoffStatus[] = [
   "destiny",
@@ -33,6 +40,32 @@ export function emptyPlayoffRace(): PlayoffRaceState {
     appliedGameIds: [],
     notreDameRecord: { wins: 0, losses: 0 },
     playoffEliminatedIds: [],
+    seedVersion: 0,
+  };
+}
+
+export function hydratePlayoffSeed(
+  state: PlayoffRaceState,
+  games: Game[],
+): PlayoffRaceState {
+  if ((state.seedVersion ?? 0) >= PLAYOFF_SEED_VERSION) return state;
+
+  const records: PlayoffRaceState["records"] = {};
+  const status: PlayoffRaceState["status"] = {};
+  for (const [id, row] of Object.entries(PLAYOFF_TEAM_SEED)) {
+    records[id] = { wins: row.wins, losses: row.losses };
+    status[id] = row.status;
+  }
+
+  return {
+    records,
+    status,
+    appliedGameIds: pendingConferenceGames(games, emptyPlayoffRace()).map(
+      (game) => game.id,
+    ),
+    notreDameRecord: { ...PLAYOFF_NOTRE_DAME_SEED },
+    playoffEliminatedIds: [],
+    seedVersion: PLAYOFF_SEED_VERSION,
   };
 }
 

@@ -1859,23 +1859,26 @@ input[type="password"],
 
 .playoff-swatches .destiny,
 .playoff-row.destiny {
-  background: #7dff7a;
+  background: #00f900;
+  color: #111;
 }
 
 .playoff-swatches .alive,
 .playoff-row.alive {
-  background: #fff56a;
+  background: #fffb00;
+  color: #111;
 }
 
 .playoff-swatches .out-loss,
 .playoff-row.out-loss {
-  background: #ffb14a;
+  background: #ff9300;
+  color: #111;
 }
 
 .playoff-swatches .eliminated,
 .playoff-row.eliminated {
-  background: #ff6b5c;
-  color: #3b0d0a;
+  background: #ff2600;
+  color: #111;
 }
 
 .playoff-cfp-note,

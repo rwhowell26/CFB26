@@ -371,6 +371,10 @@ function sanitizePlayoffRace(value: RankingStore["playoffRace"]): PlayoffRaceSta
     playoffEliminatedIds: Array.isArray(value.playoffEliminatedIds)
       ? value.playoffEliminatedIds.filter((id): id is string => typeof id === "string")
       : [],
+    seedVersion:
+      typeof value.seedVersion === "number" && value.seedVersion >= 0
+        ? value.seedVersion
+        : 0,
   };
 }
 
