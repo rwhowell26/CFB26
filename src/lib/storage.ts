@@ -11,10 +11,11 @@ import {
   WEEK_ZERO,
   formatWeekLabel,
 } from "./season";
-import type { PairwiseSession, RankingStore, WeekSnapshot } from "./types";
+import type { PairwiseSession, PlayoffRaceState, PlayoffStatus, RankingStore, WeekSnapshot } from "./types";
+import { emptyPlayoffRace } from "./playoff-race";
 
 /** Bump when storage shape/migration rules change. */
-export const STORE_SCHEMA_VERSION = 8;
+export const STORE_SCHEMA_VERSION = 9;
 
 function emptyStore(activeWeek = PRESEASON_WEEK): RankingStore {
   return {
@@ -164,6 +165,7 @@ function normalizeStore(parsed: RankingStore): RankingStore {
   return {
     ...store,
     pairwise: sanitizePairwise(store.pairwise),
+    playoffRace: sanitizePlayoffRace(store.playoffRace),
     schemaVersion: STORE_SCHEMA_VERSION,
   };
 }
@@ -313,6 +315,62 @@ function sanitizePairwise(value: RankingStore["pairwise"]): PairwiseSession | un
     scrubClimbingId: typeof value.scrubClimbingId === "string" ? value.scrubClimbingId : null,
     scrubBlendGroup: typeof value.scrubBlendGroup === "number" ? value.scrubBlendGroup : null,
     history: Array.isArray(value.history) ? value.history : [],
+  };
+}
+
+const PLAYOFF_STATUSES = new Set<PlayoffStatus>([
+  "destiny",
+  "alive",
+  "out-loss",
+  "eliminated",
+]);
+
+function sanitizeRecordMap(
+  value: unknown,
+): Record<string, { wins: number; losses: number }> {
+  if (!value || typeof value !== "object") return {};
+  const next: Record<string, { wins: number; losses: number }> = {};
+  for (const [id, rec] of Object.entries(value as Record<string, unknown>)) {
+    if (!rec || typeof rec !== "object") continue;
+    const row = rec as { wins?: unknown; losses?: unknown };
+    next[id] = {
+      wins: typeof row.wins === "number" && row.wins >= 0 ? row.wins : 0,
+      losses: typeof row.losses === "number" && row.losses >= 0 ? row.losses : 0,
+    };
+  }
+  return next;
+}
+
+function sanitizePlayoffRace(value: RankingStore["playoffRace"]): PlayoffRaceState {
+  if (!value || typeof value !== "object") return emptyPlayoffRace();
+  const status: Record<string, PlayoffStatus> = {};
+  if (value.status && typeof value.status === "object") {
+    for (const [id, item] of Object.entries(value.status)) {
+      if (PLAYOFF_STATUSES.has(item as PlayoffStatus)) {
+        status[id] = item as PlayoffStatus;
+      }
+    }
+  }
+  return {
+    records: sanitizeRecordMap(value.records),
+    status,
+    appliedGameIds: Array.isArray(value.appliedGameIds)
+      ? value.appliedGameIds.filter((id): id is string => typeof id === "string")
+      : [],
+    notreDameRecord: {
+      wins:
+        typeof value.notreDameRecord?.wins === "number" && value.notreDameRecord.wins >= 0
+          ? value.notreDameRecord.wins
+          : 0,
+      losses:
+        typeof value.notreDameRecord?.losses === "number" &&
+        value.notreDameRecord.losses >= 0
+          ? value.notreDameRecord.losses
+          : 0,
+    },
+    playoffEliminatedIds: Array.isArray(value.playoffEliminatedIds)
+      ? value.playoffEliminatedIds.filter((id): id is string => typeof id === "string")
+      : [],
   };
 }
 

@@ -33,6 +33,11 @@ export type Game = {
   awayAlternateColor: string | null;
   homeIsFbs: boolean;
   awayIsFbs: boolean;
+  /** ESPN conferenceCompetition, excluding championship games. */
+  conferenceGame: boolean;
+  championshipGame: boolean;
+  /** ESPN conference group name when this is a league game. */
+  conferenceGroup: string | null;
 };
 
 export type TeamGameView = {
@@ -112,6 +117,27 @@ export type RankingStore = {
   drafts: Record<string, string[]>;
   snapshots: Record<string, WeekSnapshot>;
   pairwise?: PairwiseSession;
+  playoffRace?: PlayoffRaceState;
+};
+
+export type PlayoffStatus = "destiny" | "alive" | "out-loss" | "eliminated";
+
+/** Manual playoff-race ledger — not derived from the personal ballot. */
+export type PlayoffRaceState = {
+  /** Conference W-L keyed by team id. */
+  records: Record<string, { wins: number; losses: number }>;
+  status: Record<string, PlayoffStatus>;
+  appliedGameIds: string[];
+  notreDameRecord: { wins: number; losses: number };
+  /** Ranked, conference-eliminated teams the user dropped from at-large. */
+  playoffEliminatedIds: string[];
+};
+
+export type CfpPoll = {
+  published: boolean;
+  week: number | null;
+  weekLabel: string | null;
+  ranks: Array<{ teamId: string; rank: number; previous: number | null }>;
 };
 
 export type PhilosophyWarning = {

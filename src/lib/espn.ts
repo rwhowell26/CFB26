@@ -1,7 +1,7 @@
 import { applyGameOverrides } from "./game-overrides";
 import { PRESEASON_WEEK, SEASON_YEAR, WEEK_ZERO, weekZeroCutoffIso } from "./season";
 import { normalizeHex } from "./team-colors";
-import type { Game, GameStatus, SeasonWeek, Team } from "./types";
+import type { CfpPoll, Game, GameStatus, SeasonWeek, Team } from "./types";
 import { ensureSeasonWeeks } from "./weeks";
 
 const ESPN_SITE = "https://site.api.espn.com/apis/site/v2/sports/football/college-football";
@@ -148,11 +148,16 @@ type ScoreboardResponse = {
     id: string;
     date: string;
     name?: string;
+    shortName?: string;
     week?: { number?: number };
+    notes?: Array<{ headline?: string }>;
     competitions?: Array<{
       id?: string;
       date?: string;
       neutralSite?: boolean;
+      conferenceCompetition?: boolean;
+      notes?: Array<{ headline?: string }>;
+      groups?: { id?: string; name?: string; isConference?: boolean };
       status?: {
         type?: { name?: string; state?: string; completed?: boolean };
       };
@@ -172,6 +177,65 @@ type ScoreboardResponse = {
     }>;
   }>;
 };
+
+type RankingsResponse = {
+  rankings?: Array<{
+    id?: string;
+    name?: string;
+    shortName?: string;
+    type?: string;
+    occurrence?: { number?: number; displayValue?: string };
+    ranks?: Array<{
+      current?: number;
+      previous?: number | null;
+      team?: { id?: string };
+    }>;
+  }>;
+};
+
+function isCfpPoll(poll: {
+  id?: string;
+  name?: string;
+  shortName?: string;
+  type?: string;
+}): boolean {
+  const blob = `${poll.id ?? ""} ${poll.name ?? ""} ${poll.shortName ?? ""} ${poll.type ?? ""}`;
+  return /playoff|\bcfp\b/i.test(blob);
+}
+
+function championshipFromEvent(
+  event: NonNullable<ScoreboardResponse["events"]>[number],
+  competition: NonNullable<NonNullable<ScoreboardResponse["events"]>[number]["competitions"]>[number],
+): boolean {
+  const notes = [...(event.notes ?? []), ...(competition.notes ?? [])]
+    .map((note) => note.headline ?? "")
+    .join(" ");
+  const blob = `${event.name ?? ""} ${event.shortName ?? ""} ${notes}`;
+  return /championship/i.test(blob);
+}
+
+export async function fetchCfpRankings(year = SEASON_YEAR): Promise<CfpPoll> {
+  return cachedFetch(`cfp-poll-${year}`, 5 * 60 * 1000, async () => {
+    const data = await getJson<RankingsResponse>(`${ESPN_SITE}/rankings`);
+    const poll = (data.rankings ?? []).find(isCfpPoll);
+    if (!poll?.ranks?.length) {
+      return { published: false, week: null, weekLabel: null, ranks: [] };
+    }
+    return {
+      published: true,
+      week: typeof poll.occurrence?.number === "number" ? poll.occurrence.number : null,
+      weekLabel: poll.occurrence?.displayValue ?? null,
+      ranks: poll.ranks
+        .map((row) => ({
+          teamId: String(row.team?.id ?? ""),
+          rank: typeof row.current === "number" ? row.current : 0,
+          previous: typeof row.previous === "number" ? row.previous : null,
+        }))
+        .filter((row) => row.teamId && row.rank > 0)
+        .sort((a, b) => a.rank - b.rank),
+    };
+  });
+}
 
 function withSeasonWeeks(regularWeeks: SeasonWeek[], year = SEASON_YEAR): SeasonWeek[] {
   return ensureSeasonWeeks(regularWeeks, year);
@@ -258,6 +322,12 @@ function parseScoreboardGames(
     const homeSwatch = colors.get(homeId);
     const awaySwatch = colors.get(awayId);
 
+    const championshipGame = championshipFromEvent(event, competition);
+    const conferenceGroup =
+      competition.groups?.isConference && competition.groups.name
+        ? competition.groups.name
+        : null;
+
     games.push({
       id: String(competition.id || event.id),
       week: displayWeekForGame(espnWeek, date),
@@ -278,6 +348,9 @@ function parseScoreboardGames(
       awayAlternateColor: awaySwatch?.alternateColor ?? null,
       homeIsFbs: fbsIds.has(homeId),
       awayIsFbs: fbsIds.has(awayId),
+      conferenceGame: Boolean(competition.conferenceCompetition) && !championshipGame,
+      championshipGame,
+      conferenceGroup,
     });
   }
   return games;
@@ -287,12 +360,14 @@ export async function fetchAllGames(year = SEASON_YEAR): Promise<{
   teams: Team[];
   weeks: SeasonWeek[];
   games: Game[];
+  cfp: CfpPoll;
 }> {
-  return cachedFetch(`all-games-colors-${year}`, 5 * 60 * 1000, async () => {
-    const [teams, weeks, colors] = await Promise.all([
+  return cachedFetch(`all-games-colors-cfp-${year}`, 5 * 60 * 1000, async () => {
+    const [teams, weeks, colors, cfp] = await Promise.all([
       fetchFbsTeams(year),
       fetchSeasonWeeks(year),
       fetchTeamColorMap(),
+      fetchCfpRankings(year),
     ]);
     const fbsIds = new Set(teams.map((t) => t.id));
 
@@ -327,7 +402,7 @@ export async function fetchAllGames(year = SEASON_YEAR): Promise<{
       }),
     );
 
-    return { teams, weeks, games };
+    return { teams, weeks, games, cfp };
   });
 }
 

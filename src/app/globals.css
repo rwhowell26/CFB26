@@ -1825,4 +1825,358 @@ input[type="password"],
   .slate-team.slate-home .slate-score {
     order: 4;
   }
+
+  .playoff-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .playoff-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.playoff-wrap {
+  display: grid;
+  gap: 1rem;
+}
+
+.playoff-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+}
+
+.playoff-swatches li {
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid var(--line);
+}
+
+.playoff-swatches .destiny,
+.playoff-row.destiny {
+  background: #7dff7a;
+}
+
+.playoff-swatches .alive,
+.playoff-row.alive {
+  background: #fff56a;
+}
+
+.playoff-swatches .out-loss,
+.playoff-row.out-loss {
+  background: #ffb14a;
+}
+
+.playoff-swatches .eliminated,
+.playoff-row.eliminated {
+  background: #ff6b5c;
+  color: #3b0d0a;
+}
+
+.playoff-cfp-note,
+.playoff-pool-copy {
+  margin: 0.65rem 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.playoff-queue-actions {
+  margin-bottom: 0.75rem;
+}
+
+.playoff-queue-group h3 {
+  margin: 0.85rem 0 0.4rem;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  font-size: 1.15rem;
+}
+
+.playoff-queue-group h3 span {
+  color: var(--muted);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.playoff-queue-group ul,
+.playoff-table ol,
+.playoff-rail-card ol,
+.playoff-pool {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.playoff-queue-group li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.playoff-queue-week {
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  min-width: 2rem;
+  color: var(--muted);
+}
+
+.playoff-queue-at {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.playoff-winner {
+  font-weight: 700;
+  color: var(--win);
+}
+
+.playoff-loser {
+  color: var(--muted);
+}
+
+.playoff-cfp-strip {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.45rem;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.playoff-cfp-strip li {
+  display: grid;
+  justify-items: center;
+  gap: 0.15rem;
+  min-width: 3.4rem;
+  font-size: 0.72rem;
+}
+
+.playoff-cfp-strip span {
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  font-weight: 700;
+}
+
+.playoff-cfp-strip em {
+  font-style: normal;
+  text-align: center;
+}
+
+.playoff-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(18rem, 0.85fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.playoff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16.5rem, 1fr));
+  gap: 0.75rem;
+}
+
+.playoff-table,
+.playoff-rail-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0.7rem;
+  box-shadow: var(--shadow);
+}
+
+.playoff-table header,
+.playoff-rail-card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.45rem;
+}
+
+.playoff-table h3,
+.playoff-rail-card h3 {
+  margin: 0;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  font-size: 1.25rem;
+}
+
+.playoff-table header span,
+.playoff-rail-card header span {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.playoff-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 0.3rem;
+  align-items: center;
+  border-radius: 8px;
+  padding: 0.2rem 0.3rem;
+}
+
+.playoff-row-main {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  padding: 0.15rem 0;
+  cursor: pointer;
+  color: inherit;
+  text-align: left;
+}
+
+.playoff-row-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.playoff-cfp-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  background: rgba(20, 32, 26, 0.12);
+  border-radius: 999px;
+  padding: 0.05rem 0.35rem;
+  flex-shrink: 0;
+}
+
+.playoff-wl {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.playoff-wl strong {
+  min-width: 2.4rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.playoff-wl button,
+.playoff-stepper button {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 6px;
+  padding: 0.05rem 0.28rem;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.playoff-games {
+  font-size: 0.78rem;
+  color: var(--muted);
+  min-width: 1.2rem;
+  text-align: right;
+}
+
+.playoff-elim-block {
+  margin-top: 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px dashed var(--line);
+}
+
+.playoff-elim-block h4,
+.playoff-rail-card h4 {
+  margin: 0 0 0.35rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.playoff-rail {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.playoff-rail-card.auto-bid {
+  outline: 2px solid #1f9d4a;
+}
+
+.playoff-rail-card.at-large {
+  outline: 2px solid #d7bc29;
+}
+
+.playoff-rail-card.eliminated {
+  outline: 2px solid #ff2600;
+}
+
+.playoff-rail-card li {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr) auto;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.playoff-slot {
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  width: 1.1rem;
+}
+
+.playoff-rail-card li div,
+.playoff-pool li div {
+  min-width: 0;
+}
+
+.playoff-rail-card li strong,
+.playoff-pool li strong {
+  display: block;
+  font-size: 0.92rem;
+}
+
+.playoff-rail-card li em,
+.playoff-pool li em {
+  display: block;
+  font-style: normal;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.playoff-empty {
+  color: var(--muted);
+  font-size: 0.88rem;
+  padding: 0.35rem 0;
+}
+
+.playoff-pool li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  gap: 0.4rem;
+  align-items: center;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.playoff-stepper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem;
+}
+
+@media (max-width: 900px) {
+  .playoff-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .playoff-grid {
+    grid-template-columns: 1fr;
+  }
 }

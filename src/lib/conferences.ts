@@ -24,3 +24,33 @@ export function shortConferenceName(name: string): string {
   const normalized = normalizeConferenceName(name);
   return CONFERENCE_SHORT[normalized] ?? CONFERENCE_SHORT[name] ?? name.replace(" Conference", "");
 }
+
+export function playoffTableLabel(conference: string): string {
+  if (conference === "Sun Belt - East") return "SBC East";
+  if (conference === "Sun Belt - West") return "SBC West";
+  return shortConferenceName(conference);
+}
+
+export function isIndependentConference(name: string): boolean {
+  return /independent/i.test(name);
+}
+
+const TABLE_ORDER = [
+  "ACC",
+  "Big 10",
+  "SEC",
+  "Big 12",
+  "AAC",
+  "CUSA",
+  "MAC",
+  "MW",
+  "P12",
+  "SBC East",
+  "SBC West",
+];
+
+export function playoffTableSortKey(conference: string): number {
+  const label = playoffTableLabel(conference);
+  const idx = TABLE_ORDER.indexOf(label);
+  return idx === -1 ? 100 + label.localeCompare("") : idx;
+}

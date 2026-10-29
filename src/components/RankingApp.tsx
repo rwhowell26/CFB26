@@ -10,8 +10,10 @@ import { HistoryTab } from "@/components/HistoryTab";
 import { MoversTab } from "@/components/MoversTab";
 import { RankingBoard } from "@/components/RankingBoard";
 import { RecommendPanel } from "@/components/RecommendPanel";
+import { PlayoffRaceTab } from "@/components/PlayoffRaceTab";
 import { SlateTab } from "@/components/SlateTab";
 import { SosTab } from "@/components/SosTab";
+import { emptyPlayoffRace } from "@/lib/playoff-race";
 import {
   applyWinnerAboveLoser,
   buildRecordSowBallot,
@@ -41,7 +43,7 @@ import {
   setPairwiseProgress,
   useRankingStore,
 } from "@/lib/storage";
-import type { Game, PairwiseSession, RankingStore, SeasonWeek, Team } from "@/lib/types";
+import type { CfpPoll, Game, PairwiseSession, RankingStore, SeasonWeek, Team } from "@/lib/types";
 import { ensureSeasonWeeks } from "@/lib/weeks";
 
 type Tab =
@@ -50,6 +52,7 @@ type Tab =
   | "board"
   | "slate"
   | "conferences"
+  | "playoff"
   | "sos"
   | "compare"
   | "history"
@@ -61,6 +64,7 @@ type GamesPayload = {
   teams: Team[];
   weeks: SeasonWeek[];
   games: Game[];
+  cfp?: CfpPoll;
 };
 
 function applyFormulaSeed(
@@ -192,6 +196,10 @@ export function RankingApp() {
 
   const teams = useMemo(() => data?.teams ?? [], [data]);
   const games = useMemo(() => data?.games ?? [], [data]);
+  const cfp = useMemo(
+    () => data?.cfp ?? { published: false, week: null, weekLabel: null, ranks: [] },
+    [data],
+  );
   const weeks = useMemo(
     () => ensureSeasonWeeks(data?.weeks ?? []),
     [data?.weeks],
@@ -533,6 +541,7 @@ export function RankingApp() {
             ["board", "Board"],
             ["slate", "Slate"],
             ["conferences", "Conferences"],
+            ["playoff", "Playoff"],
             ["sos", "SOS"],
             ["compare", "Compare"],
             ["history", "History"],
@@ -690,6 +699,16 @@ export function RankingApp() {
           records={records}
           onSelectTeam={handleSelectTeam}
           selectedTeamId={selectedTeamId}
+        />
+      ) : null}
+
+      {tab === "playoff" ? (
+        <PlayoffRaceTab
+          teams={teams}
+          games={games}
+          cfp={cfp}
+          state={store.playoffRace ?? emptyPlayoffRace()}
+          onChange={(playoffRace) => setStore({ ...store, playoffRace })}
         />
       ) : null}
 
