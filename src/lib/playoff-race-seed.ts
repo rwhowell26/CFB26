@@ -3,6 +3,9 @@ import type { PlayoffStatus } from "./types";
 /** Spreadsheet Playoff Race tab as of 2026-10-29. */
 export const PLAYOFF_SEED_VERSION = 1;
 
+/** Inclusive UTC date of conference finals already in the spreadsheet W-L. */
+export const PLAYOFF_SEED_AS_OF = "2026-10-24";
+
 export const PLAYOFF_NOTRE_DAME_SEED = { wins: 6, losses: 1 };
 
 type SeedRow = { wins: number; losses: number; status: PlayoffStatus };

@@ -6,6 +6,7 @@ import {
 } from "./conferences";
 import {
   PLAYOFF_NOTRE_DAME_SEED,
+  PLAYOFF_SEED_AS_OF,
   PLAYOFF_SEED_VERSION,
   PLAYOFF_TEAM_SEED,
 } from "./playoff-race-seed";
@@ -60,9 +61,9 @@ export function hydratePlayoffSeed(
   return {
     records,
     status,
-    appliedGameIds: pendingConferenceGames(games, emptyPlayoffRace()).map(
-      (game) => game.id,
-    ),
+    appliedGameIds: pendingConferenceGames(games, emptyPlayoffRace())
+      .filter((game) => game.date.slice(0, 10) <= PLAYOFF_SEED_AS_OF)
+      .map((game) => game.id),
     notreDameRecord: { ...PLAYOFF_NOTRE_DAME_SEED },
     playoffEliminatedIds: [],
     seedVersion: PLAYOFF_SEED_VERSION,
