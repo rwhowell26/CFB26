@@ -25,6 +25,18 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+## Second Vercel site
+
+`apps/web` is a separate Next.js app. It does not share routes, env vars, or the production domain of the rankings site.
+
+To put it online without replacing rankings:
+
+1. In Vercel, **Add New → Project** and import this same GitHub repository.
+2. Set **Root Directory** to `apps/web`.
+3. Deploy.
+
+Leave the existing rankings project's Root Directory at the repository root. Run the new app locally with `cd apps/web && npm run dev` (port 3001).
+
 ## Optional password
 
 Set `SITE_PASSWORD` in the environment. When set, `/login` gates the app.
