@@ -328,12 +328,56 @@ export function playoffTables(
     .sort((a, b) => playoffTableSortKey(a.conference) - playoffTableSortKey(b.conference));
 }
 
+function winPct(record: { wins: number; losses: number }): number {
+  const played = record.wins + record.losses;
+  return played === 0 ? 0 : record.wins / played;
+}
+
 function compareStandings(a: Team, b: Team, state: PlayoffRaceState): number {
   const ar = conferenceRecord(state, a.id);
   const br = conferenceRecord(state, b.id);
+  const ap = winPct(ar);
+  const bp = winPct(br);
+  if (ap !== bp) return bp - ap;
   if (ar.wins !== br.wins) return br.wins - ar.wins;
   if (ar.losses !== br.losses) return ar.losses - br.losses;
   return a.name.localeCompare(b.name);
+}
+
+/** Date of the team's most recent conference loss, from ESPN finals. */
+export function lastConferenceLossDate(games: Game[], teamId: string): string | null {
+  let latest: string | null = null;
+  for (const game of games) {
+    if (!game.conferenceGame || game.championshipGame) continue;
+    if (game.status !== "final" || !game.homeIsFbs || !game.awayIsFbs) continue;
+    if (game.homeTeamId !== teamId && game.awayTeamId !== teamId) continue;
+    const winnerId = gameWinnerId(game);
+    if (!winnerId || winnerId === teamId) continue;
+    if (!latest || game.date > latest) latest = game.date;
+  }
+  return latest;
+}
+
+export function formatPlayoffLossDate(iso: string): string {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return "";
+  return date.toLocaleDateString("en-US", {
+    month: "numeric",
+    day: "numeric",
+    timeZone: "America/Chicago",
+  });
+}
+
+export function pendingGamesForConference(
+  pending: Game[],
+  conference: string,
+  teamsById: Map<string, Team>,
+): Game[] {
+  return pending.filter((game) => {
+    const home = teamsById.get(game.homeTeamId);
+    const away = teamsById.get(game.awayTeamId);
+    return home?.conference === conference || away?.conference === conference;
+  });
 }
 
 export function cfpRankMap(cfp: CfpPoll): Map<string, number> {

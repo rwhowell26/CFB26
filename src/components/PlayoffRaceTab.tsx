@@ -10,15 +10,18 @@ import {
   atLargePoolTeams,
   autoBidTeams,
   cfpRankMap,
+  conferenceGamesForTeam,
   conferenceRecord,
   cycleTeamStatus,
   eliminateFromAtLarge,
   emptyPlayoffRace,
+  formatPlayoffLossDate,
   gameWinnerId,
-  groupPendingGames,
   independentEliminated,
   isNotreDame,
+  lastConferenceLossDate,
   pendingConferenceGames,
+  pendingGamesForConference,
   playoffTables,
   PLAYOFF_STATUS_LABEL,
   restoreToAtLarge,
@@ -49,10 +52,6 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
   const teamsById = useMemo(() => new Map(teams.map((team) => [team.id, team])), [teams]);
   const ranks = useMemo(() => cfpRankMap(cfp), [cfp]);
   const pending = useMemo(() => pendingConferenceGames(games, live), [games, live]);
-  const pendingGroups = useMemo(
-    () => groupPendingGames(pending, teamsById),
-    [pending, teamsById],
-  );
   const tables = useMemo(
     () => playoffTables(teams, live, cfp, games),
     [teams, live, cfp, games],
@@ -82,10 +81,15 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
       <section className="panel playoff-legend">
         <header className="panel-header">
           <h2>Playoff race</h2>
-          <p>
-            Conference records stay manual. Apply finals from the queue. Status is yours to
-            mark — click a team to cycle. Independent of your personal ballot.
-          </p>
+          <p>Click a team to cycle status. Hover a record to adjust W–L.</p>
+          <button
+            type="button"
+            className="ghost-btn"
+            disabled={!live.appliedGameIds.length}
+            onClick={() => patch(undoLastAppliedGame(live, games))}
+          >
+            Undo last apply
+          </button>
         </header>
         <ul className="playoff-swatches">
           {(["destiny", "alive", "out-loss", "eliminated"] as const).map((status) => (
@@ -100,79 +104,6 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
             : "CFP rankings are not out yet. Auto Bid and the 12-team field fill when ESPN publishes the committee 25."}
         </p>
       </section>
-
-      {pendingGroups.length ? (
-        <section className="panel playoff-queue">
-          <header className="panel-header">
-            <h2>Unapplied conference games</h2>
-            <p>
-              {pending.length} final{pending.length === 1 ? "" : "s"} not on the ledger yet.
-              Championship games are omitted. Apply ESPN&apos;s winner, or undo the last apply.
-            </p>
-          </header>
-          <div className="playoff-queue-actions">
-            <button
-              type="button"
-              className="ghost-btn"
-              disabled={!live.appliedGameIds.length}
-              onClick={() => patch(undoLastAppliedGame(live, games))}
-            >
-              Undo last apply
-            </button>
-          </div>
-          {pendingGroups.map((group) => (
-            <details key={group.conference} className="playoff-queue-group">
-              <summary>
-                {group.label}{" "}
-                <span>
-                  {group.games.length} game{group.games.length === 1 ? "" : "s"}
-                </span>
-              </summary>
-              <ul>
-                {group.games.map((game) => {
-                  const winnerId = gameWinnerId(game);
-                  const homeWon = winnerId === game.homeTeamId;
-                  return (
-                    <li key={game.id}>
-                      <span className="playoff-queue-week">{formatGameWeekShort(game.week)}</span>
-                      <span className={homeWon ? "playoff-loser" : "playoff-winner"}>
-                        {game.awayName} {game.awayScore}
-                      </span>
-                      <span className="playoff-queue-at">@</span>
-                      <span className={homeWon ? "playoff-winner" : "playoff-loser"}>
-                        {game.homeName} {game.homeScore}
-                      </span>
-                      <button
-                        type="button"
-                        className="primary-btn"
-                        disabled={!winnerId}
-                        onClick={() => patch(applyConferenceGame(live, game))}
-                      >
-                        Apply
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            </details>
-          ))}
-        </section>
-      ) : (
-        <section className="panel playoff-queue">
-          <header className="panel-header">
-            <h2>Unapplied conference games</h2>
-            <p>All conference finals on the slate are on the ledger.</p>
-          </header>
-          <button
-            type="button"
-            className="ghost-btn"
-            disabled={!live.appliedGameIds.length}
-            onClick={() => patch(undoLastAppliedGame(live, games))}
-          >
-            Undo last apply
-          </button>
-        </section>
-      )}
 
       {cfp.published ? (
         <ol className="playoff-cfp-strip">
@@ -190,114 +121,65 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
         </ol>
       ) : null}
 
-      <div className="playoff-layout">
-        <div className="playoff-grid">
-          {tables.map((table) => (
-            <section key={table.conference} className="playoff-table">
-              <header>
-                <h3>{table.label}</h3>
-                <span>{table.gamesInSeason || "—"}</span>
-              </header>
-              <ol>
-                {table.standing.map((team) => (
-                  <TeamRow
-                    key={team.id}
-                    team={team}
-                    state={live}
-                    cfpRank={ranks.get(team.id)}
-                    onCycle={() => patch(cycleTeamStatus(live, team))}
-                    onAdjust={(field, delta) =>
-                      patch(adjustConferenceRecord(live, team.id, field, delta))
-                    }
-                  />
-                ))}
-              </ol>
-              {table.eliminated.length ? (
-                <div className="playoff-elim-block">
-                  <h4>Eliminated</h4>
-                  <ol>
-                    {table.eliminated.map((team) => (
-                      <TeamRow
-                        key={team.id}
-                        team={team}
-                        state={live}
-                        cfpRank={ranks.get(team.id)}
-                        onCycle={() => patch(cycleTeamStatus(live, team))}
-                        onAdjust={(field, delta) =>
-                          patch(adjustConferenceRecord(live, team.id, field, delta))
-                        }
-                      />
-                    ))}
-                  </ol>
-                </div>
-              ) : null}
-            </section>
-          ))}
-        </div>
+      <div className="playoff-top">
+        <section className="playoff-rail-card auto-bid">
+          <header>
+            <h3>Auto Bid</h3>
+            <span>5 champs</span>
+          </header>
+          {cfp.published ? (
+            <ol>
+              {autoBids.length ? (
+                autoBids.map((team, index) => (
+                  <li key={team.id}>
+                    <span className="playoff-slot">{index + 1}</span>
+                    <TeamLogo team={team} />
+                    <div>
+                      <strong>{team.shortName}</strong>
+                      <em>
+                        #{ranks.get(team.id)} · {playoffTableLabel(team.conference)}
+                      </em>
+                    </div>
+                  </li>
+                ))
+              ) : (
+                <li className="playoff-empty">No ranked remaining conference champions yet.</li>
+              )}
+            </ol>
+          ) : (
+            <p className="playoff-empty">Waiting on the CFP 25.</p>
+          )}
+        </section>
 
-        <aside className="playoff-rail">
-          <section className="playoff-rail-card auto-bid">
-            <header>
-              <h3>Auto Bid</h3>
-              <span>5 highest CFP-ranked champs</span>
-            </header>
-            {cfp.published ? (
-              <ol>
-                {autoBids.length ? (
-                  autoBids.map((team, index) => (
-                    <li key={team.id}>
-                      <span className="playoff-slot">{index + 1}</span>
-                      <TeamLogo team={team} />
-                      <div>
-                        <strong>{team.shortName}</strong>
-                        <em>
-                          #{ranks.get(team.id)} · {playoffTableLabel(team.conference)}
-                        </em>
-                      </div>
-                    </li>
-                  ))
-                ) : (
-                  <li className="playoff-empty">No ranked remaining conference champions yet.</li>
-                )}
-              </ol>
-            ) : (
-              <p className="playoff-empty">Waiting on the CFP 25.</p>
-            )}
-          </section>
+        <section className="playoff-rail-card at-large">
+          <header>
+            <h3>At-Large</h3>
+            <span>7 after auto bids</span>
+          </header>
+          {cfp.published ? (
+            <ol>
+              {atLargeField.length ? (
+                atLargeField.map((team, index) => (
+                  <li key={team.id}>
+                    <span className="playoff-slot">{index + 1}</span>
+                    <TeamLogo team={team} />
+                    <div>
+                      <strong>{team.shortName}</strong>
+                      <em>
+                        #{ranks.get(team.id)} · {shortConferenceName(team.conference)}
+                      </em>
+                    </div>
+                  </li>
+                ))
+              ) : (
+                <li className="playoff-empty">No at-large field until more teams are ranked.</li>
+              )}
+            </ol>
+          ) : (
+            <p className="playoff-empty">Waiting on the CFP 25.</p>
+          )}
 
-          <section className="playoff-rail-card at-large">
-            <header>
-              <h3>At-Large</h3>
-              <span>7 highest ranked after auto bids</span>
-            </header>
-            {cfp.published ? (
-              <ol>
-                {atLargeField.length ? (
-                  atLargeField.map((team, index) => (
-                    <li key={team.id}>
-                      <span className="playoff-slot">{index + 1}</span>
-                      <TeamLogo team={team} />
-                      <div>
-                        <strong>{team.shortName}</strong>
-                        <em>
-                          #{ranks.get(team.id)} · {shortConferenceName(team.conference)}
-                        </em>
-                      </div>
-                    </li>
-                  ))
-                ) : (
-                  <li className="playoff-empty">No at-large field until more teams are ranked.</li>
-                )}
-              </ol>
-            ) : (
-              <p className="playoff-empty">Waiting on the CFP 25.</p>
-            )}
-
-            <h4>At-large pool</h4>
-            <p className="playoff-pool-copy">
-              Notre Dame plus ranked teams eliminated from their conference race. Drop a team
-              here if they are out of the playoff too.
-            </p>
+          {atLargePool.length ? (
             <ul className="playoff-pool">
               {atLargePool.map((team) => {
                 const nd = isNotreDame(team);
@@ -351,46 +233,137 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
                   </li>
                 );
               })}
-              {!atLargePool.length ? (
-                <li className="playoff-empty">No at-large pool teams right now.</li>
-              ) : null}
             </ul>
-          </section>
+          ) : null}
+        </section>
 
-          <section className="playoff-rail-card eliminated">
-            <header>
-              <h3>Independents · eliminated</h3>
-              <span>UConn stays here. Notre Dame joins if you eliminate them.</span>
-            </header>
-            <ol>
-              {independents.map((team) => (
-                <li key={team.id}>
-                  <TeamLogo team={team} />
-                  <div>
-                    <strong>{team.shortName}</strong>
-                    {isNotreDame(team) ? (
-                      <em>
-                        {live.notreDameRecord.wins}-{live.notreDameRecord.losses} overall
-                      </em>
-                    ) : (
-                      <em>Independent</em>
-                    )}
-                  </div>
+        <section className="playoff-rail-card eliminated">
+          <header>
+            <h3>Independents</h3>
+          </header>
+          <ol>
+            {independents.map((team) => (
+              <li key={team.id}>
+                <TeamLogo team={team} />
+                <div>
+                  <strong>{team.shortName}</strong>
                   {isNotreDame(team) ? (
-                    <button
-                      type="button"
-                      className="ghost-btn"
-                      onClick={() => patch(restoreToAtLarge(live, team.id))}
-                    >
-                      Restore
-                    </button>
+                    <em>
+                      {live.notreDameRecord.wins}-{live.notreDameRecord.losses} overall
+                    </em>
                   ) : null}
-                </li>
-              ))}
-            </ol>
-          </section>
-        </aside>
+                </div>
+                {isNotreDame(team) ? (
+                  <button
+                    type="button"
+                    className="ghost-btn"
+                    onClick={() => patch(restoreToAtLarge(live, team.id))}
+                  >
+                    Restore
+                  </button>
+                ) : null}
+              </li>
+            ))}
+          </ol>
+        </section>
       </div>
+
+      <div className="playoff-grid">
+        {tables.map((table) => {
+          const conferencePending = pendingGamesForConference(
+            pending,
+            table.conference,
+            teamsById,
+          );
+          const nextGame = conferencePending[0];
+          return (
+            <section key={table.conference} className="playoff-table">
+              <header>
+                <h3>{table.label}</h3>
+                <span>{table.gamesInSeason || "—"}</span>
+              </header>
+              {nextGame ? (
+                <NextConferenceGame
+                  game={nextGame}
+                  remaining={conferencePending.length}
+                  teamsById={teamsById}
+                  onApply={() => patch(applyConferenceGame(live, nextGame))}
+                />
+              ) : null}
+              <ol>
+                {table.standing.map((team) => (
+                  <TeamRow
+                    key={team.id}
+                    team={team}
+                    state={live}
+                    games={games}
+                    cfpRank={ranks.get(team.id)}
+                    onCycle={() => patch(cycleTeamStatus(live, team))}
+                    onAdjust={(field, delta) =>
+                      patch(adjustConferenceRecord(live, team.id, field, delta))
+                    }
+                  />
+                ))}
+              </ol>
+              {table.eliminated.length ? (
+                <div className="playoff-elim-block">
+                  <h4>Eliminated</h4>
+                  <ol>
+                    {table.eliminated.map((team) => (
+                      <TeamRow
+                        key={team.id}
+                        team={team}
+                        state={live}
+                        games={games}
+                        cfpRank={ranks.get(team.id)}
+                        onCycle={() => patch(cycleTeamStatus(live, team))}
+                        onAdjust={(field, delta) =>
+                          patch(adjustConferenceRecord(live, team.id, field, delta))
+                        }
+                      />
+                    ))}
+                  </ol>
+                </div>
+              ) : null}
+            </section>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function NextConferenceGame({
+  game,
+  remaining,
+  teamsById,
+  onApply,
+}: {
+  game: Game;
+  remaining: number;
+  teamsById: Map<string, Team>;
+  onApply: () => void;
+}) {
+  const winnerId = gameWinnerId(game);
+  const homeWon = winnerId === game.homeTeamId;
+  const away = teamsById.get(game.awayTeamId);
+  const home = teamsById.get(game.homeTeamId);
+  const awayLabel = away?.abbreviation || game.awayName;
+  const homeLabel = home?.abbreviation || game.homeName;
+  return (
+    <div className="playoff-next-game">
+      <span className="playoff-queue-week">{formatGameWeekShort(game.week)}</span>
+      <span className={homeWon ? "playoff-loser" : "playoff-winner"}>
+        {awayLabel} {game.awayScore}
+      </span>
+      <span className="playoff-queue-at">@</span>
+      <span className={homeWon ? "playoff-winner" : "playoff-loser"}>
+        {homeLabel} {game.homeScore}
+      </span>
+      <button type="button" className="primary-btn" disabled={!winnerId} onClick={onApply}>
+        Apply
+      </button>
+      {remaining > 1 ? <em>+{remaining - 1}</em> : null}
     </div>
   );
 }
@@ -398,18 +371,23 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
 function TeamRow({
   team,
   state,
+  games,
   cfpRank,
   onCycle,
   onAdjust,
 }: {
   team: Team;
   state: PlayoffRaceState;
+  games: Game[];
   cfpRank?: number;
   onCycle: () => void;
   onAdjust: (field: "wins" | "losses", delta: number) => void;
 }) {
   const rec = conferenceRecord(state, team.id);
   const status = teamPlayoffStatus(state, team);
+  const scheduled = conferenceGamesForTeam(games, team.id);
+  const lossDate =
+    status === "eliminated" ? lastConferenceLossDate(games, team.id) : null;
   return (
     <li className={`playoff-row ${STATUS_CLASS[status]}`}>
       <button type="button" className="playoff-row-main" onClick={onCycle}>
@@ -420,19 +398,25 @@ function TeamRow({
       <span className="playoff-wl">
         <strong>
           {rec.wins}-{rec.losses}
+          {scheduled ? `/${scheduled}` : ""}
         </strong>
-        <button type="button" onClick={() => onAdjust("wins", 1)}>
-          W+
-        </button>
-        <button type="button" onClick={() => onAdjust("wins", -1)}>
-          W−
-        </button>
-        <button type="button" onClick={() => onAdjust("losses", 1)}>
-          L+
-        </button>
-        <button type="button" onClick={() => onAdjust("losses", -1)}>
-          L−
-        </button>
+        {lossDate ? (
+          <span className="playoff-elim-date">{formatPlayoffLossDate(lossDate)}</span>
+        ) : null}
+        <span className="playoff-stepper">
+          <button type="button" onClick={() => onAdjust("wins", 1)}>
+            W+
+          </button>
+          <button type="button" onClick={() => onAdjust("wins", -1)}>
+            W−
+          </button>
+          <button type="button" onClick={() => onAdjust("losses", 1)}>
+            L+
+          </button>
+          <button type="button" onClick={() => onAdjust("losses", -1)}>
+            L−
+          </button>
+        </span>
       </span>
     </li>
   );
