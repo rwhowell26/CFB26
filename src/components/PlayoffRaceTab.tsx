@@ -385,7 +385,10 @@ function TeamRow({
 }) {
   const rec = conferenceRecord(state, team.id);
   const status = teamPlayoffStatus(state, team);
-  const scheduled = conferenceGamesForTeam(games, team.id);
+  const accGames =
+    playoffTableLabel(team.conference) === "ACC"
+      ? conferenceGamesForTeam(games, team.id)
+      : 0;
   const lossDate =
     status === "eliminated" ? lastConferenceLossDate(games, team.id) : null;
   return (
@@ -398,7 +401,7 @@ function TeamRow({
       <span className="playoff-wl">
         <strong>
           {rec.wins}-{rec.losses}
-          {scheduled ? `/${scheduled}` : ""}
+          {accGames ? `\u00A0\u00A0${accGames}` : ""}
         </strong>
         {lossDate ? (
           <span className="playoff-elim-date">{formatPlayoffLossDate(lossDate)}</span>
