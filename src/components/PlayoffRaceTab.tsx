@@ -108,7 +108,7 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
           </li>
         </ul>
         <ul className="playoff-swatches">
-          {(["destiny", "alive", "out-loss", "eliminated"] as const).map((status) => (
+          {(["alive", "destiny", "out-loss", "eliminated"] as const).map((status) => (
             <li key={status} className={STATUS_CLASS[status]}>
               {PLAYOFF_STATUS_LABEL[status]}
             </li>
@@ -419,10 +419,6 @@ function TeamRow({
         {cfpRank != null ? <span className="playoff-cfp-tag">CFP {cfpRank}</span> : null}
       </button>
       <span className="playoff-wl">
-        <strong>
-          {rec.wins}-{rec.losses}
-          {accGames ? `\u00A0\u00A0${accGames}` : ""}
-        </strong>
         {status === "eliminated" ? (
           <label className="playoff-elim-date">
             <span>{elimDate ? formatPlayoffLossDate(elimDate) : "date"}</span>
@@ -434,21 +430,28 @@ function TeamRow({
               aria-label={`${team.shortName} eliminated date`}
             />
           </label>
-        ) : null}
-        <span className="playoff-stepper">
-          <button type="button" onClick={() => onAdjust("wins", 1)}>
-            W+
-          </button>
-          <button type="button" onClick={() => onAdjust("wins", -1)}>
-            W−
-          </button>
-          <button type="button" onClick={() => onAdjust("losses", 1)}>
-            L+
-          </button>
-          <button type="button" onClick={() => onAdjust("losses", -1)}>
-            L−
-          </button>
-        </span>
+        ) : (
+          <>
+            <strong>
+              {rec.wins}-{rec.losses}
+              {accGames ? `\u00A0\u00A0${accGames}` : ""}
+            </strong>
+            <span className="playoff-stepper">
+              <button type="button" onClick={() => onAdjust("wins", 1)}>
+                W+
+              </button>
+              <button type="button" onClick={() => onAdjust("wins", -1)}>
+                W−
+              </button>
+              <button type="button" onClick={() => onAdjust("losses", 1)}>
+                L+
+              </button>
+              <button type="button" onClick={() => onAdjust("losses", -1)}>
+                L−
+              </button>
+            </span>
+          </>
+        )}
       </span>
     </li>
   );

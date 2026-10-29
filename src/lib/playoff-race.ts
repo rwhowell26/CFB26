@@ -21,8 +21,8 @@ import type {
 export { PLAYOFF_SEED_VERSION } from "./playoff-race-seed";
 
 export const PLAYOFF_STATUSES: PlayoffStatus[] = [
-  "destiny",
   "alive",
+  "destiny",
   "out-loss",
   "eliminated",
 ];
@@ -260,15 +260,15 @@ export function pendingConferenceGames(
 ): Game[] {
   const applied = new Set(state.appliedGameIds);
   return games
-    .filter(
-      (game) =>
-        game.conferenceGame &&
-        !game.championshipGame &&
-        game.status === "final" &&
-        game.homeIsFbs &&
-        game.awayIsFbs &&
-        !applied.has(game.id),
-    )
+    .filter((game) => {
+      if (!game.conferenceGame || game.championshipGame) return false;
+      if (game.status !== "final" || !game.homeIsFbs || !game.awayIsFbs) return false;
+      if (applied.has(game.id)) return false;
+      const homeOut = state.status[game.homeTeamId] === "eliminated";
+      const awayOut = state.status[game.awayTeamId] === "eliminated";
+      if (homeOut && awayOut) return false;
+      return true;
+    })
     .sort((a, b) => a.date.localeCompare(b.date) || a.week - b.week);
 }
 
