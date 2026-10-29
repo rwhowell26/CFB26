@@ -98,6 +98,31 @@ export function teamPlayoffStatus(
   return state.status[team.id] ?? "alive";
 }
 
+export function playoffContentionCounts(
+  teams: Team[],
+  state: PlayoffRaceState,
+): { conference: number; autoBid: number; eliminated: number } {
+  let conference = 0;
+  let autoBid = 0;
+  let eliminated = 0;
+  const playoffOut = new Set(state.playoffEliminatedIds);
+  for (const team of teams) {
+    const status = teamPlayoffStatus(state, team);
+    if (isNotreDame(team)) {
+      if (status === "eliminated" || playoffOut.has(team.id)) eliminated += 1;
+      continue;
+    }
+    if (status === "eliminated") {
+      eliminated += 1;
+      continue;
+    }
+    if (isIndependentConference(team.conference)) continue;
+    conference += 1;
+    if (status === "destiny") autoBid += 1;
+  }
+  return { conference, autoBid, eliminated };
+}
+
 export function nextPlayoffStatus(current: PlayoffStatus): PlayoffStatus {
   const idx = PLAYOFF_STATUSES.indexOf(current);
   return PLAYOFF_STATUSES[(idx + 1) % PLAYOFF_STATUSES.length];

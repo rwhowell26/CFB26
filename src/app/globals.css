@@ -1832,6 +1832,44 @@ input[type="password"],
   gap: 1rem;
 }
 
+.playoff-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0.55rem 0 0;
+  padding: 0;
+}
+
+.playoff-counts li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.28rem 0.7rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: var(--panel);
+}
+
+.playoff-counts strong {
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.playoff-counts .destiny {
+  background: #00f900;
+  color: #111;
+}
+
+.playoff-counts .eliminated {
+  background: #ff2600;
+  color: #111;
+}
+
 .playoff-swatches {
   display: flex;
   flex-wrap: wrap;

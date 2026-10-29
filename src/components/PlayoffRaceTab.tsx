@@ -21,6 +21,7 @@ import {
   isNotreDame,
   pendingConferenceGames,
   pendingGamesForConference,
+  playoffContentionCounts,
   playoffTables,
   PLAYOFF_STATUS_LABEL,
   restoreToAtLarge,
@@ -73,6 +74,7 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
     () => independentEliminated(teams, live),
     [teams, live],
   );
+  const counts = useMemo(() => playoffContentionCounts(teams, live), [teams, live]);
 
   const patch = (next: PlayoffRaceState) => onChange(next);
 
@@ -91,6 +93,20 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
             Undo last apply
           </button>
         </header>
+        <ul className="playoff-counts">
+          <li>
+            <strong>{counts.conference}</strong>
+            in conference
+          </li>
+          <li className="destiny">
+            <strong>{counts.autoBid}</strong>
+            auto bid
+          </li>
+          <li className="eliminated">
+            <strong>{counts.eliminated}</strong>
+            eliminated
+          </li>
+        </ul>
         <ul className="playoff-swatches">
           {(["destiny", "alive", "out-loss", "eliminated"] as const).map((status) => (
             <li key={status} className={STATUS_CLASS[status]}>
