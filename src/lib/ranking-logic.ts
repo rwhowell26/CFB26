@@ -563,6 +563,9 @@ export function philosophyWarnings(
   return warnings;
 }
 
+/** Rank-tab H2H flags only when the two teams' loss totals differ by this much or less. */
+export const H2H_CONFLICT_MAX_LOSS_GAP = 2;
+
 /** Head-to-head result conflicts: ahead after a loss, or behind after a win. */
 export function resultMoveSuggestions(
   rankedIds: string[],
@@ -572,6 +575,14 @@ export function resultMoveSuggestions(
   const ranks = rankMapFromOrder(rankedIds);
   const suggestions: MoveSuggestion[] = [];
   const seen = new Set<string>();
+  const lossesById = new Map<string, number>();
+  const lossesOf = (id: string) => {
+    const cached = lossesById.get(id);
+    if (cached != null) return cached;
+    const losses = recordFromGames(id, games).losses;
+    lossesById.set(id, losses);
+    return losses;
+  };
 
   for (const game of games) {
     if (game.status !== "final") continue;
@@ -594,6 +605,9 @@ export function resultMoveSuggestions(
     if (winnerRank == null || loserRank == null) continue;
     // Conflict only when loser is ranked ahead of winner
     if (loserRank < winnerRank) {
+      if (Math.abs(lossesOf(winnerId) - lossesOf(loserId)) > H2H_CONFLICT_MAX_LOSS_GAP) {
+        continue;
+      }
       const pairKey = `${winnerId}:${loserId}`;
       if (seen.has(pairKey)) continue;
       seen.add(pairKey);

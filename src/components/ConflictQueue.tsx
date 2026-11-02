@@ -101,8 +101,8 @@ export function ConflictQueue({
             <h2>Find &amp; replace conflicts</h2>
             <p>
               {pairs.length
-                ? `${index + 1} of ${pairs.length} remaining`
-                : "No remaining H2H conflicts"}
+                ? `${index + 1} of ${pairs.length} remaining · within 2 losses`
+                : "No remaining H2H conflicts within 2 losses"}
               {ignored.size ? ` · ${ignored.size} ignored` : ""}
             </p>
           </div>

@@ -13,6 +13,7 @@ import { RecommendPanel } from "@/components/RecommendPanel";
 import { PlayoffRaceTab } from "@/components/PlayoffRaceTab";
 import { SlateTab } from "@/components/SlateTab";
 import { SosTab } from "@/components/SosTab";
+import { SunBeltTab } from "@/components/SunBeltTab";
 import {
   emptyPlayoffRace,
   fillEliminatedDates,
@@ -58,6 +59,7 @@ type Tab =
   | "slate"
   | "conferences"
   | "playoff"
+  | "sunbelt"
   | "sos"
   | "compare"
   | "history"
@@ -567,6 +569,7 @@ export function RankingApp() {
             ["slate", "Slate"],
             ["conferences", "Conferences"],
             ["playoff", "Playoff"],
+            ["sunbelt", "Sun Belt"],
             ["sos", "SOS"],
             ["compare", "Compare"],
             ["history", "History"],
@@ -734,6 +737,15 @@ export function RankingApp() {
           cfp={cfp}
           state={store.playoffRace ?? emptyPlayoffRace()}
           onChange={(playoffRace) => setStore({ ...store, playoffRace })}
+        />
+      ) : null}
+
+      {tab === "sunbelt" ? (
+        <SunBeltTab
+          teams={teams}
+          games={games}
+          onSelectTeam={handleSelectTeam}
+          selectedTeamId={selectedTeamId}
         />
       ) : null}
 
