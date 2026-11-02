@@ -11,6 +11,7 @@ import { RankingBoard } from "@/components/RankingBoard";
 import { RecommendPanel } from "@/components/RecommendPanel";
 import { SlateTab } from "@/components/SlateTab";
 import { SosTab } from "@/components/SosTab";
+import { SunBeltTab } from "@/components/SunBeltTab";
 import {
   applyWinnerAboveLoser,
   philosophyWarnings,
@@ -41,7 +42,16 @@ import {
 import type { Game, SeasonWeek, Team } from "@/lib/types";
 import { ensureSeasonWeeks } from "@/lib/weeks";
 
-type Tab = "rank" | "board" | "slate" | "conferences" | "sos" | "compare" | "history" | "movers";
+type Tab =
+  | "rank"
+  | "board"
+  | "slate"
+  | "conferences"
+  | "sunbelt"
+  | "sos"
+  | "compare"
+  | "history"
+  | "movers";
 
 type GamesPayload = {
   season: number;
@@ -437,6 +447,7 @@ export function RankingApp() {
             ["board", "Board"],
             ["slate", "Slate"],
             ["conferences", "Conferences"],
+            ["sunbelt", "Sun Belt"],
             ["sos", "SOS"],
             ["compare", "Compare"],
             ["history", "History"],
@@ -569,6 +580,15 @@ export function RankingApp() {
           teams={teams}
           ranks={ranks}
           records={records}
+          onSelectTeam={handleSelectTeam}
+          selectedTeamId={selectedTeamId}
+        />
+      ) : null}
+
+      {tab === "sunbelt" ? (
+        <SunBeltTab
+          teams={teams}
+          games={games}
           onSelectTeam={handleSelectTeam}
           selectedTeamId={selectedTeamId}
         />
