@@ -13,7 +13,7 @@ import { RecommendPanel } from "@/components/RecommendPanel";
 import { PlayoffRaceTab } from "@/components/PlayoffRaceTab";
 import { SlateTab } from "@/components/SlateTab";
 import { SosTab } from "@/components/SosTab";
-import { SunBeltTab } from "@/components/SunBeltTab";
+import { ScenariosTab } from "@/components/ScenariosTab";
 import {
   emptyPlayoffRace,
   fillEliminatedDates,
@@ -60,7 +60,7 @@ type Tab =
   | "slate"
   | "conferences"
   | "playoff"
-  | "sunbelt"
+  | "scenarios"
   | "sos"
   | "compare"
   | "history"
@@ -202,6 +202,21 @@ export function RankingApp() {
     // Mount-only season fetch
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (tab !== "scenarios") return;
+    const poll = window.setInterval(async () => {
+      try {
+        const res = await fetch("/api/games?live=1");
+        const json = (await res.json()) as GamesPayload & { error?: string };
+        if (!res.ok) return;
+        setData(json);
+      } catch {
+        /* keep the last good slate */
+      }
+    }, 45_000);
+    return () => window.clearInterval(poll);
+  }, [tab]);
 
   const teams = useMemo(() => data?.teams ?? [], [data]);
   const games = useMemo(() => data?.games ?? [], [data]);
@@ -505,7 +520,7 @@ export function RankingApp() {
   }
 
   return (
-    <div className={`app-shell${tab === "sunbelt" ? " sunbelt-mode" : ""}`}>
+    <div className={`app-shell${tab === "scenarios" ? " scenario-mode" : ""}`}>
       <header className="topbar">
         <div className="brand-block">
           <p className="brand">CFB{String(SEASON_YEAR).slice(2)}</p>
@@ -563,7 +578,7 @@ export function RankingApp() {
             ["slate", "Slate"],
             ["conferences", "Conferences"],
             ["playoff", "Playoff"],
-            ["sunbelt", "Sun Belt"],
+            ["scenarios", "Scenarios"],
             ["sos", "SOS"],
             ["compare", "Compare"],
             ["history", "History"],
@@ -734,10 +749,15 @@ export function RankingApp() {
         />
       ) : null}
 
-      {tab === "sunbelt" ? (
-        <SunBeltTab
+      {tab === "scenarios" ? (
+        <ScenariosTab
           teams={teams}
           games={games}
+          cfpRanks={
+            cfp.published
+              ? new Map(cfp.ranks.map((row) => [row.teamId, row.rank]))
+              : undefined
+          }
           onSelectTeam={handleSelectTeam}
           selectedTeamId={selectedTeamId}
         />

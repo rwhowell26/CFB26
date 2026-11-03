@@ -2,9 +2,10 @@ import { NextResponse } from "next/server";
 import { currentSeasonWeek, fetchAllGames } from "@/lib/espn";
 import { SEASON_YEAR } from "@/lib/season";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const data = await fetchAllGames(SEASON_YEAR);
+    const live = new URL(request.url).searchParams.get("live") === "1";
+    const data = await fetchAllGames(SEASON_YEAR, { live });
     return NextResponse.json({
       season: SEASON_YEAR,
       currentWeek: currentSeasonWeek(data.weeks),
