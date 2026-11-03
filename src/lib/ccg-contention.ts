@@ -150,7 +150,10 @@ function othersKeepWinning(
   return picks;
 }
 
-/** Rivals lose remaining games so the selected team has the most favorable path. */
+/**
+ * Same-table "chaos": currently worse-placed teams win remaining games.
+ * Used for top-two leagues, where every conference game is inside one standings table.
+ */
 function othersFall(
   teamId: string,
   remaining: Game[],
@@ -163,6 +166,42 @@ function othersFall(
     const homePlace = place.get(game.homeTeamId) ?? 99;
     const awayPlace = place.get(game.awayTeamId) ?? 99;
     picks[game.id] = homePlace >= awayPlace ? game.homeTeamId : game.awayTeamId;
+  }
+  return picks;
+}
+
+function tableMates(seed: ScenarioProjection, teamId: string): Set<string> {
+  const table = seed.tables.find((item) => item.rows.some((row) => row.teamId === teamId));
+  return new Set((table?.rows ?? []).map((row) => row.teamId));
+}
+
+/**
+ * Best-case remaining results for "does a path still exist?".
+ *
+ * Division races: same-division teams lose to the other division; intra-division
+ * games stay unpicked so a trailer is not handed a table-clinching résumé
+ * (the App State / Georgia St false out-with-a-loss).
+ *
+ * Top-two races: fall back to othersFall, because every remaining conference
+ * game is inside the same table and leaders must lose for a chaser to have a path.
+ */
+function othersHelp(
+  teamId: string,
+  remaining: Game[],
+  seed: ScenarioProjection,
+  conference: ScenarioConference,
+): Record<string, string> {
+  if (conference.championship !== "division-winners") {
+    return othersFall(teamId, remaining, seed);
+  }
+  const rivals = tableMates(seed, teamId);
+  const picks: Record<string, string> = {};
+  for (const game of remaining) {
+    if (involves(game, teamId)) continue;
+    const homeRival = rivals.has(game.homeTeamId);
+    const awayRival = rivals.has(game.awayTeamId);
+    if (homeRival === awayRival) continue;
+    picks[game.id] = homeRival ? game.awayTeamId : game.homeTeamId;
   }
   return picks;
 }
@@ -220,11 +259,12 @@ function teamRow(
   const extra = options.extraPicks ?? {};
   const nextGame = nextConferenceGame(teamId, remaining, options.week);
   const winOwn = mergePicks(winOwnRemaining(teamId, remaining), extra);
+  const helpOthers = othersHelp(teamId, remaining, seed, conference);
   const best = projectWith(
     conference,
     teams,
     games,
-    mergePicks(winOwn, othersFall(teamId, remaining, seed)),
+    mergePicks(winOwn, helpOthers),
     options.cfpRanks,
   );
   const worst = projectWith(
@@ -238,7 +278,7 @@ function teamRow(
   if (nextGame) {
     const loseNext = mergePicks(
       winOwn,
-      othersFall(teamId, remaining, seed),
+      helpOthers,
       { [nextGame.id]: opponentId(nextGame, teamId) },
     );
     const afterLoss = projectWith(conference, teams, games, loseNext, options.cfpRanks);
