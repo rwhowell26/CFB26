@@ -3,9 +3,9 @@
 import {
   CCG_STATUS_LABEL,
   contentionCopy,
-  type CcgElimGame,
   type CcgStatus,
   type CcgTeamContention,
+  type CcgWeekSwing,
 } from "@/lib/ccg-contention";
 import type { Team } from "@/lib/types";
 
@@ -16,17 +16,17 @@ export function CcgStatusChip({ status }: { status: CcgStatus }) {
 export function CcgStatusCard({
   team,
   row,
-  elimGames,
+  weekSwings,
   teamsById,
 }: {
   team: Team;
   row: CcgTeamContention;
-  elimGames: CcgElimGame[];
+  weekSwings: CcgWeekSwing[];
   teamsById: Map<string, Team>;
 }) {
   const name = team.shortName;
-  const uniqueGames = new Map<string, CcgElimGame[]>();
-  for (const item of elimGames) {
+  const uniqueGames = new Map<string, CcgWeekSwing[]>();
+  for (const item of weekSwings) {
     const list = uniqueGames.get(item.game.id) ?? [];
     list.push(item);
     uniqueGames.set(item.game.id, list);
@@ -39,25 +39,25 @@ export function CcgStatusCard({
       </header>
       <p>{contentionCopy(row, name)}</p>
       {row.status === "eliminated" ? null : uniqueGames.size === 0 ? (
-        <p className="ccg-muted">No remaining conference games this week would eliminate them.</p>
+        <p className="ccg-muted">No remaining conference games this week would clinch or eliminate them.</p>
       ) : (
         <ul className="ccg-elim-list">
           {[...uniqueGames.values()].map((items) => {
             const game = items[0]!.game;
             const home = teamsById.get(game.homeTeamId)?.shortName ?? game.homeName;
             const away = teamsById.get(game.awayTeamId)?.shortName ?? game.awayName;
-            const winners = items.map((item) => {
-              const id = item.eliminatesIf.winnerId;
-              return teamsById.get(id)?.shortName ?? id;
+            const bits = items.map((item) => {
+              const winner = teamsById.get(item.winnerId)?.shortName ?? item.winnerId;
+              return item.kind === "clinches"
+                ? `${winner} winning clinches a CCG berth`
+                : `${winner} winning eliminates ${name}`;
             });
             return (
               <li key={game.id}>
                 <strong>
                   {away} @ {home}
                 </strong>
-                {winners.length
-                  ? ` — ${winners.join(" or ")} winning eliminates ${name}`
-                  : null}
+                {bits.length ? ` — ${bits.join("; ")}` : null}
               </li>
             );
           })}

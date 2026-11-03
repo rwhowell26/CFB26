@@ -6,10 +6,10 @@ import { CcgStatusCard, CcgStatusChip } from "@/components/CcgStatusCard";
 import { conferenceForTeam } from "@/lib/scenario-conferences";
 import {
   allConferenceContention,
-  eliminationGamesThisWeek,
   gameImplications,
-  type CcgElimGame,
+  weekSwingsThisWeek,
   type CcgStatus,
+  type CcgWeekSwing,
 } from "@/lib/ccg-contention";
 import { emptyPlayoffRace, teamPlayoffStatus } from "@/lib/playoff-race";
 import { formatRank, gamesForSlateWeek } from "@/lib/ranking-logic";
@@ -243,9 +243,9 @@ export function SlateTab({
     selectedTeam && selectedConf
       ? (contention.get(selectedConf.id)?.byTeam.get(selectedTeam.id) ?? null)
       : null;
-  const elimGames = useMemo((): CcgElimGame[] => {
+  const weekSwings = useMemo((): CcgWeekSwing[] => {
     if (!selectedTeam || !selectedConf) return [];
-    return eliminationGamesThisWeek(selectedConf, selectedTeam.id, teams, games, {
+    return weekSwingsThisWeek(selectedConf, selectedTeam.id, teams, games, {
       cfpRanks,
       week: slateWeek,
     });
@@ -253,17 +253,17 @@ export function SlateTab({
   const elimByGame = useMemo(() => {
     const map = new Map<string, string>();
     if (!selectedTeam) return map;
-    for (const item of elimGames) {
-      const winner =
-        teamsById.get(item.eliminatesIf.winnerId)?.shortName ?? item.eliminatesIf.winnerId;
+    for (const item of weekSwings) {
+      const winner = teamsById.get(item.winnerId)?.shortName ?? item.winnerId;
+      const bit =
+        item.kind === "clinches"
+          ? `${winner} winning clinches a CCG berth`
+          : `${winner} winning eliminates ${selectedTeam.shortName}`;
       const prev = map.get(item.game.id);
-      map.set(
-        item.game.id,
-        prev ? `${prev}; ${winner} winning eliminates ${selectedTeam.shortName}` : `${winner} winning eliminates ${selectedTeam.shortName}`,
-      );
+      map.set(item.game.id, prev ? `${prev}; ${bit}` : bit);
     }
     return map;
-  }, [elimGames, selectedTeam, teamsById]);
+  }, [weekSwings, selectedTeam, teamsById]);
   const selectedGame = games.find((game) => game.id === selectedGameId) ?? null;
   const implications = useMemo(() => {
     if (!selectedGame) return null;
@@ -316,7 +316,7 @@ export function SlateTab({
         <CcgStatusCard
           team={selectedTeam}
           row={selectedCcg}
-          elimGames={elimGames}
+          weekSwings={weekSwings}
           teamsById={teamsById}
         />
       ) : (
@@ -342,6 +342,7 @@ export function SlateTab({
                     {[
                       statusLine(outcome.newlyEliminated, "eliminated from the CCG"),
                       statusLine(outcome.newlyOutWithLoss, "would be out with a loss"),
+                      statusLine(outcome.newlyClinch, "would clinch a CCG berth"),
                       statusLine(outcome.newlyDestiny, "would control their destiny"),
                     ]
                       .filter(Boolean)

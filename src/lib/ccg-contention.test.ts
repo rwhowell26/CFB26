@@ -86,7 +86,7 @@ test("a team that must win this week to keep a CCG path is out with a loss", () 
   );
 });
 
-test("winning out regardless of other games is control-your-destiny", () => {
+test("winning this week's game to lock a CCG berth is gold clinch", () => {
   const games = [
     game("1", "NAVY", "TULN", "NAVY"),
     game("2", "NAVY", "MEM", "NAVY"),
@@ -98,9 +98,26 @@ test("winning out regardless of other games is control-your-destiny", () => {
     game("8", "USF", "FAU", "USF"),
   ];
   const result = conferenceContention(AAC, TEAMS, games, { week: 8 });
-  assert.equal(result.byTeam.get("NAVY")?.status, "destiny");
+  assert.equal(result.byTeam.get("NAVY")?.status, "clinch");
+  assert.equal(result.byTeam.get("NAVY")?.clinchesThisWin, true);
   assert.equal(result.byTeam.get("NAVY")?.clinchesWinOut, true);
   assert.equal(result.byTeam.get("FAU")?.status, "eliminated");
+});
+
+test("winning out is destiny when this week's win is not enough to clinch", () => {
+  const games = [
+    game("1", "NAVY", "USF", "NAVY"),
+    game("2", "TULN", "FAU", "TULN"),
+    game("3", "TULN", "USF", "TULN"),
+    game("4", "MEM", "FAU", "MEM"),
+    game("5", "NAVY", "FAU", null, 8),
+    game("6", "NAVY", "TULN", null, 9),
+    game("7", "NAVY", "MEM", null, 9),
+  ];
+  const result = conferenceContention(AAC, TEAMS, games, { week: 8 });
+  assert.equal(result.byTeam.get("NAVY")?.clinchesWinOut, true);
+  assert.equal(result.byTeam.get("NAVY")?.clinchesThisWin, false);
+  assert.equal(result.byTeam.get("NAVY")?.status, "destiny");
 });
 
 test("clicking a conference game reports who a result would eliminate", () => {

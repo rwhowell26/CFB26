@@ -1274,6 +1274,11 @@ input[type="password"],
   border: 1px solid var(--line);
 }
 
+.ccg-chip.clinch {
+  background: #f5c518;
+  color: #111;
+}
+
 .ccg-chip.destiny {
   background: #00f900;
   color: #111;
@@ -1291,6 +1296,10 @@ input[type="password"],
 .ccg-chip.eliminated {
   background: #ff2600;
   color: #111;
+}
+
+.ccg-card.clinch {
+  box-shadow: inset 4px 0 0 #f5c518;
 }
 
 .ccg-card.destiny {

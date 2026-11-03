@@ -17,7 +17,7 @@ import { formatPct, formatWinLoss, groupGamesByWeek } from "@/lib/sunbelt";
 import { conferenceForTeam, teamsInConference } from "@/lib/scenario-conferences";
 import {
   conferenceContention,
-  eliminationGamesThisWeek,
+  weekSwingsThisWeek,
 } from "@/lib/ccg-contention";
 import { CcgStatusCard } from "@/components/CcgStatusCard";
 import type { Game, Team } from "@/lib/types";
@@ -185,9 +185,9 @@ export function ScenariosTab({
   const selectedRow = selectedInConf
     ? (contention.byTeam.get(selectedInConf.id) ?? null)
     : null;
-  const elimGames = useMemo(() => {
+  const weekSwings = useMemo(() => {
     if (!selectedInConf) return [];
-    return eliminationGamesThisWeek(conference, selectedInConf.id, teams, games, {
+    return weekSwingsThisWeek(conference, selectedInConf.id, teams, games, {
       cfpRanks,
       week,
     });
@@ -246,7 +246,7 @@ export function ScenariosTab({
         <CcgStatusCard
           team={selectedInConf}
           row={selectedRow}
-          elimGames={elimGames}
+          weekSwings={weekSwings}
           teamsById={teamsById}
         />
       ) : null}

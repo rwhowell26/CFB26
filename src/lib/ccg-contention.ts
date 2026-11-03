@@ -9,11 +9,12 @@ import {
   type ScenarioProjection,
 } from "./scenario-engine";
 import { PLAYOFF_STATUS_LABEL } from "./playoff-race";
-import type { Game, PlayoffStatus, Team } from "./types";
+import type { Game, Team } from "./types";
 
-export type CcgStatus = PlayoffStatus;
+export type CcgStatus = "clinch" | "destiny" | "alive" | "out-loss" | "eliminated";
 
 export const CCG_STATUS_LABEL: Record<CcgStatus, string> = {
+  clinch: "Clinch",
   destiny: PLAYOFF_STATUS_LABEL.destiny,
   alive: PLAYOFF_STATUS_LABEL.alive,
   "out-loss": PLAYOFF_STATUS_LABEL["out-loss"],
@@ -26,12 +27,19 @@ export type CcgTeamContention = {
   nextGame: Game | null;
   hasPath: boolean;
   clinchesWinOut: boolean;
+  clinchesThisWin: boolean;
   survivesNextLoss: boolean;
 };
 
 export type CcgElimGame = {
   game: Game;
   eliminatesIf: { winnerId: string; teamIds: string[] };
+};
+
+export type CcgWeekSwing = {
+  game: Game;
+  winnerId: string;
+  kind: "eliminates" | "clinches";
 };
 
 export type CcgGameImplication = {
@@ -41,6 +49,7 @@ export type CcgGameImplication = {
   newlyEliminated: string[];
   newlyOutWithLoss: string[];
   newlyDestiny: string[];
+  newlyClinch: string[];
 };
 
 export type ConferenceContention = {
@@ -172,14 +181,29 @@ function projectWith(
   return projectConference(conference, teams, games, { picks, cfpRanks });
 }
 
+function loseOwnRemaining(
+  teamId: string,
+  remaining: Game[],
+  exceptId?: string,
+): Record<string, string> {
+  const picks: Record<string, string> = {};
+  for (const game of remaining) {
+    if (game.id === exceptId || !involves(game, teamId)) continue;
+    picks[game.id] = opponentId(game, teamId);
+  }
+  return picks;
+}
+
 function statusFor(args: {
   hasPath: boolean;
-  clinches: boolean;
+  clinchesThisWin: boolean;
+  clinchesWinOut: boolean;
   survivesLoss: boolean;
   nextGame: Game | null;
 }): CcgStatus {
   if (!args.hasPath) return "eliminated";
-  if (args.clinches) return "destiny";
+  if (args.clinchesThisWin) return "clinch";
+  if (args.clinchesWinOut) return "destiny";
   if (args.nextGame && !args.survivesLoss) return "out-loss";
   return "alive";
 }
@@ -222,17 +246,35 @@ function teamRow(
   }
   const hasPath = hasCcgPath(conference, best, teamId);
   const clinchesWinOut = clinchesCcg(conference, worst, teamId);
+  let clinchesThisWin = false;
+  if (nextGame) {
+    const afterThisWin = projectWith(
+      conference,
+      teams,
+      games,
+      mergePicks(
+        extra,
+        { [nextGame.id]: teamId },
+        loseOwnRemaining(teamId, remaining, nextGame.id),
+        othersKeepWinning(teamId, remaining, seed),
+      ),
+      options.cfpRanks,
+    );
+    clinchesThisWin = clinchesCcg(conference, afterThisWin, teamId);
+  }
   return {
     teamId,
     status: statusFor({
       hasPath,
-      clinches: clinchesWinOut,
+      clinchesThisWin,
+      clinchesWinOut,
       survivesLoss: survivesNextLoss,
       nextGame,
     }),
     nextGame,
     hasPath,
     clinchesWinOut,
+    clinchesThisWin,
     survivesNextLoss,
   };
 }
@@ -261,13 +303,28 @@ export function eliminationGamesThisWeek(
   games: Game[],
   options: CcgOptions = {},
 ): CcgElimGame[] {
+  return weekSwingsThisWeek(conference, teamId, teams, games, options)
+    .filter((item) => item.kind === "eliminates")
+    .map((item) => ({
+      game: item.game,
+      eliminatesIf: { winnerId: item.winnerId, teamIds: [teamId] },
+    }));
+}
+
+export function weekSwingsThisWeek(
+  conference: ScenarioConference,
+  teamId: string,
+  teams: Team[],
+  games: Game[],
+  options: CcgOptions = {},
+): CcgWeekSwing[] {
   const extra = options.extraPicks ?? {};
   const seed = projectWith(conference, teams, games, extra, options.cfpRanks);
   const remaining = seed.remainingConference.filter((game) => extra[game.id] == null);
   const baseline = teamRow(conference, teams, games, teamId, remaining, seed, options);
   if (baseline.status === "eliminated") return [];
   const weekGames = remaining.filter((game) => options.week == null || game.week === options.week);
-  const out: CcgElimGame[] = [];
+  const out: CcgWeekSwing[] = [];
   for (const game of weekGames) {
     for (const winnerId of [game.homeTeamId, game.awayTeamId]) {
       const after = teamRow(
@@ -280,7 +337,24 @@ export function eliminationGamesThisWeek(
         { ...options, extraPicks: mergePicks(extra, { [game.id]: winnerId }) },
       );
       if (after.status === "eliminated") {
-        out.push({ game, eliminatesIf: { winnerId, teamIds: [teamId] } });
+        out.push({ game, winnerId, kind: "eliminates" });
+      }
+      if (winnerId === teamId) {
+        const lock = projectWith(
+          conference,
+          teams,
+          games,
+          mergePicks(
+            extra,
+            { [game.id]: teamId },
+            loseOwnRemaining(teamId, remaining, game.id),
+            othersKeepWinning(teamId, remaining, seed),
+          ),
+          options.cfpRanks,
+        );
+        if (clinchesCcg(conference, lock, teamId)) {
+          out.push({ game, winnerId, kind: "clinches" });
+        }
       }
     }
   }
@@ -339,12 +413,14 @@ export function gameImplications(
     const newlyEliminated: string[] = [];
     const newlyOutWithLoss: string[] = [];
     const newlyDestiny: string[] = [];
+    const newlyClinch: string[] = [];
     for (const [teamId, row] of next.byTeam) {
       statusByTeam[teamId] = row.status;
       const prev = baseline.byTeam.get(teamId)?.status;
       if (prev !== "eliminated" && row.status === "eliminated") newlyEliminated.push(teamId);
       if (prev !== "out-loss" && row.status === "out-loss") newlyOutWithLoss.push(teamId);
       if (prev !== "destiny" && row.status === "destiny") newlyDestiny.push(teamId);
+      if (prev !== "clinch" && row.status === "clinch") newlyClinch.push(teamId);
     }
     outcomes.push({
       winnerId,
@@ -353,6 +429,7 @@ export function gameImplications(
       newlyEliminated,
       newlyOutWithLoss,
       newlyDestiny,
+      newlyClinch,
     });
   }
   return { conference, outcomes };
@@ -361,6 +438,17 @@ export function gameImplications(
 export function contentionCopy(row: CcgTeamContention, teamName: string): string {
   if (row.status === "eliminated") {
     return `${teamName} is eliminated from the conference championship game.`;
+  }
+  if (row.status === "clinch") {
+    const opp = row.nextGame
+      ? row.nextGame.homeTeamId === row.teamId
+        ? row.nextGame.awayName
+        : row.nextGame.homeName
+      : "this week";
+    const loss = row.survivesNextLoss
+      ? ""
+      : " A loss eliminates them.";
+    return `${teamName} clinches a CCG berth with a win over ${opp}.${loss}`;
   }
   if (row.status === "destiny") {
     return `${teamName} controls their own destiny: win out and they reach the CCG regardless of other results.`;
