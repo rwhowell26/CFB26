@@ -7,8 +7,10 @@ import {
   teamsInConference,
 } from "./scenario-conferences";
 import {
+  competitionPlaces,
   conferenceRecord,
   formatWinLoss,
+  markTieGroup,
   projectSunBelt,
   winningPct,
   type RankedSunBeltRow,
@@ -391,6 +393,7 @@ type RankResult = {
   order: string[];
   notes: Map<string, string>;
   unresolved: Set<string>;
+  tieGroups: Map<string, string>;
   explanation: string[];
 };
 
@@ -426,6 +429,7 @@ function resolveGroup(
   below: string[][],
   notes: Map<string, string>,
   unresolved: Set<string>,
+  tieGroups: Map<string, string>,
   explanation: string[],
   twoTeam: boolean,
 ): string[] {
@@ -438,29 +442,53 @@ function resolveGroup(
   const names = group.map((id) => ctx.nameFor(id)).join(", ");
   for (const step of steps) {
     if (step.kind === "draw") {
-      for (const id of group) {
-        unresolved.add(id);
+      const ordered = [...group].sort((a, b) => ctx.nameFor(a).localeCompare(ctx.nameFor(b)));
+      markTieGroup(ordered, unresolved, tieGroups);
+      for (const id of ordered) {
         notes.set(id, `Unresolved ${ctx.conference.drawSource.toLowerCase()} / coin toss (${names}).`);
       }
       explanation.push(`Tie among ${names} reaches ${ctx.conference.drawSource.toLowerCase()} (not applied here).`);
-      return [...group].sort((a, b) => ctx.nameFor(a).localeCompare(ctx.nameFor(b)));
+      return ordered;
     }
     if (twoTeam && ctx.conference.twoTeamH2hFirst && step.kind !== "round-robin") {
       const h2h = ctx.conference.steps.find((item) => item.kind === "round-robin");
       if (h2h) {
         const h2hBuckets = bucketsFor(group, h2h, ctx, above, below);
         if (h2hBuckets) {
-          return flattenBuckets(h2hBuckets, h2h, ctx, above, below, notes, unresolved, explanation, true);
+          return flattenBuckets(
+            h2hBuckets,
+            h2h,
+            ctx,
+            above,
+            below,
+            notes,
+            unresolved,
+            tieGroups,
+            explanation,
+            true,
+          );
         }
       }
     }
     const buckets = bucketsFor(group, step, ctx, above, below);
     if (!buckets) continue;
     explanation.push(`Tie among ${names} broken on ${step.label}.`);
-    return flattenBuckets(buckets, step, ctx, above, below, notes, unresolved, explanation, twoTeam);
+    return flattenBuckets(
+      buckets,
+      step,
+      ctx,
+      above,
+      below,
+      notes,
+      unresolved,
+      tieGroups,
+      explanation,
+      twoTeam,
+    );
   }
-  for (const id of group) unresolved.add(id);
-  return [...group].sort((a, b) => ctx.nameFor(a).localeCompare(ctx.nameFor(b)));
+  const leftover = [...group].sort((a, b) => ctx.nameFor(a).localeCompare(ctx.nameFor(b)));
+  markTieGroup(leftover, unresolved, tieGroups);
+  return leftover;
 }
 
 function flattenBuckets(
@@ -471,6 +499,7 @@ function flattenBuckets(
   below: string[][],
   notes: Map<string, string>,
   unresolved: Set<string>,
+  tieGroups: Map<string, string>,
   explanation: string[],
   twoTeam: boolean,
 ): string[] {
@@ -490,6 +519,7 @@ function flattenBuckets(
             remainingBelow,
             notes,
             unresolved,
+            tieGroups,
             explanation,
             rest.length === 2 && ctx.conference.returnToTwoTeam,
           ),
@@ -507,6 +537,7 @@ function flattenBuckets(
         remainingBelow,
         notes,
         unresolved,
+        tieGroups,
         explanation,
         nextTwo || twoTeam,
       ),
@@ -518,6 +549,7 @@ function flattenBuckets(
 function rankTeams(teamIds: string[], ctx: Ctx): RankResult {
   const notes = new Map<string, string>();
   const unresolved = new Set<string>();
+  const tieGroups = new Map<string, string>();
   const explanation: string[] = [];
   const groups = initialGroups(teamIds, ctx);
   const order: string[] = [];
@@ -536,12 +568,13 @@ function rankTeams(teamIds: string[], ctx: Ctx): RankResult {
         below,
         notes,
         unresolved,
+        tieGroups,
         explanation,
         group.length === 2,
       ),
     );
   }
-  return { order, notes, unresolved, explanation };
+  return { order, notes, unresolved, tieGroups, explanation };
 }
 
 function fromSunBeltRow(row: RankedSunBeltRow, titleGame: boolean): RankedScenarioRow {
@@ -635,13 +668,18 @@ export function projectConference(
     fbsOf,
   };
   const ranked = rankTeams(teamIds, ctx);
+  const places = competitionPlaces(ranked.order.length, (index) => {
+    const current = ranked.tieGroups.get(ranked.order[index]!);
+    const previous = ranked.tieGroups.get(ranked.order[index - 1]!);
+    return current != null && current === previous;
+  });
   const rows: RankedScenarioRow[] = ranked.order.map((teamId, index) => ({
     teamId,
-    place: index + 1,
+    place: places[index] ?? index + 1,
     conf: conferenceRecord(teamId, resolved),
     division: null,
     fbs: fbsOf(teamId),
-    champion: index === 0,
+    champion: (places[index] ?? index + 1) === 1,
     titleGame: index < 2,
     tieNote: ranked.notes.get(teamId) ?? null,
     unresolved: ranked.unresolved.has(teamId),
@@ -655,16 +693,22 @@ export function projectConference(
     : "No teams loaded.";
   const remaining = confGames.filter((game) => !gameWinner(game));
   const completed = confGames.filter((game) => gameWinner(game));
+  const tiedAtSecond = second
+    ? rows.filter((row) => row.place === second.place && row.unresolved)
+    : [];
+  const championshipNote =
+    first && second
+      ? tiedAtSecond.length > 1
+        ? `${nameFor(first.teamId)} hosts ${nameFor(second.teamId)} as the top two seeds. ${tiedAtSecond.map((row) => nameFor(row.teamId)).join(", ")} are tied at #${second.place} on ${conference.drawSource.toLowerCase()} (listed alphabetically).`
+        : `${nameFor(first.teamId)} hosts ${nameFor(second.teamId)} as the top two seeds.`
+      : "Championship field needs two teams.";
   return {
     conference,
     tables: [{ id: conference.id, label: conference.label, rows, champExplanation }],
     championship: {
       homeId: first?.teamId ?? null,
       awayId: second?.teamId ?? null,
-      note:
-        first && second
-          ? `${nameFor(first.teamId)} hosts ${nameFor(second.teamId)} as the top two seeds.`
-          : "Championship field needs two teams.",
+      note: championshipNote,
     },
     completedConference: completed,
     remainingConference: remaining,

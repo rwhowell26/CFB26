@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
+  competitionPlaces,
   formatWinLoss,
   projectSunBelt,
   winningPct,
@@ -240,6 +241,45 @@ test("higher conference percentage hosts the championship", () => {
   assert.equal(result.championship.eastId, "A");
   assert.equal(result.championship.hostId, "A");
   assert.match(result.championship.hostNote, /conference winning percentage/);
+});
+
+test("competition ranking assigns 2-2-2 then 5", () => {
+  assert.deepEqual(
+    competitionPlaces(5, (index) => index === 2 || index === 3),
+    [1, 2, 2, 2, 5],
+  );
+  assert.deepEqual(
+    competitionPlaces(3, (index) => index > 0),
+    [1, 1, 1],
+  );
+  assert.deepEqual(
+    competitionPlaces(4, () => false),
+    [1, 2, 3, 4],
+  );
+});
+
+test("unresolved coin toss uses competition places 2-2-2 then 5", () => {
+  const games = [
+    confGame("D", "A", 1, 0),
+    confGame("D", "B", 1, 0),
+    confGame("D", "C", 1, 0),
+    confGame("A", "F", 1, 0),
+    confGame("B", "G", 1, 0),
+    confGame("C", "H", 1, 0),
+  ];
+  const east = project(games).east;
+  assert.equal(east.rows[0].teamId, "D");
+  assert.equal(east.rows[0].place, 1);
+  assert.deepEqual(
+    east.rows.slice(1, 4).map((row) => row.teamId),
+    ["A", "B", "C"],
+  );
+  assert.deepEqual(
+    east.rows.slice(1, 4).map((row) => row.place),
+    [2, 2, 2],
+  );
+  assert.ok(east.rows.slice(1, 4).every((row) => row.unresolved));
+  assert.equal(east.rows[4].place, 5);
 });
 
 test("ties count as half a win", () => {

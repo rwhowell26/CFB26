@@ -100,6 +100,7 @@ type ResolveResult = {
   order: string[];
   notes: Map<string, string>;
   unresolved: Set<string>;
+  tieGroups: Map<string, string>;
   explanation: TieNote[];
 };
 
@@ -122,6 +123,35 @@ export function formatPct(record: WinLoss): string {
   const pct = winningPct(record);
   if (pct == null) return "—";
   return pct.toFixed(3).replace(/^0/, "");
+}
+
+/**
+ * Competition ranking (1224): a 3-way tie for second is 2, 2, 2 and the next
+ * team is 5. `tiedWithPrevious(i)` is true when index `i` shares a place with
+ * the row above it.
+ */
+export function competitionPlaces(
+  count: number,
+  tiedWithPrevious: (index: number) => boolean,
+): number[] {
+  const places: number[] = [];
+  for (let i = 0; i < count; i++) {
+    places.push(i > 0 && tiedWithPrevious(i) ? places[i - 1]! : i + 1);
+  }
+  return places;
+}
+
+export function markTieGroup(
+  group: string[],
+  unresolved: Set<string>,
+  tieGroups: Map<string, string>,
+): string {
+  const key = [...group].sort().join("\0");
+  for (const id of group) {
+    unresolved.add(id);
+    tieGroups.set(id, key);
+  }
+  return key;
 }
 
 export function sunBeltDivisionForTeam(
@@ -483,6 +513,7 @@ function resolveGroup(
   asTwoTeam: boolean,
   notes: Map<string, string>,
   unresolved: Set<string>,
+  tieGroups: Map<string, string>,
   explanation: TieNote[],
 ): string[] {
   if (group.length <= 1) return group;
@@ -505,6 +536,7 @@ function resolveGroup(
       true,
       notes,
       unresolved,
+      tieGroups,
       explanation,
     );
   }
@@ -545,6 +577,7 @@ function resolveGroup(
             true,
             notes,
             unresolved,
+            tieGroups,
             explanation,
           ),
         );
@@ -561,6 +594,7 @@ function resolveGroup(
           false,
           notes,
           unresolved,
+          tieGroups,
           explanation,
         ),
       );
@@ -568,12 +602,14 @@ function resolveGroup(
     return ordered;
   }
   const fallback = [...group].sort((a, b) => ctx.nameFor(a).localeCompare(ctx.nameFor(b)));
-  for (const id of fallback) unresolved.add(id);
+  markTieGroup(fallback, unresolved, tieGroups);
   explanation.push({
     teams: [...group],
     text: `${two ? "Two-team" : "Multi-team"} tie (${names}) reaches a commissioner's coin toss.`,
   });
-  notes.set(fallback[0], "coin toss (alphabetical until the toss)");
+  for (const id of fallback) {
+    notes.set(id, "Unresolved commissioner's coin toss / blended computers.");
+  }
   return fallback;
 }
 
@@ -599,6 +635,7 @@ function rankDivision(
   const confGroups = groupByKey(withPct, (id) => confPctKey(conferenceRecord(id, ctx.games)));
   const notes = new Map<string, string>();
   const unresolved = new Set<string>();
+  const tieGroups = new Map<string, string>();
   const explanation: TieNote[] = [];
   const ranked: string[] = [];
 
@@ -621,12 +658,13 @@ function rankDivision(
         group.length === 2,
         notes,
         unresolved,
+        tieGroups,
         explanation,
       ),
     );
   }
 
-  return { order: ranked, notes, unresolved, explanation };
+  return { order: ranked, notes, unresolved, tieGroups, explanation };
 }
 
 function makeCtx(
@@ -663,13 +701,18 @@ function tableFor(
 ): DivisionTable {
   const teamIds = id === "east" ? ctx.roster.east : ctx.roster.west;
   const result = rankDivision(teamIds, ctx, fbsOf);
+  const places = competitionPlaces(result.order.length, (index) => {
+    const current = result.tieGroups.get(result.order[index]!);
+    const previous = result.tieGroups.get(result.order[index - 1]!);
+    return current != null && current === previous;
+  });
   const rows: RankedSunBeltRow[] = result.order.map((teamId, index) => ({
     teamId,
-    place: index + 1,
+    place: places[index] ?? index + 1,
     conf: conferenceRecord(teamId, ctx.games),
     division: divisionRecord(teamId, ctx),
     fbs: fbsOf(teamId),
-    champion: index === 0,
+    champion: (places[index] ?? index + 1) === 1,
     tieNote: result.notes.get(teamId) ?? null,
     unresolved: result.unresolved.has(teamId),
   }));
