@@ -2,16 +2,29 @@
 
 import { useMemo, useState } from "react";
 import { TeamLogo } from "@/components/TeamLogo";
+import { CcgStatusCard, CcgStatusChip } from "@/components/CcgStatusCard";
+import { conferenceForTeam } from "@/lib/scenario-conferences";
+import {
+  allConferenceContention,
+  eliminationGamesThisWeek,
+  gameImplications,
+  type CcgElimGame,
+  type CcgStatus,
+} from "@/lib/ccg-contention";
+import { emptyPlayoffRace, teamPlayoffStatus } from "@/lib/playoff-race";
 import { formatRank, gamesForSlateWeek } from "@/lib/ranking-logic";
 import { PRESEASON_WEEK, WEEK_ZERO, formatWeekLabel } from "@/lib/season";
-import type { Game, SeasonWeek } from "@/lib/types";
+import type { Game, PlayoffRaceState, PlayoffStatus, SeasonWeek, Team } from "@/lib/types";
 
 type Props = {
   games: Game[];
   weeks: SeasonWeek[];
+  teams: Team[];
   /** Calendar week from ESPN (0 = preseason) */
   seasonWeek: number;
   ranks: Map<string, number>;
+  playoffState?: PlayoffRaceState;
+  cfpRanks?: Map<string, number>;
   onSelectTeam?: (teamId: string) => void;
   selectedTeamId?: string | null;
 };
@@ -85,27 +98,41 @@ function displayName(name: string): string {
   return name.replace(/\s+University$/, "").replace(/^University of\s+/i, "");
 }
 
+function playoffClass(status: PlayoffStatus | undefined): string {
+  return status && status !== "alive" ? status : "";
+}
+
 function SlateGameRow({
   game,
   homeRank,
   awayRank,
   highlight,
+  selectedGame,
+  elimHint,
+  homeStatus,
+  awayStatus,
   onSelectTeam,
+  onSelectGame,
   selectedTeamId,
 }: {
   game: Game;
   homeRank: number | null;
   awayRank: number | null;
   highlight?: boolean;
+  selectedGame?: boolean;
+  elimHint?: string;
+  homeStatus?: PlayoffStatus;
+  awayStatus?: PlayoffStatus;
   onSelectTeam?: (teamId: string) => void;
+  onSelectGame?: (gameId: string) => void;
   selectedTeamId?: string | null;
 }) {
   return (
-    <li className={`slate-game ${highlight ? "slate-best" : ""}`}>
+    <li className={`slate-game ${highlight ? "slate-best" : ""} ${selectedGame ? "slate-open" : ""} ${elimHint ? "slate-elim" : ""}`}>
       <div className="slate-matchup">
         <button
           type="button"
-          className={`slate-team slate-away ${selectedTeamId === game.awayTeamId ? "selected" : ""}`}
+          className={`slate-team slate-away ${selectedTeamId === game.awayTeamId ? "selected" : ""} ${playoffClass(awayStatus)}`}
           onClick={() => game.awayIsFbs && onSelectTeam?.(game.awayTeamId)}
           disabled={!game.awayIsFbs}
         >
@@ -124,7 +151,7 @@ function SlateGameRow({
         <span className="slate-at">@</span>
         <button
           type="button"
-          className={`slate-team slate-home ${selectedTeamId === game.homeTeamId ? "selected" : ""}`}
+          className={`slate-team slate-home ${selectedTeamId === game.homeTeamId ? "selected" : ""} ${playoffClass(homeStatus)}`}
           onClick={() => game.homeIsFbs && onSelectTeam?.(game.homeTeamId)}
           disabled={!game.homeIsFbs}
         >
@@ -144,7 +171,15 @@ function SlateGameRow({
       <div className="slate-meta">
         {game.neutralSite ? <span className="slate-neutral">Neutral</span> : null}
         <span>{kickoffTime(game)}</span>
+        <button
+          type="button"
+          className="slate-implications-btn"
+          onClick={() => onSelectGame?.(game.id)}
+        >
+          {selectedGame ? "Hide implications" : "Implications"}
+        </button>
       </div>
+      {elimHint ? <p className="slate-elim-copy">{elimHint}</p> : null}
     </li>
   );
 }
@@ -152,8 +187,11 @@ function SlateGameRow({
 export function SlateTab({
   games,
   weeks,
+  teams,
   seasonWeek,
   ranks,
+  playoffState,
+  cfpRanks,
   onSelectTeam,
   selectedTeamId,
 }: Props) {
@@ -192,6 +230,56 @@ export function SlateTab({
 
   const weekMeta = weeks.find((w) => w.number === slateWeek);
   const label = formatWeekLabel(slateWeek, weekMeta?.label);
+  const [selectedGameId, setSelectedGameId] = useState<string | null>(null);
+  const teamsById = useMemo(() => new Map(teams.map((team) => [team.id, team])), [teams]);
+  const livePlayoff = playoffState ?? emptyPlayoffRace();
+  const contention = useMemo(
+    () => allConferenceContention(teams, games, { cfpRanks, week: slateWeek }),
+    [teams, games, cfpRanks, slateWeek],
+  );
+  const selectedTeam = selectedTeamId ? teamsById.get(selectedTeamId) : undefined;
+  const selectedConf = selectedTeam ? conferenceForTeam(selectedTeam) : null;
+  const selectedCcg =
+    selectedTeam && selectedConf
+      ? (contention.get(selectedConf.id)?.byTeam.get(selectedTeam.id) ?? null)
+      : null;
+  const elimGames = useMemo((): CcgElimGame[] => {
+    if (!selectedTeam || !selectedConf) return [];
+    return eliminationGamesThisWeek(selectedConf, selectedTeam.id, teams, games, {
+      cfpRanks,
+      week: slateWeek,
+    });
+  }, [selectedTeam, selectedConf, teams, games, cfpRanks, slateWeek]);
+  const elimByGame = useMemo(() => {
+    const map = new Map<string, string>();
+    if (!selectedTeam) return map;
+    for (const item of elimGames) {
+      const winner =
+        teamsById.get(item.eliminatesIf.winnerId)?.shortName ?? item.eliminatesIf.winnerId;
+      const prev = map.get(item.game.id);
+      map.set(
+        item.game.id,
+        prev ? `${prev}; ${winner} winning eliminates ${selectedTeam.shortName}` : `${winner} winning eliminates ${selectedTeam.shortName}`,
+      );
+    }
+    return map;
+  }, [elimGames, selectedTeam, teamsById]);
+  const selectedGame = games.find((game) => game.id === selectedGameId) ?? null;
+  const implications = useMemo(() => {
+    if (!selectedGame) return null;
+    return gameImplications(selectedGame, teams, games, { cfpRanks, week: slateWeek });
+  }, [selectedGame, teams, games, cfpRanks, slateWeek]);
+  const playoffOf = (teamId: string, isFbs: boolean): PlayoffStatus | undefined => {
+    if (!isFbs) return undefined;
+    const team = teamsById.get(teamId);
+    if (!team) return undefined;
+    return teamPlayoffStatus(livePlayoff, team);
+  };
+  const nameOf = (id: string) => teamsById.get(id)?.shortName ?? id;
+  const statusLine = (ids: string[], verb: string) => {
+    if (!ids.length) return null;
+    return `${ids.map(nameOf).join(", ")} ${verb}`;
+  };
   const preseasonNote =
     seasonWeek === PRESEASON_WEEK
       ? "Preseason ballot week — showing Week 0 games when available."
@@ -224,6 +312,60 @@ export function SlateTab({
         {preseasonNote ? <p className="movers-note">{preseasonNote}</p> : null}
       </section>
 
+      {selectedTeam && selectedCcg ? (
+        <CcgStatusCard
+          team={selectedTeam}
+          row={selectedCcg}
+          elimGames={elimGames}
+          teamsById={teamsById}
+        />
+      ) : (
+        <p className="slate-hint">Select a team to see CCG scenarios, or open Implications on a game.</p>
+      )}
+
+      {selectedGame ? (
+        <section className="panel slate-impl-card">
+          <header className="panel-header">
+            <h2>
+              {displayName(selectedGame.awayName)} @ {displayName(selectedGame.homeName)}
+            </h2>
+            <button type="button" className="ghost-btn" onClick={() => setSelectedGameId(null)}>
+              Close
+            </button>
+          </header>
+          {implications ? (
+            <ul className="slate-impl-list">
+              {implications.outcomes.map((outcome) => (
+                <li key={outcome.winnerId}>
+                  <strong>If {outcome.winnerName} wins</strong>
+                  <p>
+                    {[
+                      statusLine(outcome.newlyEliminated, "eliminated from the CCG"),
+                      statusLine(outcome.newlyOutWithLoss, "would be out with a loss"),
+                      statusLine(outcome.newlyDestiny, "would control their destiny"),
+                    ]
+                      .filter(Boolean)
+                      .join(". ") || "No CCG field changes among other teams."}
+                  </p>
+                  <p className="slate-impl-status">
+                    {nameOf(selectedGame.awayTeamId)}{" "}
+                    <CcgStatusChip
+                      status={(outcome.statusByTeam[selectedGame.awayTeamId] ?? "alive") as CcgStatus}
+                    />{" "}
+                    · {nameOf(selectedGame.homeTeamId)}{" "}
+                    <CcgStatusChip
+                      status={(outcome.statusByTeam[selectedGame.homeTeamId] ?? "alive") as CcgStatus}
+                    />
+                  </p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="slate-hint">Non-conference game — it does not change the CCG field on its own.</p>
+          )}
+        </section>
+      ) : null}
+
       <section className="panel">
         <header className="panel-header">
           <h2>Best games · {label}</h2>
@@ -240,7 +382,12 @@ export function SlateTab({
                 homeRank={row.homeRank}
                 awayRank={row.awayRank}
                 highlight={index < 3}
+                selectedGame={selectedGameId === row.game.id}
+                elimHint={elimByGame.get(row.game.id)}
+                homeStatus={playoffOf(row.game.homeTeamId, row.game.homeIsFbs)}
+                awayStatus={playoffOf(row.game.awayTeamId, row.game.awayIsFbs)}
                 onSelectTeam={onSelectTeam}
+                onSelectGame={(id) => setSelectedGameId((cur) => (cur === id ? null : id))}
                 selectedTeamId={selectedTeamId}
               />
             ))}
@@ -274,7 +421,12 @@ export function SlateTab({
                       game={row.game}
                       homeRank={row.homeRank}
                       awayRank={row.awayRank}
+                      selectedGame={selectedGameId === row.game.id}
+                      elimHint={elimByGame.get(row.game.id)}
+                      homeStatus={playoffOf(row.game.homeTeamId, row.game.homeIsFbs)}
+                      awayStatus={playoffOf(row.game.awayTeamId, row.game.awayIsFbs)}
                       onSelectTeam={onSelectTeam}
+                      onSelectGame={(id) => setSelectedGameId((cur) => (cur === id ? null : id))}
                       selectedTeamId={selectedTeamId}
                     />
                   ))}

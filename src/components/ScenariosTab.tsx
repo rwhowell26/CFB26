@@ -14,6 +14,12 @@ import {
   type ScenarioTable,
 } from "@/lib/scenario-engine";
 import { formatPct, formatWinLoss, groupGamesByWeek } from "@/lib/sunbelt";
+import { conferenceForTeam, teamsInConference } from "@/lib/scenario-conferences";
+import {
+  conferenceContention,
+  eliminationGamesThisWeek,
+} from "@/lib/ccg-contention";
+import { CcgStatusCard } from "@/components/CcgStatusCard";
 import type { Game, Team } from "@/lib/types";
 
 const CONF_KEY = `cfb26-scenario-conference-${SEASON_YEAR}`;
@@ -23,6 +29,7 @@ type Props = {
   teams: Team[];
   games: Game[];
   cfpRanks?: Map<string, number>;
+  week?: number;
   onSelectTeam?: (teamId: string) => void;
   selectedTeamId?: string | null;
 };
@@ -90,6 +97,7 @@ export function ScenariosTab({
   teams,
   games,
   cfpRanks,
+  week,
   onSelectTeam,
   selectedTeamId,
 }: Props) {
@@ -158,6 +166,32 @@ export function ScenariosTab({
     id ? (teamsById.get(id)?.shortName ?? id) : "TBD";
   const divided = Boolean(conference.divisions?.length);
   const showDiv = divided;
+  const members = useMemo(
+    () =>
+      teamsInConference(teams, conference).sort((a, b) =>
+        a.shortName.localeCompare(b.shortName),
+      ),
+    [teams, conference],
+  );
+  const contention = useMemo(
+    () => conferenceContention(conference, teams, games, { cfpRanks, week }),
+    [conference, teams, games, cfpRanks, week],
+  );
+  const selectedTeam = selectedTeamId ? teamsById.get(selectedTeamId) : undefined;
+  const selectedInConf =
+    selectedTeam && conferenceForTeam(selectedTeam)?.id === conference.id
+      ? selectedTeam
+      : undefined;
+  const selectedRow = selectedInConf
+    ? (contention.byTeam.get(selectedInConf.id) ?? null)
+    : null;
+  const elimGames = useMemo(() => {
+    if (!selectedInConf) return [];
+    return eliminationGamesThisWeek(conference, selectedInConf.id, teams, games, {
+      cfpRanks,
+      week,
+    });
+  }, [selectedInConf, conference, teams, games, cfpRanks, week]);
 
   return (
     <div className="sbc-wrap">
@@ -176,6 +210,23 @@ export function ScenariosTab({
               ))}
             </select>
           </label>
+          <label className="sbc-conf-select">
+            <span>Team scenario</span>
+            <select
+              value={selectedInConf?.id ?? ""}
+              onChange={(e) => {
+                const id = e.target.value;
+                if (id) onSelectTeam?.(id);
+              }}
+            >
+              <option value="">Select a team</option>
+              {members.map((team) => (
+                <option key={team.id} value={team.id}>
+                  {team.shortName}
+                </option>
+              ))}
+            </select>
+          </label>
           <p className="sbc-champ-line">
             <strong>CCG</strong> {nameOf(projected.championship.homeId)} vs{" "}
             {nameOf(projected.championship.awayId)}
@@ -190,6 +241,15 @@ export function ScenariosTab({
           </p>
         </header>
       </section>
+
+      {selectedInConf && selectedRow ? (
+        <CcgStatusCard
+          team={selectedInConf}
+          row={selectedRow}
+          elimGames={elimGames}
+          teamsById={teamsById}
+        />
+      ) : null}
 
       <div className={`sbc-boards${divided ? "" : " single"}`}>
         {projected.tables.map((table) => (

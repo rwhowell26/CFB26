@@ -722,8 +722,15 @@ export function RankingApp() {
         <SlateTab
           games={games}
           weeks={weeks}
+          teams={teams}
           seasonWeek={seasonWeek}
           ranks={resumeRanks}
+          playoffState={store.playoffRace ?? emptyPlayoffRace()}
+          cfpRanks={
+            cfp.published
+              ? new Map(cfp.ranks.map((row) => [row.teamId, row.rank]))
+              : undefined
+          }
           onSelectTeam={handleSelectTeam}
           selectedTeamId={selectedTeamId}
         />
@@ -753,6 +760,7 @@ export function RankingApp() {
         <ScenariosTab
           teams={teams}
           games={games}
+          week={seasonWeek}
           cfpRanks={
             cfp.published
               ? new Map(cfp.ranks.map((row) => [row.teamId, row.rank]))
