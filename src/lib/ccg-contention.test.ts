@@ -105,6 +105,45 @@ test("winning this week's game to lock a CCG berth is gold clinch", () => {
   assert.equal(result.byTeam.get("FAU")?.status, "eliminated");
 });
 
+test("winning out is not destiny if other teams can still catch them", () => {
+  const games = [
+    game("1", "NAVY", "FAU", "NAVY"),
+    game("2", "NAVY", "USF", "NAVY"),
+    game("3", "TULN", "FAU", "TULN"),
+    game("4", "TULN", "USF", "TULN"),
+    game("5", "MEM", "FAU", "MEM"),
+    game("6", "MEM", "USF", "MEM"),
+    game("7", "NAVY", "FAU", null, 8),
+    game("8", "TULN", "USF", null, 8),
+    game("9", "MEM", "FAU", null, 8),
+  ];
+  const result = conferenceContention(AAC, TEAMS, games, { week: 8 });
+  assert.equal(result.byTeam.get("NAVY")?.hasPath, true);
+  assert.equal(result.byTeam.get("NAVY")?.clinchesWinOut, false);
+  assert.equal(result.byTeam.get("NAVY")?.status, "alive");
+  assert.equal(result.byTeam.get("TULN")?.clinchesWinOut, false);
+  assert.equal(result.byTeam.get("MEM")?.clinchesWinOut, false);
+});
+
+test("a top-two chaser still has a path when current occupants can lose remaining games", () => {
+  const games = [
+    game("1", "NAVY", "FAU", "NAVY"),
+    game("2", "NAVY", "USF", "NAVY"),
+    game("3", "NAVY", "MEM", "NAVY"),
+    game("4", "TULN", "FAU", "TULN"),
+    game("5", "TULN", "USF", "TULN"),
+    game("6", "MEM", "FAU", "MEM"),
+    game("7", "MEM", "USF", "MEM"),
+    game("8", "NAVY", "TULN", null, 8),
+    game("9", "MEM", "TULN", null, 8),
+    game("10", "MEM", "FAU", null, 8),
+  ];
+  const result = conferenceContention(AAC, TEAMS, games, { week: 8 });
+  assert.equal(result.byTeam.get("MEM")?.hasPath, true);
+  assert.notEqual(result.byTeam.get("MEM")?.status, "eliminated");
+  assert.equal(result.byTeam.get("NAVY")?.clinchesWinOut, true);
+});
+
 test("winning out is destiny when this week's win is not enough to clinch", () => {
   const games = [
     game("1", "NAVY", "USF", "NAVY"),

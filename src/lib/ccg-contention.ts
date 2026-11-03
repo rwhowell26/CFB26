@@ -134,56 +134,49 @@ function placeMap(seed: ScenarioProjection): Map<string, number> {
   return place;
 }
 
-function othersKeepWinning(
-  teamId: string,
-  remaining: Game[],
-  seed: ScenarioProjection,
-): Record<string, string> {
-  const place = placeMap(seed);
-  const picks: Record<string, string> = {};
-  for (const game of remaining) {
-    if (involves(game, teamId)) continue;
-    const homePlace = place.get(game.homeTeamId) ?? 99;
-    const awayPlace = place.get(game.awayTeamId) ?? 99;
-    picks[game.id] = homePlace <= awayPlace ? game.homeTeamId : game.awayTeamId;
-  }
-  return picks;
-}
-
-/**
- * Same-table "chaos": currently worse-placed teams win remaining games.
- * Used for top-two leagues, where every conference game is inside one standings table.
- */
-function othersFall(
-  teamId: string,
-  remaining: Game[],
-  seed: ScenarioProjection,
-): Record<string, string> {
-  const place = placeMap(seed);
-  const picks: Record<string, string> = {};
-  for (const game of remaining) {
-    if (involves(game, teamId)) continue;
-    const homePlace = place.get(game.homeTeamId) ?? 99;
-    const awayPlace = place.get(game.awayTeamId) ?? 99;
-    picks[game.id] = homePlace >= awayPlace ? game.homeTeamId : game.awayTeamId;
-  }
-  return picks;
-}
-
 function tableMates(seed: ScenarioProjection, teamId: string): Set<string> {
   const table = seed.tables.find((item) => item.rows.some((row) => row.teamId === teamId));
   return new Set((table?.rows ?? []).map((row) => row.teamId));
 }
 
+function allSeedIds(seed: ScenarioProjection): Set<string> {
+  return new Set(seed.tables.flatMap((table) => table.rows.map((row) => row.teamId)));
+}
+
+/** Teams competing with `teamId` for its CCG slot: the division, or the whole league. */
+function rivalsOf(
+  conference: ScenarioConference,
+  seed: ScenarioProjection,
+  teamId: string,
+): Set<string> {
+  if (conference.championship === "division-winners") return tableMates(seed, teamId);
+  return allSeedIds(seed);
+}
+
+function ccgSpots(conference: ScenarioConference): number {
+  return conference.championship === "division-winners" ? 1 : 2;
+}
+
+function occupants(
+  conference: ScenarioConference,
+  seed: ScenarioProjection,
+  teamId: string,
+): Set<string> {
+  const rivals = rivalsOf(conference, seed, teamId);
+  const spots = ccgSpots(conference);
+  const place = placeMap(seed);
+  const out = new Set<string>();
+  for (const id of rivals) {
+    if (id !== teamId && (place.get(id) ?? 99) <= spots) out.add(id);
+  }
+  return out;
+}
+
 /**
- * Best-case remaining results for "does a path still exist?".
- *
- * Division races: same-division teams lose to the other division; intra-division
- * games stay unpicked so a trailer is not handed a table-clinching résumé
- * (the App State / Georgia St false out-with-a-loss).
- *
- * Top-two races: fall back to othersFall, because every remaining conference
- * game is inside the same table and leaders must lose for a chaser to have a path.
+ * Best-case remaining results: does *any* path to the CCG still exist?
+ * Rivals lose to teams outside the group. Inside the group, current CCG
+ * occupants lose to non-occupants; occupant-vs-occupant and trailer-vs-trailer
+ * stay unpicked so a H2H trailer is not handed a clinching résumé.
  */
 function othersHelp(
   teamId: string,
@@ -191,23 +184,163 @@ function othersHelp(
   seed: ScenarioProjection,
   conference: ScenarioConference,
 ): Record<string, string> {
-  if (conference.championship !== "division-winners") {
-    return othersFall(teamId, remaining, seed);
-  }
-  const rivals = tableMates(seed, teamId);
+  const rivals = rivalsOf(conference, seed, teamId);
+  const leaders = occupants(conference, seed, teamId);
   const picks: Record<string, string> = {};
   for (const game of remaining) {
     if (involves(game, teamId)) continue;
     const homeRival = rivals.has(game.homeTeamId);
     const awayRival = rivals.has(game.awayTeamId);
-    if (homeRival === awayRival) continue;
-    picks[game.id] = homeRival ? game.awayTeamId : game.homeTeamId;
+    if (homeRival !== awayRival) {
+      picks[game.id] = homeRival ? game.awayTeamId : game.homeTeamId;
+      continue;
+    }
+    if (!homeRival) continue;
+    const homeLead = leaders.has(game.homeTeamId);
+    const awayLead = leaders.has(game.awayTeamId);
+    if (homeLead === awayLead) continue;
+    picks[game.id] = homeLead ? game.awayTeamId : game.homeTeamId;
+  }
+  return picks;
+}
+
+/**
+ * Same-group chaos with outsiders beating rivals. A second best-case attempt
+ * so a top-two chaser still has a path when current occupants must lose to
+ * each other, without gifting cross-division wins to a H2H trailer.
+ */
+function othersChaosInGroup(
+  teamId: string,
+  remaining: Game[],
+  seed: ScenarioProjection,
+  conference: ScenarioConference,
+): Record<string, string> {
+  const rivals = rivalsOf(conference, seed, teamId);
+  const place = placeMap(seed);
+  const picks: Record<string, string> = {};
+  for (const game of remaining) {
+    if (involves(game, teamId)) continue;
+    const homeRival = rivals.has(game.homeTeamId);
+    const awayRival = rivals.has(game.awayTeamId);
+    if (homeRival !== awayRival) {
+      picks[game.id] = homeRival ? game.awayTeamId : game.homeTeamId;
+      continue;
+    }
+    if (!homeRival) continue;
+    const homePlace = place.get(game.homeTeamId) ?? 99;
+    const awayPlace = place.get(game.awayTeamId) ?? 99;
+    picks[game.id] = homePlace >= awayPlace ? game.homeTeamId : game.awayTeamId;
+  }
+  return picks;
+}
+
+type SpoilMode = "leaders" | "trailers";
+
+/**
+ * Feasible worst cases for "win out and there are 0 scenarios they miss the CCG":
+ * rivals win every game against outsiders, and inside the group either current
+ * leaders keep winning or trailers do (H2H spoiler). Destiny requires both.
+ */
+function othersSpoil(
+  teamId: string,
+  remaining: Game[],
+  seed: ScenarioProjection,
+  conference: ScenarioConference,
+  mode: SpoilMode,
+): Record<string, string> {
+  const rivals = rivalsOf(conference, seed, teamId);
+  const place = placeMap(seed);
+  const picks: Record<string, string> = {};
+  for (const game of remaining) {
+    if (involves(game, teamId)) continue;
+    const homeRival = rivals.has(game.homeTeamId);
+    const awayRival = rivals.has(game.awayTeamId);
+    if (homeRival !== awayRival) {
+      picks[game.id] = homeRival ? game.homeTeamId : game.awayTeamId;
+      continue;
+    }
+    if (!homeRival) continue;
+    const homePlace = place.get(game.homeTeamId) ?? 99;
+    const awayPlace = place.get(game.awayTeamId) ?? 99;
+    picks[game.id] =
+      mode === "leaders"
+        ? homePlace <= awayPlace
+          ? game.homeTeamId
+          : game.awayTeamId
+        : homePlace >= awayPlace
+          ? game.homeTeamId
+          : game.awayTeamId;
   }
   return picks;
 }
 
 function mergePicks(...parts: Record<string, string>[]): Record<string, string> {
   return Object.assign({}, ...parts);
+}
+
+function pathOverlays(
+  teamId: string,
+  remaining: Game[],
+  seed: ScenarioProjection,
+  conference: ScenarioConference,
+): Record<string, string>[] {
+  return [
+    othersHelp(teamId, remaining, seed, conference),
+    othersChaosInGroup(teamId, remaining, seed, conference),
+  ];
+}
+
+function spoilOverlays(
+  teamId: string,
+  remaining: Game[],
+  seed: ScenarioProjection,
+  conference: ScenarioConference,
+): Record<string, string>[] {
+  return [
+    othersSpoil(teamId, remaining, seed, conference, "leaders"),
+    othersSpoil(teamId, remaining, seed, conference, "trailers"),
+  ];
+}
+
+function existsCcgPath(
+  conference: ScenarioConference,
+  teams: Team[],
+  games: Game[],
+  teamId: string,
+  remaining: Game[],
+  seed: ScenarioProjection,
+  basePicks: Record<string, string>,
+  cfpRanks?: Map<string, number>,
+): boolean {
+  if (hasCcgPath(conference, projectWith(conference, teams, games, basePicks, cfpRanks), teamId)) {
+    return true;
+  }
+  return pathOverlays(teamId, remaining, seed, conference).some((overlay) =>
+    hasCcgPath(
+      conference,
+      projectWith(conference, teams, games, mergePicks(basePicks, overlay), cfpRanks),
+      teamId,
+    ),
+  );
+}
+
+function guaranteedCcg(
+  conference: ScenarioConference,
+  teams: Team[],
+  games: Game[],
+  teamId: string,
+  remaining: Game[],
+  seed: ScenarioProjection,
+  basePicks: Record<string, string>,
+  cfpRanks?: Map<string, number>,
+): boolean {
+  return spoilOverlays(teamId, remaining, seed, conference).every((overlay) =>
+    clinchesCcg(
+      conference,
+      projectWith(conference, teams, games, mergePicks(basePicks, overlay), cfpRanks),
+      teamId,
+    ),
+  );
 }
 
 function projectWith(
@@ -259,48 +392,52 @@ function teamRow(
   const extra = options.extraPicks ?? {};
   const nextGame = nextConferenceGame(teamId, remaining, options.week);
   const winOwn = mergePicks(winOwnRemaining(teamId, remaining), extra);
-  const helpOthers = othersHelp(teamId, remaining, seed, conference);
-  const best = projectWith(
+  const hasPath = existsCcgPath(
     conference,
     teams,
     games,
-    mergePicks(winOwn, helpOthers),
+    teamId,
+    remaining,
+    seed,
+    winOwn,
     options.cfpRanks,
   );
-  const worst = projectWith(
+  const clinchesWinOut = guaranteedCcg(
     conference,
     teams,
     games,
-    mergePicks(winOwn, othersKeepWinning(teamId, remaining, seed)),
+    teamId,
+    remaining,
+    seed,
+    winOwn,
     options.cfpRanks,
   );
   let survivesNextLoss = true;
   if (nextGame) {
-    const loseNext = mergePicks(
-      winOwn,
-      helpOthers,
-      { [nextGame.id]: opponentId(nextGame, teamId) },
-    );
-    const afterLoss = projectWith(conference, teams, games, loseNext, options.cfpRanks);
-    survivesNextLoss = hasCcgPath(conference, afterLoss, teamId);
-  }
-  const hasPath = hasCcgPath(conference, best, teamId);
-  const clinchesWinOut = clinchesCcg(conference, worst, teamId);
-  let clinchesThisWin = false;
-  if (nextGame) {
-    const afterThisWin = projectWith(
+    const loseNext = mergePicks(winOwn, { [nextGame.id]: opponentId(nextGame, teamId) });
+    survivesNextLoss = existsCcgPath(
       conference,
       teams,
       games,
-      mergePicks(
-        extra,
-        { [nextGame.id]: teamId },
-        loseOwnRemaining(teamId, remaining, nextGame.id),
-        othersKeepWinning(teamId, remaining, seed),
-      ),
+      teamId,
+      remaining,
+      seed,
+      loseNext,
       options.cfpRanks,
     );
-    clinchesThisWin = clinchesCcg(conference, afterThisWin, teamId);
+  }
+  let clinchesThisWin = false;
+  if (nextGame) {
+    clinchesThisWin = guaranteedCcg(
+      conference,
+      teams,
+      games,
+      teamId,
+      remaining,
+      seed,
+      mergePicks(extra, { [nextGame.id]: teamId }, loseOwnRemaining(teamId, remaining, nextGame.id)),
+      options.cfpRanks,
+    );
   }
   return {
     teamId,
@@ -380,19 +517,17 @@ export function weekSwingsThisWeek(
         out.push({ game, winnerId, kind: "eliminates" });
       }
       if (winnerId === teamId) {
-        const lock = projectWith(
+        const lock = guaranteedCcg(
           conference,
           teams,
           games,
-          mergePicks(
-            extra,
-            { [game.id]: teamId },
-            loseOwnRemaining(teamId, remaining, game.id),
-            othersKeepWinning(teamId, remaining, seed),
-          ),
+          teamId,
+          remaining,
+          seed,
+          mergePicks(extra, { [game.id]: teamId }, loseOwnRemaining(teamId, remaining, game.id)),
           options.cfpRanks,
         );
-        if (clinchesCcg(conference, lock, teamId)) {
+        if (lock) {
           out.push({ game, winnerId, kind: "clinches" });
         }
       }
@@ -491,7 +626,7 @@ export function contentionCopy(row: CcgTeamContention, teamName: string): string
     return `${teamName} clinches a CCG berth with a win over ${opp}.${loss}`;
   }
   if (row.status === "destiny") {
-    return `${teamName} controls their own destiny: win out and they reach the CCG regardless of other results.`;
+    return `${teamName} controls their own destiny: win out and they reach the CCG in every remaining-game scenario.`;
   }
   if (row.status === "out-loss") {
     const opp = row.nextGame
