@@ -50,6 +50,7 @@ import {
   useRankingStore,
 } from "@/lib/storage";
 import type { CfpPoll, Game, PairwiseSession, RankingStore, SeasonWeek, Team } from "@/lib/types";
+import { latestCompletedRankingWeek } from "@/lib/ranking-week";
 import { ensureSeasonWeeks } from "@/lib/weeks";
 
 type Tab =
@@ -148,17 +149,10 @@ export function RankingApp() {
         if (cancelled) return;
         setData(json);
 
-        // Open the season's current week, unless Week 6 is empty because the
-        // latest build was moved back onto Week 5.
-        const seasonWeek =
-          typeof json.currentWeek === "number" ? json.currentWeek : PRESEASON_WEEK;
+        // Rank/Build open the latest week whose Sunday has arrived (Chicago).
+        // Slate still uses ESPN's calendar week so upcoming games stay visible.
+        const openWeek = latestCompletedRankingWeek(json.weeks, json.games);
         const latest = hydrateStoreFromLocalStorage();
-        const currentCount = getDraftOrder(latest, seasonWeek).length;
-        const week5Count = getDraftOrder(latest, 5).length;
-        const openWeek =
-          seasonWeek === 6 && currentCount === 0 && week5Count >= FBS_TEAM_COUNT
-            ? 5
-            : seasonWeek;
         let nextStore = latest.activeWeek === openWeek ? latest : { ...latest, activeWeek: openWeek };
         if (getDraftOrder(nextStore, openWeek).length === 0) {
           nextStore = applyFormulaSeed(nextStore, openWeek, json.teams, json.games);
@@ -182,7 +176,7 @@ export function RankingApp() {
           nextStore = { ...nextStore, playoffRace };
         }
         setWeek(openWeek);
-        if (openWeek === 5 && week5Count >= FBS_TEAM_COUNT) setTab("rank");
+        if (getDraftOrder(nextStore, openWeek).length >= FBS_TEAM_COUNT) setTab("rank");
         if (nextStore !== latest) setStore(nextStore);
       } catch (err) {
         if (!cancelled) {
