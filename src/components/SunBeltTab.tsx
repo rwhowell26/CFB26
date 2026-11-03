@@ -7,7 +7,6 @@ import {
   formatWinLoss,
   groupGamesByWeek,
   projectSunBelt,
-  winningPct,
   type DivisionTable,
   type RankedSunBeltRow,
 } from "@/lib/sunbelt";
@@ -47,6 +46,11 @@ function gameWinnerId(game: Game): string | null {
   return game.homeScore > game.awayScore ? game.homeTeamId : game.awayTeamId;
 }
 
+function shortLabel(team: Team | undefined, fallback: string): string {
+  if (!team) return fallback.replace(/\s+University$/, "").replace(/^University of\s+/i, "");
+  return team.abbreviation || team.shortName;
+}
+
 export function SunBeltTab({ teams, games, onSelectTeam, selectedTeamId }: Props) {
   const [picks, setPicks] = useState<Record<string, string>>({});
   const [picksReady, setPicksReady] = useState(false);
@@ -68,18 +72,6 @@ export function SunBeltTab({ teams, games, onSelectTeam, selectedTeamId }: Props
     () => projectSunBelt(teams, games, { picks }),
     [teams, games, picks],
   );
-
-  const currentRows = useMemo(() => {
-    return [...current.east.rows, ...current.west.rows].sort((a, b) => {
-      const ap = winningPct(a.conf) ?? -1;
-      const bp = winningPct(b.conf) ?? -1;
-      if (ap !== bp) return bp - ap;
-      if (a.conf.wins !== b.conf.wins) return b.conf.wins - a.conf.wins;
-      return (teamsById.get(a.teamId)?.shortName ?? a.teamId).localeCompare(
-        teamsById.get(b.teamId)?.shortName ?? b.teamId,
-      );
-    });
-  }, [current, teamsById]);
 
   const remainingWeeks = useMemo(
     () => groupGamesByWeek(projected.remainingConference),
@@ -104,127 +96,103 @@ export function SunBeltTab({ teams, games, onSelectTeam, selectedTeamId }: Props
 
   return (
     <div className="sbc-wrap">
-      <section className="panel">
-        <header className="panel-header">
-          <h2>{SEASON_YEAR} Sun Belt standings</h2>
-          <p>
-            Pick remaining conference winners. Division titles use the official Sun Belt
-            formula: conference winning percentage, then two-team or multi-team tiebreakers
-            (head-to-head / games among the tied teams, division percentage, records down
-            the standings, common cross-division opponents, CFP final-weekend result if
-            published, overall FBS percentage, then a coin toss). Computer composites are
-            skipped until those rankings are available.
+      <section className="panel sbc-top">
+        <header className="panel-header sbc-top-header">
+          <h2>{SEASON_YEAR} Sun Belt</h2>
+          <p className="sbc-champ-line">
+            <strong>CCG</strong> {nameOf(projected.championship.eastId)} vs{" "}
+            {nameOf(projected.championship.westId)}
+            <span> · {projected.championship.hostNote}</span>
+            <span>
+              {" "}
+              ·{" "}
+              {projected.unpickedCount > 0
+                ? `${projected.unpickedCount} unpicked`
+                : "all remaining games picked"}
+            </span>
           </p>
         </header>
-        <div className="sbc-champ-banner">
-          <div>
-            <strong>Championship</strong>
-            <span>
-              {nameOf(projected.championship.eastId)} vs {nameOf(projected.championship.westId)}
-            </span>
-          </div>
-          <p>{projected.championship.hostNote}</p>
-          {projected.unpickedCount > 0 ? (
-            <p className="sbc-pending">
-              {projected.unpickedCount} remaining conference game
-              {projected.unpickedCount === 1 ? "" : "s"} unpicked — standings include
-              completed games plus your picks.
-            </p>
-          ) : (
-            <p className="sbc-pending">All remaining conference games have a projected winner.</p>
-          )}
-        </div>
       </section>
 
-      <div className="sbc-standings-grid">
+      <div className="sbc-boards">
         <DivisionCard
+          title="Projected East"
           table={projected.east}
           teamsById={teamsById}
           selectedTeamId={selectedTeamId}
           onSelectTeam={onSelectTeam}
         />
         <DivisionCard
+          title="Projected West"
           table={projected.west}
           teamsById={teamsById}
           selectedTeamId={selectedTeamId}
           onSelectTeam={onSelectTeam}
         />
+        <DivisionCard
+          title="Current East"
+          table={current.east}
+          teamsById={teamsById}
+          selectedTeamId={selectedTeamId}
+          onSelectTeam={onSelectTeam}
+          compact
+        />
+        <DivisionCard
+          title="Current West"
+          table={current.west}
+          teamsById={teamsById}
+          selectedTeamId={selectedTeamId}
+          onSelectTeam={onSelectTeam}
+          compact
+        />
       </div>
 
-      <section className="panel">
-        <header className="panel-header">
-          <h2>Current conference records</h2>
-          <p>Completed Sun Belt games only, before remaining-game picks.</p>
-        </header>
-        <ul className="sbc-current">
-          {currentRows.map((row) => {
-            const team = teamsById.get(row.teamId);
-            return (
-              <li key={row.teamId}>
-                <button
-                  type="button"
-                  className={selectedTeamId === row.teamId ? "selected" : ""}
-                  onClick={() => onSelectTeam?.(row.teamId)}
-                >
-                  {team?.logo ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={team.logo} alt="" className="team-logo" />
-                  ) : null}
-                  <strong>{team?.shortName ?? row.teamId}</strong>
-                  <em>{formatWinLoss(row.conf)}</em>
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      </section>
-
-      <section className="panel">
-        <header className="panel-header">
+      <section className="panel sbc-slate-panel">
+        <header className="panel-header sbc-slate-header">
           <h2>Remaining conference games</h2>
-          <p>Home team listed first. Click a team to project the winner; click again to clear.</p>
+          <div className="sbc-game-toolbar">
+            <label>
+              <input
+                type="checkbox"
+                checked={hideCompleted}
+                onChange={(e) => setHideCompleted(e.target.checked)}
+              />
+              Hide completed
+            </label>
+            <button
+              type="button"
+              className="ghost-btn"
+              onClick={() => setPicks({})}
+              disabled={Object.keys(picks).length === 0}
+            >
+              Clear picks
+            </button>
+          </div>
         </header>
-        <div className="sbc-game-toolbar">
-          <label>
-            <input
-              type="checkbox"
-              checked={hideCompleted}
-              onChange={(e) => setHideCompleted(e.target.checked)}
-            />
-            Hide completed games
-          </label>
-          <button
-            type="button"
-            className="ghost-btn"
-            onClick={() => setPicks({})}
-            disabled={Object.keys(picks).length === 0}
-          >
-            Clear picks
-          </button>
-        </div>
         {remainingWeeks.length === 0 ? (
           <p className="sbc-empty">No remaining Sun Belt conference games on the ESPN slate.</p>
         ) : (
-          remainingWeeks.map((week) => (
-            <div key={week.week} className="sbc-week">
-              <h3>{week.label}</h3>
-              <ul className="sbc-games">
-                {week.games.map((game) => (
-                  <ConferenceGameRow
-                    key={game.id}
-                    game={game}
-                    pick={picks[game.id] ?? null}
-                    teamsById={teamsById}
-                    onPick={(winnerId) => setPick(game.id, winnerId)}
-                  />
-                ))}
-              </ul>
-            </div>
-          ))
+          <div className="sbc-slate">
+            {remainingWeeks.map((week) => (
+              <div key={week.week} className="sbc-week">
+                <h3>{week.label}</h3>
+                <ul className="sbc-games">
+                  {week.games.map((game) => (
+                    <ConferenceGameRow
+                      key={game.id}
+                      game={game}
+                      pick={picks[game.id] ?? null}
+                      teamsById={teamsById}
+                      onPick={(winnerId) => setPick(game.id, winnerId)}
+                    />
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         )}
         {!hideCompleted && completedWeeks.length > 0 ? (
-          <>
-            <h3 className="sbc-completed-heading">Completed games</h3>
+          <div className="sbc-slate sbc-completed-slate">
             {completedWeeks.map((week) => (
               <div key={`done-${week.week}`} className="sbc-week">
                 <h3>{week.label}</h3>
@@ -241,7 +209,7 @@ export function SunBeltTab({ teams, games, onSelectTeam, selectedTeamId }: Props
                 </ul>
               </div>
             ))}
-          </>
+          </div>
         ) : null}
       </section>
     </div>
@@ -249,21 +217,24 @@ export function SunBeltTab({ teams, games, onSelectTeam, selectedTeamId }: Props
 }
 
 function DivisionCard({
+  title,
   table,
   teamsById,
   selectedTeamId,
   onSelectTeam,
+  compact = false,
 }: {
+  title: string;
   table: DivisionTable;
   teamsById: Map<string, Team>;
   selectedTeamId?: string | null;
   onSelectTeam?: (teamId: string) => void;
+  compact?: boolean;
 }) {
   return (
-    <section className="panel sbc-division">
+    <section className={`panel sbc-division${compact ? " compact" : ""}`}>
       <header className="panel-header">
-        <h2>{table.label}</h2>
-        <p>{table.champExplanation}</p>
+        <h2 title={table.champExplanation}>{title}</h2>
       </header>
       <div className="sbc-table-wrap">
         <table className="sbc-table">
@@ -272,8 +243,12 @@ function DivisionCard({
               <th scope="col">#</th>
               <th scope="col">Team</th>
               <th scope="col">Conf</th>
-              <th scope="col">Div</th>
-              <th scope="col">FBS</th>
+              {compact ? null : (
+                <>
+                  <th scope="col">Div</th>
+                  <th scope="col">FBS</th>
+                </>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -284,6 +259,7 @@ function DivisionCard({
                 team={teamsById.get(row.teamId)}
                 selected={selectedTeamId === row.teamId}
                 onSelectTeam={onSelectTeam}
+                compact={compact}
               />
             ))}
           </tbody>
@@ -298,33 +274,41 @@ function StandingsRow({
   team,
   selected,
   onSelectTeam,
+  compact,
 }: {
   row: RankedSunBeltRow;
   team: Team | undefined;
   selected: boolean;
   onSelectTeam?: (teamId: string) => void;
+  compact: boolean;
 }) {
+  const name = compact
+    ? shortLabel(team, row.teamId)
+    : (team?.shortName ?? row.teamId);
   return (
-    <tr className={`${row.champion ? "champ" : ""} ${selected ? "selected" : ""} ${row.unresolved ? "unresolved" : ""}`}>
+    <tr className={`${row.champion ? "champ" : ""} ${selected ? "selected" : ""}`}>
       <td>{row.place}</td>
       <td>
-        <button type="button" className="sbc-team-btn" onClick={() => onSelectTeam?.(row.teamId)}>
+        <button
+          type="button"
+          className="sbc-team-btn"
+          title={row.tieNote ?? team?.name}
+          onClick={() => onSelectTeam?.(row.teamId)}
+        >
           {team?.logo ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={team.logo} alt="" className="team-logo" />
           ) : null}
-          <span>
-            <strong>{team?.shortName ?? row.teamId}</strong>
-            {row.tieNote ? <em title={row.tieNote}>{row.tieNote}</em> : null}
-          </span>
+          <strong>{name}</strong>
         </button>
       </td>
-      <td>
-        {formatWinLoss(row.conf)}
-        <small>{formatPct(row.conf)}</small>
-      </td>
-      <td>{formatWinLoss(row.division)}</td>
-      <td>{formatWinLoss(row.fbs)}</td>
+      <td title={formatPct(row.conf)}>{formatWinLoss(row.conf)}</td>
+      {compact ? null : (
+        <>
+          <td>{formatWinLoss(row.division)}</td>
+          <td>{formatWinLoss(row.fbs)}</td>
+        </>
+      )}
     </tr>
   );
 }
@@ -391,13 +375,14 @@ function SidePick({
       type="button"
       className={`sbc-side ${selected ? "winner" : ""}`}
       disabled={locked}
+      title={team?.shortName ?? fallbackName}
       onClick={() => onPick?.(teamId)}
     >
       {team?.logo ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={team.logo} alt="" className="team-logo" />
       ) : null}
-      <strong>{team?.shortName ?? fallbackName.replace(/\s+University$/, "")}</strong>
+      <strong>{shortLabel(team, fallbackName)}</strong>
       {score != null ? <span className="sbc-score">{score}</span> : null}
     </button>
   );

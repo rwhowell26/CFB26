@@ -505,7 +505,7 @@ export function RankingApp() {
   }
 
   return (
-    <div className="app-shell">
+    <div className={`app-shell${tab === "sunbelt" ? " sunbelt-mode" : ""}`}>
       <header className="topbar">
         <div className="brand-block">
           <p className="brand">CFB{String(SEASON_YEAR).slice(2)}</p>
