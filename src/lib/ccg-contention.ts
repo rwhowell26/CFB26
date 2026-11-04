@@ -441,7 +441,8 @@ export function scenarioProofPicks(
   const winOwn = winOwnRemaining(teamId, remaining);
   const spoilers = spoilOverlays(teamId, remaining, seed, conference);
   const helpers = [{}, ...pathOverlays(teamId, remaining, seed, conference)];
-  const prefer: "best" | "worst" = row.status === "eliminated" ? "best" : "worst";
+  const prefer: "best" | "worst" =
+    row.status === "eliminated" || row.status === "alive" ? "best" : "worst";
   let own: Record<string, string> = winOwn;
   if (row.status === "clinch" && nextGame) {
     own = mergePicks({ [nextGame.id]: teamId }, loseOwnRemaining(teamId, remaining, nextGame.id));
@@ -731,13 +732,13 @@ export function gameImplications(
 
 export function proofPicksCopy(status: CcgStatus, teamName: string): string {
   if (status === "clinch") {
-    return `Proof: ${teamName} wins this week, loses the rest, and every other remaining game is a worst case.`;
+    return `Proof: ${teamName} wins this week, then loses out.`;
   }
   if (status === "destiny") {
     return `Proof: ${teamName} wins out; every other remaining game is a worst case. A computer, CFP, or undetermined tie still counts as controlling their own destiny.`;
   }
   if (status === "alive") {
-    return `Proof: ${teamName} loses next, then wins out; every other remaining game is a worst case.`;
+    return `Proof: ${teamName} loses next, then wins out; every other remaining game is a best case. They still make the CCG.`;
   }
   if (status === "out-loss") {
     return `Proof: ${teamName} loses next, then wins out; every other remaining game is a worst case. They miss the CCG.`;
