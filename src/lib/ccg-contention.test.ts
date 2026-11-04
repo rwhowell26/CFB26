@@ -287,7 +287,7 @@ test("proof picks lose next then spoil others for out-with-a-loss", () => {
   assert.notEqual(projected.championship.awayId, "MEM");
 });
 
-test("proof picks lose next then help others so an alive team still makes the CCG", () => {
+test("proof picks lose next then help others so an alive team still finishes first", () => {
   const next = sbc("next", APP, GSU, null, 10);
   const appGames = [
     sbc("a1", APP, COASTAL, APP),
@@ -327,6 +327,7 @@ test("proof picks lose next then help others so an alive team still makes the CC
   const east = projected.tables.find((table) => table.id === "east");
   const appRow = east?.rows.find((row) => row.teamId === APP);
   assert.equal(appRow?.place, 1);
+  assert.equal(east?.rows.filter((row) => row.place === 1).length, 1);
   assert.ok(
     projected.championship.homeId === APP || projected.championship.awayId === APP,
   );

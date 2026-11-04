@@ -373,6 +373,21 @@ function pathScore(
   return (inCcg ? 0 : 100) + place;
 }
 
+/** Lower is better for the selected team: unique 1st, then tied 1st, then CCG, then out. */
+function placeProofScore(
+  conference: ScenarioConference,
+  projection: ScenarioProjection,
+  teamId: string,
+): number {
+  const row = rowsFor(projection, teamId)[0];
+  const place = row?.place ?? 99;
+  const table = projection.tables.find((item) => item.rows.some((entry) => entry.teamId === teamId));
+  const tied = table?.rows.filter((entry) => entry.place === place).length ?? 99;
+  if (!hasCcgPath(conference, projection, teamId)) return 1000 + place;
+  if (place > 1) return 100 + place;
+  return tied > 1 ? tied : 0;
+}
+
 function chooseOverlay(
   conference: ScenarioConference,
   teams: Team[],
@@ -402,6 +417,58 @@ function chooseOverlay(
   return chosen;
 }
 
+function currentWins(seed: ScenarioProjection): Map<string, number> {
+  const wins = new Map<string, number>();
+  for (const table of seed.tables) {
+    for (const row of table.rows) wins.set(row.teamId, row.conf.wins);
+  }
+  return wins;
+}
+
+/**
+ * Best-case others for finishing first: dump leftover wins onto teams that
+ * still cannot catch the selected team's lose-next-then-win-out total.
+ */
+function othersDump(
+  teamId: string,
+  remaining: Game[],
+  seed: ScenarioProjection,
+  ownPicks: Record<string, string>,
+): Record<string, string> {
+  const wins = currentWins(seed);
+  for (const game of remaining) {
+    const winner = ownPicks[game.id];
+    if (!winner) continue;
+    wins.set(winner, (wins.get(winner) ?? 0) + 1);
+  }
+  const selectedFinal = wins.get(teamId) ?? 0;
+  const picks: Record<string, string> = {};
+  const others = remaining
+    .filter((game) => !involves(game, teamId))
+    .sort((a, b) => {
+      const aMax = Math.max(wins.get(a.homeTeamId) ?? 0, wins.get(a.awayTeamId) ?? 0);
+      const bMax = Math.max(wins.get(b.homeTeamId) ?? 0, wins.get(b.awayTeamId) ?? 0);
+      return bMax - aMax || a.id.localeCompare(b.id);
+    });
+  for (const game of others) {
+    const homeW = wins.get(game.homeTeamId) ?? 0;
+    const awayW = wins.get(game.awayTeamId) ?? 0;
+    const homeSafe = homeW + 1 <= selectedFinal;
+    const awaySafe = awayW + 1 <= selectedFinal;
+    let winner: string;
+    if (homeSafe !== awaySafe) {
+      winner = homeSafe ? game.homeTeamId : game.awayTeamId;
+    } else if (homeSafe) {
+      winner = homeW <= awayW ? game.homeTeamId : game.awayTeamId;
+    } else {
+      winner = homeW >= awayW ? game.homeTeamId : game.awayTeamId;
+    }
+    picks[game.id] = winner;
+    wins.set(winner, (wins.get(winner) ?? 0) + 1);
+  }
+  return picks;
+}
+
 function fillUnpicked(
   remaining: Game[],
   picks: Record<string, string>,
@@ -424,6 +491,46 @@ function fillUnpicked(
           : game.awayTeamId;
   }
   return next;
+}
+
+function greedyImprovePicks(
+  conference: ScenarioConference,
+  teams: Team[],
+  games: Game[],
+  teamId: string,
+  remaining: Game[],
+  picks: Record<string, string>,
+  cfpRanks: Map<string, number> | undefined,
+  prefer: "best" | "worst",
+): Record<string, string> {
+  const locked = new Set(
+    remaining.filter((game) => involves(game, teamId)).map((game) => game.id),
+  );
+  let current = { ...picks };
+  const scoreOf = (next: Record<string, string>) =>
+    placeProofScore(conference, projectWith(conference, teams, games, next, cfpRanks), teamId);
+  let currentScore = scoreOf(current);
+  const better = (left: number, right: number) =>
+    prefer === "best" ? left < right : left > right;
+  for (let pass = 0; pass < 2; pass++) {
+    if (prefer === "best" && currentScore === 0) break;
+    for (const game of remaining) {
+      if (locked.has(game.id)) continue;
+      const home = mergePicks(current, { [game.id]: game.homeTeamId });
+      const away = mergePicks(current, { [game.id]: game.awayTeamId });
+      const homeScore = scoreOf(home);
+      const awayScore = scoreOf(away);
+      const useHome = better(homeScore, awayScore) || (homeScore === awayScore && current[game.id] === game.homeTeamId);
+      const chosen = useHome ? home : away;
+      const chosenScore = useHome ? homeScore : awayScore;
+      if (chosen !== current) {
+        current = chosen;
+        currentScore = chosenScore;
+        if (prefer === "best" && currentScore === 0) return current;
+      }
+    }
+  }
+  return current;
 }
 
 export function scenarioProofPicks(
@@ -450,17 +557,46 @@ export function scenarioProofPicks(
     own = mergePicks(winOwn, { [nextGame.id]: opponentId(nextGame, teamId) });
   }
   const base = mergePicks(extra, own);
-  const overlay = chooseOverlay(
-    conference,
-    teams,
-    games,
-    teamId,
-    base,
-    prefer === "best" ? helpers : spoilers,
-    prefer,
-    options.cfpRanks,
-  );
-  return fillUnpicked(remaining, mergePicks(base, overlay), seed, prefer);
+  if (prefer !== "best") {
+    const overlay = chooseOverlay(
+      conference,
+      teams,
+      games,
+      teamId,
+      base,
+      spoilers,
+      prefer,
+      options.cfpRanks,
+    );
+    return fillUnpicked(remaining, mergePicks(base, overlay), seed, prefer);
+  }
+  const dump = othersDump(teamId, remaining, seed, base);
+  const starts = [dump, ...helpers];
+  let best: Record<string, string> | null = null;
+  let bestScore = Infinity;
+  for (const start of starts) {
+    const candidate = greedyImprovePicks(
+      conference,
+      teams,
+      games,
+      teamId,
+      remaining,
+      fillUnpicked(remaining, mergePicks(base, start), seed, prefer),
+      options.cfpRanks,
+      prefer,
+    );
+    const score = placeProofScore(
+      conference,
+      projectWith(conference, teams, games, candidate, options.cfpRanks),
+      teamId,
+    );
+    if (score < bestScore) {
+      best = candidate;
+      bestScore = score;
+      if (bestScore === 0) break;
+    }
+  }
+  return best ?? fillUnpicked(remaining, mergePicks(base, dump), seed, prefer);
 }
 
 function projectWith(
@@ -738,7 +874,7 @@ export function proofPicksCopy(status: CcgStatus, teamName: string): string {
     return `Proof: ${teamName} wins out; every other remaining game is a worst case. A computer, CFP, or undetermined tie still counts as controlling their own destiny.`;
   }
   if (status === "alive") {
-    return `Proof: ${teamName} loses next, then wins out; every other remaining game is a best case. They still make the CCG.`;
+    return `Proof: ${teamName} loses next, then wins out; every other remaining game is a best case. They still finish first.`;
   }
   if (status === "out-loss") {
     return `Proof: ${teamName} loses next, then wins out; every other remaining game is a worst case. They miss the CCG.`;
