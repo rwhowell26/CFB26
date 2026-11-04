@@ -267,7 +267,7 @@ test("proof picks win out and spoil others for destiny", () => {
   );
 });
 
-test("proof picks lose next then win out for alive and out-with-a-loss", () => {
+test("proof picks lose next then spoil others for out-with-a-loss", () => {
   const games = [
     game("1", "NAVY", "USF", "NAVY"),
     game("2", "NAVY", "FAU", "NAVY"),
@@ -285,7 +285,9 @@ test("proof picks lose next then win out for alive and out-with-a-loss", () => {
   const projected = projectConference(AAC, TEAMS, games, { picks });
   assert.notEqual(projected.championship.homeId, "MEM");
   assert.notEqual(projected.championship.awayId, "MEM");
+});
 
+test("proof picks lose next then help others so an alive team still makes the CCG", () => {
   const next = sbc("next", APP, GSU, null, 10);
   const appGames = [
     sbc("a1", APP, COASTAL, APP),
@@ -321,6 +323,13 @@ test("proof picks lose next then win out for alive and out-with-a-loss", () => {
   assert.equal(appPicks["ar1"], APP);
   assert.equal(appPicks["ar2"], APP);
   assert.equal(appPicks["ar3"], APP);
+  const projected = projectConference(SBC, SBC_TEAMS, appGames, { picks: appPicks });
+  const east = projected.tables.find((table) => table.id === "east");
+  const appRow = east?.rows.find((row) => row.teamId === APP);
+  assert.equal(appRow?.place, 1);
+  assert.ok(
+    projected.championship.homeId === APP || projected.championship.awayId === APP,
+  );
 });
 
 test("proof picks win out with help for an eliminated team still missing the CCG", () => {
