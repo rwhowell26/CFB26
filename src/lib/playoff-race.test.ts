@@ -1,11 +1,14 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
+  applyConferenceGame,
   atLargePoolTeams,
   autoBidTeams,
   conferenceChampions,
   emptyPlayoffRace,
   eliminateFromAtLarge,
+  pendingAtLargeGames,
+  playoffContentionCounts,
   playoffTables,
 } from "./playoff-race.ts";
 import type { CfpPoll, Game, PlayoffRaceState, Team } from "./types.ts";
@@ -142,6 +145,68 @@ test("at-large has no seven-team cap", () => {
   const ranks = extras.map((row, index) => [row.id, index + 1] as [string, number]);
   const pool = atLargePoolTeams(extras, state({ status }), cfp(ranks), games);
   assert.equal(pool.length, 8);
+});
+
+test("CCG loser with more than 3 overall losses goes to conference elim", () => {
+  const games = [
+    game("acc-ccg", "MIA", "CLEM", "MIA", { championshipGame: true }),
+    game("clem-1", "CLEM", "GT", "GT"),
+    game("clem-2", "CLEM", "FSU", "FSU"),
+    game("clem-3", "CLEM", "UGA", "UGA"),
+  ];
+  const live = state({ status: { MIA: "destiny", CLEM: "destiny" } });
+  const pool = atLargePoolTeams(TEAMS, live, cfp([]), games);
+  assert.ok(!pool.some((row) => row.id === "CLEM"));
+  const acc = playoffTables(TEAMS, live, cfp([]), games).find((table) => table.label === "ACC")!;
+  assert.ok(acc.eliminated.some((row) => row.id === "CLEM"));
+  const counts = playoffContentionCounts(TEAMS, live, games, cfp([]));
+  assert.equal(counts.autoBid, 1);
+  assert.ok(counts.eliminated >= 1);
+});
+
+test("CCG loser with 3 or fewer overall losses moves to at-large", () => {
+  const games = [
+    game("acc-ccg", "MIA", "CLEM", "MIA", { championshipGame: true }),
+    game("clem-1", "CLEM", "GT", "CLEM"),
+    game("clem-2", "CLEM", "FSU", "FSU"),
+  ];
+  const pool = atLargePoolTeams(
+    TEAMS,
+    state({ status: { MIA: "destiny", CLEM: "destiny" } }),
+    cfp([["CLEM", 10]]),
+    games,
+  );
+  assert.deepEqual(
+    pool.filter((row) => row.id === "CLEM" || row.id === "MIA").map((row) => row.id),
+    ["CLEM"],
+  );
+});
+
+test("judgement eliminate removes a CCG winner from auto bid into conference elim", () => {
+  const games = [game("acc-ccg", "MIA", "CLEM", "MIA", { championshipGame: true })];
+  const live = eliminateFromAtLarge(state(), "MIA", games);
+  assert.equal(autoBidTeams(TEAMS, games, cfp([["MIA", 1]]), live).length, 0);
+  const acc = playoffTables(TEAMS, live, cfp([]), games).find((table) => table.label === "ACC")!;
+  assert.ok(acc.eliminated.some((row) => row.id === "MIA"));
+});
+
+test("at-large queue lists unapplied post-seed games and apply bumps Notre Dame", () => {
+  const games = [
+    game("nd-1", "ND", "GT", "GT", {
+      conferenceGame: false,
+      date: "2026-11-01T20:00:00.000Z",
+    }),
+  ];
+  const live = state();
+  const pool = atLargePoolTeams(TEAMS, live, cfp([]), games);
+  const pending = pendingAtLargeGames(
+    games,
+    live,
+    new Set(pool.map((row) => row.id)),
+  );
+  assert.equal(pending[0]?.id, "nd-1");
+  const next = applyConferenceGame(live, games[0]!, "ND");
+  assert.equal(next.notreDameRecord.losses, 2);
 });
 
 test("judgement eliminate drops a team from at-large", () => {

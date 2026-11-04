@@ -7,6 +7,7 @@ import {
   adjustConferenceRecord,
   applyConferenceGame,
   atLargePoolTeams,
+  AT_LARGE_IN_COUNT,
   AUTO_BID_IN_COUNT,
   AUTO_BID_OUT_COUNT,
   autoBidTeams,
@@ -21,6 +22,7 @@ import {
   independentEliminated,
   isNotreDame,
   overallPlayoffRecord,
+  pendingAtLargeGames,
   pendingConferenceGames,
   pendingGamesForConference,
   playoffContentionCounts,
@@ -28,7 +30,6 @@ import {
   PLAYOFF_STATUS_LABEL,
   restoreToAtLarge,
   setEliminatedOn,
-  setNotreDameRecord,
   teamPlayoffStatus,
   undoLastAppliedGame,
 } from "@/lib/playoff-race";
@@ -60,13 +61,22 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
     [teams, live, cfp, games],
   );
   const autoBids = useMemo(
-    () => autoBidTeams(teams, games, cfp),
-    [cfp, games, teams],
+    () => autoBidTeams(teams, games, cfp, live),
+    [cfp, games, live, teams],
   );
   const atLargePool = useMemo(
     () => atLargePoolTeams(teams, live, cfp, games),
     [teams, live, cfp, games],
   );
+  const atLargeIds = useMemo(
+    () => new Set(atLargePool.map((team) => team.id)),
+    [atLargePool],
+  );
+  const atLargePending = useMemo(
+    () => pendingAtLargeGames(games, live, atLargeIds),
+    [games, live, atLargeIds],
+  );
+  const ndId = useMemo(() => teams.find((team) => isNotreDame(team))?.id, [teams]);
   const independents = useMemo(
     () => independentEliminated(teams, live, games),
     [teams, live, games],
@@ -88,7 +98,7 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
             type="button"
             className="ghost-btn"
             disabled={!live.appliedGameIds.length}
-            onClick={() => patch(undoLastAppliedGame(live, games))}
+            onClick={() => patch(undoLastAppliedGame(live, games, ndId))}
           >
             Undo last apply
           </button>
@@ -115,9 +125,9 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
           ))}
         </ul>
         <p className="playoff-cfp-note">
-          Auto Bid fills when a team wins its CCG. At-Large is anyone out of the CCG race
-          with 3 or fewer overall losses — including Notre Dame. Eliminate anyone you
-          judge out of the field.
+          Auto Bid fills when a team wins its CCG — gold 1–5, red 6–10. At-Large is
+          anyone out of the CCG race with 3 or fewer overall losses; the top 7 are gold.
+          Eliminate sends a team to their conference knockout list.
         </p>
       </section>
 
@@ -148,6 +158,13 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
                         {rec.wins}-{rec.losses} · {playoffTableLabel(team.conference)}
                       </em>
                     </div>
+                    <button
+                      type="button"
+                      className="ghost-btn"
+                      onClick={() => patch(eliminateFromAtLarge(live, team.id, games))}
+                    >
+                      Eliminate
+                    </button>
                   </li>
                 );
               })}
@@ -162,13 +179,24 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
             <h3>At-Large</h3>
             <span>out of CCG · ≤3 losses</span>
           </header>
+          {atLargePending[0] ? (
+            <NextConferenceGame
+              game={atLargePending[0]}
+              remaining={atLargePending.length}
+              teamsById={teamsById}
+              onApply={() => patch(applyConferenceGame(live, atLargePending[0]!, ndId))}
+            />
+          ) : null}
           {atLargePool.length ? (
             <ol className="playoff-pool">
               {atLargePool.map((team, index) => {
                 const nd = isNotreDame(team);
                 const rec = overallPlayoffRecord(team, live, games);
                 return (
-                  <li key={team.id}>
+                  <li
+                    key={team.id}
+                    className={index < AT_LARGE_IN_COUNT ? "bid-in" : undefined}
+                  >
                     <span className="playoff-slot">{index + 1}</span>
                     <TeamLogo team={team} />
                     <div>
@@ -179,34 +207,6 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
                         {nd ? "" : ` · ${shortConferenceName(team.conference)}`}
                       </em>
                     </div>
-                    {nd ? (
-                      <span className="playoff-stepper">
-                        <button
-                          type="button"
-                          onClick={() => patch(setNotreDameRecord(live, "wins", 1))}
-                        >
-                          W+
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => patch(setNotreDameRecord(live, "wins", -1))}
-                        >
-                          W−
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => patch(setNotreDameRecord(live, "losses", 1))}
-                        >
-                          L+
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => patch(setNotreDameRecord(live, "losses", -1))}
-                        >
-                          L−
-                        </button>
-                      </span>
-                    ) : null}
                     <button
                       type="button"
                       className="ghost-btn"
@@ -245,7 +245,7 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
                   game={nextGame}
                   remaining={conferencePending.length}
                   teamsById={teamsById}
-                  onApply={() => patch(applyConferenceGame(live, nextGame))}
+                  onApply={() => patch(applyConferenceGame(live, nextGame, ndId))}
                 />
               ) : null}
               <ol>
@@ -275,6 +275,7 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
                         state={live}
                         games={games}
                         cfpRank={ranks.get(team.id)}
+                        asEliminated
                         onCycle={() => patch(cycleTeamStatus(live, team, games))}
                         onAdjust={(field, delta) =>
                           patch(adjustConferenceRecord(live, team.id, field, delta))
@@ -373,6 +374,7 @@ function TeamRow({
   onAdjust,
   onDateChange,
   onRestore,
+  asEliminated = false,
 }: {
   team: Team;
   state: PlayoffRaceState;
@@ -382,9 +384,10 @@ function TeamRow({
   onAdjust: (field: "wins" | "losses", delta: number) => void;
   onDateChange: (date: string) => void;
   onRestore?: () => void;
+  asEliminated?: boolean;
 }) {
   const rec = conferenceRecord(state, team.id);
-  const status = teamPlayoffStatus(state, team);
+  const status = asEliminated ? "eliminated" : teamPlayoffStatus(state, team);
   const accGames =
     playoffTableLabel(team.conference) === "ACC"
       ? conferenceGamesForTeam(games, team.id)
