@@ -10,6 +10,7 @@ import {
   PLAYOFF_SEED_VERSION,
   PLAYOFF_TEAM_SEED,
 } from "./playoff-race-seed";
+import { compareRecords, recordFromGames } from "./ranking-logic";
 import type {
   CfpPoll,
   Game,
@@ -17,6 +18,13 @@ import type {
   PlayoffStatus,
   Team,
 } from "./types";
+
+/** Conference champs in the top five auto-bid spots (gold). */
+export const AUTO_BID_IN_COUNT = 5;
+/** Extra CCG winners listed after the five auto bids (red). */
+export const AUTO_BID_OUT_COUNT = 5;
+/** Overall losses allowed for the at-large pool. */
+export const AT_LARGE_MAX_LOSSES = 3;
 
 export { PLAYOFF_SEED_VERSION } from "./playoff-race-seed";
 
@@ -101,12 +109,16 @@ export function teamPlayoffStatus(
 export function playoffContentionCounts(
   teams: Team[],
   state: PlayoffRaceState,
+  games: Game[] = [],
+  cfp: CfpPoll = { published: false, week: null, weekLabel: null, ranks: [] },
 ): { conference: number; autoBid: number; eliminated: number } {
+  const champs = new Set(autoBidTeams(teams, games, cfp).map((team) => team.id));
   let conference = 0;
-  let autoBid = 0;
+  let autoBid = champs.size;
   let eliminated = 0;
   const playoffOut = new Set(state.playoffEliminatedIds);
   for (const team of teams) {
+    if (champs.has(team.id)) continue;
     const status = teamPlayoffStatus(state, team);
     if (isNotreDame(team)) {
       if (status === "eliminated" || playoffOut.has(team.id)) eliminated += 1;
@@ -118,7 +130,6 @@ export function playoffContentionCounts(
     }
     if (isIndependentConference(team.conference)) continue;
     conference += 1;
-    if (status === "destiny") autoBid += 1;
   }
   return { conference, autoBid, eliminated };
 }
@@ -354,8 +365,11 @@ export function playoffTables(
   cfp: CfpPoll,
   games: Game[],
 ): PlayoffTable[] {
-  const ranked = new Set(cfp.ranks.map((row) => row.teamId));
-  const playoffOut = new Set(state.playoffEliminatedIds);
+  const champIds = new Set(autoBidTeams(teams, games, cfp).map((team) => team.id));
+  const atLargeIds = new Set(
+    atLargePoolTeams(teams, state, cfp, games).map((team) => team.id),
+  );
+  const ranks = cfpRankMap(cfp);
   const confGames = games.filter(
     (game) => game.conferenceGame && !game.championshipGame && game.homeIsFbs && game.awayIsFbs,
   );
@@ -373,16 +387,13 @@ export function playoffTables(
       const standing: Team[] = [];
       const eliminated: Team[] = [];
       for (const team of members) {
+        if (champIds.has(team.id) || atLargeIds.has(team.id)) continue;
         const status = teamPlayoffStatus(state, team);
-        if (status !== "eliminated") {
-          standing.push(team);
-          continue;
-        }
-        if (ranked.has(team.id) && !playoffOut.has(team.id)) continue;
-        eliminated.push(team);
+        if (status !== "eliminated") standing.push(team);
+        else eliminated.push(team);
       }
-      standing.sort((a, b) => compareStandings(a, b, state));
-      eliminated.sort((a, b) => compareStandings(a, b, state));
+      standing.sort((a, b) => compareStandings(a, b, state, ranks));
+      eliminated.sort((a, b) => compareEliminated(a, b, state));
       const gamesInSeason = Math.max(
         0,
         ...members.map((team) =>
@@ -402,19 +413,35 @@ export function playoffTables(
     .sort((a, b) => playoffTableSortKey(a.conference) - playoffTableSortKey(b.conference));
 }
 
-function winPct(record: { wins: number; losses: number }): number {
-  const played = record.wins + record.losses;
-  return played === 0 ? 0 : record.wins / played;
+function standingStatusGroup(status: PlayoffStatus): number {
+  if (status === "destiny") return 0;
+  if (status === "out-loss") return 2;
+  if (status === "eliminated") return 3;
+  return 1;
 }
 
-function compareStandings(a: Team, b: Team, state: PlayoffRaceState): number {
+function compareStandings(
+  a: Team,
+  b: Team,
+  state: PlayoffRaceState,
+  ranks: Map<string, number>,
+): number {
+  const as = standingStatusGroup(teamPlayoffStatus(state, a));
+  const bs = standingStatusGroup(teamPlayoffStatus(state, b));
+  if (as !== bs) return as - bs;
   const ar = conferenceRecord(state, a.id);
   const br = conferenceRecord(state, b.id);
-  const ap = winPct(ar);
-  const bp = winPct(br);
-  if (ap !== bp) return bp - ap;
-  if (ar.wins !== br.wins) return br.wins - ar.wins;
   if (ar.losses !== br.losses) return ar.losses - br.losses;
+  const rankA = ranks.get(a.id) ?? 99;
+  const rankB = ranks.get(b.id) ?? 99;
+  if (rankA !== rankB) return rankA - rankB;
+  return a.name.localeCompare(b.name);
+}
+
+function compareEliminated(a: Team, b: Team, state: PlayoffRaceState): number {
+  const da = state.eliminatedOn?.[a.id] ?? "";
+  const db = state.eliminatedOn?.[b.id] ?? "";
+  if (da !== db) return db.localeCompare(da);
   return a.name.localeCompare(b.name);
 }
 
@@ -467,89 +494,86 @@ export function parentKey(team: Team): string {
   return normalizeConferenceName(team.conference);
 }
 
-/** Highest CFP-ranked team still in each conference race. */
-export function projectedChampions(
-  teams: Team[],
+export function overallPlayoffRecord(
+  team: Team,
   state: PlayoffRaceState,
-  cfp: CfpPoll,
-): Team[] {
-  const ranks = cfpRankMap(cfp);
-  const byParent = new Map<string, Team[]>();
-  for (const team of teams) {
-    if (isIndependentConference(team.conference)) continue;
-    if (teamPlayoffStatus(state, team) === "eliminated") continue;
-    const key = parentKey(team);
-    const list = byParent.get(key) ?? [];
-    list.push(team);
-    byParent.set(key, list);
-  }
+  games: Game[],
+): { wins: number; losses: number } {
+  if (isNotreDame(team)) return state.notreDameRecord;
+  return recordFromGames(team.id, games);
+}
 
-  const champs: Team[] = [];
-  for (const members of byParent.values()) {
-    const ranked = members
-      .filter((team) => ranks.has(team.id))
-      .sort((a, b) => (ranks.get(a.id) ?? 99) - (ranks.get(b.id) ?? 99));
-    if (ranked[0]) champs.push(ranked[0]);
+function cannotMakeCcg(team: Team, state: PlayoffRaceState): boolean {
+  if (isIndependentConference(team.conference)) return true;
+  return teamPlayoffStatus(state, team) === "eliminated";
+}
+
+/** One CCG winner per conference, from final championship games. Empty until CCG weekend. */
+export function conferenceChampions(teams: Team[], games: Game[]): Team[] {
+  const byId = new Map(teams.map((team) => [team.id, team]));
+  const byConf = new Map<string, { team: Team; date: string }>();
+  for (const game of games) {
+    if (!game.championshipGame || game.status !== "final") continue;
+    const winnerId = gameWinnerId(game);
+    if (!winnerId) continue;
+    const winner = byId.get(winnerId);
+    if (!winner || isIndependentConference(winner.conference)) continue;
+    const key = parentKey(winner);
+    const prev = byConf.get(key);
+    if (!prev || game.date > prev.date) byConf.set(key, { team: winner, date: game.date });
   }
-  return champs.sort((a, b) => (ranks.get(a.id) ?? 99) - (ranks.get(b.id) ?? 99));
+  return [...byConf.values()].map((row) => row.team);
 }
 
 export function autoBidTeams(
   teams: Team[],
-  state: PlayoffRaceState,
+  games: Game[],
   cfp: CfpPoll,
 ): Team[] {
-  return projectedChampions(teams, state, cfp).slice(0, 5);
+  const ranks = cfpRankMap(cfp);
+  return conferenceChampions(teams, games).sort((a, b) => {
+    const ar = ranks.get(a.id);
+    const br = ranks.get(b.id);
+    if (ar != null && br != null && ar !== br) return ar - br;
+    if (ar != null && br == null) return -1;
+    if (ar == null && br != null) return 1;
+    const rec = compareRecords(
+      recordFromGames(a.id, games),
+      recordFromGames(b.id, games),
+    );
+    if (rec !== 0) return rec;
+    return a.name.localeCompare(b.name);
+  });
 }
 
-export function atLargeFieldTeams(
-  teams: Team[],
-  state: PlayoffRaceState,
-  cfp: CfpPoll,
-  autoBidIds: Set<string>,
-): Team[] {
-  const byId = new Map(teams.map((team) => [team.id, team]));
-  const out = new Set(state.playoffEliminatedIds);
-  const picked: Team[] = [];
-  for (const row of [...cfp.ranks].sort((a, b) => a.rank - b.rank)) {
-    if (autoBidIds.has(row.teamId) || out.has(row.teamId)) continue;
-    const team = byId.get(row.teamId);
-    if (!team) continue;
-    picked.push(team);
-    if (picked.length >= 7) break;
-  }
-  return picked;
-}
-
-/** Ranked teams knocked out of their conference race, plus Notre Dame. */
+/** CCG-out (or independent) teams with 3 or fewer overall losses, ranked by CFP. */
 export function atLargePoolTeams(
   teams: Team[],
   state: PlayoffRaceState,
   cfp: CfpPoll,
+  games: Game[],
 ): Team[] {
-  const ranked = new Set(cfp.ranks.map((row) => row.teamId));
+  const champs = new Set(autoBidTeams(teams, games, cfp).map((team) => team.id));
   const out = new Set(state.playoffEliminatedIds);
   const pool: Team[] = [];
   for (const team of teams) {
-    if (out.has(team.id)) continue;
-    if (isNotreDame(team)) {
-      pool.push(team);
-      continue;
-    }
-    if (isIndependentConference(team.conference)) continue;
-    if (teamPlayoffStatus(state, team) !== "eliminated") continue;
-    if (!ranked.has(team.id)) continue;
+    if (out.has(team.id) || champs.has(team.id)) continue;
+    if (!cannotMakeCcg(team, state)) continue;
+    if (overallPlayoffRecord(team, state, games).losses > AT_LARGE_MAX_LOSSES) continue;
     pool.push(team);
   }
   const ranks = cfpRankMap(cfp);
   return pool.sort((a, b) => {
     const ar = ranks.get(a.id);
     const br = ranks.get(b.id);
-    if (ar != null && br != null) return ar - br;
-    if (ar != null) return -1;
-    if (br != null) return 1;
-    if (isNotreDame(a)) return -1;
-    if (isNotreDame(b)) return 1;
+    if (ar != null && br != null && ar !== br) return ar - br;
+    if (ar != null && br == null) return -1;
+    if (ar == null && br != null) return 1;
+    const rec = compareRecords(
+      overallPlayoffRecord(a, state, games),
+      overallPlayoffRecord(b, state, games),
+    );
+    if (rec !== 0) return rec;
     return a.name.localeCompare(b.name);
   });
 }
@@ -557,13 +581,19 @@ export function atLargePoolTeams(
 export function independentEliminated(
   teams: Team[],
   state: PlayoffRaceState,
+  games: Game[] = [],
 ): Team[] {
   const out = new Set(state.playoffEliminatedIds);
   return teams
     .filter((team) => {
       if (!isIndependentConference(team.conference)) return false;
       if (isUConn(team)) return true;
-      if (isNotreDame(team)) return out.has(team.id);
+      if (isNotreDame(team)) {
+        return (
+          out.has(team.id) ||
+          overallPlayoffRecord(team, state, games).losses > AT_LARGE_MAX_LOSSES
+        );
+      }
       return teamPlayoffStatus(state, team) === "eliminated" || out.has(team.id);
     })
     .sort((a, b) => a.name.localeCompare(b.name));

@@ -15,6 +15,11 @@
   --win: #1f6b45;
   --shadow: 0 18px 50px rgba(15, 35, 24, 0.12);
   --radius: 18px;
+  /* Official CFP logo gold (PMS-adjacent #C5A354). */
+  --cfp-gold: #c5a354;
+  --cfp-gold-fill: rgba(197, 163, 84, 0.34);
+  --cfp-red: #9b2335;
+  --cfp-red-fill: rgba(155, 35, 53, 0.18);
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
 }
@@ -2392,11 +2397,23 @@ input[type="password"],
 }
 
 .playoff-rail-card.auto-bid {
-  outline: 2px solid #1f9d4a;
+  outline: 2px solid var(--cfp-gold);
 }
 
 .playoff-rail-card.at-large {
-  outline: 2px solid #d7bc29;
+  outline: 2px solid var(--cfp-gold);
+}
+
+.playoff-rail-card.auto-bid li.bid-in {
+  background: var(--cfp-gold-fill);
+  border-radius: 8px;
+  box-shadow: inset 3px 0 0 var(--cfp-gold);
+}
+
+.playoff-rail-card.auto-bid li.bid-out {
+  background: var(--cfp-red-fill);
+  border-radius: 8px;
+  box-shadow: inset 3px 0 0 var(--cfp-red);
 }
 
 .playoff-rail-card.eliminated {
@@ -2443,7 +2460,7 @@ input[type="password"],
 
 .playoff-pool li {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  grid-template-columns: auto auto minmax(0, 1fr) auto auto;
   gap: 0.4rem;
   align-items: center;
   padding: 0.35rem 0;

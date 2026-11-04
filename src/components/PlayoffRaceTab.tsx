@@ -6,8 +6,9 @@ import { playoffTableLabel, shortConferenceName } from "@/lib/conferences";
 import {
   adjustConferenceRecord,
   applyConferenceGame,
-  atLargeFieldTeams,
   atLargePoolTeams,
+  AUTO_BID_IN_COUNT,
+  AUTO_BID_OUT_COUNT,
   autoBidTeams,
   cfpRankMap,
   conferenceGamesForTeam,
@@ -19,6 +20,7 @@ import {
   gameWinnerId,
   independentEliminated,
   isNotreDame,
+  overallPlayoffRecord,
   pendingConferenceGames,
   pendingGamesForConference,
   playoffContentionCounts,
@@ -58,23 +60,21 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
     [teams, live, cfp, games],
   );
   const autoBids = useMemo(
-    () => (cfp.published ? autoBidTeams(teams, live, cfp) : []),
-    [cfp, live, teams],
-  );
-  const autoBidIds = useMemo(() => new Set(autoBids.map((team) => team.id)), [autoBids]);
-  const atLargeField = useMemo(
-    () => (cfp.published ? atLargeFieldTeams(teams, live, cfp, autoBidIds) : []),
-    [cfp, live, teams, autoBidIds],
+    () => autoBidTeams(teams, games, cfp),
+    [cfp, games, teams],
   );
   const atLargePool = useMemo(
-    () => atLargePoolTeams(teams, live, cfp),
-    [teams, live, cfp],
+    () => atLargePoolTeams(teams, live, cfp, games),
+    [teams, live, cfp, games],
   );
   const independents = useMemo(
-    () => independentEliminated(teams, live),
-    [teams, live],
+    () => independentEliminated(teams, live, games),
+    [teams, live, games],
   );
-  const counts = useMemo(() => playoffContentionCounts(teams, live), [teams, live]);
+  const counts = useMemo(
+    () => playoffContentionCounts(teams, live, games, cfp),
+    [teams, live, games, cfp],
+  );
 
   const patch = (next: PlayoffRaceState) => onChange(next);
 
@@ -115,100 +115,68 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
           ))}
         </ul>
         <p className="playoff-cfp-note">
-          {cfp.published
-            ? `CFP ${cfp.weekLabel ?? `Week ${cfp.week ?? ""}`} · Auto Bid is the five highest-ranked remaining conference champions · At-Large is the next seven`
-            : "CFP rankings are not out yet. Auto Bid and the 12-team field fill when ESPN publishes the committee 25."}
+          Auto Bid fills when a team wins its CCG. At-Large is anyone out of the CCG race
+          with 3 or fewer overall losses — including Notre Dame. Eliminate anyone you
+          judge out of the field.
         </p>
       </section>
-
-      {cfp.published ? (
-        <ol className="playoff-cfp-strip">
-          {cfp.ranks.map((row) => {
-            const team = teamsById.get(row.teamId);
-            if (!team) return null;
-            return (
-              <li key={row.teamId}>
-                <span>#{row.rank}</span>
-                <TeamLogo team={team} />
-                <em>{team.shortName}</em>
-              </li>
-            );
-          })}
-        </ol>
-      ) : null}
 
       <div className="playoff-top">
         <section className="playoff-rail-card auto-bid">
           <header>
             <h3>Auto Bid</h3>
-            <span>5 champs</span>
+            <span>CCG winners</span>
           </header>
-          {cfp.published ? (
+          {autoBids.length ? (
             <ol>
-              {autoBids.length ? (
-                autoBids.map((team, index) => (
-                  <li key={team.id}>
+              {autoBids.map((team, index) => {
+                const rec = overallPlayoffRecord(team, live, games);
+                const bidClass =
+                  index < AUTO_BID_IN_COUNT
+                    ? "bid-in"
+                    : index < AUTO_BID_IN_COUNT + AUTO_BID_OUT_COUNT
+                      ? "bid-out"
+                      : undefined;
+                return (
+                  <li key={team.id} className={bidClass}>
                     <span className="playoff-slot">{index + 1}</span>
                     <TeamLogo team={team} />
                     <div>
                       <strong>{team.shortName}</strong>
                       <em>
-                        #{ranks.get(team.id)} · {playoffTableLabel(team.conference)}
+                        {ranks.has(team.id) ? `#${ranks.get(team.id)} · ` : ""}
+                        {rec.wins}-{rec.losses} · {playoffTableLabel(team.conference)}
                       </em>
                     </div>
                   </li>
-                ))
-              ) : (
-                <li className="playoff-empty">No ranked remaining conference champions yet.</li>
-              )}
+                );
+              })}
             </ol>
           ) : (
-            <p className="playoff-empty">Waiting on the CFP 25.</p>
+            <p className="playoff-empty">Empty until conference championship weekend.</p>
           )}
         </section>
 
         <section className="playoff-rail-card at-large">
           <header>
             <h3>At-Large</h3>
-            <span>7 after auto bids</span>
+            <span>out of CCG · ≤3 losses</span>
           </header>
-          {cfp.published ? (
-            <ol>
-              {atLargeField.length ? (
-                atLargeField.map((team, index) => (
+          {atLargePool.length ? (
+            <ol className="playoff-pool">
+              {atLargePool.map((team, index) => {
+                const nd = isNotreDame(team);
+                const rec = overallPlayoffRecord(team, live, games);
+                return (
                   <li key={team.id}>
                     <span className="playoff-slot">{index + 1}</span>
                     <TeamLogo team={team} />
                     <div>
                       <strong>{team.shortName}</strong>
                       <em>
-                        #{ranks.get(team.id)} · {shortConferenceName(team.conference)}
-                      </em>
-                    </div>
-                  </li>
-                ))
-              ) : (
-                <li className="playoff-empty">No at-large field until more teams are ranked.</li>
-              )}
-            </ol>
-          ) : (
-            <p className="playoff-empty">Waiting on the CFP 25.</p>
-          )}
-
-          {atLargePool.length ? (
-            <ul className="playoff-pool">
-              {atLargePool.map((team) => {
-                const nd = isNotreDame(team);
-                const rec = nd ? live.notreDameRecord : conferenceRecord(live, team.id);
-                return (
-                  <li key={team.id}>
-                    <TeamLogo team={team} />
-                    <div>
-                      <strong>{team.shortName}</strong>
-                      <em>
                         {ranks.has(team.id) ? `#${ranks.get(team.id)} · ` : ""}
-                        {rec.wins}-{rec.losses}
-                        {nd ? " overall" : ` ${shortConferenceName(team.conference)}`}
+                        {rec.wins}-{rec.losses} overall
+                        {nd ? "" : ` · ${shortConferenceName(team.conference)}`}
                       </em>
                     </div>
                     {nd ? (
@@ -249,8 +217,12 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
                   </li>
                 );
               })}
-            </ul>
-          ) : null}
+            </ol>
+          ) : (
+            <p className="playoff-empty">
+              Empty until a team is out of the CCG race with 3 or fewer overall losses.
+            </p>
+          )}
         </section>
       </div>
 
@@ -308,6 +280,11 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
                           patch(adjustConferenceRecord(live, team.id, field, delta))
                         }
                         onDateChange={(date) => patch(setEliminatedOn(live, team.id, date))}
+                        onRestore={
+                          live.playoffEliminatedIds.includes(team.id)
+                            ? () => patch(restoreToAtLarge(live, team.id))
+                            : undefined
+                        }
                       />
                     ))}
                   </ol>
@@ -395,6 +372,7 @@ function TeamRow({
   onCycle,
   onAdjust,
   onDateChange,
+  onRestore,
 }: {
   team: Team;
   state: PlayoffRaceState;
@@ -403,6 +381,7 @@ function TeamRow({
   onCycle: () => void;
   onAdjust: (field: "wins" | "losses", delta: number) => void;
   onDateChange: (date: string) => void;
+  onRestore?: () => void;
 }) {
   const rec = conferenceRecord(state, team.id);
   const status = teamPlayoffStatus(state, team);
@@ -420,16 +399,23 @@ function TeamRow({
       </button>
       <span className="playoff-wl">
         {status === "eliminated" ? (
-          <label className="playoff-elim-date">
-            <span>{elimDate ? formatPlayoffLossDate(elimDate) : "date"}</span>
-            <input
-              type="date"
-              value={elimDate ?? ""}
-              onClick={(event) => event.stopPropagation()}
-              onChange={(event) => onDateChange(event.target.value)}
-              aria-label={`${team.shortName} eliminated date`}
-            />
-          </label>
+          <>
+            <label className="playoff-elim-date">
+              <span>{elimDate ? formatPlayoffLossDate(elimDate) : "date"}</span>
+              <input
+                type="date"
+                value={elimDate ?? ""}
+                onClick={(event) => event.stopPropagation()}
+                onChange={(event) => onDateChange(event.target.value)}
+                aria-label={`${team.shortName} eliminated date`}
+              />
+            </label>
+            {onRestore ? (
+              <button type="button" className="ghost-btn" onClick={onRestore}>
+                Restore
+              </button>
+            ) : null}
+          </>
         ) : (
           <>
             <strong>
