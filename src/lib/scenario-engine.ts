@@ -211,29 +211,82 @@ function groupByKey<T>(items: T[], keyOf: (item: T) => string): T[][] {
   return groups;
 }
 
+function pctKey(record: WinLoss): string {
+  const pct = winningPct(record);
+  return pct == null ? "none" : pct.toFixed(6);
+}
+
+/**
+ * ACC 2026: order by winning percentage, then pull in any team that played a
+ * different number of conference games and matches the group's wins or losses.
+ * A 5-4 (9 games) and 4-4 (8 games) are the same CCG tie group.
+ */
+export function percentageAdvantageGroups(records: Map<string, WinLoss>): string[][] {
+  const remaining = new Set(records.keys());
+  const groups: string[][] = [];
+  const playedOf = (id: string) => {
+    const record = records.get(id)!;
+    return record.wins + record.losses + record.ties;
+  };
+  while (remaining.size) {
+    let bestPct = -2;
+    for (const id of remaining) {
+      const pct = winningPct(records.get(id)!) ?? -1;
+      if (pct > bestPct) bestPct = pct;
+    }
+    const best = bestPct < 0 ? "none" : bestPct.toFixed(6);
+    const core: string[] = [];
+    for (const id of remaining) {
+      if (pctKey(records.get(id)!) === best) core.push(id);
+    }
+    const attached: string[] = [];
+    for (const id of remaining) {
+      if (core.includes(id)) continue;
+      const rec = records.get(id)!;
+      const played = playedOf(id);
+      const matches = core.some((cid) => {
+        const corePlayed = playedOf(cid);
+        if (played === 0 || corePlayed === 0 || corePlayed === played) return false;
+        const cr = records.get(cid)!;
+        return rec.wins === cr.wins || rec.losses === cr.losses;
+      });
+      if (matches) attached.push(id);
+    }
+    const group = [...core, ...attached];
+    groups.push(group);
+    for (const id of group) remaining.delete(id);
+  }
+  return groups;
+}
+
 function initialGroups(teamIds: string[], ctx: Ctx): string[][] {
   const method = ctx.conference.initialRank;
-  const sorted = [...teamIds].sort((a, b) => {
-    const ar = conferenceRecord(a, ctx.games);
-    const br = conferenceRecord(b, ctx.games);
-    if (method === "losses") {
-      if (ar.losses !== br.losses) return ar.losses - br.losses;
-      if (ar.wins !== br.wins) return br.wins - ar.wins;
-    } else {
-      const ap = winningPct(ar) ?? -1;
-      const bp = winningPct(br) ?? -1;
-      if (ap !== bp) return bp - ap;
-      if (method === "percentage-advantage" || method === "record-advantage") {
+  const sortGroup = (ids: string[]) =>
+    [...ids].sort((a, b) => {
+      const ar = conferenceRecord(a, ctx.games);
+      const br = conferenceRecord(b, ctx.games);
+      if (method === "losses") {
+        if (ar.losses !== br.losses) return ar.losses - br.losses;
         if (ar.wins !== br.wins) return br.wins - ar.wins;
+      } else {
+        const ap = winningPct(ar) ?? -1;
+        const bp = winningPct(br) ?? -1;
+        if (ap !== bp) return bp - ap;
+        if (method === "percentage-advantage" || method === "record-advantage") {
+          if (ar.wins !== br.wins) return br.wins - ar.wins;
+        }
       }
-    }
-    return ctx.nameFor(a).localeCompare(ctx.nameFor(b));
-  });
+      return ctx.nameFor(a).localeCompare(ctx.nameFor(b));
+    });
+  if (method === "percentage-advantage") {
+    const records = new Map(teamIds.map((id) => [id, conferenceRecord(id, ctx.games)]));
+    return percentageAdvantageGroups(records).map(sortGroup);
+  }
+  const sorted = sortGroup(teamIds);
   return groupByKey(sorted, (id) => {
     const record = conferenceRecord(id, ctx.games);
     if (method === "losses") return `L${record.losses}`;
-    const pct = winningPct(record);
-    return pct == null ? "none" : pct.toFixed(6);
+    return pctKey(record);
   });
 }
 

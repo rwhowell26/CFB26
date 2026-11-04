@@ -4,12 +4,13 @@ import {
   type ScenarioConference,
 } from "./scenario-conferences";
 import {
+  percentageAdvantageGroups,
   projectConference,
   type RankedScenarioRow,
   type ScenarioProjection,
 } from "./scenario-engine";
 import { PLAYOFF_STATUS_LABEL } from "./playoff-race";
-import { winningPct } from "./sunbelt";
+import { winningPct, type WinLoss } from "./sunbelt";
 import type { Game, Team } from "./types";
 
 export type CcgStatus = "clinch" | "destiny" | "alive" | "out-loss" | "eliminated";
@@ -425,6 +426,16 @@ function recordPct(wins: number, losses: number): number {
   return winningPct({ wins, losses, ties: 0 }) ?? -1;
 }
 
+function wl(wins: number, losses: number): WinLoss {
+  return { wins, losses, ties: 0 };
+}
+
+function advantageGroupIndex(records: Map<string, WinLoss>, teamId: string): number {
+  const groups = percentageAdvantageGroups(records);
+  const index = groups.findIndex((group) => group.includes(teamId));
+  return index < 0 ? 99 : index;
+}
+
 /** Strictly better in the conference's initial ranking groups — same group is a computer/draw tie. */
 function strictlyAhead(
   wins: number,
@@ -434,7 +445,32 @@ function strictlyAhead(
   method: ScenarioConference["initialRank"],
 ): boolean {
   if (method === "losses") return losses < selectedLosses;
+  if (method === "percentage-advantage") {
+    const records = new Map<string, WinLoss>([
+      ["a", wl(wins, losses)],
+      ["b", wl(selectedWins, selectedLosses)],
+    ]);
+    return advantageGroupIndex(records, "a") < advantageGroupIndex(records, "b");
+  }
   return recordPct(wins, losses) > recordPct(selectedWins, selectedLosses);
+}
+
+function dumpGroupAhead(
+  rec: Map<string, DumpRecord>,
+  candidateId: string,
+  candWins: number,
+  candLosses: number,
+  selectedId: string,
+  selWins: number,
+  selLosses: number,
+): boolean {
+  const records = new Map<string, WinLoss>();
+  for (const [id, row] of rec) {
+    if (id === candidateId) records.set(id, wl(candWins, candLosses));
+    else if (id === selectedId) records.set(id, wl(selWins, selLosses));
+    else records.set(id, wl(row.wins, row.losses + row.left));
+  }
+  return advantageGroupIndex(records, candidateId) < advantageGroupIndex(records, selectedId);
 }
 
 /**
@@ -510,22 +546,44 @@ function othersDump(
     const homeWinL = home.losses + Math.max(0, home.left - 1);
     const awayWinW = away.wins + 1;
     const awayWinL = away.losses + Math.max(0, away.left - 1);
-    const homeSafe = !strictlyAhead(homeWinW, homeWinL, selW, selL, method);
-    const awaySafe = !strictlyAhead(awayWinW, awayWinL, selW, selL, method);
-    const homeLocked = strictlyAhead(home.wins, home.losses + home.left, selW, selL, method);
-    const awayLocked = strictlyAhead(away.wins, away.losses + away.left, selW, selL, method);
+    const aheadOfSelected = (id: string, wins: number, losses: number) =>
+      method === "percentage-advantage"
+        ? dumpGroupAhead(rec, id, wins, losses, teamId, selW, selL)
+        : strictlyAhead(wins, losses, selW, selL, method);
+    const homeSafe = !aheadOfSelected(game.homeTeamId, homeWinW, homeWinL);
+    const awaySafe = !aheadOfSelected(game.awayTeamId, awayWinW, awayWinL);
+    const homeLocked = aheadOfSelected(
+      game.homeTeamId,
+      home.wins,
+      home.losses + home.left,
+    );
+    const awayLocked = aheadOfSelected(
+      game.awayTeamId,
+      away.wins,
+      away.losses + away.left,
+    );
     let winner: string;
     if (homeSafe !== awaySafe) {
       winner = homeSafe ? game.homeTeamId : game.awayTeamId;
     } else if (homeSafe) {
-      const homePct = recordPct(homeWinW, homeWinL);
-      const awayPct = recordPct(awayWinW, awayWinL);
-      winner =
-        homePct < awayPct || (homePct === awayPct && home.wins <= away.wins)
-          ? game.homeTeamId
-          : game.awayTeamId;
+      const homeLeft = Math.max(0, home.left - 1);
+      const awayLeft = Math.max(0, away.left - 1);
+      if (homeLeft !== awayLeft) {
+        winner = homeLeft < awayLeft ? game.homeTeamId : game.awayTeamId;
+      } else if (home.wins !== away.wins) {
+        winner = home.wins <= away.wins ? game.homeTeamId : game.awayTeamId;
+      } else {
+        const homePct = recordPct(homeWinW, homeWinL);
+        const awayPct = recordPct(awayWinW, awayWinL);
+        winner =
+          homePct < awayPct || (homePct === awayPct && home.losses >= away.losses)
+            ? game.homeTeamId
+            : game.awayTeamId;
+      }
     } else if (homeLocked !== awayLocked) {
       winner = homeLocked ? game.homeTeamId : game.awayTeamId;
+    } else if (homeWinL !== awayWinL) {
+      winner = homeWinL > awayWinL ? game.homeTeamId : game.awayTeamId;
     } else {
       const homePct = recordPct(home.wins, home.losses);
       const awayPct = recordPct(away.wins, away.losses);
@@ -828,16 +886,11 @@ export function weekSwingsThisWeek(
   const out: CcgWeekSwing[] = [];
   for (const game of weekGames) {
     for (const winnerId of [game.homeTeamId, game.awayTeamId]) {
-      const after = teamRow(
-        conference,
-        teams,
-        games,
-        teamId,
-        remaining.filter((item) => item.id !== game.id),
-        seed,
-        { ...options, extraPicks: mergePicks(extra, { [game.id]: winnerId }) },
-      );
-      if (after.status === "eliminated") {
+      const after = conferenceContention(conference, teams, games, {
+        ...options,
+        extraPicks: mergePicks(extra, { [game.id]: winnerId }),
+      }).byTeam.get(teamId);
+      if (after?.status === "eliminated") {
         out.push({ game, winnerId, kind: "eliminates" });
       }
       if (winnerId === teamId) {

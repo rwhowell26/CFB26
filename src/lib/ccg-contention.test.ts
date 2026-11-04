@@ -7,6 +7,7 @@ import {
   eliminationGamesThisWeek,
   gameImplications,
   scenarioProofPicks,
+  weekSwingsThisWeek,
 } from "./ccg-contention.ts";
 import type { Game, Team } from "./types.ts";
 
@@ -63,7 +64,7 @@ const ACC = SCENARIO_CONFERENCES.find((conf) => conf.id === "acc")!;
 const TEAMS = ["NAVY", "TULN", "MEM", "USF", "FAU"].map((id) =>
   team(id, "American Conference"),
 );
-const ACC_TEAMS = ["MIA", "WAKE", "CLEM", "PITT", "FSU", "DUKE", "SMU", "GT"].map((id) =>
+const ACC_TEAMS = ["MIA", "WAKE", "CLEM", "PITT", "FSU", "DUKE", "SMU", "GT", "BC"].map((id) =>
   team(id, "Atlantic Coast Conference"),
 );
 
@@ -250,6 +251,46 @@ test("a next-game loss into an unresolved SportSource tie is alive, not out with
   assert.ok(pittRow);
   assert.ok((pittRow!.place ?? 99) <= 2);
   assert.equal(pittRow!.unresolved, true);
+});
+
+test("an 8-game ACC team that loses next into a 4-loss SportSource pile is alive", () => {
+  // BC 0-1 loses next vs FSU and beats GT → 1-2. PITT is already 2-2. Unequal
+  // games, same 2 losses, so ACC pulls BC into PITT's SportSource group at #2
+  // behind MIA. Percentage-only grouping left BC at #3 and called them out-loss.
+  const games = [
+    acc("m1", "MIA", "PITT", "MIA"),
+    acc("m2", "MIA", "FSU", "MIA"),
+    acc("m3", "MIA", "GT", "MIA"),
+    acc("m4", "MIA", "SMU", "MIA"),
+    acc("m5", "MIA", "BC", "MIA"),
+    acc("p1", "PITT", "FSU", "PITT"),
+    acc("p2", "PITT", "GT", "PITT"),
+    acc("p3", "PITT", "SMU", "SMU"),
+    acc("next", "BC", "FSU", null, 8),
+    acc("b2", "BC", "GT", null, 9),
+  ];
+  const result = conferenceContention(ACC, ACC_TEAMS, games, { week: 8 });
+  const bc = result.byTeam.get("BC");
+  assert.equal(bc?.hasPath, true);
+  assert.equal(bc?.survivesNextLoss, true);
+  assert.notEqual(bc?.status, "out-loss");
+  const projected = projectConference(ACC, ACC_TEAMS, games, {
+    picks: { next: "FSU", b2: "BC" },
+  });
+  const bcRow = projected.tables[0].rows.find((row) => row.teamId === "BC");
+  const pittRow = projected.tables[0].rows.find((row) => row.teamId === "PITT");
+  assert.equal(bcRow?.conf.wins, 1);
+  assert.equal(bcRow?.conf.losses, 2);
+  assert.equal(pittRow?.conf.wins, 2);
+  assert.equal(pittRow?.conf.losses, 2);
+  assert.ok((bcRow?.place ?? 99) <= 2);
+  assert.equal(bcRow?.unresolved, true);
+  assert.equal(pittRow?.place, bcRow?.place);
+  const swings = weekSwingsThisWeek(ACC, "BC", ACC_TEAMS, games, { week: 8 });
+  assert.equal(
+    swings.some((item) => item.kind === "eliminates" && item.winnerId === "FSU"),
+    false,
+  );
 });
 
 test("a division path after a next-game loss is alive, not out with a loss", () => {

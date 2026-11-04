@@ -73,6 +73,38 @@ test("conference winning percentage / losses ranks a single table", () => {
   assert.equal(result.championship.awayId, "BYU");
 });
 
+test("ACC 5-4 and 4-4 with unequal games share a SportSource CCG tie", () => {
+  const teams = ["MIA", "PITT", "BC", "FSU", "GT", "SMU"].map((id) =>
+    team(id, "Atlantic Coast Conference"),
+  );
+  const games = [
+    game("m1", "MIA", "PITT", "MIA"),
+    game("m2", "MIA", "FSU", "MIA"),
+    game("m3", "MIA", "GT", "MIA"),
+    game("m4", "MIA", "SMU", "MIA"),
+    game("m5", "MIA", "BC", "MIA"),
+    game("p1", "PITT", "FSU", "PITT"),
+    game("p2", "PITT", "GT", "PITT"),
+    game("p3", "PITT", "SMU", "SMU"),
+    game("b1", "BC", "FSU", "BC"),
+    game("b2", "BC", "GT", "GT"),
+  ];
+  const result = projectConference(ACC, teams, games);
+  const rows = result.tables[0].rows;
+  const pitt = rows.find((row) => row.teamId === "PITT");
+  const bc = rows.find((row) => row.teamId === "BC");
+  assert.equal(pitt?.conf.wins, 2);
+  assert.equal(pitt?.conf.losses, 2);
+  assert.equal(bc?.conf.wins, 1);
+  assert.equal(bc?.conf.losses, 2);
+  assert.equal(rows[0]?.teamId, "MIA");
+  assert.equal(rows[0]?.place, 1);
+  assert.equal(pitt?.place, 2);
+  assert.equal(bc?.place, 2);
+  assert.equal(pitt?.unresolved, true);
+  assert.equal(bc?.unresolved, true);
+});
+
 test("two-team head-to-head breaks an ACC tie at the same percentage", () => {
   const games = [
     game("1", "CLEM", "MIA", "MIA"),
@@ -80,6 +112,7 @@ test("two-team head-to-head breaks an ACC tie at the same percentage", () => {
     game("3", "MIA", "FSU", "MIA"),
     game("4", "CLEM", "GT", "CLEM"),
     game("5", "MIA", "GT", "GT"),
+    game("6", "GT", "FSU", "FSU"),
   ];
   const result = projectConference(ACC, ACC_TEAMS, games);
   assert.equal(result.tables[0].rows[0].conf.wins, 2);
