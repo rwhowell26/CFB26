@@ -59,9 +59,23 @@ function game(
 }
 
 const AAC = SCENARIO_CONFERENCES.find((conf) => conf.id === "aac")!;
+const ACC = SCENARIO_CONFERENCES.find((conf) => conf.id === "acc")!;
 const TEAMS = ["NAVY", "TULN", "MEM", "USF", "FAU"].map((id) =>
   team(id, "American Conference"),
 );
+const ACC_TEAMS = ["MIA", "WAKE", "CLEM", "PITT", "FSU", "DUKE", "SMU", "GT"].map((id) =>
+  team(id, "Atlantic Coast Conference"),
+);
+
+function acc(
+  id: string,
+  home: string,
+  away: string,
+  winner: string | null,
+  week = 1,
+): Game {
+  return game(id, home, away, winner, week, "Atlantic Coast Conference");
+}
 
 test("a team that must win this week to keep a CCG path is out with a loss", () => {
   // MEM 1-1, remaining vs FAU. NAVY is 3-0 with no games left; TULN is 1-0
@@ -196,6 +210,47 @@ function sbc(
 ): Game {
   return game(id, home, away, winner, week, "Sun Belt Conference");
 }
+
+test("a next-game loss into an unresolved SportSource tie is alive, not out with a loss", () => {
+  // ACC ranks by percentage, then H2H, then SportSource. PITT 1-1 loses next vs FSU
+  // and wins the rest → 2-2. SMU is already 2-2 with no leftovers, and they never
+  // played, so SportSource leaves them tied at #2 behind MIA.
+  // Win-count dump would hand CLEM (1-0) a leftover win to "match" PITT's 2 wins and
+  // steal 2nd on percentage (2-0). Percentage dump keeps CLEM from jumping; an
+  // undetermined SportSource pile still counts as a CCG path.
+  const games = [
+    acc("m1", "MIA", "FSU", "MIA"),
+    acc("m2", "MIA", "GT", "MIA"),
+    acc("m4", "MIA", "PITT", "MIA"),
+    acc("m5", "MIA", "SMU", "MIA"),
+    acc("w1", "WAKE", "FSU", "WAKE"),
+    acc("w2", "WAKE", "GT", "WAKE"),
+    acc("c1", "CLEM", "GT", "CLEM"),
+    acc("p1", "PITT", "GT", "PITT"),
+    acc("s1", "SMU", "FSU", "SMU"),
+    acc("s2", "SMU", "GT", "SMU"),
+    acc("s4", "DUKE", "SMU", "DUKE"),
+    acc("next", "PITT", "FSU", null, 8),
+    acc("p2", "PITT", "WAKE", null, 9),
+    acc("w3", "WAKE", "GT", null, 9),
+    acc("c2", "CLEM", "DUKE", null, 8),
+    acc("m6", "MIA", "DUKE", null, 9),
+    acc("d2", "DUKE", "FSU", null, 9),
+  ];
+  const result = conferenceContention(ACC, ACC_TEAMS, games, { week: 8 });
+  const pitt = result.byTeam.get("PITT");
+  assert.equal(pitt?.hasPath, true);
+  assert.equal(pitt?.survivesNextLoss, true);
+  assert.equal(pitt?.status, "alive");
+  const picks = scenarioProofPicks(ACC, ACC_TEAMS, games, "PITT", { week: 8 });
+  assert.equal(picks["next"], "FSU");
+  assert.equal(picks["p2"], "PITT");
+  const projected = projectConference(ACC, ACC_TEAMS, games, { picks });
+  const pittRow = projected.tables[0].rows.find((row) => row.teamId === "PITT");
+  assert.ok(pittRow);
+  assert.ok((pittRow!.place ?? 99) <= 2);
+  assert.equal(pittRow!.unresolved, true);
+});
 
 test("a division path after a next-game loss is alive, not out with a loss", () => {
   // East snapshot: GASO 3-1, JMU 4-2, App 2-2, GSU 2-2.

@@ -9,6 +9,7 @@ import {
   type ScenarioProjection,
 } from "./scenario-engine";
 import { PLAYOFF_STATUS_LABEL } from "./playoff-race";
+import { winningPct } from "./sunbelt";
 import type { Game, Team } from "./types";
 
 export type CcgStatus = "clinch" | "destiny" | "alive" | "out-loss" | "eliminated";
@@ -82,6 +83,8 @@ function hasCcgPath(
 ): boolean {
   const rows = rowsFor(projection, teamId);
   if (!rows.length) return false;
+  // Unresolved computer / CFP / draw groups share a competition place. Assume
+  // the selected team wins that tiebreaker, so a CCG place for the group is a path.
   if (conference.championship === "division-winners") {
     return rows.some((row) => row.place === 1);
   }
@@ -312,16 +315,15 @@ function existsCcgPath(
   basePicks: Record<string, string>,
   cfpRanks?: Map<string, number>,
 ): boolean {
-  if (hasCcgPath(conference, projectWith(conference, teams, games, basePicks, cfpRanks), teamId)) {
-    return true;
-  }
-  return pathOverlays(teamId, remaining, seed, conference).some((overlay) =>
+  const inCcg = (overlay: Record<string, string>) =>
     hasCcgPath(
       conference,
       projectWith(conference, teams, games, mergePicks(basePicks, overlay), cfpRanks),
       teamId,
-    ),
-  );
+    );
+  if (inCcg({})) return true;
+  if (pathOverlays(teamId, remaining, seed, conference).some(inCcg)) return true;
+  return inCcg(othersDump(teamId, remaining, seed, basePicks, conference));
 }
 
 function guaranteedCcg(
@@ -417,54 +419,120 @@ function chooseOverlay(
   return chosen;
 }
 
-function currentWins(seed: ScenarioProjection): Map<string, number> {
-  const wins = new Map<string, number>();
-  for (const table of seed.tables) {
-    for (const row of table.rows) wins.set(row.teamId, row.conf.wins);
-  }
-  return wins;
+type DumpRecord = { wins: number; losses: number; left: number };
+
+function recordPct(wins: number, losses: number): number {
+  return winningPct({ wins, losses, ties: 0 }) ?? -1;
+}
+
+/** Strictly better in the conference's initial ranking groups — same group is a computer/draw tie. */
+function strictlyAhead(
+  wins: number,
+  losses: number,
+  selectedWins: number,
+  selectedLosses: number,
+  method: ScenarioConference["initialRank"],
+): boolean {
+  if (method === "losses") return losses < selectedLosses;
+  return recordPct(wins, losses) > recordPct(selectedWins, selectedLosses);
 }
 
 /**
- * Best-case others for finishing first: dump leftover wins onto teams that
- * still cannot catch the selected team's lose-next-then-win-out total.
+ * Best-case others: dump leftover wins onto teams that still cannot finish
+ * strictly ahead of the selected team on winning percentage (or losses).
+ * A same-percentage SportSource / computer pile is allowed — we assume they
+ * win that undetermined tiebreaker.
  */
 function othersDump(
   teamId: string,
   remaining: Game[],
   seed: ScenarioProjection,
   ownPicks: Record<string, string>,
+  conference: ScenarioConference,
 ): Record<string, string> {
-  const wins = currentWins(seed);
+  const rec = new Map<string, DumpRecord>();
+  const ensure = (id: string): DumpRecord => {
+    let row = rec.get(id);
+    if (!row) {
+      row = { wins: 0, losses: 0, left: 0 };
+      rec.set(id, row);
+    }
+    return row;
+  };
+  for (const table of seed.tables) {
+    for (const row of table.rows) {
+      rec.set(row.teamId, { wins: row.conf.wins, losses: row.conf.losses, left: 0 });
+    }
+  }
+  for (const game of remaining) {
+    ensure(game.homeTeamId).left++;
+    ensure(game.awayTeamId).left++;
+  }
+  const apply = (game: Game, winner: string) => {
+    const home = ensure(game.homeTeamId);
+    const away = ensure(game.awayTeamId);
+    if (winner === game.homeTeamId) {
+      home.wins++;
+      away.losses++;
+    } else {
+      away.wins++;
+      home.losses++;
+    }
+    home.left--;
+    away.left--;
+  };
   for (const game of remaining) {
     const winner = ownPicks[game.id];
-    if (!winner) continue;
-    wins.set(winner, (wins.get(winner) ?? 0) + 1);
+    if (winner) apply(game, winner);
   }
-  const selectedFinal = wins.get(teamId) ?? 0;
+  const selected = ensure(teamId);
+  const selW = selected.wins;
+  const selL = selected.losses;
+  const method = conference.initialRank;
   const picks: Record<string, string> = {};
   const others = remaining
-    .filter((game) => !involves(game, teamId))
+    .filter((game) => !involves(game, teamId) && ownPicks[game.id] == null)
     .sort((a, b) => {
-      const aMax = Math.max(wins.get(a.homeTeamId) ?? 0, wins.get(a.awayTeamId) ?? 0);
-      const bMax = Math.max(wins.get(b.homeTeamId) ?? 0, wins.get(b.awayTeamId) ?? 0);
+      const aMax = Math.max(
+        recordPct(ensure(a.homeTeamId).wins, ensure(a.homeTeamId).losses),
+        recordPct(ensure(a.awayTeamId).wins, ensure(a.awayTeamId).losses),
+      );
+      const bMax = Math.max(
+        recordPct(ensure(b.homeTeamId).wins, ensure(b.homeTeamId).losses),
+        recordPct(ensure(b.awayTeamId).wins, ensure(b.awayTeamId).losses),
+      );
       return bMax - aMax || a.id.localeCompare(b.id);
     });
   for (const game of others) {
-    const homeW = wins.get(game.homeTeamId) ?? 0;
-    const awayW = wins.get(game.awayTeamId) ?? 0;
-    const homeSafe = homeW + 1 <= selectedFinal;
-    const awaySafe = awayW + 1 <= selectedFinal;
+    const home = ensure(game.homeTeamId);
+    const away = ensure(game.awayTeamId);
+    const homeWinW = home.wins + 1;
+    const homeWinL = home.losses + Math.max(0, home.left - 1);
+    const awayWinW = away.wins + 1;
+    const awayWinL = away.losses + Math.max(0, away.left - 1);
+    const homeSafe = !strictlyAhead(homeWinW, homeWinL, selW, selL, method);
+    const awaySafe = !strictlyAhead(awayWinW, awayWinL, selW, selL, method);
+    const homeLocked = strictlyAhead(home.wins, home.losses + home.left, selW, selL, method);
+    const awayLocked = strictlyAhead(away.wins, away.losses + away.left, selW, selL, method);
     let winner: string;
     if (homeSafe !== awaySafe) {
       winner = homeSafe ? game.homeTeamId : game.awayTeamId;
     } else if (homeSafe) {
-      winner = homeW <= awayW ? game.homeTeamId : game.awayTeamId;
+      const homePct = recordPct(homeWinW, homeWinL);
+      const awayPct = recordPct(awayWinW, awayWinL);
+      winner =
+        homePct < awayPct || (homePct === awayPct && home.wins <= away.wins)
+          ? game.homeTeamId
+          : game.awayTeamId;
+    } else if (homeLocked !== awayLocked) {
+      winner = homeLocked ? game.homeTeamId : game.awayTeamId;
     } else {
-      winner = homeW >= awayW ? game.homeTeamId : game.awayTeamId;
+      const homePct = recordPct(home.wins, home.losses);
+      const awayPct = recordPct(away.wins, away.losses);
+      winner = homePct >= awayPct ? game.homeTeamId : game.awayTeamId;
     }
     picks[game.id] = winner;
-    wins.set(winner, (wins.get(winner) ?? 0) + 1);
+    apply(game, winner);
   }
   return picks;
 }
@@ -570,7 +638,7 @@ export function scenarioProofPicks(
     );
     return fillUnpicked(remaining, mergePicks(base, overlay), seed, prefer);
   }
-  const dump = othersDump(teamId, remaining, seed, base);
+  const dump = othersDump(teamId, remaining, seed, base, conference);
   const starts = [dump, ...helpers];
   let best: Record<string, string> | null = null;
   let bestScore = Infinity;
