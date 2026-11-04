@@ -343,6 +343,125 @@ function guaranteedCcg(
   );
 }
 
+/** Win-out destiny: still in the CCG field even after both spoil overlays, including unresolved computer/CFP ties. */
+function reachesCcgAgainstSpoilers(
+  conference: ScenarioConference,
+  teams: Team[],
+  games: Game[],
+  teamId: string,
+  remaining: Game[],
+  seed: ScenarioProjection,
+  basePicks: Record<string, string>,
+  cfpRanks?: Map<string, number>,
+): boolean {
+  return spoilOverlays(teamId, remaining, seed, conference).every((overlay) =>
+    hasCcgPath(
+      conference,
+      projectWith(conference, teams, games, mergePicks(basePicks, overlay), cfpRanks),
+      teamId,
+    ),
+  );
+}
+
+function pathScore(
+  conference: ScenarioConference,
+  projection: ScenarioProjection,
+  teamId: string,
+): number {
+  const inCcg = hasCcgPath(conference, projection, teamId);
+  const place = rowsFor(projection, teamId)[0]?.place ?? 99;
+  return (inCcg ? 0 : 100) + place;
+}
+
+function chooseOverlay(
+  conference: ScenarioConference,
+  teams: Team[],
+  games: Game[],
+  teamId: string,
+  basePicks: Record<string, string>,
+  overlays: Record<string, string>[],
+  prefer: "best" | "worst",
+  cfpRanks?: Map<string, number>,
+): Record<string, string> {
+  let chosen = overlays[0] ?? {};
+  let chosenScore = prefer === "best" ? Infinity : -Infinity;
+  for (const overlay of overlays) {
+    const projection = projectWith(
+      conference,
+      teams,
+      games,
+      mergePicks(basePicks, overlay),
+      cfpRanks,
+    );
+    const score = pathScore(conference, projection, teamId);
+    if (prefer === "best" ? score < chosenScore : score > chosenScore) {
+      chosen = overlay;
+      chosenScore = score;
+    }
+  }
+  return chosen;
+}
+
+function fillUnpicked(
+  remaining: Game[],
+  picks: Record<string, string>,
+  seed: ScenarioProjection,
+  prefer: "best" | "worst",
+): Record<string, string> {
+  const place = placeMap(seed);
+  const next = { ...picks };
+  for (const game of remaining) {
+    if (next[game.id]) continue;
+    const homePlace = place.get(game.homeTeamId) ?? 99;
+    const awayPlace = place.get(game.awayTeamId) ?? 99;
+    next[game.id] =
+      prefer === "worst"
+        ? homePlace <= awayPlace
+          ? game.homeTeamId
+          : game.awayTeamId
+        : homePlace >= awayPlace
+          ? game.homeTeamId
+          : game.awayTeamId;
+  }
+  return next;
+}
+
+export function scenarioProofPicks(
+  conference: ScenarioConference,
+  teams: Team[],
+  games: Game[],
+  teamId: string,
+  options: CcgOptions = {},
+): Record<string, string> {
+  const extra = options.extraPicks ?? {};
+  const seed = projectWith(conference, teams, games, extra, options.cfpRanks);
+  const remaining = seed.remainingConference.filter((game) => extra[game.id] == null);
+  const row = teamRow(conference, teams, games, teamId, remaining, seed, options);
+  const nextGame = row.nextGame;
+  const winOwn = winOwnRemaining(teamId, remaining);
+  const spoilers = spoilOverlays(teamId, remaining, seed, conference);
+  const helpers = [{}, ...pathOverlays(teamId, remaining, seed, conference)];
+  const prefer: "best" | "worst" = row.status === "eliminated" ? "best" : "worst";
+  let own: Record<string, string> = winOwn;
+  if (row.status === "clinch" && nextGame) {
+    own = mergePicks({ [nextGame.id]: teamId }, loseOwnRemaining(teamId, remaining, nextGame.id));
+  } else if ((row.status === "alive" || row.status === "out-loss") && nextGame) {
+    own = mergePicks(winOwn, { [nextGame.id]: opponentId(nextGame, teamId) });
+  }
+  const base = mergePicks(extra, own);
+  const overlay = chooseOverlay(
+    conference,
+    teams,
+    games,
+    teamId,
+    base,
+    prefer === "best" ? helpers : spoilers,
+    prefer,
+    options.cfpRanks,
+  );
+  return fillUnpicked(remaining, mergePicks(base, overlay), seed, prefer);
+}
+
 function projectWith(
   conference: ScenarioConference,
   teams: Team[],
@@ -402,7 +521,7 @@ function teamRow(
     winOwn,
     options.cfpRanks,
   );
-  const clinchesWinOut = guaranteedCcg(
+  const clinchesWinOut = reachesCcgAgainstSpoilers(
     conference,
     teams,
     games,
@@ -610,6 +729,22 @@ export function gameImplications(
   return { conference, outcomes };
 }
 
+export function proofPicksCopy(status: CcgStatus, teamName: string): string {
+  if (status === "clinch") {
+    return `Proof: ${teamName} wins this week, loses the rest, and every other remaining game is a worst case.`;
+  }
+  if (status === "destiny") {
+    return `Proof: ${teamName} wins out; every other remaining game is a worst case. A computer, CFP, or undetermined tie still counts as controlling their own destiny.`;
+  }
+  if (status === "alive") {
+    return `Proof: ${teamName} loses next, then wins out; every other remaining game is a worst case.`;
+  }
+  if (status === "out-loss") {
+    return `Proof: ${teamName} loses next, then wins out; every other remaining game is a worst case. They miss the CCG.`;
+  }
+  return `Proof: ${teamName} wins out and everyone else helps; they still miss the CCG.`;
+}
+
 export function contentionCopy(row: CcgTeamContention, teamName: string): string {
   if (row.status === "eliminated") {
     return `${teamName} is eliminated from the conference championship game.`;
@@ -626,7 +761,7 @@ export function contentionCopy(row: CcgTeamContention, teamName: string): string
     return `${teamName} clinches a CCG berth with a win over ${opp}.${loss}`;
   }
   if (row.status === "destiny") {
-    return `${teamName} controls their own destiny: win out and they reach the CCG in every remaining-game scenario.`;
+    return `${teamName} controls their own destiny: win out and they reach the CCG in every remaining-game scenario, including ties that still need computer rankings, CFP rankings, or another undetermined tiebreaker.`;
   }
   if (row.status === "out-loss") {
     const opp = row.nextGame

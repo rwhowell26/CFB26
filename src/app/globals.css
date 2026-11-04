@@ -2486,6 +2486,12 @@ input[type="password"],
   color: var(--muted);
 }
 
+.sbc-proof-note {
+  margin: 0.2rem 0 0.35rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
 .sbc-conf-select {
   display: grid;
   gap: 0.08rem;

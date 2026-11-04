@@ -1,10 +1,12 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { SCENARIO_CONFERENCES } from "./scenario-conferences.ts";
+import { projectConference } from "./scenario-engine.ts";
 import {
   conferenceContention,
   eliminationGamesThisWeek,
   gameImplications,
+  scenarioProofPicks,
 } from "./ccg-contention.ts";
 import type { Game, Team } from "./types.ts";
 
@@ -62,17 +64,22 @@ const TEAMS = ["NAVY", "TULN", "MEM", "USF", "FAU"].map((id) =>
 );
 
 test("a team that must win this week to keep a CCG path is out with a loss", () => {
+  // MEM 1-1, remaining vs FAU. NAVY is 3-0 with no games left; TULN is 1-0
+  // with a leftover vs USF. MEM can catch 2nd only if they win and TULN loses,
+  // so a next-game loss eliminates them and winning out is not destiny.
   const games = [
     game("1", "NAVY", "USF", "NAVY"),
     game("2", "NAVY", "FAU", "NAVY"),
-    game("3", "TULN", "USF", "TULN"),
+    game("3", "NAVY", "MEM", "NAVY"),
     game("4", "TULN", "FAU", "TULN"),
-    game("5", "MEM", "FAU", "MEM"),
-    game("6", "MEM", "USF", null, 8),
+    game("5", "MEM", "USF", "MEM"),
+    game("6", "MEM", "FAU", null, 8),
+    game("7", "TULN", "USF", null, 8),
   ];
   const result = conferenceContention(AAC, TEAMS, games, { week: 8 });
   assert.equal(result.byTeam.get("MEM")?.status, "out-loss");
   assert.equal(result.byTeam.get("MEM")?.survivesNextLoss, false);
+  assert.equal(result.byTeam.get("MEM")?.clinchesWinOut, false);
   assert.equal(result.byTeam.get("FAU")?.status, "eliminated");
   assert.equal(result.byTeam.get("NAVY")?.hasPath, true);
   assert.equal(result.byTeam.get("TULN")?.hasPath, true);
@@ -81,7 +88,7 @@ test("a team that must win this week to keep a CCG path is out with a loss", () 
     memElim.some(
       (item) =>
         item.game.id === "6" &&
-        item.eliminatesIf.winnerId === "USF" &&
+        item.eliminatesIf.winnerId === "FAU" &&
         item.eliminatesIf.teamIds.includes("MEM"),
     ),
   );
@@ -105,7 +112,7 @@ test("winning this week's game to lock a CCG berth is gold clinch", () => {
   assert.equal(result.byTeam.get("FAU")?.status, "eliminated");
 });
 
-test("winning out is not destiny if other teams can still catch them", () => {
+test("winning out into an unresolved computer tie is destiny", () => {
   const games = [
     game("1", "NAVY", "FAU", "NAVY"),
     game("2", "NAVY", "USF", "NAVY"),
@@ -119,10 +126,11 @@ test("winning out is not destiny if other teams can still catch them", () => {
   ];
   const result = conferenceContention(AAC, TEAMS, games, { week: 8 });
   assert.equal(result.byTeam.get("NAVY")?.hasPath, true);
-  assert.equal(result.byTeam.get("NAVY")?.clinchesWinOut, false);
-  assert.equal(result.byTeam.get("NAVY")?.status, "alive");
-  assert.equal(result.byTeam.get("TULN")?.clinchesWinOut, false);
-  assert.equal(result.byTeam.get("MEM")?.clinchesWinOut, false);
+  assert.equal(result.byTeam.get("NAVY")?.clinchesWinOut, true);
+  assert.equal(result.byTeam.get("NAVY")?.clinchesThisWin, false);
+  assert.equal(result.byTeam.get("NAVY")?.status, "destiny");
+  assert.equal(result.byTeam.get("TULN")?.status, "destiny");
+  assert.equal(result.byTeam.get("MEM")?.status, "destiny");
 });
 
 test("a top-two chaser still has a path when current occupants can lose remaining games", () => {
@@ -234,6 +242,107 @@ test("a division path after a next-game loss is alive, not out with a loss", () 
     appElim.some((item) => item.game.id === "next" && item.eliminatesIf.winnerId === GSU),
     false,
   );
+});
+
+test("proof picks win out and spoil others for destiny", () => {
+  const games = [
+    game("1", "NAVY", "USF", "NAVY"),
+    game("2", "TULN", "FAU", "TULN"),
+    game("3", "TULN", "USF", "TULN"),
+    game("4", "MEM", "FAU", "MEM"),
+    game("5", "NAVY", "FAU", null, 8),
+    game("6", "NAVY", "TULN", null, 9),
+    game("7", "NAVY", "MEM", null, 9),
+  ];
+  const picks = scenarioProofPicks(AAC, TEAMS, games, "NAVY", { week: 8 });
+  assert.equal(picks["5"], "NAVY");
+  assert.equal(picks["6"], "NAVY");
+  assert.equal(picks["7"], "NAVY");
+  const projected = projectConference(AAC, TEAMS, games, { picks });
+  const navy = projected.tables[0].rows.find((row) => row.teamId === "NAVY");
+  assert.ok(navy);
+  assert.ok(navy!.place <= 2);
+  assert.ok(
+    projected.championship.homeId === "NAVY" || projected.championship.awayId === "NAVY",
+  );
+});
+
+test("proof picks lose next then win out for alive and out-with-a-loss", () => {
+  const games = [
+    game("1", "NAVY", "USF", "NAVY"),
+    game("2", "NAVY", "FAU", "NAVY"),
+    game("3", "NAVY", "MEM", "NAVY"),
+    game("4", "TULN", "FAU", "TULN"),
+    game("5", "MEM", "USF", "MEM"),
+    game("6", "MEM", "FAU", null, 8),
+    game("7", "TULN", "USF", null, 8),
+  ];
+  const mem = conferenceContention(AAC, TEAMS, games, { week: 8 }).byTeam.get("MEM");
+  assert.equal(mem?.status, "out-loss");
+  const picks = scenarioProofPicks(AAC, TEAMS, games, "MEM", { week: 8 });
+  assert.equal(picks["6"], "FAU");
+  assert.equal(picks["7"], "TULN");
+  const projected = projectConference(AAC, TEAMS, games, { picks });
+  assert.notEqual(projected.championship.homeId, "MEM");
+  assert.notEqual(projected.championship.awayId, "MEM");
+
+  const next = sbc("next", APP, GSU, null, 10);
+  const appGames = [
+    sbc("a1", APP, COASTAL, APP),
+    sbc("a2", APP, ODU, APP),
+    sbc("a3", JMU, APP, JMU),
+    sbc("a4", MARSHALL, APP, MARSHALL),
+    sbc("g1", GASO, MARSHALL, GASO),
+    sbc("g2", GASO, COASTAL, GASO),
+    sbc("g3", GASO, ODU, GASO),
+    sbc("g4", JMU, GASO, JMU),
+    sbc("j1", JMU, MARSHALL, JMU),
+    sbc("j2", JMU, COASTAL, JMU),
+    sbc("j3", WEST[0], JMU, WEST[0]),
+    sbc("j4", WEST[1], JMU, WEST[1]),
+    sbc("s1", GSU, MARSHALL, GSU),
+    sbc("s2", GSU, ODU, GSU),
+    sbc("s3", COASTAL, GSU, COASTAL),
+    sbc("s4", WEST[2], GSU, WEST[2]),
+    next,
+    sbc("ar1", APP, WEST[3], null, 11),
+    sbc("ar2", APP, WEST[4], null, 12),
+    sbc("ar3", APP, WEST[5], null, 13),
+    sbc("gr1", GASO, WEST[5], null, 11),
+    sbc("gr2", GASO, WEST[6], null, 12),
+    sbc("jr1", JMU, WEST[6], null, 11),
+    sbc("sr1", GSU, WEST[0], null, 11),
+    sbc("sr2", GSU, WEST[1], null, 12),
+  ];
+  const app = conferenceContention(SBC, SBC_TEAMS, appGames, { week: 10 }).byTeam.get(APP);
+  assert.equal(app?.status, "alive");
+  const appPicks = scenarioProofPicks(SBC, SBC_TEAMS, appGames, APP, { week: 10 });
+  assert.equal(appPicks["next"], GSU);
+  assert.equal(appPicks["ar1"], APP);
+  assert.equal(appPicks["ar2"], APP);
+  assert.equal(appPicks["ar3"], APP);
+});
+
+test("proof picks win out with help for an eliminated team still missing the CCG", () => {
+  const games = [
+    game("1", "NAVY", "USF", "NAVY"),
+    game("2", "NAVY", "FAU", "NAVY"),
+    game("3", "TULN", "USF", "TULN"),
+    game("4", "TULN", "FAU", "TULN"),
+    game("5", "MEM", "FAU", "MEM"),
+    game("6", "MEM", "USF", null, 8),
+    game("7", "FAU", "USF", null, 9),
+  ];
+  const result = conferenceContention(AAC, TEAMS, games, { week: 8 });
+  assert.equal(result.byTeam.get("FAU")?.status, "eliminated");
+  const picks = scenarioProofPicks(AAC, TEAMS, games, "FAU", { week: 8 });
+  assert.equal(picks["7"], "FAU");
+  const projected = projectConference(AAC, TEAMS, games, { picks });
+  const fau = projected.tables[0].rows.find((row) => row.teamId === "FAU");
+  assert.ok(fau);
+  assert.ok(fau!.place > 2);
+  assert.notEqual(projected.championship.homeId, "FAU");
+  assert.notEqual(projected.championship.awayId, "FAU");
 });
 
 test("clicking a conference game reports who a result would eliminate", () => {
