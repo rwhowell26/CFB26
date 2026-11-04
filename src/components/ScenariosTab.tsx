@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { SEASON_YEAR } from "@/lib/season";
 import {
   SCENARIO_CONFERENCES,
@@ -17,6 +17,8 @@ import { formatPct, formatWinLoss, groupGamesByWeek } from "@/lib/sunbelt";
 import { conferenceForTeam, teamsInConference } from "@/lib/scenario-conferences";
 import {
   conferenceContention,
+  proofPicksCopy,
+  scenarioProofPicks,
   weekSwingsThisWeek,
 } from "@/lib/ccg-contention";
 import { CcgStatusCard } from "@/components/CcgStatusCard";
@@ -43,6 +45,19 @@ function loadJson<T>(key: string, fallback: T): T {
   } catch {
     return fallback;
   }
+}
+
+function loadStoredConferenceId(): string | null {
+  if (typeof window === "undefined") return null;
+  const raw = window.localStorage.getItem(CONF_KEY);
+  if (!raw) return null;
+  try {
+    const parsed = JSON.parse(raw);
+    if (typeof parsed === "string" && parsed) return parsed;
+  } catch {
+    if (!raw.startsWith("{") && !raw.startsWith("[")) return raw;
+  }
+  return null;
 }
 
 function loadPicks(id: ScenarioConferenceId): Record<string, string> {
@@ -105,20 +120,24 @@ export function ScenariosTab({
   const [conferenceId, setConferenceId] = useState<ScenarioConferenceId>("sunbelt");
   const [picks, setPicks] = useState<Record<string, string>>({});
   const [picksReady, setPicksReady] = useState(false);
+  const [conferenceHydrated, setConferenceHydrated] = useState(false);
   const [hideCompleted, setHideCompleted] = useState(true);
+  const appliedProofKey = useRef("");
 
   useEffect(() => {
-    const stored = loadJson<string>(CONF_KEY, "sunbelt");
+    if (conferenceHydrated || available.length === 0) return;
+    const stored = loadStoredConferenceId();
     const match = available.find((conf) => conf.id === stored) ?? available[0];
     const id = match?.id ?? defaultScenarioConference(SCENARIO_CONFERENCES);
     setConferenceId(id);
     setPicks(loadPicks(id));
     setPicksReady(true);
-  }, [available]);
+    setConferenceHydrated(true);
+  }, [available, conferenceHydrated]);
 
   useEffect(() => {
     if (!picksReady) return;
-    window.localStorage.setItem(CONF_KEY, conferenceId);
+    window.localStorage.setItem(CONF_KEY, JSON.stringify(conferenceId));
     window.localStorage.setItem(picksKey(conferenceId), JSON.stringify(picks));
   }, [conferenceId, picks, picksReady]);
 
@@ -158,6 +177,7 @@ export function ScenariosTab({
   };
 
   const changeConference = (id: ScenarioConferenceId) => {
+    appliedProofKey.current = "";
     setConferenceId(id);
     setPicks(loadPicks(id));
   };
@@ -192,6 +212,30 @@ export function ScenariosTab({
       week,
     });
   }, [selectedInConf, conference, teams, games, cfpRanks, week]);
+
+  const applyProofPicks = () => {
+    if (!selectedInConf) return;
+    appliedProofKey.current = `${conference.id}:${selectedInConf.id}`;
+    setPicks(
+      scenarioProofPicks(conference, teams, games, selectedInConf.id, {
+        cfpRanks,
+        week,
+      }),
+    );
+  };
+
+  useEffect(() => {
+    if (!picksReady || !selectedInConf) return;
+    const key = `${conference.id}:${selectedInConf.id}`;
+    if (appliedProofKey.current === key) return;
+    appliedProofKey.current = key;
+    setPicks(
+      scenarioProofPicks(conference, teams, games, selectedInConf.id, {
+        cfpRanks,
+        week,
+      }),
+    );
+  }, [picksReady, conference, selectedInConf, teams, games, cfpRanks, week]);
 
   return (
     <div className="sbc-wrap">
@@ -292,6 +336,14 @@ export function ScenariosTab({
             <button
               type="button"
               className="ghost-btn"
+              onClick={applyProofPicks}
+              disabled={!selectedInConf}
+            >
+              Prove status
+            </button>
+            <button
+              type="button"
+              className="ghost-btn"
               onClick={() => setPicks({})}
               disabled={Object.keys(picks).length === 0}
             >
@@ -299,6 +351,9 @@ export function ScenariosTab({
             </button>
           </div>
         </header>
+        {selectedInConf && selectedRow ? (
+          <p className="sbc-proof-note">{proofPicksCopy(selectedRow.status, selectedInConf.shortName)}</p>
+        ) : null}
         {remainingWeeks.length === 0 ? (
           <p className="sbc-empty">No remaining conference games on the ESPN slate.</p>
         ) : (
