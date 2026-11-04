@@ -700,7 +700,9 @@ export function scenarioProofPicks(
   const spoilers = spoilOverlays(teamId, remaining, seed, conference);
   const helpers = [{}, ...pathOverlays(teamId, remaining, seed, conference)];
   const prefer: "best" | "worst" =
-    row.status === "eliminated" || row.status === "alive" ? "best" : "worst";
+    row.status === "eliminated" || row.status === "alive" || row.status === "out-loss"
+      ? "best"
+      : "worst";
   let own: Record<string, string> = winOwn;
   if (row.status === "clinch" && nextGame) {
     own = mergePicks({ [nextGame.id]: teamId }, loseOwnRemaining(teamId, remaining, nextGame.id));
@@ -1035,7 +1037,7 @@ export function proofPicksCopy(status: CcgStatus, teamName: string): string {
     return `Proof: ${teamName} loses next, then wins out; every other remaining game is a best case. They still occupy a CCG place, including an unresolved computer / SportSource tie.`;
   }
   if (status === "out-loss") {
-    return `Proof: ${teamName} loses next, then wins out; every other remaining game is a worst case. They miss the CCG.`;
+    return `Proof: ${teamName} loses next, then wins out; every other remaining game is a best case. Their best finish still misses the CCG.`;
   }
   return `Proof: ${teamName} wins out and everyone else helps; they still miss the CCG.`;
 }

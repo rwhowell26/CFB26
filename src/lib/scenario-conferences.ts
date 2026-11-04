@@ -68,7 +68,8 @@ export const SCENARIO_CONFERENCES: ScenarioConference[] = [
     shortLabel: "ACC",
     espnName: "Atlantic Coast Conference",
     sourceUrl: "https://theacc.com/documents/2026/7/15//ACC_Football_Tiebreaker_Policy_Jully_2026.pdf",
-    // 8-game and 9-game teams with the same wins or losses (5-4 and 4-4) share a CCG tie.
+    // ACC-only: 8-game and 9-game teams with the same wins or losses (5-4 and 4-4)
+    // share a CCG tie. Other conferences have even schedules.
     initialRank: "percentage-advantage",
     divisions: null,
     championship: "top-two",

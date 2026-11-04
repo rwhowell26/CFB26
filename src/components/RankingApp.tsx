@@ -321,8 +321,18 @@ export function RankingApp() {
   const snapshotExists = Boolean(store.snapshots[String(week)]);
 
   const handleSelectTeam = (teamId: string) => {
-    if (rankedSet.has(teamId)) setSelectedRankedId(teamId);
-    else setSelectedUnrankedId(teamId);
+    if (rankedSet.has(teamId)) {
+      setSelectedRankedId(teamId);
+      setSelectedUnrankedId(null);
+    } else {
+      setSelectedUnrankedId(teamId);
+      setSelectedRankedId(null);
+    }
+  };
+
+  const handleSelectTeamFromSlate = (teamId: string) => {
+    handleSelectTeam(teamId);
+    setTab("scenarios");
   };
 
   const updateRanked = (nextRanked: string[]) => {
@@ -741,7 +751,7 @@ export function RankingApp() {
               ? new Map(cfp.ranks.map((row) => [row.teamId, row.rank]))
               : undefined
           }
-          onSelectTeam={handleSelectTeam}
+          onSelectTeam={handleSelectTeamFromSlate}
           selectedTeamId={selectedTeamId}
         />
       ) : null}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { SEASON_YEAR } from "@/lib/season";
 import {
   SCENARIO_CONFERENCES,
@@ -117,23 +117,41 @@ export function ScenariosTab({
   selectedTeamId,
 }: Props) {
   const available = useMemo(() => conferencesPresent(teams), [teams]);
-  const [conferenceId, setConferenceId] = useState<ScenarioConferenceId>("sunbelt");
+  const selectedConfId = (() => {
+    if (!selectedTeamId) return undefined;
+    const team = teams.find((item) => item.id === selectedTeamId);
+    return team ? conferenceForTeam(team)?.id : undefined;
+  })();
+  const [conferenceId, setConferenceId] = useState<ScenarioConferenceId>(
+    () => selectedConfId ?? "sunbelt",
+  );
   const [picks, setPicks] = useState<Record<string, string>>({});
-  const [picksReady, setPicksReady] = useState(false);
-  const [conferenceHydrated, setConferenceHydrated] = useState(false);
+  const [picksReady, setPicksReady] = useState(() => Boolean(selectedConfId));
+  const [conferenceHydrated, setConferenceHydrated] = useState(() => Boolean(selectedConfId));
   const [hideCompleted, setHideCompleted] = useState(true);
   const appliedProofKey = useRef("");
+  const conferenceIdRef = useRef(conferenceId);
+  conferenceIdRef.current = conferenceId;
 
   useEffect(() => {
     if (conferenceHydrated || available.length === 0) return;
     const stored = loadStoredConferenceId();
-    const match = available.find((conf) => conf.id === stored) ?? available[0];
+    const selectedTeam = selectedTeamId
+      ? teams.find((team) => team.id === selectedTeamId)
+      : undefined;
+    const selectedConfId = selectedTeam
+      ? conferenceForTeam(selectedTeam)?.id
+      : undefined;
+    const match =
+      available.find((conf) => conf.id === selectedConfId) ??
+      available.find((conf) => conf.id === stored) ??
+      available[0];
     const id = match?.id ?? defaultScenarioConference(SCENARIO_CONFERENCES);
     setConferenceId(id);
     setPicks(loadPicks(id));
     setPicksReady(true);
     setConferenceHydrated(true);
-  }, [available, conferenceHydrated]);
+  }, [available, conferenceHydrated, selectedTeamId, teams]);
 
   useEffect(() => {
     if (!picksReady) return;
@@ -176,11 +194,20 @@ export function ScenariosTab({
     });
   };
 
-  const changeConference = (id: ScenarioConferenceId) => {
+  const changeConference = useCallback((id: ScenarioConferenceId) => {
     appliedProofKey.current = "";
     setConferenceId(id);
     setPicks(loadPicks(id));
-  };
+  }, []);
+
+  useEffect(() => {
+    if (!conferenceHydrated || !selectedTeamId) return;
+    const team = teams.find((item) => item.id === selectedTeamId);
+    const conf = team ? conferenceForTeam(team) : null;
+    if (!conf || !available.some((item) => item.id === conf.id)) return;
+    if (conf.id === conferenceIdRef.current) return;
+    changeConference(conf.id);
+  }, [available, changeConference, conferenceHydrated, selectedTeamId, teams]);
 
   const nameOf = (id: string | null) =>
     id ? (teamsById.get(id)?.shortName ?? id) : "TBD";
