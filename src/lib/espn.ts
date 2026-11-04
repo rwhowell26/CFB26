@@ -21,10 +21,12 @@ async function cachedFetch<T>(key: string, ttlMs: number, loader: () => Promise<
   return value;
 }
 
-async function getJson<T>(url: string, fresh = false): Promise<T> {
+async function getJson<T>(url: string): Promise<T> {
+  // Scoreboards must not use Next's Data Cache: `revalidate: 300` can keep
+  // serving a completed week's pre-kickoff snapshot until the next deploy.
   const res = await fetch(url, {
     headers: { Accept: "application/json" },
-    ...(fresh ? { cache: "no-store" as const } : { next: { revalidate: 300 } }),
+    cache: "no-store",
   });
   if (!res.ok) {
     throw new Error(`ESPN request failed (${res.status}) for ${url}`);
@@ -365,7 +367,7 @@ export async function fetchAllGames(
   games: Game[];
   cfp: CfpPoll;
 }> {
-  const ttl = options.live ? 30 * 1000 : 5 * 60 * 1000;
+    const ttl = options.live ? 30 * 1000 : 45 * 1000;
   return cachedFetch(`all-games-colors-cfp-${year}${options.live ? "-live" : ""}`, ttl, async () => {
     const [teams, weeks, colors, cfp] = await Promise.all([
       fetchFbsTeams(year),
@@ -387,7 +389,6 @@ export async function fetchAllGames(
       weekNumbers.map(async (week) => {
         const data = await getJson<ScoreboardResponse>(
           `${ESPN_SITE}/scoreboard?year=${year}&week=${week}&seasontype=2&groups=80&limit=300`,
-          Boolean(options.live),
         );
         return parseScoreboardGames(data, fbsIds, week, colors);
       }),

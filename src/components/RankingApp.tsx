@@ -143,7 +143,7 @@ export function RankingApp() {
 
     (async () => {
       try {
-        const res = await fetch("/api/games", { signal: controller.signal });
+        const res = await fetch("/api/games", { cache: "no-store", signal: controller.signal });
         const json = (await res.json()) as GamesPayload & { error?: string };
         if (!res.ok) throw new Error(json.error || "Failed to load season data");
         if (cancelled) return;
@@ -204,19 +204,29 @@ export function RankingApp() {
   }, []);
 
   useEffect(() => {
-    if (tab !== "scenarios") return;
-    const poll = window.setInterval(async () => {
+    if (loading || error) return;
+    const refresh = async () => {
       try {
-        const res = await fetch("/api/games?live=1");
+        const res = await fetch("/api/games?live=1", { cache: "no-store" });
         const json = (await res.json()) as GamesPayload & { error?: string };
         if (!res.ok) return;
         setData(json);
       } catch {
         /* keep the last good slate */
       }
-    }, 45_000);
-    return () => window.clearInterval(poll);
-  }, [tab]);
+    };
+    const poll = window.setInterval(refresh, 45_000);
+    const onVisible = () => {
+      if (document.visibilityState === "visible") void refresh();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    window.addEventListener("focus", onVisible);
+    return () => {
+      window.clearInterval(poll);
+      document.removeEventListener("visibilitychange", onVisible);
+      window.removeEventListener("focus", onVisible);
+    };
+  }, [loading, error]);
 
   const teams = useMemo(() => data?.teams ?? [], [data]);
   const games = useMemo(() => data?.games ?? [], [data]);
