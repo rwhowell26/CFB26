@@ -64,8 +64,8 @@ const ACC = SCENARIO_CONFERENCES.find((conf) => conf.id === "acc")!;
 const TEAMS = ["NAVY", "TULN", "MEM", "USF", "FAU"].map((id) =>
   team(id, "American Conference"),
 );
-const ACC_TEAMS = ["MIA", "WAKE", "CLEM", "PITT", "FSU", "DUKE", "SMU", "GT", "BC"].map((id) =>
-  team(id, "Atlantic Coast Conference"),
+const ACC_TEAMS = ["MIA", "WAKE", "CLEM", "PITT", "FSU", "DUKE", "SMU", "GT", "BC", "NCST"].map(
+  (id) => team(id, "Atlantic Coast Conference"),
 );
 
 function acc(
@@ -291,6 +291,40 @@ test("an 8-game ACC team that loses next into a 4-loss SportSource pile is alive
     swings.some((item) => item.kind === "eliminates" && item.winnerId === "FSU"),
     false,
   );
+});
+
+test("a next-game loss into a 4-loss SportSource pile is alive even if dump leaves extra leaders", () => {
+  // NCST 0-1 loses next vs DUKE and beats GT → 1-2. PITT is 2-2. Same two losses,
+  // unequal games → SportSource group at #2 behind MIA, unless leftover WAKE/CLEM
+  // is dumped onto WAKE (2-0 → 3-0) to share 1.000 with MIA and push NCST to #3.
+  const games = [
+    acc("m1", "MIA", "PITT", "MIA"),
+    acc("m2", "MIA", "FSU", "MIA"),
+    acc("m3", "MIA", "GT", "MIA"),
+    acc("m4", "MIA", "SMU", "MIA"),
+    acc("m5", "MIA", "NCST", "MIA"),
+    acc("m6", "MIA", "CLEM", "MIA"),
+    acc("w1", "WAKE", "FSU", "WAKE"),
+    acc("w2", "WAKE", "GT", "WAKE"),
+    acc("p1", "PITT", "FSU", "PITT"),
+    acc("p2", "PITT", "GT", "PITT"),
+    acc("p3", "PITT", "SMU", "SMU"),
+    acc("next", "NCST", "DUKE", null, 8),
+    acc("n2", "NCST", "GT", null, 9),
+    acc("left", "WAKE", "CLEM", null, 9),
+  ];
+  const result = conferenceContention(ACC, ACC_TEAMS, games, { week: 8 });
+  const ncst = result.byTeam.get("NCST");
+  assert.equal(ncst?.hasPath, true);
+  assert.equal(ncst?.survivesNextLoss, true);
+  assert.equal(ncst?.status, "alive");
+  const picks = scenarioProofPicks(ACC, ACC_TEAMS, games, "NCST", { week: 8 });
+  assert.equal(picks["next"], "DUKE");
+  assert.equal(picks["n2"], "NCST");
+  const projected = projectConference(ACC, ACC_TEAMS, games, { picks });
+  const row = projected.tables[0].rows.find((item) => item.teamId === "NCST");
+  assert.ok((row?.place ?? 99) <= 2);
+  assert.equal(row?.unresolved, true);
 });
 
 test("a division path after a next-game loss is alive, not out with a loss", () => {

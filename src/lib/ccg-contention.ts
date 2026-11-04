@@ -323,8 +323,30 @@ function existsCcgPath(
       teamId,
     );
   if (inCcg({})) return true;
-  if (pathOverlays(teamId, remaining, seed, conference).some(inCcg)) return true;
-  return inCcg(othersDump(teamId, remaining, seed, basePicks, conference));
+  const helpers = pathOverlays(teamId, remaining, seed, conference);
+  if (helpers.some(inCcg)) return true;
+  const dump = othersDump(teamId, remaining, seed, basePicks, conference);
+  if (inCcg(dump)) return true;
+  // Dump can leave extra unique teams ahead. Flip leftovers the same way
+  // Alive proof does: if any CCG place remains, including an unresolved
+  // computer / SportSource pile at #2, the team is not out after a loss.
+  for (const start of [dump, ...helpers]) {
+    const candidate = greedyImprovePicks(
+      conference,
+      teams,
+      games,
+      teamId,
+      remaining,
+      fillUnpicked(remaining, mergePicks(basePicks, start), seed, "best"),
+      cfpRanks,
+      "best",
+      true,
+    );
+    if (hasCcgPath(conference, projectWith(conference, teams, games, candidate, cfpRanks), teamId)) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function guaranteedCcg(
@@ -628,6 +650,7 @@ function greedyImprovePicks(
   picks: Record<string, string>,
   cfpRanks: Map<string, number> | undefined,
   prefer: "best" | "worst",
+  stopAtCcg = false,
 ): Record<string, string> {
   const locked = new Set(
     remaining.filter((game) => involves(game, teamId)).map((game) => game.id),
@@ -636,10 +659,12 @@ function greedyImprovePicks(
   const scoreOf = (next: Record<string, string>) =>
     placeProofScore(conference, projectWith(conference, teams, games, next, cfpRanks), teamId);
   let currentScore = scoreOf(current);
+  const done = (score: number) =>
+    prefer === "best" && (score === 0 || (stopAtCcg && score < 1000));
   const better = (left: number, right: number) =>
     prefer === "best" ? left < right : left > right;
   for (let pass = 0; pass < 2; pass++) {
-    if (prefer === "best" && currentScore === 0) break;
+    if (done(currentScore)) break;
     for (const game of remaining) {
       if (locked.has(game.id)) continue;
       const home = mergePicks(current, { [game.id]: game.homeTeamId });
@@ -652,7 +677,7 @@ function greedyImprovePicks(
       if (chosen !== current) {
         current = chosen;
         currentScore = chosenScore;
-        if (prefer === "best" && currentScore === 0) return current;
+        if (done(currentScore)) return current;
       }
     }
   }
@@ -882,15 +907,27 @@ export function weekSwingsThisWeek(
   const remaining = seed.remainingConference.filter((game) => extra[game.id] == null);
   const baseline = teamRow(conference, teams, games, teamId, remaining, seed, options);
   if (baseline.status === "eliminated") return [];
-  const weekGames = remaining.filter((game) => options.week == null || game.week === options.week);
+  const weekGames = remaining.filter(
+    (game) => involves(game, teamId) && (options.week == null || game.week === options.week),
+  );
   const out: CcgWeekSwing[] = [];
   for (const game of weekGames) {
     for (const winnerId of [game.homeTeamId, game.awayTeamId]) {
-      const after = conferenceContention(conference, teams, games, {
-        ...options,
-        extraPicks: mergePicks(extra, { [game.id]: winnerId }),
-      }).byTeam.get(teamId);
-      if (after?.status === "eliminated") {
+      const nextExtra = mergePicks(extra, { [game.id]: winnerId });
+      const afterSeed = projectWith(conference, teams, games, nextExtra, options.cfpRanks);
+      const afterRemaining = afterSeed.remainingConference.filter(
+        (item) => nextExtra[item.id] == null,
+      );
+      const after = teamRow(
+        conference,
+        teams,
+        games,
+        teamId,
+        afterRemaining,
+        afterSeed,
+        { ...options, extraPicks: nextExtra },
+      );
+      if (after.status === "eliminated") {
         out.push({ game, winnerId, kind: "eliminates" });
       }
       if (winnerId === teamId) {
@@ -995,7 +1032,7 @@ export function proofPicksCopy(status: CcgStatus, teamName: string): string {
     return `Proof: ${teamName} wins out; every other remaining game is a worst case. A computer, CFP, or undetermined tie still counts as controlling their own destiny.`;
   }
   if (status === "alive") {
-    return `Proof: ${teamName} loses next, then wins out; every other remaining game is a best case. They still finish first.`;
+    return `Proof: ${teamName} loses next, then wins out; every other remaining game is a best case. They still occupy a CCG place, including an unresolved computer / SportSource tie.`;
   }
   if (status === "out-loss") {
     return `Proof: ${teamName} loses next, then wins out; every other remaining game is a worst case. They miss the CCG.`;

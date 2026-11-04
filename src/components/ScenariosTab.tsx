@@ -235,7 +235,7 @@ export function ScenariosTab({
         week,
       }),
     );
-  }, [picksReady, conference, selectedInConf, teams, games, cfpRanks, week]);
+  }, [picksReady, conference, selectedInConf?.id, teams, games, cfpRanks, week]);
 
   return (
     <div className="sbc-wrap">
