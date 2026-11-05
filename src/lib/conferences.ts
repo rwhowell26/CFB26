@@ -38,8 +38,8 @@ export function isIndependentConference(name: string): boolean {
 const TABLE_ORDER = [
   "ACC",
   "Big 10",
-  "SEC",
   "Big 12",
+  "SEC",
   "AAC",
   "CUSA",
   "MAC",

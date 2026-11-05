@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
+import { playoffTableSortKey } from "./conferences.ts";
 import {
   applyConferenceGame,
   atLargePoolTeams,
@@ -256,4 +257,8 @@ test("eliminated conference teams sort by most recent knockout date", () => {
     acc.eliminated.map((row) => row.id),
     ["FSU", "GT"],
   );
+});
+
+test("Playoff tables list Big 12 before the SEC", () => {
+  assert.ok(playoffTableSortKey("Big 12 Conference") < playoffTableSortKey("Southeastern Conference"));
 });

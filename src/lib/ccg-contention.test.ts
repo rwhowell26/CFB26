@@ -61,6 +61,10 @@ function game(
 
 const AAC = SCENARIO_CONFERENCES.find((conf) => conf.id === "aac")!;
 const ACC = SCENARIO_CONFERENCES.find((conf) => conf.id === "acc")!;
+const SEC = SCENARIO_CONFERENCES.find((conf) => conf.id === "sec")!;
+const SEC_TEAMS = ["MIZ", "UGA", "BAMA", "UK", "VAN", "AUB"].map((id) =>
+  team(id, "Southeastern Conference"),
+);
 const TEAMS = ["NAVY", "TULN", "MEM", "USF", "FAU"].map((id) =>
   team(id, "American Conference"),
 );
@@ -181,6 +185,39 @@ test("winning out is destiny when this week's win is not enough to clinch", () =
   assert.equal(result.byTeam.get("NAVY")?.clinchesWinOut, true);
   assert.equal(result.byTeam.get("NAVY")?.clinchesThisWin, false);
   assert.equal(result.byTeam.get("NAVY")?.status, "destiny");
+});
+
+test("winning out is not destiny when two other 3-1s dump them on SEC common opponents", () => {
+  function sec(
+    id: string,
+    home: string,
+    away: string,
+    winner: string | null,
+    week = 1,
+  ): Game {
+    return game(id, home, away, winner, week, "Southeastern Conference");
+  }
+  const games = [
+    sec("uga-bama", "UGA", "BAMA", "UGA"),
+    sec("uga-van", "UGA", "VAN", "UGA"),
+    sec("uga-aub", "UGA", "AUB", "UGA"),
+    sec("bama-van", "BAMA", "VAN", "BAMA"),
+    sec("bama-aub", "BAMA", "AUB", "BAMA"),
+    sec("miz-van", "MIZ", "VAN", "VAN"),
+    sec("miz-aub", "MIZ", "AUB", "MIZ"),
+    sec("uk-van", "UK", "VAN", "UK"),
+    sec("uk-aub", "UK", "AUB", "UK"),
+    sec("miz-uga", "MIZ", "UGA", null, 8),
+    sec("miz-uk", "UK", "MIZ", null, 8),
+    sec("bama-uk", "BAMA", "UK", null, 8),
+  ];
+  const result = conferenceContention(SEC, SEC_TEAMS, games, { week: 8 });
+  assert.equal(result.byTeam.get("MIZ")?.hasPath, true);
+  assert.equal(result.byTeam.get("MIZ")?.clinchesWinOut, false);
+  assert.notEqual(result.byTeam.get("MIZ")?.status, "destiny");
+  assert.ok(
+    result.byTeam.get("UGA")?.status === "destiny" || result.byTeam.get("UGA")?.status === "clinch",
+  );
 });
 
 const SBC = SCENARIO_CONFERENCES.find((conf) => conf.id === "sunbelt")!;

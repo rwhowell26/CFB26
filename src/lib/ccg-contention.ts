@@ -294,6 +294,186 @@ function pathOverlays(
   ];
 }
 
+function projectedConfRecord(
+  teamId: string,
+  confGames: Game[],
+  picks: Record<string, string>,
+  assumeRemainingWins: boolean,
+): { wins: number; losses: number } {
+  let wins = 0;
+  let losses = 0;
+  for (const game of confGames) {
+    if (!involves(game, teamId)) continue;
+    let winner: string | null = null;
+    if (
+      game.status === "final" &&
+      game.homeScore != null &&
+      game.awayScore != null &&
+      game.homeScore !== game.awayScore
+    ) {
+      winner = game.homeScore > game.awayScore ? game.homeTeamId : game.awayTeamId;
+    } else if (picks[game.id]) {
+      winner = picks[game.id];
+    } else if (assumeRemainingWins) {
+      winner = teamId;
+    }
+    if (!winner) continue;
+    if (winner === teamId) wins += 1;
+    else losses += 1;
+  }
+  return { wins, losses };
+}
+
+function recordAtLeastAsGood(
+  best: { wins: number; losses: number },
+  target: { wins: number; losses: number },
+): boolean {
+  const bestPct = best.wins + best.losses === 0 ? -1 : best.wins / (best.wins + best.losses);
+  const targetPct = target.wins + target.losses === 0 ? -1 : target.wins / (target.wins + target.losses);
+  if (bestPct !== targetPct) return bestPct >= targetPct;
+  return best.wins >= target.wins;
+}
+
+function outsiderWinner(game: Game, confGames: Game[]): string {
+  const homeNow = projectedConfRecord(game.homeTeamId, confGames, {}, false);
+  const awayNow = projectedConfRecord(game.awayTeamId, confGames, {}, false);
+  return recordAtLeastAsGood(homeNow, awayNow) ? game.homeTeamId : game.awayTeamId;
+}
+
+function giveWinsTo(
+  favoredIds: string[],
+  remaining: Game[],
+  confGames: Game[],
+  winOwn: Record<string, string>,
+  mutual: Record<string, string> = {},
+): Record<string, string> {
+  const favored = new Set(favoredIds);
+  const picks = { ...winOwn, ...mutual };
+  const open = remaining.filter((game) => !picks[game.id]);
+  for (const game of open) {
+    const homeF = favored.has(game.homeTeamId);
+    const awayF = favored.has(game.awayTeamId);
+    if (homeF !== awayF) {
+      picks[game.id] = homeF ? game.homeTeamId : game.awayTeamId;
+    } else if (homeF && awayF) {
+      picks[game.id] = game.homeTeamId;
+    } else {
+      picks[game.id] = outsiderWinner(game, confGames);
+    }
+  }
+  return picks;
+}
+
+/**
+ * Worst-case remaining games for a win-out. A packed same-record pile can
+ * actually *help* the selected team (they win the big tie). Also try every
+ * pair of rivals who can match that record — a smaller pile is what dumps
+ * Missouri behind Georgia and Alabama at 7-2.
+ */
+function othersLeapfrogWinOut(
+  teamId: string,
+  remaining: Game[],
+  confGames: Game[],
+  winOwn: Record<string, string>,
+  members: string[],
+  conference: ScenarioConference,
+  teams: Team[],
+  games: Game[],
+  cfpRanks?: Map<string, number>,
+): Record<string, string> {
+  const target = projectedConfRecord(teamId, confGames, winOwn, false);
+  const candidates = members
+    .filter(
+      (id) =>
+        id !== teamId &&
+        recordAtLeastAsGood(projectedConfRecord(id, confGames, winOwn, true), target),
+    )
+    .sort((a, b) => {
+      const ra = projectedConfRecord(a, confGames, winOwn, true);
+      const rb = projectedConfRecord(b, confGames, winOwn, true);
+      const pa = ra.wins + ra.losses === 0 ? 0 : ra.wins / (ra.wins + ra.losses);
+      const pb = rb.wins + rb.losses === 0 ? 0 : rb.wins / (rb.wins + rb.losses);
+      return pb - pa || rb.wins - ra.wins;
+    })
+    .slice(0, 8);
+  const open = remaining
+    .filter((game) => !involves(game, teamId) && !winOwn[game.id])
+    .sort((a, b) => a.date.localeCompare(b.date) || a.id.localeCompare(b.id));
+
+  const scoreOf = (picks: Record<string, string>) =>
+    placeProofScore(
+      conference,
+      projectWith(conference, teams, games, picks, cfpRanks),
+      teamId,
+    );
+
+  let worst = giveWinsTo(candidates, open, confGames, winOwn);
+  let worstScore = scoreOf(worst);
+  if (worstScore >= 1000) return worst;
+
+  const consider = (picks: Record<string, string>): boolean => {
+    const score = scoreOf(picks);
+    if (score > worstScore) {
+      worst = picks;
+      worstScore = score;
+    }
+    return worstScore >= 1000;
+  };
+
+  for (let i = 0; i < candidates.length; i++) {
+    for (let j = i + 1; j < candidates.length; j++) {
+      const a = candidates[i]!;
+      const b = candidates[j]!;
+      const mutualGames = open.filter((game) => involves(game, a) && involves(game, b));
+      let variants: Record<string, string>[] = [{}];
+      for (const game of mutualGames) {
+        const next: Record<string, string>[] = [];
+        for (const base of variants) {
+          next.push({ ...base, [game.id]: game.homeTeamId });
+          next.push({ ...base, [game.id]: game.awayTeamId });
+        }
+        variants = next;
+      }
+      for (const variant of variants) {
+        const picks = giveWinsTo([a, b], open, confGames, winOwn, variant);
+        const aRec = projectedConfRecord(a, confGames, picks, false);
+        const bRec = projectedConfRecord(b, confGames, picks, false);
+        if (!recordAtLeastAsGood(aRec, target) || !recordAtLeastAsGood(bRec, target)) continue;
+        if (
+          strictlyAhead(
+            aRec.wins,
+            aRec.losses,
+            target.wins,
+            target.losses,
+            conference.initialRank,
+          ) &&
+          strictlyAhead(
+            bRec.wins,
+            bRec.losses,
+            target.wins,
+            target.losses,
+            conference.initialRank,
+          )
+        ) {
+          return picks;
+        }
+        if (consider(picks)) return worst;
+      }
+    }
+  }
+  return worst;
+}
+
+function confGamesForSeed(seed: ScenarioProjection, games: Game[]): Game[] {
+  const memberSet = allSeedIds(seed);
+  return games.filter(
+    (game) =>
+      !game.championshipGame &&
+      memberSet.has(game.homeTeamId) &&
+      memberSet.has(game.awayTeamId),
+  );
+}
+
 function spoilOverlays(
   teamId: string,
   remaining: Game[],
@@ -304,6 +484,29 @@ function spoilOverlays(
     othersSpoil(teamId, remaining, seed, conference, "leaders"),
     othersSpoil(teamId, remaining, seed, conference, "trailers"),
   ];
+}
+
+function worstWinOutOverlay(
+  teamId: string,
+  remaining: Game[],
+  seed: ScenarioProjection,
+  conference: ScenarioConference,
+  teams: Team[],
+  games: Game[],
+  winOwn: Record<string, string>,
+  cfpRanks?: Map<string, number>,
+): Record<string, string> {
+  return othersLeapfrogWinOut(
+    teamId,
+    remaining,
+    confGamesForSeed(seed, games),
+    winOwn,
+    [...allSeedIds(seed)],
+    conference,
+    teams,
+    games,
+    cfpRanks,
+  );
 }
 
 function existsCcgPath(
@@ -359,12 +562,15 @@ function guaranteedCcg(
   basePicks: Record<string, string>,
   cfpRanks?: Map<string, number>,
 ): boolean {
-  return spoilOverlays(teamId, remaining, seed, conference).every((overlay) =>
+  const inField = (overlay: Record<string, string>) =>
     clinchesCcg(
       conference,
       projectWith(conference, teams, games, mergePicks(basePicks, overlay), cfpRanks),
       teamId,
-    ),
+    );
+  if (!spoilOverlays(teamId, remaining, seed, conference).every(inField)) return false;
+  return inField(
+    worstWinOutOverlay(teamId, remaining, seed, conference, teams, games, basePicks, cfpRanks),
   );
 }
 
@@ -379,12 +585,15 @@ function reachesCcgAgainstSpoilers(
   basePicks: Record<string, string>,
   cfpRanks?: Map<string, number>,
 ): boolean {
-  return spoilOverlays(teamId, remaining, seed, conference).every((overlay) =>
+  const inField = (overlay: Record<string, string>) =>
     hasCcgPath(
       conference,
       projectWith(conference, teams, games, mergePicks(basePicks, overlay), cfpRanks),
       teamId,
-    ),
+    );
+  if (!spoilOverlays(teamId, remaining, seed, conference).every(inField)) return false;
+  return inField(
+    worstWinOutOverlay(teamId, remaining, seed, conference, teams, games, basePicks, cfpRanks),
   );
 }
 
@@ -697,7 +906,19 @@ export function scenarioProofPicks(
   const row = teamRow(conference, teams, games, teamId, remaining, seed, options);
   const nextGame = row.nextGame;
   const winOwn = winOwnRemaining(teamId, remaining);
-  const spoilers = spoilOverlays(teamId, remaining, seed, conference);
+  const spoilers = [
+    ...spoilOverlays(teamId, remaining, seed, conference),
+    worstWinOutOverlay(
+      teamId,
+      remaining,
+      seed,
+      conference,
+      teams,
+      games,
+      winOwn,
+      options.cfpRanks,
+    ),
+  ];
   const helpers = [{}, ...pathOverlays(teamId, remaining, seed, conference)];
   const prefer: "best" | "worst" =
     row.status === "eliminated" || row.status === "alive" ? "best" : "worst";
@@ -809,16 +1030,18 @@ function teamRow(
     winOwn,
     options.cfpRanks,
   );
-  const clinchesWinOut = reachesCcgAgainstSpoilers(
-    conference,
-    teams,
-    games,
-    teamId,
-    remaining,
-    seed,
-    winOwn,
-    options.cfpRanks,
-  );
+  const clinchesWinOut =
+    hasPath &&
+    reachesCcgAgainstSpoilers(
+      conference,
+      teams,
+      games,
+      teamId,
+      remaining,
+      seed,
+      winOwn,
+      options.cfpRanks,
+    );
   let survivesNextLoss = true;
   if (nextGame) {
     const loseNext = mergePicks(winOwn, { [nextGame.id]: opponentId(nextGame, teamId) });
@@ -834,7 +1057,7 @@ function teamRow(
     );
   }
   let clinchesThisWin = false;
-  if (nextGame) {
+  if (nextGame && clinchesWinOut) {
     clinchesThisWin = guaranteedCcg(
       conference,
       teams,

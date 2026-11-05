@@ -27,9 +27,11 @@ export type TiebreakKind =
   | "round-robin"
   | "division-pct"
   | "standings-walk"
+  | "common-opponents"
   | "conf-record-equal"
   | "opponent-win-pct"
   | "total-wins"
+  | "overall-pct"
   | "cfp-final-weekend"
   | "cfp-rank"
   | "draw";
@@ -53,7 +55,10 @@ export type ScenarioConference = {
   initialRank: "percentage" | "losses" | "percentage-advantage" | "record-advantage";
   divisions: { id: string; label: string }[] | null;
   championship: "division-winners" | "top-two";
+  /** Multi-team procedure, and the default when `twoTeamSteps` is omitted. */
   steps: TiebreakStep[];
+  /** Two-team procedure when it differs from the multi-team list. */
+  twoTeamSteps?: TiebreakStep[];
   restartAfterSplit: boolean;
   returnToTwoTeam: boolean;
   twoTeamH2hFirst: boolean;
@@ -91,13 +96,13 @@ export const SCENARIO_CONFERENCES: ScenarioConference[] = [
     label: "Big Ten",
     shortLabel: "Big 10",
     espnName: "Big Ten Conference",
-    sourceUrl: null,
-    initialRank: "losses",
+    sourceUrl: "https://bigten.org/fb/article/blt6104802d94ebe1ab/",
+    initialRank: "percentage",
     divisions: null,
     championship: "top-two",
     restartAfterSplit: true,
     returnToTwoTeam: true,
-    twoTeamH2hFirst: false,
+    twoTeamH2hFirst: true,
     onlySplitOnePerStep: true,
     drawSource: "SportSource Rating Score",
     steps: [
@@ -106,13 +111,18 @@ export const SCENARIO_CONFERENCES: ScenarioConference[] = [
         label: "head-to-head / record among the tied teams",
         roundRobin: "equal-or-sweep-win",
       },
-      { kind: "conf-record-equal", label: "conference record with an equal number of games" },
+      {
+        kind: "common-opponents",
+        label: "win percentage against all common conference opponents",
+      },
       {
         kind: "standings-walk",
-        label: "record vs next-highest remaining team",
-        oneGameEach: true,
+        label: "record vs next highest-placed common opponent",
       },
-      { kind: "opponent-win-pct", label: "conference opponents' winning percentage" },
+      {
+        kind: "opponent-win-pct",
+        label: "combined conference winning percentage of conference opponents",
+      },
       { kind: "draw", label: "SportSource rating" },
     ],
   },
@@ -121,14 +131,14 @@ export const SCENARIO_CONFERENCES: ScenarioConference[] = [
     label: "Big 12",
     shortLabel: "Big 12",
     espnName: "Big 12 Conference",
-    sourceUrl: "https://big12sports.com/documents/2024/9/5//Big_12_Football_2024_Tiebreaker_Policy.pdf",
-    initialRank: "losses",
+    sourceUrl: "https://big12sports.com/documents/2025/11/4/Big_12_Football_2024_Tiebreaker_Policy.pdf",
+    initialRank: "percentage",
     divisions: null,
     championship: "top-two",
     restartAfterSplit: true,
     returnToTwoTeam: true,
-    twoTeamH2hFirst: false,
-    onlySplitOnePerStep: false,
+    twoTeamH2hFirst: true,
+    onlySplitOnePerStep: true,
     drawSource: "SportSource Rating Score",
     steps: [
       {
@@ -136,14 +146,19 @@ export const SCENARIO_CONFERENCES: ScenarioConference[] = [
         label: "head-to-head / record among the tied teams",
         roundRobin: "equal-or-sweep-win",
       },
-      { kind: "conf-record-equal", label: "conference record with an equal number of games" },
+      {
+        kind: "common-opponents",
+        label: "win percentage against all common conference opponents",
+      },
       {
         kind: "standings-walk",
-        label: "record vs next-highest remaining team",
-        oneGameEach: true,
+        label: "record vs next highest-placed common opponent",
       },
-      { kind: "opponent-win-pct", label: "conference opponents' winning percentage" },
-      { kind: "total-wins", label: "total wins (conference and non-conference)" },
+      {
+        kind: "opponent-win-pct",
+        label: "combined conference winning percentage of conference opponents",
+      },
+      { kind: "total-wins", label: "eligible wins in a 12-game season" },
       { kind: "draw", label: "SportSource rating" },
     ],
   },
@@ -167,13 +182,18 @@ export const SCENARIO_CONFERENCES: ScenarioConference[] = [
         label: "head-to-head / record among the tied teams",
         roundRobin: "equal-or-sweep-win-or-loss",
       },
-      { kind: "conf-record-equal", label: "conference record with an equal number of games" },
+      {
+        kind: "common-opponents",
+        label: "win percentage against all common conference opponents",
+      },
       {
         kind: "standings-walk",
-        label: "record vs next-highest remaining team",
-        oneGameEach: true,
+        label: "record vs next highest-placed common opponent",
       },
-      { kind: "opponent-win-pct", label: "conference opponents' winning percentage" },
+      {
+        kind: "opponent-win-pct",
+        label: "cumulative conference winning percentage of conference opponents",
+      },
       { kind: "draw", label: "capped relative scoring margin" },
     ],
   },
@@ -198,6 +218,11 @@ export const SCENARIO_CONFERENCES: ScenarioConference[] = [
         roundRobin: "equal-or-sweep-win",
       },
       { kind: "cfp-final-weekend", label: "CFP ranking without a final-weekend loss" },
+      {
+        kind: "common-opponents",
+        label: "win percentage against all common conference opponents",
+      },
+      { kind: "overall-pct", label: "overall winning percentage" },
       { kind: "draw", label: "blended computer rankings" },
     ],
   },
@@ -213,8 +238,8 @@ export const SCENARIO_CONFERENCES: ScenarioConference[] = [
     championship: "top-two",
     restartAfterSplit: true,
     returnToTwoTeam: true,
-    twoTeamH2hFirst: false,
-    onlySplitOnePerStep: false,
+    twoTeamH2hFirst: true,
+    onlySplitOnePerStep: true,
     drawSource: "Blended Computer Rankings",
     steps: [
       {
@@ -222,8 +247,18 @@ export const SCENARIO_CONFERENCES: ScenarioConference[] = [
         label: "head-to-head / record among the tied teams",
         roundRobin: "equal-or-sweep-win-or-loss",
       },
-      { kind: "conf-record-equal", label: "conference record with an equal number of games" },
-      { kind: "standings-walk", label: "record vs next-highest remaining team" },
+      {
+        kind: "common-opponents",
+        label: "win percentage against all common conference opponents",
+      },
+      {
+        kind: "standings-walk",
+        label: "record vs next highest-placed common opponent",
+      },
+      {
+        kind: "opponent-win-pct",
+        label: "cumulative conference winning percentage of conference opponents",
+      },
       { kind: "draw", label: "blended computer rankings" },
     ],
   },
@@ -233,13 +268,13 @@ export const SCENARIO_CONFERENCES: ScenarioConference[] = [
     shortLabel: "MAC",
     espnName: "Mid-American Conference",
     sourceUrl: "https://getsomemaction.com/documents/2024/9/18//2024_MAC_FB_Tiebreaker_Policy.pdf",
-    initialRank: "losses",
+    initialRank: "percentage",
     divisions: null,
     championship: "top-two",
     restartAfterSplit: true,
     returnToTwoTeam: true,
     twoTeamH2hFirst: true,
-    onlySplitOnePerStep: false,
+    onlySplitOnePerStep: true,
     drawSource: "SportSource Rating Score",
     steps: [
       {
@@ -247,7 +282,18 @@ export const SCENARIO_CONFERENCES: ScenarioConference[] = [
         label: "head-to-head / record among the tied teams",
         roundRobin: "equal-or-sweep-win",
       },
-      { kind: "conf-record-equal", label: "conference record with an equal number of games" },
+      {
+        kind: "common-opponents",
+        label: "win percentage against all common conference opponents",
+      },
+      {
+        kind: "standings-walk",
+        label: "record vs next highest-placed common opponent",
+      },
+      {
+        kind: "opponent-win-pct",
+        label: "combined conference winning percentage of conference opponents",
+      },
       { kind: "draw", label: "SportSource rating" },
     ],
   },
@@ -278,6 +324,15 @@ export const SCENARIO_CONFERENCES: ScenarioConference[] = [
         roundRobin: "equal-or-sweep-win-or-loss",
       },
       { kind: "cfp-final-weekend", label: "CFP ranking without a final-weekend loss" },
+      {
+        kind: "common-opponents",
+        label: "win percentage against all common conference opponents",
+      },
+      {
+        kind: "standings-walk",
+        label: "record vs next highest-placed common opponent",
+      },
+      { kind: "overall-pct", label: "overall winning percentage" },
       { kind: "draw", label: "blended computer rankings" },
     ],
   },
@@ -286,24 +341,51 @@ export const SCENARIO_CONFERENCES: ScenarioConference[] = [
     label: "Pac-12",
     shortLabel: "P12",
     espnName: "Pac-12 Conference",
-    sourceUrl: null,
-    initialRank: "losses",
+    sourceUrl:
+      "https://pac-12.com/news/2026/9/3/pac-12-announces-commercial-and-operational-updates-ahead-of-its-2026-football-season-kickoff.aspx",
+    initialRank: "percentage",
     divisions: null,
     championship: "top-two",
     restartAfterSplit: true,
     returnToTwoTeam: true,
-    twoTeamH2hFirst: false,
-    onlySplitOnePerStep: false,
+    twoTeamH2hFirst: true,
+    onlySplitOnePerStep: true,
     drawSource: "SportSource Rating Score",
+    twoTeamSteps: [
+      {
+        kind: "round-robin",
+        label: "head-to-head",
+        roundRobin: "equal",
+      },
+      {
+        kind: "standings-walk",
+        label: "record vs next highest-placed common opponent",
+      },
+      {
+        kind: "common-opponents",
+        label: "win percentage against all common conference opponents",
+      },
+      { kind: "cfp-rank", label: "CFP ranking before week 13" },
+      { kind: "draw", label: "SportSource rating" },
+    ],
     steps: [
       {
         kind: "round-robin",
         label: "head-to-head / record among the tied teams",
         roundRobin: "equal",
       },
-      { kind: "conf-record-equal", label: "conference record with an equal number of games" },
-      { kind: "standings-walk", label: "record vs next-highest remaining team" },
-      { kind: "opponent-win-pct", label: "conference opponents' winning percentage" },
+      {
+        kind: "common-opponents",
+        label: "win percentage against all common conference opponents",
+      },
+      {
+        kind: "standings-walk",
+        label: "record vs next highest-placed common opponent",
+      },
+      {
+        kind: "opponent-win-pct",
+        label: "combined conference winning percentage of conference opponents",
+      },
       { kind: "draw", label: "SportSource rating" },
     ],
   },

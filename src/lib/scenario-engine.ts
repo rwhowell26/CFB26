@@ -71,6 +71,7 @@ type Ctx = {
   conference: ScenarioConference;
   teamIds: string[];
   games: ResolvedGame[];
+  allGames: Game[];
   byTeam: Map<string, ResolvedGame[]>;
   cfpRanks: Map<string, number> | null;
   finalWeek: number;
@@ -342,6 +343,30 @@ function roundRobinScore(
   return equalGames ? winningPct(record) : null;
 }
 
+function playedOpponents(teamId: string, ctx: Ctx): Set<string> {
+  const opps = new Set<string>();
+  for (const game of ctx.byTeam.get(teamId) ?? []) opps.add(opponentId(game, teamId));
+  return opps;
+}
+
+function commonConferenceOpponents(group: string[], ctx: Ctx): Set<string> {
+  const played = group.map((id) => playedOpponents(id, ctx));
+  const first = played[0];
+  if (!first) return new Set();
+  const common = new Set<string>();
+  for (const opp of first) {
+    if (group.includes(opp)) continue;
+    if (played.every((set) => set.has(opp))) common.add(opp);
+  }
+  return common;
+}
+
+function commonOpponentsScore(teamId: string, group: string[], ctx: Ctx): number | null {
+  const common = commonConferenceOpponents(group, ctx);
+  if (!common.size) return null;
+  return winningPct(recordAgainst(teamId, common, ctx));
+}
+
 function standingsWalkScore(
   teamId: string,
   group: string[],
@@ -350,9 +375,13 @@ function standingsWalkScore(
   below: string[][],
   oneGameEach: boolean,
 ): number | null {
-  const slots = [...above.map((id) => [id]), ...below.filter((slot) => slot.some((id) => !group.includes(id)))];
+  const slots = [
+    ...above.map((id) => [id]),
+    ...below.filter((slot) => slot.some((id) => !group.includes(id))),
+  ];
   for (const slot of slots) {
     const records = group.map((id) => recordAgainst(id, new Set(slot), ctx));
+    if (records.some((record) => gamesPlayed(record) === 0)) continue;
     if (oneGameEach && records.some((record) => gamesPlayed(record) !== 1)) continue;
     const pcts = records.map((record) => winningPct(record));
     if (pcts.every((pct) => pct == null)) continue;
@@ -376,8 +405,20 @@ function opponentWinPct(teamId: string, ctx: Ctx): number | null {
   return played ? wins / played : null;
 }
 
-function totalWins(teamId: string, ctx: Ctx): number {
-  return conferenceRecord(teamId, ctx.games).wins + ctx.fbsOf(teamId).wins;
+function eligibleTotalWins(teamId: string, ctx: Ctx): number {
+  const fbsWins = ctx.fbsOf(teamId).wins;
+  let fcsWins = 0;
+  for (const game of ctx.allGames) {
+    if (game.status !== "final" || game.homeScore == null || game.awayScore == null) continue;
+    const isHome = game.homeTeamId === teamId;
+    if (!isHome && game.awayTeamId !== teamId) continue;
+    const oppIsFbs = isHome ? game.awayIsFbs : game.homeIsFbs;
+    if (oppIsFbs) continue;
+    const teamScore = isHome ? game.homeScore : game.awayScore;
+    const oppScore = isHome ? game.awayScore : game.homeScore;
+    if (teamScore > oppScore) fcsWins += 1;
+  }
+  return fbsWins + Math.min(1, fcsWins);
 }
 
 function finalWeekendResult(teamId: string, ctx: Ctx): "win" | "loss" | "tie" | "none" {
@@ -424,6 +465,8 @@ function stepScore(
       return winningPct(conferenceRecord(teamId, ctx.games));
     case "standings-walk":
       return standingsWalkScore(teamId, group, ctx, above, below, Boolean(step.oneGameEach));
+    case "common-opponents":
+      return commonOpponentsScore(teamId, group, ctx);
     case "conf-record-equal": {
       const records = group.map((id) => conferenceRecord(id, ctx.games));
       if (new Set(records.map(gamesPlayed)).size !== 1) return null;
@@ -432,7 +475,9 @@ function stepScore(
     case "opponent-win-pct":
       return opponentWinPct(teamId, ctx);
     case "total-wins":
-      return totalWins(teamId, ctx);
+      return eligibleTotalWins(teamId, ctx);
+    case "overall-pct":
+      return winningPct(ctx.fbsOf(teamId));
     case "cfp-final-weekend":
       return cfpScore(teamId, group, ctx, true, false);
     case "cfp-rank":
@@ -491,7 +536,10 @@ function resolveGroup(
   if (!played) {
     return [...group].sort((a, b) => ctx.nameFor(a).localeCompare(ctx.nameFor(b)));
   }
-  const steps = ctx.conference.steps;
+  const steps =
+    twoTeam && ctx.conference.twoTeamSteps?.length
+      ? ctx.conference.twoTeamSteps
+      : ctx.conference.steps;
   const names = group.map((id) => ctx.nameFor(id)).join(", ");
   for (const step of steps) {
     if (step.kind === "draw") {
@@ -714,6 +762,7 @@ export function projectConference(
     conference,
     teamIds,
     games: resolved,
+    allGames: games,
     byTeam,
     cfpRanks: options.cfpRanks && options.cfpRanks.size > 0 ? options.cfpRanks : null,
     finalWeek: weeks.length ? Math.max(...weeks) : 0,

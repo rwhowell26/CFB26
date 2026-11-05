@@ -123,6 +123,88 @@ test("two-team head-to-head breaks an ACC tie at the same percentage", () => {
   assert.equal(result.tables[0].rows[1].place, 2);
 });
 
+test("Big 12 three-way 8-1 ranks Texas Tech behind BYU and Utah", () => {
+  const ids = ["UTAH", "BYU", "TECH", "HOU", "BAY"];
+  const teams = ids.map((id) => team(id, "Big 12 Conference"));
+  const games = [
+    game("byu-utah", "UTAH", "BYU", "BYU"),
+    game("utah-hou", "UTAH", "HOU", "UTAH"),
+    game("byu-hou", "BYU", "HOU", "BYU"),
+    game("tech-hou", "TECH", "HOU", "HOU"),
+    game("utah-bay", "UTAH", "BAY", "UTAH"),
+    game("byu-bay", "BYU", "BAY", "BYU"),
+    game("tech-bay", "TECH", "BAY", "TECH"),
+  ];
+  const rows = projectConference(BIG12, teams, games).tables[0].rows;
+  assert.deepEqual(
+    rows.slice(0, 3).map((row) => row.teamId),
+    ["BYU", "UTAH", "TECH"],
+  );
+  assert.equal(rows[2]?.unresolved, false);
+});
+
+test("Big 12 7-2 sits behind two 8-1 teams", () => {
+  const ids = ["UTAH", "BYU", "BAY", "HOU"];
+  const teams = ids.map((id) => team(id, "Big 12 Conference"));
+  const games = [
+    game("u1", "UTAH", "HOU", "UTAH"),
+    game("u2", "UTAH", "BAY", "UTAH"),
+    game("b1", "BYU", "HOU", "BYU"),
+    game("b2", "BYU", "BAY", "BYU"),
+  ];
+  const rows = projectConference(BIG12, teams, games).tables[0].rows;
+  assert.deepEqual(
+    rows.slice(0, 3).map((row) => row.teamId),
+    ["BYU", "UTAH", "BAY"],
+  );
+  assert.ok((rows.find((row) => row.teamId === "BAY")?.place ?? 0) > 2);
+});
+
+test("SEC common-opponent step ranks a 7-2 behind two 8-1 teams", () => {
+  const SEC = SCENARIO_CONFERENCES.find((conf) => conf.id === "sec")!;
+  const ids = ["UGA", "UK", "TENN", "MIZ", "VAN"];
+  const teams = ids.map((id) => team(id, "Southeastern Conference"));
+  const games = [
+    game("uga-van", "UGA", "VAN", "UGA"),
+    game("uk-van", "UK", "VAN", "UK"),
+    game("tenn-van", "TENN", "VAN", "TENN"),
+    game("uga-miz", "UGA", "MIZ", "UGA"),
+    game("uk-miz", "UK", "MIZ", "UK"),
+    game("tenn-miz", "TENN", "MIZ", "MIZ"),
+  ];
+  const rows = projectConference(SEC, teams, games).tables[0].rows;
+  const uga = rows.find((row) => row.teamId === "UGA")!;
+  const uk = rows.find((row) => row.teamId === "UK")!;
+  const tenn = rows.find((row) => row.teamId === "TENN")!;
+  assert.equal(uga.place, 1);
+  assert.equal(uk.place, 1);
+  assert.ok(tenn.place > 2);
+});
+
+test("SEC incomplete three-way at 3-1 ranks the common-opponent trailer third", () => {
+  const SEC = SCENARIO_CONFERENCES.find((conf) => conf.id === "sec")!;
+  const ids = ["MIZ", "UGA", "BAMA", "UK", "VAN", "AUB"];
+  const teams = ids.map((id) => team(id, "Southeastern Conference"));
+  const games = [
+    game("uga-bama", "UGA", "BAMA", "UGA"),
+    game("uga-van", "UGA", "VAN", "UGA"),
+    game("uga-aub", "UGA", "AUB", "UGA"),
+    game("bama-van", "BAMA", "VAN", "BAMA"),
+    game("bama-aub", "BAMA", "AUB", "BAMA"),
+    game("miz-van", "MIZ", "VAN", "VAN"),
+    game("miz-aub", "MIZ", "AUB", "MIZ"),
+    game("uk-van", "UK", "VAN", "UK"),
+    game("uk-aub", "UK", "AUB", "UK"),
+    game("miz-uga", "MIZ", "UGA", "MIZ"),
+    game("miz-uk", "UK", "MIZ", "MIZ"),
+    game("bama-uk", "BAMA", "UK", "BAMA"),
+  ];
+  const rows = projectConference(SEC, teams, games).tables[0].rows;
+  assert.equal(rows.find((row) => row.teamId === "UGA")?.place, 1);
+  assert.equal(rows.find((row) => row.teamId === "BAMA")?.place, 2);
+  assert.ok((rows.find((row) => row.teamId === "MIZ")?.place ?? 0) > 2);
+});
+
 test("a remaining-game pick changes the projected champion", () => {
   const games = [
     game("1", "UTAH", "HOU", "UTAH"),
