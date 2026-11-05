@@ -154,13 +154,13 @@ export function displayChoices(
   random: () => number = Math.random,
   options: { remapLetters?: boolean } = {},
 ): DisplayChoice[] {
-  const shuffled = shuffle(choices, random);
   if (options.remapLetters === false) {
-    return shuffled.map((choice) => ({
+    return choices.map((choice) => ({
       ...choice,
       originalLetter: choice.letter,
     }));
   }
+  const shuffled = shuffle(choices, random);
   return shuffled.map((choice, index) => ({
     letter: LETTERS[index] ?? choice.letter,
     text: choice.text,
