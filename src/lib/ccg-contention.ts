@@ -10,7 +10,6 @@ import {
   type RankedScenarioRow,
   type ScenarioProjection,
 } from "./scenario-engine";
-import { PLAYOFF_STATUS_LABEL } from "./playoff-race";
 import { winningPct, type WinLoss } from "./sunbelt";
 import type { Game, Team } from "./types";
 
@@ -18,10 +17,10 @@ export type CcgStatus = "clinch" | "destiny" | "alive" | "out-loss" | "eliminate
 
 export const CCG_STATUS_LABEL: Record<CcgStatus, string> = {
   clinch: "Clinch",
-  destiny: PLAYOFF_STATUS_LABEL.destiny,
-  alive: PLAYOFF_STATUS_LABEL.alive,
-  "out-loss": PLAYOFF_STATUS_LABEL["out-loss"],
-  eliminated: PLAYOFF_STATUS_LABEL.eliminated,
+  destiny: "Control destiny",
+  alive: "Alive",
+  "out-loss": "Out with a loss",
+  eliminated: "Eliminated",
 };
 
 export type CcgTeamContention = {
