@@ -14,6 +14,8 @@ export type QuizQuestion = {
   explanation: string;
   /** Optional lesson shown before the question so the quiz can teach, not just test. */
   lesson?: string;
+  /** When true, every listed answer letter must be selected and no others. */
+  selectAll?: boolean;
 };
 
 export type QuizState = {
@@ -30,7 +32,19 @@ export type AnswerResult = {
   streak: number;
 };
 
-const LETTERS = ["A", "B", "C", "D"] as const;
+const LETTERS = ["A", "B", "C", "D", "E", "F"] as const;
+
+export function answerLetters(answer: string): string[] {
+  return [...new Set(answer.toUpperCase().match(/[A-F]/g) ?? [])].sort();
+}
+
+export function answersEqual(selected: string, answer: string): boolean {
+  return answerLetters(selected).join("") === answerLetters(answer).join("");
+}
+
+export function isSelectAll(question: QuizQuestion): boolean {
+  return question.selectAll === true || answerLetters(question.answer).length > 1;
+}
 
 export function shuffle<T>(items: readonly T[], random: () => number = Math.random): T[] {
   const next = [...items];
@@ -98,7 +112,7 @@ export function applyAnswer(
   }
 
   const rest = state.queue.slice(1);
-  const correct = selectedLetter === question.answer;
+  const correct = answersEqual(selectedLetter, question.answer);
   const streaks = { ...state.streaks };
   const key = String(questionId);
   let streak = streaks[key] ?? 0;
@@ -138,8 +152,16 @@ export type DisplayChoice = QuizChoice & { originalLetter: string };
 export function displayChoices(
   choices: readonly QuizChoice[],
   random: () => number = Math.random,
+  options: { remapLetters?: boolean } = {},
 ): DisplayChoice[] {
-  return shuffle(choices, random).map((choice, index) => ({
+  const shuffled = shuffle(choices, random);
+  if (options.remapLetters === false) {
+    return shuffled.map((choice) => ({
+      ...choice,
+      originalLetter: choice.letter,
+    }));
+  }
+  return shuffled.map((choice, index) => ({
     letter: LETTERS[index] ?? choice.letter,
     text: choice.text,
     originalLetter: choice.letter,

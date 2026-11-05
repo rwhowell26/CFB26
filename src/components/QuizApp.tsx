@@ -3,10 +3,12 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import {
+  answerLetters,
   applyAnswer,
   createInitialState,
   displayChoices,
   isComplete,
+  isSelectAll,
   MASTERY_STREAK,
   pendingStreakCount,
   type DisplayChoice,
@@ -25,7 +27,7 @@ export function QuizApp({ quiz }: { quiz: QuizDefinition }) {
   const [state, setState] = useQuizStore(quiz);
   const [reviewId, setReviewId] = useState<number | null>(null);
   const [deal, setDeal] = useState(0);
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selected, setSelected] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<Feedback | null>(null);
 
   const ids = useMemo(() => quizQuestionIds(quiz), [quiz]);
@@ -41,7 +43,9 @@ export function QuizApp({ quiz }: { quiz: QuizDefinition }) {
       return [];
     }
     void deal;
-    return displayChoices(nextQuestion.choices);
+    return displayChoices(nextQuestion.choices, Math.random, {
+      remapLetters: !isSelectAll(nextQuestion),
+    });
   }, [activeId, deal, questions]);
 
   const completed = state.mastered.length;
@@ -52,10 +56,10 @@ export function QuizApp({ quiz }: { quiz: QuizDefinition }) {
   const progressLabel = `${completed} of ${total} questions completed`;
 
   const onSubmit = () => {
-    if (selected == null || !question || feedback) {
+    if (selected.length === 0 || !question || feedback) {
       return;
     }
-    const result = applyAnswer(state, selected, questions);
+    const result = applyAnswer(state, selected.join(","), questions);
     setReviewId(result.questionId);
     setState(result.state);
     setFeedback({
@@ -67,9 +71,22 @@ export function QuizApp({ quiz }: { quiz: QuizDefinition }) {
 
   const onNext = () => {
     setFeedback(null);
-    setSelected(null);
+    setSelected([]);
     setReviewId(null);
     setDeal((value) => value + 1);
+  };
+
+  const toggleChoice = (letter: string, selectAll: boolean) => {
+    if (feedback) {
+      return;
+    }
+    if (!selectAll) {
+      setSelected([letter]);
+      return;
+    }
+    setSelected((current) =>
+      current.includes(letter) ? current.filter((item) => item !== letter) : [...current, letter],
+    );
   };
 
   const onReset = () => {
@@ -77,7 +94,7 @@ export function QuizApp({ quiz }: { quiz: QuizDefinition }) {
       return;
     }
     setFeedback(null);
-    setSelected(null);
+    setSelected([]);
     setReviewId(null);
     setDeal((value) => value + 1);
     saveQuizState(quiz, createInitialState(ids));
@@ -159,10 +176,13 @@ export function QuizApp({ quiz }: { quiz: QuizDefinition }) {
           <h2 id="quiz-prompt" className="quiz-prompt">
             {question.prompt}
           </h2>
+          {isSelectAll(question) ? (
+            <p className="quiz-select-hint">Select every correct option. Partial credit is not given.</p>
+          ) : null}
 
           <div
             className="quiz-choices"
-            role="radiogroup"
+            role={isSelectAll(question) ? "group" : "radiogroup"}
             aria-labelledby="quiz-prompt"
             aria-disabled={Boolean(feedback)}
             onKeyDown={(event) => {
@@ -173,30 +193,31 @@ export function QuizApp({ quiz }: { quiz: QuizDefinition }) {
                 }
                 return;
               }
-              const index = ["1", "2", "3", "4", "a", "b", "c", "d", "A", "B", "C", "D"].indexOf(
+              const keyIndex = ["1", "2", "3", "4", "5", "6", "a", "b", "c", "d", "e", "f", "A", "B", "C", "D", "E", "F"].indexOf(
                 event.key,
               );
-              if (index >= 0) {
-                const choice = choices[index % 4];
-                if (choice) {
-                  setSelected(choice.originalLetter);
+              if (keyIndex >= 0) {
+                const choice = choices[keyIndex % 6];
+                if (choice && keyIndex % 6 < choices.length) {
+                  toggleChoice(choice.originalLetter, isSelectAll(question));
                 }
               }
-              if (event.key === "Enter" && selected != null) {
+              if (event.key === "Enter" && selected.length > 0) {
                 event.preventDefault();
                 onSubmit();
               }
             }}
           >
             {choices.map((choice) => {
-              const isSelected = selected === choice.originalLetter;
-              const showCorrect = Boolean(feedback && choice.originalLetter === question.answer);
-              const showWrong = Boolean(feedback && isSelected && !feedback.correct);
+              const isSelected = selected.includes(choice.originalLetter);
+              const correctLetters = answerLetters(question.answer);
+              const showCorrect = Boolean(feedback && correctLetters.includes(choice.originalLetter));
+              const showWrong = Boolean(feedback && isSelected && !correctLetters.includes(choice.originalLetter));
               return (
                 <button
                   key={choice.originalLetter}
                   type="button"
-                  role="radio"
+                  role={isSelectAll(question) ? "checkbox" : "radio"}
                   aria-checked={isSelected}
                   className={[
                     "quiz-choice",
@@ -207,7 +228,7 @@ export function QuizApp({ quiz }: { quiz: QuizDefinition }) {
                     .filter(Boolean)
                     .join(" ")}
                   disabled={Boolean(feedback)}
-                  onClick={() => setSelected(choice.originalLetter)}
+                  onClick={() => toggleChoice(choice.originalLetter, isSelectAll(question))}
                 >
                   <span className="quiz-choice-letter">{choice.letter}</span>
                   <span>{choice.text}</span>
@@ -242,7 +263,7 @@ export function QuizApp({ quiz }: { quiz: QuizDefinition }) {
               type="button"
               className="primary-btn"
               onClick={onSubmit}
-              disabled={selected == null}
+              disabled={selected.length === 0}
             >
               Check answer
             </button>

@@ -1832,6 +1832,12 @@ a.primary-btn {
   line-height: 1.4;
 }
 
+.quiz-select-hint {
+  margin: -0.35rem 0 0.85rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
 .quiz-choices {
   display: grid;
   gap: 0.55rem;

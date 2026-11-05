@@ -1,0 +1,5408 @@
+{
+  "id": "accy-6100-audit-test-3",
+  "title": "ACCY 6100 \u2014 Auditing Seminar",
+  "subtitle": "Audit test 3",
+  "source": "Practice exam for Modules 9\u201314 (150 one-best-answer and 50 select-all)",
+  "questions": [
+    {
+      "id": 1,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "Which statement best describes audit evidence?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only the documents the client gives the auditor"
+        },
+        {
+          "letter": "B",
+          "text": "Only third-party confirmations and counts"
+        },
+        {
+          "letter": "C",
+          "text": "All the information used by the auditor to reach the conclusions on which the opinion is based"
+        },
+        {
+          "letter": "D",
+          "text": "Only the workpapers kept in the audit file"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Evidence is all information used to reach the conclusions underlying the opinion."
+    },
+    {
+      "id": 2,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "Evidence sufficiency is a measure of the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Quantity of evidence"
+        },
+        {
+          "letter": "B",
+          "text": "Relevance of evidence"
+        },
+        {
+          "letter": "C",
+          "text": "Reliability of evidence"
+        },
+        {
+          "letter": "D",
+          "text": "Source of evidence"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Sufficiency is quantity."
+    },
+    {
+      "id": 3,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "Evidence appropriateness consists of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Quantity and timing"
+        },
+        {
+          "letter": "B",
+          "text": "Materiality and risk"
+        },
+        {
+          "letter": "C",
+          "text": "Cost and availability"
+        },
+        {
+          "letter": "D",
+          "text": "Relevance and reliability"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Appropriateness = relevance + reliability."
+    },
+    {
+      "id": 4,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "As the assessed risk of material misstatement (RMM) increases, the auditor should:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Obtain less evidence because controls are weak"
+        },
+        {
+          "letter": "B",
+          "text": "Obtain more persuasive evidence"
+        },
+        {
+          "letter": "C",
+          "text": "Rely more on management representations"
+        },
+        {
+          "letter": "D",
+          "text": "Reduce the extent of substantive testing"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Higher RMM calls for more persuasive evidence."
+    },
+    {
+      "id": 5,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "All else equal, as the quality of the evidence collected increases, the quantity of corroborating evidence needed:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Increases"
+        },
+        {
+          "letter": "B",
+          "text": "Stays the same"
+        },
+        {
+          "letter": "C",
+          "text": "Decreases"
+        },
+        {
+          "letter": "D",
+          "text": "Becomes unlimited"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Better quality means less corroboration needed."
+    },
+    {
+      "id": 6,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "(Select ALL that apply.) The reliability of audit evidence depends on the source of the evidence, including the level of the source\u2019s:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Bias"
+        },
+        {
+          "letter": "B",
+          "text": "Competence"
+        },
+        {
+          "letter": "C",
+          "text": "Number of pages in the document"
+        },
+        {
+          "letter": "D",
+          "text": "Fiscal year-end"
+        },
+        {
+          "letter": "E",
+          "text": "Materiality threshold"
+        }
+      ],
+      "answer": "A,B",
+      "selectAll": true,
+      "explanation": "Correct: A,B. Reliability depends on source bias and competence."
+    },
+    {
+      "id": 7,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "Which evidence is generally MOST reliable?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A spreadsheet prepared by the controller"
+        },
+        {
+          "letter": "B",
+          "text": "A bank statement received directly from the bank"
+        },
+        {
+          "letter": "C",
+          "text": "An oral explanation from the CFO"
+        },
+        {
+          "letter": "D",
+          "text": "A photocopy of a bank statement from the client\u2019s files"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Evidence received directly from an independent third party is most reliable."
+    },
+    {
+      "id": 8,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "(Select ALL that apply.) Which are appropriate overall audit responses to assessed risks of material misstatement (AS 2301)?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Assign responsibilities appropriately"
+        },
+        {
+          "letter": "B",
+          "text": "Provide appropriate supervision"
+        },
+        {
+          "letter": "C",
+          "text": "Incorporate unpredictability in procedures"
+        },
+        {
+          "letter": "D",
+          "text": "Reduce professional skepticism to save time"
+        },
+        {
+          "letter": "E",
+          "text": "Evaluate the selection and application of accounting principles"
+        }
+      ],
+      "answer": "A,B,C,E",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,E. Skepticism must not be reduced."
+    },
+    {
+      "id": 9,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "Which is the best example of building unpredictability into an audit?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Testing the same accounts at the same threshold each year"
+        },
+        {
+          "letter": "B",
+          "text": "Announcing site visits to client managers"
+        },
+        {
+          "letter": "C",
+          "text": "Varying the timing, locations, and testing thresholds, and testing items not usually tested"
+        },
+        {
+          "letter": "D",
+          "text": "Reusing last year\u2019s audit program unchanged"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Vary timing, locations, thresholds."
+    },
+    {
+      "id": 10,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "Which of the following is NOT a substantive procedure?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Test of details of balances"
+        },
+        {
+          "letter": "B",
+          "text": "Substantive analytical procedure"
+        },
+        {
+          "letter": "C",
+          "text": "Test of controls"
+        },
+        {
+          "letter": "D",
+          "text": "Test of details of transactions"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Tests of controls are not substantive."
+    },
+    {
+      "id": 11,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "(Select ALL that apply.) Substantive procedures include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Tests of details of balances"
+        },
+        {
+          "letter": "B",
+          "text": "Tests of details of transactions"
+        },
+        {
+          "letter": "C",
+          "text": "Substantive analytical procedures"
+        },
+        {
+          "letter": "D",
+          "text": "Tests of controls"
+        },
+        {
+          "letter": "E",
+          "text": "Risk assessment procedures"
+        }
+      ],
+      "answer": "A,B,C",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C. Tests of details and substantive AP."
+    },
+    {
+      "id": 12,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "Which of the following is a test of details?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Comparing gross margin percentage with the industry average"
+        },
+        {
+          "letter": "B",
+          "text": "Reviewing the trend in days sales outstanding"
+        },
+        {
+          "letter": "C",
+          "text": "Inquiring of the CFO about changes in revenue"
+        },
+        {
+          "letter": "D",
+          "text": "Vouching a sample of PP&E additions to vendor invoices"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Vouching individual items is a test of details."
+    },
+    {
+      "id": 13,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "In the expanded audit risk model, audit risk (AuR) equals:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "RMM + Planned DR"
+        },
+        {
+          "letter": "B",
+          "text": "IR \u00d7 CR only"
+        },
+        {
+          "letter": "C",
+          "text": "IR \u00d7 CR \u00d7 AP \u00d7 TD"
+        },
+        {
+          "letter": "D",
+          "text": "AP \u00d7 TD only"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. AuR = IR \u00d7 CR \u00d7 AP \u00d7 TD."
+    },
+    {
+      "id": 14,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "The auditor will accept audit risk of 5%. IR = 100%, CR = 50%, and AP risk = 80%. What is the acceptable risk for tests of details (TD)?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "12.5%"
+        },
+        {
+          "letter": "B",
+          "text": "20%"
+        },
+        {
+          "letter": "C",
+          "text": "8%"
+        },
+        {
+          "letter": "D",
+          "text": "25%"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. TD = 0.05 / (1.0 \u00d7 0.5 \u00d7 0.8) = 12.5%."
+    },
+    {
+      "id": 15,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "AuR = 4%, IR = 80%, CR = 50%, AP risk = 50%. What is the acceptable TD risk?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "8%"
+        },
+        {
+          "letter": "B",
+          "text": "10%"
+        },
+        {
+          "letter": "C",
+          "text": "16%"
+        },
+        {
+          "letter": "D",
+          "text": "20%"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. TD = 0.04 / (0.8 \u00d7 0.5 \u00d7 0.5) = 20%."
+    },
+    {
+      "id": 16,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "Tests of details risk (TD) is the probability that the auditor\u2019s tests of details will NOT detect a material misstatement that:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Occurred, was not prevented or detected by ICFR, and was not detected by substantive analytical procedures"
+        },
+        {
+          "letter": "B",
+          "text": "Occurred and was detected by ICFR"
+        },
+        {
+          "letter": "C",
+          "text": "Was detected by analytical procedures"
+        },
+        {
+          "letter": "D",
+          "text": "Was immaterial"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. TD risk definition."
+    },
+    {
+      "id": 17,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "(Select ALL that apply.) Circumstances favoring the use of confirmations (AS 2310) rather than evidence from the client include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Higher risk of material misstatement"
+        },
+        {
+          "letter": "B",
+          "text": "Complex transactions"
+        },
+        {
+          "letter": "C",
+          "text": "Low-risk, immaterial balances"
+        },
+        {
+          "letter": "D",
+          "text": "Evidence is already available from the client at low risk"
+        },
+        {
+          "letter": "E",
+          "text": "The client prefers not to contact third parties"
+        }
+      ],
+      "answer": "A,B",
+      "selectAll": true,
+      "explanation": "Correct: A,B. Higher RMM and complex transactions."
+    },
+    {
+      "id": 18,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "A confirmation is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A representation letter from management"
+        },
+        {
+          "letter": "B",
+          "text": "A client-prepared schedule agreed to the ledger"
+        },
+        {
+          "letter": "C",
+          "text": "A direct communication from a third party in response to a request for information about an item affecting the financial statements"
+        },
+        {
+          "letter": "D",
+          "text": "A recalculation of a balance by the auditor"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Confirmation = direct third-party communication."
+    },
+    {
+      "id": 19,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "For accounts receivable, confirmations are LEAST useful for testing:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Existence of the receivable"
+        },
+        {
+          "letter": "B",
+          "text": "Rights and obligations"
+        },
+        {
+          "letter": "C",
+          "text": "Valuation (collectibility)"
+        },
+        {
+          "letter": "D",
+          "text": "None; confirmations address all assertions equally well"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Confirmations do not address valuation/collectibility well."
+    },
+    {
+      "id": 20,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "(Select ALL that apply.) Confirmations are generally NOT as useful for testing which assertions?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Existence"
+        },
+        {
+          "letter": "B",
+          "text": "Valuation"
+        },
+        {
+          "letter": "C",
+          "text": "Completeness"
+        },
+        {
+          "letter": "D",
+          "text": "Presentation and disclosure"
+        },
+        {
+          "letter": "E",
+          "text": "Rights and obligations"
+        }
+      ],
+      "answer": "B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: B,C,D. Valuation, completeness, presentation and disclosure."
+    },
+    {
+      "id": 21,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "A positive confirmation:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Asks the recipient to respond whether or not they agree"
+        },
+        {
+          "letter": "B",
+          "text": "Asks the recipient to respond only if they disagree"
+        },
+        {
+          "letter": "C",
+          "text": "Is never used for accounts receivable"
+        },
+        {
+          "letter": "D",
+          "text": "Provides no evidence even when answered"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Positive asks for a response in all cases."
+    },
+    {
+      "id": 22,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "The auditor does not receive a response to a positive confirmation. The non-response:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Is evidence the balance is correct"
+        },
+        {
+          "letter": "B",
+          "text": "Is evidence the balance is overstated"
+        },
+        {
+          "letter": "C",
+          "text": "Is evidence of fraud"
+        },
+        {
+          "letter": "D",
+          "text": "Provides no evidence by itself, so alternative procedures are needed"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Non-response is no evidence; do alternative procedures."
+    },
+    {
+      "id": 23,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "For a negative confirmation, a non-response:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Provides no evidence"
+        },
+        {
+          "letter": "B",
+          "text": "Proves the balance is correct"
+        },
+        {
+          "letter": "C",
+          "text": "Provides some evidence (the recipient did not disagree)"
+        },
+        {
+          "letter": "D",
+          "text": "Must always be followed by a second request"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Negative non-response gives some evidence."
+    },
+    {
+      "id": 24,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "(Select ALL that apply.) Negative confirmations are most appropriate when:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "RMM is assessed as low"
+        },
+        {
+          "letter": "B",
+          "text": "There are a large number of small balances"
+        },
+        {
+          "letter": "C",
+          "text": "There are a few large balances"
+        },
+        {
+          "letter": "D",
+          "text": "The auditor has no reason to believe recipients will disregard the request"
+        },
+        {
+          "letter": "E",
+          "text": "Controls over receivables are weak"
+        }
+      ],
+      "answer": "A,B,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,D. Low risk, many small balances, recipients expected to respond."
+    },
+    {
+      "id": 25,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "A client has 8 customers with very large receivable balances and RMM is high. The best confirmation approach is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Positive confirmations"
+        },
+        {
+          "letter": "B",
+          "text": "Negative confirmations only"
+        },
+        {
+          "letter": "C",
+          "text": "No confirmations; use client records"
+        },
+        {
+          "letter": "D",
+          "text": "Inquiry of management"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Few large balances and high risk call for positives."
+    },
+    {
+      "id": 26,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "A utility has 50,000 small residential balances, strong controls, and low assessed risk. The most efficient approach is likely:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Positive confirmations for all"
+        },
+        {
+          "letter": "B",
+          "text": "Confirming nothing"
+        },
+        {
+          "letter": "C",
+          "text": "Negative confirmations (possibly with positives for larger balances)"
+        },
+        {
+          "letter": "D",
+          "text": "Blank positive confirmations for all"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Many small balances and low risk suit negatives."
+    },
+    {
+      "id": 27,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "The client controller offers to mail the confirmations to save the auditor time. The auditor should:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Accept, since the controller knows the customers"
+        },
+        {
+          "letter": "B",
+          "text": "Accept if the controller signs a representation"
+        },
+        {
+          "letter": "C",
+          "text": "Accept for small balances only"
+        },
+        {
+          "letter": "D",
+          "text": "Decline; the auditor must control the mailing and receipt"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. The auditor must control mailing."
+    },
+    {
+      "id": 28,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "A confirmation reply shows a balance different from the client\u2019s records. The auditor should:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Adjust the ledger to the confirmation amount"
+        },
+        {
+          "letter": "B",
+          "text": "Investigate and perform alternative procedures to determine the cause (e.g., timing differences vs. misstatement)"
+        },
+        {
+          "letter": "C",
+          "text": "Ignore it if below materiality"
+        },
+        {
+          "letter": "D",
+          "text": "Send a negative confirmation instead"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Investigate differences with alternative procedures."
+    },
+    {
+      "id": 29,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "(Select ALL that apply.) Appropriate alternative procedures when a customer does not respond to a positive receivable confirmation include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Examining subsequent cash receipts"
+        },
+        {
+          "letter": "B",
+          "text": "Examining shipping documents"
+        },
+        {
+          "letter": "C",
+          "text": "Examining customer purchase orders or sales contracts"
+        },
+        {
+          "letter": "D",
+          "text": "Accepting management\u2019s assurance that the balance is valid"
+        },
+        {
+          "letter": "E",
+          "text": "Removing the account from the population"
+        }
+      ],
+      "answer": "A,B,C",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C. Subsequent receipts, shipping documents, customer orders."
+    },
+    {
+      "id": 30,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "Observation of the client\u2019s inventory count is best described as a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Test of controls only"
+        },
+        {
+          "letter": "B",
+          "text": "Substantive test only"
+        },
+        {
+          "letter": "C",
+          "text": "Dual-purpose test"
+        },
+        {
+          "letter": "D",
+          "text": "Risk assessment procedure only"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Dual-purpose (control and detail)."
+    },
+    {
+      "id": 31,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "(Select ALL that apply.) Purposes of an inventory observation include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Evaluating the effectiveness of the client\u2019s inventory-taking procedures"
+        },
+        {
+          "letter": "B",
+          "text": "Verifying existence by counting and examining a sample of items"
+        },
+        {
+          "letter": "C",
+          "text": "Testing valuation by obtaining market price quotes"
+        },
+        {
+          "letter": "D",
+          "text": "Testing accounts payable cutoff"
+        },
+        {
+          "letter": "E",
+          "text": "Verifying that the client has a perpetual system"
+        }
+      ],
+      "answer": "A,B",
+      "selectAll": true,
+      "explanation": "Correct: A,B. Evaluate count procedures and verify existence."
+    },
+    {
+      "id": 32,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "The client uses a perpetual system with cycle counts rather than a year-end count. The auditor:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Does not need to observe any counts"
+        },
+        {
+          "letter": "B",
+          "text": "Should be present when the cycle counts are performed"
+        },
+        {
+          "letter": "C",
+          "text": "May rely on the client\u2019s counts without observation"
+        },
+        {
+          "letter": "D",
+          "text": "Should only review the count sheets afterward"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Be present at cycle counts."
+    },
+    {
+      "id": 33,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "Audit documentation is best defined as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Management\u2019s financial statement notes"
+        },
+        {
+          "letter": "B",
+          "text": "Only the audit report"
+        },
+        {
+          "letter": "C",
+          "text": "A list of client contacts"
+        },
+        {
+          "letter": "D",
+          "text": "The written record of the basis for the auditor\u2019s conclusions that supports the auditor\u2019s representations"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Documentation definition."
+    },
+    {
+      "id": 34,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "(Select ALL that apply.) Audit documentation might be reviewed by:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Auditors new to the engagement"
+        },
+        {
+          "letter": "B",
+          "text": "Supervisors and engagement quality reviewers"
+        },
+        {
+          "letter": "C",
+          "text": "A successor auditor"
+        },
+        {
+          "letter": "D",
+          "text": "Internal and external inspection teams"
+        },
+        {
+          "letter": "E",
+          "text": "The client\u2019s competitors"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Not competitors."
+    },
+    {
+      "id": 35,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "Which statement best distinguishes evidence from documentation?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "They are identical"
+        },
+        {
+          "letter": "B",
+          "text": "Documentation is information obtained from third parties; evidence is the audit file"
+        },
+        {
+          "letter": "C",
+          "text": "Evidence is the information the auditor obtains through procedures; documentation is the written record of the basis for the conclusions"
+        },
+        {
+          "letter": "D",
+          "text": "Evidence is only oral; documentation is only written"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Evidence = information; documentation = record of the basis."
+    },
+    {
+      "id": 36,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "(Select ALL that apply.) Examples of audit documentation include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Audit programs"
+        },
+        {
+          "letter": "B",
+          "text": "Confirmations"
+        },
+        {
+          "letter": "C",
+          "text": "Letters of representation"
+        },
+        {
+          "letter": "D",
+          "text": "Schedules and memoranda"
+        },
+        {
+          "letter": "E",
+          "text": "Management\u2019s internal strategy memo that the auditor never received"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Items never received are not audit documentation."
+    },
+    {
+      "id": 37,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "(Select ALL that apply.) According to PCAOB standards, audit documentation should:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Demonstrate the engagement complied with PCAOB standards"
+        },
+        {
+          "letter": "B",
+          "text": "Support the basis for conclusions on every relevant financial statement assertion"
+        },
+        {
+          "letter": "C",
+          "text": "Demonstrate the accounting records agree or can be reconciled with the financial statements"
+        },
+        {
+          "letter": "D",
+          "text": "Show that management agrees with each conclusion"
+        },
+        {
+          "letter": "E",
+          "text": "Guarantee that all misstatements were detected"
+        }
+      ],
+      "answer": "A,B,C",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C. Demonstrate the engagement complied with PCAOB standards; Support the basis for conclusions on every relevant financial statement assertion; Demonstrate the accounting records agree or can be reconciled with the financial statements"
+    },
+    {
+      "id": 38,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "The auditor must retain audit documentation for:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Three years from fiscal year-end"
+        },
+        {
+          "letter": "B",
+          "text": "Five years from the audit report date"
+        },
+        {
+          "letter": "C",
+          "text": "Seven years from the date the auditor grants permission to use the report"
+        },
+        {
+          "letter": "D",
+          "text": "Ten years from the date fieldwork began"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Seven years from permission to use the report."
+    },
+    {
+      "id": 39,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "If no audit report is issued, documentation must be retained for seven years from:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The date fieldwork was completed"
+        },
+        {
+          "letter": "B",
+          "text": "Year-end"
+        },
+        {
+          "letter": "C",
+          "text": "The date the engagement letter was signed"
+        },
+        {
+          "letter": "D",
+          "text": "The date of the client\u2019s next audit"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Seven years from fieldwork completion."
+    },
+    {
+      "id": 40,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "If the engagement is not completed, documentation is retained for seven years from the date:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Of the engagement letter"
+        },
+        {
+          "letter": "B",
+          "text": "The client pays the fee"
+        },
+        {
+          "letter": "C",
+          "text": "Of the prior-year report"
+        },
+        {
+          "letter": "D",
+          "text": "The engagement ceased"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Seven years from when the engagement ceased."
+    },
+    {
+      "id": 41,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "During the retention period, a senior wants to delete an outdated workpaper and attach a new memo. Under PCAOB rules the auditor:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "May delete and add"
+        },
+        {
+          "letter": "B",
+          "text": "May add documentation but may not remove existing workpapers"
+        },
+        {
+          "letter": "C",
+          "text": "May neither add nor delete"
+        },
+        {
+          "letter": "D",
+          "text": "May delete but not add"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. May add, may not remove."
+    },
+    {
+      "id": 42,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "Audit sampling is the application of an audit procedure to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Less than 100% of the items in a balance or class, expecting the sample to be representative"
+        },
+        {
+          "letter": "B",
+          "text": "100% of items"
+        },
+        {
+          "letter": "C",
+          "text": "Only the largest items"
+        },
+        {
+          "letter": "D",
+          "text": "Items chosen by the client"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Less than 100% and representative."
+    },
+    {
+      "id": 43,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "(Select ALL that apply.) Procedures that likely do NOT involve sampling include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Inquiry and observation"
+        },
+        {
+          "letter": "B",
+          "text": "Analytical procedures"
+        },
+        {
+          "letter": "C",
+          "text": "Testing every item using CAATs"
+        },
+        {
+          "letter": "D",
+          "text": "Automated application controls when general IT controls are effective"
+        },
+        {
+          "letter": "E",
+          "text": "A test of details of receivables on a selected subset"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Inquiry and observation; Analytical procedures; Testing every item using CAATs; Automated application controls when general IT controls are effective"
+    },
+    {
+      "id": 44,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "Sampling is typically used in:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Analytical procedures and inquiry"
+        },
+        {
+          "letter": "B",
+          "text": "Walkthroughs only"
+        },
+        {
+          "letter": "C",
+          "text": "Some tests of (manual) controls, some substantive tests, and some dual-purpose tests"
+        },
+        {
+          "letter": "D",
+          "text": "Risk assessment only"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Some tests of (manual) controls, some substantive tests, and some dual-purpose tests"
+    },
+    {
+      "id": 45,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "The risk of incorrect acceptance is the risk of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Concluding a material misstatement does not exist when it does (or controls are more effective than they are)"
+        },
+        {
+          "letter": "B",
+          "text": "Concluding a misstatement exists when it does not"
+        },
+        {
+          "letter": "C",
+          "text": "Using the wrong audit procedure"
+        },
+        {
+          "letter": "D",
+          "text": "Misreading a document"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Incorrect acceptance (over-reliance)."
+    },
+    {
+      "id": 46,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "The risk of under-reliance on controls corresponds to the risk of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Incorrect acceptance"
+        },
+        {
+          "letter": "B",
+          "text": "Non-sampling risk"
+        },
+        {
+          "letter": "C",
+          "text": "Detection risk"
+        },
+        {
+          "letter": "D",
+          "text": "Incorrect rejection"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Under-reliance = incorrect rejection."
+    },
+    {
+      "id": 47,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "(Select ALL that apply.) Benefits of statistical sampling include helping the auditor:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Design an efficient sample"
+        },
+        {
+          "letter": "B",
+          "text": "Measure the sufficiency of the evidence obtained"
+        },
+        {
+          "letter": "C",
+          "text": "Quantitatively evaluate sample results"
+        },
+        {
+          "letter": "D",
+          "text": "Eliminate sampling risk entirely"
+        },
+        {
+          "letter": "E",
+          "text": "Eliminate non-sampling risk"
+        }
+      ],
+      "answer": "A,B,C",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C. Statistical sampling does not eliminate sampling or non-sampling risk."
+    },
+    {
+      "id": 48,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "A downside of statistical sampling is that it:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Cannot measure sampling risk"
+        },
+        {
+          "letter": "B",
+          "text": "Cannot be used for variables"
+        },
+        {
+          "letter": "C",
+          "text": "Is prohibited by PCAOB standards"
+        },
+        {
+          "letter": "D",
+          "text": "Requires more specialized knowledge"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Needs specialized knowledge."
+    },
+    {
+      "id": 49,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "An auditor wants a conclusion about the rate of exceptions in approving vouchers (a control). The appropriate approach is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Variables sampling"
+        },
+        {
+          "letter": "B",
+          "text": "Attributes sampling"
+        },
+        {
+          "letter": "C",
+          "text": "Analytical procedures"
+        },
+        {
+          "letter": "D",
+          "text": "Inquiry only"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Rate of deviation = attributes."
+    },
+    {
+      "id": 50,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "An auditor wants a conclusion about the dollar amount of existing receivables. The appropriate approach is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Variables sampling"
+        },
+        {
+          "letter": "B",
+          "text": "Attributes sampling"
+        },
+        {
+          "letter": "C",
+          "text": "A walkthrough"
+        },
+        {
+          "letter": "D",
+          "text": "Negative confirmation only"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Dollar amounts = variables."
+    },
+    {
+      "id": 51,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "In attributes sampling, each deviation is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Weighted by dollar amount"
+        },
+        {
+          "letter": "B",
+          "text": "Weighted by the size of the population"
+        },
+        {
+          "letter": "C",
+          "text": "Given equal weight regardless of the dollar amount of the transaction"
+        },
+        {
+          "letter": "D",
+          "text": "Ignored if the transaction is small"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Deviations weighted equally."
+    },
+    {
+      "id": 52,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "In attributes sampling, as the tolerable rate of deviation increases, the sample size:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Increases"
+        },
+        {
+          "letter": "B",
+          "text": "Stays the same"
+        },
+        {
+          "letter": "C",
+          "text": "Doubles"
+        },
+        {
+          "letter": "D",
+          "text": "Decreases"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Higher tolerable rate means smaller sample."
+    },
+    {
+      "id": 53,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "As the expected population deviation rate increases, the attributes sample size:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Increases"
+        },
+        {
+          "letter": "B",
+          "text": "Decreases"
+        },
+        {
+          "letter": "C",
+          "text": "Stays the same"
+        },
+        {
+          "letter": "D",
+          "text": "Becomes zero"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Higher expected deviation means larger sample."
+    },
+    {
+      "id": 54,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "(Select ALL that apply.) Which changes would INCREASE an attributes sample size?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Tolerable rate lowered from 8% to 5%"
+        },
+        {
+          "letter": "B",
+          "text": "Expected deviation rate raised from 1% to 3%"
+        },
+        {
+          "letter": "C",
+          "text": "Acceptable risk of over-reliance lowered from 10% to 5%"
+        },
+        {
+          "letter": "D",
+          "text": "Population increased from 5,000 to 50,000 items"
+        },
+        {
+          "letter": "E",
+          "text": "Tolerable rate raised from 5% to 10%"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Only a higher tolerable rate (E) would decrease it."
+    },
+    {
+      "id": 55,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "In a variables test, as tolerable misstatement increases, the sample size:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Increases"
+        },
+        {
+          "letter": "B",
+          "text": "Stays the same"
+        },
+        {
+          "letter": "C",
+          "text": "Decreases"
+        },
+        {
+          "letter": "D",
+          "text": "Cannot be determined"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Decreases"
+    },
+    {
+      "id": 56,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "As expected misstatement approaches tolerable misstatement, the required sample size:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Increases, because more precise measurement is needed"
+        },
+        {
+          "letter": "B",
+          "text": "Decreases"
+        },
+        {
+          "letter": "C",
+          "text": "Is unaffected"
+        },
+        {
+          "letter": "D",
+          "text": "Is replaced by a census"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Increases, because more precise measurement is needed"
+    },
+    {
+      "id": 57,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "Population size has what effect on the sample size in a variables test?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Doubles it"
+        },
+        {
+          "letter": "B",
+          "text": "Directly proportional"
+        },
+        {
+          "letter": "C",
+          "text": "Inverse"
+        },
+        {
+          "letter": "D",
+          "text": "Little effect unless the population is very small"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Little effect unless the population is very small"
+    },
+    {
+      "id": 58,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "The auditor accepts a higher AP risk (analytical procedures provide less assurance). The acceptable TD risk:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Increases"
+        },
+        {
+          "letter": "B",
+          "text": "Decreases, so sample sizes increase"
+        },
+        {
+          "letter": "C",
+          "text": "Is unaffected"
+        },
+        {
+          "letter": "D",
+          "text": "Becomes 100%"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Acceptable TD falls, so samples grow."
+    },
+    {
+      "id": 59,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "Which selection method gives larger items a higher probability of selection and increases dollar coverage?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Random selection"
+        },
+        {
+          "letter": "B",
+          "text": "Haphazard selection"
+        },
+        {
+          "letter": "C",
+          "text": "Probability proportional to size (PPS)"
+        },
+        {
+          "letter": "D",
+          "text": "Judgmental avoidance"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. PPS."
+    },
+    {
+      "id": 60,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "The auditor selects items without conscious bias but without a randomizing device. This is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Haphazard selection"
+        },
+        {
+          "letter": "B",
+          "text": "Random selection"
+        },
+        {
+          "letter": "C",
+          "text": "PPS selection"
+        },
+        {
+          "letter": "D",
+          "text": "Systematic selection"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Haphazard."
+    },
+    {
+      "id": 61,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "A sample of $10,000 contains $500 of misstatement. The population is $400,000. Projecting proportionally, the estimated misstatement is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "$500"
+        },
+        {
+          "letter": "B",
+          "text": "$20,000"
+        },
+        {
+          "letter": "C",
+          "text": "$40,000"
+        },
+        {
+          "letter": "D",
+          "text": "$2,000"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. 5% \u00d7 $400,000 = $20,000."
+    },
+    {
+      "id": 62,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "The auditor cannot apply the planned procedure to a selected item (e.g., the invoice cannot be located). The auditor should:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Replace the item silently"
+        },
+        {
+          "letter": "B",
+          "text": "Treat it as correct"
+        },
+        {
+          "letter": "C",
+          "text": "Drop it from the results"
+        },
+        {
+          "letter": "D",
+          "text": "Consider the reasons and perform alternative procedures"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Consider reasons and use alternative procedures."
+    },
+    {
+      "id": 63,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "The auditor selects every 10th vendor invoice beginning with the 3rd. Documentation should include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Each invoice\u2019s full text"
+        },
+        {
+          "letter": "B",
+          "text": "The source of the documents, the starting point, and the sampling interval"
+        },
+        {
+          "letter": "C",
+          "text": "Only the total dollar amount"
+        },
+        {
+          "letter": "D",
+          "text": "Nothing, since it is systematic"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Source, starting point (3rd), interval (10)."
+    },
+    {
+      "id": 64,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "The auditor selects all vendor invoices over $1,000. Documentation need only describe:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Each invoice\u2019s identifying characteristics"
+        },
+        {
+          "letter": "B",
+          "text": "The starting point and interval"
+        },
+        {
+          "letter": "C",
+          "text": "The dollar scope and the population the items were drawn from"
+        },
+        {
+          "letter": "D",
+          "text": "The client\u2019s approval"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Dollar scope and population."
+    },
+    {
+      "id": 65,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "The auditor selects a sample from a population of documents. Documentation should include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Identifying characteristics of each item selected"
+        },
+        {
+          "letter": "B",
+          "text": "Only the sample size"
+        },
+        {
+          "letter": "C",
+          "text": "Only the source"
+        },
+        {
+          "letter": "D",
+          "text": "The client\u2019s sampling plan"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Identifying characteristics of each item selected"
+    },
+    {
+      "id": 66,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "The AICPA\u2019s detailed audit guide covering statistical and non-statistical sampling was published in:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "1917"
+        },
+        {
+          "letter": "B",
+          "text": "1955"
+        },
+        {
+          "letter": "C",
+          "text": "1972"
+        },
+        {
+          "letter": "D",
+          "text": "1983"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. 1983."
+    },
+    {
+      "id": 67,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "Statistical sampling requires the sample to be:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Selected by the client"
+        },
+        {
+          "letter": "B",
+          "text": "Representative (random)"
+        },
+        {
+          "letter": "C",
+          "text": "Limited to the largest items"
+        },
+        {
+          "letter": "D",
+          "text": "Selected haphazardly"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Representative (random)."
+    },
+    {
+      "id": 68,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "In substantive testing, the \u201cprecision required\u201d is the difference between:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "IR and CR"
+        },
+        {
+          "letter": "B",
+          "text": "Population and sample size"
+        },
+        {
+          "letter": "C",
+          "text": "Expected misstatement and tolerable misstatement"
+        },
+        {
+          "letter": "D",
+          "text": "Materiality and audit risk"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Expected vs. tolerable misstatement."
+    },
+    {
+      "id": 69,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "(Select ALL that apply.) Planning a sample for a substantive test of details includes:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Determining the test objectives"
+        },
+        {
+          "letter": "B",
+          "text": "Defining the population (and checking its completeness)"
+        },
+        {
+          "letter": "C",
+          "text": "Defining the sampling unit and identifying individually significant items"
+        },
+        {
+          "letter": "D",
+          "text": "Choosing a statistical or non-statistical technique"
+        },
+        {
+          "letter": "E",
+          "text": "Eliminating all sampling risk before testing"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Determining the test objectives; Defining the population (and checking its completeness); Defining the sampling unit and identifying individually significant items; Choosing a statistical or non-statistical technique"
+    },
+    {
+      "id": 70,
+      "module": "Module 9: Evidence, Confirmations, Inventory, Documentation, Sampling",
+      "prompt": "(Select ALL that apply.) Which are examples of NON-sampling risk?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Using an inappropriate audit procedure for the objective"
+        },
+        {
+          "letter": "B",
+          "text": "Failing to recognize a misstatement in a document examined"
+        },
+        {
+          "letter": "C",
+          "text": "Selecting too small a sample for the desired confidence"
+        },
+        {
+          "letter": "D",
+          "text": "A random sample that happens to be unrepresentative"
+        },
+        {
+          "letter": "E",
+          "text": "A properly selected sample that, by chance, differs from the population MODULE 10: Substantive Analytical Procedures (Q71\u201392)"
+        }
+      ],
+      "answer": "A,B",
+      "selectAll": true,
+      "explanation": "Correct: A,B. C and D describe sampling risk."
+    },
+    {
+      "id": 71,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "Analytical procedures are evaluations of financial information made by studying:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only prior-year financial statements"
+        },
+        {
+          "letter": "B",
+          "text": "Only the client\u2019s controls"
+        },
+        {
+          "letter": "C",
+          "text": "Plausible relationships among financial and nonfinancial data"
+        },
+        {
+          "letter": "D",
+          "text": "Individual transactions only"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Plausible relationships among financial and nonfinancial data"
+    },
+    {
+      "id": 72,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "Which best distinguishes tests of details from analytical procedures?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Tests of details study relationships; analytical procedures examine individual items"
+        },
+        {
+          "letter": "B",
+          "text": "Tests of details examine the individual elements of a balance or class; analytical procedures evaluate relationships among data"
+        },
+        {
+          "letter": "C",
+          "text": "Both are tests of controls"
+        },
+        {
+          "letter": "D",
+          "text": "Only analytical procedures can be substantive"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Tests of details examine the individual elements of a balance or class; analytical procedures evaluate relationships among data"
+    },
+    {
+      "id": 73,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "Which is a substantive analytical procedure?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Vouching additions to equipment"
+        },
+        {
+          "letter": "B",
+          "text": "Confirming receivables"
+        },
+        {
+          "letter": "C",
+          "text": "Observing the inventory count"
+        },
+        {
+          "letter": "D",
+          "text": "Predicting interest expense from average debt \u00d7 stated rate and comparing it to the recorded amount"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. An expectation compared with the recorded amount."
+    },
+    {
+      "id": 74,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "(Select ALL that apply.) Analytical procedures are used in which phases of the audit?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Planning, to help understand the client\u2019s business and identify risk areas"
+        },
+        {
+          "letter": "B",
+          "text": "Fieldwork, as a substantive procedure"
+        },
+        {
+          "letter": "C",
+          "text": "Wrap-up, to assess consistency of the statements with the auditor\u2019s understanding of the entity"
+        },
+        {
+          "letter": "D",
+          "text": "Only after the opinion has been issued"
+        },
+        {
+          "letter": "E",
+          "text": "As a replacement for audit documentation"
+        }
+      ],
+      "answer": "A,B,C",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C. Planning, to help understand the client\u2019s business and identify risk areas; Fieldwork, as a substantive procedure; Wrap-up, to assess consistency of the statements with the auditor\u2019s understanding of the entity"
+    },
+    {
+      "id": 75,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "The correct order of steps in an analytical procedure is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Develop an expectation, compare to the recorded amount, investigate differences, document"
+        },
+        {
+          "letter": "B",
+          "text": "Compare, develop an expectation, document, investigate"
+        },
+        {
+          "letter": "C",
+          "text": "Document, develop an expectation, compare, investigate"
+        },
+        {
+          "letter": "D",
+          "text": "Investigate, compare, develop an expectation, document"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Develop an expectation, compare to the recorded amount, investigate differences, document"
+    },
+    {
+      "id": 76,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "The most critical element of a substantive analytical procedure is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The speed of the procedure"
+        },
+        {
+          "letter": "B",
+          "text": "The number of ratios computed"
+        },
+        {
+          "letter": "C",
+          "text": "The precision of the expectation"
+        },
+        {
+          "letter": "D",
+          "text": "The use of prior-year balances"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Precision."
+    },
+    {
+      "id": 77,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "(Select ALL that apply.) Precision of an expectation depends on:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The sophistication (type) of the expectation developed"
+        },
+        {
+          "letter": "B",
+          "text": "The reliability of the data used"
+        },
+        {
+          "letter": "C",
+          "text": "The objectivity (nature) of the account or assertion"
+        },
+        {
+          "letter": "D",
+          "text": "The size of the audit fee"
+        },
+        {
+          "letter": "E",
+          "text": "The client\u2019s fiscal year-end"
+        }
+      ],
+      "answer": "A,B,C",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C. The sophistication (type) of the expectation developed; The reliability of the data used; The objectivity (nature) of the account or assertion"
+    },
+    {
+      "id": 78,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "Which expectation is likely MORE precise?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Interest expense on fixed-rate debt"
+        },
+        {
+          "letter": "B",
+          "text": "An asset recorded at an estimated fair value"
+        },
+        {
+          "letter": "C",
+          "text": "A subjective impairment charge"
+        },
+        {
+          "letter": "D",
+          "text": "A litigation accrual"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Objective, fixed-rate items give precise expectations."
+    },
+    {
+      "id": 79,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "As the auditor needs more assurance from the analytical procedure (lower AP risk), the auditor should:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Use a less precise expectation"
+        },
+        {
+          "letter": "B",
+          "text": "Use only unaudited data"
+        },
+        {
+          "letter": "C",
+          "text": "Accept larger unexplained differences"
+        },
+        {
+          "letter": "D",
+          "text": "Demand more precision in the expectation"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Demand more precision in the expectation"
+    },
+    {
+      "id": 80,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "Trend analysis is most appropriate when:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The environment changes rapidly"
+        },
+        {
+          "letter": "B",
+          "text": "Amounts are expected to be stable and the environment is relatively unchanged"
+        },
+        {
+          "letter": "C",
+          "text": "Controls are absent"
+        },
+        {
+          "letter": "D",
+          "text": "The account is highly subjective"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Amounts are expected to be stable and the environment is relatively unchanged"
+    },
+    {
+      "id": 81,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "Which trend analysis is likely MORE precise?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Consolidated company revenue"
+        },
+        {
+          "letter": "B",
+          "text": "Industry-wide revenue"
+        },
+        {
+          "letter": "C",
+          "text": "Revenue trends for individual stores"
+        },
+        {
+          "letter": "D",
+          "text": "A one-year change in total assets"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Lower aggregation is more precise."
+    },
+    {
+      "id": 82,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "An auditor predicts hotel room revenue as rooms \u00d7 occupancy rate \u00d7 average daily rate. This is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A trend analysis"
+        },
+        {
+          "letter": "B",
+          "text": "A regression analysis"
+        },
+        {
+          "letter": "C",
+          "text": "A ratio analysis with implicit expectations"
+        },
+        {
+          "letter": "D",
+          "text": "A reasonableness test (an explicit expectation)"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Reasonableness test (explicit)."
+    },
+    {
+      "id": 83,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "Which method provides statistical measures of the precision of the expectation?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Simple trend analysis"
+        },
+        {
+          "letter": "B",
+          "text": "Simple ratio analysis"
+        },
+        {
+          "letter": "C",
+          "text": "Regression analysis"
+        },
+        {
+          "letter": "D",
+          "text": "Inquiry"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Regression."
+    },
+    {
+      "id": 84,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "(Select ALL that apply.) Advantages of regression analysis include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "It can incorporate multiple factors"
+        },
+        {
+          "letter": "B",
+          "text": "It provides measures of precision"
+        },
+        {
+          "letter": "C",
+          "text": "It can produce more precise expectations"
+        },
+        {
+          "letter": "D",
+          "text": "It requires no understanding of the relationships involved"
+        },
+        {
+          "letter": "E",
+          "text": "It guarantees the recorded amount is correct"
+        }
+      ],
+      "answer": "A,B,C",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C. It can incorporate multiple factors; It provides measures of precision; It can produce more precise expectations"
+    },
+    {
+      "id": 85,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "Which approach involves implicit expectations rather than explicit predictions?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Trend analysis"
+        },
+        {
+          "letter": "B",
+          "text": "Reasonableness test"
+        },
+        {
+          "letter": "C",
+          "text": "Regression"
+        },
+        {
+          "letter": "D",
+          "text": "Independent recalculation"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Trend and ratio analysis rely on implicit expectations."
+    },
+    {
+      "id": 86,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "The auditor decides whether a difference between the expectation and the recorded amount is significant by reference to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The client\u2019s preference"
+        },
+        {
+          "letter": "B",
+          "text": "Materiality thresholds"
+        },
+        {
+          "letter": "C",
+          "text": "Last year\u2019s difference"
+        },
+        {
+          "letter": "D",
+          "text": "The audit fee"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Materiality thresholds."
+    },
+    {
+      "id": 87,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "Bad debt expense is unexpectedly low, and management says credit policies were tightened. The best next step is to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Accept the explanation as plausible"
+        },
+        {
+          "letter": "B",
+          "text": "Record an adjusting entry"
+        },
+        {
+          "letter": "C",
+          "text": "Increase the allowance automatically"
+        },
+        {
+          "letter": "D",
+          "text": "Corroborate the explanation (e.g., review the new policy, its approval, and evidence of implementation; inquire of independent parties)"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Corroborate management\u2019s explanation."
+    },
+    {
+      "id": 88,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "The more precise the auditor\u2019s expectation, the more likely a difference is due to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Misstatement rather than other potential explanations"
+        },
+        {
+          "letter": "B",
+          "text": "Normal fluctuation"
+        },
+        {
+          "letter": "C",
+          "text": "Client bias"
+        },
+        {
+          "letter": "D",
+          "text": "Auditor error"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Misstatement rather than other potential explanations"
+    },
+    {
+      "id": 89,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "(Select ALL that apply.) To evaluate plausible non-misstatement explanations for differences, the auditor should consider:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Inquiries of independent parties (inside and outside the company)"
+        },
+        {
+          "letter": "B",
+          "text": "Evidence from other audit procedures"
+        },
+        {
+          "letter": "C",
+          "text": "Evidence from other supporting documentation"
+        },
+        {
+          "letter": "D",
+          "text": "Management\u2019s explanation alone, if it sounds reasonable"
+        },
+        {
+          "letter": "E",
+          "text": "The prior auditor\u2019s opinion alone"
+        }
+      ],
+      "answer": "A,B,C",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C. Inquiries of independent parties (inside and outside the company); Evidence from other audit procedures; Evidence from other supporting documentation"
+    },
+    {
+      "id": 90,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "Documentation of a substantive analytical procedure should include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only the conclusion"
+        },
+        {
+          "letter": "B",
+          "text": "Only the recorded amount"
+        },
+        {
+          "letter": "C",
+          "text": "The expectation and factors considered, the comparison results, and any additional procedures and their results"
+        },
+        {
+          "letter": "D",
+          "text": "Management\u2019s signed approval"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. The expectation and factors considered, the comparison results, and any additional procedures and their results"
+    },
+    {
+      "id": 91,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "(Select ALL that apply.) Plausible explanations for a significant difference between expectation and recorded amount include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Inherent factors affecting the account"
+        },
+        {
+          "letter": "B",
+          "text": "Unusual events or changes in business or accounting processes"
+        },
+        {
+          "letter": "C",
+          "text": "Unreliable data used to form the expectation"
+        },
+        {
+          "letter": "D",
+          "text": "An actual misstatement"
+        },
+        {
+          "letter": "E",
+          "text": "The auditor\u2019s personal preference"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Inherent factors affecting the account; Unusual events or changes in business or accounting processes; Unreliable data used to form the expectation; An actual misstatement"
+    },
+    {
+      "id": 92,
+      "module": "Module 10: Substantive Analytical Procedures",
+      "prompt": "An auditor predicts revenue by multiplying last year\u2019s revenue by 1.03 without considering that the client opened five new stores. The main problem is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The procedure is not a test of details"
+        },
+        {
+          "letter": "B",
+          "text": "The expectation ignores known factors, so it lacks the precision needed for substantive assurance"
+        },
+        {
+          "letter": "C",
+          "text": "A test of controls is required instead"
+        },
+        {
+          "letter": "D",
+          "text": "No documentation is needed MODULE 11: Auditor Use of Specialists (Q93\u2013112)"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Ignores new stores, so too imprecise."
+    },
+    {
+      "id": 93,
+      "module": "Module 11: Specialists",
+      "prompt": "(Select ALL that apply.) Auditors or management may use specialists for:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Valuation"
+        },
+        {
+          "letter": "B",
+          "text": "Determining physical characteristics"
+        },
+        {
+          "letter": "C",
+          "text": "Determining amounts derived using specialized techniques"
+        },
+        {
+          "letter": "D",
+          "text": "Technical interpretations"
+        },
+        {
+          "letter": "E",
+          "text": "Deciding which audit opinion to issue"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Valuation; Determining physical characteristics; Determining amounts derived using specialized techniques; Technical interpretations"
+    },
+    {
+      "id": 94,
+      "module": "Module 11: Specialists",
+      "prompt": "For which situation is a specialist MOST likely needed?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Footing a journal"
+        },
+        {
+          "letter": "B",
+          "text": "Straight-line depreciation"
+        },
+        {
+          "letter": "C",
+          "text": "Valuing complex derivatives or mineral reserves"
+        },
+        {
+          "letter": "D",
+          "text": "Computing a simple current ratio"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Valuing complex derivatives or mineral reserves"
+    },
+    {
+      "id": 95,
+      "module": "Module 11: Specialists",
+      "prompt": "Which standard governs the use of a specialist ENGAGED by the auditor?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "AS 1105"
+        },
+        {
+          "letter": "B",
+          "text": "AS 2501"
+        },
+        {
+          "letter": "C",
+          "text": "AS 1210"
+        },
+        {
+          "letter": "D",
+          "text": "AS 2415"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. AS 1210."
+    },
+    {
+      "id": 96,
+      "module": "Module 11: Specialists",
+      "prompt": "A specialist EMPLOYED by the audit firm is treated under:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "AS 1210"
+        },
+        {
+          "letter": "B",
+          "text": "AS 1201 (supervision of the audit engagement)"
+        },
+        {
+          "letter": "C",
+          "text": "AS 2405"
+        },
+        {
+          "letter": "D",
+          "text": "AS 2310"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. AS 1201."
+    },
+    {
+      "id": 97,
+      "module": "Module 11: Specialists",
+      "prompt": "A specialist employed or engaged by the CLIENT is addressed in:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "AS 1105, Appendix A"
+        },
+        {
+          "letter": "B",
+          "text": "AS 1201"
+        },
+        {
+          "letter": "C",
+          "text": "AS 2315"
+        },
+        {
+          "letter": "D",
+          "text": "AS 1210 only"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. AS 1105, App. A."
+    },
+    {
+      "id": 98,
+      "module": "Module 11: Specialists",
+      "prompt": "(Select ALL that apply.) When the auditor engages a specialist, the auditor should assess the specialist\u2019s:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Knowledge, skill, and ability"
+        },
+        {
+          "letter": "B",
+          "text": "Objectivity"
+        },
+        {
+          "letter": "C",
+          "text": "Certification, licensing, or accreditation in the field"
+        },
+        {
+          "letter": "D",
+          "text": "Experience with the type of work"
+        },
+        {
+          "letter": "E",
+          "text": "Personal net worth"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Knowledge, skill, and ability; Objectivity; Certification, licensing, or accreditation in the field; Experience with the type of work"
+    },
+    {
+      "id": 99,
+      "module": "Module 11: Specialists",
+      "prompt": "Which is NOT a factor in assessing a specialist\u2019s qualifications?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Certification or licensing"
+        },
+        {
+          "letter": "B",
+          "text": "Experience with the type of work"
+        },
+        {
+          "letter": "C",
+          "text": "Reputation"
+        },
+        {
+          "letter": "D",
+          "text": "A financial relationship with the client"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. That is an objectivity factor."
+    },
+    {
+      "id": 100,
+      "module": "Module 11: Specialists",
+      "prompt": "The specialist\u2019s employer has a significant financial relationship with the client. The auditor is mainly concerned with the specialist\u2019s:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Experience"
+        },
+        {
+          "letter": "B",
+          "text": "Certification"
+        },
+        {
+          "letter": "C",
+          "text": "Objectivity"
+        },
+        {
+          "letter": "D",
+          "text": "Reputation"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Objectivity."
+    },
+    {
+      "id": 101,
+      "module": "Module 11: Specialists",
+      "prompt": "(Select ALL that apply.) Information that helps the auditor assess a specialist\u2019s objectivity includes:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Related-party information"
+        },
+        {
+          "letter": "B",
+          "text": "Employment contracts"
+        },
+        {
+          "letter": "C",
+          "text": "Questionnaire responses"
+        },
+        {
+          "letter": "D",
+          "text": "Written representations or disclosures in the specialist\u2019s report"
+        },
+        {
+          "letter": "E",
+          "text": "The client\u2019s tax returns"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Related-party information; Employment contracts; Questionnaire responses; Written representations or disclosures in the specialist\u2019s report"
+    },
+    {
+      "id": 102,
+      "module": "Module 11: Specialists",
+      "prompt": "(Select ALL that apply.) The auditor should inform an engaged specialist of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The specialist\u2019s responsibilities"
+        },
+        {
+          "letter": "B",
+          "text": "The nature of the work"
+        },
+        {
+          "letter": "C",
+          "text": "The degree of responsibility for testing data, evaluating assumptions or developing their own, and evaluating methods"
+        },
+        {
+          "letter": "D",
+          "text": "The specialist\u2019s reporting responsibilities (work, results, conclusions)"
+        },
+        {
+          "letter": "E",
+          "text": "The auditor\u2019s personal opinion about management\u2019s honesty"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. The specialist\u2019s responsibilities; The nature of the work; The degree of responsibility for testing data, evaluating assumptions or developing their own, and evaluating methods; The specialist\u2019s reporting responsibilities (work, results, conclusions)"
+    },
+    {
+      "id": 103,
+      "module": "Module 11: Specialists",
+      "prompt": "In addition to describing the work, the auditor should give the specialist:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The prior auditor\u2019s workpapers"
+        },
+        {
+          "letter": "B",
+          "text": "Information about the client and its environment that could affect the specialist\u2019s work"
+        },
+        {
+          "letter": "C",
+          "text": "The audit fee"
+        },
+        {
+          "letter": "D",
+          "text": "Management\u2019s representation letter only"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Information about the client and its environment that could affect the specialist\u2019s work"
+    },
+    {
+      "id": 104,
+      "module": "Module 11: Specialists",
+      "prompt": "Evaluating an engaged specialist\u2019s work includes reviewing the report to determine there is sufficient appropriate evidence that:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The client likes the result"
+        },
+        {
+          "letter": "B",
+          "text": "The specialist was paid"
+        },
+        {
+          "letter": "C",
+          "text": "The work took less than a month"
+        },
+        {
+          "letter": "D",
+          "text": "The work was performed as agreed and the conclusions are consistent with the work and other audit evidence"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. The work was performed as agreed and the conclusions are consistent with the work and other audit evidence"
+    },
+    {
+      "id": 105,
+      "module": "Module 11: Specialists",
+      "prompt": "The extent of review of the specialist\u2019s work depends on:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The degree of reliance on the specialist, the risk of material misstatement, and the specialist\u2019s knowledge, skill, and ability"
+        },
+        {
+          "letter": "B",
+          "text": "Only the specialist\u2019s fee"
+        },
+        {
+          "letter": "C",
+          "text": "Only client preferences"
+        },
+        {
+          "letter": "D",
+          "text": "Only the account size"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. The degree of reliance on the specialist, the risk of material misstatement, and the specialist\u2019s knowledge, skill, and ability"
+    },
+    {
+      "id": 106,
+      "module": "Module 11: Specialists",
+      "prompt": "The auditor relies heavily on a specialist for a high-risk assertion, and the specialist has limited experience. The review should be:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Minimal"
+        },
+        {
+          "letter": "B",
+          "text": "Skipped"
+        },
+        {
+          "letter": "C",
+          "text": "More extensive"
+        },
+        {
+          "letter": "D",
+          "text": "Delegated to the client"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. More extensive review."
+    },
+    {
+      "id": 107,
+      "module": "Module 11: Specialists",
+      "prompt": "The key difference between an auditor-employed specialist and an engaged specialist is that the employed specialist:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Is not subject to any oversight"
+        },
+        {
+          "letter": "B",
+          "text": "Is a member of the audit team and is supervised under AS 1201"
+        },
+        {
+          "letter": "C",
+          "text": "Works for the client"
+        },
+        {
+          "letter": "D",
+          "text": "May not be used for valuation"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Is a member of the audit team and is supervised under AS 1201"
+    },
+    {
+      "id": 108,
+      "module": "Module 11: Specialists",
+      "prompt": "For an auditor-employed specialist, the engagement partner must:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Inform the specialist of the work, provide client information, and evaluate whether the work complies with instructions and the conclusions are consistent with other evidence"
+        },
+        {
+          "letter": "B",
+          "text": "Only obtain a representation letter"
+        },
+        {
+          "letter": "C",
+          "text": "Disclaim responsibility for the work"
+        },
+        {
+          "letter": "D",
+          "text": "Have the client supervise the work"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Inform the specialist of the work, provide client information, and evaluate whether the work complies with instructions and the conclusions are consistent with other evidence"
+    },
+    {
+      "id": 109,
+      "module": "Module 11: Specialists",
+      "prompt": "For a specialist employed or engaged by the client, evaluating the work (AS 1105, App. A) includes testing:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only the specialist\u2019s fees"
+        },
+        {
+          "letter": "B",
+          "text": "Only the signature"
+        },
+        {
+          "letter": "C",
+          "text": "The accuracy of the data used, the reasonableness of significant assumptions, and the appropriateness of the methods"
+        },
+        {
+          "letter": "D",
+          "text": "Nothing; the work may be accepted as is"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Data, assumptions, methods."
+    },
+    {
+      "id": 110,
+      "module": "Module 11: Specialists",
+      "prompt": "Why is objectivity especially important for a client-employed specialist?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The specialist works for the client and may be biased toward client interests"
+        },
+        {
+          "letter": "B",
+          "text": "Client specialists are always more skilled"
+        },
+        {
+          "letter": "C",
+          "text": "Objectivity is irrelevant for client specialists"
+        },
+        {
+          "letter": "D",
+          "text": "The auditor supervises them"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. The specialist works for the client and may be biased toward client interests"
+    },
+    {
+      "id": 111,
+      "module": "Module 11: Specialists",
+      "prompt": "The specialist\u2019s conclusions are inconsistent with other audit evidence. The auditor should:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Ignore the inconsistency"
+        },
+        {
+          "letter": "B",
+          "text": "Accept the specialist\u2019s view"
+        },
+        {
+          "letter": "C",
+          "text": "Delete the other evidence"
+        },
+        {
+          "letter": "D",
+          "text": "Resolve the inconsistency, performing additional procedures if needed"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Resolve the inconsistency, performing additional procedures if needed"
+    },
+    {
+      "id": 112,
+      "module": "Module 11: Specialists",
+      "prompt": "A \u201cspecialist\u201d is best described as a person or firm with special skill or knowledge in:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Accounting or auditing"
+        },
+        {
+          "letter": "B",
+          "text": "A field other than accounting or auditing"
+        },
+        {
+          "letter": "C",
+          "text": "Tax compliance only"
+        },
+        {
+          "letter": "D",
+          "text": "Internal audit only MODULE 12: Judgment, Estimates, and Going Concern (Q113\u2013138)"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. A field other than accounting or auditing"
+    },
+    {
+      "id": 113,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "Judgments in auditing are difficult primarily because they reflect:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Excess evidence"
+        },
+        {
+          "letter": "B",
+          "text": "Management certainty"
+        },
+        {
+          "letter": "C",
+          "text": "Uncertainty and subjectivity"
+        },
+        {
+          "letter": "D",
+          "text": "Simple rules"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Uncertainty and subjectivity"
+    },
+    {
+      "id": 114,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "(Select ALL that apply.) Judgmental items are problematic because they:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Reflect uncertainty about future events"
+        },
+        {
+          "letter": "B",
+          "text": "Reflect subjectivity"
+        },
+        {
+          "letter": "C",
+          "text": "Often have little \u201chard\u201d evidence"
+        },
+        {
+          "letter": "D",
+          "text": "Allow people to reach differing conclusions"
+        },
+        {
+          "letter": "E",
+          "text": "Are always objectively verifiable"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Reflect uncertainty about future events; Reflect subjectivity; Often have little \u201chard\u201d evidence; Allow people to reach differing conclusions"
+    },
+    {
+      "id": 115,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "Because judgments are difficult and complex, humans tend to use:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Heuristics"
+        },
+        {
+          "letter": "B",
+          "text": "Exhaustive analysis"
+        },
+        {
+          "letter": "C",
+          "text": "Perfect information"
+        },
+        {
+          "letter": "D",
+          "text": "Randomization"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Heuristics"
+    },
+    {
+      "id": 116,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "A heuristic is best described as:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A formal statistical model"
+        },
+        {
+          "letter": "B",
+          "text": "A legal standard"
+        },
+        {
+          "letter": "C",
+          "text": "A required audit procedure"
+        },
+        {
+          "letter": "D",
+          "text": "A mental shortcut that uses fewer cues or steps, trading accuracy for efficiency"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. A mental shortcut that uses fewer cues or steps, trading accuracy for efficiency"
+    },
+    {
+      "id": 117,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "(Select ALL that apply.) Synonyms or close relatives of heuristics include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Rules of thumb"
+        },
+        {
+          "letter": "B",
+          "text": "Stereotypes"
+        },
+        {
+          "letter": "C",
+          "text": "Educated guesses"
+        },
+        {
+          "letter": "D",
+          "text": "Common sense"
+        },
+        {
+          "letter": "E",
+          "text": "A formal regression model"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Rules of thumb; Stereotypes; Educated guesses; Common sense"
+    },
+    {
+      "id": 118,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "An auditor starts from last year\u2019s materiality and adjusts only slightly despite new facts. This is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Availability"
+        },
+        {
+          "letter": "B",
+          "text": "Anchoring and adjustment"
+        },
+        {
+          "letter": "C",
+          "text": "Framing"
+        },
+        {
+          "letter": "D",
+          "text": "Dilution"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Anchoring and adjustment."
+    },
+    {
+      "id": 119,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "An auditor wants controls to be effective (to cut substantive work) and reads ambiguous test results favorably. This is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Recency"
+        },
+        {
+          "letter": "B",
+          "text": "Availability"
+        },
+        {
+          "letter": "C",
+          "text": "Motivated reasoning"
+        },
+        {
+          "letter": "D",
+          "text": "Framing"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Motivated reasoning."
+    },
+    {
+      "id": 120,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "After a prior inventory fraud, an auditor overestimates inventory fraud risk at a new client with strong controls because the case is easy to recall. This is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The availability heuristic"
+        },
+        {
+          "letter": "B",
+          "text": "Anchoring"
+        },
+        {
+          "letter": "C",
+          "text": "The dilution effect"
+        },
+        {
+          "letter": "D",
+          "text": "Primacy"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Availability."
+    },
+    {
+      "id": 121,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "An auditor looks for evidence that supports her initial risk assessment and discounts contradictory evidence. This is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Framing"
+        },
+        {
+          "letter": "B",
+          "text": "Recency"
+        },
+        {
+          "letter": "C",
+          "text": "Dilution"
+        },
+        {
+          "letter": "D",
+          "text": "Confirmation bias"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Confirmation bias."
+    },
+    {
+      "id": 122,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "Giving the most weight to the last piece of evidence received is a:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Primacy effect"
+        },
+        {
+          "letter": "B",
+          "text": "Recency effect"
+        },
+        {
+          "letter": "C",
+          "text": "Framing effect"
+        },
+        {
+          "letter": "D",
+          "text": "Anchoring effect"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Recency."
+    },
+    {
+      "id": 123,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "Asking \u201cDoes management show integrity?\u201d versus \u201cMight management act dishonestly?\u201d leads to different conclusions on the same evidence. This is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Availability"
+        },
+        {
+          "letter": "B",
+          "text": "Anchoring"
+        },
+        {
+          "letter": "C",
+          "text": "Framing"
+        },
+        {
+          "letter": "D",
+          "text": "Dilution"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Framing."
+    },
+    {
+      "id": 124,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "The dilution effect occurs when:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Irrelevant information weakens the influence of relevant information"
+        },
+        {
+          "letter": "B",
+          "text": "The first evidence is overweighted"
+        },
+        {
+          "letter": "C",
+          "text": "Risk is overstated"
+        },
+        {
+          "letter": "D",
+          "text": "Evidence is recalled easily"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Dilution."
+    },
+    {
+      "id": 125,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "(Select ALL that apply.) Which are judgment biases or heuristics?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Anchoring and adjustment"
+        },
+        {
+          "letter": "B",
+          "text": "Availability"
+        },
+        {
+          "letter": "C",
+          "text": "Confirmation bias"
+        },
+        {
+          "letter": "D",
+          "text": "Framing"
+        },
+        {
+          "letter": "E",
+          "text": "Materiality"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Materiality is not a bias."
+    },
+    {
+      "id": 126,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "Under AS 2501, the auditor must use:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "All three approaches in every audit"
+        },
+        {
+          "letter": "B",
+          "text": "At least one of three approaches"
+        },
+        {
+          "letter": "C",
+          "text": "Only management\u2019s method"
+        },
+        {
+          "letter": "D",
+          "text": "Only an independent estimate"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. At least one of the three."
+    },
+    {
+      "id": 127,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "(Select ALL that apply.) The approaches in AS 2501 are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Test management\u2019s process"
+        },
+        {
+          "letter": "B",
+          "text": "Develop an independent estimate"
+        },
+        {
+          "letter": "C",
+          "text": "Evaluate evidence from events occurring after the measurement date"
+        },
+        {
+          "letter": "D",
+          "text": "Rely solely on a representation letter"
+        },
+        {
+          "letter": "E",
+          "text": "Confirm the estimate with the bank"
+        }
+      ],
+      "answer": "A,B,C",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C. Test management\u2019s process; Develop an independent estimate; Evaluate evidence from events occurring after the measurement date"
+    },
+    {
+      "id": 128,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "To test the allowance for doubtful accounts, an auditor examines cash collected after year-end. This is which approach?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Subsequent events (events after the measurement date)"
+        },
+        {
+          "letter": "B",
+          "text": "Independent estimate"
+        },
+        {
+          "letter": "C",
+          "text": "Test of management\u2019s process"
+        },
+        {
+          "letter": "D",
+          "text": "Test of controls"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Subsequent events."
+    },
+    {
+      "id": 129,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "The auditor builds her own model of a fair value estimate using her own methods and data. This is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Subsequent events"
+        },
+        {
+          "letter": "B",
+          "text": "Testing management\u2019s process"
+        },
+        {
+          "letter": "C",
+          "text": "A confirmation"
+        },
+        {
+          "letter": "D",
+          "text": "Developing an independent estimate"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Independent estimate."
+    },
+    {
+      "id": 130,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "(Select ALL that apply.) Significant assumptions are those that are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Sensitive to variation"
+        },
+        {
+          "letter": "B",
+          "text": "Susceptible to misstatement and bias"
+        },
+        {
+          "letter": "C",
+          "text": "Based on unobservable data"
+        },
+        {
+          "letter": "D",
+          "text": "Dependent on the company\u2019s intent and ability to carry out a course of action"
+        },
+        {
+          "letter": "E",
+          "text": "Immaterial to the estimate"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Sensitive to variation; Susceptible to misstatement and bias; Based on unobservable data; Dependent on the company\u2019s intent and ability to carry out a course of action"
+    },
+    {
+      "id": 131,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "When testing management\u2019s process, evaluating methods includes determining whether the method is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The cheapest"
+        },
+        {
+          "letter": "B",
+          "text": "Used by competitors"
+        },
+        {
+          "letter": "C",
+          "text": "Appropriate and applied consistently"
+        },
+        {
+          "letter": "D",
+          "text": "Never changed"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Appropriate and applied consistently"
+    },
+    {
+      "id": 132,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "When the auditor develops an independent estimate using third-party data, the auditor should:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Assume the data is reliable"
+        },
+        {
+          "letter": "B",
+          "text": "Evaluate the relevance and reliability of the third-party data and test any company-provided data"
+        },
+        {
+          "letter": "C",
+          "text": "Use only company data"
+        },
+        {
+          "letter": "D",
+          "text": "Ignore the data"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Evaluate the relevance and reliability of the third-party data and test any company-provided data"
+    },
+    {
+      "id": 133,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "Under AS 2415, the auditor evaluates whether substantial doubt exists about the client\u2019s ability to continue for a reasonable period not to exceed:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "3 months"
+        },
+        {
+          "letter": "B",
+          "text": "6 months"
+        },
+        {
+          "letter": "C",
+          "text": "12 months"
+        },
+        {
+          "letter": "D",
+          "text": "24 months"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. 12 months."
+    },
+    {
+      "id": 134,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "If there is substantial doubt, the auditor reviews management\u2019s plans and asks whether:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The plan is popular"
+        },
+        {
+          "letter": "B",
+          "text": "Management has the ability and intent to execute it, and whether it will resolve the doubt"
+        },
+        {
+          "letter": "C",
+          "text": "The plan is cheap"
+        },
+        {
+          "letter": "D",
+          "text": "The board has seen it"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Management has the ability and intent to execute it, and whether it will resolve the doubt"
+    },
+    {
+      "id": 135,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "If substantial doubt remains unresolved, the auditor:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Resigns automatically"
+        },
+        {
+          "letter": "B",
+          "text": "Adds an explanatory paragraph to the audit report"
+        },
+        {
+          "letter": "C",
+          "text": "Issues no report"
+        },
+        {
+          "letter": "D",
+          "text": "Withdraws the prior opinion"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Explanatory paragraph."
+    },
+    {
+      "id": 136,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "(Select ALL that apply.) In evaluating management\u2019s plans, the auditor considers whether:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The plan will resolve the doubt"
+        },
+        {
+          "letter": "B",
+          "text": "Management has the ability to execute it"
+        },
+        {
+          "letter": "C",
+          "text": "Management has the intent to execute it"
+        },
+        {
+          "letter": "D",
+          "text": "The auditor likes the plan"
+        },
+        {
+          "letter": "E",
+          "text": "The plan has already been implemented in prior years only"
+        }
+      ],
+      "answer": "A,B,C",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C. The plan will resolve the doubt; Management has the ability to execute it; Management has the intent to execute it"
+    },
+    {
+      "id": 137,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "The \u201cself-fulfilling prophecy\u201d argument against going concern opinions is that:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "They are always correct"
+        },
+        {
+          "letter": "B",
+          "text": "They are never read"
+        },
+        {
+          "letter": "C",
+          "text": "They increase auditor fees"
+        },
+        {
+          "letter": "D",
+          "text": "The opinion itself can cause creditors and others to withdraw support, contributing to failure"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. The opinion itself can cause creditors and others to withdraw support, contributing to failure"
+    },
+    {
+      "id": 138,
+      "module": "Module 12: Judgment, Estimates, and Going Concern",
+      "prompt": "Compared with AS 2415, ISA 570:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Is identical"
+        },
+        {
+          "letter": "B",
+          "text": "Applies only to the U.S."
+        },
+        {
+          "letter": "C",
+          "text": "Evaluates management\u2019s own assessment over the same period and calls for an adverse opinion if the going concern basis is inappropriate"
+        },
+        {
+          "letter": "D",
+          "text": "Does not mention going concern MODULE 13: Auditor Responsibility for Fraud (Q139\u2013174)"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Evaluates management\u2019s own assessment over the same period and calls for an adverse opinion if the going concern basis is inappropriate"
+    },
+    {
+      "id": 139,
+      "module": "Module 13: Fraud",
+      "prompt": "The dictionary definition of fraud is the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Accidental misstatement of records"
+        },
+        {
+          "letter": "B",
+          "text": "Intentional use of deceit, a trick, or dishonest means to deprive another of property or legal rights"
+        },
+        {
+          "letter": "C",
+          "text": "Unintentional omission of disclosures"
+        },
+        {
+          "letter": "D",
+          "text": "Failure to follow procedures"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Intentional use of deceit, a trick, or dishonest means to deprive another of property or legal rights"
+    },
+    {
+      "id": 140,
+      "module": "Module 13: Fraud",
+      "prompt": "(Select ALL that apply.) Elements of fraud from a legal standpoint include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A false representation of a material nature"
+        },
+        {
+          "letter": "B",
+          "text": "Scienter (intent to deceive)"
+        },
+        {
+          "letter": "C",
+          "text": "Reliance by the person receiving the representation"
+        },
+        {
+          "letter": "D",
+          "text": "Damages (financial harm)"
+        },
+        {
+          "letter": "E",
+          "text": "A negligent mistake"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Negligence is not fraud."
+    },
+    {
+      "id": 141,
+      "module": "Module 13: Fraud",
+      "prompt": "Scienter refers to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The financial harm"
+        },
+        {
+          "letter": "B",
+          "text": "The false statement"
+        },
+        {
+          "letter": "C",
+          "text": "The mental state of intent to deceive, manipulate, or defraud"
+        },
+        {
+          "letter": "D",
+          "text": "The victim\u2019s reliance"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. The mental state of intent to deceive, manipulate, or defraud"
+    },
+    {
+      "id": 142,
+      "module": "Module 13: Fraud",
+      "prompt": "According to AS 2401, fraud is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A legal determination made by the auditor"
+        },
+        {
+          "letter": "B",
+          "text": "Any misstatement, intentional or not"
+        },
+        {
+          "letter": "C",
+          "text": "Only misappropriation of assets"
+        },
+        {
+          "letter": "D",
+          "text": "An intentional act that results in a material misstatement in financial statements that are the subject of an audit"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. An intentional act that results in a material misstatement in financial statements that are the subject of an audit"
+    },
+    {
+      "id": 143,
+      "module": "Module 13: Fraud",
+      "prompt": "With respect to fraud, the auditor:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Makes legal determinations of fraud"
+        },
+        {
+          "letter": "B",
+          "text": "Does not make legal determinations but is concerned with whether misstatements are intentional (fraud) or unintentional (error)"
+        },
+        {
+          "letter": "C",
+          "text": "Only looks for errors"
+        },
+        {
+          "letter": "D",
+          "text": "Reports all suspicions to regulators"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Does not make legal determinations but is concerned with whether misstatements are intentional (fraud) or unintentional (error)"
+    },
+    {
+      "id": 144,
+      "module": "Module 13: Fraud",
+      "prompt": "PCAOB standards describe two types of fraud:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Errors and omissions"
+        },
+        {
+          "letter": "B",
+          "text": "Embezzlement and bribery"
+        },
+        {
+          "letter": "C",
+          "text": "Fraudulent financial reporting and misappropriation of assets"
+        },
+        {
+          "letter": "D",
+          "text": "Tax and nontax fraud"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Fraudulent financial reporting and misappropriation of assets"
+    },
+    {
+      "id": 145,
+      "module": "Module 13: Fraud",
+      "prompt": "The CFO inflates revenue to meet an earnings target. This is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Fraudulent financial reporting"
+        },
+        {
+          "letter": "B",
+          "text": "Misappropriation of assets"
+        },
+        {
+          "letter": "C",
+          "text": "An error"
+        },
+        {
+          "letter": "D",
+          "text": "An illegal act with only direct effects"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Fraudulent financial reporting"
+    },
+    {
+      "id": 146,
+      "module": "Module 13: Fraud",
+      "prompt": "A warehouse employee steals inventory and falsifies counts to hide it. This is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Fraudulent financial reporting"
+        },
+        {
+          "letter": "B",
+          "text": "A change in estimate"
+        },
+        {
+          "letter": "C",
+          "text": "An error"
+        },
+        {
+          "letter": "D",
+          "text": "Misappropriation of assets"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Misappropriation of assets"
+    },
+    {
+      "id": 147,
+      "module": "Module 13: Fraud",
+      "prompt": "How does the auditor\u2019s strategy differ between the two types?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "It does not differ"
+        },
+        {
+          "letter": "B",
+          "text": "For financial statement fraud, management is the potential perpetrator and opposes the auditor; for employee misappropriation, management is generally on the auditor\u2019s side"
+        },
+        {
+          "letter": "C",
+          "text": "Management is always an ally"
+        },
+        {
+          "letter": "D",
+          "text": "Management is always the perpetrator"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. For financial statement fraud, management is the potential perpetrator and opposes the auditor; for employee misappropriation, management is generally on the auditor\u2019s side"
+    },
+    {
+      "id": 148,
+      "module": "Module 13: Fraud",
+      "prompt": "(Select ALL that apply.) Which statements are true?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Fraudulent financial reporting is typically perpetrated by management"
+        },
+        {
+          "letter": "B",
+          "text": "Misappropriation of assets is typically perpetrated by employees"
+        },
+        {
+          "letter": "C",
+          "text": "The two types require identical audit approaches"
+        },
+        {
+          "letter": "D",
+          "text": "With employee misappropriation, management is generally on the auditor\u2019s side"
+        },
+        {
+          "letter": "E",
+          "text": "Management is always on the auditor\u2019s side"
+        }
+      ],
+      "answer": "A,B,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,D. Fraudulent financial reporting is typically perpetrated by management; Misappropriation of assets is typically perpetrated by employees; With employee misappropriation, management is generally on the auditor\u2019s side"
+    },
+    {
+      "id": 149,
+      "module": "Module 13: Fraud",
+      "prompt": "SAS 1 (1972) indicated the auditor:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Must detect all fraud"
+        },
+        {
+          "letter": "B",
+          "text": "Must search for all management fraud"
+        },
+        {
+          "letter": "C",
+          "text": "Is aware that fraud may exist, but the examination is not designed to detect it"
+        },
+        {
+          "letter": "D",
+          "text": "Must guarantee the absence of fraud"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. SAS 1."
+    },
+    {
+      "id": 150,
+      "module": "Module 13: Fraud",
+      "prompt": "SAS 16 (1977) introduced a responsibility to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Search for errors or irregularities that have a material effect on the statements"
+        },
+        {
+          "letter": "B",
+          "text": "Assess fraud risk factors only"
+        },
+        {
+          "letter": "C",
+          "text": "Presume revenue fraud"
+        },
+        {
+          "letter": "D",
+          "text": "Report all irregularities externally"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. SAS 16."
+    },
+    {
+      "id": 151,
+      "module": "Module 13: Fraud",
+      "prompt": "SAS 53 (1988) required the auditor to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Ignore irregularities"
+        },
+        {
+          "letter": "B",
+          "text": "Assess the risk that errors and irregularities may cause material misstatement and design the audit accordingly"
+        },
+        {
+          "letter": "C",
+          "text": "Guarantee detection"
+        },
+        {
+          "letter": "D",
+          "text": "Rely solely on internal control"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. SAS 53."
+    },
+    {
+      "id": 152,
+      "module": "Module 13: Fraud",
+      "prompt": "SAS 82 (1997) is notable because it:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Eliminated fraud responsibility"
+        },
+        {
+          "letter": "B",
+          "text": "Applied only to small firms"
+        },
+        {
+          "letter": "C",
+          "text": "Was issued before SAS 1"
+        },
+        {
+          "letter": "D",
+          "text": "Required the auditor to specifically assess fraud risk, covering both types of fraud"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. SAS 82."
+    },
+    {
+      "id": 153,
+      "module": "Module 13: Fraud",
+      "prompt": "SAS 99 (2002), now reflected in AS 2401, requires the auditor to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Plan and perform the audit to obtain reasonable assurance of detecting material misstatement due to fraud or error, and presume improper revenue recognition is a fraud risk"
+        },
+        {
+          "letter": "B",
+          "text": "Obtain absolute assurance"
+        },
+        {
+          "letter": "C",
+          "text": "Assume management is honest"
+        },
+        {
+          "letter": "D",
+          "text": "Perform no brainstorming"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. SAS 99 / AS 2401."
+    },
+    {
+      "id": 154,
+      "module": "Module 13: Fraud",
+      "prompt": "(Select ALL that apply.) Under AS 2401, the auditor\u2019s current responsibility includes:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Obtaining reasonable (not absolute) assurance about material misstatement"
+        },
+        {
+          "letter": "B",
+          "text": "Considering misstatements caused by error or fraud"
+        },
+        {
+          "letter": "C",
+          "text": "Presuming revenue recognition is a fraud risk"
+        },
+        {
+          "letter": "D",
+          "text": "Guaranteeing that all fraud is detected"
+        },
+        {
+          "letter": "E",
+          "text": "Considering the risk of management override of controls"
+        }
+      ],
+      "answer": "A,B,C,E",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,E. Obtaining reasonable (not absolute) assurance about material misstatement; Considering misstatements caused by error or fraud; Presuming revenue recognition is a fraud risk; Considering the risk of management override of controls"
+    },
+    {
+      "id": 155,
+      "module": "Module 13: Fraud",
+      "prompt": "\u201cReasonable assurance\u201d means:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Complete certainty"
+        },
+        {
+          "letter": "B",
+          "text": "100% detection of fraud"
+        },
+        {
+          "letter": "C",
+          "text": "No responsibility for fraud"
+        },
+        {
+          "letter": "D",
+          "text": "A high but not absolute level of assurance"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. A high but not absolute level of assurance"
+    },
+    {
+      "id": 156,
+      "module": "Module 13: Fraud",
+      "prompt": "The three conditions of the fraud triangle are:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Intent, motive, and action"
+        },
+        {
+          "letter": "B",
+          "text": "Cost, benefit, and risk"
+        },
+        {
+          "letter": "C",
+          "text": "Incentive/pressure, opportunity, and rationalization/attitude"
+        },
+        {
+          "letter": "D",
+          "text": "Inherent, control, and detection risk"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Incentive/pressure, opportunity, and rationalization/attitude"
+    },
+    {
+      "id": 157,
+      "module": "Module 13: Fraud",
+      "prompt": "(Select ALL that apply.) The fraud triangle includes:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Incentive or pressure"
+        },
+        {
+          "letter": "B",
+          "text": "Opportunity"
+        },
+        {
+          "letter": "C",
+          "text": "Rationalization or attitude"
+        },
+        {
+          "letter": "D",
+          "text": "Materiality"
+        },
+        {
+          "letter": "E",
+          "text": "Detection risk"
+        }
+      ],
+      "answer": "A,B,C",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C. Incentive or pressure; Opportunity; Rationalization or attitude"
+    },
+    {
+      "id": 158,
+      "module": "Module 13: Fraud",
+      "prompt": "A CFO\u2019s bonus depends on hitting an EPS target. This illustrates the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Opportunity element"
+        },
+        {
+          "letter": "B",
+          "text": "Incentive/pressure element"
+        },
+        {
+          "letter": "C",
+          "text": "Rationalization element"
+        },
+        {
+          "letter": "D",
+          "text": "Detection element"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Incentive/pressure."
+    },
+    {
+      "id": 159,
+      "module": "Module 13: Fraud",
+      "prompt": "A company has no segregation of duties and weak oversight over cash. This most directly increases:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Incentive"
+        },
+        {
+          "letter": "B",
+          "text": "Rationalization"
+        },
+        {
+          "letter": "C",
+          "text": "Materiality"
+        },
+        {
+          "letter": "D",
+          "text": "Opportunity"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Opportunity."
+    },
+    {
+      "id": 160,
+      "module": "Module 13: Fraud",
+      "prompt": "An employee who \u201cborrows\u201d from petty cash says, \u201cI\u2019ll pay it back once things improve.\u201d This reflects:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Rationalization"
+        },
+        {
+          "letter": "B",
+          "text": "Opportunity"
+        },
+        {
+          "letter": "C",
+          "text": "Pressure"
+        },
+        {
+          "letter": "D",
+          "text": "Detection risk"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Rationalization."
+    },
+    {
+      "id": 161,
+      "module": "Module 13: Fraud",
+      "prompt": "(Select ALL that apply.) During the planning discussion about fraud, the engagement team should consider:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "How the financial statements might be susceptible to material misstatement due to fraud"
+        },
+        {
+          "letter": "B",
+          "text": "How management could perpetrate and conceal fraudulent financial reporting"
+        },
+        {
+          "letter": "C",
+          "text": "How assets could be misappropriated"
+        },
+        {
+          "letter": "D",
+          "text": "The need to emphasize professional skepticism"
+        },
+        {
+          "letter": "E",
+          "text": "How to set the audit fee"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. How the financial statements might be susceptible to material misstatement due to fraud; How management could perpetrate and conceal fraudulent financial reporting; How assets could be misappropriated; The need to emphasize professional skepticism"
+    },
+    {
+      "id": 162,
+      "module": "Module 13: Fraud",
+      "prompt": "The primary purpose of the team\u2019s fraud brainstorming is to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Assign blame"
+        },
+        {
+          "letter": "B",
+          "text": "Reduce audit work"
+        },
+        {
+          "letter": "C",
+          "text": "Share insights and heighten awareness of where and how fraud could occur"
+        },
+        {
+          "letter": "D",
+          "text": "Satisfy the client"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Share insights and heighten awareness of where and how fraud could occur"
+    },
+    {
+      "id": 163,
+      "module": "Module 13: Fraud",
+      "prompt": "(Select ALL that apply.) In assessing fraud risk, the auditor makes inquiries of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Management"
+        },
+        {
+          "letter": "B",
+          "text": "The audit committee"
+        },
+        {
+          "letter": "C",
+          "text": "Internal auditors"
+        },
+        {
+          "letter": "D",
+          "text": "The client\u2019s competitors"
+        },
+        {
+          "letter": "E",
+          "text": "The press"
+        }
+      ],
+      "answer": "A,B,C",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C. Management; The audit committee; Internal auditors"
+    },
+    {
+      "id": 164,
+      "module": "Module 13: Fraud",
+      "prompt": "(Select ALL that apply.) Factors relevant to identifying fraud risk include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Events or conditions indicating a component of the fraud triangle"
+        },
+        {
+          "letter": "B",
+          "text": "Incomplete or inaccurate disclosure"
+        },
+        {
+          "letter": "C",
+          "text": "The presumption of fraud risk in revenue recognition"
+        },
+        {
+          "letter": "D",
+          "text": "The risk of management override of controls"
+        },
+        {
+          "letter": "E",
+          "text": "The client\u2019s logo"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Events or conditions indicating a component of the fraud triangle; Incomplete or inaccurate disclosure; The presumption of fraud risk in revenue recognition; The risk of management override of controls"
+    },
+    {
+      "id": 165,
+      "module": "Module 13: Fraud",
+      "prompt": "Which fraud risk must the auditor presume exists?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Payroll"
+        },
+        {
+          "letter": "B",
+          "text": "Improper revenue recognition"
+        },
+        {
+          "letter": "C",
+          "text": "Cash disbursements"
+        },
+        {
+          "letter": "D",
+          "text": "Prepaid expenses"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Revenue recognition."
+    },
+    {
+      "id": 166,
+      "module": "Module 13: Fraud",
+      "prompt": "Which is performed regardless of the assessed risks, to address management override?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Confirming all receivables"
+        },
+        {
+          "letter": "B",
+          "text": "Examining journal entries (plus reviewing estimates for bias and unusual transactions)"
+        },
+        {
+          "letter": "C",
+          "text": "Counting all inventory"
+        },
+        {
+          "letter": "D",
+          "text": "Obtaining a legal letter"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Journal entries (also estimates and unusual transactions)."
+    },
+    {
+      "id": 167,
+      "module": "Module 13: Fraud",
+      "prompt": "(Select ALL that apply.) Appropriate responses to heightened fraud risk include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Modifying the nature, timing, and extent of procedures"
+        },
+        {
+          "letter": "B",
+          "text": "Incorporating unpredictability"
+        },
+        {
+          "letter": "C",
+          "text": "Performing analytical procedures on disaggregated data"
+        },
+        {
+          "letter": "D",
+          "text": "Reducing professional skepticism to finish on time"
+        },
+        {
+          "letter": "E",
+          "text": "Relying more on management representations"
+        }
+      ],
+      "answer": "A,B,C",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C. Modifying the nature, timing, and extent of procedures; Incorporating unpredictability; Performing analytical procedures on disaggregated data"
+    },
+    {
+      "id": 168,
+      "module": "Module 13: Fraud",
+      "prompt": "(Select ALL that apply.) For a revenue fraud risk, appropriate responses include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Analytical procedures on disaggregated data"
+        },
+        {
+          "letter": "B",
+          "text": "Confirming contract terms and the absence of side agreements"
+        },
+        {
+          "letter": "C",
+          "text": "Inquiring of sales, marketing, and legal personnel"
+        },
+        {
+          "letter": "D",
+          "text": "Being present at period-end to observe shipments"
+        },
+        {
+          "letter": "E",
+          "text": "Reducing testing to save time"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Analytical procedures on disaggregated data; Confirming contract terms and the absence of side agreements; Inquiring of sales, marketing, and legal personnel; Being present at period-end to observe shipments"
+    },
+    {
+      "id": 169,
+      "module": "Module 13: Fraud",
+      "prompt": "(Select ALL that apply.) For fraud risk in accounting estimates, appropriate responses include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Using a specialist"
+        },
+        {
+          "letter": "B",
+          "text": "Developing an independent estimate"
+        },
+        {
+          "letter": "C",
+          "text": "Performing a retrospective review of prior estimates"
+        },
+        {
+          "letter": "D",
+          "text": "Looking for management bias"
+        },
+        {
+          "letter": "E",
+          "text": "Accepting management\u2019s estimate without testing"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Using a specialist; Developing an independent estimate; Performing a retrospective review of prior estimates; Looking for management bias"
+    },
+    {
+      "id": 170,
+      "module": "Module 13: Fraud",
+      "prompt": "An auditor suspects inventory manipulation at a remote warehouse. Which response is MOST responsive?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Rely on last year\u2019s count"
+        },
+        {
+          "letter": "B",
+          "text": "Perform an unannounced observation near year-end, examine packaged inventory carefully, and consider a specialist"
+        },
+        {
+          "letter": "C",
+          "text": "Inquire only of the warehouse manager"
+        },
+        {
+          "letter": "D",
+          "text": "Eliminate substantive testing"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Perform an unannounced observation near year-end, examine packaged inventory carefully, and consider a specialist"
+    },
+    {
+      "id": 171,
+      "module": "Module 13: Fraud",
+      "prompt": "Fraud involving senior management, or any material fraud, should be reported:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Directly to the audit committee"
+        },
+        {
+          "letter": "B",
+          "text": "Only to the SEC"
+        },
+        {
+          "letter": "C",
+          "text": "Only to the staff accountant"
+        },
+        {
+          "letter": "D",
+          "text": "To no one"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Directly to the audit committee."
+    },
+    {
+      "id": 172,
+      "module": "Module 13: Fraud",
+      "prompt": "(Select ALL that apply.) The auditor may report fraud outside the client to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Comply with legal and regulatory requirements"
+        },
+        {
+          "letter": "B",
+          "text": "A successor auditor (with client permission)"
+        },
+        {
+          "letter": "C",
+          "text": "Respond to a subpoena"
+        },
+        {
+          "letter": "D",
+          "text": "A funding agency or other specified agency"
+        },
+        {
+          "letter": "E",
+          "text": "The press"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Comply with legal and regulatory requirements; A successor auditor (with client permission); Respond to a subpoena; A funding agency or other specified agency"
+    },
+    {
+      "id": 173,
+      "module": "Module 13: Fraud",
+      "prompt": "(Select ALL that apply.) Fraud is difficult to find because:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Sophisticated people (including management) can perpetrate and conceal it"
+        },
+        {
+          "letter": "B",
+          "text": "It is concealed by withholding evidence, falsifying documents, side agreements, and collusion"
+        },
+        {
+          "letter": "C",
+          "text": "It is hard to tell whether detected misstatements are intentional or unintentional"
+        },
+        {
+          "letter": "D",
+          "text": "It is strategic"
+        },
+        {
+          "letter": "E",
+          "text": "It always leaves an obvious trail"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Sophisticated people (including management) can perpetrate and conceal it; It is concealed by withholding evidence, falsifying documents, side agreements, and collusion; It is hard to tell whether detected misstatements are intentional or unintentional; It is strategic"
+    },
+    {
+      "id": 174,
+      "module": "Module 13: Fraud",
+      "prompt": "Why is fraud risk different from error risk?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Errors are intentional"
+        },
+        {
+          "letter": "B",
+          "text": "Fraud risk is easier to measure"
+        },
+        {
+          "letter": "C",
+          "text": "There is no difference"
+        },
+        {
+          "letter": "D",
+          "text": "A potential fraudster anticipates the auditor\u2019s assessment and response and adjusts, so fraud risk is strategic MODULE 14: Illegal Acts (Q175\u2013200)"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Fraud risk is strategic."
+    },
+    {
+      "id": 175,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "Illegal acts are violations of laws or government regulations attributable to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only management\u2019s personal conduct"
+        },
+        {
+          "letter": "B",
+          "text": "Only criminal law"
+        },
+        {
+          "letter": "C",
+          "text": "The entity, or management or employees acting on behalf of the entity"
+        },
+        {
+          "letter": "D",
+          "text": "Only foreign operations"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. The entity, or management or employees acting on behalf of the entity"
+    },
+    {
+      "id": 176,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "(Select ALL that apply.) Illegal acts under AS 2405 include violations by:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The entity"
+        },
+        {
+          "letter": "B",
+          "text": "Management acting on its behalf"
+        },
+        {
+          "letter": "C",
+          "text": "Employees acting on its behalf"
+        },
+        {
+          "letter": "D",
+          "text": "Management\u2019s personal misconduct unrelated to business activities"
+        },
+        {
+          "letter": "E",
+          "text": "The auditor"
+        }
+      ],
+      "answer": "A,B,C",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C. The entity; Management acting on its behalf; Employees acting on its behalf"
+    },
+    {
+      "id": 177,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "Which is NOT an illegal act as defined?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A tax law violation by the entity"
+        },
+        {
+          "letter": "B",
+          "text": "An environmental violation by employees at work"
+        },
+        {
+          "letter": "C",
+          "text": "Bribery by a manager to win business"
+        },
+        {
+          "letter": "D",
+          "text": "Management\u2019s personal misconduct unrelated to the business"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Management\u2019s personal misconduct unrelated to the business"
+    },
+    {
+      "id": 178,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "Determining whether an act is illegal normally:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Requires a legal determination outside the auditor\u2019s professional competence"
+        },
+        {
+          "letter": "B",
+          "text": "Is the auditor\u2019s responsibility alone"
+        },
+        {
+          "letter": "C",
+          "text": "Is made by the client"
+        },
+        {
+          "letter": "D",
+          "text": "Is irrelevant to audits"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Requires a legal determination outside the auditor\u2019s professional competence"
+    },
+    {
+      "id": 179,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "An illegal act with a direct effect is one where the law:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Primarily affects operations"
+        },
+        {
+          "letter": "B",
+          "text": "Directly and materially affects financial statement amounts"
+        },
+        {
+          "letter": "C",
+          "text": "Has no financial effect"
+        },
+        {
+          "letter": "D",
+          "text": "Applies only to auditors"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Directly and materially affects financial statement amounts"
+    },
+    {
+      "id": 180,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "Which is MOST likely a direct-effect illegal act?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "An OSHA violation"
+        },
+        {
+          "letter": "B",
+          "text": "A tax law violation that misstates the income tax accrual and expense"
+        },
+        {
+          "letter": "C",
+          "text": "An environmental violation"
+        },
+        {
+          "letter": "D",
+          "text": "Insider trading by an employee"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Tax law violation misstating the accrual."
+    },
+    {
+      "id": 181,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "(Select ALL that apply.) Laws whose violations typically have indirect effects include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Insider trading and securities trading laws"
+        },
+        {
+          "letter": "B",
+          "text": "Occupational safety and health"
+        },
+        {
+          "letter": "C",
+          "text": "Food and drug administration rules"
+        },
+        {
+          "letter": "D",
+          "text": "Environmental protection"
+        },
+        {
+          "letter": "E",
+          "text": "Income tax laws that determine the tax accrual"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Tax law is direct."
+    },
+    {
+      "id": 182,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "For illegal acts with a direct effect, the auditor\u2019s responsibility is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "None"
+        },
+        {
+          "letter": "B",
+          "text": "Only to inquire"
+        },
+        {
+          "letter": "C",
+          "text": "The same as for errors or fraud"
+        },
+        {
+          "letter": "D",
+          "text": "To report to the SEC"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Same as for errors or fraud."
+    },
+    {
+      "id": 183,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "For illegal acts with an indirect effect, the audit is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Designed to detect all of them"
+        },
+        {
+          "letter": "B",
+          "text": "Required to confirm every law with regulators"
+        },
+        {
+          "letter": "C",
+          "text": "Limited to tax"
+        },
+        {
+          "letter": "D",
+          "text": "Not normally designed to detect them, and no assurance is provided that they will be detected"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Not normally designed to detect them, and no assurance is provided that they will be detected"
+    },
+    {
+      "id": 184,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "What assurance does the auditor provide that liabilities arising from indirect-effect illegal acts will be recorded and disclosed?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "No assurance that such contingent liabilities will be recorded"
+        },
+        {
+          "letter": "B",
+          "text": "Absolute assurance"
+        },
+        {
+          "letter": "C",
+          "text": "Reasonable assurance"
+        },
+        {
+          "letter": "D",
+          "text": "Limited assurance"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. No assurance."
+    },
+    {
+      "id": 185,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "(Select ALL that apply.) Information that may indicate an illegal act has occurred includes:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Unauthorized transactions or improperly recorded transactions"
+        },
+        {
+          "letter": "B",
+          "text": "An investigation by a governmental agency or enforcement proceeding"
+        },
+        {
+          "letter": "C",
+          "text": "Large payments for unspecified services to consultants, affiliates, or employees"
+        },
+        {
+          "letter": "D",
+          "text": "Unexplained payments to government officials or employees"
+        },
+        {
+          "letter": "E",
+          "text": "Strong, well-documented internal controls"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Unauthorized transactions or improperly recorded transactions; An investigation by a governmental agency or enforcement proceeding; Large payments for unspecified services to consultants, affiliates, or employees; Unexplained payments to government officials or employees"
+    },
+    {
+      "id": 186,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "Which procedure does the auditor specifically perform regarding illegal acts?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "No inquiry is needed"
+        },
+        {
+          "letter": "B",
+          "text": "Inquiring of management about their knowledge of illegal acts"
+        },
+        {
+          "letter": "C",
+          "text": "Hiring an investigator for every audit"
+        },
+        {
+          "letter": "D",
+          "text": "Auditing only tax compliance"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Inquiring of management about their knowledge of illegal acts"
+    },
+    {
+      "id": 187,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "(Select ALL that apply.) Audit procedures that may make the auditor aware of illegal acts include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Inquiring of management"
+        },
+        {
+          "letter": "B",
+          "text": "Reading minutes of board and committee meetings"
+        },
+        {
+          "letter": "C",
+          "text": "Inquiring of legal counsel"
+        },
+        {
+          "letter": "D",
+          "text": "Substantive tests of transactions and balances"
+        },
+        {
+          "letter": "E",
+          "text": "Destroying documentation"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Inquiring of management; Reading minutes of board and committee meetings; Inquiring of legal counsel; Substantive tests of transactions and balances"
+    },
+    {
+      "id": 188,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "The auditor believes an illegal act with a material indirect effect may have occurred. The auditor should:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Ignore it unless it is a tax issue"
+        },
+        {
+          "letter": "B",
+          "text": "Immediately resign"
+        },
+        {
+          "letter": "C",
+          "text": "Report it to the press"
+        },
+        {
+          "letter": "D",
+          "text": "Attempt to determine whether it occurred, including consulting the client\u2019s legal counsel or other specialists and applying additional procedures"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Attempt to determine whether it occurred, including consulting the client\u2019s legal counsel or other specialists and applying additional procedures"
+    },
+    {
+      "id": 189,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "(Select ALL that apply.) Additional procedures to understand a possible illegal act include:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Examining supporting documents"
+        },
+        {
+          "letter": "B",
+          "text": "Confirming significant information with the other party"
+        },
+        {
+          "letter": "C",
+          "text": "Determining whether the transaction was properly authorized"
+        },
+        {
+          "letter": "D",
+          "text": "Considering whether similar transactions may have occurred"
+        },
+        {
+          "letter": "E",
+          "text": "Destroying the related documents"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Examining supporting documents; Confirming significant information with the other party; Determining whether the transaction was properly authorized; Considering whether similar transactions may have occurred"
+    },
+    {
+      "id": 190,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "If an illegal act has occurred, the auditor considers:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The impact on the financial statements and whether there are related material misstatements"
+        },
+        {
+          "letter": "B",
+          "text": "Only the fine amount"
+        },
+        {
+          "letter": "C",
+          "text": "Only tax consequences"
+        },
+        {
+          "letter": "D",
+          "text": "Nothing further"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. The impact on the financial statements and whether there are related material misstatements"
+    },
+    {
+      "id": 191,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "The auditor should report illegal acts to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The press"
+        },
+        {
+          "letter": "B",
+          "text": "Competitors"
+        },
+        {
+          "letter": "C",
+          "text": "The audit committee (those charged with governance) or the board of directors"
+        },
+        {
+          "letter": "D",
+          "text": "A rating agency"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. The audit committee (those charged with governance) or the board of directors"
+    },
+    {
+      "id": 192,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "The client does not respond appropriately to an illegal act. The auditor should consider:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Doing nothing"
+        },
+        {
+          "letter": "B",
+          "text": "Withdrawing from the engagement and the effect on the audit report"
+        },
+        {
+          "letter": "C",
+          "text": "Increasing the fee"
+        },
+        {
+          "letter": "D",
+          "text": "Deleting workpapers"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Withdrawing from the engagement and the effect on the audit report"
+    },
+    {
+      "id": 193,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "(Select ALL that apply.) If the client does not take appropriate action, the auditor should consider:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The effect on the audit report (qualification, adverse opinion, or disclaimer)"
+        },
+        {
+          "letter": "B",
+          "text": "Withdrawing from the engagement"
+        },
+        {
+          "letter": "C",
+          "text": "Informing the audit committee or board"
+        },
+        {
+          "letter": "D",
+          "text": "Ignoring the matter if the client objects"
+        },
+        {
+          "letter": "E",
+          "text": "Backdating workpapers"
+        }
+      ],
+      "answer": "A,B,C",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C. The effect on the audit report (qualification, adverse opinion, or disclaimer); Withdrawing from the engagement; Informing the audit committee or board"
+    },
+    {
+      "id": 194,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "How does the auditor\u2019s responsibility for indirect-effect illegal acts differ from that for fraud?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "They are identical"
+        },
+        {
+          "letter": "B",
+          "text": "Fraud is never the auditor\u2019s responsibility"
+        },
+        {
+          "letter": "C",
+          "text": "Illegal acts are always tested directly"
+        },
+        {
+          "letter": "D",
+          "text": "For fraud the auditor must plan to obtain reasonable assurance; for indirect-effect illegal acts the audit is not designed to detect them and provides no assurance"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. For fraud the auditor must plan to obtain reasonable assurance; for indirect-effect illegal acts the audit is not designed to detect them and provides no assurance"
+    },
+    {
+      "id": 195,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "The PCAOB\u2019s NOCLAR proposal would replace the term \u201cillegal acts\u201d with:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Fraudulent conduct"
+        },
+        {
+          "letter": "B",
+          "text": "Noncompliance with laws and regulations"
+        },
+        {
+          "letter": "C",
+          "text": "Unlawful accounting"
+        },
+        {
+          "letter": "D",
+          "text": "Regulatory error"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Noncompliance with laws and regulations"
+    },
+    {
+      "id": 196,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "(Select ALL that apply.) The NOCLAR proposal would:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Replace \u201cillegal acts\u201d with noncompliance with laws and regulations"
+        },
+        {
+          "letter": "B",
+          "text": "Include fraud in the NOCLAR definition"
+        },
+        {
+          "letter": "C",
+          "text": "Require procedures to identify laws whose noncompliance could materially affect the statements"
+        },
+        {
+          "letter": "D",
+          "text": "Require assessing and responding to risks of material misstatement due to noncompliance"
+        },
+        {
+          "letter": "E",
+          "text": "Eliminate the auditor\u2019s responsibility for indirect-effect acts"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Replace \u201cillegal acts\u201d with noncompliance with laws and regulations; Include fraud in the NOCLAR definition; Require procedures to identify laws whose noncompliance could materially affect the statements; Require assessing and responding to risks of material misstatement due to noncompliance"
+    },
+    {
+      "id": 197,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "The current status of the NOCLAR proposal is that consideration has been:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Finalized and effective"
+        },
+        {
+          "letter": "B",
+          "text": "Adopted in 2024"
+        },
+        {
+          "letter": "C",
+          "text": "Paused (put on hold); AS 2405 remains in effect"
+        },
+        {
+          "letter": "D",
+          "text": "Adopted by the SEC"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Paused; AS 2405 remains in effect."
+    },
+    {
+      "id": 198,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "The auditor learns of unexplained payments to foreign officials. The best course is to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Ignore them"
+        },
+        {
+          "letter": "B",
+          "text": "Report them to the SEC immediately"
+        },
+        {
+          "letter": "C",
+          "text": "Inquire of management and consult legal counsel, expand procedures, evaluate the impact on the statements, and communicate with the audit committee"
+        },
+        {
+          "letter": "D",
+          "text": "Resign without further work"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Inquire of management and consult legal counsel, expand procedures, evaluate the impact on the statements, and communicate with the audit committee"
+    },
+    {
+      "id": 199,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "Which situation is an indirect-effect illegal act?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A client dumps toxic waste in violation of environmental regulations, creating potential fines and cleanup liabilities"
+        },
+        {
+          "letter": "B",
+          "text": "A client intentionally miscalculates its income tax accrual"
+        },
+        {
+          "letter": "C",
+          "text": "A client\u2019s clerical error in a ledger"
+        },
+        {
+          "letter": "D",
+          "text": "A client misclassifies a loan"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. A client dumps toxic waste in violation of environmental regulations, creating potential fines and cleanup liabilities"
+    },
+    {
+      "id": 200,
+      "module": "Module 14: Illegal Acts",
+      "prompt": "Which statement about indirect-effect illegal acts is correct?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The auditor will always be aware of them"
+        },
+        {
+          "letter": "B",
+          "text": "The auditor is unlikely to be aware of such violations unless informed by the client or a regulatory investigation"
+        },
+        {
+          "letter": "C",
+          "text": "They never create contingent liabilities"
+        },
+        {
+          "letter": "D",
+          "text": "They are always immaterial BONUS SET: Extra Depth on Modules 10 and 12 (Q201\u2013250) These 50 extra questions (25 on Module 10, 25 on Module 12) raise the total to 250, including 12 more multiple-answer questions. The answer key for them is just before the Scoring section. MODULE 10 BONUS: Substantive Analytical Procedures (Q201\u2013225)"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. The auditor is unlikely to be aware of such violations unless informed by the client or a regulatory investigation"
+    }
+  ]
+}

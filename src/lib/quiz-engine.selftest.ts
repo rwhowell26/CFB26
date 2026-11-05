@@ -1,5 +1,6 @@
 import {
   applyAnswer,
+  answersEqual,
   createInitialState,
   insertIntoShuffle,
   parseStoredState,
@@ -86,5 +87,41 @@ assert(restored, "valid stored state should parse");
 assert(!restored?.mastered.includes(999), "unknown mastered ids should be dropped");
 assert(restored?.queue.includes(1), "saved queue should be kept");
 assert(restored?.queue.includes(2), "missing live questions should be added back");
+
+assert(answersEqual("B,A", "A,B"), "multi-answer order should not matter");
+assert(!answersEqual("A,B", "A"), "partial multi-answer should be wrong");
+
+const multiQuestions = new Map<number, QuizQuestion>([
+  [
+    3,
+    {
+      id: 3,
+      module: "Test",
+      prompt: "Pick both?",
+      choices: [
+        { letter: "A", text: "yes" },
+        { letter: "B", text: "yes" },
+        { letter: "C", text: "no" },
+      ],
+      answer: "A,B",
+      selectAll: true,
+      explanation: "A and B",
+    },
+  ],
+]);
+const multiMiss = applyAnswer(
+  { streaks: { "3": 0 }, mastered: [], queue: [3] },
+  "A",
+  multiQuestions,
+  () => 0,
+);
+assert(!multiMiss.correct, "select-all should require every correct letter");
+const multiHit = applyAnswer(
+  { streaks: { "3": 0 }, mastered: [], queue: [3] },
+  "B,A",
+  multiQuestions,
+  () => 0,
+);
+assert(multiHit.correct, "select-all should accept the full set in any order");
 
 console.log("quiz engine self-test passed");
