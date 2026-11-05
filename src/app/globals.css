@@ -2916,6 +2916,41 @@ input[type="password"],
   color: var(--muted);
 }
 
+.cbb-overall {
+  display: flex;
+  gap: 0.55rem;
+  align-items: baseline;
+  margin: 0.55rem 0 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.cbb-overall span {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cbb-overall strong {
+  font-size: 1.2rem;
+  font-weight: 750;
+}
+
+.cbb-overall em {
+  font-style: normal;
+  color: var(--muted);
+}
+
+.cbb-overall em.better {
+  color: var(--turf);
+  font-weight: 700;
+}
+
+.cbb-overall em.worse {
+  color: var(--loss);
+}
+
 .cbb-metric-group-label {
   margin: 0 0 0.25rem;
   font-size: 0.78rem;

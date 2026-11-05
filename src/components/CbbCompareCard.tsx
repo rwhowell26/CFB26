@@ -5,10 +5,11 @@ import { shortCbbConference } from "@/lib/cbb-conferences";
 import {
   formatDiff,
   formatQuad,
-  formatRankValue,
+  formatRating,
   formatRecord,
+  overallAverage,
   predictiveAverage,
-  rankDiff,
+  ratingDiff,
   resumeAverage,
 } from "@/lib/cbb-metrics";
 import type { CbbTeam, CbbTeamMetrics } from "@/lib/cbb-types";
@@ -42,16 +43,17 @@ function MetricStack({
       <p className="cbb-metric-group-label">{title}</p>
       <dl>
         {rows.map((row) => {
-          const diff = rankDiff(row.left, row.right);
-          const better = diff != null && diff < 0;
-          const worse = diff != null && diff > 0;
+          const diff = ratingDiff(row.left, row.right);
+          const better = diff != null && diff > 0;
+          const worse = diff != null && diff < 0;
+          const digits = row.avg || Math.abs(row.left ?? 0) < 1 ? 2 : 1;
           return (
             <div
               key={row.key}
               className={`cbb-metric-row${row.avg ? " avg" : ""}${better ? " better" : ""}${worse ? " worse" : ""}`}
             >
               <dt>{row.label}</dt>
-              <dd className="cbb-metric-value">{formatRankValue(row.left, row.avg ? 1 : 0)}</dd>
+              <dd className="cbb-metric-value">{formatRating(row.left, digits)}</dd>
               <dd className="cbb-metric-diff">{formatDiff(diff)}</dd>
             </div>
           );
@@ -62,6 +64,8 @@ function MetricStack({
 }
 
 export function CbbCompareCard({ team, metrics, other, roleLabel, rank, onPick }: Props) {
+  const overall = overallAverage(metrics);
+  const otherOverall = overallAverage(other);
   const resumeRows: MetricRow[] = [
     { key: "resume", label: "Average", left: resumeAverage(metrics), right: resumeAverage(other), avg: true },
     { key: "sor", label: "SOR", left: metrics.sor, right: other.sor },
@@ -96,6 +100,13 @@ export function CbbCompareCard({ team, metrics, other, roleLabel, rank, onPick }
             </p>
           </div>
         </div>
+        <p className="cbb-overall">
+          <span>Overall avg</span>
+          <strong>{formatRating(overall, 2)}</strong>
+          <em className={overall != null && otherOverall != null && overall > otherOverall ? "better" : overall != null && otherOverall != null && overall < otherOverall ? "worse" : ""}>
+            {formatDiff(ratingDiff(overall, otherOverall))}
+          </em>
+        </p>
       </header>
       <MetricStack title="Resume" rows={resumeRows} />
       <MetricStack title="Predictive" rows={predRows} />

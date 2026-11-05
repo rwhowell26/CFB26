@@ -1,5 +1,6 @@
 import { normalizeHex } from "./team-colors";
 import { CBB_SEASON_YEAR } from "./cbb-season";
+import { fetchCbbMetrics } from "./cbb-feeds";
 import { emptyMetrics } from "./cbb-metrics";
 import type { CbbTeam, CbbTeamMetrics } from "./cbb-types";
 
@@ -100,7 +101,7 @@ export async function fetchCbbPayload(year = CBB_SEASON_YEAR): Promise<{
   metrics: Record<string, CbbTeamMetrics>;
   conferences: string[];
 }> {
-  return cachedFetch(`cbb-standings-${year}`, 5 * 60 * 1000, async () => {
+  return cachedFetch(`cbb-standings-${year}-v2`, 5 * 60 * 1000, async () => {
     const [data, colors] = await Promise.all([
       getJson<StandingsNode>(`${ESPN_V2}/standings?group=50&season=${year}`),
       fetchTeamColorMap(),
@@ -138,10 +139,16 @@ export async function fetchCbbPayload(year = CBB_SEASON_YEAR): Promise<{
 
     walk(data);
     teams.sort((a, b) => a.name.localeCompare(b.name));
+    let liveMetrics = metrics;
+    try {
+      liveMetrics = await fetchCbbMetrics(teams);
+    } catch {
+      liveMetrics = metrics;
+    }
     return {
       season: year,
       teams,
-      metrics,
+      metrics: liveMetrics,
       conferences: [...new Set(conferences)],
     };
   });

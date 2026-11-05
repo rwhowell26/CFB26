@@ -2,7 +2,9 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
   assignField,
+  bestTeamByConference,
   recommendNewTeams,
+  seedForFieldIndex,
   seedWorkingPool,
 } from "./cbb-bracket";
 import { emptyMetrics } from "./cbb-metrics";
@@ -109,7 +111,7 @@ test("recommendNewTeams keeps teams within 10 of the last Next 4 Out", () => {
   const metrics = rankedMetrics(["in1", "bubble8", "newClose", "newFar"]);
   metrics.set("bubble8", { ...emptyMetrics("bubble8"), sor: 20, kpi: 20, wab: 20 });
   metrics.set("newClose", { ...emptyMetrics("newClose"), sor: 28, kpi: 28, wab: 28 });
-  metrics.set("newFar", { ...emptyMetrics("newFar"), sor: 40, kpi: 40, wab: 40 });
+  metrics.set("newFar", { ...emptyMetrics("newFar"), sor: 5, kpi: 5, wab: 5 });
   const previous: CbbSnapshot = {
     id: "prev",
     createdAt: "2026-11-01T00:00:00.000Z",
@@ -140,6 +142,54 @@ test("seedWorkingPool prepends last S-curve and appends missing auto-bids", () =
     recommendedIds: [],
   };
   const pool = seedWorkingPool(teams, metrics, previous);
-  assert.deepEqual(pool.slice(0, 2), ["unc", "duke"]);
+  assert.ok(pool.includes("unc"));
   assert.ok(pool.includes("iowa"));
+  assert.equal(pool.length, 2);
+});
+
+test("first board seeds by current six-metric average, highest first", () => {
+  const teams = [team("low", "A"), team("high", "B"), team("mid", "C")];
+  const metrics = new Map<string, CbbTeamMetrics>([
+    ["low", { ...emptyMetrics("low"), kenpom: 4, bpi: 4, torvik: 4, sor: 4, kpi: 4, wab: 4 }],
+    ["mid", { ...emptyMetrics("mid"), kenpom: 12, bpi: 12, torvik: 12, sor: 12, kpi: 12, wab: 12 }],
+    ["high", { ...emptyMetrics("high"), kenpom: 20, bpi: 20, torvik: 20, sor: 20, kpi: 20, wab: 20 }],
+  ]);
+  assert.deepEqual(seedWorkingPool(teams, metrics, null), ["high", "mid", "low"]);
+});
+
+test("auto-bid is the current highest average in that conference", () => {
+  const teams = [team("unc", "ACC"), team("duke", "ACC"), team("iowa", "MVC")];
+  const metrics = new Map<string, CbbTeamMetrics>([
+    ["unc", { ...emptyMetrics("unc"), kenpom: 18 }],
+    ["duke", { ...emptyMetrics("duke"), kenpom: 31 }],
+    ["iowa", { ...emptyMetrics("iowa"), kenpom: 9 }],
+  ]);
+  const teamsById = new Map(teams.map((item) => [item.id, item]));
+  const best = bestTeamByConference(teams, teamsById, metrics);
+  assert.equal(best.get("ACC"), "duke");
+  assert.equal(best.get("MVC"), "iowa");
+});
+
+test("seedWorkingPool injects a conference leader even when the average sits below the cut", () => {
+  const power = Array.from({ length: 80 }, (_, i) => team(`p${i}`, "Power"));
+  const mid = team("mid", "MVC");
+  const teams = [...power, mid];
+  const metrics = new Map<string, CbbTeamMetrics>();
+  for (const item of power) {
+    const rating = 80 - Number(item.id.slice(1));
+    metrics.set(item.id, { ...emptyMetrics(item.id), kenpom: rating });
+  }
+  metrics.set("mid", { ...emptyMetrics("mid"), kenpom: 1 });
+  const pool = seedWorkingPool(teams, metrics, null);
+  assert.ok(pool.includes("mid"));
+  assert.equal(pool.length, 76);
+  assert.equal(pool[0], "p0");
+});
+
+test("play-in seeds 11 and 16 hold six teams", () => {
+  const seeds = Array.from({ length: 68 }, (_, i) => seedForFieldIndex(i));
+  assert.equal(seeds.filter((seed) => seed === 11).length, 6);
+  assert.equal(seeds.filter((seed) => seed === 16).length, 6);
+  assert.equal(seeds.filter((seed) => seed === 1).length, 4);
+  assert.equal(seeds.length, 68);
 });

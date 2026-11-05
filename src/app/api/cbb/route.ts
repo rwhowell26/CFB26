@@ -3,6 +3,7 @@ import { fetchCbbPayload } from "@/lib/cbb-espn";
 import { CBB_SEASON_LABEL, CBB_SEASON_YEAR } from "@/lib/cbb-season";
 
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 export async function GET() {
   try {

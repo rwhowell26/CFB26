@@ -5,10 +5,11 @@ import {
   resumeAverage,
   winPct,
 } from "./cbb-metrics";
-import { formatCbbTimestamp } from "./cbb-season";
+import { formatCbbDate } from "./cbb-season";
 import {
   FIELD_SIZE,
   FIRST_FOUR_OUT,
+  LOCK_SIZE,
   NEXT_FOUR_OUT,
   RECOMMEND_WITHIN,
 } from "./cbb-season";
@@ -43,11 +44,11 @@ export function compareCbbTeams(
 ): number {
   const leftMetrics = metricsOf(leftId, metrics);
   const rightMetrics = metricsOf(rightId, metrics);
-  const overall = (overallAverage(leftMetrics) ?? 9999) - (overallAverage(rightMetrics) ?? 9999);
+  const overall = (overallAverage(rightMetrics) ?? -9999) - (overallAverage(leftMetrics) ?? -9999);
   if (overall !== 0) return overall;
-  const resume = (resumeAverage(leftMetrics) ?? 9999) - (resumeAverage(rightMetrics) ?? 9999);
+  const resume = (resumeAverage(rightMetrics) ?? -9999) - (resumeAverage(leftMetrics) ?? -9999);
   if (resume !== 0) return resume;
-  const pred = (predictiveAverage(leftMetrics) ?? 9999) - (predictiveAverage(rightMetrics) ?? 9999);
+  const pred = (predictiveAverage(rightMetrics) ?? -9999) - (predictiveAverage(leftMetrics) ?? -9999);
   if (pred !== 0) return pred;
   const left = teamsById.get(leftId);
   const right = teamsById.get(rightId);
@@ -152,14 +153,13 @@ export function assignField(
   }
 
   const leftovers = sCurve.filter((id) => !placed.has(id) && teamsById.has(id));
+  const seenOnSeed = new Map<number, number>();
   const field: CbbFieldTeam[] = fieldIds.map((teamId, index) => {
-    const seedIndex = Math.min(index, 63);
-    const seed = Math.min(16, Math.floor(seedIndex / 4) + 1);
+    const seed = seedForFieldIndex(index);
     const role = roles.get(teamId) ?? "at-large";
-    const playIn =
-      (role === "auto-bid" && seed === 16 && index >= 60) ||
-      (role === "at-large" && atLargeIds.indexOf(teamId) >= atLargeIds.length - 4);
-    return { teamId, role, sCurveIndex: index, seed, playIn };
+    const seen = seenOnSeed.get(seed) ?? 0;
+    seenOnSeed.set(seed, seen + 1);
+    return { teamId, role, sCurveIndex: index, seed, playIn: (seed === 11 || seed === 16) && seen >= 4 };
   });
 
   return {
@@ -170,6 +170,20 @@ export function assignField(
     nextFourOut: leftovers.slice(FIRST_FOUR_OUT, FIRST_FOUR_OUT + NEXT_FOUR_OUT),
     unrepresented: [...unrepresented],
   };
+}
+
+/** 1–10 and 12–15 have four teams; 11-seeds and 16-seeds include play-in extras. */
+export function seedForFieldIndex(index: number): number {
+  const slots = [
+    ...Array(10).fill(null).flatMap((_, seed) => Array(4).fill(seed + 1)),
+    ...Array(6).fill(11),
+    ...Array(4).fill(12),
+    ...Array(4).fill(13),
+    ...Array(4).fill(14),
+    ...Array(4).fill(15),
+    ...Array(6).fill(16),
+  ] as number[];
+  return slots[index] ?? 16;
 }
 
 export function previousConsideredIds(snapshot: CbbSnapshot | null): Set<string> {
@@ -191,16 +205,24 @@ export function recommendNewTeams(
   if (!previous?.nextFourOut.length) return [];
   const considered = previousConsideredIds(previous);
   const bottomId = previous.nextFourOut[previous.nextFourOut.length - 1];
-  const bottomAvg = overallAverage(metrics.get(bottomId ?? ""));
-  if (bottomAvg == null || !bottomId) return [];
-  const cutoff = bottomAvg + within;
+  const bottom = metrics.get(bottomId ?? "");
+  const bottomOverall = overallAverage(bottom);
+  const bottomResume = resumeAverage(bottom);
+  const bottomPred = predictiveAverage(bottom);
+  if (!bottomId || (bottomOverall == null && bottomResume == null && bottomPred == null)) return [];
   const teamsById = new Map(teams.map((team) => [team.id, team]));
+  const withinCutoff = (value: number | null, floor: number | null) =>
+    value != null && floor != null && value >= floor - within;
   return sortByMetrics(
     teams
       .filter((team) => !considered.has(team.id))
       .filter((team) => {
-        const avg = overallAverage(metrics.get(team.id));
-        return avg != null && avg <= cutoff;
+        const row = metrics.get(team.id);
+        return (
+          withinCutoff(overallAverage(row), bottomOverall) ||
+          withinCutoff(resumeAverage(row), bottomResume) ||
+          withinCutoff(predictiveAverage(row), bottomPred)
+        );
       })
       .map((team) => team.id),
     teamsById,
@@ -208,7 +230,7 @@ export function recommendNewTeams(
   );
 }
 
-/** Last projection order, plus recommended newcomers and missing auto-bid leaders. */
+/** Last projection order (or live six-metric averages), plus missing auto-bid leaders. */
 export function seedWorkingPool(
   teams: CbbTeam[],
   metrics: Map<string, CbbTeamMetrics>,
@@ -217,7 +239,28 @@ export function seedWorkingPool(
   const teamsById = new Map(teams.map((team) => [team.id, team]));
   const liveIds = new Set(teams.map((team) => team.id));
   const bestByConf = bestTeamByConference(teams, teamsById, metrics);
-  const extras: string[] = [];
+
+  const injectAutoBids = (pool: string[]) => {
+    const next = [...pool];
+    const have = new Set(next);
+    for (const id of bestByConf.values()) {
+      if (!id || have.has(id) || !liveIds.has(id)) continue;
+      for (let i = next.length - 1; i >= 0; i--) {
+        const occupant = teamsById.get(next[i]!);
+        if (!occupant) continue;
+        const confAlready = next.some(
+          (other, j) => j !== i && teamsById.get(other)?.conference === occupant.conference,
+        );
+        if (!confAlready) continue;
+        have.delete(next[i]!);
+        next.splice(i, 1);
+        break;
+      }
+      next.push(id);
+      have.add(id);
+    }
+    return next;
+  };
 
   if (!previous) {
     const sorted = sortByMetrics(
@@ -225,24 +268,11 @@ export function seedWorkingPool(
       teamsById,
       metrics,
     );
-    const top = sorted.slice(0, FIELD_SIZE + FIRST_FOUR_OUT + NEXT_FOUR_OUT);
-    const have = new Set(top);
-    for (const id of bestByConf.values()) {
-      if (!have.has(id)) extras.push(id);
-    }
-    return [...top, ...extras];
+    return injectAutoBids(sorted.slice(0, LOCK_SIZE));
   }
 
   const order = previous.sCurve.filter((id) => liveIds.has(id));
-  const have = new Set(order);
-  const add = (id: string) => {
-    if (!liveIds.has(id) || have.has(id)) return;
-    have.add(id);
-    extras.push(id);
-  };
-  for (const id of recommendNewTeams(teams, metrics, previous)) add(id);
-  for (const id of bestByConf.values()) add(id);
-  return [...order, ...extras];
+  return injectAutoBids(order.slice(0, LOCK_SIZE));
 }
 
 export function snapshotFromAssignment(
@@ -254,7 +284,7 @@ export function snapshotFromAssignment(
   return {
     id: `cbb-${now.getTime()}`,
     createdAt: now.toISOString(),
-    label: formatCbbTimestamp(now.toISOString(), now),
+    label: formatCbbDate(now.toISOString(), now),
     sCurve: [...sCurve],
     atLargeIds: [...assignment.atLargeIds],
     autoBidByConference: { ...assignment.autoBidByConference },

@@ -10,7 +10,9 @@ export type QuadRecord = {
   losses: number;
 };
 
-/** Metric ranks: 1 is best. Null until a source is wired. */
+export type CbbScrubPhase = "lock" | "recommend";
+
+/** Rating points: higher is better. Null until a source is wired. */
 export type CbbTeamMetrics = {
   teamId: string;
   sor: number | null;
@@ -52,6 +54,9 @@ export type CbbSnapshot = {
 export type CbbScrubCheckpoint = {
   rankedIds: string[];
   confirmedPairs: string[];
+  phase: CbbScrubPhase;
+  climbingId: string | null;
+  recommendQueue: string[];
 };
 
 export type CbbDraft = {
@@ -60,6 +65,9 @@ export type CbbDraft = {
   basedOnId: string | null;
   rankedIds: string[];
   confirmedPairs: string[];
+  phase: CbbScrubPhase;
+  climbingId: string | null;
+  recommendQueue: string[];
   history: CbbScrubCheckpoint[];
 };
 

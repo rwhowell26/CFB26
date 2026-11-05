@@ -11,8 +11,8 @@ import {
   snapshotFromAssignment,
 } from "@/lib/cbb-bracket";
 import { shortCbbConference } from "@/lib/cbb-conferences";
-import { emptyMetrics, formatRecord, overallAverage, formatRankValue } from "@/lib/cbb-metrics";
-import { FIELD_SIZE, formatCbbTimestamp } from "@/lib/cbb-season";
+import { emptyMetrics, formatRecord, overallAverage, formatRating } from "@/lib/cbb-metrics";
+import { FIELD_SIZE, formatCbbDate } from "@/lib/cbb-season";
 import {
   applyScrubChoice,
   emptyDraft,
@@ -67,7 +67,7 @@ function TeamRow({
         {playIn ? " · Play-in" : ""}
         {role === "auto-bid" ? " · Auto" : role === "at-large" ? " · At-large" : ""}
       </span>
-      <span className="cbb-scurve-avg">{formatRankValue(overallAverage(metrics))}</span>
+      <span className="cbb-scurve-avg">{formatRating(overallAverage(metrics))}</span>
     </li>
   );
 }
@@ -99,12 +99,13 @@ export function BracketologyTab({
   };
 
   if (draft) {
-    const question = nextScrubQuestion(draft.rankedIds, draft.confirmedPairs);
+    const recommended = recommendNewTeams(teams, metrics, previousForSeed);
+    const question = nextScrubQuestion(draft);
     const left = question ? teamsById.get(question.leftId) : null;
     const right = question ? teamsById.get(question.rightId) : null;
     const leftMetrics = question ? metricsFor(metrics, question.leftId) : null;
     const rightMetrics = question ? metricsFor(metrics, question.rightId) : null;
-    const remaining = remainingScrubCount(draft.rankedIds, draft.confirmedPairs);
+    const remaining = remainingScrubCount(draft);
     const preview = liveFieldPreview(draft.rankedIds, teamsById, conferences);
     const assignment = assignField(
       draft.rankedIds,
@@ -114,11 +115,10 @@ export function BracketologyTab({
     );
 
     const pick = (winnerId: string, loserId: string) => {
-      onStoreChange({ draft: applyScrubChoice(draft, winnerId, loserId) });
+      onStoreChange({ draft: applyScrubChoice(draft, winnerId, loserId, recommended) });
     };
 
     const save = () => {
-      const recommended = recommendNewTeams(teams, metrics, previousForSeed);
       const snapshot = snapshotFromAssignment(assignment, draft.rankedIds, recommended);
       onStoreChange({
         snapshots: [snapshot, ...snapshots],
@@ -133,7 +133,7 @@ export function BracketologyTab({
           <section className="panel">
             <header className="panel-header">
               <p className="eyebrow">Bracketology · preference pass</p>
-              <h2>S-curve complete</h2>
+              <h2>Seed list locked</h2>
               <p>
                 {assignment.field.length} in the field · {assignment.atLargeIds.length} at-large ·{" "}
                 {Object.keys(assignment.autoBidByConference).length} auto-bids. First 4 out and next 4
@@ -153,7 +153,7 @@ export function BracketologyTab({
             assignment={assignment}
             teamsById={teamsById}
             metrics={metrics}
-            recommendedIds={recommendNewTeams(teams, metrics, previousForSeed)}
+            recommendedIds={recommended}
           />
         </div>
       );
@@ -163,18 +163,24 @@ export function BracketologyTab({
       <div className="cbb-bracketology">
         <section className="panel">
           <header className="panel-header">
-            <p className="eyebrow">Bracketology · {question.leftRank} vs {question.rightRank}</p>
+            <p className="eyebrow">
+              Bracketology · {question.phase === "recommend" ? "recommended climb" : `${question.leftRank} vs ${question.rightRank}`}
+            </p>
             <h2>Who belongs higher?</h2>
             <p>
-              {draft.basedOnId
-                ? "Adjacent scrub from last projection, starting at the 1-seed vs the 2-seed."
-                : "No previous projection — seeded by record, then name. Scrub starts at the 1-seed vs the 2-seed."}{" "}
-              Resume and predictive ranks are 1 = best.
+              {question.phase === "recommend"
+                ? "Next 4 Out are locked. Scrub recommended teams into the seed list."
+                : draft.basedOnId
+                  ? "Seeded from last projection. Adjacent scrub from the 1-seed vs the 2-seed through Next 4 Out."
+                  : "Seeded by the average of the six rating points. Scrub from the 1-seed vs the 2-seed through Next 4 Out."}{" "}
+              Higher rating is better.
             </p>
             <p>
-              {remaining} pair{remaining === 1 ? "" : "s"} left · field preview {preview.atLarge}{" "}
-              at-large / {preview.autoBids} auto · {preview.reserved} spots reserved for conferences
-              not yet in.
+              {question.phase === "recommend"
+                ? `${remaining} recommended team${remaining === 1 ? "" : "s"} left to place`
+                : `${remaining} pair${remaining === 1 ? "" : "s"} left to lock Next 4 Out`}{" "}
+              · field preview {preview.atLarge} at-large / {preview.autoBids} auto · {preview.reserved}{" "}
+              spots reserved for conferences not yet in.
             </p>
           </header>
           <div className="build-actions">
@@ -184,7 +190,11 @@ export function BracketologyTab({
             <button type="button" className="primary-btn" onClick={() => pick(right.id, left.id)}>
               {right.shortName} higher
             </button>
-            <button type="button" className="ghost-btn" onClick={() => onStoreChange({ draft: skipRemainingScrub(draft) })}>
+            <button
+              type="button"
+              className="ghost-btn"
+              onClick={() => onStoreChange({ draft: skipRemainingScrub(draft, recommended) })}
+            >
               Keep remaining order
             </button>
             <button
@@ -208,7 +218,7 @@ export function BracketologyTab({
             team={left}
             metrics={leftMetrics}
             other={rightMetrics}
-            roleLabel="Currently higher"
+            roleLabel={question.phase === "recommend" ? "Team above" : "Currently higher"}
             rank={question.leftRank}
             onPick={() => pick(left.id, right.id)}
           />
@@ -216,7 +226,7 @@ export function BracketologyTab({
             team={right}
             metrics={rightMetrics}
             other={leftMetrics}
-            roleLabel="Currently lower"
+            roleLabel={question.phase === "recommend" ? "Climbing" : "Currently lower"}
             rank={question.rightRank}
             onPick={() => pick(right.id, left.id)}
           />
@@ -295,7 +305,7 @@ function SavedProjection({
   return (
     <>
       <p className="cbb-saved-meta">
-        Saved {formatCbbTimestamp(snapshot.createdAt)} · {assignment.field.length}/{FIELD_SIZE} field ·{" "}
+        Saved {formatCbbDate(snapshot.createdAt)} · {assignment.field.length}/{FIELD_SIZE} field ·{" "}
         {assignment.atLargeIds.length} at-large · {Object.keys(assignment.autoBidByConference).length}{" "}
         auto-bids
       </p>
@@ -348,8 +358,8 @@ function ProjectionLists({
     <>
       <section className="panel">
         <header className="panel-header">
-          <h2>S-curve</h2>
-          <p>Seeds 1–16 · last four at-larges and 16-seeds tagged as play-in.</p>
+          <h2>Seed list</h2>
+          <p>Ordered 1 through 16. Play-in lines (11 and 16) simply list more than four teams.</p>
         </header>
         {[...bySeed.entries()].map(([seed, rows]) => (
           <div key={seed} className="cbb-seed-block">
@@ -398,15 +408,12 @@ function ProjectionLists({
         <header className="panel-header">
           <h2>Recommended adds</h2>
           <p>
-            Teams that were not in the previous field or bubble whose overall metric average is within
-            10 of the last Next 4 Out team.
+            Teams left out of last projection whose overall, resume, or predictive average is within
+            10 rating points of the last Next 4 Out team.
           </p>
         </header>
         {recommendedIds.length ? renderIds(recommendedIds, 1) : (
-          <p className="empty-state">
-            No recommendations yet. Metric ranks (SOR, KPI, WAB, KenPom, BPI, Torvik) are blank until
-            those feeds are wired, so this list stays empty.
-          </p>
+          <p className="empty-state">None this board. New teams need ratings within 10 of the last Next 4 Out.</p>
         )}
       </section>
     </>

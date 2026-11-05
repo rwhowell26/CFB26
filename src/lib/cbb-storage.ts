@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useSyncExternalStore } from "react";
-import { CBB_SEASON_YEAR, CBB_STORE_SCHEMA_VERSION, CBB_STORAGE_KEY } from "./cbb-season";
+import { CBB_SEASON_YEAR, CBB_STORE_SCHEMA_VERSION, CBB_STORAGE_KEY, formatCbbDate } from "./cbb-season";
 import type { CbbDraft, CbbSnapshot, CbbStore } from "./cbb-types";
 
 function emptyStore(): CbbStore {
@@ -22,7 +22,7 @@ function sanitizeSnapshot(value: unknown): CbbSnapshot | null {
   return {
     id: row.id,
     createdAt: row.createdAt,
-    label: typeof row.label === "string" ? row.label : row.createdAt,
+    label: formatCbbDate(row.createdAt),
     sCurve: row.sCurve.filter((id): id is string => typeof id === "string"),
     atLargeIds: row.atLargeIds.filter((id): id is string => typeof id === "string"),
     autoBidByConference:
@@ -57,6 +57,11 @@ function sanitizeDraft(value: unknown): CbbDraft | null {
     confirmedPairs: Array.isArray(row.confirmedPairs)
       ? row.confirmedPairs.filter((id): id is string => typeof id === "string")
       : [],
+    phase: row.phase === "recommend" ? "recommend" : "lock",
+    climbingId: typeof row.climbingId === "string" ? row.climbingId : null,
+    recommendQueue: Array.isArray(row.recommendQueue)
+      ? row.recommendQueue.filter((id): id is string => typeof id === "string")
+      : [],
     history: Array.isArray(row.history)
       ? row.history
           .filter((item) => item && typeof item === "object" && Array.isArray(item.rankedIds))
@@ -64,6 +69,11 @@ function sanitizeDraft(value: unknown): CbbDraft | null {
             rankedIds: item.rankedIds.filter((id): id is string => typeof id === "string"),
             confirmedPairs: Array.isArray(item.confirmedPairs)
               ? item.confirmedPairs.filter((id): id is string => typeof id === "string")
+              : [],
+            phase: item.phase === "recommend" ? "recommend" as const : "lock" as const,
+            climbingId: typeof item.climbingId === "string" ? item.climbingId : null,
+            recommendQueue: Array.isArray(item.recommendQueue)
+              ? item.recommendQueue.filter((id): id is string => typeof id === "string")
               : [],
           }))
       : [],
