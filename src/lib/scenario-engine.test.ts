@@ -246,6 +246,31 @@ test("unresolved blended computer rankings use competition places 2-2-2 then 5",
   assert.match(result.championship.note, /tied at #2 on blended computer rankings/i);
 });
 
+test("Army-Navy is omitted from AAC conference games even when ESPN marks it conference", () => {
+  const ARMY = "349";
+  const NAVY = "2426";
+  const teams = [ARMY, NAVY, "TULN"].map((id) => team(id, "American Conference"));
+  const games = [
+    game("navy-tuln", NAVY, "TULN", NAVY),
+    {
+      ...game("army-navy", ARMY, NAVY, null, 9),
+      conferenceGroup: "American Conference",
+    },
+  ];
+  const result = projectConference(AAC, teams, games);
+  assert.equal(
+    result.remainingConference.some((item) => item.id === "army-navy"),
+    false,
+  );
+  assert.equal(
+    result.completedConference.some((item) => item.id === "army-navy"),
+    false,
+  );
+  const navy = result.tables[0].rows.find((row) => row.teamId === NAVY)!;
+  assert.equal(navy.conf.wins, 1);
+  assert.equal(navy.conf.losses, 0);
+});
+
 test("independents are omitted from the Scenarios conference list", () => {
   const teams = [
     team("ND", "FBS Independents"),

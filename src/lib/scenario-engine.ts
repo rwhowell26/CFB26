@@ -1,3 +1,4 @@
+import { isArmyNavyGame } from "./game-overrides";
 import {
   SCENARIO_CONFERENCES,
   conferenceForTeam,
@@ -101,6 +102,7 @@ export function conferenceGamesFor(
     .filter(
       (game) =>
         !game.championshipGame &&
+        !isArmyNavyGame(game) &&
         teamIds.has(game.homeTeamId) &&
         teamIds.has(game.awayTeamId),
     )

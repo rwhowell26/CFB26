@@ -4,6 +4,7 @@ import {
   type ScenarioConference,
 } from "./scenario-conferences";
 import {
+  conferenceGamesFor,
   percentageAdvantageGroups,
   projectConference,
   type RankedScenarioRow,
@@ -465,13 +466,7 @@ function othersLeapfrogWinOut(
 }
 
 function confGamesForSeed(seed: ScenarioProjection, games: Game[]): Game[] {
-  const memberSet = allSeedIds(seed);
-  return games.filter(
-    (game) =>
-      !game.championshipGame &&
-      memberSet.has(game.homeTeamId) &&
-      memberSet.has(game.awayTeamId),
-  );
+  return conferenceGamesFor(games, allSeedIds(seed));
 }
 
 function spoilOverlays(
