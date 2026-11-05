@@ -1,9 +1,9 @@
-import { RankingApp } from "@/components/RankingApp";
+import { SportApp } from "@/components/SportApp";
 
 export default function HomePage() {
   return (
     <main>
-      <RankingApp />
+      <SportApp />
     </main>
   );
 }

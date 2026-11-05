@@ -1,0 +1,38 @@
+const SHORT: Record<string, string> = {
+  "America East Conference": "Am. East",
+  "American Conference": "AAC",
+  "Atlantic 10 Conference": "A-10",
+  "Atlantic Coast Conference": "ACC",
+  "Atlantic Sun Conference": "A-Sun",
+  "Big 12 Conference": "Big 12",
+  "Big East Conference": "Big East",
+  "Big Sky Conference": "Big Sky",
+  "Big South Conference": "Big South",
+  "Big Ten Conference": "Big Ten",
+  "Big West Conference": "Big West",
+  "Coastal Athletic Association": "CAA",
+  "Conference USA": "CUSA",
+  "Horizon League": "Horizon",
+  "Ivy League": "Ivy",
+  "Metro Conference": "MAAC",
+  "Mid-American Conference": "MAC",
+  "Mid-Eastern Athletic Conference": "MEAC",
+  "Missouri Valley Conference": "MVC",
+  "Mountain West Conference": "MW",
+  "Northeast Conference": "NEC",
+  "Ohio Valley Conference": "OVC",
+  "Pac-12 Conference": "Pac-12",
+  "Patriot League": "Patriot",
+  "Southeastern Conference": "SEC",
+  "Southern Conference": "SoCon",
+  "Southland Conference": "Southland",
+  "Southwestern Athletic Conference": "SWAC",
+  "Summit League": "Summit",
+  "Sun Belt Conference": "Sun Belt",
+  "United Athletic Conference": "UAC",
+  "West Coast Conference": "WCC",
+};
+
+export function shortCbbConference(name: string): string {
+  return SHORT[name] ?? name.replace(/ Conference$/i, "").replace(/ League$/i, "");
+}

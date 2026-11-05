@@ -15,8 +15,9 @@ const sans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  title: "CFB26 Personal Rankings",
-  description: "Private weekly FBS ranking workspace with schedules, SOS, and history.",
+  title: "CFB26 / CBB Bracketology",
+  description:
+    "Private FBS ranking workspace and men's college basketball bracketology.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
