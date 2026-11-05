@@ -2,7 +2,7 @@
   "id": "accy-6100-audit-test-3",
   "title": "ACCY 6100 \u2014 Auditing Seminar",
   "subtitle": "Audit test 3",
-  "source": "Practice exam for Modules 9\u201314 (150 one-best-answer and 50 select-all)",
+  "source": "Practice exam for Modules 9\u201314 plus 50 bonus questions (188 one-best-answer and 62 select-all)",
   "questions": [
     {
       "id": 1,
@@ -1881,7 +1881,7 @@
         },
         {
           "letter": "E",
-          "text": "A properly selected sample that, by chance, differs from the population MODULE 10: Substantive Analytical Procedures (Q71\u201392)"
+          "text": "A properly selected sample that, by chance, differs from the population"
         }
       ],
       "answer": "A,B",
@@ -2473,7 +2473,7 @@
         },
         {
           "letter": "D",
-          "text": "No documentation is needed MODULE 11: Auditor Use of Specialists (Q93\u2013112)"
+          "text": "No documentation is needed"
         }
       ],
       "answer": "B",
@@ -3009,7 +3009,7 @@
         },
         {
           "letter": "D",
-          "text": "Internal audit only MODULE 12: Judgment, Estimates, and Going Concern (Q113\u2013138)"
+          "text": "Internal audit only"
         }
       ],
       "answer": "B",
@@ -3709,7 +3709,7 @@
         },
         {
           "letter": "D",
-          "text": "Does not mention going concern MODULE 13: Auditor Responsibility for Fraud (Q139\u2013174)"
+          "text": "Does not mention going concern"
         }
       ],
       "answer": "C",
@@ -4693,7 +4693,7 @@
         },
         {
           "letter": "D",
-          "text": "A potential fraudster anticipates the auditor\u2019s assessment and response and adjusts, so fraud risk is strategic MODULE 14: Illegal Acts (Q175\u2013200)"
+          "text": "A potential fraudster anticipates the auditor\u2019s assessment and response and adjusts, so fraud risk is strategic"
         }
       ],
       "answer": "D",
@@ -5397,12 +5397,1364 @@
         },
         {
           "letter": "D",
-          "text": "They are always immaterial BONUS SET: Extra Depth on Modules 10 and 12 (Q201\u2013250) These 50 extra questions (25 on Module 10, 25 on Module 12) raise the total to 250, including 12 more multiple-answer questions. The answer key for them is just before the Scoring section. MODULE 10 BONUS: Substantive Analytical Procedures (Q201\u2013225)"
+          "text": "They are always immaterial"
         }
       ],
       "answer": "B",
       "selectAll": false,
       "explanation": "Correct: B. The auditor is unlikely to be aware of such violations unless informed by the client or a regulatory investigation"
+    },
+    {
+      "id": 201,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "(Select ALL that apply.) Which of the following are tests of details (not analytical procedures)?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Vouching a sample of sales entries to shipping documents"
+        },
+        {
+          "letter": "B",
+          "text": "Confirming a sample of customer balances"
+        },
+        {
+          "letter": "C",
+          "text": "Recomputing depreciation on selected assets"
+        },
+        {
+          "letter": "D",
+          "text": "Comparing gross margin percentage to the prior year"
+        },
+        {
+          "letter": "E",
+          "text": "Examining invoices for a sample of repairs expense items"
+        }
+      ],
+      "answer": "A,B,C,E",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,E. D is an analytical procedure."
+    },
+    {
+      "id": 202,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "Substantive analytical procedures are generally MOST effective for:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Large volumes of transactions that tend to be predictable over time (e.g., payroll, interest)"
+        },
+        {
+          "letter": "B",
+          "text": "One-time, unusual transactions"
+        },
+        {
+          "letter": "C",
+          "text": "Highly subjective estimates"
+        },
+        {
+          "letter": "D",
+          "text": "Nonrecurring litigation accruals"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Predictable, high-volume items."
+    },
+    {
+      "id": 203,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "A 120-room hotel (365 days) expects 70% occupancy at an average daily rate of $150. What is the expected room revenue?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "$4,599,000"
+        },
+        {
+          "letter": "B",
+          "text": "$5,475,000"
+        },
+        {
+          "letter": "C",
+          "text": "$3,832,500"
+        },
+        {
+          "letter": "D",
+          "text": "$6,570,000"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. 120 \u00d7 365 \u00d7 0.70 \u00d7 $150 = $4,599,000."
+    },
+    {
+      "id": 204,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "Using the expectation in Q203, recorded room revenue is $4,750,000 and the auditor\u2019s investigation threshold is $100,000. The auditor should:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Investigate the $151,000 difference, because it exceeds the threshold"
+        },
+        {
+          "letter": "B",
+          "text": "Accept the difference, because it is under 4% of revenue"
+        },
+        {
+          "letter": "C",
+          "text": "Adjust the expectation to $4,750,000"
+        },
+        {
+          "letter": "D",
+          "text": "Confirm only the largest customers"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. $4,750,000 \u2212 $4,599,000 = $151,000, above the $100,000 threshold."
+    },
+    {
+      "id": 205,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "Average debt is $2,000,000 at 6%. Recorded interest expense is $150,000. The investigation threshold is $20,000. The best next step is to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Accept the recorded amount"
+        },
+        {
+          "letter": "B",
+          "text": "Investigate the $30,000 difference (e.g., additional borrowings, rate changes, or misstatement) and corroborate explanations"
+        },
+        {
+          "letter": "C",
+          "text": "Reduce the expectation"
+        },
+        {
+          "letter": "D",
+          "text": "Ask management to restate the expectation"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Expected $120,000; difference $30,000 exceeds $20,000."
+    },
+    {
+      "id": 206,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "(Select ALL that apply.) Which factors increase the reliability of data used to form an expectation?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Effective internal controls over the data"
+        },
+        {
+          "letter": "B",
+          "text": "Data obtained from a source independent of the client"
+        },
+        {
+          "letter": "C",
+          "text": "Data that has been audited"
+        },
+        {
+          "letter": "D",
+          "text": "Unaudited internal budgets prepared without controls"
+        },
+        {
+          "letter": "E",
+          "text": "Data from a source with an incentive to misstate"
+        }
+      ],
+      "answer": "A,B,C",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C. Effective internal controls over the data; Data obtained from a source independent of the client; Data that has been audited"
+    },
+    {
+      "id": 207,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "The auditor needs a high level of assurance from the analytical procedure (low AP risk). Which expectation is most appropriate?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A regression model incorporating several driving factors"
+        },
+        {
+          "letter": "B",
+          "text": "A simple comparison to prior-year balance"
+        },
+        {
+          "letter": "C",
+          "text": "An unadjusted comparison with a competitor"
+        },
+        {
+          "letter": "D",
+          "text": "Management\u2019s own forecast"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. More precise expectation for more assurance."
+    },
+    {
+      "id": 208,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "Comparing gross profit percentage over time and against industry peers is an example of:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Regression analysis"
+        },
+        {
+          "letter": "B",
+          "text": "A test of controls"
+        },
+        {
+          "letter": "C",
+          "text": "Ratio analysis"
+        },
+        {
+          "letter": "D",
+          "text": "Reasonableness testing with explicit prediction"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Ratio analysis."
+    },
+    {
+      "id": 209,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "Consolidated-level trend analysis is relatively imprecise because:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Consolidated amounts are always unaudited"
+        },
+        {
+          "letter": "B",
+          "text": "Offsetting changes across components can mask misstatements"
+        },
+        {
+          "letter": "C",
+          "text": "Trend analysis cannot be used for revenue"
+        },
+        {
+          "letter": "D",
+          "text": "It requires regression"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Offsetting changes mask misstatements."
+    },
+    {
+      "id": 210,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "The auditor builds the expectation for sales from the same sales ledger being tested. The main problem is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The data is not independent of the recorded amount, so it lacks reliability as a basis for the expectation"
+        },
+        {
+          "letter": "B",
+          "text": "The ledger is too detailed"
+        },
+        {
+          "letter": "C",
+          "text": "Sales cannot be tested analytically"
+        },
+        {
+          "letter": "D",
+          "text": "There is no problem"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. The expectation must be independent of the recorded amount."
+    },
+    {
+      "id": 211,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "(Select ALL that apply.) After finding a significant difference between expectation and recorded amount, the auditor should:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Consider plausible explanations other than misstatement"
+        },
+        {
+          "letter": "B",
+          "text": "Corroborate management\u2019s explanations"
+        },
+        {
+          "letter": "C",
+          "text": "Perform additional procedures if the difference is not explained"
+        },
+        {
+          "letter": "D",
+          "text": "Document the work and conclusion"
+        },
+        {
+          "letter": "E",
+          "text": "Change the expectation to equal the recorded amount"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Never force the expectation to match."
+    },
+    {
+      "id": 212,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "When using industry data to build an expectation, the auditor should be most concerned with:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The comparability and reliability of the industry data"
+        },
+        {
+          "letter": "B",
+          "text": "The font used in the report"
+        },
+        {
+          "letter": "C",
+          "text": "Whether the industry is large"
+        },
+        {
+          "letter": "D",
+          "text": "Whether the data is free"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. The comparability and reliability of the industry data"
+    },
+    {
+      "id": 213,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "AuR = 5%, IR = 100%, CR = 50%, AP risk = 50%. What is the acceptable TD risk?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "10%"
+        },
+        {
+          "letter": "B",
+          "text": "5%"
+        },
+        {
+          "letter": "C",
+          "text": "25%"
+        },
+        {
+          "letter": "D",
+          "text": "20%"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. 0.05 / (1.0 \u00d7 0.5 \u00d7 0.5) = 20%."
+    },
+    {
+      "id": 214,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "Using the same facts but with NO substantive analytical procedures (AP risk = 100%), the acceptable TD risk is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "20%"
+        },
+        {
+          "letter": "B",
+          "text": "10%"
+        },
+        {
+          "letter": "C",
+          "text": "50%"
+        },
+        {
+          "letter": "D",
+          "text": "5%"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. 0.05 / (1.0 \u00d7 0.5 \u00d7 1.0) = 10%."
+    },
+    {
+      "id": 215,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "Compared with relying on a strong substantive AP (AP risk = 50%), performing no substantive AP means tests of details must:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Provide more assurance, so the TD sample will be larger"
+        },
+        {
+          "letter": "B",
+          "text": "Provide less assurance, so samples shrink"
+        },
+        {
+          "letter": "C",
+          "text": "Be eliminated"
+        },
+        {
+          "letter": "D",
+          "text": "Be unchanged"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Lower acceptable TD means a larger sample."
+    },
+    {
+      "id": 216,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "Analytical procedures performed in the planning phase:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Are always substantive"
+        },
+        {
+          "letter": "B",
+          "text": "Replace tests of details"
+        },
+        {
+          "letter": "C",
+          "text": "Are not substantive procedures; they help identify risk"
+        },
+        {
+          "letter": "D",
+          "text": "Are prohibited"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Are not substantive procedures; they help identify risk"
+    },
+    {
+      "id": 217,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "(Select ALL that apply.) Substantive analytical procedures are LESS effective when:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Transactions are unusual or nonrecurring"
+        },
+        {
+          "letter": "B",
+          "text": "The account is highly subjective"
+        },
+        {
+          "letter": "C",
+          "text": "The business environment is unstable and relationships are unpredictable"
+        },
+        {
+          "letter": "D",
+          "text": "There are many routine transactions with stable relationships"
+        },
+        {
+          "letter": "E",
+          "text": "The underlying data is unreliable"
+        }
+      ],
+      "answer": "A,B,C,E",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,E. Transactions are unusual or nonrecurring; The account is highly subjective; The business environment is unstable and relationships are unpredictable; The underlying data is unreliable"
+    },
+    {
+      "id": 218,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "Which statistic indicates the precision of a regression-based expectation?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Population size"
+        },
+        {
+          "letter": "B",
+          "text": "Prior-year balance"
+        },
+        {
+          "letter": "C",
+          "text": "The standard error of the estimate (with R\u00b2 as a goodness-of-fit measure)"
+        },
+        {
+          "letter": "D",
+          "text": "The number of ratios"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Standard error of the estimate."
+    },
+    {
+      "id": 219,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "An advantage of a reasonableness test over a trend analysis is that it:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Builds an explicit expectation from related financial and nonfinancial data"
+        },
+        {
+          "letter": "B",
+          "text": "Eliminates the need for data"
+        },
+        {
+          "letter": "C",
+          "text": "Requires no judgment"
+        },
+        {
+          "letter": "D",
+          "text": "Is never wrong"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Builds an explicit expectation from related financial and nonfinancial data"
+    },
+    {
+      "id": 220,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "The auditor accepts a low-precision expectation but sets a very wide investigation threshold, and no difference is found. The auditor can conclude:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "No misstatement exists"
+        },
+        {
+          "letter": "B",
+          "text": "Misstatements below the threshold are impossible"
+        },
+        {
+          "letter": "C",
+          "text": "Only that no difference exceeds the threshold, with limited assurance because of low precision"
+        },
+        {
+          "letter": "D",
+          "text": "Controls are effective"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. A wide threshold plus low precision gives limited assurance."
+    },
+    {
+      "id": 221,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "(Select ALL that apply.) Which statements about precision are TRUE?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Expectations at a lower level of aggregation are generally more precise"
+        },
+        {
+          "letter": "B",
+          "text": "Objectively determined accounts allow more precise expectations"
+        },
+        {
+          "letter": "C",
+          "text": "Regression is generally more precise than a simple trend"
+        },
+        {
+          "letter": "D",
+          "text": "Unaudited data without controls improves precision"
+        },
+        {
+          "letter": "E",
+          "text": "Higher required assurance demands greater precision"
+        }
+      ],
+      "answer": "A,B,C,E",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,E. Expectations at a lower level of aggregation are generally more precise; Objectively determined accounts allow more precise expectations; Regression is generally more precise than a simple trend; Higher required assurance demands greater precision"
+    },
+    {
+      "id": 222,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "Credit sales are $5,000,000 and the auditor expects bad debt expense of 2% ($100,000). Recorded expense is $60,000; tolerable difference is $15,000. The auditor should:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Accept the amount"
+        },
+        {
+          "letter": "B",
+          "text": "Increase sales"
+        },
+        {
+          "letter": "C",
+          "text": "Investigate the $40,000 difference, corroborate any explanation, and consider a possible understated allowance"
+        },
+        {
+          "letter": "D",
+          "text": "Remove the expectation"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. $100,000 \u2212 $60,000 = $40,000, above $15,000; possible understated allowance."
+    },
+    {
+      "id": 223,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "Gross margin fell from 40% to 35% against a stable expectation. Which explanation points to a possible misstatement rather than a business cause?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Competitor price cuts forced discounting"
+        },
+        {
+          "letter": "B",
+          "text": "Unrecorded sales or overstated cost of goods sold"
+        },
+        {
+          "letter": "C",
+          "text": "A supplier cost increase"
+        },
+        {
+          "letter": "D",
+          "text": "A shift in sales mix"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Unrecorded sales or overstated cost of goods sold"
+    },
+    {
+      "id": 224,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "(Select ALL that apply.) To evaluate management\u2019s explanation for unexpectedly low bad debt expense (new tighter credit policy), the auditor could:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Review the new credit policy and its approval"
+        },
+        {
+          "letter": "B",
+          "text": "Obtain evidence it was implemented"
+        },
+        {
+          "letter": "C",
+          "text": "Inquire of independent parties such as collections personnel"
+        },
+        {
+          "letter": "D",
+          "text": "Accept the CFO\u2019s statement alone"
+        },
+        {
+          "letter": "E",
+          "text": "Obtain only a management representation letter"
+        }
+      ],
+      "answer": "A,B,C",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C. Review the new credit policy and its approval; Obtain evidence it was implemented; Inquire of independent parties such as collections personnel"
+    },
+    {
+      "id": 225,
+      "module": "Module 10 bonus: Substantive Analytical Procedures",
+      "prompt": "Analytical procedures (AP) risk is the probability that:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The substantive analytical procedures will not detect a material misstatement that occurred and was not prevented or detected by internal control"
+        },
+        {
+          "letter": "B",
+          "text": "Controls fail"
+        },
+        {
+          "letter": "C",
+          "text": "The sample is unrepresentative"
+        },
+        {
+          "letter": "D",
+          "text": "A confirmation is not returned"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. The substantive analytical procedures will not detect a material misstatement that occurred and was not prevented or detected by internal control"
+    },
+    {
+      "id": 226,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "(Select ALL that apply.) Judgment is involved in which phases of an audit?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Client acceptance (engagement risk)"
+        },
+        {
+          "letter": "B",
+          "text": "Planning (materiality, inherent and control risk assessment)"
+        },
+        {
+          "letter": "C",
+          "text": "Fieldwork (sample sizes, estimates)"
+        },
+        {
+          "letter": "D",
+          "text": "Wrap-up (going concern, sufficiency of evidence)"
+        },
+        {
+          "letter": "E",
+          "text": "None, because standards remove judgment"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Client acceptance (engagement risk); Planning (materiality, inherent and control risk assessment); Fieldwork (sample sizes, estimates); Wrap-up (going concern, sufficiency of evidence)"
+    },
+    {
+      "id": 227,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "In auditing estimates, the auditor often must form:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "No judgments"
+        },
+        {
+          "letter": "B",
+          "text": "Only legal judgments"
+        },
+        {
+          "letter": "C",
+          "text": "Judgments about management\u2019s judgments"
+        },
+        {
+          "letter": "D",
+          "text": "Only mechanical computations"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Judgments about management\u2019s judgments"
+    },
+    {
+      "id": 228,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "Judgmental items could provide opportunities for fraud because:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "They are always large"
+        },
+        {
+          "letter": "B",
+          "text": "They are hard to detect or prove to be wrong"
+        },
+        {
+          "letter": "C",
+          "text": "They are never audited"
+        },
+        {
+          "letter": "D",
+          "text": "They are always objective"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. They are hard to detect or prove to be wrong"
+    },
+    {
+      "id": 229,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "An auditor sets this year\u2019s sample size by taking last year\u2019s and adjusting only slightly, despite changed risks. This is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Anchoring and adjustment"
+        },
+        {
+          "letter": "B",
+          "text": "Availability"
+        },
+        {
+          "letter": "C",
+          "text": "Framing"
+        },
+        {
+          "letter": "D",
+          "text": "Recency"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Anchoring and adjustment."
+    },
+    {
+      "id": 230,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "An auditor gives too much weight to the first piece of evidence encountered. This is the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Recency effect"
+        },
+        {
+          "letter": "B",
+          "text": "Dilution effect"
+        },
+        {
+          "letter": "C",
+          "text": "Framing effect"
+        },
+        {
+          "letter": "D",
+          "text": "Primacy effect"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Primacy."
+    },
+    {
+      "id": 231,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "After a training session on revenue fraud, an auditor sees revenue fraud everywhere because the training is vivid in memory. This is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Dilution"
+        },
+        {
+          "letter": "B",
+          "text": "The availability heuristic"
+        },
+        {
+          "letter": "C",
+          "text": "Primacy"
+        },
+        {
+          "letter": "D",
+          "text": "Anchoring"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Availability."
+    },
+    {
+      "id": 232,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "An auditor seeks only evidence supporting management\u2019s estimate and overlooks contradictory evidence. This is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Recency"
+        },
+        {
+          "letter": "B",
+          "text": "Dilution"
+        },
+        {
+          "letter": "C",
+          "text": "Confirmation bias"
+        },
+        {
+          "letter": "D",
+          "text": "Framing"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Confirmation bias."
+    },
+    {
+      "id": 233,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "Evaluating the same evidence as \u201cthe estimate is reasonable\u201d versus \u201cthe estimate is unreasonable\u201d yields different conclusions. This is the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Availability heuristic"
+        },
+        {
+          "letter": "B",
+          "text": "Recency effect"
+        },
+        {
+          "letter": "C",
+          "text": "Anchoring effect"
+        },
+        {
+          "letter": "D",
+          "text": "Framing effect"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Framing."
+    },
+    {
+      "id": 234,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "A long memo is mostly irrelevant detail, and the one sentence about a covenant violation receives little weight. This is the:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Dilution effect"
+        },
+        {
+          "letter": "B",
+          "text": "Primacy effect"
+        },
+        {
+          "letter": "C",
+          "text": "Availability heuristic"
+        },
+        {
+          "letter": "D",
+          "text": "Confirmation bias"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Dilution."
+    },
+    {
+      "id": 235,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "(Select ALL that apply.) Which are examples of how biases can affect auditor judgments?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Adjusting too little from last year\u2019s risk assessment"
+        },
+        {
+          "letter": "B",
+          "text": "Overweighting vivid or easily recalled past events"
+        },
+        {
+          "letter": "C",
+          "text": "Discounting evidence that contradicts an initial view"
+        },
+        {
+          "letter": "D",
+          "text": "Giving too much weight to the most recent evidence"
+        },
+        {
+          "letter": "E",
+          "text": "Always improving the accuracy of the conclusion"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. Adjusting too little from last year\u2019s risk assessment; Overweighting vivid or easily recalled past events; Discounting evidence that contradicts an initial view; Giving too much weight to the most recent evidence"
+    },
+    {
+      "id": 236,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "Under budget pressure, an auditor concludes controls are effective to avoid extra testing and reads ambiguous results accordingly. This is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Availability"
+        },
+        {
+          "letter": "B",
+          "text": "Motivated reasoning"
+        },
+        {
+          "letter": "C",
+          "text": "Dilution"
+        },
+        {
+          "letter": "D",
+          "text": "Recency"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Motivated reasoning."
+    },
+    {
+      "id": 237,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "Heuristics involve a tradeoff between:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Cost and revenue"
+        },
+        {
+          "letter": "B",
+          "text": "Risk and materiality"
+        },
+        {
+          "letter": "C",
+          "text": "Judgment accuracy and judgment efficiency"
+        },
+        {
+          "letter": "D",
+          "text": "Evidence and documentation"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Judgment accuracy and judgment efficiency"
+    },
+    {
+      "id": 238,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "An assumption about future warranty claim rates changes the estimate dramatically with small changes. It is a significant assumption because it is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Sensitive to variation"
+        },
+        {
+          "letter": "B",
+          "text": "Immaterial"
+        },
+        {
+          "letter": "C",
+          "text": "Observable"
+        },
+        {
+          "letter": "D",
+          "text": "Unrelated to the estimate"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Sensitive to variation."
+    },
+    {
+      "id": 239,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "A fair value estimate relies on Level 3-type unobservable inputs. This is a significant assumption because it involves:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Audited data"
+        },
+        {
+          "letter": "B",
+          "text": "Market quotes"
+        },
+        {
+          "letter": "C",
+          "text": "Third-party confirmations"
+        },
+        {
+          "letter": "D",
+          "text": "Unobservable data"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Unobservable data."
+    },
+    {
+      "id": 240,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "(Select ALL that apply.) Which assumptions are likely to be significant?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Management\u2019s intent and ability to hold securities to maturity"
+        },
+        {
+          "letter": "B",
+          "text": "A stable 1% rise in office supply costs"
+        },
+        {
+          "letter": "C",
+          "text": "An unobservable discount rate with a large effect on value"
+        },
+        {
+          "letter": "D",
+          "text": "An assumption highly sensitive to small changes"
+        },
+        {
+          "letter": "E",
+          "text": "An immaterial assumption with no effect"
+        }
+      ],
+      "answer": "A,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,C,D. Intent and ability, unobservable inputs, and high sensitivity."
+    },
+    {
+      "id": 241,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "Management\u2019s estimation process lacks controls and its model appears flawed. Which AS 2501 approach is MOST appropriate?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Rely on management\u2019s representation"
+        },
+        {
+          "letter": "B",
+          "text": "Test only the data"
+        },
+        {
+          "letter": "C",
+          "text": "Develop an independent estimate"
+        },
+        {
+          "letter": "D",
+          "text": "Do nothing"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. Independent estimate."
+    },
+    {
+      "id": 242,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "To audit the allowance for doubtful accounts, an auditor reviews January collections on December receivables. This is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Subsequent-events evidence about the estimate"
+        },
+        {
+          "letter": "B",
+          "text": "An independent estimate"
+        },
+        {
+          "letter": "C",
+          "text": "A test of controls"
+        },
+        {
+          "letter": "D",
+          "text": "A confirmation"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Subsequent events."
+    },
+    {
+      "id": 243,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "To audit a warranty reserve, the auditor reviews management\u2019s method, historical claims data, and assumptions. This is:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "A subsequent event approach"
+        },
+        {
+          "letter": "B",
+          "text": "Testing management\u2019s process"
+        },
+        {
+          "letter": "C",
+          "text": "An independent estimate"
+        },
+        {
+          "letter": "D",
+          "text": "A confirmation"
+        }
+      ],
+      "answer": "B",
+      "selectAll": false,
+      "explanation": "Correct: B. Test of management\u2019s process."
+    },
+    {
+      "id": 244,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "(Select ALL that apply.) When testing management\u2019s process, the auditor evaluates whether:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The method is appropriate"
+        },
+        {
+          "letter": "B",
+          "text": "The method is applied consistently"
+        },
+        {
+          "letter": "C",
+          "text": "The data is accurate, complete, relevant, and reliable"
+        },
+        {
+          "letter": "D",
+          "text": "The significant assumptions are reasonable"
+        },
+        {
+          "letter": "E",
+          "text": "The auditor\u2019s own model is superior"
+        }
+      ],
+      "answer": "A,B,C,D",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D. The method is appropriate; The method is applied consistently; The data is accurate, complete, relevant, and reliable; The significant assumptions are reasonable"
+    },
+    {
+      "id": 245,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "(Select ALL that apply.) The auditor checks whether significant assumptions are consistent with:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Relevant industry, regulatory, and external factors, including economic conditions"
+        },
+        {
+          "letter": "B",
+          "text": "The company\u2019s objectives, strategies, and related business risks"
+        },
+        {
+          "letter": "C",
+          "text": "Existing market information"
+        },
+        {
+          "letter": "D",
+          "text": "Historical or recent experience"
+        },
+        {
+          "letter": "E",
+          "text": "Other significant assumptions used in other company estimates"
+        },
+        {
+          "letter": "F",
+          "text": "The auditor\u2019s personal preferences"
+        }
+      ],
+      "answer": "A,B,C,D,E",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C,D,E. Relevant industry, regulatory, and external factors, including economic conditions; The company\u2019s objectives, strategies, and related business risks; Existing market information; Historical or recent experience; Other significant assumptions used in other company estimates"
+    },
+    {
+      "id": 246,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "When the auditor develops an independent estimate, the final step is to:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Compare it to management\u2019s recorded estimate and evaluate any difference"
+        },
+        {
+          "letter": "B",
+          "text": "Adopt management\u2019s amount"
+        },
+        {
+          "letter": "C",
+          "text": "Destroy the model"
+        },
+        {
+          "letter": "D",
+          "text": "Skip documentation"
+        }
+      ],
+      "answer": "A",
+      "selectAll": false,
+      "explanation": "Correct: A. Compare it to management\u2019s recorded estimate and evaluate any difference"
+    },
+    {
+      "id": 247,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "A client has a $3 million loan due in six months, negative cash flows, and plans to refinance. In the going concern evaluation the auditor should assess whether:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "The loan is large"
+        },
+        {
+          "letter": "B",
+          "text": "The bank likes the client"
+        },
+        {
+          "letter": "C",
+          "text": "The plan will resolve the doubt and management has the ability and intent to carry it out"
+        },
+        {
+          "letter": "D",
+          "text": "Management will sign a letter"
+        }
+      ],
+      "answer": "C",
+      "selectAll": false,
+      "explanation": "Correct: C. The plan will resolve the doubt and management has the ability and intent to carry it out"
+    },
+    {
+      "id": 248,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "Under ISA 570, if management\u2019s going concern assessment covers less than 12 months, the auditor:",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Accepts it"
+        },
+        {
+          "letter": "B",
+          "text": "Resigns"
+        },
+        {
+          "letter": "C",
+          "text": "Ignores it"
+        },
+        {
+          "letter": "D",
+          "text": "Requests that management extend the period"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. Requests that management extend the period"
+    },
+    {
+      "id": 249,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "(Select ALL that apply.) Which statements about going concern opinions are supported by the slides?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "Only about half of companies filing for bankruptcy had received going concern opinions"
+        },
+        {
+          "letter": "B",
+          "text": "Some argue a going concern opinion can be a self-fulfilling prophecy"
+        },
+        {
+          "letter": "C",
+          "text": "The public wonders \u201cwhere was the auditor?\u201d when companies fail"
+        },
+        {
+          "letter": "D",
+          "text": "Auditors never issue going concern opinions"
+        },
+        {
+          "letter": "E",
+          "text": "AS 2415 requires evaluating a period of three years"
+        }
+      ],
+      "answer": "A,B,C",
+      "selectAll": true,
+      "explanation": "Correct: A,B,C. Only about half of companies filing for bankruptcy had received going concern opinions; Some argue a going concern opinion can be a self-fulfilling prophecy; The public wonders \u201cwhere was the auditor?\u201d when companies fail"
+    },
+    {
+      "id": 250,
+      "module": "Module 12 bonus: Judgment, Estimates, and Going Concern",
+      "prompt": "Which best explains why judgments are problematic?",
+      "choices": [
+        {
+          "letter": "A",
+          "text": "They are objective and precise"
+        },
+        {
+          "letter": "B",
+          "text": "They are easy to document"
+        },
+        {
+          "letter": "C",
+          "text": "They have little uncertainty"
+        },
+        {
+          "letter": "D",
+          "text": "They reflect uncertainty and subjectivity, creating higher inherent risk and encouraging heuristics that produce biased conclusions"
+        }
+      ],
+      "answer": "D",
+      "selectAll": false,
+      "explanation": "Correct: D. They reflect uncertainty and subjectivity, creating higher inherent risk and encouraging heuristics that produce biased conclusions"
     }
   ]
 }
