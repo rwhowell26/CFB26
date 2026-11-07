@@ -1178,10 +1178,6 @@ input[type="password"],
   color: #111;
 }
 
-.slate-game.slate-open {
-  border-color: rgba(31, 107, 69, 0.55);
-}
-
 .slate-game.slate-elim {
   box-shadow: inset 0 0 0 1px #ff9300;
 }
@@ -1193,48 +1189,10 @@ input[type="password"],
   font-weight: 600;
 }
 
-.slate-implications-btn {
-  border: 1px solid var(--line);
-  background: var(--panel);
-  border-radius: 999px;
-  font: inherit;
-  font-size: 0.72rem;
-  font-weight: 600;
-  padding: 0.12rem 0.5rem;
-  cursor: pointer;
-  color: inherit;
-}
-
 .slate-hint {
   margin: 0;
   color: var(--muted);
   font-size: 0.88rem;
-}
-
-.slate-impl-card .panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.slate-impl-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 0.75rem;
-}
-
-.slate-impl-list p {
-  margin: 0.25rem 0 0;
-}
-
-.slate-impl-status {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  align-items: center;
 }
 
 .ccg-card {
