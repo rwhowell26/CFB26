@@ -295,3 +295,46 @@ test("Sun Belt still uses East/West division tables", () => {
     ["east", "west"],
   );
 });
+
+test("only the ACC uses 8-game vs 9-game same-wins-or-losses attach", () => {
+  assert.deepEqual(
+    SCENARIO_CONFERENCES.filter((conf) => conf.initialRank === "percentage-advantage").map(
+      (conf) => conf.id,
+    ),
+    ["acc"],
+  );
+});
+
+test("non-ACC percentage ranking keeps 5-4 ahead of 4-4", () => {
+  const ids = ["MIA", "NAVY", "TULN", "W1", "W2", "W3", "W4", "L1", "L2", "L3"];
+  const aacTeams = ids.map((id) => team(id, "American Conference"));
+  const games = [
+    game("m-navy", "MIA", "NAVY", "MIA"),
+    game("m-tuln", "MIA", "TULN", "MIA"),
+    game("m-l1", "MIA", "L1", "MIA"),
+    game("m-l2", "MIA", "L2", "MIA"),
+    game("m-l3", "MIA", "L3", "MIA"),
+    game("n-tuln", "NAVY", "TULN", "NAVY"),
+    game("n-w1", "NAVY", "W1", "NAVY"),
+    game("n-w2", "NAVY", "W2", "NAVY"),
+    game("n-w3", "NAVY", "W3", "NAVY"),
+    game("n-w4", "NAVY", "W4", "NAVY"),
+    game("n-l1", "NAVY", "L1", "L1"),
+    game("n-l2", "NAVY", "L2", "L2"),
+    game("n-l3", "NAVY", "L3", "L3"),
+    game("t-w1", "TULN", "W1", "TULN"),
+    game("t-w2", "TULN", "W2", "TULN"),
+    game("t-w3", "TULN", "W3", "TULN"),
+    game("t-w4", "TULN", "W4", "TULN"),
+    game("t-l1", "TULN", "L1", "L1"),
+    game("t-l2", "TULN", "L2", "L2"),
+  ];
+  const aac = projectConference(AAC, aacTeams, games);
+  const navy = aac.tables[0].rows.find((row) => row.teamId === "NAVY");
+  const tuln = aac.tables[0].rows.find((row) => row.teamId === "TULN");
+  assert.equal(navy?.conf.wins, 5);
+  assert.equal(navy?.conf.losses, 4);
+  assert.equal(tuln?.conf.wins, 4);
+  assert.equal(tuln?.conf.losses, 4);
+  assert.ok((navy?.place ?? 99) < (tuln?.place ?? 99));
+});

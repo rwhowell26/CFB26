@@ -6,6 +6,7 @@ import {
   conferenceContention,
   eliminationGamesThisWeek,
   gameImplications,
+  proofPicksCopy,
   scenarioProofPicks,
   weekSwingsThisWeek,
 } from "./ccg-contention.ts";
@@ -434,7 +435,7 @@ test("proof picks win out and spoil others for destiny", () => {
   );
 });
 
-test("proof picks lose next then spoil others for out-with-a-loss", () => {
+test("proof picks lose next then help others for out-with-a-loss still missing the CCG", () => {
   const games = [
     game("1", "NAVY", "USF", "NAVY"),
     game("2", "NAVY", "FAU", "NAVY"),
@@ -448,10 +449,15 @@ test("proof picks lose next then spoil others for out-with-a-loss", () => {
   assert.equal(mem?.status, "out-loss");
   const picks = scenarioProofPicks(AAC, TEAMS, games, "MEM", { week: 8 });
   assert.equal(picks["6"], "FAU");
-  assert.equal(picks["7"], "TULN");
+  assert.equal(picks["7"], "USF");
   const projected = projectConference(AAC, TEAMS, games, { picks });
+  const memRow = projected.tables[0].rows.find((row) => row.teamId === "MEM");
+  assert.ok(memRow);
+  assert.ok(memRow!.place > 2);
   assert.notEqual(projected.championship.homeId, "MEM");
   assert.notEqual(projected.championship.awayId, "MEM");
+  assert.match(proofPicksCopy("out-loss", "MEM"), /best case/);
+  assert.match(proofPicksCopy("out-loss", "MEM"), /misses the CCG/);
 });
 
 test("proof picks lose next then help others so an alive team still finishes first", () => {

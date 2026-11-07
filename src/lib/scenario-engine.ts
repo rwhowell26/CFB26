@@ -220,9 +220,11 @@ function pctKey(record: WinLoss): string {
 }
 
 /**
- * ACC 2026: order by winning percentage, then pull in any team that played a
- * different number of conference games and matches the group's wins or losses.
- * A 5-4 (9 games) and 4-4 (8 games) are the same CCG tie group.
+ * ACC 2026 only (initialRank "percentage-advantage"): order by winning
+ * percentage, then pull in any team that played a different number of
+ * conference games and matches the group's wins or losses. A 5-4 (9 games)
+ * and 4-4 (8 games) are the same CCG tie group. Other conferences have even
+ * schedules and do not use this attach.
  */
 export function percentageAdvantageGroups(records: Map<string, WinLoss>): string[][] {
   const remaining = new Set(records.keys());
