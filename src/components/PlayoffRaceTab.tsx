@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { TeamLogo } from "@/components/TeamLogo";
 import { playoffTableLabel, shortConferenceName } from "@/lib/conferences";
 import {
   adjustConferenceRecord,
+  applyConferenceGame,
   atLargePoolTeams,
   AT_LARGE_IN_COUNT,
   AUTO_BID_IN_COUNT,
@@ -30,12 +31,8 @@ import {
   restoreToAtLarge,
   setEliminatedOn,
   teamPlayoffStatus,
+  undoLastAppliedGame,
 } from "@/lib/playoff-race";
-import {
-  applyPlayoffGame,
-  syncPlayoffStatuses,
-  undoPlayoffGame,
-} from "@/lib/playoff-scenario-sync";
 import { formatGameWeekShort } from "@/lib/season";
 import type { CfpPoll, Game, PlayoffRaceState, PlayoffStatus, Team } from "@/lib/types";
 
@@ -91,27 +88,20 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
 
   const patch = (next: PlayoffRaceState) => onChange(next);
 
-  useEffect(() => {
-    const next = syncPlayoffStatuses(live, teams, games, cfp);
-    if (next !== live) onChange(next);
-    // Apply/undo already sync. This covers first paint and a later games refresh.
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- status writes must not retrigger
-  }, [games, teams, cfp]);
-
   return (
     <div className="playoff-wrap">
       <section className="panel playoff-legend">
         <header className="panel-header">
           <h2>Playoff race</h2>
           <p>
-            Apply a completed game to refresh every CCG category. Click a team to
+            Apply a completed game to update conference records. Click a team to
             cycle status. Hover a record to adjust W–L.
           </p>
           <button
             type="button"
             className="ghost-btn"
             disabled={!live.appliedGameIds.length}
-            onClick={() => patch(undoPlayoffGame(live, teams, games, ndId, cfp))}
+            onClick={() => patch(undoLastAppliedGame(live, games, ndId))}
           >
             Undo last apply
           </button>
@@ -198,7 +188,7 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
               remaining={atLargePending.length}
               teamsById={teamsById}
               onApply={() =>
-                patch(applyPlayoffGame(live, atLargePending[0]!, teams, games, ndId, cfp))
+                patch(applyConferenceGame(live, atLargePending[0]!, ndId))
               }
             />
           ) : null}
@@ -261,7 +251,7 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
                   remaining={conferencePending.length}
                   teamsById={teamsById}
                   onApply={() =>
-                    patch(applyPlayoffGame(live, nextGame, teams, games, ndId, cfp))
+                    patch(applyConferenceGame(live, nextGame, ndId))
                   }
                 />
               ) : null}

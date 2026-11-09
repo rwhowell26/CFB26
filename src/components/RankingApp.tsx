@@ -13,7 +13,6 @@ import { RecommendPanel } from "@/components/RecommendPanel";
 import { PlayoffRaceTab } from "@/components/PlayoffRaceTab";
 import { SlateTab } from "@/components/SlateTab";
 import { SosTab } from "@/components/SosTab";
-import { ScenariosTab } from "@/components/ScenariosTab";
 import {
   emptyPlayoffRace,
   fillEliminatedDates,
@@ -60,7 +59,6 @@ type Tab =
   | "slate"
   | "conferences"
   | "playoff"
-  | "scenarios"
   | "sos"
   | "compare"
   | "history"
@@ -530,7 +528,7 @@ export function RankingApp() {
   }
 
   return (
-    <div className={`app-shell${tab === "scenarios" ? " scenario-mode" : ""}`}>
+    <div className="app-shell">
       <header className="topbar">
         <div className="brand-block">
           <p className="brand">CFB{String(SEASON_YEAR).slice(2)}</p>
@@ -588,7 +586,6 @@ export function RankingApp() {
             ["slate", "Slate"],
             ["conferences", "Conferences"],
             ["playoff", "Playoff"],
-            ["scenarios", "Scenarios"],
             ["sos", "SOS"],
             ["compare", "Compare"],
             ["history", "History"],
@@ -736,11 +733,6 @@ export function RankingApp() {
           seasonWeek={seasonWeek}
           ranks={resumeRanks}
           playoffState={store.playoffRace ?? emptyPlayoffRace()}
-          cfpRanks={
-            cfp.published
-              ? new Map(cfp.ranks.map((row) => [row.teamId, row.rank]))
-              : undefined
-          }
           onSelectTeam={handleSelectTeam}
           selectedTeamId={selectedTeamId}
         />
@@ -763,21 +755,6 @@ export function RankingApp() {
           cfp={cfp}
           state={store.playoffRace ?? emptyPlayoffRace()}
           onChange={(playoffRace) => setStore({ ...store, playoffRace })}
-        />
-      ) : null}
-
-      {tab === "scenarios" ? (
-        <ScenariosTab
-          teams={teams}
-          games={games}
-          week={seasonWeek}
-          cfpRanks={
-            cfp.published
-              ? new Map(cfp.ranks.map((row) => [row.teamId, row.rank]))
-              : undefined
-          }
-          onSelectTeam={handleSelectTeam}
-          selectedTeamId={selectedTeamId}
         />
       ) : null}
 
