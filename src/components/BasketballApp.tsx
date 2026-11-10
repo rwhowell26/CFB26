@@ -108,7 +108,7 @@ export function BasketballApp() {
   const latest = latestSnapshot(store);
 
   return (
-    <div className="app-shell cbb-mode">
+    <div className={`app-shell cbb-mode${store.draft ? " is-scrub" : ""}`}>
       <header className="topbar">
         <div className="brand-block">
           <p className="brand">CBB{String(CBB_SEASON_YEAR).slice(2)}</p>

@@ -2386,6 +2386,50 @@ input[type="password"],
   gap: 0.85rem;
 }
 
+.cbb-mode.is-scrub {
+  padding-top: 0.35rem;
+  padding-bottom: 1rem;
+}
+
+.cbb-mode.is-scrub .topbar {
+  margin-bottom: 0.35rem;
+  align-items: center;
+}
+
+.cbb-mode.is-scrub .brand {
+  font-size: 2rem;
+}
+
+.cbb-mode.is-scrub .brand-block h1 {
+  font-size: 1.15rem;
+}
+
+.cbb-mode.is-scrub .tagline,
+.cbb-mode.is-scrub .tabs {
+  display: none;
+}
+
+.cbb-mode.is-scrub .cbb-bracketology {
+  gap: 0.45rem;
+}
+
+.cbb-scrub-bar {
+  padding: 0.55rem 0.75rem;
+}
+
+.cbb-scrub-bar .panel-header {
+  margin-bottom: 0.4rem;
+}
+
+.cbb-scrub-bar .panel-header h2 {
+  font-size: 1.2rem;
+}
+
+.cbb-scrub-bar .panel-header p {
+  margin: 0.1rem 0 0;
+  font-size: 0.88rem;
+}
+
 .cbb-saved-meta {
   margin: 0;
   color: var(--muted);
@@ -2394,8 +2438,11 @@ input[type="password"],
 
 .cbb-compare-board {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 8.4rem minmax(0, 1fr);
-  grid-template-rows: auto repeat(9, auto) auto auto;
+  grid-template-columns: auto 3.4rem 7.6rem 3.4rem auto;
+  grid-template-rows: auto repeat(9, 1.38rem) auto;
+  width: max-content;
+  max-width: 100%;
+  margin-inline: auto;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
@@ -2410,6 +2457,20 @@ input[type="password"],
   grid-row: 1 / -1;
   margin: 0;
   min-width: 0;
+}
+
+.cbb-compare-col.left {
+  grid-column: 1 / 3;
+  grid-template-columns: subgrid;
+}
+
+.cbb-compare-col.right {
+  grid-column: 4 / 6;
+  grid-template-columns: subgrid;
+}
+
+.cbb-compare-mid {
+  grid-column: 3;
 }
 
 .cbb-compare-col {
@@ -2436,13 +2497,24 @@ input[type="password"],
   display: grid;
   justify-items: center;
   align-content: start;
-  gap: 0.35rem;
-  padding: 0.85rem 0.7rem 0.7rem;
+  align-self: start;
+  gap: 0.2rem;
+  padding: 0.45rem 0.7rem 0.35rem;
+}
+
+.cbb-compare-col.left .cbb-compare-head {
+  grid-column: 1;
+  grid-row: 1 / span 10;
+}
+
+.cbb-compare-col.right .cbb-compare-head {
+  grid-column: 2;
+  grid-row: 1 / span 10;
 }
 
 .cbb-compare-head .team-logo {
-  width: 3.6rem;
-  height: 3.6rem;
+  width: 2.75rem;
+  height: 2.75rem;
   background: transparent;
   box-shadow: none;
 }
@@ -2450,19 +2522,19 @@ input[type="password"],
 .cbb-compare-head strong {
   display: block;
   font-family: var(--font-display), "Barlow Condensed", sans-serif;
-  font-size: 1.35rem;
+  font-size: 1.22rem;
   line-height: 1.05;
 }
 
 .cbb-compare-head p {
   margin: 0;
   opacity: 0.86;
-  font-size: 0.92rem;
+  font-size: 0.82rem;
 }
 
 .cbb-compare-role {
   margin: 0;
-  font-size: 0.72rem;
+  font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -2477,42 +2549,92 @@ input[type="password"],
 }
 
 .cbb-compare-mid-head {
-  display: grid;
-  place-items: center;
-  padding: 0.85rem 0.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.12rem;
+  padding: 0.35rem 0.15rem;
+}
+
+.cbb-compare-mid-head.toward-left {
+  justify-content: flex-start;
+}
+
+.cbb-compare-mid-head.toward-right {
+  justify-content: flex-end;
+}
+
+.cbb-compare-arrow {
+  flex: none;
+  color: var(--ink);
+  font-size: 1.55rem;
+  font-weight: 800;
+  line-height: 0.85;
 }
 
 .cbb-compare-gap {
   display: inline-grid;
   place-items: center;
-  min-width: 3.4rem;
-  padding: 0.28rem 0.55rem;
+  min-width: 2.6rem;
+  padding: 0.18rem 0.38rem;
   border-radius: 999px;
   background: color-mix(in srgb, var(--ink) 12%, var(--panel));
   color: var(--ink);
   font-weight: 800;
-  font-size: 1.25rem;
+  font-size: 1.05rem;
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
 
 .cbb-compare-val,
 .cbb-compare-label {
-  display: grid;
-  place-items: center;
-  min-height: 1.7rem;
-  padding: 0.18rem 0.45rem;
+  display: flex;
+  align-items: center;
+  min-height: 0;
+  padding: 0;
   font-variant-numeric: tabular-nums;
 }
 
 .cbb-compare-val {
   font-weight: 650;
-  font-size: 1rem;
+  font-size: 1.02rem;
+}
+
+.cbb-compare-col.left .cbb-compare-val,
+.cbb-compare-col.left .cbb-compare-val-spacer {
+  grid-column: 2;
+  justify-content: flex-end;
+  padding-right: 0.32rem;
+  text-align: right;
+}
+
+.cbb-compare-col.right .cbb-compare-val,
+.cbb-compare-col.right .cbb-compare-val-spacer {
+  grid-column: 1;
+  justify-content: flex-start;
+  padding-left: 0.32rem;
+  text-align: left;
+}
+
+.cbb-compare-col.left .cbb-compare-val-spacer,
+.cbb-compare-col.right .cbb-compare-val-spacer {
+  grid-row: 1;
+}
+
+.cbb-compare-label {
+  justify-content: center;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.1;
 }
 
 .cbb-compare-val.avg,
 .cbb-compare-label.avg {
-  font-size: 1.08rem;
+  font-size: 1.05rem;
   font-weight: 800;
 }
 
@@ -2524,20 +2646,17 @@ input[type="password"],
   opacity: 0.7;
 }
 
-.cbb-compare-label {
-  color: var(--muted);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  text-align: center;
-  line-height: 1.15;
-}
-
 .cbb-compare-col .cbb-quads {
+  grid-column: 1 / -1;
   color: inherit;
   opacity: 0.88;
-  padding: 0.45rem 0.55rem 0.15rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem 0.55rem;
+  width: auto;
+  padding: 0.2rem 0.55rem 0.4rem;
+  font-size: 0.7rem;
 }
 
 .cbb-quads {
@@ -2547,15 +2666,8 @@ input[type="password"],
   font-size: 0.78rem;
 }
 
-.cbb-compare-hint {
-  margin: 0;
-  padding: 0.35rem 0.7rem 0.8rem;
-  font-size: 0.78rem;
-  opacity: 0.78;
-}
-
 .cbb-compare-mid-spacer {
-  min-height: 0.4rem;
+  min-height: 0;
 }
 
 .cbb-seed-block h3 {

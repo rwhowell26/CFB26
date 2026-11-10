@@ -83,7 +83,7 @@ export function CbbCompareCard({
 
   return (
     <div className="cbb-compare-board">
-      <button type="button" className="cbb-compare-col" style={leftColors} onClick={onPickLeft}>
+      <button type="button" className="cbb-compare-col left" style={leftColors} onClick={onPickLeft}>
         <header className="cbb-compare-head">
           <p className="cbb-compare-role">{leftRole}</p>
           <TeamLogo team={left} className="lg" onFill={leftColors.background} />
@@ -92,6 +92,9 @@ export function CbbCompareCard({
           </strong>
           <p>{formatRecord(left.wins, left.losses)}</p>
         </header>
+        <span className="cbb-compare-val-spacer" aria-hidden>
+          &nbsp;
+        </span>
         {rows.map((row) => (
           <span
             key={row.key}
@@ -106,14 +109,33 @@ export function CbbCompareCard({
           <span>Q3 {formatQuad(leftMetrics.quad3)}</span>
           <span>Q4 {formatQuad(leftMetrics.quad4)}</span>
         </div>
-        <p className="cbb-compare-hint">Click to rank {left.shortName} higher</p>
       </button>
 
       <div className="cbb-compare-mid">
-        <div className="cbb-compare-mid-head">
+        <div
+          className={`cbb-compare-mid-head${betterSide ? ` toward-${betterSide}` : ""}`}
+          role="img"
+          aria-label={
+            betterSide === "left"
+              ? `${left.shortName} leads by ${badgeText}`
+              : betterSide === "right"
+                ? `${right.shortName} leads by ${badgeText}`
+                : "Overall ranks are even"
+          }
+        >
+          {betterSide === "left" ? (
+            <span className="cbb-compare-arrow" aria-hidden>
+              ⬅
+            </span>
+          ) : null}
           <span className="cbb-compare-gap" style={badgeColors ?? undefined}>
             {badgeText}
           </span>
+          {betterSide === "right" ? (
+            <span className="cbb-compare-arrow" aria-hidden>
+              ➡
+            </span>
+          ) : null}
         </div>
         {rows.map((row) => (
           <span key={row.key} className={`cbb-compare-label${row.avg ? " avg" : ""}`}>
@@ -121,10 +143,9 @@ export function CbbCompareCard({
           </span>
         ))}
         <div className="cbb-compare-mid-spacer" />
-        <div className="cbb-compare-mid-spacer" />
       </div>
 
-      <button type="button" className="cbb-compare-col" style={rightColors} onClick={onPickRight}>
+      <button type="button" className="cbb-compare-col right" style={rightColors} onClick={onPickRight}>
         <header className="cbb-compare-head">
           <p className="cbb-compare-role">{rightRole}</p>
           <TeamLogo team={right} className="lg" onFill={rightColors.background} />
@@ -133,6 +154,9 @@ export function CbbCompareCard({
           </strong>
           <p>{formatRecord(right.wins, right.losses)}</p>
         </header>
+        <span className="cbb-compare-val-spacer" aria-hidden>
+          &nbsp;
+        </span>
         {rows.map((row) => (
           <span
             key={row.key}
@@ -147,7 +171,6 @@ export function CbbCompareCard({
           <span>Q3 {formatQuad(rightMetrics.quad3)}</span>
           <span>Q4 {formatQuad(rightMetrics.quad4)}</span>
         </div>
-        <p className="cbb-compare-hint">Click to rank {right.shortName} higher</p>
       </button>
     </div>
   );
