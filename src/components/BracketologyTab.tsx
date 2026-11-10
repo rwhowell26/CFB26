@@ -10,7 +10,6 @@ import {
   seedWorkingPool,
   snapshotFromAssignment,
 } from "@/lib/cbb-bracket";
-import { shortCbbConference } from "@/lib/cbb-conferences";
 import { emptyMetrics, formatRecord, overallAverage, formatRank } from "@/lib/cbb-metrics";
 import { FIELD_SIZE, formatCbbDate } from "@/lib/cbb-season";
 import {
@@ -63,9 +62,8 @@ function TeamRow({
       <TeamLogo team={team} />
       <strong>{team.shortName}</strong>
       <span className="cbb-scurve-meta">
-        {formatRecord(team.wins, team.losses)} · {shortCbbConference(team.conference)}
-        {playIn ? " · Play-in" : ""}
-        {role === "auto-bid" ? " · Auto" : role === "at-large" ? " · At-large" : ""}
+        {formatRecord(team.wins, team.losses)}
+        {playIn ? " · PI" : ""}
       </span>
       <span className="cbb-scurve-avg">{formatRank(overallAverage(metrics), 1)}</span>
     </li>
@@ -224,14 +222,10 @@ export function BracketologyTab({
 
   return (
     <div className="cbb-bracketology">
-      <section className="panel">
+      <section className="panel cbb-results-bar">
         <header className="panel-header">
           <p className="eyebrow">Bracketology</p>
           <h2>{viewing ? viewing.label : "No projections yet"}</h2>
-          <p>
-            Build a 68-team field whenever you want. Start new uses last projection&apos;s S-curve
-            and scrubs from the 1-seed vs the 2-seed.
-          </p>
         </header>
         <div className="cbb-toolbar">
           <label className="week-select">
@@ -342,12 +336,8 @@ function ProjectionLists({
   );
 
   return (
-    <>
-      <section className="panel">
-        <header className="panel-header">
-          <h2>Seed list</h2>
-          <p>Ordered 1 through 16. Play-in lines (11 and 16) simply list more than four teams.</p>
-        </header>
+    <div className="cbb-projection">
+      <div className="cbb-seed-grid">
         {[...bySeed.entries()].map(([seed, rows]) => (
           <div key={seed} className="cbb-seed-block">
             <h3>{seed}-seeds</h3>
@@ -370,7 +360,7 @@ function ProjectionLists({
             </ol>
           </div>
         ))}
-      </section>
+      </div>
 
       <div className="cbb-bubble-grid">
         <section className="panel">
@@ -389,20 +379,15 @@ function ProjectionLists({
             <p className="empty-state">None yet.</p>
           )}
         </section>
+        <section className="panel">
+          <header className="panel-header">
+            <h2>Recommended</h2>
+          </header>
+          {recommendedIds.length ? renderIds(recommendedIds, 1) : (
+            <p className="empty-state">None this board.</p>
+          )}
+        </section>
       </div>
-
-      <section className="panel">
-        <header className="panel-header">
-          <h2>Recommended adds</h2>
-          <p>
-            Teams left out of last projection whose overall, resume, or predictive average rank is
-            within 10 of the last Next 4 Out team.
-          </p>
-        </header>
-        {recommendedIds.length ? renderIds(recommendedIds, 1) : (
-          <p className="empty-state">None this board. New teams need a rank average within 10 of the last Next 4 Out.</p>
-        )}
-      </section>
-    </>
+    </div>
   );
 }
