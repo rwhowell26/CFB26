@@ -91,10 +91,11 @@ function normalizeStore(parsed: Partial<CbbStore> | null): CbbStore {
     typeof parsed.viewingId === "string" && snapshots.some((item) => item.id === parsed.viewingId)
       ? parsed.viewingId
       : snapshots[0]?.id ?? null;
+  const keepDraft = parsed.schemaVersion === CBB_STORE_SCHEMA_VERSION;
   return {
     ...base,
     snapshots,
-    draft: sanitizeDraft(parsed.draft),
+    draft: keepDraft ? sanitizeDraft(parsed.draft) : null,
     viewingId,
   };
 }

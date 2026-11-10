@@ -32,7 +32,7 @@ export function predictiveAverage(metrics?: CbbTeamMetrics | null): number | nul
   return meanRatings(metrics.kenpom, metrics.bpi, metrics.torvik);
 }
 
-/** Mean of all six rating points that are present. */
+/** Mean of all six published ranks that are present. Lower is better. */
 export function overallAverage(metrics?: CbbTeamMetrics | null): number | null {
   if (!metrics) return null;
   return meanRatings(
@@ -45,18 +45,24 @@ export function overallAverage(metrics?: CbbTeamMetrics | null): number | null {
   );
 }
 
-/** Left minus right. Positive means the left rating is better. */
-export function ratingDiff(left: number | null, right: number | null): number | null {
-  if (left == null || right == null) return null;
-  return left - right;
+/** Other minus self. Positive means this team has the better (lower) rank. */
+export function rankAdvantage(self: number | null, other: number | null): number | null {
+  if (self == null || other == null) return null;
+  return other - self;
 }
 
-export function formatRating(value: number | null, digits = 1): string {
+export function formatRank(value: number | null, digits = 0): string {
   if (value == null) return "—";
-  const use = Math.abs(value) < 1 && value !== 0 ? 2 : digits;
-  const rendered = value.toFixed(use);
-  if (value > 0 && use > 0) return `+${rendered}`;
-  return rendered;
+  if (digits <= 0) return String(Math.round(value));
+  return value.toFixed(digits);
+}
+
+export function formatRankAdvantage(advantage: number | null): string {
+  if (advantage == null) return "—";
+  if (Math.abs(advantage) < 0.05) return "0";
+  const abs = Math.abs(advantage);
+  const rendered = Number.isInteger(abs) || Math.abs(abs - Math.round(abs)) < 0.05 ? String(Math.round(abs)) : abs.toFixed(1);
+  return advantage > 0 ? `+${rendered}` : `−${rendered}`;
 }
 
 export function formatRecord(wins: number, losses: number): string {
@@ -65,13 +71,6 @@ export function formatRecord(wins: number, losses: number): string {
 
 export function formatQuad(record: QuadRecord | null): string {
   return record ? formatRecord(record.wins, record.losses) : "—";
-}
-
-export function formatDiff(diff: number | null): string {
-  if (diff == null) return "—";
-  if (Math.abs(diff) < 0.05) return "0";
-  const rounded = Math.abs(diff) < 1 ? Math.abs(diff).toFixed(2) : Math.abs(diff).toFixed(1);
-  return diff > 0 ? `+${rounded}` : `−${rounded}`;
 }
 
 export function winPct(team: Pick<CbbTeam, "wins" | "losses">): number {

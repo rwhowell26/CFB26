@@ -1,26 +1,30 @@
 "use client";
 
 import { TeamLogo } from "@/components/TeamLogo";
-import { shortCbbConference } from "@/lib/cbb-conferences";
 import {
-  formatDiff,
   formatQuad,
-  formatRating,
+  formatRank,
+  formatRankAdvantage,
   formatRecord,
   overallAverage,
   predictiveAverage,
-  ratingDiff,
+  rankAdvantage,
   resumeAverage,
 } from "@/lib/cbb-metrics";
+import { compareColumnColors } from "@/lib/team-colors";
 import type { CbbTeam, CbbTeamMetrics } from "@/lib/cbb-types";
 
 type Props = {
-  team: CbbTeam;
-  metrics: CbbTeamMetrics;
-  other: CbbTeamMetrics;
-  roleLabel: string;
-  rank: number;
-  onPick: () => void;
+  left: CbbTeam;
+  right: CbbTeam;
+  leftMetrics: CbbTeamMetrics;
+  rightMetrics: CbbTeamMetrics;
+  leftRole: string;
+  rightRole: string;
+  leftRank: number;
+  rightRank: number;
+  onPickLeft: () => void;
+  onPickRight: () => void;
 };
 
 type MetricRow = {
@@ -31,92 +35,120 @@ type MetricRow = {
   avg?: boolean;
 };
 
-function MetricStack({
-  rows,
-  title,
-}: {
-  rows: MetricRow[];
-  title: string;
-}) {
-  return (
-    <div className="cbb-metric-group">
-      <p className="cbb-metric-group-label">{title}</p>
-      <dl>
-        {rows.map((row) => {
-          const diff = ratingDiff(row.left, row.right);
-          const better = diff != null && diff > 0;
-          const worse = diff != null && diff < 0;
-          const digits = row.avg || Math.abs(row.left ?? 0) < 1 ? 2 : 1;
-          return (
-            <div
-              key={row.key}
-              className={`cbb-metric-row${row.avg ? " avg" : ""}${better ? " better" : ""}${worse ? " worse" : ""}`}
-            >
-              <dt>{row.label}</dt>
-              <dd className="cbb-metric-value">{formatRating(row.left, digits)}</dd>
-              <dd className="cbb-metric-diff">{formatDiff(diff)}</dd>
-            </div>
-          );
-        })}
-      </dl>
-    </div>
-  );
+function sideClass(self: number | null, other: number | null): string {
+  const advantage = rankAdvantage(self, other);
+  if (advantage == null || Math.abs(advantage) < 0.05) return "";
+  return advantage > 0 ? " better" : " worse";
 }
 
-export function CbbCompareCard({ team, metrics, other, roleLabel, rank, onPick }: Props) {
-  const overall = overallAverage(metrics);
-  const otherOverall = overallAverage(other);
-  const resumeRows: MetricRow[] = [
-    { key: "resume", label: "Average", left: resumeAverage(metrics), right: resumeAverage(other), avg: true },
-    { key: "sor", label: "SOR", left: metrics.sor, right: other.sor },
-    { key: "kpi", label: "KPI", left: metrics.kpi, right: other.kpi },
-    { key: "wab", label: "WAB", left: metrics.wab, right: other.wab },
-  ];
-  const predRows: MetricRow[] = [
+export function CbbCompareCard({
+  left,
+  right,
+  leftMetrics,
+  rightMetrics,
+  leftRole,
+  rightRole,
+  leftRank,
+  rightRank,
+  onPickLeft,
+  onPickRight,
+}: Props) {
+  const leftColors = compareColumnColors(left.color, left.alternateColor);
+  const rightColors = compareColumnColors(right.color, right.alternateColor);
+  const leftOverall = overallAverage(leftMetrics);
+  const rightOverall = overallAverage(rightMetrics);
+  const leftAdv = rankAdvantage(leftOverall, rightOverall);
+  const betterSide =
+    leftAdv == null || Math.abs(leftAdv) < 0.05 ? null : leftAdv > 0 ? "left" : "right";
+  const badgeColors = betterSide === "left" ? leftColors : betterSide === "right" ? rightColors : null;
+  const badgeText = formatRankAdvantage(leftAdv == null ? null : Math.abs(leftAdv) < 0.05 ? 0 : Math.abs(leftAdv));
+
+  const rows: MetricRow[] = [
+    { key: "overall", label: "Overall", left: leftOverall, right: rightOverall, avg: true },
+    { key: "resume", label: "Resume", left: resumeAverage(leftMetrics), right: resumeAverage(rightMetrics), avg: true },
+    { key: "sor", label: "SOR", left: leftMetrics.sor, right: rightMetrics.sor },
+    { key: "kpi", label: "KPI", left: leftMetrics.kpi, right: rightMetrics.kpi },
+    { key: "wab", label: "WAB", left: leftMetrics.wab, right: rightMetrics.wab },
     {
       key: "pred",
-      label: "Average",
-      left: predictiveAverage(metrics),
-      right: predictiveAverage(other),
+      label: "Predictive",
+      left: predictiveAverage(leftMetrics),
+      right: predictiveAverage(rightMetrics),
       avg: true,
     },
-    { key: "kenpom", label: "KenPom", left: metrics.kenpom, right: other.kenpom },
-    { key: "bpi", label: "BPI", left: metrics.bpi, right: other.bpi },
-    { key: "torvik", label: "Torvik", left: metrics.torvik, right: other.torvik },
+    { key: "kenpom", label: "KenPom", left: leftMetrics.kenpom, right: rightMetrics.kenpom },
+    { key: "bpi", label: "BPI", left: leftMetrics.bpi, right: rightMetrics.bpi },
+    { key: "torvik", label: "Torvik", left: leftMetrics.torvik, right: rightMetrics.torvik },
   ];
 
   return (
-    <button type="button" className="cbb-compare-card" onClick={onPick}>
-      <header>
-        <p className="cbb-compare-role">{roleLabel}</p>
-        <div className="cbb-compare-team">
-          <TeamLogo team={team} />
-          <div>
-            <strong>
-              #{rank} {team.shortName}
-            </strong>
-            <p>
-              {formatRecord(team.wins, team.losses)} · {shortCbbConference(team.conference)}
-            </p>
-          </div>
+    <div className="cbb-compare-board">
+      <button type="button" className="cbb-compare-col" style={leftColors} onClick={onPickLeft}>
+        <header className="cbb-compare-head">
+          <p className="cbb-compare-role">{leftRole}</p>
+          <TeamLogo team={left} className="lg" onFill={leftColors.background} />
+          <strong>
+            #{leftRank} {left.shortName}
+          </strong>
+          <p>{formatRecord(left.wins, left.losses)}</p>
+        </header>
+        {rows.map((row) => (
+          <span
+            key={row.key}
+            className={`cbb-compare-val${row.avg ? " avg" : ""}${sideClass(row.left, row.right)}`}
+          >
+            {formatRank(row.left, row.avg ? 1 : 0)}
+          </span>
+        ))}
+        <div className="cbb-quads">
+          <span>Q1 {formatQuad(leftMetrics.quad1)}</span>
+          <span>Q2 {formatQuad(leftMetrics.quad2)}</span>
+          <span>Q3 {formatQuad(leftMetrics.quad3)}</span>
+          <span>Q4 {formatQuad(leftMetrics.quad4)}</span>
         </div>
-        <p className="cbb-overall">
-          <span>Overall avg</span>
-          <strong>{formatRating(overall, 2)}</strong>
-          <em className={overall != null && otherOverall != null && overall > otherOverall ? "better" : overall != null && otherOverall != null && overall < otherOverall ? "worse" : ""}>
-            {formatDiff(ratingDiff(overall, otherOverall))}
-          </em>
-        </p>
-      </header>
-      <MetricStack title="Resume" rows={resumeRows} />
-      <MetricStack title="Predictive" rows={predRows} />
-      <div className="cbb-quads">
-        <span>Q1 {formatQuad(metrics.quad1)}</span>
-        <span>Q2 {formatQuad(metrics.quad2)}</span>
-        <span>Q3 {formatQuad(metrics.quad3)}</span>
-        <span>Q4 {formatQuad(metrics.quad4)}</span>
+        <p className="cbb-compare-hint">Click to rank {left.shortName} higher</p>
+      </button>
+
+      <div className="cbb-compare-mid">
+        <div className="cbb-compare-mid-head">
+          <span className="cbb-compare-gap" style={badgeColors ?? undefined}>
+            {badgeText}
+          </span>
+        </div>
+        {rows.map((row) => (
+          <span key={row.key} className={`cbb-compare-label${row.avg ? " avg" : ""}`}>
+            {row.label}
+          </span>
+        ))}
+        <div className="cbb-compare-mid-spacer" />
+        <div className="cbb-compare-mid-spacer" />
       </div>
-      <p className="cbb-compare-hint">Click to rank {team.shortName} higher</p>
-    </button>
+
+      <button type="button" className="cbb-compare-col" style={rightColors} onClick={onPickRight}>
+        <header className="cbb-compare-head">
+          <p className="cbb-compare-role">{rightRole}</p>
+          <TeamLogo team={right} className="lg" onFill={rightColors.background} />
+          <strong>
+            #{rightRank} {right.shortName}
+          </strong>
+          <p>{formatRecord(right.wins, right.losses)}</p>
+        </header>
+        {rows.map((row) => (
+          <span
+            key={row.key}
+            className={`cbb-compare-val${row.avg ? " avg" : ""}${sideClass(row.right, row.left)}`}
+          >
+            {formatRank(row.right, row.avg ? 1 : 0)}
+          </span>
+        ))}
+        <div className="cbb-quads">
+          <span>Q1 {formatQuad(rightMetrics.quad1)}</span>
+          <span>Q2 {formatQuad(rightMetrics.quad2)}</span>
+          <span>Q3 {formatQuad(rightMetrics.quad3)}</span>
+          <span>Q4 {formatQuad(rightMetrics.quad4)}</span>
+        </div>
+        <p className="cbb-compare-hint">Click to rank {right.shortName} higher</p>
+      </button>
+    </div>
   );
 }

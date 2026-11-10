@@ -12,7 +12,7 @@ export type QuadRecord = {
 
 export type CbbScrubPhase = "lock" | "recommend";
 
-/** Rating points: higher is better. Null until a source is wired. */
+/** Published ranks: 1 is best. Null until a source is wired. */
 export type CbbTeamMetrics = {
   teamId: string;
   sor: number | null;

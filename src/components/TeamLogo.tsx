@@ -1,6 +1,6 @@
 "use client";
 
-import { logoAppearance } from "@/lib/team-colors";
+import { logoAppearance, logoOnFill } from "@/lib/team-colors";
 
 export type TeamLogoSource = {
   id?: string | null;
@@ -14,15 +14,15 @@ type Props = {
   team: TeamLogoSource;
   className?: string;
   fallback?: string;
+  onFill?: string | null;
 };
 
-export function TeamLogo({ team, className = "", fallback }: Props) {
-  const { src, style, markColor } = logoAppearance(
-    team.color,
-    team.alternateColor,
-    team.logo,
-    team.id,
-  );
+export function TeamLogo({ team, className = "", fallback, onFill }: Props) {
+  const filled = logoOnFill(team.logo, team.id, onFill ?? null);
+  const swatch = logoAppearance(team.color, team.alternateColor, team.logo, team.id);
+  const src = onFill ? filled.src : swatch.src;
+  const markColor = onFill ? filled.markColor : swatch.markColor;
+  const style = onFill ? undefined : swatch.style;
   const classes = ["team-logo", className].filter(Boolean).join(" ");
   const mark = fallback ?? team.abbreviation?.slice(0, 2) ?? "·";
 

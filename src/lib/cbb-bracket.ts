@@ -44,11 +44,11 @@ export function compareCbbTeams(
 ): number {
   const leftMetrics = metricsOf(leftId, metrics);
   const rightMetrics = metricsOf(rightId, metrics);
-  const overall = (overallAverage(rightMetrics) ?? -9999) - (overallAverage(leftMetrics) ?? -9999);
+  const overall = (overallAverage(leftMetrics) ?? 9999) - (overallAverage(rightMetrics) ?? 9999);
   if (overall !== 0) return overall;
-  const resume = (resumeAverage(rightMetrics) ?? -9999) - (resumeAverage(leftMetrics) ?? -9999);
+  const resume = (resumeAverage(leftMetrics) ?? 9999) - (resumeAverage(rightMetrics) ?? 9999);
   if (resume !== 0) return resume;
-  const pred = (predictiveAverage(rightMetrics) ?? -9999) - (predictiveAverage(leftMetrics) ?? -9999);
+  const pred = (predictiveAverage(leftMetrics) ?? 9999) - (predictiveAverage(rightMetrics) ?? 9999);
   if (pred !== 0) return pred;
   const left = teamsById.get(leftId);
   const right = teamsById.get(rightId);
@@ -212,7 +212,7 @@ export function recommendNewTeams(
   if (!bottomId || (bottomOverall == null && bottomResume == null && bottomPred == null)) return [];
   const teamsById = new Map(teams.map((team) => [team.id, team]));
   const withinCutoff = (value: number | null, floor: number | null) =>
-    value != null && floor != null && value >= floor - within;
+    value != null && floor != null && value <= floor + within;
   return sortByMetrics(
     teams
       .filter((team) => !considered.has(team.id))
@@ -230,7 +230,7 @@ export function recommendNewTeams(
   );
 }
 
-/** Last projection order (or live six-metric averages), plus missing auto-bid leaders. */
+/** Last projection order (or live six-rank averages), plus missing auto-bid leaders. */
 export function seedWorkingPool(
   teams: CbbTeam[],
   metrics: Map<string, CbbTeamMetrics>,

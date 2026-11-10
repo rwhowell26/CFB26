@@ -11,7 +11,7 @@ import {
   snapshotFromAssignment,
 } from "@/lib/cbb-bracket";
 import { shortCbbConference } from "@/lib/cbb-conferences";
-import { emptyMetrics, formatRecord, overallAverage, formatRating } from "@/lib/cbb-metrics";
+import { emptyMetrics, formatRecord, overallAverage, formatRank } from "@/lib/cbb-metrics";
 import { FIELD_SIZE, formatCbbDate } from "@/lib/cbb-season";
 import {
   applyScrubChoice,
@@ -67,7 +67,7 @@ function TeamRow({
         {playIn ? " · Play-in" : ""}
         {role === "auto-bid" ? " · Auto" : role === "at-large" ? " · At-large" : ""}
       </span>
-      <span className="cbb-scurve-avg">{formatRating(overallAverage(metrics))}</span>
+      <span className="cbb-scurve-avg">{formatRank(overallAverage(metrics), 1)}</span>
     </li>
   );
 }
@@ -172,8 +172,8 @@ export function BracketologyTab({
                 ? "Next 4 Out are locked. Scrub recommended teams into the seed list."
                 : draft.basedOnId
                   ? "Seeded from last projection. Adjacent scrub from the 1-seed vs the 2-seed through Next 4 Out."
-                  : "Seeded by the average of the six rating points. Scrub from the 1-seed vs the 2-seed through Next 4 Out."}{" "}
-              Higher rating is better.
+                  : "Seeded by the average of the six published ranks. Scrub from the 1-seed vs the 2-seed through Next 4 Out."}{" "}
+              Lower rank is better.
             </p>
             <p>
               {question.phase === "recommend"
@@ -213,24 +213,18 @@ export function BracketologyTab({
             </button>
           </div>
         </section>
-        <div className="build-resumes">
-          <CbbCompareCard
-            team={left}
-            metrics={leftMetrics}
-            other={rightMetrics}
-            roleLabel={question.phase === "recommend" ? "Team above" : "Currently higher"}
-            rank={question.leftRank}
-            onPick={() => pick(left.id, right.id)}
-          />
-          <CbbCompareCard
-            team={right}
-            metrics={rightMetrics}
-            other={leftMetrics}
-            roleLabel={question.phase === "recommend" ? "Climbing" : "Currently lower"}
-            rank={question.rightRank}
-            onPick={() => pick(right.id, left.id)}
-          />
-        </div>
+        <CbbCompareCard
+          left={left}
+          right={right}
+          leftMetrics={leftMetrics}
+          rightMetrics={rightMetrics}
+          leftRole={question.phase === "recommend" ? "Team above" : "Currently higher"}
+          rightRole={question.phase === "recommend" ? "Climbing" : "Currently lower"}
+          leftRank={question.leftRank}
+          rightRank={question.rightRank}
+          onPickLeft={() => pick(left.id, right.id)}
+          onPickRight={() => pick(right.id, left.id)}
+        />
       </div>
     );
   }
@@ -408,12 +402,12 @@ function ProjectionLists({
         <header className="panel-header">
           <h2>Recommended adds</h2>
           <p>
-            Teams left out of last projection whose overall, resume, or predictive average is within
-            10 rating points of the last Next 4 Out team.
+            Teams left out of last projection whose overall, resume, or predictive average rank is
+            within 10 of the last Next 4 Out team.
           </p>
         </header>
         {recommendedIds.length ? renderIds(recommendedIds, 1) : (
-          <p className="empty-state">None this board. New teams need ratings within 10 of the last Next 4 Out.</p>
+          <p className="empty-state">None this board. New teams need a rank average within 10 of the last Next 4 Out.</p>
         )}
       </section>
     </>
