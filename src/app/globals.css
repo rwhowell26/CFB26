@@ -2394,7 +2394,7 @@ input[type="password"],
 
 .cbb-compare-board {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 8.4rem minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) 7.4rem minmax(0, 1fr);
   grid-template-rows: auto repeat(9, auto) auto auto;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -2498,16 +2498,42 @@ input[type="password"],
 
 .cbb-compare-val,
 .cbb-compare-label {
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
   min-height: 1.7rem;
-  padding: 0.18rem 0.45rem;
+  padding: 0.18rem 0.3rem;
   font-variant-numeric: tabular-nums;
 }
 
 .cbb-compare-val {
   font-weight: 650;
   font-size: 1rem;
+  min-width: 0;
+}
+
+.cbb-compare-col.left .cbb-compare-val {
+  justify-content: flex-end;
+  padding-right: 0.35rem;
+  padding-left: 0.8rem;
+  text-align: right;
+}
+
+.cbb-compare-col.right .cbb-compare-val {
+  justify-content: flex-start;
+  padding-left: 0.35rem;
+  padding-right: 0.8rem;
+  text-align: left;
+}
+
+.cbb-compare-label {
+  justify-content: center;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.15;
 }
 
 .cbb-compare-val.avg,
@@ -2524,20 +2550,19 @@ input[type="password"],
   opacity: 0.7;
 }
 
-.cbb-compare-label {
-  color: var(--muted);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  text-align: center;
-  line-height: 1.15;
-}
-
 .cbb-compare-col .cbb-quads {
   color: inherit;
   opacity: 0.88;
-  padding: 0.45rem 0.55rem 0.15rem;
+  width: min(100%, 13.5rem);
+  padding: 0.45rem 0.35rem 0.15rem;
+}
+
+.cbb-compare-col.left .cbb-quads {
+  justify-self: end;
+}
+
+.cbb-compare-col.right .cbb-quads {
+  justify-self: start;
 }
 
 .cbb-quads {
