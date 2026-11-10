@@ -161,7 +161,7 @@ export function BracketologyTab({
 
     return (
       <div className="cbb-bracketology">
-        <section className="panel">
+        <section className="panel cbb-scrub-bar">
           <header className="panel-header">
             <p className="eyebrow">
               Bracketology · {question.phase === "recommend" ? "recommended climb" : `${question.leftRank} vs ${question.rightRank}`}
@@ -169,18 +169,11 @@ export function BracketologyTab({
             <h2>Who belongs higher?</h2>
             <p>
               {question.phase === "recommend"
-                ? "Next 4 Out are locked. Scrub recommended teams into the seed list."
-                : draft.basedOnId
-                  ? "Seeded from last projection. Adjacent scrub from the 1-seed vs the 2-seed through Next 4 Out."
-                  : "Seeded by the average of the six published ranks. Scrub from the 1-seed vs the 2-seed through Next 4 Out."}{" "}
-              Lower rank is better.
-            </p>
-            <p>
-              {question.phase === "recommend"
                 ? `${remaining} recommended team${remaining === 1 ? "" : "s"} left to place`
-                : `${remaining} pair${remaining === 1 ? "" : "s"} left to lock Next 4 Out`}{" "}
-              · field preview {preview.atLarge} at-large / {preview.autoBids} auto · {preview.reserved}{" "}
-              spots reserved for conferences not yet in.
+                : `${remaining} pair${remaining === 1 ? "" : "s"} left`}
+              {" · "}
+              {preview.atLarge} at-large / {preview.autoBids} auto
+              {preview.reserved ? ` · ${preview.reserved} reserved` : ""}
             </p>
           </header>
           <div className="build-actions">
