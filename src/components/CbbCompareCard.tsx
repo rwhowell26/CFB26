@@ -112,10 +112,30 @@ export function CbbCompareCard({
       </button>
 
       <div className="cbb-compare-mid">
-        <div className="cbb-compare-mid-head">
+        <div
+          className={`cbb-compare-mid-head${betterSide ? ` toward-${betterSide}` : ""}`}
+          role="img"
+          aria-label={
+            betterSide === "left"
+              ? `${left.shortName} leads by ${badgeText}`
+              : betterSide === "right"
+                ? `${right.shortName} leads by ${badgeText}`
+                : "Overall ranks are even"
+          }
+        >
+          {betterSide === "left" ? (
+            <span className="cbb-compare-arrow" aria-hidden>
+              ⬅
+            </span>
+          ) : null}
           <span className="cbb-compare-gap" style={badgeColors ?? undefined}>
             {badgeText}
           </span>
+          {betterSide === "right" ? (
+            <span className="cbb-compare-arrow" aria-hidden>
+              ➡
+            </span>
+          ) : null}
         </div>
         {rows.map((row) => (
           <span key={row.key} className={`cbb-compare-label${row.avg ? " avg" : ""}`}>

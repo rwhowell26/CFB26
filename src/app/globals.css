@@ -2549,16 +2549,34 @@ input[type="password"],
 }
 
 .cbb-compare-mid-head {
-  display: grid;
-  place-items: center;
-  padding: 0.35rem 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.12rem;
+  padding: 0.35rem 0.15rem;
+}
+
+.cbb-compare-mid-head.toward-left {
+  justify-content: flex-start;
+}
+
+.cbb-compare-mid-head.toward-right {
+  justify-content: flex-end;
+}
+
+.cbb-compare-arrow {
+  flex: none;
+  color: var(--ink);
+  font-size: 1.55rem;
+  font-weight: 800;
+  line-height: 0.85;
 }
 
 .cbb-compare-gap {
   display: inline-grid;
   place-items: center;
-  min-width: 2.8rem;
-  padding: 0.18rem 0.42rem;
+  min-width: 2.6rem;
+  padding: 0.18rem 0.38rem;
   border-radius: 999px;
   background: color-mix(in srgb, var(--ink) 12%, var(--panel));
   color: var(--ink);
