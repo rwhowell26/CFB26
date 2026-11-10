@@ -111,7 +111,7 @@ test("recommendNewTeams keeps teams within 10 of the last Next 4 Out", () => {
   const metrics = rankedMetrics(["in1", "bubble8", "newClose", "newFar"]);
   metrics.set("bubble8", { ...emptyMetrics("bubble8"), sor: 20, kpi: 20, wab: 20 });
   metrics.set("newClose", { ...emptyMetrics("newClose"), sor: 28, kpi: 28, wab: 28 });
-  metrics.set("newFar", { ...emptyMetrics("newFar"), sor: 5, kpi: 5, wab: 5 });
+  metrics.set("newFar", { ...emptyMetrics("newFar"), sor: 50, kpi: 50, wab: 50 });
   const previous: CbbSnapshot = {
     id: "prev",
     createdAt: "2026-11-01T00:00:00.000Z",
@@ -147,17 +147,17 @@ test("seedWorkingPool prepends last S-curve and appends missing auto-bids", () =
   assert.equal(pool.length, 2);
 });
 
-test("first board seeds by current six-metric average, highest first", () => {
+test("first board seeds by current six-rank average, lowest first", () => {
   const teams = [team("low", "A"), team("high", "B"), team("mid", "C")];
   const metrics = new Map<string, CbbTeamMetrics>([
     ["low", { ...emptyMetrics("low"), kenpom: 4, bpi: 4, torvik: 4, sor: 4, kpi: 4, wab: 4 }],
     ["mid", { ...emptyMetrics("mid"), kenpom: 12, bpi: 12, torvik: 12, sor: 12, kpi: 12, wab: 12 }],
     ["high", { ...emptyMetrics("high"), kenpom: 20, bpi: 20, torvik: 20, sor: 20, kpi: 20, wab: 20 }],
   ]);
-  assert.deepEqual(seedWorkingPool(teams, metrics, null), ["high", "mid", "low"]);
+  assert.deepEqual(seedWorkingPool(teams, metrics, null), ["low", "mid", "high"]);
 });
 
-test("auto-bid is the current highest average in that conference", () => {
+test("auto-bid is the current best (lowest) rank average in that conference", () => {
   const teams = [team("unc", "ACC"), team("duke", "ACC"), team("iowa", "MVC")];
   const metrics = new Map<string, CbbTeamMetrics>([
     ["unc", { ...emptyMetrics("unc"), kenpom: 18 }],
@@ -166,7 +166,7 @@ test("auto-bid is the current highest average in that conference", () => {
   ]);
   const teamsById = new Map(teams.map((item) => [item.id, item]));
   const best = bestTeamByConference(teams, teamsById, metrics);
-  assert.equal(best.get("ACC"), "duke");
+  assert.equal(best.get("ACC"), "unc");
   assert.equal(best.get("MVC"), "iowa");
 });
 
@@ -176,10 +176,10 @@ test("seedWorkingPool injects a conference leader even when the average sits bel
   const teams = [...power, mid];
   const metrics = new Map<string, CbbTeamMetrics>();
   for (const item of power) {
-    const rating = 80 - Number(item.id.slice(1));
-    metrics.set(item.id, { ...emptyMetrics(item.id), kenpom: rating });
+    const rank = Number(item.id.slice(1)) + 1;
+    metrics.set(item.id, { ...emptyMetrics(item.id), kenpom: rank });
   }
-  metrics.set("mid", { ...emptyMetrics("mid"), kenpom: 1 });
+  metrics.set("mid", { ...emptyMetrics("mid"), kenpom: 200 });
   const pool = seedWorkingPool(teams, metrics, null);
   assert.ok(pool.includes("mid"));
   assert.equal(pool.length, 76);

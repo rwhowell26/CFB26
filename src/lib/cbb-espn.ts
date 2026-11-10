@@ -101,7 +101,7 @@ export async function fetchCbbPayload(year = CBB_SEASON_YEAR): Promise<{
   metrics: Record<string, CbbTeamMetrics>;
   conferences: string[];
 }> {
-  return cachedFetch(`cbb-standings-${year}-v2`, 5 * 60 * 1000, async () => {
+  return cachedFetch(`cbb-standings-${year}-v3`, 5 * 60 * 1000, async () => {
     const [data, colors] = await Promise.all([
       getJson<StandingsNode>(`${ESPN_V2}/standings?group=50&season=${year}`),
       fetchTeamColorMap(),

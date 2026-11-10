@@ -16,7 +16,7 @@ function rgb(hex: string): { r: number; g: number; b: number } {
   };
 }
 
-function relativeLuminance(hex: string): number {
+export function relativeLuminance(hex: string): number {
   const toLin = (channel: number) => {
     const c = channel / 255;
     return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
@@ -155,4 +155,55 @@ export function logoAppearance(
       : espnContrastLogo(logoHref, style.backgroundColor, teamId)
     : null;
   return { src, style, markColor };
+}
+
+function contrastRatio(left: string, right: string): number {
+  const a = relativeLuminance(left);
+  const b = relativeLuminance(right);
+  const light = Math.max(a, b);
+  const dark = Math.min(a, b);
+  return (light + 0.05) / (dark + 0.05);
+}
+
+function darkenHex(hex: string, amount: number): string {
+  const { r, g, b } = rgb(hex);
+  const factor = Math.max(0, 1 - amount);
+  const to = (channel: number) =>
+    Math.round(channel * factor)
+      .toString(16)
+      .padStart(2, "0");
+  return `#${to(r)}${to(g)}${to(b)}`;
+}
+
+/** Primary fill + secondary text, darkened until the type stays readable. */
+export function compareColumnColors(
+  color?: string | null,
+  alternateColor?: string | null,
+): { background: string; color: string } {
+  const primary = normalizeHex(color);
+  const secondary = normalizeHex(alternateColor);
+  let background = primary ?? secondary ?? FALLBACK_FILL;
+  while (relativeLuminance(background) > 0.28) {
+    background = darkenHex(background, 0.14);
+  }
+  let text = secondary && secondary.toLowerCase() !== background.toLowerCase() ? secondary : "#f8fafc";
+  if (contrastRatio(background, text) < 4.5) {
+    text = relativeLuminance(background) < 0.45 ? "#f8fafc" : "#0f172a";
+  }
+  return { background, color: text };
+}
+
+export function logoOnFill(
+  logoHref?: string | null,
+  teamId?: string | null,
+  fillHex?: string | null,
+): { src: string | null; markColor: string | null } {
+  const markColor = teamId ? LOGO_TINT[teamId] ?? null : null;
+  const fill = fillHex ?? FALLBACK_FILL;
+  const src = logoHref
+    ? markColor
+      ? lightLogoHref(logoHref)
+      : espnContrastLogo(logoHref, fill, teamId)
+    : null;
+  return { src, markColor };
 }
