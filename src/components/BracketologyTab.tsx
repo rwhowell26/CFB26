@@ -5,6 +5,7 @@ import { TeamLogo } from "@/components/TeamLogo";
 import {
   assignField,
   bestTeamByConference,
+  conferenceInField,
   liveFieldPreview,
   padAboveSlots,
   recommendNewTeams,
@@ -168,6 +169,8 @@ export function BracketologyTab({
     }
 
     const aboveSlots = padAboveSlots(teamsAboveCurrent(draft.rankedIds, question.leftRank));
+    const leftMates = conferenceInField(left.id, assignment, teamsById);
+    const rightMates = conferenceInField(right.id, assignment, teamsById);
 
     return (
       <div className="cbb-bracketology">
@@ -265,7 +268,8 @@ export function BracketologyTab({
               ...spotFromRank(question.rightRank),
               playIn: spotForTeam(right.id, draft.rankedIds, assignment).playIn,
             }}
-            assignment={assignment}
+            leftMates={leftMates}
+            rightMates={rightMates}
             teamsById={teamsById}
             onPickLeft={() => pick(left.id, right.id)}
             onPickRight={() => pick(right.id, left.id)}

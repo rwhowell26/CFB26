@@ -3,7 +3,7 @@ import { test } from "node:test";
 import {
   assignField,
   bestTeamByConference,
-  fieldResultsForTeam,
+  conferenceInField,
   markPlayIn,
   padAboveSlots,
   recommendNewTeams,
@@ -291,38 +291,44 @@ test("padAboveSlots fills empty slots at the top and stays at eight", () => {
   assert.deepEqual(padAboveSlots(["a"], 3), [null, null, "a"]);
 });
 
-test("fieldResultsForTeam keeps wins and losses against the current field", () => {
+test("conferenceInField lists conference-mates already in the 76", () => {
   const conferences = ["ACC", "B1G", "SEC"];
   const teams = [
     team("duke", "ACC"),
     team("unc", "ACC"),
+    team("ncst", "ACC"),
     team("purdue", "B1G"),
     team("kentucky", "SEC"),
-    team("wake", "ACC"),
   ];
   const teamsById = new Map(teams.map((item) => [item.id, item]));
-  const assignment = assignField(
-    ["duke", "unc", "purdue", "kentucky"],
+  const best = new Map([
+    ["ACC", "duke"],
+    ["B1G", "purdue"],
+    ["SEC", "kentucky"],
+  ]);
+  const result = assignField(
+    ["duke", "unc", "purdue", "kentucky", "ncst"],
     teamsById,
     conferences,
-    new Map([
-      ["ACC", "duke"],
-      ["B1G", "purdue"],
-      ["SEC", "kentucky"],
-    ]),
-    4,
+    best,
+    5,
   );
-  const games = [
-    { id: "1", homeTeamId: "duke", awayTeamId: "unc", winnerId: "duke", status: "final" as const },
-    { id: "2", homeTeamId: "duke", awayTeamId: "purdue", winnerId: "purdue", status: "final" as const },
-    { id: "3", homeTeamId: "duke", awayTeamId: "wake", winnerId: "duke", status: "final" as const },
-    { id: "4", homeTeamId: "duke", awayTeamId: "kentucky", winnerId: null, status: "scheduled" as const },
-  ];
-  const results = fieldResultsForTeam("duke", games, assignment);
+
+  const acc = conferenceInField("unc", result, teamsById);
   assert.deepEqual(
-    results.map((row) => `${row.result}:${row.opponentId}`),
-    ["W:unc", "L:purdue"],
+    acc.map((row) => row.teamId),
+    ["duke", "unc", "ncst"],
   );
+  assert.ok(acc.every((row) => teamsById.get(row.teamId)?.conference === "ACC"));
+
+  const bigTen = conferenceInField("purdue", result, teamsById);
+  assert.deepEqual(
+    bigTen.map((row) => row.teamId),
+    ["purdue"],
+  );
+  assert.equal(bigTen[0]?.role, "auto-bid");
+
+  assert.deepEqual(conferenceInField("missing", result, teamsById), []);
 });
 
 test("spotFromRank shows seed and play-in as the seed list is built", () => {

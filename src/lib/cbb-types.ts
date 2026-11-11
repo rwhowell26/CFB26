@@ -5,22 +5,6 @@ export type CbbTeam = Team & {
   losses: number;
 };
 
-export type CbbPlayedGame = {
-  id: string;
-  homeTeamId: string;
-  awayTeamId: string;
-  winnerId: string | null;
-  status: "scheduled" | "in_progress" | "final";
-};
-
-export type CbbFieldResult = {
-  opponentId: string;
-  result: "W" | "L";
-  seed: number;
-  rank: number;
-  playIn: boolean;
-};
-
 export type QuadRecord = {
   wins: number;
   losses: number;
