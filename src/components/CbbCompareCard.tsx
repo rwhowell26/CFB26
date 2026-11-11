@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { TeamLogo } from "@/components/TeamLogo";
+import { fieldResultsForTeam, spotLabel, type FieldAssignment } from "@/lib/cbb-bracket";
 import {
   formatQuad,
   formatRank,
@@ -12,8 +14,13 @@ import {
   resumeAverage,
 } from "@/lib/cbb-metrics";
 import { compareColumnColors } from "@/lib/team-colors";
-import type { CbbTeam, CbbTeamMetrics, CbbTeamSpot } from "@/lib/cbb-types";
-import { spotLabel } from "@/lib/cbb-bracket";
+import type {
+  CbbFieldResult,
+  CbbPlayedGame,
+  CbbTeam,
+  CbbTeamMetrics,
+  CbbTeamSpot,
+} from "@/lib/cbb-types";
 
 type Props = {
   left: CbbTeam;
@@ -24,6 +31,8 @@ type Props = {
   rightRole: string;
   leftSpot: CbbTeamSpot;
   rightSpot: CbbTeamSpot;
+  assignment: FieldAssignment;
+  teamsById: Map<string, CbbTeam>;
   onPickLeft: () => void;
   onPickRight: () => void;
 };
@@ -42,6 +51,43 @@ function sideClass(self: number | null, other: number | null): string {
   return advantage > 0 ? " better" : " worse";
 }
 
+function ResumeFieldList({
+  results,
+  teamsById,
+}: {
+  results: CbbFieldResult[];
+  teamsById: Map<string, CbbTeam>;
+}) {
+  const wins = results.filter((row) => row.result === "W").length;
+  const losses = results.length - wins;
+  return (
+    <div className="cbb-resume-field">
+      <p>vs field · {wins}-{losses}</p>
+      {results.length ? (
+        <ol>
+          {results.map((row) => {
+            const opponent = teamsById.get(row.opponentId);
+            if (!opponent) return null;
+            return (
+              <li key={row.opponentId} className={row.result === "W" ? "win" : "loss"}>
+                <em>{row.result}</em>
+                <span>{row.seed}</span>
+                <TeamLogo team={opponent} />
+                <strong>
+                  {opponent.shortName}
+                  {row.playIn ? " PI" : ""}
+                </strong>
+              </li>
+            );
+          })}
+        </ol>
+      ) : (
+        <p className="cbb-resume-empty">No field games yet</p>
+      )}
+    </div>
+  );
+}
+
 export function CbbCompareCard({
   left,
   right,
@@ -51,9 +97,12 @@ export function CbbCompareCard({
   rightRole,
   leftSpot,
   rightSpot,
+  assignment,
+  teamsById,
   onPickLeft,
   onPickRight,
 }: Props) {
+  const [games, setGames] = useState<CbbPlayedGame[]>([]);
   const leftColors = compareColumnColors(left.color, left.alternateColor);
   const rightColors = compareColumnColors(right.color, right.alternateColor);
   const leftOverall = overallAverage(leftMetrics);
@@ -63,6 +112,24 @@ export function CbbCompareCard({
     leftAdv == null || Math.abs(leftAdv) < 0.05 ? null : leftAdv > 0 ? "left" : "right";
   const badgeColors = betterSide === "left" ? leftColors : betterSide === "right" ? rightColors : null;
   const badgeText = formatRankAdvantage(leftAdv == null ? null : Math.abs(leftAdv) < 0.05 ? 0 : Math.abs(leftAdv));
+  const leftResume = fieldResultsForTeam(left.id, games, assignment);
+  const rightResume = fieldResultsForTeam(right.id, games, assignment);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setGames([]);
+    fetch(`/api/cbb/schedule?ids=${encodeURIComponent(`${left.id},${right.id}`)}`, {
+      cache: "no-store",
+      signal: controller.signal,
+    })
+      .then((res) => res.json() as Promise<{ games?: CbbPlayedGame[] }>)
+      .then((json) => setGames(json.games ?? []))
+      .catch((err: unknown) => {
+        if (err instanceof DOMException && err.name === "AbortError") return;
+        setGames([]);
+      });
+    return () => controller.abort();
+  }, [left.id, right.id]);
 
   const rows: MetricRow[] = [
     { key: "overall", label: "Overall", left: leftOverall, right: rightOverall, avg: true },
@@ -97,6 +164,7 @@ export function CbbCompareCard({
           <TeamLogo team={left} className="lg" onFill={leftColors.background} />
           <strong>{left.shortName}</strong>
           <p>{formatRecord(left.wins, left.losses)}</p>
+          <ResumeFieldList results={leftResume} teamsById={teamsById} />
         </header>
         <span className="cbb-compare-val-spacer" aria-hidden>
           &nbsp;
@@ -164,6 +232,7 @@ export function CbbCompareCard({
           <TeamLogo team={right} className="lg" onFill={rightColors.background} />
           <strong>{right.shortName}</strong>
           <p>{formatRecord(right.wins, right.losses)}</p>
+          <ResumeFieldList results={rightResume} teamsById={teamsById} />
         </header>
         <span className="cbb-compare-val-spacer" aria-hidden>
           &nbsp;

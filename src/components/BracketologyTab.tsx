@@ -6,15 +6,17 @@ import {
   assignField,
   bestTeamByConference,
   liveFieldPreview,
+  padAboveSlots,
   recommendNewTeams,
   seedWorkingPool,
   snapshotFromAssignment,
   spotForTeam,
   spotFromRank,
   spotLabel,
+  teamsAboveCurrent,
 } from "@/lib/cbb-bracket";
 import { emptyMetrics, formatRecord, overallAverage, formatRank } from "@/lib/cbb-metrics";
-import { FIELD_SIZE, FIRST_FOUR_OUT, PLAY_IN_TEAMS, formatCbbDate } from "@/lib/cbb-season";
+import { COMPLETED_ABOVE, FIELD_SIZE, FIRST_FOUR_OUT, PLAY_IN_TEAMS, formatCbbDate } from "@/lib/cbb-season";
 import {
   applyScrubChoice,
   emptyDraft,
@@ -165,24 +167,23 @@ export function BracketologyTab({
       );
     }
 
+    const aboveSlots = padAboveSlots(teamsAboveCurrent(draft.rankedIds, question.leftRank));
+
     return (
       <div className="cbb-bracketology">
         <section className="panel cbb-scrub-bar">
           <header className="panel-header">
             <p className="eyebrow">
-              Bracketology ·{" "}
               {question.phase === "recommend"
-                ? "recommended climb"
+                ? "Recommended climb"
                 : `${spotLabel(spotFromRank(question.leftRank))} #${question.leftRank} vs ${spotLabel(spotFromRank(question.rightRank))} #${question.rightRank}`}
             </p>
-            <h2>Who belongs higher?</h2>
             <p>
               {question.phase === "recommend"
-                ? `${remaining} recommended team${remaining === 1 ? "" : "s"} left to place`
+                ? `${remaining} recommended team${remaining === 1 ? "" : "s"} left`
                 : `${remaining} pair${remaining === 1 ? "" : "s"} left`}
               {" · "}
               {preview.atLarge} at-large / {preview.autoBids} auto
-              {preview.reserved ? ` · ${preview.reserved} reserved` : ""}
               {" · "}
               {assignment.field.filter((row) => row.playIn).length}/{PLAY_IN_TEAMS} play-in
             </p>
@@ -217,24 +218,59 @@ export function BracketologyTab({
             </button>
           </div>
         </section>
-        <CbbCompareCard
-          left={left}
-          right={right}
-          leftMetrics={leftMetrics}
-          rightMetrics={rightMetrics}
-          leftRole={question.phase === "recommend" ? "Team above" : "Currently higher"}
-          rightRole={question.phase === "recommend" ? "Climbing" : "Currently lower"}
-          leftSpot={{
-            ...spotFromRank(question.leftRank),
-            playIn: spotForTeam(left.id, draft.rankedIds, assignment).playIn,
-          }}
-          rightSpot={{
-            ...spotFromRank(question.rightRank),
-            playIn: spotForTeam(right.id, draft.rankedIds, assignment).playIn,
-          }}
-          onPickLeft={() => pick(left.id, right.id)}
-          onPickRight={() => pick(right.id, left.id)}
-        />
+        <div className="cbb-scrub-stage">
+          <aside className="cbb-completed-rail" aria-label="Completed spots above">
+            <h3>
+              Above
+              <span>
+                {Math.min(COMPLETED_ABOVE, Math.max(0, question.leftRank - 1))} / {COMPLETED_ABOVE}
+              </span>
+            </h3>
+            <ol>
+              {aboveSlots.map((id, index) => {
+                if (!id) {
+                  return <li key={`empty-${index}`} className="cbb-scurve-row is-empty" />;
+                }
+                const team = teamsById.get(id);
+                if (!team) return <li key={id} className="cbb-scurve-row is-empty" />;
+                const rank = draft.rankedIds.indexOf(id) + 1;
+                const row = assignment.field.find((item) => item.teamId === id);
+                const spot = spotFromRank(rank);
+                return (
+                  <TeamRow
+                    key={id}
+                    team={team}
+                    rank={rank}
+                    seed={row?.seed ?? spot.seed ?? undefined}
+                    role={row?.role}
+                    playIn={row?.playIn ?? spot.playIn}
+                    metrics={metricsFor(metrics, id)}
+                  />
+                );
+              })}
+            </ol>
+          </aside>
+          <CbbCompareCard
+            left={left}
+            right={right}
+            leftMetrics={leftMetrics}
+            rightMetrics={rightMetrics}
+            leftRole={question.phase === "recommend" ? "Team above" : "Currently higher"}
+            rightRole={question.phase === "recommend" ? "Climbing" : "Currently lower"}
+            leftSpot={{
+              ...spotFromRank(question.leftRank),
+              playIn: spotForTeam(left.id, draft.rankedIds, assignment).playIn,
+            }}
+            rightSpot={{
+              ...spotFromRank(question.rightRank),
+              playIn: spotForTeam(right.id, draft.rankedIds, assignment).playIn,
+            }}
+            assignment={assignment}
+            teamsById={teamsById}
+            onPickLeft={() => pick(left.id, right.id)}
+            onPickRight={() => pick(right.id, left.id)}
+          />
+        </div>
       </div>
     );
   }

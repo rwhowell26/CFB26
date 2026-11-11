@@ -7,6 +7,7 @@ import {
 } from "./cbb-metrics";
 import { formatCbbDate } from "./cbb-season";
 import {
+  COMPLETED_ABOVE,
   FIELD_SIZE,
   FIRST_FOUR_OUT,
   LOCK_SIZE,
@@ -17,7 +18,9 @@ import {
   RECOMMEND_WITHIN,
 } from "./cbb-season";
 import type {
+  CbbFieldResult,
   CbbFieldTeam,
+  CbbPlayedGame,
   CbbScrubBand,
   CbbSnapshot,
   CbbTeam,
@@ -273,6 +276,52 @@ export function spotForTeam(
     };
   }
   return spotFromRank(rank);
+}
+
+/** Seed-list teams immediately above the current pair, newest/closest last. */
+export function teamsAboveCurrent(
+  rankedIds: string[],
+  leftRank: number,
+  count = COMPLETED_ABOVE,
+): string[] {
+  const end = Math.max(0, leftRank - 1);
+  const start = Math.max(0, end - count);
+  return rankedIds.slice(start, end);
+}
+
+export function padAboveSlots(ids: string[], count = COMPLETED_ABOVE): Array<string | null> {
+  const trimmed = ids.slice(-count);
+  const pad = Math.max(0, count - trimmed.length);
+  return [...Array.from({ length: pad }, () => null), ...trimmed];
+}
+
+/** Final results against opponents currently in the 76-team field. */
+export function fieldResultsForTeam(
+  teamId: string,
+  games: CbbPlayedGame[],
+  assignment: FieldAssignment,
+): CbbFieldResult[] {
+  const inField = new Map(assignment.field.map((row) => [row.teamId, row]));
+  const byOpponent = new Map<string, CbbFieldResult>();
+  for (const game of games) {
+    if (game.status !== "final" || !game.winnerId) continue;
+    const opponentId =
+      game.homeTeamId === teamId ? game.awayTeamId : game.awayTeamId === teamId ? game.homeTeamId : null;
+    if (!opponentId || opponentId === teamId) continue;
+    const row = inField.get(opponentId);
+    if (!row) continue;
+    byOpponent.set(opponentId, {
+      opponentId,
+      result: game.winnerId === teamId ? "W" : "L",
+      seed: row.seed,
+      rank: row.sCurveIndex + 1,
+      playIn: row.playIn,
+    });
+  }
+  return [...byOpponent.values()].sort((left, right) => {
+    if (left.result !== right.result) return left.result === "W" ? -1 : 1;
+    return left.seed - right.seed || left.rank - right.rank;
+  });
 }
 
 export function previousConsideredIds(snapshot: CbbSnapshot | null): Set<string> {
