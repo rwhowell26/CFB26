@@ -8,6 +8,8 @@ import {
   padAboveSlots,
   recommendNewTeams,
   seedForFieldIndex,
+  seedLinePlayInGames,
+  seedLinePlayInTeams,
   seedLineSize,
   seedWorkingPool,
   spotFromRank,
@@ -18,9 +20,9 @@ import { emptyMetrics } from "./cbb-metrics";
 import {
   COMPLETED_ABOVE,
   FIELD_SIZE,
-  PLAY_IN_AT_LARGE_TEAMS,
+  PLAY_IN_GAMES,
   PLAY_IN_TEAMS,
-  PLAY_IN_16_TEAMS,
+  SEED_LINE_SPOTS,
 } from "./cbb-season";
 import type { CbbFieldTeam, CbbSnapshot, CbbTeam, CbbTeamMetrics } from "./cbb-types";
 
@@ -200,20 +202,40 @@ test("seedWorkingPool injects a conference leader even when the average sits bel
   assert.equal(pool[0], "p0");
 });
 
-test("play-in seeds 11 and 16 hold ten teams in a 76-team field", () => {
+test("seed lines list four First Round spots and even play-in pairs", () => {
   const seeds = Array.from({ length: FIELD_SIZE }, (_, i) => seedForFieldIndex(i));
-  assert.equal(seeds.filter((seed) => seed === 11).length, 10);
-  assert.equal(seeds.filter((seed) => seed === 16).length, 10);
-  assert.equal(seeds.filter((seed) => seed === 1).length, 4);
-  assert.equal(seeds.filter((seed) => seed === 12).length, 4);
+  const counts = new Map<number, number>();
+  for (const seed of seeds) counts.set(seed, (counts.get(seed) ?? 0) + 1);
+
+  assert.equal(counts.get(1), SEED_LINE_SPOTS);
+  assert.equal(counts.get(11), 8);
+  assert.equal(counts.get(12), 6);
+  assert.equal(counts.get(13), SEED_LINE_SPOTS);
+  assert.equal(counts.get(15), 6);
+  assert.equal(counts.get(16), 8);
   assert.equal(seeds.length, FIELD_SIZE);
   assert.equal(
     Array.from({ length: 16 }, (_, i) => seedLineSize(i + 1)).reduce((sum, size) => sum + size, 0),
     FIELD_SIZE,
   );
+  assert.equal(
+    Array.from({ length: 16 }, (_, i) => seedLinePlayInGames(i + 1)).reduce((sum, n) => sum + n, 0),
+    PLAY_IN_GAMES,
+  );
+  assert.equal(
+    Array.from({ length: 16 }, (_, i) => seedLinePlayInTeams(i + 1)).reduce((sum, n) => sum + n, 0),
+    PLAY_IN_TEAMS,
+  );
+
+  for (let seed = 1; seed <= 16; seed++) {
+    const listed = seedLineSize(seed);
+    const playIn = seedLinePlayInTeams(seed);
+    assert.equal(playIn % 2, 0, `${seed}-line play-in count must be even`);
+    assert.equal(listed - playIn / 2, SEED_LINE_SPOTS, `${seed}-line must collapse to four spots`);
+  }
 });
 
-test("76-team field marks 16 play-in teams: eight 16-seeds and eight last at-larges", () => {
+test("76-team field marks 24 Opening Round teams in even seed-line pairs", () => {
   const conferences = Array.from({ length: 32 }, (_, i) => `C${i}`);
   const power = Array.from({ length: 50 }, (_, i) => team(`p${i}`, "C0"));
   const autos = conferences.slice(1).map((conf) => team(`${conf}-best`, conf, 8, 8));
@@ -229,15 +251,21 @@ test("76-team field marks 16 play-in teams: eight 16-seeds and eight last at-lar
 
   const playIn = result.field.filter((row) => row.playIn);
   assert.equal(playIn.length, PLAY_IN_TEAMS);
-  assert.equal(playIn.filter((row) => row.seed === 16).length, PLAY_IN_16_TEAMS);
-  assert.equal(playIn.filter((row) => row.role === "at-large").length, PLAY_IN_AT_LARGE_TEAMS);
-  assert.equal(
-    playIn.filter((row) => row.seed === 16).length + playIn.filter((row) => row.role === "at-large").length,
-    PLAY_IN_TEAMS,
-  );
+  assert.equal(playIn.filter((row) => row.seed === 11).length, 8);
+  assert.equal(playIn.filter((row) => row.seed === 12).length, 4);
+  assert.equal(playIn.filter((row) => row.seed === 13).length, 0);
+  assert.equal(playIn.filter((row) => row.seed === 15).length, 4);
+  assert.equal(playIn.filter((row) => row.seed === 16).length, 8);
+
+  for (let seed = 1; seed <= 16; seed++) {
+    const rows = result.field.filter((row) => row.seed === seed);
+    const marked = rows.filter((row) => row.playIn);
+    assert.equal(marked.length, seedLinePlayInTeams(seed));
+    assert.equal(rows.length - marked.length / 2, SEED_LINE_SPOTS);
+  }
 });
 
-test("markPlayIn keeps 16-seed games and last at-larges from overlapping", () => {
+test("markPlayIn never leaves a lone play-in on a seed line", () => {
   const field: CbbFieldTeam[] = Array.from({ length: FIELD_SIZE }, (_, index) => ({
     teamId: `t${index}`,
     role: index >= 32 ? "at-large" : "auto-bid",
@@ -248,14 +276,12 @@ test("markPlayIn keeps 16-seed games and last at-larges from overlapping", () =>
   const marked = markPlayIn(field);
   const playIn = marked.filter((row) => row.playIn);
   assert.equal(playIn.length, PLAY_IN_TEAMS);
-  assert.equal(playIn.filter((row) => row.seed === 16).length, PLAY_IN_16_TEAMS);
-  assert.equal(playIn.filter((row) => row.role === "at-large" && row.seed !== 16).length, PLAY_IN_AT_LARGE_TEAMS);
-  const lastAtLarge = field
-    .filter((row) => row.role === "at-large" && row.seed !== 16)
-    .slice(-PLAY_IN_AT_LARGE_TEAMS);
-  for (const row of lastAtLarge) {
-    assert.equal(marked.find((item) => item.teamId === row.teamId)?.playIn, true);
+  for (let seed = 1; seed <= 16; seed++) {
+    const count = playIn.filter((row) => row.seed === seed).length;
+    assert.equal(count, seedLinePlayInTeams(seed));
+    assert.equal(count % 2, 0);
   }
+  assert.equal(playIn.filter((row) => row.seed === 13).length, 0);
 });
 
 test("teamsAboveCurrent is empty at the first pair", () => {
@@ -330,14 +356,21 @@ test("spotFromRank shows seed and play-in as the seed list is built", () => {
   assert.deepEqual(spotFromRank(4), { rank: 4, seed: 1, playIn: false, band: "field" });
   assert.deepEqual(spotFromRank(5), { rank: 5, seed: 2, playIn: false, band: "field" });
   assert.equal(spotFromRank(41).seed, 11);
-  assert.equal(spotFromRank(41).playIn, false);
-  assert.equal(spotFromRank(43).seed, 11);
-  assert.equal(spotFromRank(43).playIn, true);
-  assert.equal(spotFromRank(67).seed, 16);
-  assert.equal(spotFromRank(67).playIn, false);
+  assert.equal(spotFromRank(41).playIn, true);
+  assert.equal(spotFromRank(48).seed, 11);
+  assert.equal(spotFromRank(48).playIn, true);
+  assert.equal(spotFromRank(49).seed, 12);
+  assert.equal(spotFromRank(49).playIn, false);
+  assert.equal(spotFromRank(51).seed, 12);
+  assert.equal(spotFromRank(51).playIn, true);
+  assert.equal(spotFromRank(63).seed, 15);
+  assert.equal(spotFromRank(63).playIn, false);
+  assert.equal(spotFromRank(65).seed, 15);
+  assert.equal(spotFromRank(65).playIn, true);
   assert.equal(spotFromRank(69).seed, 16);
   assert.equal(spotFromRank(69).playIn, true);
   assert.equal(spotFromRank(76).seed, 16);
+  assert.equal(spotFromRank(76).playIn, true);
   assert.equal(spotFromRank(77).band, "first-four-out");
   assert.equal(spotFromRank(81).band, "next-four-out");
   assert.equal(spotLabel(spotFromRank(1)), "1-seed");

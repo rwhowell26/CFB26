@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { BracketologyTab } from "@/components/BracketologyTab";
-import { CBB_SEASON_LABEL, CBB_SEASON_YEAR, FIELD_SIZE, PLAY_IN_TEAMS } from "@/lib/cbb-season";
+import { CBB_SEASON_LABEL, CBB_SEASON_YEAR, FIELD_SIZE, PLAY_IN_GAMES, PLAY_IN_TEAMS } from "@/lib/cbb-season";
 import { emptyMetrics } from "@/lib/cbb-metrics";
 import {
   hydrateCbbStoreFromLocalStorage,
@@ -115,7 +115,8 @@ export function BasketballApp() {
           <h1>Bracketology</h1>
           <p className="tagline">
             {CBB_SEASON_LABEL} · {teams.length} D1 teams · {conferences.length} auto-bids ·{" "}
-            {Math.max(0, FIELD_SIZE - conferences.length)} at-large · {PLAY_IN_TEAMS} play-in
+            {Math.max(0, FIELD_SIZE - conferences.length)} at-large · {PLAY_IN_TEAMS} play-in · {PLAY_IN_GAMES}{" "}
+            Opening Round games
             {latest ? ` · last saved ${latest.label}` : ""}
           </p>
         </div>

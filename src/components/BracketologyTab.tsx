@@ -16,7 +16,15 @@ import {
   teamsAboveCurrent,
 } from "@/lib/cbb-bracket";
 import { emptyMetrics, formatRecord, overallAverage, formatRank } from "@/lib/cbb-metrics";
-import { COMPLETED_ABOVE, FIELD_SIZE, FIRST_FOUR_OUT, PLAY_IN_TEAMS, formatCbbDate } from "@/lib/cbb-season";
+import {
+  COMPLETED_ABOVE,
+  FIELD_SIZE,
+  FIRST_FOUR_OUT,
+  PLAY_IN_GAMES,
+  PLAY_IN_TEAMS,
+  SEED_LINE_SPOTS,
+  formatCbbDate,
+} from "@/lib/cbb-season";
 import {
   applyScrubChoice,
   emptyDraft,
@@ -144,8 +152,8 @@ export function BracketologyTab({
               <p>
                 {assignment.field.length} in the field · {assignment.atLargeIds.length} at-large ·{" "}
                 {Object.keys(assignment.autoBidByConference).length} auto-bids ·{" "}
-                {assignment.field.filter((row) => row.playIn).length} play-in. First 4 out and next 4
-                out are listed below.
+                {assignment.field.filter((row) => row.playIn).length} play-in · {PLAY_IN_GAMES} Opening
+                Round games. First 4 out and next 4 out are listed below.
               </p>
             </header>
             <div className="build-actions">
@@ -185,7 +193,8 @@ export function BracketologyTab({
               {" · "}
               {preview.atLarge} at-large / {preview.autoBids} auto
               {" · "}
-              {assignment.field.filter((row) => row.playIn).length}/{PLAY_IN_TEAMS} play-in
+              {assignment.field.filter((row) => row.playIn).length}/{PLAY_IN_TEAMS} play-in · {PLAY_IN_GAMES}{" "}
+              Opening Round games
             </p>
           </header>
           <div className="build-actions">
@@ -343,7 +352,8 @@ function SavedProjection({
       <p className="cbb-saved-meta">
         Saved {formatCbbDate(snapshot.createdAt)} · {assignment.field.length}/{FIELD_SIZE} field ·{" "}
         {assignment.atLargeIds.length} at-large · {Object.keys(assignment.autoBidByConference).length}{" "}
-        auto-bids · {assignment.field.filter((row) => row.playIn).length}/{PLAY_IN_TEAMS} play-in
+        auto-bids · {assignment.field.filter((row) => row.playIn).length}/{PLAY_IN_TEAMS} play-in · {PLAY_IN_GAMES}{" "}
+        Opening Round games
       </p>
       <ProjectionLists
         assignment={assignment}
@@ -400,7 +410,7 @@ function ProjectionLists({
               {rows.some((row) => row.playIn) ? (
                 <span className="cbb-seed-count">
                   {" "}
-                  · {rows.filter((row) => row.playIn).length} play-in
+                  · {rows.filter((row) => row.playIn).length} play-in · {SEED_LINE_SPOTS} spots
                 </span>
               ) : null}
             </h3>
