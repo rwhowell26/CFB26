@@ -18,7 +18,9 @@ import {
   RECOMMEND_WITHIN,
 } from "./cbb-season";
 import type {
+  CbbFieldResult,
   CbbFieldTeam,
+  CbbPlayedGame,
   CbbScrubBand,
   CbbSnapshot,
   CbbTeam,
@@ -293,15 +295,33 @@ export function padAboveSlots(ids: string[], count = COMPLETED_ABOVE): Array<str
   return [...Array.from({ length: pad }, () => null), ...trimmed];
 }
 
-/** Every team from this conference already in the 76, including the compared team. */
-export function conferenceInField(
+/** Final results against opponents currently in the 76-team field. */
+export function fieldResultsForTeam(
   teamId: string,
+  games: CbbPlayedGame[],
   assignment: FieldAssignment,
-  teamsById: Map<string, CbbTeam>,
-): CbbFieldTeam[] {
-  const conference = teamsById.get(teamId)?.conference;
-  if (!conference) return [];
-  return assignment.field.filter((row) => teamsById.get(row.teamId)?.conference === conference);
+): CbbFieldResult[] {
+  const inField = new Map(assignment.field.map((row) => [row.teamId, row]));
+  const byOpponent = new Map<string, CbbFieldResult>();
+  for (const game of games) {
+    if (game.status !== "final" || !game.winnerId) continue;
+    const opponentId =
+      game.homeTeamId === teamId ? game.awayTeamId : game.awayTeamId === teamId ? game.homeTeamId : null;
+    if (!opponentId || opponentId === teamId) continue;
+    const row = inField.get(opponentId);
+    if (!row) continue;
+    byOpponent.set(opponentId, {
+      opponentId,
+      result: game.winnerId === teamId ? "W" : "L",
+      seed: row.seed,
+      rank: row.sCurveIndex + 1,
+      playIn: row.playIn,
+    });
+  }
+  return [...byOpponent.values()].sort((left, right) => {
+    if (left.result !== right.result) return left.result === "W" ? -1 : 1;
+    return left.seed - right.seed || left.rank - right.rank;
+  });
 }
 
 export function previousConsideredIds(snapshot: CbbSnapshot | null): Set<string> {

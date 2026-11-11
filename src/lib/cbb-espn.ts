@@ -2,7 +2,7 @@ import { normalizeHex } from "./team-colors";
 import { CBB_SEASON_YEAR } from "./cbb-season";
 import { fetchCbbMetrics } from "./cbb-feeds";
 import { emptyMetrics } from "./cbb-metrics";
-import type { CbbTeam, CbbTeamMetrics } from "./cbb-types";
+import type { CbbPlayedGame, CbbTeam, CbbTeamMetrics } from "./cbb-types";
 
 const ESPN_SITE = "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball";
 const ESPN_V2 = "https://site.api.espn.com/apis/v2/sports/basketball/mens-college-basketball";
@@ -152,4 +152,93 @@ export async function fetchCbbPayload(year = CBB_SEASON_YEAR): Promise<{
       conferences: [...new Set(conferences)],
     };
   });
+}
+
+function competitorScore(score: unknown): number | null {
+  if (score == null || score === "") return null;
+  if (typeof score === "number" && Number.isFinite(score)) return score;
+  if (typeof score === "string") {
+    const n = Number(score);
+    return Number.isFinite(n) ? n : null;
+  }
+  if (typeof score === "object" && score && "value" in score) {
+    const n = Number((score as { value?: unknown }).value);
+    return Number.isFinite(n) ? n : null;
+  }
+  return null;
+}
+
+function mapCbbStatus(
+  name?: string,
+  state?: string,
+  completed?: boolean,
+): CbbPlayedGame["status"] {
+  if (completed || name === "STATUS_FINAL" || state === "post") return "final";
+  if (state === "in" || name === "STATUS_IN_PROGRESS") return "in_progress";
+  return "scheduled";
+}
+
+async function fetchOneCbbSchedule(teamId: string, year: number): Promise<CbbPlayedGame[]> {
+  return cachedFetch(`cbb-schedule-${year}-${teamId}`, 5 * 60 * 1000, async () => {
+    const data = await getJson<{
+      events?: Array<{
+        id?: string;
+        competitions?: Array<{
+          id?: string;
+          status?: { type?: { name?: string; state?: string; completed?: boolean } };
+          competitors?: Array<{
+            homeAway?: string;
+            winner?: boolean;
+            score?: unknown;
+            team?: { id?: string };
+          }>;
+        }>;
+      }>;
+    }>(`${ESPN_SITE}/teams/${teamId}/schedule?season=${year}`);
+
+    const games: CbbPlayedGame[] = [];
+    for (const event of data.events ?? []) {
+      const competition = event.competitions?.[0];
+      const competitors = competition?.competitors ?? [];
+      const home = competitors.find((row) => row.homeAway === "home");
+      const away = competitors.find((row) => row.homeAway === "away");
+      if (!home?.team?.id || !away?.team?.id) continue;
+      const status = mapCbbStatus(
+        competition?.status?.type?.name,
+        competition?.status?.type?.state,
+        competition?.status?.type?.completed,
+      );
+      const homeId = String(home.team.id);
+      const awayId = String(away.team.id);
+      let winnerId: string | null = null;
+      if (home.winner) winnerId = homeId;
+      else if (away.winner) winnerId = awayId;
+      else if (status === "final") {
+        const homeScore = competitorScore(home.score);
+        const awayScore = competitorScore(away.score);
+        if (homeScore != null && awayScore != null && homeScore !== awayScore) {
+          winnerId = homeScore > awayScore ? homeId : awayId;
+        }
+      }
+      games.push({
+        id: String(competition?.id || event.id),
+        homeTeamId: homeId,
+        awayTeamId: awayId,
+        winnerId,
+        status,
+      });
+    }
+    return games;
+  });
+}
+
+export async function fetchCbbSchedules(
+  teamIds: string[],
+  year = CBB_SEASON_YEAR,
+): Promise<CbbPlayedGame[]> {
+  const unique = [...new Set(teamIds.filter(Boolean))].slice(0, 4);
+  const lists = await Promise.all(unique.map((id) => fetchOneCbbSchedule(id, year)));
+  const byId = new Map<string, CbbPlayedGame>();
+  for (const game of lists.flat()) byId.set(game.id, game);
+  return [...byId.values()];
 }

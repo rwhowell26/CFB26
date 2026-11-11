@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { TeamLogo } from "@/components/TeamLogo";
+import { fieldResultsForTeam, spotLabel, type FieldAssignment } from "@/lib/cbb-bracket";
 import {
   formatQuad,
   formatRank,
@@ -12,9 +14,13 @@ import {
   resumeAverage,
 } from "@/lib/cbb-metrics";
 import { compareColumnColors } from "@/lib/team-colors";
-import { shortCbbConference } from "@/lib/cbb-conferences";
-import type { CbbFieldTeam, CbbTeam, CbbTeamMetrics, CbbTeamSpot } from "@/lib/cbb-types";
-import { spotLabel } from "@/lib/cbb-bracket";
+import type {
+  CbbFieldResult,
+  CbbPlayedGame,
+  CbbTeam,
+  CbbTeamMetrics,
+  CbbTeamSpot,
+} from "@/lib/cbb-types";
 
 type Props = {
   left: CbbTeam;
@@ -25,8 +31,7 @@ type Props = {
   rightRole: string;
   leftSpot: CbbTeamSpot;
   rightSpot: CbbTeamSpot;
-  leftMates: CbbFieldTeam[];
-  rightMates: CbbFieldTeam[];
+  assignment: FieldAssignment;
   teamsById: Map<string, CbbTeam>;
   onPickLeft: () => void;
   onPickRight: () => void;
@@ -46,41 +51,38 @@ function sideClass(self: number | null, other: number | null): string {
   return advantage > 0 ? " better" : " worse";
 }
 
-function ContentionList({
-  team,
-  mates,
+function ResumeFieldList({
+  results,
   teamsById,
-  align,
 }: {
-  team: CbbTeam;
-  mates: CbbFieldTeam[];
+  results: CbbFieldResult[];
   teamsById: Map<string, CbbTeam>;
-  align: "left" | "right";
 }) {
-  const conf = shortCbbConference(team.conference);
+  const wins = results.filter((row) => row.result === "W").length;
+  const losses = results.length - wins;
   return (
-    <div className={`cbb-contention-col ${align}`}>
-      <p>
-        {conf} · {mates.length} in
-      </p>
-      {mates.length ? (
+    <div className="cbb-resume-field">
+      <p>vs field · {wins}-{losses}</p>
+      {results.length ? (
         <ol>
-          {mates.map((row) => {
-            const mate = teamsById.get(row.teamId);
-            if (!mate) return null;
-            const current = mate.id === team.id;
+          {results.map((row) => {
+            const opponent = teamsById.get(row.opponentId);
+            if (!opponent) return null;
             return (
-              <li key={row.teamId} className={current ? "is-current" : undefined}>
+              <li key={row.opponentId} className={row.result === "W" ? "win" : "loss"}>
+                <em>{row.result}</em>
                 <span>{row.seed}</span>
-                <TeamLogo team={mate} />
-                <strong>{mate.shortName}</strong>
-                <em>{row.role === "auto-bid" ? "AQ" : "AL"}</em>
+                <TeamLogo team={opponent} />
+                <strong>
+                  {opponent.shortName}
+                  {row.playIn ? " PI" : ""}
+                </strong>
               </li>
             );
           })}
         </ol>
       ) : (
-        <p className="cbb-contention-empty">None in yet</p>
+        <p className="cbb-resume-empty">No field games yet</p>
       )}
     </div>
   );
@@ -95,12 +97,12 @@ export function CbbCompareCard({
   rightRole,
   leftSpot,
   rightSpot,
-  leftMates,
-  rightMates,
+  assignment,
   teamsById,
   onPickLeft,
   onPickRight,
 }: Props) {
+  const [games, setGames] = useState<CbbPlayedGame[]>([]);
   const leftColors = compareColumnColors(left.color, left.alternateColor);
   const rightColors = compareColumnColors(right.color, right.alternateColor);
   const leftOverall = overallAverage(leftMetrics);
@@ -110,6 +112,24 @@ export function CbbCompareCard({
     leftAdv == null || Math.abs(leftAdv) < 0.05 ? null : leftAdv > 0 ? "left" : "right";
   const badgeColors = betterSide === "left" ? leftColors : betterSide === "right" ? rightColors : null;
   const badgeText = formatRankAdvantage(leftAdv == null ? null : Math.abs(leftAdv) < 0.05 ? 0 : Math.abs(leftAdv));
+  const leftResume = fieldResultsForTeam(left.id, games, assignment);
+  const rightResume = fieldResultsForTeam(right.id, games, assignment);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setGames([]);
+    fetch(`/api/cbb/schedule?ids=${encodeURIComponent(`${left.id},${right.id}`)}`, {
+      cache: "no-store",
+      signal: controller.signal,
+    })
+      .then((res) => res.json() as Promise<{ games?: CbbPlayedGame[] }>)
+      .then((json) => setGames(json.games ?? []))
+      .catch((err: unknown) => {
+        if (err instanceof DOMException && err.name === "AbortError") return;
+        setGames([]);
+      });
+    return () => controller.abort();
+  }, [left.id, right.id]);
 
   const rows: MetricRow[] = [
     { key: "overall", label: "Overall", left: leftOverall, right: rightOverall, avg: true },
@@ -144,6 +164,7 @@ export function CbbCompareCard({
           <TeamLogo team={left} className="lg" onFill={leftColors.background} />
           <strong>{left.shortName}</strong>
           <p>{formatRecord(left.wins, left.losses)}</p>
+          <ResumeFieldList results={leftResume} teamsById={teamsById} />
         </header>
         <span className="cbb-compare-val-spacer" aria-hidden>
           &nbsp;
@@ -195,16 +216,7 @@ export function CbbCompareCard({
             {row.label}
           </span>
         ))}
-        <div className="cbb-contention">
-          {left.conference === right.conference ? (
-            <ContentionList team={left} mates={leftMates} teamsById={teamsById} align="left" />
-          ) : (
-            <>
-              <ContentionList team={left} mates={leftMates} teamsById={teamsById} align="left" />
-              <ContentionList team={right} mates={rightMates} teamsById={teamsById} align="right" />
-            </>
-          )}
-        </div>
+        <div className="cbb-compare-mid-spacer" />
       </div>
 
       <button type="button" className="cbb-compare-col right" style={rightColors} onClick={onPickRight}>
@@ -220,6 +232,7 @@ export function CbbCompareCard({
           <TeamLogo team={right} className="lg" onFill={rightColors.background} />
           <strong>{right.shortName}</strong>
           <p>{formatRecord(right.wins, right.losses)}</p>
+          <ResumeFieldList results={rightResume} teamsById={teamsById} />
         </header>
         <span className="cbb-compare-val-spacer" aria-hidden>
           &nbsp;
