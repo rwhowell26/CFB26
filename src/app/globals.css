@@ -2869,6 +2869,22 @@ input[type="password"],
   white-space: nowrap;
 }
 
+.cbb-pi {
+  display: inline-block;
+  margin-left: 0.28rem;
+  padding: 0 0.28rem;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--accent, #c4a574) 35%, transparent);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  vertical-align: 0.08rem;
+}
+
+.cbb-projection .cbb-scurve-meta {
+  white-space: nowrap;
+}
+
 .cbb-bubble-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

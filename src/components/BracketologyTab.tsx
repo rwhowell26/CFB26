@@ -67,11 +67,11 @@ function TeamRow({
       <span className="cbb-scurve-rank">{seed != null ? `${seed}` : "·"}</span>
       <span className="cbb-scurve-idx">#{rank}</span>
       <TeamLogo team={team} />
-      <strong>{team.shortName}</strong>
-      <span className="cbb-scurve-meta">
-        {formatRecord(team.wins, team.losses)}
-        {playIn ? " · Play-in" : ""}
-      </span>
+      <strong>
+        {team.shortName}
+        {playIn ? <span className="cbb-pi">PI</span> : null}
+      </strong>
+      <span className="cbb-scurve-meta">{formatRecord(team.wins, team.losses)}</span>
       <span className="cbb-scurve-avg">{formatRank(overallAverage(metrics), 1)}</span>
     </li>
   );

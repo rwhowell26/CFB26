@@ -87,7 +87,7 @@ export function CbbCompareCard({
       <button type="button" className="cbb-compare-col left" style={leftColors} onClick={onPickLeft}>
         <header className="cbb-compare-head">
           <p className="cbb-compare-role">{leftRole}</p>
-          <p className="cbb-compare-seedline">
+          <p className="cbb-compare-seedline" aria-label={`${spotLabel(leftSpot)}, rank ${leftSpot.rank}`}>
             <span className="cbb-compare-seed">{leftSpot.seed != null ? `${leftSpot.seed}` : "—"}</span>
             <span className="cbb-compare-seed-meta">
               <strong>{spotLabel(leftSpot)}</strong>
@@ -154,7 +154,7 @@ export function CbbCompareCard({
       <button type="button" className="cbb-compare-col right" style={rightColors} onClick={onPickRight}>
         <header className="cbb-compare-head">
           <p className="cbb-compare-role">{rightRole}</p>
-          <p className="cbb-compare-seedline">
+          <p className="cbb-compare-seedline" aria-label={`${spotLabel(rightSpot)}, rank ${rightSpot.rank}`}>
             <span className="cbb-compare-seed">{rightSpot.seed != null ? `${rightSpot.seed}` : "—"}</span>
             <span className="cbb-compare-seed-meta">
               <strong>{spotLabel(rightSpot)}</strong>
