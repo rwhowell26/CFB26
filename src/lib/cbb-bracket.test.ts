@@ -250,29 +250,41 @@ test("76-team field marks 24 Opening Round teams in even seed-line pairs", () =>
   assert.equal(Object.keys(result.autoBidByConference).length, conferences.length);
 
   const playIn = result.field.filter((row) => row.playIn);
-  assert.equal(playIn.length, PLAY_IN_TEAMS);
-  assert.equal(playIn.filter((row) => row.seed === 11).length, 8);
-  assert.equal(playIn.filter((row) => row.seed === 12).length, 4);
+  assert.ok(playIn.every((row) => row.seed === 11 || row.seed === 12 || row.seed === 15 || row.seed === 16));
+  assert.ok(
+    playIn.every((row) => (row.role === "auto-bid" ? row.seed === 15 || row.seed === 16 : true)),
+    "auto-bids only play in on 15/16",
+  );
+  assert.ok(playIn.filter((row) => row.seed === 11 || row.seed === 12).every((row) => row.role === "at-large"));
   assert.equal(playIn.filter((row) => row.seed === 13).length, 0);
   assert.equal(playIn.filter((row) => row.seed === 15).length, 4);
   assert.equal(playIn.filter((row) => row.seed === 16).length, 8);
 
   for (let seed = 1; seed <= 16; seed++) {
-    const rows = result.field.filter((row) => row.seed === seed);
-    const marked = rows.filter((row) => row.playIn);
-    assert.equal(marked.length, seedLinePlayInTeams(seed));
-    assert.equal(rows.length - marked.length / 2, SEED_LINE_SPOTS);
+    const marked = result.field.filter((row) => row.seed === seed && row.playIn);
+    assert.equal(marked.length % 2, 0, `${seed}-line play-in must be even`);
+    if (seed === 11 || seed === 12) {
+      assert.ok(marked.every((row) => row.role === "at-large"));
+    }
+    if (seed === 15 || seed === 16) {
+      assert.ok(marked.every((row) => row.role === "auto-bid"));
+    }
   }
 });
 
 test("markPlayIn never leaves a lone play-in on a seed line", () => {
-  const field: CbbFieldTeam[] = Array.from({ length: FIELD_SIZE }, (_, index) => ({
-    teamId: `t${index}`,
-    role: index >= 32 ? "at-large" : "auto-bid",
-    sCurveIndex: index,
-    seed: seedForFieldIndex(index),
-    playIn: false,
-  }));
+  const field: CbbFieldTeam[] = Array.from({ length: FIELD_SIZE }, (_, index) => {
+    const seed = seedForFieldIndex(index);
+    const role: CbbFieldTeam["role"] =
+      seed === 15 || seed === 16 ? "auto-bid" : seed === 11 || seed === 12 ? "at-large" : index < 32 ? "auto-bid" : "at-large";
+    return {
+      teamId: `t${index}`,
+      role,
+      sCurveIndex: index,
+      seed,
+      playIn: false,
+    };
+  });
   const marked = markPlayIn(field);
   const playIn = marked.filter((row) => row.playIn);
   assert.equal(playIn.length, PLAY_IN_TEAMS);
@@ -282,6 +294,26 @@ test("markPlayIn never leaves a lone play-in on a seed line", () => {
     assert.equal(count % 2, 0);
   }
   assert.equal(playIn.filter((row) => row.seed === 13).length, 0);
+});
+
+test("a 12-seed auto-bid gets a bye and the at-large on that line plays in", () => {
+  const twelve: CbbFieldTeam[] = [
+    { teamId: "utahst", role: "at-large", sCurveIndex: 48, seed: 12, playIn: false },
+    { teamId: "michigan", role: "at-large", sCurveIndex: 49, seed: 12, playIn: false },
+    { teamId: "highpoint", role: "auto-bid", sCurveIndex: 50, seed: 12, playIn: false },
+    { teamId: "kentucky", role: "at-large", sCurveIndex: 51, seed: 12, playIn: false },
+    { teamId: "newmexico", role: "at-large", sCurveIndex: 52, seed: 12, playIn: false },
+    { teamId: "stanford", role: "at-large", sCurveIndex: 53, seed: 12, playIn: false },
+  ];
+  const marked = markPlayIn(twelve);
+  const byId = new Map(marked.map((row) => [row.teamId, row]));
+  assert.equal(byId.get("highpoint")?.playIn, false);
+  assert.equal(byId.get("utahst")?.playIn, false);
+  assert.equal(byId.get("michigan")?.playIn, true);
+  assert.equal(byId.get("kentucky")?.playIn, true);
+  assert.equal(byId.get("newmexico")?.playIn, true);
+  assert.equal(byId.get("stanford")?.playIn, true);
+  assert.equal(marked.filter((row) => row.playIn).length, 4);
 });
 
 test("teamsAboveCurrent is empty at the first pair", () => {

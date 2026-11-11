@@ -22,7 +22,6 @@ import {
   FIRST_FOUR_OUT,
   PLAY_IN_GAMES,
   PLAY_IN_TEAMS,
-  SEED_LINE_SPOTS,
   formatCbbDate,
 } from "@/lib/cbb-season";
 import {
@@ -410,7 +409,8 @@ function ProjectionLists({
               {rows.some((row) => row.playIn) ? (
                 <span className="cbb-seed-count">
                   {" "}
-                  · {rows.filter((row) => row.playIn).length} play-in · {SEED_LINE_SPOTS} spots
+                  · {rows.filter((row) => row.playIn).length} play-in ·{" "}
+                  {rows.length - rows.filter((row) => row.playIn).length / 2} spots
                 </span>
               ) : null}
             </h3>

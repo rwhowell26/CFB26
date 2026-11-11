@@ -211,10 +211,23 @@ export function firstIndexForSeed(seed: number): number {
   return cursor;
 }
 
+/** Auto-bids only play in the Opening Round on the 15- and 16-seed lines. */
+export function autoBidPlayInSeed(seed: number): boolean {
+  return seed === 15 || seed === 16;
+}
+
+function playInPool(seed: number, rows: CbbFieldTeam[]): CbbFieldTeam[] {
+  const autoBids = rows.filter((row) => row.role === "auto-bid");
+  const atLarge = rows.filter((row) => row.role === "at-large");
+  const primary = autoBidPlayInSeed(seed) ? autoBids : atLarge;
+  const fill = autoBidPlayInSeed(seed) ? atLarge : [];
+  const worseFirst = (left: CbbFieldTeam, right: CbbFieldTeam) => right.sCurveIndex - left.sCurveIndex;
+  return [...primary.sort(worseFirst), ...fill.sort(worseFirst)];
+}
+
 /**
- * Mark Opening Round teams from the bottom of each seed line.
- * A line with N games lists 2N play-in teams (always even) so two names
- * collapse to one of the four First Round spots.
+ * Opening Round: 12 lowest at-larges on 11/12, 12 lowest auto-bids on 15/16.
+ * Auto-bids on 11–14 get a bye instead of playing an at-large.
  */
 export function markPlayIn(field: CbbFieldTeam[]): CbbFieldTeam[] {
   const playInIds = new Set<string>();
@@ -227,7 +240,9 @@ export function markPlayIn(field: CbbFieldTeam[]): CbbFieldTeam[] {
   for (const [seed, rows] of bySeed) {
     const count = seedLinePlayInTeams(seed);
     if (!count) continue;
-    for (const row of rows.slice(-count)) playInIds.add(row.teamId);
+    const picked = playInPool(seed, rows).slice(0, count);
+    const even = picked.slice(0, picked.length - (picked.length % 2));
+    for (const row of even) playInIds.add(row.teamId);
   }
   return field.map((row) => ({ ...row, playIn: playInIds.has(row.teamId) }));
 }
