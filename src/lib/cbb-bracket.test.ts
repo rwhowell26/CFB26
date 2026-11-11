@@ -3,12 +3,22 @@ import { test } from "node:test";
 import {
   assignField,
   bestTeamByConference,
+  markPlayIn,
   recommendNewTeams,
   seedForFieldIndex,
+  seedLineSize,
   seedWorkingPool,
+  spotFromRank,
+  spotLabel,
 } from "./cbb-bracket";
 import { emptyMetrics } from "./cbb-metrics";
-import type { CbbSnapshot, CbbTeam, CbbTeamMetrics } from "./cbb-types";
+import {
+  FIELD_SIZE,
+  PLAY_IN_AT_LARGE_TEAMS,
+  PLAY_IN_TEAMS,
+  PLAY_IN_16_TEAMS,
+} from "./cbb-season";
+import type { CbbFieldTeam, CbbSnapshot, CbbTeam, CbbTeamMetrics } from "./cbb-types";
 
 function team(
   id: string,
@@ -182,14 +192,84 @@ test("seedWorkingPool injects a conference leader even when the average sits bel
   metrics.set("mid", { ...emptyMetrics("mid"), kenpom: 200 });
   const pool = seedWorkingPool(teams, metrics, null);
   assert.ok(pool.includes("mid"));
-  assert.equal(pool.length, 76);
+  assert.equal(pool.length, 81);
   assert.equal(pool[0], "p0");
 });
 
-test("play-in seeds 11 and 16 hold six teams", () => {
-  const seeds = Array.from({ length: 68 }, (_, i) => seedForFieldIndex(i));
-  assert.equal(seeds.filter((seed) => seed === 11).length, 6);
-  assert.equal(seeds.filter((seed) => seed === 16).length, 6);
+test("play-in seeds 11 and 16 hold ten teams in a 76-team field", () => {
+  const seeds = Array.from({ length: FIELD_SIZE }, (_, i) => seedForFieldIndex(i));
+  assert.equal(seeds.filter((seed) => seed === 11).length, 10);
+  assert.equal(seeds.filter((seed) => seed === 16).length, 10);
   assert.equal(seeds.filter((seed) => seed === 1).length, 4);
-  assert.equal(seeds.length, 68);
+  assert.equal(seeds.filter((seed) => seed === 12).length, 4);
+  assert.equal(seeds.length, FIELD_SIZE);
+  assert.equal(
+    Array.from({ length: 16 }, (_, i) => seedLineSize(i + 1)).reduce((sum, size) => sum + size, 0),
+    FIELD_SIZE,
+  );
+});
+
+test("76-team field marks 16 play-in teams: eight 16-seeds and eight last at-larges", () => {
+  const conferences = Array.from({ length: 32 }, (_, i) => `C${i}`);
+  const power = Array.from({ length: 50 }, (_, i) => team(`p${i}`, "C0"));
+  const autos = conferences.slice(1).map((conf) => team(`${conf}-best`, conf, 8, 8));
+  const teams = [...power, ...autos];
+  const teamsById = new Map(teams.map((item) => [item.id, item]));
+  const best = new Map(conferences.map((conf, i) => [conf, i === 0 ? "p0" : `${conf}-best`]));
+  const sCurve = [...power.map((item) => item.id), ...autos.map((item) => item.id)];
+
+  const result = assignField(sCurve, teamsById, conferences, best);
+  assert.equal(result.field.length, FIELD_SIZE);
+  assert.equal(result.atLargeIds.length, FIELD_SIZE - conferences.length);
+  assert.equal(Object.keys(result.autoBidByConference).length, conferences.length);
+
+  const playIn = result.field.filter((row) => row.playIn);
+  assert.equal(playIn.length, PLAY_IN_TEAMS);
+  assert.equal(playIn.filter((row) => row.seed === 16).length, PLAY_IN_16_TEAMS);
+  assert.equal(playIn.filter((row) => row.role === "at-large").length, PLAY_IN_AT_LARGE_TEAMS);
+  assert.equal(
+    playIn.filter((row) => row.seed === 16).length + playIn.filter((row) => row.role === "at-large").length,
+    PLAY_IN_TEAMS,
+  );
+});
+
+test("markPlayIn keeps 16-seed games and last at-larges from overlapping", () => {
+  const field: CbbFieldTeam[] = Array.from({ length: FIELD_SIZE }, (_, index) => ({
+    teamId: `t${index}`,
+    role: index >= 32 ? "at-large" : "auto-bid",
+    sCurveIndex: index,
+    seed: seedForFieldIndex(index),
+    playIn: false,
+  }));
+  const marked = markPlayIn(field);
+  const playIn = marked.filter((row) => row.playIn);
+  assert.equal(playIn.length, PLAY_IN_TEAMS);
+  assert.equal(playIn.filter((row) => row.seed === 16).length, PLAY_IN_16_TEAMS);
+  assert.equal(playIn.filter((row) => row.role === "at-large" && row.seed !== 16).length, PLAY_IN_AT_LARGE_TEAMS);
+  const lastAtLarge = field
+    .filter((row) => row.role === "at-large" && row.seed !== 16)
+    .slice(-PLAY_IN_AT_LARGE_TEAMS);
+  for (const row of lastAtLarge) {
+    assert.equal(marked.find((item) => item.teamId === row.teamId)?.playIn, true);
+  }
+});
+
+test("spotFromRank shows seed and play-in as the seed list is built", () => {
+  assert.deepEqual(spotFromRank(1), { rank: 1, seed: 1, playIn: false, band: "field" });
+  assert.deepEqual(spotFromRank(4), { rank: 4, seed: 1, playIn: false, band: "field" });
+  assert.deepEqual(spotFromRank(5), { rank: 5, seed: 2, playIn: false, band: "field" });
+  assert.equal(spotFromRank(41).seed, 11);
+  assert.equal(spotFromRank(41).playIn, false);
+  assert.equal(spotFromRank(43).seed, 11);
+  assert.equal(spotFromRank(43).playIn, true);
+  assert.equal(spotFromRank(67).seed, 16);
+  assert.equal(spotFromRank(67).playIn, false);
+  assert.equal(spotFromRank(69).seed, 16);
+  assert.equal(spotFromRank(69).playIn, true);
+  assert.equal(spotFromRank(76).seed, 16);
+  assert.equal(spotFromRank(77).band, "first-four-out");
+  assert.equal(spotFromRank(81).band, "next-four-out");
+  assert.equal(spotLabel(spotFromRank(1)), "1-seed");
+  assert.equal(spotLabel(spotFromRank(69)), "16-seed · Play-in");
+  assert.equal(spotLabel(spotFromRank(77)), "First 4 out");
 });

@@ -11,13 +11,18 @@ import {
   FIRST_FOUR_OUT,
   LOCK_SIZE,
   NEXT_FOUR_OUT,
+  PLAY_IN_AT_LARGE_TEAMS,
+  PLAY_IN_SEED_LINE_SIZE,
+  PLAY_IN_16_TEAMS,
   RECOMMEND_WITHIN,
 } from "./cbb-season";
 import type {
   CbbFieldTeam,
+  CbbScrubBand,
   CbbSnapshot,
   CbbTeam,
   CbbTeamMetrics,
+  CbbTeamSpot,
 } from "./cbb-types";
 
 export type FieldAssignment = {
@@ -98,7 +103,7 @@ export function bestTeamByConference(
 }
 
 /**
- * 68-team field from an S-curve. At-larges stop once remaining slots
+ * 76-team field from an S-curve. At-larges stop once remaining slots
  * equal remaining conferences so every league still gets an auto-bid.
  */
 export function assignField(
@@ -153,14 +158,15 @@ export function assignField(
   }
 
   const leftovers = sCurve.filter((id) => !placed.has(id) && teamsById.has(id));
-  const seenOnSeed = new Map<number, number>();
-  const field: CbbFieldTeam[] = fieldIds.map((teamId, index) => {
-    const seed = seedForFieldIndex(index);
-    const role = roles.get(teamId) ?? "at-large";
-    const seen = seenOnSeed.get(seed) ?? 0;
-    seenOnSeed.set(seed, seen + 1);
-    return { teamId, role, sCurveIndex: index, seed, playIn: (seed === 11 || seed === 16) && seen >= 4 };
-  });
+  const field: CbbFieldTeam[] = markPlayIn(
+    fieldIds.map((teamId, index) => ({
+      teamId,
+      role: roles.get(teamId) ?? "at-large",
+      sCurveIndex: index,
+      seed: seedForFieldIndex(index),
+      playIn: false,
+    })),
+  );
 
   return {
     field,
@@ -172,18 +178,101 @@ export function assignField(
   };
 }
 
-/** 1–10 and 12–15 have four teams; 11-seeds and 16-seeds include play-in extras. */
+/** 1–10 and 12–15 have four teams; 11-seeds and 16-seeds hold two byes plus eight play-in teams. */
+export function seedLineSize(seed: number): number {
+  return seed === 11 || seed === 16 ? PLAY_IN_SEED_LINE_SIZE : 4;
+}
+
 export function seedForFieldIndex(index: number): number {
-  const slots = [
-    ...Array(10).fill(null).flatMap((_, seed) => Array(4).fill(seed + 1)),
-    ...Array(6).fill(11),
-    ...Array(4).fill(12),
-    ...Array(4).fill(13),
-    ...Array(4).fill(14),
-    ...Array(4).fill(15),
-    ...Array(6).fill(16),
-  ] as number[];
-  return slots[index] ?? 16;
+  let cursor = 0;
+  for (let seed = 1; seed <= 16; seed++) {
+    const size = seedLineSize(seed);
+    if (index < cursor + size) return seed;
+    cursor += size;
+  }
+  return 16;
+}
+
+export function firstIndexForSeed(seed: number): number {
+  let cursor = 0;
+  for (let current = 1; current < seed; current++) cursor += seedLineSize(current);
+  return cursor;
+}
+
+/**
+ * Four 16-seed play-in games (eight teams on that line) plus four games
+ * among the lowest at-large bids that are not already on the 16-line.
+ */
+export function markPlayIn(field: CbbFieldTeam[]): CbbFieldTeam[] {
+  const playInIds = new Set<string>();
+  const sixteen = field.filter((row) => row.seed === 16);
+  for (const row of sixteen.slice(-PLAY_IN_16_TEAMS)) playInIds.add(row.teamId);
+  const atLarge = field.filter(
+    (row) => row.role === "at-large" && row.seed !== 16 && !playInIds.has(row.teamId),
+  );
+  for (const row of atLarge.slice(-PLAY_IN_AT_LARGE_TEAMS)) playInIds.add(row.teamId);
+  return field.map((row) => ({ ...row, playIn: playInIds.has(row.teamId) }));
+}
+
+export function bandForRank(rank: number): CbbScrubBand {
+  if (rank < 1) return "out";
+  if (rank <= FIELD_SIZE) return "field";
+  if (rank <= FIELD_SIZE + FIRST_FOUR_OUT) return "first-four-out";
+  if (rank <= LOCK_SIZE) return "next-four-out";
+  return "out";
+}
+
+/** Seed and play-in slot from overall seed-list rank (1 is best). */
+export function spotFromRank(rank: number): CbbTeamSpot {
+  const band = bandForRank(rank);
+  if (band !== "field") {
+    return { rank, seed: null, playIn: false, band };
+  }
+  const index = rank - 1;
+  const seed = seedForFieldIndex(index);
+  const offset = index - firstIndexForSeed(seed);
+  const playInByes = seedLineSize(seed) - (seed === 16 ? PLAY_IN_16_TEAMS : seed === 11 ? PLAY_IN_AT_LARGE_TEAMS : 0);
+  return {
+    rank,
+    seed,
+    playIn: playInByes < seedLineSize(seed) && offset >= playInByes,
+    band,
+  };
+}
+
+export function spotLabel(spot: CbbTeamSpot): string {
+  if (spot.band === "first-four-out") return "First 4 out";
+  if (spot.band === "next-four-out") return "Next 4 out";
+  if (spot.band === "out") return "Out";
+  if (spot.seed == null) return `#${spot.rank}`;
+  return spot.playIn ? `${spot.seed}-seed · Play-in` : `${spot.seed}-seed`;
+}
+
+export function spotForTeam(
+  teamId: string,
+  rankedIds: string[],
+  assignment: FieldAssignment,
+): CbbTeamSpot {
+  const ranked = rankedIds.indexOf(teamId);
+  const rank = ranked >= 0 ? ranked + 1 : 0;
+  const row = assignment.field.find((item) => item.teamId === teamId);
+  if (row) {
+    return { rank: rank || row.sCurveIndex + 1, seed: row.seed, playIn: row.playIn, band: "field" };
+  }
+  const firstOut = assignment.firstFourOut.indexOf(teamId);
+  if (firstOut >= 0) {
+    return { rank: rank || FIELD_SIZE + firstOut + 1, seed: null, playIn: false, band: "first-four-out" };
+  }
+  const nextOut = assignment.nextFourOut.indexOf(teamId);
+  if (nextOut >= 0) {
+    return {
+      rank: rank || FIELD_SIZE + FIRST_FOUR_OUT + nextOut + 1,
+      seed: null,
+      playIn: false,
+      band: "next-four-out",
+    };
+  }
+  return spotFromRank(rank);
 }
 
 export function previousConsideredIds(snapshot: CbbSnapshot | null): Set<string> {

@@ -9,9 +9,12 @@ import {
   recommendNewTeams,
   seedWorkingPool,
   snapshotFromAssignment,
+  spotForTeam,
+  spotFromRank,
+  spotLabel,
 } from "@/lib/cbb-bracket";
 import { emptyMetrics, formatRecord, overallAverage, formatRank } from "@/lib/cbb-metrics";
-import { FIELD_SIZE, formatCbbDate } from "@/lib/cbb-season";
+import { FIELD_SIZE, FIRST_FOUR_OUT, PLAY_IN_TEAMS, formatCbbDate } from "@/lib/cbb-season";
 import {
   applyScrubChoice,
   emptyDraft,
@@ -56,14 +59,18 @@ function TeamRow({
   metrics: CbbTeamMetrics;
 }) {
   return (
-    <li className={`cbb-scurve-row${role === "auto-bid" ? " auto" : role === "at-large" ? " at-large" : ""}`}>
+    <li
+      className={`cbb-scurve-row${role === "auto-bid" ? " auto" : role === "at-large" ? " at-large" : ""}${
+        playIn ? " play-in" : ""
+      }`}
+    >
       <span className="cbb-scurve-rank">{seed != null ? `${seed}` : "·"}</span>
       <span className="cbb-scurve-idx">#{rank}</span>
       <TeamLogo team={team} />
       <strong>{team.shortName}</strong>
       <span className="cbb-scurve-meta">
         {formatRecord(team.wins, team.losses)}
-        {playIn ? " · PI" : ""}
+        {playIn ? " · Play-in" : ""}
       </span>
       <span className="cbb-scurve-avg">{formatRank(overallAverage(metrics), 1)}</span>
     </li>
@@ -134,7 +141,8 @@ export function BracketologyTab({
               <h2>Seed list locked</h2>
               <p>
                 {assignment.field.length} in the field · {assignment.atLargeIds.length} at-large ·{" "}
-                {Object.keys(assignment.autoBidByConference).length} auto-bids. First 4 out and next 4
+                {Object.keys(assignment.autoBidByConference).length} auto-bids ·{" "}
+                {assignment.field.filter((row) => row.playIn).length} play-in. First 4 out and next 4
                 out are listed below.
               </p>
             </header>
@@ -162,7 +170,10 @@ export function BracketologyTab({
         <section className="panel cbb-scrub-bar">
           <header className="panel-header">
             <p className="eyebrow">
-              Bracketology · {question.phase === "recommend" ? "recommended climb" : `${question.leftRank} vs ${question.rightRank}`}
+              Bracketology ·{" "}
+              {question.phase === "recommend"
+                ? "recommended climb"
+                : `${spotLabel(spotFromRank(question.leftRank))} #${question.leftRank} vs ${spotLabel(spotFromRank(question.rightRank))} #${question.rightRank}`}
             </p>
             <h2>Who belongs higher?</h2>
             <p>
@@ -172,6 +183,8 @@ export function BracketologyTab({
               {" · "}
               {preview.atLarge} at-large / {preview.autoBids} auto
               {preview.reserved ? ` · ${preview.reserved} reserved` : ""}
+              {" · "}
+              {assignment.field.filter((row) => row.playIn).length}/{PLAY_IN_TEAMS} play-in
             </p>
           </header>
           <div className="build-actions">
@@ -211,8 +224,14 @@ export function BracketologyTab({
           rightMetrics={rightMetrics}
           leftRole={question.phase === "recommend" ? "Team above" : "Currently higher"}
           rightRole={question.phase === "recommend" ? "Climbing" : "Currently lower"}
-          leftRank={question.leftRank}
-          rightRank={question.rightRank}
+          leftSpot={{
+            ...spotFromRank(question.leftRank),
+            playIn: spotForTeam(left.id, draft.rankedIds, assignment).playIn,
+          }}
+          rightSpot={{
+            ...spotFromRank(question.rightRank),
+            playIn: spotForTeam(right.id, draft.rankedIds, assignment).playIn,
+          }}
           onPickLeft={() => pick(left.id, right.id)}
           onPickRight={() => pick(right.id, left.id)}
         />
@@ -288,7 +307,7 @@ function SavedProjection({
       <p className="cbb-saved-meta">
         Saved {formatCbbDate(snapshot.createdAt)} · {assignment.field.length}/{FIELD_SIZE} field ·{" "}
         {assignment.atLargeIds.length} at-large · {Object.keys(assignment.autoBidByConference).length}{" "}
-        auto-bids
+        auto-bids · {assignment.field.filter((row) => row.playIn).length}/{PLAY_IN_TEAMS} play-in
       </p>
       <ProjectionLists
         assignment={assignment}
@@ -340,7 +359,15 @@ function ProjectionLists({
       <div className="cbb-seed-grid">
         {[...bySeed.entries()].map(([seed, rows]) => (
           <div key={seed} className="cbb-seed-block">
-            <h3>{seed}-seeds</h3>
+            <h3>
+              {seed}-seeds
+              {rows.some((row) => row.playIn) ? (
+                <span className="cbb-seed-count">
+                  {" "}
+                  · {rows.filter((row) => row.playIn).length} play-in
+                </span>
+              ) : null}
+            </h3>
             <ol className="cbb-scurve">
               {rows.map((row) => {
                 const team = teamsById.get(row.teamId);
@@ -367,7 +394,7 @@ function ProjectionLists({
           <header className="panel-header">
             <h2>First 4 out</h2>
           </header>
-          {assignment.firstFourOut.length ? renderIds(assignment.firstFourOut, 69) : (
+          {assignment.firstFourOut.length ? renderIds(assignment.firstFourOut, FIELD_SIZE + 1) : (
             <p className="empty-state">None yet.</p>
           )}
         </section>
@@ -375,7 +402,7 @@ function ProjectionLists({
           <header className="panel-header">
             <h2>Next 4 out</h2>
           </header>
-          {assignment.nextFourOut.length ? renderIds(assignment.nextFourOut, 73) : (
+          {assignment.nextFourOut.length ? renderIds(assignment.nextFourOut, FIELD_SIZE + FIRST_FOUR_OUT + 1) : (
             <p className="empty-state">None yet.</p>
           )}
         </section>

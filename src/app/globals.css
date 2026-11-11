@@ -2537,7 +2537,7 @@ input[type="password"],
   box-shadow: none;
 }
 
-.cbb-compare-head strong {
+.cbb-compare-head > strong {
   display: block;
   font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-size: 1.7rem;
@@ -2557,6 +2557,49 @@ input[type="password"],
   letter-spacing: 0.04em;
   text-transform: uppercase;
   opacity: 0.78;
+}
+
+.cbb-compare-seedline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin: 0;
+}
+
+.cbb-compare-seed {
+  display: grid;
+  place-items: center;
+  min-width: 2.6rem;
+  height: 2.6rem;
+  padding: 0 0.2rem;
+  border-radius: 0.55rem;
+  background: color-mix(in srgb, #fff 18%, transparent);
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.cbb-compare-seed-meta {
+  display: grid;
+  justify-items: start;
+  gap: 0.05rem;
+  text-align: left;
+}
+
+.cbb-compare-seed-meta strong {
+  font-size: 0.92rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.cbb-compare-seed-meta em {
+  font-style: normal;
+  font-size: 1.05rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.92;
 }
 
 .cbb-compare-mid {
@@ -2708,6 +2751,15 @@ input[type="password"],
   color: var(--muted);
 }
 
+.cbb-seed-block h3 .cbb-seed-count {
+  font-family: inherit;
+  font-size: 0.7rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--muted);
+  opacity: 0.85;
+}
+
 .cbb-projection .cbb-scurve {
   gap: 0.04rem;
 }
@@ -2793,6 +2845,10 @@ input[type="password"],
 
 .cbb-scurve-row.auto {
   background: rgba(196, 165, 116, 0.16);
+}
+
+.cbb-scurve-row.play-in {
+  box-shadow: inset 3px 0 0 color-mix(in srgb, var(--accent, #c4a574) 85%, #fff);
 }
 
 .cbb-scurve-rank {
