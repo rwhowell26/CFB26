@@ -67,7 +67,7 @@ test("undo restores the previous S-curve", () => {
 });
 
 test("remaining lock count ignores teams past Next 4 Out", () => {
-  const ids = Array.from({ length: 80 }, (_, i) => `t${i}`);
+  const ids = Array.from({ length: 90 }, (_, i) => `t${i}`);
   const draft = emptyDraft(ids, null);
-  assert.equal(remainingScrubCount(draft), 75);
+  assert.equal(remainingScrubCount(draft), 83);
 });

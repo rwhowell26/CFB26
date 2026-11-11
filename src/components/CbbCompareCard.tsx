@@ -12,7 +12,8 @@ import {
   resumeAverage,
 } from "@/lib/cbb-metrics";
 import { compareColumnColors } from "@/lib/team-colors";
-import type { CbbTeam, CbbTeamMetrics } from "@/lib/cbb-types";
+import type { CbbTeam, CbbTeamMetrics, CbbTeamSpot } from "@/lib/cbb-types";
+import { spotLabel } from "@/lib/cbb-bracket";
 
 type Props = {
   left: CbbTeam;
@@ -21,8 +22,8 @@ type Props = {
   rightMetrics: CbbTeamMetrics;
   leftRole: string;
   rightRole: string;
-  leftRank: number;
-  rightRank: number;
+  leftSpot: CbbTeamSpot;
+  rightSpot: CbbTeamSpot;
   onPickLeft: () => void;
   onPickRight: () => void;
 };
@@ -48,8 +49,8 @@ export function CbbCompareCard({
   rightMetrics,
   leftRole,
   rightRole,
-  leftRank,
-  rightRank,
+  leftSpot,
+  rightSpot,
   onPickLeft,
   onPickRight,
 }: Props) {
@@ -86,10 +87,15 @@ export function CbbCompareCard({
       <button type="button" className="cbb-compare-col left" style={leftColors} onClick={onPickLeft}>
         <header className="cbb-compare-head">
           <p className="cbb-compare-role">{leftRole}</p>
+          <p className="cbb-compare-seedline" aria-label={`${spotLabel(leftSpot)}, rank ${leftSpot.rank}`}>
+            <span className="cbb-compare-seed">{leftSpot.seed != null ? `${leftSpot.seed}` : "—"}</span>
+            <span className="cbb-compare-seed-meta">
+              <strong>{spotLabel(leftSpot)}</strong>
+              <em>#{leftSpot.rank}</em>
+            </span>
+          </p>
           <TeamLogo team={left} className="lg" onFill={leftColors.background} />
-          <strong>
-            #{leftRank} {left.shortName}
-          </strong>
+          <strong>{left.shortName}</strong>
           <p>{formatRecord(left.wins, left.losses)}</p>
         </header>
         <span className="cbb-compare-val-spacer" aria-hidden>
@@ -148,10 +154,15 @@ export function CbbCompareCard({
       <button type="button" className="cbb-compare-col right" style={rightColors} onClick={onPickRight}>
         <header className="cbb-compare-head">
           <p className="cbb-compare-role">{rightRole}</p>
+          <p className="cbb-compare-seedline" aria-label={`${spotLabel(rightSpot)}, rank ${rightSpot.rank}`}>
+            <span className="cbb-compare-seed">{rightSpot.seed != null ? `${rightSpot.seed}` : "—"}</span>
+            <span className="cbb-compare-seed-meta">
+              <strong>{spotLabel(rightSpot)}</strong>
+              <em>#{rightSpot.rank}</em>
+            </span>
+          </p>
           <TeamLogo team={right} className="lg" onFill={rightColors.background} />
-          <strong>
-            #{rightRank} {right.shortName}
-          </strong>
+          <strong>{right.shortName}</strong>
           <p>{formatRecord(right.wins, right.losses)}</p>
         </header>
         <span className="cbb-compare-val-spacer" aria-hidden>

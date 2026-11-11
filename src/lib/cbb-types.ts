@@ -38,6 +38,16 @@ export type CbbFieldTeam = {
   playIn: boolean;
 };
 
+export type CbbScrubBand = "field" | "first-four-out" | "next-four-out" | "out";
+
+/** Live seed-list spot while scrubbing or on the saved board. */
+export type CbbTeamSpot = {
+  rank: number;
+  seed: number | null;
+  playIn: boolean;
+  band: CbbScrubBand;
+};
+
 export type CbbSnapshot = {
   id: string;
   createdAt: string;
