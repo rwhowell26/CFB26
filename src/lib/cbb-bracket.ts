@@ -12,9 +12,8 @@ import {
   FIRST_FOUR_OUT,
   LOCK_SIZE,
   NEXT_FOUR_OUT,
-  PLAY_IN_AT_LARGE_TEAMS,
-  PLAY_IN_SEED_LINE_SIZE,
-  PLAY_IN_16_TEAMS,
+  SEED_LINE_PLAY_IN_GAMES,
+  SEED_LINE_SPOTS,
   RECOMMEND_WITHIN,
 } from "./cbb-season";
 import type {
@@ -181,9 +180,19 @@ export function assignField(
   };
 }
 
-/** 1–10 and 12–15 have four teams; 11-seeds and 16-seeds hold two byes plus eight play-in teams. */
+/** Opening Round games on this seed line (0 if every team already has a First Round bye). */
+export function seedLinePlayInGames(seed: number): number {
+  return SEED_LINE_PLAY_IN_GAMES[seed] ?? 0;
+}
+
+/** Play-in names on this line; always even so they pair for one First Round spot. */
+export function seedLinePlayInTeams(seed: number): number {
+  return seedLinePlayInGames(seed) * 2;
+}
+
+/** Listed names on a seed line: four First Round spots plus one extra team per play-in game. */
 export function seedLineSize(seed: number): number {
-  return seed === 11 || seed === 16 ? PLAY_IN_SEED_LINE_SIZE : 4;
+  return SEED_LINE_SPOTS + seedLinePlayInGames(seed);
 }
 
 export function seedForFieldIndex(index: number): number {
@@ -202,18 +211,39 @@ export function firstIndexForSeed(seed: number): number {
   return cursor;
 }
 
+/** Auto-bids only play in the Opening Round on the 15- and 16-seed lines. */
+export function autoBidPlayInSeed(seed: number): boolean {
+  return seed === 15 || seed === 16;
+}
+
+function playInPool(seed: number, rows: CbbFieldTeam[]): CbbFieldTeam[] {
+  const autoBids = rows.filter((row) => row.role === "auto-bid");
+  const atLarge = rows.filter((row) => row.role === "at-large");
+  const primary = autoBidPlayInSeed(seed) ? autoBids : atLarge;
+  const fill = autoBidPlayInSeed(seed) ? atLarge : [];
+  const worseFirst = (left: CbbFieldTeam, right: CbbFieldTeam) => right.sCurveIndex - left.sCurveIndex;
+  return [...primary.sort(worseFirst), ...fill.sort(worseFirst)];
+}
+
 /**
- * Four 16-seed play-in games (eight teams on that line) plus four games
- * among the lowest at-large bids that are not already on the 16-line.
+ * Opening Round: 12 lowest at-larges on 11/12, 12 lowest auto-bids on 15/16.
+ * Auto-bids on 11–14 get a bye instead of playing an at-large.
  */
 export function markPlayIn(field: CbbFieldTeam[]): CbbFieldTeam[] {
   const playInIds = new Set<string>();
-  const sixteen = field.filter((row) => row.seed === 16);
-  for (const row of sixteen.slice(-PLAY_IN_16_TEAMS)) playInIds.add(row.teamId);
-  const atLarge = field.filter(
-    (row) => row.role === "at-large" && row.seed !== 16 && !playInIds.has(row.teamId),
-  );
-  for (const row of atLarge.slice(-PLAY_IN_AT_LARGE_TEAMS)) playInIds.add(row.teamId);
+  const bySeed = new Map<number, CbbFieldTeam[]>();
+  for (const row of field) {
+    const list = bySeed.get(row.seed) ?? [];
+    list.push(row);
+    bySeed.set(row.seed, list);
+  }
+  for (const [seed, rows] of bySeed) {
+    const count = seedLinePlayInTeams(seed);
+    if (!count) continue;
+    const picked = playInPool(seed, rows).slice(0, count);
+    const even = picked.slice(0, picked.length - (picked.length % 2));
+    for (const row of even) playInIds.add(row.teamId);
+  }
   return field.map((row) => ({ ...row, playIn: playInIds.has(row.teamId) }));
 }
 
@@ -234,11 +264,11 @@ export function spotFromRank(rank: number): CbbTeamSpot {
   const index = rank - 1;
   const seed = seedForFieldIndex(index);
   const offset = index - firstIndexForSeed(seed);
-  const playInByes = seedLineSize(seed) - (seed === 16 ? PLAY_IN_16_TEAMS : seed === 11 ? PLAY_IN_AT_LARGE_TEAMS : 0);
+  const byes = seedLineSize(seed) - seedLinePlayInTeams(seed);
   return {
     rank,
     seed,
-    playIn: playInByes < seedLineSize(seed) && offset >= playInByes,
+    playIn: offset >= byes,
     band,
   };
 }
