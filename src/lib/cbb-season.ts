@@ -18,6 +18,8 @@ export const NEXT_FOUR_OUT = 4;
 export const RECOMMEND_WITHIN = 10;
 export const CBB_STORE_SCHEMA_VERSION = 4;
 export const LOCK_SIZE = FIELD_SIZE + FIRST_FOUR_OUT + NEXT_FOUR_OUT;
+/** Completed seed-list spots shown beside the current compare. */
+export const COMPLETED_ABOVE = 8;
 
 export type SportId = "cfb" | "cbb";
 

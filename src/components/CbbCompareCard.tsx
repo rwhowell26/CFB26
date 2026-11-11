@@ -12,7 +12,8 @@ import {
   resumeAverage,
 } from "@/lib/cbb-metrics";
 import { compareColumnColors } from "@/lib/team-colors";
-import type { CbbTeam, CbbTeamMetrics, CbbTeamSpot } from "@/lib/cbb-types";
+import { shortCbbConference } from "@/lib/cbb-conferences";
+import type { CbbFieldTeam, CbbTeam, CbbTeamMetrics, CbbTeamSpot } from "@/lib/cbb-types";
 import { spotLabel } from "@/lib/cbb-bracket";
 
 type Props = {
@@ -24,6 +25,9 @@ type Props = {
   rightRole: string;
   leftSpot: CbbTeamSpot;
   rightSpot: CbbTeamSpot;
+  leftMates: CbbFieldTeam[];
+  rightMates: CbbFieldTeam[];
+  teamsById: Map<string, CbbTeam>;
   onPickLeft: () => void;
   onPickRight: () => void;
 };
@@ -42,6 +46,46 @@ function sideClass(self: number | null, other: number | null): string {
   return advantage > 0 ? " better" : " worse";
 }
 
+function ContentionList({
+  team,
+  mates,
+  teamsById,
+  align,
+}: {
+  team: CbbTeam;
+  mates: CbbFieldTeam[];
+  teamsById: Map<string, CbbTeam>;
+  align: "left" | "right";
+}) {
+  const conf = shortCbbConference(team.conference);
+  return (
+    <div className={`cbb-contention-col ${align}`}>
+      <p>
+        {conf} · {mates.length} in
+      </p>
+      {mates.length ? (
+        <ol>
+          {mates.map((row) => {
+            const mate = teamsById.get(row.teamId);
+            if (!mate) return null;
+            const current = mate.id === team.id;
+            return (
+              <li key={row.teamId} className={current ? "is-current" : undefined}>
+                <span>{row.seed}</span>
+                <TeamLogo team={mate} />
+                <strong>{mate.shortName}</strong>
+                <em>{row.role === "auto-bid" ? "AQ" : "AL"}</em>
+              </li>
+            );
+          })}
+        </ol>
+      ) : (
+        <p className="cbb-contention-empty">None in yet</p>
+      )}
+    </div>
+  );
+}
+
 export function CbbCompareCard({
   left,
   right,
@@ -51,6 +95,9 @@ export function CbbCompareCard({
   rightRole,
   leftSpot,
   rightSpot,
+  leftMates,
+  rightMates,
+  teamsById,
   onPickLeft,
   onPickRight,
 }: Props) {
@@ -148,7 +195,16 @@ export function CbbCompareCard({
             {row.label}
           </span>
         ))}
-        <div className="cbb-compare-mid-spacer" />
+        <div className="cbb-contention">
+          {left.conference === right.conference ? (
+            <ContentionList team={left} mates={leftMates} teamsById={teamsById} align="left" />
+          ) : (
+            <>
+              <ContentionList team={left} mates={leftMates} teamsById={teamsById} align="left" />
+              <ContentionList team={right} mates={rightMates} teamsById={teamsById} align="right" />
+            </>
+          )}
+        </div>
       </div>
 
       <button type="button" className="cbb-compare-col right" style={rightColors} onClick={onPickRight}>

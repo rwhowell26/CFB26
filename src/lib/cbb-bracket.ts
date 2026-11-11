@@ -7,6 +7,7 @@ import {
 } from "./cbb-metrics";
 import { formatCbbDate } from "./cbb-season";
 import {
+  COMPLETED_ABOVE,
   FIELD_SIZE,
   FIRST_FOUR_OUT,
   LOCK_SIZE,
@@ -273,6 +274,34 @@ export function spotForTeam(
     };
   }
   return spotFromRank(rank);
+}
+
+/** Seed-list teams immediately above the current pair, newest/closest last. */
+export function teamsAboveCurrent(
+  rankedIds: string[],
+  leftRank: number,
+  count = COMPLETED_ABOVE,
+): string[] {
+  const end = Math.max(0, leftRank - 1);
+  const start = Math.max(0, end - count);
+  return rankedIds.slice(start, end);
+}
+
+export function padAboveSlots(ids: string[], count = COMPLETED_ABOVE): Array<string | null> {
+  const trimmed = ids.slice(-count);
+  const pad = Math.max(0, count - trimmed.length);
+  return [...Array.from({ length: pad }, () => null), ...trimmed];
+}
+
+/** Every team from this conference already in the 76, including the compared team. */
+export function conferenceInField(
+  teamId: string,
+  assignment: FieldAssignment,
+  teamsById: Map<string, CbbTeam>,
+): CbbFieldTeam[] {
+  const conference = teamsById.get(teamId)?.conference;
+  if (!conference) return [];
+  return assignment.field.filter((row) => teamsById.get(row.teamId)?.conference === conference);
 }
 
 export function previousConsideredIds(snapshot: CbbSnapshot | null): Set<string> {

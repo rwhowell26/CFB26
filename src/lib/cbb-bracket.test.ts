@@ -3,16 +3,20 @@ import { test } from "node:test";
 import {
   assignField,
   bestTeamByConference,
+  conferenceInField,
   markPlayIn,
+  padAboveSlots,
   recommendNewTeams,
   seedForFieldIndex,
   seedLineSize,
   seedWorkingPool,
   spotFromRank,
   spotLabel,
+  teamsAboveCurrent,
 } from "./cbb-bracket";
 import { emptyMetrics } from "./cbb-metrics";
 import {
+  COMPLETED_ABOVE,
   FIELD_SIZE,
   PLAY_IN_AT_LARGE_TEAMS,
   PLAY_IN_TEAMS,
@@ -252,6 +256,79 @@ test("markPlayIn keeps 16-seed games and last at-larges from overlapping", () =>
   for (const row of lastAtLarge) {
     assert.equal(marked.find((item) => item.teamId === row.teamId)?.playIn, true);
   }
+});
+
+test("teamsAboveCurrent is empty at the first pair", () => {
+  const ids = ["a", "b", "c", "d", "e"];
+  assert.deepEqual(teamsAboveCurrent(ids, 1), []);
+  assert.deepEqual(teamsAboveCurrent(ids, 0), []);
+});
+
+test("teamsAboveCurrent keeps the closest completed teams, nearest last", () => {
+  const ids = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"];
+  assert.deepEqual(teamsAboveCurrent(ids, 5), ["a", "b", "c", "d"]);
+  assert.deepEqual(teamsAboveCurrent(ids, 11), ["c", "d", "e", "f", "g", "h", "i", "j"]);
+  assert.equal(teamsAboveCurrent(ids, 11).length, COMPLETED_ABOVE);
+  assert.equal(teamsAboveCurrent(ids, 11).at(-1), "j");
+});
+
+test("padAboveSlots fills empty slots at the top and stays at eight", () => {
+  assert.equal(padAboveSlots([]).length, COMPLETED_ABOVE);
+  assert.deepEqual(padAboveSlots([]), Array.from({ length: COMPLETED_ABOVE }, () => null));
+  assert.deepEqual(padAboveSlots(["a", "b"]), [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    "a",
+    "b",
+  ]);
+  const eight = ["a", "b", "c", "d", "e", "f", "g", "h"];
+  assert.deepEqual(padAboveSlots(eight), eight);
+  assert.deepEqual(padAboveSlots([...eight, "i", "j"]), eight.slice(2).concat(["i", "j"]));
+  assert.deepEqual(padAboveSlots(["a"], 3), [null, null, "a"]);
+});
+
+test("conferenceInField lists conference-mates already in the 76", () => {
+  const conferences = ["ACC", "B1G", "SEC"];
+  const teams = [
+    team("duke", "ACC"),
+    team("unc", "ACC"),
+    team("ncst", "ACC"),
+    team("purdue", "B1G"),
+    team("kentucky", "SEC"),
+  ];
+  const teamsById = new Map(teams.map((item) => [item.id, item]));
+  const best = new Map([
+    ["ACC", "duke"],
+    ["B1G", "purdue"],
+    ["SEC", "kentucky"],
+  ]);
+  const result = assignField(
+    ["duke", "unc", "purdue", "kentucky", "ncst"],
+    teamsById,
+    conferences,
+    best,
+    5,
+  );
+
+  const acc = conferenceInField("unc", result, teamsById);
+  assert.deepEqual(
+    acc.map((row) => row.teamId),
+    ["duke", "unc", "ncst"],
+  );
+  assert.ok(acc.every((row) => teamsById.get(row.teamId)?.conference === "ACC"));
+
+  const bigTen = conferenceInField("purdue", result, teamsById);
+  assert.deepEqual(
+    bigTen.map((row) => row.teamId),
+    ["purdue"],
+  );
+  assert.equal(bigTen[0]?.role, "auto-bid");
+
+  assert.deepEqual(conferenceInField("missing", result, teamsById), []);
 });
 
 test("spotFromRank shows seed and play-in as the seed list is built", () => {
