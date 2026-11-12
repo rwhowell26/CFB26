@@ -321,6 +321,70 @@ test("conference auto-bid is always in the field, never First or Next 4 Out", ()
   assert.ok(!result.atLargeIds.includes("grandcanyon"));
 });
 
+test("live conference leaders replace a stale snapshot auto-bid map", () => {
+  const conferences = ["WAC", "A", "B", "C"];
+  const teams = [
+    team("utahvalley", "WAC"),
+    team("grandcanyon", "WAC"),
+    team("a1", "A"),
+    team("a2", "A"),
+    team("a3", "A"),
+    team("b1", "B"),
+    team("c1", "C"),
+  ];
+  const teamsById = new Map(teams.map((item) => [item.id, item]));
+  const metrics = rankedMetrics(["grandcanyon", "a1", "b1", "c1", "utahvalley", "a2", "a3"]);
+  const live = bestTeamByConference(teams, teamsById, metrics);
+  assert.equal(live.get("WAC"), "grandcanyon");
+
+  const sCurve = ["utahvalley", "a1", "a2", "a3", "b1", "c1", "grandcanyon"];
+  const stale = assignField(
+    sCurve,
+    teamsById,
+    conferences,
+    new Map([
+      ["WAC", "utahvalley"],
+      ["A", "a1"],
+      ["B", "b1"],
+      ["C", "c1"],
+    ]),
+    6,
+  );
+  assert.ok(stale.nextFourOut.includes("grandcanyon") || stale.firstFourOut.includes("grandcanyon"));
+
+  const result = assignField(sCurve, teamsById, conferences, live, 6);
+  assert.ok(result.field.some((row) => row.teamId === "grandcanyon"));
+  assert.equal(result.autoBidByConference.WAC, "grandcanyon");
+  assert.ok(!result.firstFourOut.includes("grandcanyon"));
+  assert.ok(!result.nextFourOut.includes("grandcanyon"));
+});
+
+test("an auto-bid missing from a full s-curve still evicts an at-large", () => {
+  const conferences = ["A", "B", "C", "WAC"];
+  const teams = [
+    team("a1", "A"),
+    team("a2", "A"),
+    team("a3", "A"),
+    team("a4", "A"),
+    team("b1", "B"),
+    team("c1", "C"),
+    team("grandcanyon", "WAC"),
+  ];
+  const teamsById = new Map(teams.map((item) => [item.id, item]));
+  const best = new Map([
+    ["A", "a1"],
+    ["B", "b1"],
+    ["C", "c1"],
+    ["WAC", "grandcanyon"],
+  ]);
+  const result = assignField(["a1", "a2", "a3", "a4"], teamsById, conferences, best, 4);
+  assert.ok(result.field.some((row) => row.teamId === "grandcanyon"));
+  assert.equal(result.autoBidByConference.WAC, "grandcanyon");
+  assert.equal(result.field.length, 4);
+  assert.ok(!result.firstFourOut.includes("grandcanyon"));
+  assert.ok(!result.nextFourOut.includes("grandcanyon"));
+});
+
 test("markPlayIn never leaves a lone play-in on a seed line", () => {
   const marked = markPlayIn(dummyField());
   const playIn = marked.filter((row) => row.playIn);
