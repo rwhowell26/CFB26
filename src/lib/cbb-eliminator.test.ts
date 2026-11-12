@@ -142,6 +142,9 @@ test("eliminating a conference leader passes the auto-bid to the next team", () 
   assert.equal(byId.get("duke")?.inField, false);
   assert.equal(byId.get("unc")?.role, "auto-bid");
   assert.equal(byId.get("unc")?.inField, true);
+  const listed = rows.filter((row) => row.status !== "eliminated");
+  assert.equal(listed.some((row) => row.teamId === "duke"), false);
+  assert.equal(listed.some((row) => row.teamId === "unc"), true);
 });
 
 test("playInForFieldIndex marks the Opening Round slots on 11/12/15/16", () => {
