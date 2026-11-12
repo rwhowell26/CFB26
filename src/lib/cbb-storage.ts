@@ -11,7 +11,13 @@ function emptyStore(): CbbStore {
     snapshots: [],
     draft: null,
     viewingId: null,
+    eliminatorLockedIds: [],
+    eliminatorEliminatedIds: [],
   };
+}
+
+function sanitizeIdList(value: unknown): string[] {
+  return Array.isArray(value) ? value.filter((id): id is string => typeof id === "string") : [];
 }
 
 function sanitizeSnapshot(value: unknown): CbbSnapshot | null {
@@ -97,6 +103,8 @@ function normalizeStore(parsed: Partial<CbbStore> | null): CbbStore {
     snapshots,
     draft: keepDraft ? sanitizeDraft(parsed.draft) : null,
     viewingId,
+    eliminatorLockedIds: sanitizeIdList(parsed.eliminatorLockedIds),
+    eliminatorEliminatedIds: sanitizeIdList(parsed.eliminatorEliminatedIds),
   };
 }
 

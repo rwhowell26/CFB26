@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { BracketologyTab } from "@/components/BracketologyTab";
+import { EliminatorTab } from "@/components/EliminatorTab";
 import { CBB_SEASON_LABEL, CBB_SEASON_YEAR, FIELD_SIZE, PLAY_IN_GAMES, PLAY_IN_TEAMS } from "@/lib/cbb-season";
 import { emptyMetrics } from "@/lib/cbb-metrics";
 import {
@@ -25,7 +26,7 @@ export function BasketballApp() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [store, setStore] = useCbbStore();
-  const [tab] = useState<"bracketology">("bracketology");
+  const [tab, setTab] = useState<"bracketology" | "eliminator">("bracketology");
 
   useEffect(() => {
     hydrateCbbStoreFromLocalStorage();
@@ -80,12 +81,16 @@ export function BasketballApp() {
     snapshots?: CbbSnapshot[];
     draft?: CbbDraft | null;
     viewingId?: string | null;
+    eliminatorLockedIds?: string[];
+    eliminatorEliminatedIds?: string[];
   }) => {
     setStore({
       ...store,
       snapshots: next.snapshots ?? store.snapshots,
       draft: next.draft === undefined ? store.draft : next.draft,
       viewingId: next.viewingId === undefined ? store.viewingId : next.viewingId,
+      eliminatorLockedIds: next.eliminatorLockedIds ?? store.eliminatorLockedIds,
+      eliminatorEliminatedIds: next.eliminatorEliminatedIds ?? store.eliminatorEliminatedIds,
     });
   };
 
@@ -108,11 +113,11 @@ export function BasketballApp() {
   const latest = latestSnapshot(store);
 
   return (
-    <div className={`app-shell cbb-mode${store.draft ? " is-scrub" : ""}`}>
+    <div className={`app-shell cbb-mode${store.draft && tab === "bracketology" ? " is-scrub" : ""}`}>
       <header className="topbar">
         <div className="brand-block">
           <p className="brand">CBB{String(CBB_SEASON_YEAR).slice(2)}</p>
-          <h1>Bracketology</h1>
+          <h1>{tab === "eliminator" ? "Eliminator" : "Bracketology"}</h1>
           <p className="tagline">
             {CBB_SEASON_LABEL} · {teams.length} D1 teams · {conferences.length} auto-bids ·{" "}
             {Math.max(0, FIELD_SIZE - conferences.length)} at-large · {PLAY_IN_TEAMS} play-in · {PLAY_IN_GAMES}{" "}
@@ -123,20 +128,46 @@ export function BasketballApp() {
       </header>
 
       <nav className="tabs" aria-label="Basketball">
-        <button type="button" className={tab === "bracketology" ? "active" : ""}>
+        <button
+          type="button"
+          className={tab === "bracketology" ? "active" : ""}
+          onClick={() => setTab("bracketology")}
+        >
           Bracketology
+        </button>
+        <button
+          type="button"
+          className={tab === "eliminator" ? "active" : ""}
+          onClick={() => setTab("eliminator")}
+        >
+          Eliminator
         </button>
       </nav>
 
-      <BracketologyTab
-        teams={teams}
-        metrics={metrics}
-        conferences={conferences}
-        snapshots={store.snapshots}
-        draft={store.draft}
-        viewingId={store.viewingId}
-        onStoreChange={patchStore}
-      />
+      {tab === "eliminator" ? (
+        <EliminatorTab
+          teams={teams}
+          metrics={metrics}
+          lockedIds={store.eliminatorLockedIds ?? []}
+          eliminatedIds={store.eliminatorEliminatedIds ?? []}
+          onChange={(next) =>
+            patchStore({
+              eliminatorLockedIds: next.lockedIds,
+              eliminatorEliminatedIds: next.eliminatedIds,
+            })
+          }
+        />
+      ) : (
+        <BracketologyTab
+          teams={teams}
+          metrics={metrics}
+          conferences={conferences}
+          snapshots={store.snapshots}
+          draft={store.draft}
+          viewingId={store.viewingId}
+          onStoreChange={patchStore}
+        />
+      )}
     </div>
   );
 }

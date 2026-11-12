@@ -103,4 +103,6 @@ export type CbbStore = {
   snapshots: CbbSnapshot[];
   draft: CbbDraft | null;
   viewingId: string | null;
+  eliminatorLockedIds: string[];
+  eliminatorEliminatedIds: string[];
 };
