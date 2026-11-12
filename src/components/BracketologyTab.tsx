@@ -183,7 +183,7 @@ export function BracketologyTab({
             <p className="eyebrow">
               {question.phase === "recommend"
                 ? "Recommended climb"
-                : `${spotLabel(spotFromRank(question.leftRank))} #${question.leftRank} vs ${spotLabel(spotFromRank(question.rightRank))} #${question.rightRank}`}
+                : `${spotLabel(spotForTeam(left.id, draft.rankedIds, assignment))} #${question.leftRank} vs ${spotLabel(spotForTeam(right.id, draft.rankedIds, assignment))} #${question.rightRank}`}
             </p>
             <p>
               {question.phase === "recommend"
@@ -265,14 +265,8 @@ export function BracketologyTab({
             rightMetrics={rightMetrics}
             leftRole={question.phase === "recommend" ? "Team above" : "Currently higher"}
             rightRole={question.phase === "recommend" ? "Climbing" : "Currently lower"}
-            leftSpot={{
-              ...spotFromRank(question.leftRank),
-              playIn: spotForTeam(left.id, draft.rankedIds, assignment).playIn,
-            }}
-            rightSpot={{
-              ...spotFromRank(question.rightRank),
-              playIn: spotForTeam(right.id, draft.rankedIds, assignment).playIn,
-            }}
+            leftSpot={spotForTeam(left.id, draft.rankedIds, assignment)}
+            rightSpot={spotForTeam(right.id, draft.rankedIds, assignment)}
             assignment={assignment}
             teamsById={teamsById}
             onPickLeft={() => pick(left.id, right.id)}

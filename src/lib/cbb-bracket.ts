@@ -216,35 +216,96 @@ export function autoBidPlayInSeed(seed: number): boolean {
   return seed === 15 || seed === 16;
 }
 
-function playInPool(seed: number, rows: CbbFieldTeam[]): CbbFieldTeam[] {
-  const autoBids = rows.filter((row) => row.role === "auto-bid");
-  const atLarge = rows.filter((row) => row.role === "at-large");
-  const primary = autoBidPlayInSeed(seed) ? autoBids : atLarge;
-  const fill = autoBidPlayInSeed(seed) ? atLarge : [];
-  const worseFirst = (left: CbbFieldTeam, right: CbbFieldTeam) => right.sCurveIndex - left.sCurveIndex;
-  return [...primary.sort(worseFirst), ...fill.sort(worseFirst)];
+function evenCount(n: number): number {
+  return n - (n % 2);
+}
+
+function worseFirst(left: CbbFieldTeam, right: CbbFieldTeam): number {
+  return right.sCurveIndex - left.sCurveIndex;
+}
+
+function betterFirst(left: CbbFieldTeam, right: CbbFieldTeam): number {
+  return left.sCurveIndex - right.sCurveIndex;
+}
+
+/** 12 lowest at-larges: 8 on 11, 4 on 12. */
+export function openingRoundAtLargeTeams(): number {
+  return seedLinePlayInTeams(11) + seedLinePlayInTeams(12);
+}
+
+/** 12 lowest auto-bids: 4 on 15, 8 on 16. */
+export function openingRoundAutoBidTeams(): number {
+  return seedLinePlayInTeams(15) + seedLinePlayInTeams(16);
+}
+
+function playInSlotIndexes(seed: number): number[] {
+  const start = firstIndexForSeed(seed);
+  const byes = seedLineSize(seed) - seedLinePlayInTeams(seed);
+  return Array.from({ length: seedLinePlayInTeams(seed) }, (_, i) => start + byes + i);
 }
 
 /**
- * Opening Round: 12 lowest at-larges on 11/12, 12 lowest auto-bids on 15/16.
- * Auto-bids on 11–14 get a bye instead of playing an at-large.
+ * Opening Round: the 12 lowest at-larges on the seed list play on 11/12
+ * (last vs 2nd-last, and so on). The 12 lowest auto-bids play on 15/16.
+ * A better at-large on 11/12 slides to the vacated 13/14 line so no bye
+ * at-large sits below a play-in at-large.
  */
 export function markPlayIn(field: CbbFieldTeam[]): CbbFieldTeam[] {
-  const playInIds = new Set<string>();
-  const bySeed = new Map<number, CbbFieldTeam[]>();
-  for (const row of field) {
-    const list = bySeed.get(row.seed) ?? [];
-    list.push(row);
-    bySeed.set(row.seed, list);
+  const atLarge = field.filter((row) => row.role === "at-large").sort(worseFirst);
+  const autoBids = field.filter((row) => row.role === "auto-bid").sort(worseFirst);
+  const alPlayIn = atLarge.slice(0, evenCount(Math.min(openingRoundAtLargeTeams(), atLarge.length)));
+  const aqPlayIn = autoBids.slice(
+    0,
+    evenCount(Math.min(openingRoundAutoBidTeams(), autoBids.length)),
+  );
+  const playInIds = new Set([...alPlayIn, ...aqPlayIn].map((row) => row.teamId));
+
+  if (field.length !== FIELD_SIZE) {
+    return field.map((row) => ({ ...row, playIn: playInIds.has(row.teamId) }));
   }
-  for (const [seed, rows] of bySeed) {
-    const count = seedLinePlayInTeams(seed);
-    if (!count) continue;
-    const picked = playInPool(seed, rows).slice(0, count);
-    const even = picked.slice(0, picked.length - (picked.length % 2));
-    for (const row of even) playInIds.add(row.teamId);
+
+  const placed: Array<CbbFieldTeam | undefined> = Array.from({ length: FIELD_SIZE });
+  const used = new Set<string>();
+  const put = (index: number, row: CbbFieldTeam, playIn: boolean) => {
+    placed[index] = {
+      ...row,
+      seed: seedForFieldIndex(index),
+      playIn,
+    };
+    used.add(row.teamId);
+  };
+
+  const twelveAls = alPlayIn.slice(0, seedLinePlayInTeams(12)).sort(betterFirst);
+  const elevenAls = alPlayIn.slice(seedLinePlayInTeams(12)).sort(betterFirst);
+  const sixteenAqs = aqPlayIn.slice(0, seedLinePlayInTeams(16)).sort(betterFirst);
+  const fifteenAqs = aqPlayIn.slice(seedLinePlayInTeams(16)).sort(betterFirst);
+
+  playInSlotIndexes(11).forEach((index, i) => {
+    const row = elevenAls[i];
+    if (row) put(index, row, true);
+  });
+  playInSlotIndexes(12).forEach((index, i) => {
+    const row = twelveAls[i];
+    if (row) put(index, row, true);
+  });
+  playInSlotIndexes(15).forEach((index, i) => {
+    const row = fifteenAqs[i];
+    if (row) put(index, row, true);
+  });
+  playInSlotIndexes(16).forEach((index, i) => {
+    const row = sixteenAqs[i];
+    if (row) put(index, row, true);
+  });
+
+  const remaining = field.filter((row) => !used.has(row.teamId)).sort(betterFirst);
+  let next = 0;
+  for (let index = 0; index < FIELD_SIZE; index++) {
+    if (placed[index]) continue;
+    const row = remaining[next++];
+    if (row) put(index, row, false);
   }
-  return field.map((row) => ({ ...row, playIn: playInIds.has(row.teamId) }));
+
+  return placed.map((row, index) => row ?? { ...field[index]!, playIn: playInIds.has(field[index]!.teamId) });
 }
 
 export function bandForRank(rank: number): CbbScrubBand {
