@@ -344,7 +344,10 @@ function SavedProjection({
     snapshot.sCurve,
     teamsById,
     conferences,
-    new Map(Object.entries(snapshot.autoBidByConference)),
+    // Recompute from live metrics. A saved autoBidByConference can still
+    // name a teammate who was first on the S-curve, which parked the real
+    // conference leader (Grand Canyon) in Next 4 Out.
+    bestTeamByConference([...teamsById.values()], teamsById, metrics),
   );
   return (
     <>

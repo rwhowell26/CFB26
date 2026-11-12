@@ -131,9 +131,9 @@ export function assignField(
   const placed = new Set<string>();
 
   const place = (teamId: string, role: CbbFieldTeam["role"]) => {
-    if (placed.has(teamId) || fieldIds.length >= fieldSize) return;
+    if (placed.has(teamId) || fieldIds.length >= fieldSize) return false;
     const team = teamsById.get(teamId);
-    if (!team) return;
+    if (!team) return false;
     fieldIds.push(teamId);
     placed.add(teamId);
     roles.set(teamId, role);
@@ -142,27 +142,42 @@ export function assignField(
       autoBidByConference[team.conference] = teamId;
       unrepresented.delete(team.conference);
     }
+    return true;
+  };
+
+  const evictLastAtLarge = () => {
+    for (let i = fieldIds.length - 1; i >= 0; i--) {
+      const id = fieldIds[i]!;
+      if (roles.get(id) !== "at-large") continue;
+      fieldIds.splice(i, 1);
+      placed.delete(id);
+      roles.delete(id);
+      const at = atLargeIds.indexOf(id);
+      if (at >= 0) atLargeIds.splice(at, 1);
+      return true;
+    }
+    return false;
   };
 
   for (const teamId of sCurve) {
-    if (fieldIds.length >= fieldSize) break;
     const team = teamsById.get(teamId);
     if (!team || placed.has(teamId)) continue;
     const slotsLeft = fieldSize - fieldIds.length;
     const confsLeft = unrepresented.size;
 
     if (autoBidIds.has(teamId)) {
+      if (fieldIds.length >= fieldSize) evictLastAtLarge();
       place(teamId, "auto-bid");
       continue;
     }
-    if (slotsLeft <= confsLeft) continue;
+    if (fieldIds.length >= fieldSize || slotsLeft <= confsLeft) continue;
     place(teamId, "at-large");
   }
 
   for (const conference of [...unrepresented]) {
-    if (fieldIds.length >= fieldSize) break;
     const teamId = bestByConference.get(conference);
     if (!teamId || placed.has(teamId)) continue;
+    if (fieldIds.length >= fieldSize) evictLastAtLarge();
     place(teamId, "auto-bid");
   }
 
