@@ -3104,22 +3104,54 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
   font-size: 0.88rem;
 }
 
-.cbb-elim-list {
-  gap: 0.08rem;
-}
-
-.cbb-elim-list > li {
+.cbb-elim-out {
   display: grid;
-  gap: 0.35rem;
+  gap: 0.4rem;
+  padding: 0 0.85rem 0.85rem;
 }
 
-.cbb-elim-split {
-  margin: 0.65rem 0.2rem 0.15rem;
+.cbb-elim-out > p {
+  margin: 0;
+  color: var(--muted);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--muted);
+}
+
+.cbb-elim-out-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.cbb-elim-out-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.18rem 0.55rem 0.18rem 0.28rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, #b42318 10%, var(--panel));
+  color: inherit;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cbb-elim-out-chip:hover {
+  border-color: color-mix(in srgb, #b42318 45%, var(--line));
+}
+
+.cbb-elim-out-chip .team-logo {
+  width: 1.15rem;
+  height: 1.15rem;
+  padding: 0.04rem;
+}
+
+.cbb-elim-list {
+  gap: 0.08rem;
 }
 
 .cbb-elim-row {
@@ -3138,7 +3170,29 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
 }
 
 .cbb-elim-row.is-locked {
-  box-shadow: inset 3px 0 0 color-mix(in srgb, var(--turf, #1f6b45) 80%, #fff);
+  box-shadow: none;
+}
+
+.cbb-elim-row.is-locked.play-in {
+  box-shadow: none;
+}
+
+.cbb-elim-row.is-locked .cbb-scurve-idx,
+.cbb-elim-row.is-locked .cbb-scurve-meta,
+.cbb-elim-row.is-locked .cbb-scurve-avg,
+.cbb-elim-row.is-locked .cbb-elim-role {
+  color: color-mix(in srgb, currentColor 78%, transparent);
+}
+
+.cbb-elim-row.is-locked .cbb-pi,
+.cbb-elim-row.is-locked .cbb-elim-tag {
+  background: color-mix(in srgb, currentColor 22%, transparent);
+  color: inherit;
+}
+
+.cbb-elim-row.is-locked .team-logo {
+  background: transparent;
+  box-shadow: none;
 }
 
 .cbb-elim-row.is-eliminated {
@@ -3151,6 +3205,11 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
 
 .cbb-elim-row.is-selected {
   outline: 1px solid color-mix(in srgb, var(--turf, #1f6b45) 55%, #fff);
+}
+
+.cbb-elim-row.is-locked.is-selected {
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
 }
 
 .cbb-elim-tag {
