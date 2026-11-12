@@ -2399,8 +2399,7 @@ input[type="password"],
   font-size: 1.15rem;
 }
 
-.cbb-mode:not(.is-scrub) .tagline,
-.cbb-mode:not(.is-scrub) .tabs {
+.cbb-mode:not(.is-scrub) .tagline {
   display: none;
 }
 
@@ -3070,6 +3069,122 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
 
   .cbb-scurve-meta,
   .cbb-scurve-avg {
+    display: none;
+  }
+}
+
+.cbb-eliminator {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.cbb-elim-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+  padding: 0 0.85rem 0.85rem;
+}
+
+.cbb-elim-toolbar input[type="search"] {
+  min-width: 12rem;
+  flex: 1;
+}
+
+.cbb-elim-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.cbb-elim-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.cbb-elim-list {
+  gap: 0.08rem;
+}
+
+.cbb-elim-list > li {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.cbb-elim-split {
+  margin: 0.65rem 0.2rem 0.15rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cbb-elim-row {
+  width: 100%;
+  grid-template-columns: 1.6rem 2.2rem 1.2rem minmax(0, 1fr) 4.8rem 3.2rem 2.4rem 2.8rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.cbb-elim-row.chase {
+  background: rgba(148, 163, 184, 0.12);
+}
+
+.cbb-elim-row.is-locked {
+  box-shadow: inset 3px 0 0 color-mix(in srgb, var(--turf, #1f6b45) 80%, #fff);
+}
+
+.cbb-elim-row.is-eliminated {
+  opacity: 0.55;
+}
+
+.cbb-elim-row.is-eliminated strong {
+  text-decoration: line-through;
+}
+
+.cbb-elim-row.is-selected {
+  outline: 1px solid color-mix(in srgb, var(--turf, #1f6b45) 55%, #fff);
+}
+
+.cbb-elim-tag {
+  display: inline-block;
+  margin-left: 0.28rem;
+  padding: 0 0.28rem;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--turf, #1f6b45) 28%, transparent);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  vertical-align: 0.08rem;
+}
+
+.cbb-elim-tag.out {
+  background: color-mix(in srgb, #b42318 28%, transparent);
+}
+
+.cbb-elim-role {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: right;
+}
+
+@media (max-width: 720px) {
+  .cbb-elim-row {
+    grid-template-columns: 1.4rem 2rem 1.1rem minmax(0, 1fr) 2.6rem;
+  }
+
+  .cbb-elim-row .cbb-scurve-meta,
+  .cbb-elim-role {
     display: none;
   }
 }
