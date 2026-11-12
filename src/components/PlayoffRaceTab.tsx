@@ -17,12 +17,13 @@ import {
   cycleTeamStatus,
   eliminateFromAtLarge,
   emptyPlayoffRace,
+  formatNextOpponent,
   formatPlayoffLossDate,
   gameWinnerId,
   independentEliminated,
   isNotreDame,
+  nextGameForTeam,
   overallPlayoffRecord,
-  pendingAtLargeGames,
   pendingConferenceGames,
   pendingGamesForConference,
   playoffContentionCounts,
@@ -67,14 +68,6 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
   const atLargePool = useMemo(
     () => atLargePoolTeams(teams, live, cfp, games),
     [teams, live, cfp, games],
-  );
-  const atLargeIds = useMemo(
-    () => new Set(atLargePool.map((team) => team.id)),
-    [atLargePool],
-  );
-  const atLargePending = useMemo(
-    () => pendingAtLargeGames(games, live, atLargeIds),
-    [games, live, atLargeIds],
   );
   const ndId = useMemo(() => teams.find((team) => isNotreDame(team))?.id, [teams]);
   const independents = useMemo(
@@ -182,21 +175,13 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
             <h3>At-Large</h3>
             <span>out of CCG · ≤3 losses</span>
           </header>
-          {atLargePending[0] ? (
-            <NextConferenceGame
-              game={atLargePending[0]}
-              remaining={atLargePending.length}
-              teamsById={teamsById}
-              onApply={() =>
-                patch(applyConferenceGame(live, atLargePending[0]!, ndId))
-              }
-            />
-          ) : null}
           {atLargePool.length ? (
             <ol className="playoff-pool">
               {atLargePool.map((team, index) => {
                 const nd = isNotreDame(team);
                 const rec = overallPlayoffRecord(team, live, games);
+                const nextGame = nextGameForTeam(team.id, games);
+                const rank = ranks.get(team.id);
                 return (
                   <li
                     key={team.id}
@@ -205,12 +190,19 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
                     <span className="playoff-slot">{index + 1}</span>
                     <TeamLogo team={team} />
                     <div>
-                      <strong>{team.shortName}</strong>
+                      <span className="playoff-pool-name">
+                        <strong>{team.shortName}</strong>
+                        {rank != null ? <span className="playoff-pool-rank">#{rank}</span> : null}
+                      </span>
                       <em>
-                        {ranks.has(team.id) ? `#${ranks.get(team.id)} · ` : ""}
                         {rec.wins}-{rec.losses} overall
                         {nd ? "" : ` · ${shortConferenceName(team.conference)}`}
                       </em>
+                      {nextGame ? (
+                        <em className="playoff-pool-next">
+                          {formatNextOpponent(nextGame, team.id, teamsById, ranks)}
+                        </em>
+                      ) : null}
                     </div>
                     <button
                       type="button"
@@ -306,30 +298,33 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
             <h3>Independents</h3>
           </header>
           <ol>
-            {independents.map((team) => (
-              <li key={team.id} className="playoff-row eliminated">
-                <button type="button" className="playoff-row-main" disabled>
-                  <TeamLogo team={team} />
-                  <span className="playoff-row-name">{team.shortName}</span>
-                </button>
-                <span className="playoff-wl">
-                  {isNotreDame(team) ? (
-                    <strong>
-                      {live.notreDameRecord.wins}-{live.notreDameRecord.losses}
-                    </strong>
-                  ) : null}
-                  {isNotreDame(team) ? (
-                    <button
-                      type="button"
-                      className="ghost-btn"
-                      onClick={() => patch(restoreToAtLarge(live, team.id))}
-                    >
-                      Restore
-                    </button>
-                  ) : null}
-                </span>
-              </li>
-            ))}
+            {independents.map((team) => {
+              const rec = isNotreDame(team) ? overallPlayoffRecord(team, live, games) : null;
+              return (
+                <li key={team.id} className="playoff-row eliminated">
+                  <button type="button" className="playoff-row-main" disabled>
+                    <TeamLogo team={team} />
+                    <span className="playoff-row-name">{team.shortName}</span>
+                  </button>
+                  <span className="playoff-wl">
+                    {rec ? (
+                      <strong>
+                        {rec.wins}-{rec.losses}
+                      </strong>
+                    ) : null}
+                    {isNotreDame(team) ? (
+                      <button
+                        type="button"
+                        className="ghost-btn"
+                        onClick={() => patch(restoreToAtLarge(live, team.id))}
+                      >
+                        Restore
+                      </button>
+                    ) : null}
+                  </span>
+                </li>
+              );
+            })}
           </ol>
         </section>
       </div>

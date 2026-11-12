@@ -555,8 +555,39 @@ export function overallPlayoffRecord(
   state: PlayoffRaceState,
   games: Game[],
 ): { wins: number; losses: number } {
+  const live = recordFromGames(team.id, games);
+  if (live.wins + live.losses > 0) return live;
   if (isNotreDame(team)) return state.notreDameRecord;
-  return recordFromGames(team.id, games);
+  return live;
+}
+
+/** Soonest unplayed game for a team, including games in progress. */
+export function nextGameForTeam(teamId: string, games: Game[]): Game | null {
+  const upcoming = games
+    .filter((game) => {
+      if (game.homeTeamId !== teamId && game.awayTeamId !== teamId) return false;
+      return game.status !== "final";
+    })
+    .sort((a, b) => a.date.localeCompare(b.date) || a.week - b.week);
+  return upcoming[0] ?? null;
+}
+
+export function formatNextOpponent(
+  game: Game,
+  teamId: string,
+  teamsById: Map<string, Team>,
+  ranks: Map<string, number> = new Map(),
+): string {
+  const isHome = game.homeTeamId === teamId;
+  const opponentId = isHome ? game.awayTeamId : game.homeTeamId;
+  const opponent = teamsById.get(opponentId);
+  const name = opponent?.abbreviation || (isHome ? game.awayName : game.homeName);
+  const rank = ranks.get(opponentId);
+  const ranked = rank != null ? `#${rank} ${name}` : name;
+  const loc = game.neutralSite ? "vs" : isHome ? "vs" : "@";
+  if (game.status === "in_progress") return `${loc} ${ranked} · live`;
+  const when = formatPlayoffLossDate(game.date);
+  return when ? `${loc} ${ranked} · ${when}` : `${loc} ${ranked}`;
 }
 
 export function championshipLoserIds(games: Game[]): Set<string> {
