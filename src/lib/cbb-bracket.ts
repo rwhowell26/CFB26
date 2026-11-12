@@ -12,6 +12,7 @@ import {
   FIRST_FOUR_OUT,
   LOCK_SIZE,
   NEXT_FOUR_OUT,
+  PLAY_IN_TEAMS,
   SEED_LINE_PLAY_IN_GAMES,
   SEED_LINE_SPOTS,
   RECOMMEND_WITHIN,
@@ -105,8 +106,10 @@ export function bestTeamByConference(
 }
 
 /**
- * 76-team field from an S-curve. At-larges stop once remaining slots
- * equal remaining conferences so every league still gets an auto-bid.
+ * 76-team field from an S-curve. Auto-bids are always the conference
+ * leaders (bestByConference), never a higher-ranked teammate, and they
+ * always occupy a field slot. At-larges stop once remaining slots equal
+ * remaining auto-bids so First/Next 4 Out never include a bid-holder.
  */
 export function assignField(
   sCurve: string[],
@@ -116,6 +119,11 @@ export function assignField(
   fieldSize = FIELD_SIZE,
 ): FieldAssignment {
   const unrepresented = new Set(allConferences);
+  const autoBidIds = new Set<string>();
+  for (const conference of allConferences) {
+    const id = bestByConference.get(conference);
+    if (id) autoBidIds.add(id);
+  }
   const fieldIds: string[] = [];
   const roles = new Map<string, CbbFieldTeam["role"]>();
   const atLargeIds: string[] = [];
@@ -140,16 +148,15 @@ export function assignField(
     if (fieldIds.length >= fieldSize) break;
     const team = teamsById.get(teamId);
     if (!team || placed.has(teamId)) continue;
-    const alreadyIn = !unrepresented.has(team.conference);
     const slotsLeft = fieldSize - fieldIds.length;
     const confsLeft = unrepresented.size;
 
-    if (alreadyIn) {
-      if (slotsLeft <= confsLeft) continue;
-      place(teamId, "at-large");
+    if (autoBidIds.has(teamId)) {
+      place(teamId, "auto-bid");
       continue;
     }
-    place(teamId, "auto-bid");
+    if (slotsLeft <= confsLeft) continue;
+    place(teamId, "at-large");
   }
 
   for (const conference of [...unrepresented]) {
@@ -159,7 +166,7 @@ export function assignField(
     place(teamId, "auto-bid");
   }
 
-  const leftovers = sCurve.filter((id) => !placed.has(id) && teamsById.has(id));
+  const leftovers = sCurve.filter((id) => !placed.has(id) && teamsById.has(id) && !autoBidIds.has(id));
   const field: CbbFieldTeam[] = markPlayIn(
     fieldIds.map((teamId, index) => ({
       teamId,
@@ -228,194 +235,142 @@ function betterFirst(left: CbbFieldTeam, right: CbbFieldTeam): number {
   return left.sCurveIndex - right.sCurveIndex;
 }
 
-/** Max Opening Round at-larges: 8 on 11, 4 on 12. */
+/** 12 lowest at-larges play in the Opening Round. */
 export function openingRoundAtLargeTeams(): number {
-  return seedLinePlayInTeams(11) + seedLinePlayInTeams(12);
+  return PLAY_IN_TEAMS / 2;
 }
 
-/** 12 lowest auto-bids: 4 on 15, 8 on 16. */
+/** 12 lowest auto-bids play in on 15/16. */
 export function openingRoundAutoBidTeams(): number {
-  return seedLinePlayInTeams(15) + seedLinePlayInTeams(16);
+  return PLAY_IN_TEAMS / 2;
 }
 
-function alsOnSeed(field: CbbFieldTeam[], seed: number): CbbFieldTeam[] {
-  return field.filter((row) => row.role === "at-large" && row.seed === seed);
-}
-
-function swapSeeds(left: CbbFieldTeam, right: CbbFieldTeam): void {
-  const seed = left.seed;
-  left.seed = right.seed;
-  right.seed = seed;
-}
+const HALF_SPOTS = SEED_LINE_SPOTS * 2;
+const PLAY_IN_COST = 1;
+const BYE_COST = 2;
 
 /**
- * Slide worse 13+ at-larges onto 12 as play-ins and park extra 11-line
- * at-larges as byes so a better 11 (Miami) can stay in a play-in while
- * the next 11s (Seton Hall, Xavier) do not, and the last 11 (UCF) joins 12.
- */
-function rebalanceAtLargeLines(field: CbbFieldTeam[]): {
-  elevenByeIds: Set<string>;
-  twelveByeIds: Set<string>;
-  elevenAnchorId: string | null;
-  twelveAnchorId: string | null;
-} {
-  const none = {
-    elevenByeIds: new Set<string>(),
-    twelveByeIds: new Set<string>(),
-    elevenAnchorId: null,
-    twelveAnchorId: null,
-  };
-  const stranded = field
-    .filter((row) => row.role === "at-large" && row.seed >= 13)
-    .sort(worseFirst);
-
-  const twelveAlSeats = alsOnSeed(field, 12).length;
-  const toPromote = stranded.slice(0, twelveAlSeats);
-  for (const row of toPromote) {
-    const demote = alsOnSeed(field, 12).sort(betterFirst)[0];
-    if (!demote || demote.teamId === row.teamId) break;
-    swapSeeds(row, demote);
-  }
-
-  const elevens = alsOnSeed(field, 11).sort(betterFirst);
-  const promotions = toPromote.length;
-  if (elevens.length < 4 && !promotions) return none;
-  if (elevens.length < 2) {
-    return {
-      elevenByeIds: new Set(elevens[0] ? [elevens[0].teamId] : []),
-      twelveByeIds: new Set(),
-      elevenAnchorId: null,
-      twelveAnchorId: null,
-    };
-  }
-
-  const twelveBestAfterPromote = alsOnSeed(field, 12).sort(betterFirst)[0];
-  const extraByeCount = Math.min(elevens.length - 2, Math.max(promotions, 1) + 1);
-  const extraByes = elevens.slice(2, 2 + extraByeCount);
-  const park = extraByes.at(-1);
-  const stayByes = extraByes.slice(0, park ? extraByes.length - 1 : extraByes.length);
-  const promotedIds = new Set(toPromote.map((row) => row.teamId));
-  const extraByeIds = new Set(extraByes.map((row) => row.teamId));
-  const sliders = elevens
-    .filter((row) => row.teamId !== elevens[0]?.teamId && row.teamId !== elevens[1]?.teamId && !extraByeIds.has(row.teamId))
-    .sort(worseFirst);
-  const nSlide = Math.max(promotions, extraByes.length ? 1 : 0);
-
-  for (const slider of sliders.slice(0, nSlide)) {
-    const candidates = alsOnSeed(field, 12)
-      .filter((row) => !promotedIds.has(row.teamId) && row.teamId !== park?.teamId)
-      .sort(betterFirst);
-    const byeSlots = Math.max(0, alsOnSeed(field, 12).length - seedLinePlayInTeams(12));
-    const dest = candidates[byeSlots > 1 ? 1 : 0] ?? candidates[0];
-    if (!dest) break;
-    swapSeeds(slider, dest);
-  }
-
-  if (park) {
-    const ranked = alsOnSeed(field, 12)
-      .filter((row) => !promotedIds.has(row.teamId) && row.teamId !== park.teamId)
-      .sort(worseFirst);
-    const dest = ranked[1] ?? ranked[0];
-    if (dest) swapSeeds(park, dest);
-  }
-
-  const parkOnTwelve = park?.seed === 12;
-  const slidersOnTwelve = sliders.filter((row) => row.seed === 12);
-  const twelveByes = [
-    parkOnTwelve && park ? park.teamId : null,
-    twelveBestAfterPromote?.seed === 12 ? twelveBestAfterPromote.teamId : null,
-  ].filter((id): id is string => Boolean(id));
-  return {
-    elevenByeIds: new Set(
-      [elevens[0]!.teamId, ...stayByes.map((row) => row.teamId), park && !parkOnTwelve ? park.teamId : null].filter(
-        (id): id is string => Boolean(id),
-      ),
-    ),
-    twelveByeIds: new Set(twelveByes),
-    elevenAnchorId: elevens[1]?.teamId ?? null,
-    twelveAnchorId: slidersOnTwelve[0]?.teamId ?? null,
-  };
-}
-
-function pickEvenPlayIn(
-  rows: CbbFieldTeam[],
-  forcedByeIds: Set<string>,
-  anchorId: string | null,
-  maxTeams: number,
-): CbbFieldTeam[] {
-  const eligible = rows.filter((row) => !forcedByeIds.has(row.teamId)).sort(worseFirst);
-  const cap = evenCount(Math.min(maxTeams, eligible.length));
-  if (!cap) return [];
-  const anchor = eligible.find((row) => row.teamId === anchorId);
-  if (anchor) {
-    const rest = eligible.filter((row) => row.teamId !== anchorId).sort(worseFirst);
-    return [anchor, ...rest.slice(0, cap - 1)];
-  }
-  return eligible.slice(0, cap);
-}
-
-function playInPool(seed: number, rows: CbbFieldTeam[]): CbbFieldTeam[] {
-  const autoBids = rows.filter((row) => row.role === "auto-bid");
-  const atLarge = rows.filter((row) => row.role === "at-large");
-  const primary = autoBidPlayInSeed(seed) ? autoBids : atLarge;
-  const fill = autoBidPlayInSeed(seed) ? atLarge : [];
-  return [...primary.sort(worseFirst), ...fill.sort(worseFirst)];
-}
-
-/**
- * Opening Round at-larges sit on 11/12. A 13+ at-large that is worse than
- * those play-ins slides onto 12; the 12-line bye slides back a line so the
- * seed lines stay even. The best 11 at-large keeps a bye, the next stays in
- * a play-in, extra 11s become byes, and the worst 11s join the 12-line.
- * Auto-bids only play in on 15/16.
+ * Opening Round at-larges are the 12 lowest at-larges (no at-large bye is
+ * ranked below a play-in at-large). Auto-bids play in only on 15/16; an
+ * auto-bid that lands on 11–14 keeps a bye, and play-in at-larges slide to
+ * 12 then 13 so every seed line still has four First Round spots
+ * (`listed − play-in/2 = 4`). Rank order (`sCurveIndex`) is unchanged.
  */
 export function markPlayIn(field: CbbFieldTeam[]): CbbFieldTeam[] {
   const next = field.map((row) => ({ ...row, playIn: false }));
-  const playInIds = new Set<string>();
+  const atLarge = next.filter((row) => row.role === "at-large").sort(worseFirst);
+  const autoBids = next.filter((row) => row.role === "auto-bid").sort(worseFirst);
+  const alPlayInIds = new Set(
+    atLarge
+      .slice(0, evenCount(Math.min(openingRoundAtLargeTeams(), atLarge.length)))
+      .map((row) => row.teamId),
+  );
+  const aqPlayInIds = new Set(
+    autoBids
+      .slice(0, evenCount(Math.min(openingRoundAutoBidTeams(), autoBids.length)))
+      .map((row) => row.teamId),
+  );
+  const isPlayIn = (row: CbbFieldTeam) =>
+    row.role === "at-large" ? alPlayInIds.has(row.teamId) : aqPlayInIds.has(row.teamId);
+  const costOf = (row: CbbFieldTeam) => (isPlayIn(row) ? PLAY_IN_COST : BYE_COST);
 
   if (next.length !== FIELD_SIZE) {
-    const atLarge = next.filter((row) => row.role === "at-large").sort(worseFirst);
-    const autoBids = next.filter((row) => row.role === "auto-bid" && autoBidPlayInSeed(row.seed)).sort(worseFirst);
-    const alPlayIn = atLarge.slice(0, evenCount(Math.min(openingRoundAtLargeTeams(), atLarge.length)));
-    const aqPlayIn = autoBids.slice(0, evenCount(Math.min(openingRoundAutoBidTeams(), autoBids.length)));
-    for (const row of [...alPlayIn, ...aqPlayIn]) playInIds.add(row.teamId);
-    return next.map((row) => ({ ...row, playIn: playInIds.has(row.teamId) }));
+    return next.map((row) => ({
+      ...row,
+      playIn: isPlayIn(row) && (row.role === "at-large" || autoBidPlayInSeed(row.seed)),
+    }));
   }
 
-  const protectedByes = rebalanceAtLargeLines(next);
+  let seed = 1;
+  let used = 0;
+  const assigned = new Set<string>();
+  const prepaid = new Map<number, number>();
+  const deferred: CbbFieldTeam[] = [];
+  const deferIds = new Set<string>();
 
-  const elevenAls = alsOnSeed(next, 11);
-  const twelveAls = alsOnSeed(next, 12);
-  for (const row of pickEvenPlayIn(
-    elevenAls,
-    protectedByes.elevenByeIds,
-    protectedByes.elevenAnchorId,
-    seedLinePlayInTeams(11),
-  )) {
-    playInIds.add(row.teamId);
-  }
-  for (const row of pickEvenPlayIn(
-    twelveAls,
-    protectedByes.twelveByeIds,
-    protectedByes.twelveAnchorId,
-    seedLinePlayInTeams(12),
-  )) {
-    playInIds.add(row.teamId);
+  const openSeed = (nextSeed: number) => {
+    seed = nextSeed;
+    used = prepaid.get(seed) ?? 0;
+    const remain: CbbFieldTeam[] = [];
+    for (const row of deferred) {
+      const cost = costOf(row);
+      if (used + cost <= HALF_SPOTS) {
+        row.seed = seed;
+        row.playIn = isPlayIn(row);
+        assigned.add(row.teamId);
+        used += cost;
+      } else {
+        remain.push(row);
+      }
+    }
+    deferred.length = 0;
+    deferred.push(...remain);
+  };
+
+  const slideBestPlayInOnSeed = (): boolean => {
+    const slide = next
+      .filter((row) => assigned.has(row.teamId) && row.seed === seed && row.playIn && row.role === "at-large")
+      .sort(betterFirst)[0];
+    if (!slide) return false;
+    slide.seed = seed + 1;
+    prepaid.set(seed + 1, (prepaid.get(seed + 1) ?? 0) + costOf(slide));
+    return true;
+  };
+
+  for (let i = 0; i < next.length; i++) {
+    const row = next[i];
+    if (deferIds.has(row.teamId)) {
+      deferred.push(row);
+      continue;
+    }
+
+    const cost = costOf(row);
+    while (used + cost > HALF_SPOTS) {
+      if (
+        seed >= 11 &&
+        cost === BYE_COST &&
+        used === HALF_SPOTS - PLAY_IN_COST &&
+        slideBestPlayInOnSeed()
+      ) {
+        used -= PLAY_IN_COST;
+        continue;
+      }
+      openSeed(seed + 1);
+    }
+
+    if (seed >= 11 && seed <= 13 && row.role === "auto-bid" && cost === BYE_COST) {
+      const leftoverAfter = HALF_SPOTS - (used + cost);
+      const remainingPiAls: CbbFieldTeam[] = [];
+      for (let j = i + 1; j < next.length; j++) {
+        const later = next[j];
+        if (later.role === "at-large" && alPlayInIds.has(later.teamId) && !deferIds.has(later.teamId)) {
+          remainingPiAls.push(later);
+        }
+      }
+      if (leftoverAfter === PLAY_IN_COST * 2 && remainingPiAls.length >= 4) {
+        deferIds.add(remainingPiAls[0]!.teamId);
+      }
+    }
+
+    row.seed = seed;
+    row.playIn = isPlayIn(row);
+    assigned.add(row.teamId);
+    used += cost;
   }
 
-  const bySeed = new Map<number, CbbFieldTeam[]>();
-  for (const row of next) {
-    const list = bySeed.get(row.seed) ?? [];
-    list.push(row);
-    bySeed.set(row.seed, list);
-  }
-  for (const seed of [15, 16]) {
-    const rows = bySeed.get(seed) ?? [];
-    const picked = playInPool(seed, rows).slice(0, seedLinePlayInTeams(seed));
-    for (const row of picked.slice(0, evenCount(picked.length))) playInIds.add(row.teamId);
+  for (const row of deferred) {
+    const cost = costOf(row);
+    while (used + cost > HALF_SPOTS) openSeed(seed + 1);
+    row.seed = seed;
+    row.playIn = isPlayIn(row);
+    assigned.add(row.teamId);
+    used += cost;
   }
 
-  return next.map((row) => ({ ...row, playIn: playInIds.has(row.teamId) }));
+  return next.map((row) => ({
+    ...row,
+    playIn: row.role === "auto-bid" ? Boolean(row.playIn && autoBidPlayInSeed(row.seed)) : row.playIn,
+  }));
 }
 
 export function bandForRank(rank: number): CbbScrubBand {

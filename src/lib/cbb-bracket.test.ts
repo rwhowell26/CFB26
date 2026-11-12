@@ -235,6 +235,25 @@ test("seed lines list four First Round spots and even play-in pairs", () => {
   }
 });
 
+function assertFourSpotLines(field: CbbFieldTeam[]): void {
+  for (let seed = 1; seed <= 16; seed++) {
+    const listed = field.filter((row) => row.seed === seed);
+    const playIn = listed.filter((row) => row.playIn);
+    assert.equal(playIn.length % 2, 0, `${seed}-line play-in must be even`);
+    if (!listed.length) continue;
+    assert.equal(listed.length - playIn.length / 2, SEED_LINE_SPOTS, `${seed}-line must collapse to four spots`);
+  }
+}
+
+function assertNoAtLargeByeBelowPlayIn(field: CbbFieldTeam[]): void {
+  const alPlayIn = field.filter((row) => row.role === "at-large" && row.playIn);
+  const alByes = field.filter((row) => row.role === "at-large" && !row.playIn);
+  if (!alPlayIn.length || !alByes.length) return;
+  const bestPlayIn = Math.min(...alPlayIn.map((row) => row.sCurveIndex));
+  const worstBye = Math.max(...alByes.map((row) => row.sCurveIndex));
+  assert.ok(worstBye < bestPlayIn, "no at-large bye may be ranked below a play-in at-large");
+}
+
 test("76-team field marks 24 Opening Round teams in even seed-line pairs", () => {
   const conferences = Array.from({ length: 32 }, (_, i) => `C${i}`);
   const power = Array.from({ length: 50 }, (_, i) => team(`p${i}`, "C0"));
@@ -250,41 +269,68 @@ test("76-team field marks 24 Opening Round teams in even seed-line pairs", () =>
   assert.equal(Object.keys(result.autoBidByConference).length, conferences.length);
 
   const playIn = result.field.filter((row) => row.playIn);
-  assert.ok(playIn.every((row) => row.seed === 11 || row.seed === 12 || row.seed === 15 || row.seed === 16));
+  assert.equal(playIn.length, PLAY_IN_TEAMS);
   assert.ok(
     playIn.every((row) => (row.role === "auto-bid" ? row.seed === 15 || row.seed === 16 : true)),
     "auto-bids only play in on 15/16",
   );
-  assert.ok(playIn.filter((row) => row.seed === 11 || row.seed === 12).every((row) => row.role === "at-large"));
-  assert.equal(playIn.filter((row) => row.seed === 13).length, 0);
-  assert.equal(playIn.filter((row) => row.seed === 15).length, 4);
-  assert.equal(playIn.filter((row) => row.seed === 16).length, 8);
+  assert.ok(
+    playIn.filter((row) => row.seed === 11 || row.seed === 12 || row.seed === 13).every((row) => row.role === "at-large"),
+  );
+  assertFourSpotLines(result.field);
+  assertNoAtLargeByeBelowPlayIn(result.field);
 
   for (let seed = 1; seed <= 16; seed++) {
     const marked = result.field.filter((row) => row.seed === seed && row.playIn);
-    assert.equal(marked.length % 2, 0, `${seed}-line play-in must be even`);
-    if (seed === 11 || seed === 12) {
-      assert.ok(marked.every((row) => row.role === "at-large"));
-    }
     if (seed === 15 || seed === 16) {
       assert.ok(marked.every((row) => row.role === "auto-bid"));
     }
   }
 });
 
+test("conference auto-bid is always in the field, never First or Next 4 Out", () => {
+  const conferences = ["WAC", "A", "B", "C"];
+  const decoy = team("utahvalley", "WAC");
+  const leader = team("grandcanyon", "WAC", 8, 8);
+  const others = [
+    team("a1", "A"),
+    team("a2", "A"),
+    team("a3", "A"),
+    team("b1", "B"),
+    team("c1", "C"),
+  ];
+  const teams = [decoy, leader, ...others];
+  const teamsById = new Map(teams.map((item) => [item.id, item]));
+  const best = new Map([
+    ["WAC", "grandcanyon"],
+    ["A", "a1"],
+    ["B", "b1"],
+    ["C", "c1"],
+  ]);
+  const result = assignField(
+    ["utahvalley", "a1", "a2", "a3", "b1", "c1", "grandcanyon"],
+    teamsById,
+    conferences,
+    best,
+    6,
+  );
+  assert.ok(result.field.some((row) => row.teamId === "grandcanyon"));
+  assert.equal(result.autoBidByConference.WAC, "grandcanyon");
+  assert.ok(!result.firstFourOut.includes("grandcanyon"));
+  assert.ok(!result.nextFourOut.includes("grandcanyon"));
+  assert.ok(!result.atLargeIds.includes("grandcanyon"));
+});
+
 test("markPlayIn never leaves a lone play-in on a seed line", () => {
   const marked = markPlayIn(dummyField());
   const playIn = marked.filter((row) => row.playIn);
   assert.ok(playIn.length % 2 === 0);
-  for (let seed = 1; seed <= 16; seed++) {
-    const count = playIn.filter((row) => row.seed === seed).length;
-    assert.equal(count % 2, 0, `${seed}-line play-in must be even`);
-    const listed = marked.filter((row) => row.seed === seed).length;
-    assert.equal(listed, seedLineSize(seed), `${seed}-line listed count`);
-    assert.ok(listed - count / 2 >= SEED_LINE_SPOTS, `${seed}-line First Round spots`);
+  assertFourSpotLines(marked);
+  assertNoAtLargeByeBelowPlayIn(marked);
+  assert.ok(playIn.every((row) => (row.role === "auto-bid" ? row.seed === 15 || row.seed === 16 : true)));
+  for (let i = 0; i < marked.length; i++) {
+    assert.equal(marked[i]?.sCurveIndex, i, "rank order stays the seed-list order");
   }
-  assert.equal(playIn.filter((row) => row.seed === 13).length, 0);
-  assert.ok(playIn.every((row) => row.role === "auto-bid" ? row.seed === 15 || row.seed === 16 : true));
 });
 
 test("a 12-seed auto-bid gets a bye and the at-large on that line plays in", () => {
@@ -363,80 +409,43 @@ function screenshotField(): CbbFieldTeam[] {
   );
 }
 
-test("worse 13-seed at-larges play in on 12 and better 12s slide back", () => {
+test("play-ins keep ranked order and pack 11/12/13 around auto-bid byes", () => {
   const marked = markPlayIn(screenshotField());
   const byId = new Map(marked.map((row) => [row.teamId, row]));
 
-  assert.equal(byId.get("pitt")?.playIn, true);
-  assert.equal(byId.get("pitt")?.seed, 12);
-  assert.equal(byId.get("kentucky")?.playIn, true);
-  assert.equal(byId.get("kentucky")?.seed, 12);
-  assert.equal(byId.get("miami")?.playIn, true);
-  assert.equal(byId.get("ucf")?.playIn, true);
-  assert.equal(byId.get("ucf")?.seed, 12);
+  for (let i = 0; i < marked.length; i++) {
+    assert.equal(marked[i]?.sCurveIndex, i, "rank order stays the seed-list order");
+  }
 
-  assert.equal(byId.get("utahst")?.playIn, false);
-  assert.equal(byId.get("utahst")?.seed, 13);
-  assert.equal(byId.get("xavier")?.playIn, false);
-  assert.equal(byId.get("setonhall")?.playIn, false);
-  assert.equal(byId.get("highpoint")?.playIn, false);
-  assert.equal(byId.get("santaclara")?.playIn, false);
+  assert.equal(byId.get("notredame")?.seed, 11);
   assert.equal(byId.get("notredame")?.playIn, false);
+  assert.equal(byId.get("santaclara")?.seed, 11);
+  assert.equal(byId.get("santaclara")?.playIn, false);
+  for (const id of ["georgia", "tcu", "xavier", "setonhall"]) {
+    assert.equal(byId.get(id)?.seed, 11, `${id} stays an 11-seed play-in`);
+    assert.equal(byId.get(id)?.playIn, true, `${id} stays an 11-seed play-in`);
+  }
 
-  assert.equal(marked.filter((row) => row.seed === 11).length, 8);
-  assert.equal(marked.filter((row) => row.seed === 12).length, 6);
-  assert.equal(marked.filter((row) => row.seed === 13).length, 4);
-  assert.equal(marked.filter((row) => row.seed === 12 && row.playIn).length % 2, 0);
-  assert.equal(marked.filter((row) => row.seed === 11 && row.playIn).length % 2, 0);
-  assert.equal(marked.filter((row) => row.seed === 13 && row.playIn).length, 0);
+  assert.equal(byId.get("highpoint")?.seed, 12);
+  assert.equal(byId.get("highpoint")?.playIn, false);
+  for (const id of ["stanford", "newmexico", "michigan", "miami", "utahst", "ucf"]) {
+    assert.equal(byId.get(id)?.seed, 12, `${id} is a 12-seed play-in`);
+    assert.equal(byId.get(id)?.playIn, true, `${id} is a 12-seed play-in`);
+  }
+
+  assert.equal(byId.get("pitt")?.seed, 13);
+  assert.equal(byId.get("pitt")?.playIn, true);
+  assert.equal(byId.get("kentucky")?.seed, 13);
+  assert.equal(byId.get("kentucky")?.playIn, true);
+
+  assert.equal(marked.filter((row) => row.seed === 11).length, 6);
+  assert.equal(marked.filter((row) => row.seed === 12).length, 7);
+  assert.equal(marked.filter((row) => row.seed === 13).length, 5);
+  assertFourSpotLines(marked);
+  assertNoAtLargeByeBelowPlayIn(marked);
   assert.ok(
     marked.every((row) => (row.role === "auto-bid" && row.playIn ? row.seed === 15 || row.seed === 16 : true)),
   );
-});
-
-test("Xavier and Seton Hall get byes and UCF slides to 12 even without a 13-seed at-large", () => {
-  const field = dummyField(
-    {
-      40: "notredame",
-      41: "miami",
-      42: "setonhall",
-      43: "xavier",
-      44: "tcu",
-      45: "georgia",
-      46: "santaclara",
-      47: "ucf",
-      48: "utahst",
-      49: "michigan",
-      50: "highpoint",
-      51: "kentucky",
-      52: "newmexico",
-      53: "stanford",
-    },
-    {
-      46: "auto-bid",
-      50: "auto-bid",
-    },
-  );
-  const marked = markPlayIn(field);
-  const byId = new Map(marked.map((row) => [row.teamId, row]));
-  assert.equal(byId.get("miami")?.playIn, true);
-  assert.equal(byId.get("ucf")?.playIn, true);
-  assert.equal(byId.get("ucf")?.seed, 12);
-  assert.equal(byId.get("xavier")?.playIn, false);
-  assert.equal(byId.get("setonhall")?.playIn, false);
-  assert.equal(byId.get("notredame")?.playIn, false);
-  assert.equal(marked.filter((row) => row.seed === 12 && row.playIn).length % 2, 0);
-  assert.equal(marked.filter((row) => row.seed === 11 && row.playIn).length % 2, 0);
-});
-
-test("a 13-seed at-large that is worse than 12-line play-ins moves onto 12", () => {
-  const marked = markPlayIn(screenshotField());
-  const byId = new Map(marked.map((row) => [row.teamId, row]));
-  const twelvePi = marked.filter((row) => row.seed === 12 && row.playIn && row.role === "at-large");
-  assert.ok(twelvePi.some((row) => row.teamId === "pitt"));
-  assert.ok(twelvePi.some((row) => row.teamId === "kentucky"));
-  assert.equal(byId.get("pitt")?.sCurveIndex, 54);
-  assert.ok((byId.get("pitt")?.sCurveIndex ?? 0) > (byId.get("kentucky")?.sCurveIndex ?? 0));
 });
 
 test("teamsAboveCurrent is empty at the first pair", () => {

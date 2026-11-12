@@ -381,6 +381,9 @@ function ProjectionLists({
     list.push(row);
     bySeed.set(row.seed, list);
   }
+  for (const rows of bySeed.values()) {
+    rows.sort((left, right) => left.sCurveIndex - right.sCurveIndex);
+  }
 
   const renderIds = (ids: string[], startRank: number) => (
     <ol className="cbb-scurve">
@@ -402,37 +405,41 @@ function ProjectionLists({
   return (
     <div className="cbb-projection">
       <div className="cbb-seed-grid">
-        {[...bySeed.entries()].map(([seed, rows]) => (
-          <div key={seed} className="cbb-seed-block">
-            <h3>
-              {seed}-seeds
-              {rows.some((row) => row.playIn) ? (
-                <span className="cbb-seed-count">
-                  {" "}
-                  · {rows.filter((row) => row.playIn).length} play-in ·{" "}
-                  {rows.length - rows.filter((row) => row.playIn).length / 2} spots
-                </span>
-              ) : null}
-            </h3>
-            <ol className="cbb-scurve">
-              {rows.map((row) => {
-                const team = teamsById.get(row.teamId);
-                if (!team) return null;
-                return (
-                  <TeamRow
-                    key={row.teamId}
-                    team={team}
-                    rank={row.sCurveIndex + 1}
-                    seed={row.seed}
-                    role={row.role}
-                    playIn={row.playIn}
-                    metrics={metricsFor(metrics, row.teamId)}
-                  />
-                );
-              })}
-            </ol>
-          </div>
-        ))}
+        {Array.from({ length: 16 }, (_, i) => i + 1).map((seed) => {
+          const rows = bySeed.get(seed);
+          if (!rows?.length) return null;
+          return (
+            <div key={seed} className="cbb-seed-block">
+              <h3>
+                {seed}-seeds
+                {rows.some((row) => row.playIn) ? (
+                  <span className="cbb-seed-count">
+                    {" "}
+                    · {rows.filter((row) => row.playIn).length} play-in ·{" "}
+                    {rows.length - rows.filter((row) => row.playIn).length / 2} spots
+                  </span>
+                ) : null}
+              </h3>
+              <ol className="cbb-scurve">
+                {rows.map((row) => {
+                  const team = teamsById.get(row.teamId);
+                  if (!team) return null;
+                  return (
+                    <TeamRow
+                      key={row.teamId}
+                      team={team}
+                      rank={row.sCurveIndex + 1}
+                      seed={row.seed}
+                      role={row.role}
+                      playIn={row.playIn}
+                      metrics={metricsFor(metrics, row.teamId)}
+                    />
+                  );
+                })}
+              </ol>
+            </div>
+          );
+        })}
       </div>
 
       <div className="cbb-bubble-grid">
