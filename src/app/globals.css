@@ -3104,50 +3104,73 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
   font-size: 0.88rem;
 }
 
-.cbb-elim-out {
-  display: grid;
-  gap: 0.4rem;
-  padding: 0 0.85rem 0.85rem;
+.cbb-eliminator.has-dock {
+  padding-bottom: 5.5rem;
 }
 
-.cbb-elim-out > p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.cbb-elim-out-list {
+.cbb-elim-dock {
+  position: fixed;
+  z-index: 30;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%);
+  width: min(1600px, calc(100% - 2rem));
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.cbb-elim-out-chip {
-  display: inline-flex;
+  gap: 0.55rem;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.18rem 0.55rem 0.18rem 0.28rem;
+  padding: 0.65rem 0.85rem;
   border: 1px solid var(--line);
-  border-radius: 999px;
-  background: color-mix(in srgb, #b42318 10%, var(--panel));
-  color: inherit;
-  font: inherit;
+  border-radius: 16px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.cbb-elim-dock > span {
+  flex: 1;
+  min-width: 8rem;
+  font-weight: 700;
+}
+
+.cbb-elim-restore {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.cbb-elim-restore input[type="search"] {
+  width: 100%;
+}
+
+.cbb-elim-restore-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+  max-height: min(50vh, 28rem);
+  overflow: auto;
+}
+
+.cbb-elim-restore-list li {
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.28rem 0.15rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.cbb-elim-restore-list li > span {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+  min-width: 0;
+}
+
+.cbb-elim-restore-list em {
+  color: var(--muted);
+  font-style: normal;
   font-size: 0.82rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.cbb-elim-out-chip:hover {
-  border-color: color-mix(in srgb, #b42318 45%, var(--line));
-}
-
-.cbb-elim-out-chip .team-logo {
-  width: 1.15rem;
-  height: 1.15rem;
-  padding: 0.04rem;
 }
 
 .cbb-elim-list {
@@ -3195,14 +3218,6 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
   box-shadow: none;
 }
 
-.cbb-elim-row.is-eliminated {
-  opacity: 0.55;
-}
-
-.cbb-elim-row.is-eliminated strong {
-  text-decoration: line-through;
-}
-
 .cbb-elim-row.is-selected {
   outline: 1px solid color-mix(in srgb, var(--turf, #1f6b45) 55%, #fff);
 }
@@ -3222,10 +3237,6 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
   font-weight: 800;
   letter-spacing: 0.04em;
   vertical-align: 0.08rem;
-}
-
-.cbb-elim-tag.out {
-  background: color-mix(in srgb, #b42318 28%, transparent);
 }
 
 .cbb-elim-role {
