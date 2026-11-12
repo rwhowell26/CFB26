@@ -141,6 +141,21 @@ export function logoSwatch(
   };
 }
 
+/** Full-row fill using the same brand color as the logo disc. */
+export function teamFillColors(
+  color?: string | null,
+  alternateColor?: string | null,
+  teamId?: string | null,
+): { backgroundColor: string; color: string } {
+  const backgroundColor = logoSwatch(color, alternateColor, teamId).backgroundColor;
+  const light = "#f8fafc";
+  const dark = "#0f172a";
+  return {
+    backgroundColor,
+    color: contrastRatio(backgroundColor, light) >= contrastRatio(backgroundColor, dark) ? light : dark,
+  };
+}
+
 export function logoAppearance(
   color?: string | null,
   alternateColor?: string | null,

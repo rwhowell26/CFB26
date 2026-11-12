@@ -6,6 +6,7 @@ import { shortCbbConference } from "@/lib/cbb-conferences";
 import { buildEliminatorBoard, type EliminatorRow } from "@/lib/cbb-eliminator";
 import { formatRank, formatRecord, overallAverage } from "@/lib/cbb-metrics";
 import { FIELD_SIZE } from "@/lib/cbb-season";
+import { teamFillColors } from "@/lib/team-colors";
 import type { CbbTeam, CbbTeamMetrics } from "@/lib/cbb-types";
 
 type Props = {
@@ -31,6 +32,16 @@ export function EliminatorTab({ teams, metrics, lockedIds, eliminatedIds, onChan
   const rows = useMemo(
     () => buildEliminatorBoard(teams, teamsById, metrics, lockedIds, eliminatedIds),
     [teams, teamsById, metrics, lockedIds, eliminatedIds],
+  );
+  const eliminatedTeams = useMemo(
+    () =>
+      rows
+        .filter((row) => row.status === "eliminated")
+        .flatMap((row) => {
+          const team = teamsById.get(row.teamId);
+          return team ? [team] : [];
+        }),
+    [rows, teamsById],
   );
   const needle = query.trim().toLowerCase();
   const visible = needle
@@ -85,30 +96,43 @@ export function EliminatorTab({ teams, metrics, lockedIds, eliminatedIds, onChan
               </button>
               <button
                 type="button"
-                className="ghost-btn"
+                className={selected.status === "eliminated" ? "primary-btn" : "ghost-btn"}
                 onClick={() => setStatus(selected.teamId, selected.status === "eliminated" ? "open" : "eliminated")}
               >
-                {selected.status === "eliminated" ? "Restore" : "Eliminate"}
+                {selected.status === "eliminated" ? "Add back" : "Eliminate"}
               </button>
             </div>
           ) : (
             <p className="cbb-elim-hint">Click a team to lock them in or eliminate them.</p>
           )}
         </div>
+        {eliminatedTeams.length ? (
+          <div className="cbb-elim-out">
+            <p>Eliminated · click to add back</p>
+            <div className="cbb-elim-out-list">
+              {eliminatedTeams.map((team) => (
+                <button
+                  key={team.id}
+                  type="button"
+                  className="cbb-elim-out-chip"
+                  onClick={() => setStatus(team.id, "open")}
+                >
+                  <TeamLogo team={team} />
+                  {team.shortName}
+                </button>
+              ))}
+            </div>
+          </div>
+        ) : null}
       </section>
 
       <ol className="cbb-scurve cbb-elim-list">
-        {visible.map((row, visibleIndex) => {
+        {visible.map((row) => {
           const team = teamsById.get(row.teamId);
           if (!team) return null;
-          const prev = visible[visibleIndex - 1];
-          const splitAfterField =
-            !needle && row.role === "conference-chase" && prev?.role !== "conference-chase";
+          const lockedFill = row.status === "locked" ? teamFillColors(team.color, team.alternateColor, team.id) : undefined;
           return (
             <li key={row.teamId}>
-              {splitAfterField ? (
-                <p className="cbb-elim-split">If they win their conference tournament</p>
-              ) : null}
               <button
                 type="button"
                 className={`cbb-scurve-row cbb-elim-row${row.role === "auto-bid" ? " auto" : row.role === "at-large" ? " at-large" : ""}${
@@ -116,11 +140,12 @@ export function EliminatorTab({ teams, metrics, lockedIds, eliminatedIds, onChan
                 }${row.playIn ? " play-in" : ""}${row.status === "locked" ? " is-locked" : ""}${
                   row.status === "eliminated" ? " is-eliminated" : ""
                 }${selectedId === row.teamId ? " is-selected" : ""}`}
+                style={lockedFill}
                 onClick={() => setSelectedId(row.teamId)}
               >
                 <span className="cbb-scurve-rank">{row.seed != null ? row.seed : "·"}</span>
                 <span className="cbb-scurve-idx">#{row.rank}</span>
-                <TeamLogo team={team} />
+                <TeamLogo team={team} onFill={lockedFill?.backgroundColor} />
                 <strong>
                   {team.shortName}
                   {row.playIn ? <span className="cbb-pi">PI</span> : null}
