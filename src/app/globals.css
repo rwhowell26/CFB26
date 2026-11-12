@@ -2993,6 +2993,7 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
   align-items: center;
   padding: 0.2rem 0.35rem;
   border-radius: 8px;
+  overflow: hidden;
 }
 
 .cbb-scurve-row.at-large {
@@ -3003,8 +3004,29 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
   background: rgba(196, 165, 116, 0.16);
 }
 
+.cbb-scurve-row.is-filled .cbb-scurve-idx,
+.cbb-scurve-row.is-filled .cbb-scurve-meta,
+.cbb-scurve-row.is-filled .cbb-scurve-avg {
+  color: inherit;
+  opacity: 0.86;
+}
+
+.cbb-scurve-row.is-filled .team-logo {
+  background: transparent;
+  box-shadow: none;
+}
+
+.cbb-scurve-row.is-filled .cbb-pi {
+  background: color-mix(in srgb, #fff 22%, transparent);
+  color: inherit;
+}
+
 .cbb-scurve-row.play-in {
   box-shadow: inset 3px 0 0 color-mix(in srgb, var(--accent, #c4a574) 85%, #fff);
+}
+
+.cbb-scurve-row.is-filled.play-in {
+  box-shadow: inset 3px 0 0 color-mix(in srgb, #fff 55%, transparent);
 }
 
 .cbb-scurve-rank {

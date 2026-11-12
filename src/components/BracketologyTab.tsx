@@ -16,6 +16,7 @@ import {
   teamsAboveCurrent,
 } from "@/lib/cbb-bracket";
 import { emptyMetrics, formatRecord, overallAverage, formatRank } from "@/lib/cbb-metrics";
+import { compareColumnColors } from "@/lib/team-colors";
 import {
   COMPLETED_ABOVE,
   FIELD_SIZE,
@@ -67,15 +68,17 @@ function TeamRow({
   playIn?: boolean;
   metrics: CbbTeamMetrics;
 }) {
+  const colors = compareColumnColors(team.color, team.alternateColor);
   return (
     <li
-      className={`cbb-scurve-row${role === "auto-bid" ? " auto" : role === "at-large" ? " at-large" : ""}${
+      className={`cbb-scurve-row is-filled${role === "auto-bid" ? " auto" : role === "at-large" ? " at-large" : ""}${
         playIn ? " play-in" : ""
       }`}
+      style={colors}
     >
       <span className="cbb-scurve-rank">{seed != null ? `${seed}` : "·"}</span>
       <span className="cbb-scurve-idx">#{rank}</span>
-      <TeamLogo team={team} />
+      <TeamLogo team={team} onFill={colors.background} />
       <strong>
         {team.shortName}
         {playIn ? <span className="cbb-pi">PI</span> : null}
