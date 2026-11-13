@@ -6,7 +6,9 @@ import {
   assignField,
   bestTeamByConference,
   draftSCurve,
+  liveReserveCounts,
   padAboveSlots,
+  playInCap,
   recommendNewTeams,
   remainingAutoBidIds,
   seedWorkingPool,
@@ -128,12 +130,24 @@ export function BracketologyTab({
     const rightMetrics = question ? metricsFor(metrics, question.rightId) : null;
     const remaining = remainingScrubCount(draft);
     const curve = draftSCurve(draft.rankedIds, draft.autoBidIds);
-    const assignment = assignField(
-      curve,
-      teamsById,
-      conferences,
-      bestTeamByConference(teams, teamsById, metrics),
-    );
+    const bestByConf = bestTeamByConference(teams, teamsById, metrics);
+    const assignment = assignField(curve, teamsById, conferences, bestByConf);
+    const placedForReserve =
+      question?.phase === "at-large"
+        ? draft.rankedIds.slice(0, Math.max(0, question.leftRank - 1))
+        : question?.phase === "recommend"
+          ? draft.rankedIds.slice(0, Math.max(0, question.leftRank))
+          : draft.rankedIds;
+    const live = liveReserveCounts(placedForReserve, teamsById, bestByConf, conferences);
+    const reserves =
+      question?.phase === "auto-bid" || !question
+        ? {
+            atLargeSpots: assignment.atLargeIds.length,
+            reserved: assignment.autoBidsReserved,
+            total: assignment.autoBidsTotal,
+            playInRemaining: assignment.field.filter((row) => row.playIn).length,
+          }
+        : live;
 
     const pick = (winnerId: string, loserId: string) => {
       onStoreChange({ draft: applyScrubChoice(draft, winnerId, loserId, recommended, autoBidIds) });
@@ -161,10 +175,10 @@ export function BracketologyTab({
               <h2>Seed list locked</h2>
               <p>
                 {assignment.field.length} in the field · {assignment.atLargeIds.length} at-large ·{" "}
-                {Object.keys(assignment.autoBidByConference).length} auto-bids ·{" "}
-                {assignment.field.filter((row) => row.playIn).length} play-in · {PLAY_IN_GAMES} Opening
-                Round games. Last 4 in, first 4 out, and next 4 out used the at-large cut; 12–16
-                auto-bids were scrubbed separately.
+                {assignment.autoBidsReserved}/{assignment.autoBidsTotal} auto-bid ·{" "}
+                {assignment.field.filter((row) => row.playIn).length}/{playInCap(assignment.autoBidsReserved)} play-in
+                · {PLAY_IN_GAMES} Opening Round games. Last 4 in, first 4 out, and next 4 out used the
+                at-large cut; 12–16 auto-bids were scrubbed separately.
               </p>
             </header>
             <div className="build-actions">
@@ -206,10 +220,8 @@ export function BracketologyTab({
                   ? `${remaining} auto-bid pair${remaining === 1 ? "" : "s"} left`
                   : `${remaining} at-large pair${remaining === 1 ? "" : "s"} left`}
               {" · "}
-              {assignment.atLargeIds.length} at-large / {Object.keys(assignment.autoBidByConference).length} auto
-              {" · "}
-              {assignment.field.filter((row) => row.playIn).length}/{PLAY_IN_TEAMS} play-in · {PLAY_IN_GAMES}{" "}
-              Opening Round games
+              {reserves.atLargeSpots} at-large · {reserves.reserved}/{reserves.total} auto-bid ·{" "}
+              {reserves.playInRemaining}/{PLAY_IN_TEAMS} play-in · {PLAY_IN_GAMES} Opening Round games
             </p>
           </header>
           <div className="build-actions">
@@ -374,9 +386,9 @@ function SavedProjection({
     <>
       <p className="cbb-saved-meta">
         Saved {formatCbbDate(snapshot.createdAt)} · {assignment.field.length}/{FIELD_SIZE} field ·{" "}
-        {assignment.atLargeIds.length} at-large · {Object.keys(assignment.autoBidByConference).length}{" "}
-        auto-bids · {assignment.field.filter((row) => row.playIn).length}/{PLAY_IN_TEAMS} play-in · {PLAY_IN_GAMES}{" "}
-        Opening Round games
+        {assignment.atLargeIds.length} at-large · {assignment.autoBidsReserved}/{assignment.autoBidsTotal} auto-bid
+        · {assignment.field.filter((row) => row.playIn).length}/{playInCap(assignment.autoBidsReserved)} play-in ·{" "}
+        {PLAY_IN_GAMES} Opening Round games
       </p>
       <ProjectionLists
         assignment={assignment}

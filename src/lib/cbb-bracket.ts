@@ -36,6 +36,9 @@ export type FieldAssignment = {
   firstFourOut: string[];
   nextFourOut: string[];
   unrepresented: string[];
+  /** Conference champs still reserved at 12–16 (not in the at-large group). */
+  autoBidsReserved: number;
+  autoBidsTotal: number;
 };
 
 function metricsOf(
@@ -115,10 +118,10 @@ export function bestTeamByConference(
 }
 
 /**
- * 76-team field from an S-curve. Auto-bids are always the conference
- * leaders (bestByConference), never a higher-ranked teammate, and they
- * always occupy a field slot. At-larges stop once remaining slots equal
- * remaining auto-bids so First/Next 4 Out never include a bid-holder.
+ * 76-team field from an S-curve. Conference leaders always occupy a field
+ * slot. A leader who is in on merit (would make it without winning the
+ * conference) stays marked auto-bid but joins the at-large group: reserved
+ * 12–16 spots drop by one and one more at-large spot opens at the cut.
  */
 export function assignField(
   sCurve: string[],
@@ -133,21 +136,22 @@ export function assignField(
     const id = bestByConference.get(conference);
     if (id) autoBidIds.add(id);
   }
+  const autoBidsTotal = autoBidIds.size;
   const fieldIds: string[] = [];
   const roles = new Map<string, CbbFieldTeam["role"]>();
   const atLargeIds: string[] = [];
   const autoBidByConference: Record<string, string> = {};
   const placed = new Set<string>();
 
-  const place = (teamId: string, role: CbbFieldTeam["role"]) => {
+  const place = (teamId: string, role: CbbFieldTeam["role"], inAtLargeGroup = role === "at-large") => {
     if (placed.has(teamId) || fieldIds.length >= fieldSize) return false;
     const team = teamsById.get(teamId);
     if (!team) return false;
     fieldIds.push(teamId);
     placed.add(teamId);
     roles.set(teamId, role);
-    if (role === "at-large") atLargeIds.push(teamId);
-    else {
+    if (inAtLargeGroup && !atLargeIds.includes(teamId)) atLargeIds.push(teamId);
+    if (role === "auto-bid") {
       autoBidByConference[team.conference] = teamId;
       unrepresented.delete(team.conference);
     }
@@ -176,7 +180,8 @@ export function assignField(
 
     if (autoBidIds.has(teamId)) {
       if (fieldIds.length >= fieldSize) evictLastAtLarge();
-      place(teamId, "auto-bid");
+      const onMerit = slotsLeft > confsLeft;
+      place(teamId, "auto-bid", onMerit);
       continue;
     }
     if (fieldIds.length >= fieldSize || slotsLeft <= confsLeft) continue;
@@ -187,10 +192,11 @@ export function assignField(
     const teamId = bestByConference.get(conference);
     if (!teamId || placed.has(teamId)) continue;
     if (fieldIds.length >= fieldSize) evictLastAtLarge();
-    place(teamId, "auto-bid");
+    place(teamId, "auto-bid", false);
   }
 
   const leftovers = sCurve.filter((id) => !placed.has(id) && teamsById.has(id) && !autoBidIds.has(id));
+  const atLargeGroup = new Set(atLargeIds);
   const field: CbbFieldTeam[] = markPlayIn(
     fieldIds.map((teamId, index) => ({
       teamId,
@@ -199,7 +205,9 @@ export function assignField(
       seed: seedForFieldIndex(index),
       playIn: false,
     })),
+    atLargeGroup,
   );
+  const autoBidsReserved = Object.values(autoBidByConference).filter((id) => !atLargeGroup.has(id)).length;
 
   return {
     field,
@@ -208,7 +216,17 @@ export function assignField(
     firstFourOut: leftovers.slice(0, FIRST_FOUR_OUT),
     nextFourOut: leftovers.slice(FIRST_FOUR_OUT, FIRST_FOUR_OUT + NEXT_FOUR_OUT),
     unrepresented: [...unrepresented],
+    autoBidsReserved,
+    autoBidsTotal,
   };
+}
+
+/** Opening Round slots: 12 at-large play-ins plus play-ins among reserved auto-bids. */
+export function playInCap(autoBidsReserved: number): number {
+  return (
+    openingRoundAtLargeTeams() +
+    evenCount(Math.min(openingRoundAutoBidTeams(), Math.max(0, autoBidsReserved)))
+  );
 }
 
 /** Opening Round games on this seed line (0 if every team already has a First Round bye). */
@@ -280,18 +298,21 @@ const BYE_COST = 2;
  * 12 then 13 so every seed line still has four First Round spots
  * (`listed − play-in/2 = 4`). Rank order (`sCurveIndex`) is unchanged.
  */
-export function markPlayIn(field: CbbFieldTeam[]): CbbFieldTeam[] {
+export function markPlayIn(field: CbbFieldTeam[], atLargeGroup?: Set<string>): CbbFieldTeam[] {
   const next = field.map((row) => ({ ...row, playIn: false }));
-  const atLarge = next.filter((row) => row.role === "at-large").sort(worseFirst);
-  const autoBids = next.filter((row) => row.role === "auto-bid").sort(worseFirst);
+  const group = atLargeGroup ?? new Set(next.filter((row) => row.role === "at-large").map((row) => row.teamId));
+  const atLarge = next.filter((row) => group.has(row.teamId) && row.role === "at-large").sort(worseFirst);
+  const reservedAutoBids = next
+    .filter((row) => row.role === "auto-bid" && !group.has(row.teamId))
+    .sort(worseFirst);
   const alPlayInIds = new Set(
     atLarge
       .slice(0, evenCount(Math.min(openingRoundAtLargeTeams(), atLarge.length)))
       .map((row) => row.teamId),
   );
   const aqPlayInIds = new Set(
-    autoBids
-      .slice(0, evenCount(Math.min(openingRoundAutoBidTeams(), autoBids.length)))
+    reservedAutoBids
+      .slice(0, evenCount(Math.min(openingRoundAutoBidTeams(), reservedAutoBids.length)))
       .map((row) => row.teamId),
   );
   const isPlayIn = (row: CbbFieldTeam) =>
@@ -424,12 +445,8 @@ export function spotFromRank(rank: number): CbbTeamSpot {
 }
 
 export function lastFourInIds(assignment: FieldAssignment): Set<string> {
-  return new Set(
-    assignment.field
-      .filter((row) => row.role === "at-large")
-      .slice(-LAST_FOUR_IN)
-      .map((row) => row.teamId),
-  );
+  const inField = new Set(assignment.field.map((row) => row.teamId));
+  return new Set(assignment.atLargeIds.filter((id) => inField.has(id)).slice(-LAST_FOUR_IN));
 }
 
 export function spotLabel(spot: CbbTeamSpot): string {
@@ -720,6 +737,30 @@ export function snapshotFromAssignment(
     firstFourOut: [...assignment.firstFourOut],
     nextFourOut: [...assignment.nextFourOut],
     recommendedIds: [...recommendedIds],
+  };
+}
+
+/** Caps while scrubbing: reserved auto-bids drop only after a conference champ is placed. */
+export function liveReserveCounts(
+  placedIds: string[],
+  teamsById: Map<string, CbbTeam>,
+  bestByConference: Map<string, string>,
+  allConferences: string[],
+): { atLargeSpots: number; reserved: number; total: number; playInRemaining: number } {
+  const total = allConferences.length;
+  const represented = new Set<string>();
+  for (const id of placedIds) {
+    const team = teamsById.get(id);
+    if (!team) continue;
+    if (bestByConference.get(team.conference) === id) represented.add(team.conference);
+  }
+  const reserved = total - represented.size;
+  const absorbed = represented.size;
+  return {
+    atLargeSpots: FIELD_SIZE - reserved,
+    reserved,
+    total,
+    playInRemaining: Math.max(0, PLAY_IN_TEAMS - absorbed),
   };
 }
 

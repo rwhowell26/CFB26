@@ -4,6 +4,7 @@ import {
   assignField,
   bestTeamByConference,
   fieldResultsForTeam,
+  liveReserveCounts,
   markPlayIn,
   padAboveSlots,
   recommendNewTeams,
@@ -92,7 +93,9 @@ test("assignField stops at-larges so remaining conferences still fit", () => {
   );
 
   assert.equal(result.field.length, 6);
-  assert.deepEqual(result.atLargeIds, ["a2", "a3"]);
+  assert.deepEqual(result.atLargeIds, ["a1", "a2", "a3"]);
+  assert.equal(result.autoBidsReserved, 3);
+  assert.equal(result.autoBidsTotal, 4);
   assert.deepEqual(result.autoBidByConference, {
     A: "a1",
     B: "b1",
@@ -113,10 +116,49 @@ test("assignField skips extra at-larges when only auto-bid slots remain", () => 
 
   const result = assignField(sCurve, teamsById, conferences, best, 6);
   assert.equal(result.field.length, 6);
-  assert.equal(result.atLargeIds.length, 2);
+  assert.ok(result.atLargeIds.includes("p0"));
+  assert.equal(result.atLargeIds.length, 3);
+  assert.equal(result.autoBidsReserved, 3);
+  assert.equal(result.autoBidsTotal, 4);
   assert.equal(Object.keys(result.autoBidByConference).length, 4);
   assert.ok(!result.atLargeIds.includes("p9"));
   assert.ok(result.firstFourOut.includes("p3"));
+});
+
+test("live reserve counts start at 32/32 and drop after a conference champ is placed", () => {
+  const conferences = Array.from({ length: 32 }, (_, i) => `C${i}`);
+  const teams = [
+    team("florida", "C0"),
+    team("msu", "C1"),
+    ...conferences.slice(2).map((conf) => team(`${conf}-best`, conf)),
+  ];
+  const teamsById = new Map(teams.map((item) => [item.id, item]));
+  const best = new Map(conferences.map((conf, i) => [conf, i === 0 ? "florida" : i === 1 ? "msu" : `${conf}-best`]));
+  const start = liveReserveCounts([], teamsById, best, conferences);
+  assert.equal(start.reserved, 32);
+  assert.equal(start.atLargeSpots, 44);
+  assert.equal(start.playInRemaining, 24);
+  const afterFlorida = liveReserveCounts(["florida"], teamsById, best, conferences);
+  assert.equal(afterFlorida.reserved, 31);
+  assert.equal(afterFlorida.atLargeSpots, 45);
+  assert.equal(afterFlorida.playInRemaining, 23);
+});
+
+test("a merit auto-bid joins the at-large group and drops reserved spots", () => {
+  const conferences = Array.from({ length: 32 }, (_, i) => `C${i}`);
+  const power = Array.from({ length: 50 }, (_, i) => team(`p${i}`, "C0"));
+  const autos = conferences.slice(1).map((conf) => team(`${conf}-best`, conf, 8, 8));
+  const teams = [...power, ...autos];
+  const teamsById = new Map(teams.map((item) => [item.id, item]));
+  const best = new Map(conferences.map((conf, i) => [conf, i === 0 ? "p0" : `${conf}-best`]));
+  const sCurve = [...power.map((item) => item.id), ...autos.map((item) => item.id)];
+  const result = assignField(sCurve, teamsById, conferences, best);
+  assert.equal(result.autoBidsTotal, 32);
+  assert.equal(result.autoBidsReserved, 31);
+  assert.equal(result.atLargeIds.length, 45);
+  assert.ok(result.atLargeIds.includes("p0"));
+  assert.equal(result.autoBidByConference.C0, "p0");
+  assert.ok(result.firstFourOut.includes("p45"));
 });
 
 test("recommendNewTeams keeps teams within 15 of the last Next 4 Out", () => {
@@ -355,7 +397,10 @@ test("76-team field marks 24 Opening Round teams in even seed-line pairs", () =>
 
   const result = assignField(sCurve, teamsById, conferences, best);
   assert.equal(result.field.length, FIELD_SIZE);
-  assert.equal(result.atLargeIds.length, FIELD_SIZE - conferences.length);
+  assert.ok(result.atLargeIds.includes("p0"));
+  assert.equal(result.atLargeIds.length, FIELD_SIZE - result.autoBidsReserved);
+  assert.equal(result.autoBidsTotal, conferences.length);
+  assert.equal(result.autoBidsReserved, conferences.length - 1);
   assert.equal(Object.keys(result.autoBidByConference).length, conferences.length);
 
   const playIn = result.field.filter((row) => row.playIn);
