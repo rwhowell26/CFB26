@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { BracketologyTab } from "@/components/BracketologyTab";
 import { BracketTab } from "@/components/BracketTab";
 import { CbbConferencesTab } from "@/components/CbbConferencesTab";
+import { ContentionTab } from "@/components/ContentionTab";
 import { EliminatorTab } from "@/components/EliminatorTab";
 import { CBB_SEASON_LABEL, CBB_SEASON_YEAR, FIELD_SIZE, PLAY_IN_GAMES, PLAY_IN_TEAMS } from "@/lib/cbb-season";
 import { emptyMetrics } from "@/lib/cbb-metrics";
@@ -28,9 +29,9 @@ export function BasketballApp() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [store, setStore] = useCbbStore();
-  const [tab, setTab] = useState<"bracketology" | "bracket" | "eliminator" | "conferences">(
-    "bracketology",
-  );
+  const [tab, setTab] = useState<
+    "bracketology" | "contention" | "bracket" | "eliminator" | "conferences"
+  >("bracketology");
 
   useEffect(() => {
     hydrateCbbStoreFromLocalStorage();
@@ -87,6 +88,7 @@ export function BasketballApp() {
     viewingId?: string | null;
     eliminatorLockedIds?: string[];
     eliminatorEliminatedIds?: string[];
+    contentionApprovedIds?: string[] | null;
   }) => {
     setStore({
       ...store,
@@ -95,6 +97,10 @@ export function BasketballApp() {
       viewingId: next.viewingId === undefined ? store.viewingId : next.viewingId,
       eliminatorLockedIds: next.eliminatorLockedIds ?? store.eliminatorLockedIds,
       eliminatorEliminatedIds: next.eliminatorEliminatedIds ?? store.eliminatorEliminatedIds,
+      contentionApprovedIds:
+        next.contentionApprovedIds === undefined
+          ? store.contentionApprovedIds
+          : next.contentionApprovedIds,
     });
   };
 
@@ -132,7 +138,9 @@ export function BasketballApp() {
                 ? "Conferences"
                 : tab === "bracket"
                   ? "Bracket"
-                  : "Bracketology"}
+                  : tab === "contention"
+                    ? "In Contention"
+                    : "Bracketology"}
           </h1>
           <p className="tagline">
             {CBB_SEASON_LABEL} · {teams.length} D1 teams · {conferences.length} auto-bids ·{" "}
@@ -150,6 +158,13 @@ export function BasketballApp() {
           onClick={() => setTab("bracketology")}
         >
           Bracketology
+        </button>
+        <button
+          type="button"
+          className={tab === "contention" ? "active" : ""}
+          onClick={() => setTab("contention")}
+        >
+          In Contention
         </button>
         <button
           type="button"
@@ -176,6 +191,14 @@ export function BasketballApp() {
 
       {tab === "conferences" ? (
         <CbbConferencesTab teams={teams} metrics={metrics} />
+      ) : tab === "contention" ? (
+        <ContentionTab
+          teams={teams}
+          metrics={metrics}
+          snapshot={latest}
+          approvedIds={store.contentionApprovedIds}
+          onApprovedIds={(ids) => patchStore({ contentionApprovedIds: ids })}
+        />
       ) : tab === "bracket" ? (
         <BracketTab
           teams={teams}

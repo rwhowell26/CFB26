@@ -107,4 +107,6 @@ export type CbbStore = {
   viewingId: string | null;
   eliminatorLockedIds: string[];
   eliminatorEliminatedIds: string[];
+  /** Approved In Contention roster. Null until the tab seeds from the current criteria. */
+  contentionApprovedIds: string[] | null;
 };

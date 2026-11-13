@@ -13,6 +13,7 @@ function emptyStore(): CbbStore {
     viewingId: null,
     eliminatorLockedIds: [],
     eliminatorEliminatedIds: [],
+    contentionApprovedIds: null,
   };
 }
 
@@ -116,6 +117,9 @@ function normalizeStore(parsed: Partial<CbbStore> | null): CbbStore {
     viewingId,
     eliminatorLockedIds: sanitizeIdList(parsed.eliminatorLockedIds),
     eliminatorEliminatedIds: sanitizeIdList(parsed.eliminatorEliminatedIds),
+    contentionApprovedIds: Array.isArray(parsed.contentionApprovedIds)
+      ? sanitizeIdList(parsed.contentionApprovedIds)
+      : null,
   };
 }
 
