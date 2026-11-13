@@ -1,6 +1,7 @@
 "use client";
 
-import { logoAppearance, logoOnFill } from "@/lib/team-colors";
+import type { CSSProperties } from "react";
+import { logoAppearance, logoOnFill, logoOrigin, logoScale } from "@/lib/team-colors";
 
 export type TeamLogoSource = {
   id?: string | null;
@@ -22,7 +23,11 @@ export function TeamLogo({ team, className = "", fallback, onFill }: Props) {
   const swatch = logoAppearance(team.color, team.alternateColor, team.logo, team.id);
   const src = onFill ? filled.src : swatch.src;
   const markColor = onFill ? filled.markColor : swatch.markColor;
-  const style = onFill ? undefined : swatch.style;
+  const zoomStyle = {
+    "--logo-scale": String(logoScale(team.id)),
+    "--logo-origin": logoOrigin(team.id),
+  } as CSSProperties;
+  const style = onFill ? zoomStyle : { ...swatch.style, ...zoomStyle };
   const classes = ["team-logo", className].filter(Boolean).join(" ");
   const mark = fallback ?? team.abbreviation?.slice(0, 2) ?? "·";
 
@@ -43,8 +48,10 @@ export function TeamLogo({ team, className = "", fallback, onFill }: Props) {
 
   if (src) {
     return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img src={src} alt="" className={classes} style={style} />
+      <span className={classes} style={style} aria-hidden>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={src} alt="" className="team-logo-img" />
+      </span>
     );
   }
 

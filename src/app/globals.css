@@ -384,7 +384,6 @@ input[type="password"],
 .team-logo {
   width: 1.8rem;
   height: 1.8rem;
-  object-fit: contain;
   border-radius: 0.4rem;
   padding: 0.14rem;
   box-sizing: border-box;
@@ -392,12 +391,26 @@ input[type="password"],
   flex: none;
   display: inline-grid;
   place-items: center;
+  overflow: hidden;
+  --logo-scale: 1;
+  --logo-origin: center;
+}
+
+.team-logo-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  transform: scale(var(--logo-scale, 1));
+  transform-origin: var(--logo-origin, center);
 }
 
 .team-logo-mark {
   width: 100%;
   height: 100%;
   display: block;
+  transform: scale(var(--logo-scale, 1));
+  transform-origin: var(--logo-origin, center);
   -webkit-mask-size: contain;
   mask-size: contain;
   -webkit-mask-repeat: no-repeat;
