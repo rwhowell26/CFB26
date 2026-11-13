@@ -453,7 +453,7 @@ export function spotLabel(spot: CbbTeamSpot): string {
   if (spot.band === "last-four-in") return "Last 4 in";
   if (spot.band === "first-four-out") return "First 4 out";
   if (spot.band === "next-four-out") return "Next 4 out";
-  if (spot.band === "out") return "Out";
+  if (spot.band === "out") return "Currently out";
   if (spot.seed == null) return `#${spot.rank}`;
   return spot.playIn ? `${spot.seed}-seed · Play-in` : `${spot.seed}-seed`;
 }
@@ -488,7 +488,7 @@ export function spotForTeam(
       band: "next-four-out",
     };
   }
-  return spotFromRank(rank);
+  return { rank, seed: null, playIn: false, band: "out" };
 }
 
 /** Seed-list teams immediately above the current pair, newest/closest last. */

@@ -298,6 +298,23 @@ test("a former conference leader stays on the at-large board", () => {
   assert.ok(pool.includes("unc"));
 });
 
+test("teams past Next 4 Out are Currently out, not a seed line", () => {
+  const conferences = ["C0"];
+  const power = Array.from({ length: 16 }, (_, i) => team(`p${i}`, "C0"));
+  const teamsById = new Map(power.map((item) => [item.id, item]));
+  const sCurve = power.map((item) => item.id);
+  const result = assignField(sCurve, teamsById, conferences, new Map([["C0", "p0"]]), 6);
+  assert.equal(result.nextFourOut.length, 4);
+  const leftover = "p14";
+  assert.ok(!result.field.some((row) => row.teamId === leftover));
+  assert.ok(!result.firstFourOut.includes(leftover));
+  assert.ok(!result.nextFourOut.includes(leftover));
+  const spot = spotForTeam(leftover, sCurve, result);
+  assert.equal(spot.band, "out");
+  assert.equal(spot.seed, null);
+  assert.equal(spotLabel(spot), "Currently out");
+});
+
 test("at-larges past the auto-bid reservation are First 4 Out, not 14-seeds", () => {
   const conferences = Array.from({ length: 4 }, (_, i) => `C${i}`);
   const power = Array.from({ length: 10 }, (_, i) => team(`p${i}`, "C0"));

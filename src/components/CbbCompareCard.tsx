@@ -154,11 +154,16 @@ export function CbbCompareCard({
       <button type="button" className="cbb-compare-col left" style={leftColors} onClick={onPickLeft}>
         <header className="cbb-compare-head">
           <p className="cbb-compare-role">{leftRole}</p>
-          <p className="cbb-compare-seedline" aria-label={`${spotLabel(leftSpot)}, rank ${leftSpot.rank}`}>
+          <p
+            className="cbb-compare-seedline"
+            aria-label={
+              leftSpot.band === "out" ? spotLabel(leftSpot) : `${spotLabel(leftSpot)}, rank ${leftSpot.rank}`
+            }
+          >
             <span className="cbb-compare-seed">{leftSpot.seed != null ? `${leftSpot.seed}` : "—"}</span>
             <span className="cbb-compare-seed-meta">
               <strong>{spotLabel(leftSpot)}</strong>
-              <em>#{leftSpot.rank}</em>
+              {leftSpot.band !== "out" ? <em>#{leftSpot.rank}</em> : null}
             </span>
           </p>
           <TeamLogo team={left} className="lg" onFill={leftColors.background} />
@@ -222,11 +227,16 @@ export function CbbCompareCard({
       <button type="button" className="cbb-compare-col right" style={rightColors} onClick={onPickRight}>
         <header className="cbb-compare-head">
           <p className="cbb-compare-role">{rightRole}</p>
-          <p className="cbb-compare-seedline" aria-label={`${spotLabel(rightSpot)}, rank ${rightSpot.rank}`}>
+          <p
+            className="cbb-compare-seedline"
+            aria-label={
+              rightSpot.band === "out" ? spotLabel(rightSpot) : `${spotLabel(rightSpot)}, rank ${rightSpot.rank}`
+            }
+          >
             <span className="cbb-compare-seed">{rightSpot.seed != null ? `${rightSpot.seed}` : "—"}</span>
             <span className="cbb-compare-seed-meta">
               <strong>{spotLabel(rightSpot)}</strong>
-              <em>#{rightSpot.rank}</em>
+              {rightSpot.band !== "out" ? <em>#{rightSpot.rank}</em> : null}
             </span>
           </p>
           <TeamLogo team={right} className="lg" onFill={rightColors.background} />
