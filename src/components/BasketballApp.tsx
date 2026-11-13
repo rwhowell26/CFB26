@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { BracketologyTab } from "@/components/BracketologyTab";
+import { BracketTab } from "@/components/BracketTab";
 import { CbbConferencesTab } from "@/components/CbbConferencesTab";
 import { EliminatorTab } from "@/components/EliminatorTab";
 import { CBB_SEASON_LABEL, CBB_SEASON_YEAR, FIELD_SIZE, PLAY_IN_GAMES, PLAY_IN_TEAMS } from "@/lib/cbb-season";
@@ -27,7 +28,9 @@ export function BasketballApp() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [store, setStore] = useCbbStore();
-  const [tab, setTab] = useState<"bracketology" | "eliminator" | "conferences">("bracketology");
+  const [tab, setTab] = useState<"bracketology" | "bracket" | "eliminator" | "conferences">(
+    "bracketology",
+  );
 
   useEffect(() => {
     hydrateCbbStoreFromLocalStorage();
@@ -114,12 +117,22 @@ export function BasketballApp() {
   const latest = latestSnapshot(store);
 
   return (
-    <div className={`app-shell cbb-mode${store.draft && tab === "bracketology" ? " is-scrub" : ""}`}>
+    <div
+      className={`app-shell cbb-mode${store.draft && tab === "bracketology" ? " is-scrub" : ""}${
+        tab === "bracket" ? " is-bracket" : ""
+      }`}
+    >
       <header className="topbar">
         <div className="brand-block">
           <p className="brand">CBB{String(CBB_SEASON_YEAR).slice(2)}</p>
           <h1>
-            {tab === "eliminator" ? "Eliminator" : tab === "conferences" ? "Conferences" : "Bracketology"}
+            {tab === "eliminator"
+              ? "Eliminator"
+              : tab === "conferences"
+                ? "Conferences"
+                : tab === "bracket"
+                  ? "Bracket"
+                  : "Bracketology"}
           </h1>
           <p className="tagline">
             {CBB_SEASON_LABEL} · {teams.length} D1 teams · {conferences.length} auto-bids ·{" "}
@@ -140,6 +153,13 @@ export function BasketballApp() {
         </button>
         <button
           type="button"
+          className={tab === "bracket" ? "active" : ""}
+          onClick={() => setTab("bracket")}
+        >
+          Bracket
+        </button>
+        <button
+          type="button"
           className={tab === "eliminator" ? "active" : ""}
           onClick={() => setTab("eliminator")}
         >
@@ -156,6 +176,15 @@ export function BasketballApp() {
 
       {tab === "conferences" ? (
         <CbbConferencesTab teams={teams} metrics={metrics} />
+      ) : tab === "bracket" ? (
+        <BracketTab
+          teams={teams}
+          metrics={metrics}
+          conferences={conferences}
+          snapshots={store.snapshots}
+          viewingId={store.viewingId}
+          onViewingId={(id) => patchStore({ viewingId: id })}
+        />
       ) : tab === "eliminator" ? (
         <EliminatorTab
           teams={teams}

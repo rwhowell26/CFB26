@@ -3396,3 +3396,237 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
     display: none;
   }
 }
+
+.cbb-mode.is-bracket {
+  width: min(1780px, calc(100% - 1rem));
+}
+
+.cbb-bracket-tab {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.cbb-br-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.35rem 0.7rem;
+}
+
+.cbb-br-bar .panel-header {
+  margin: 0;
+}
+
+.cbb-br-bar .panel-header h2,
+.cbb-br-bar .panel-header p:first-of-type {
+  margin: 0;
+}
+
+.cbb-br-frame {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 8.75rem minmax(0, 1fr);
+  grid-template-areas:
+    "east ff west"
+    "midwest ff south";
+  gap: 0.4rem 0.55rem;
+  min-height: calc(100dvh - 8.5rem);
+}
+
+.cbb-br-region {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.3rem 0.35rem 0.4rem;
+}
+
+.cbb-br-region header {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.4rem;
+  align-items: baseline;
+  margin-bottom: 0.2rem;
+}
+
+.cbb-br-region h3 {
+  margin: 0;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cbb-br-region header span {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.cbb-br-r64 {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.22rem;
+  min-width: 0;
+}
+
+.cbb-br-game {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 0.12rem 0.15rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.cbb-br-or {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 0.08rem;
+  border-radius: 6px;
+  background: rgba(20, 32, 26, 0.05);
+}
+
+.cbb-br-game .cbb-br-or,
+.cbb-br-game {
+  align-items: stretch;
+}
+
+.cbb-br-region.is-flip .cbb-br-game,
+.cbb-br-region.is-flip .cbb-br-or {
+  align-items: flex-end;
+}
+
+.cbb-br-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.28rem;
+  min-width: 0;
+  width: fit-content;
+  max-width: 100%;
+  border-left: 3px solid var(--chip-color, var(--turf));
+  padding: 0.04rem 0.2rem 0.04rem 0.28rem;
+}
+
+.cbb-br-region.is-flip .cbb-br-chip {
+  flex-direction: row-reverse;
+  border-left: 0;
+  border-right: 3px solid var(--chip-color, var(--turf));
+  text-align: right;
+}
+
+.cbb-br-chip.is-empty {
+  opacity: 0.45;
+}
+
+.cbb-br-seed {
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  width: 1.05rem;
+  flex: none;
+  text-align: center;
+}
+
+.cbb-br-chip .team-logo {
+  width: 1.15rem;
+  height: 1.15rem;
+  padding: 0.05rem;
+  border-radius: 0.28rem;
+}
+
+.cbb-br-name {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.cbb-br-name strong {
+  font-size: 0.78rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cbb-br-name em {
+  font-style: normal;
+  font-size: 0.62rem;
+  color: var(--muted);
+}
+
+.cbb-br-ff {
+  grid-area: ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.6rem 0.45rem;
+  background: var(--turf-deep);
+  color: #f4fff7;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.cbb-br-ff p {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.cbb-br-ff-game {
+  display: grid;
+  gap: 0.1rem;
+  padding: 0.45rem 0.3rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+}
+
+.cbb-br-ff-game strong {
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+}
+
+.cbb-br-ff-game span {
+  font-size: 0.68rem;
+  opacity: 0.7;
+}
+
+.cbb-br-balance {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.68rem;
+  opacity: 0.78;
+}
+
+@media (max-width: 1100px) {
+  .cbb-br-frame {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "ff"
+      "east"
+      "west"
+      "south"
+      "midwest";
+    min-height: 0;
+  }
+
+  .cbb-br-region.is-flip .cbb-br-chip {
+    flex-direction: row;
+    border-right: 0;
+    border-left: 3px solid var(--chip-color, var(--turf));
+    text-align: left;
+  }
+}
