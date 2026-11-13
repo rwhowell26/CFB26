@@ -32,13 +32,23 @@ test("teamFillColors uses the logo disc fill and picks contrasting ink", () => {
   assert.equal(carolina.color.toLowerCase(), "#0f172a");
 });
 
-test("logo discs use primary color, not secondary", () => {
-  const queens = logoAppearance("192c66", "857040", "https://a.espncdn.com/i/teamlogos/ncaa/500/2511.png", "2511");
-  assert.equal(queens.style.backgroundColor.toLowerCase(), "#192c66");
-  assert.match(queens.src ?? "", /\/ncaa\/500-dark\/2511\.png$/);
+test("Queens disc uses navy fill and the light contrast Q", () => {
+  const goldSecondary = logoAppearance(
+    "192c66",
+    "857040",
+    "https://a.espncdn.com/i/teamlogos/ncaa/500/2511.png",
+  );
+  assert.equal(goldSecondary.style.backgroundColor.toLowerCase(), "#857040");
 
-  const notreDame = logoAppearance("062340", "c99700", "https://a.espncdn.com/i/teamlogos/ncaa/500/87.png", "87");
-  assert.equal(notreDame.style.backgroundColor.toLowerCase(), "#062340");
+  const queens = logoAppearance(
+    "192c66",
+    "857040",
+    "https://a.espncdn.com/i/teamlogos/ncaa/500/2511.png",
+    "2511",
+  );
+  assert.equal(queens.style.backgroundColor.toLowerCase(), "#192c66");
+  assert.equal(queens.markColor, null);
+  assert.match(queens.src ?? "", /\/ncaa\/500-dark\/2511\.png$/);
 });
 
 test("white primary falls back to secondary so the disc stays colored", () => {
@@ -52,7 +62,12 @@ test("dark fills use the light ESPN mark so the logo stays visible", () => {
 });
 
 test("tints that would vanish into the fill are skipped", () => {
-  const navyOnNavy = logoAppearance("00225b", "ffffff", "https://a.espncdn.com/i/teamlogos/ncaa/500/2426.png", "2426");
+  const navyOnNavy = logoAppearance(
+    "00225b",
+    "ffffff",
+    "https://a.espncdn.com/i/teamlogos/ncaa/500/2426.png",
+    "2426",
+  );
   assert.equal(navyOnNavy.markColor, null);
   assert.match(navyOnNavy.src ?? "", /\/ncaa\/500-dark\/2426\.png$/);
 });
@@ -60,7 +75,7 @@ test("tints that would vanish into the fill are skipped", () => {
 test("Central Arkansas logo is scaled up to fill the disc", () => {
   assert.ok(logoScale("2110") >= 1.8);
   assert.ok(logoScale("2110") <= 2.4);
-  assert.equal(logoOrigin("2110"), "center 62%");
+  assert.equal(logoOrigin("2110"), "center 65%");
   assert.equal(logoScale("2511"), 1);
   assert.equal(logoOrigin("2511"), "center");
 });
