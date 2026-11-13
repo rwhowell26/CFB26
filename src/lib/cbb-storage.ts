@@ -51,6 +51,11 @@ function sanitizeSnapshot(value: unknown): CbbSnapshot | null {
   };
 }
 
+function sanitizePhase(value: unknown): CbbDraft["phase"] {
+  if (value === "recommend" || value === "auto-bid" || value === "at-large") return value;
+  return "at-large";
+}
+
 function sanitizeDraft(value: unknown): CbbDraft | null {
   if (!value || typeof value !== "object") return null;
   const row = value as Partial<CbbDraft>;
@@ -63,10 +68,13 @@ function sanitizeDraft(value: unknown): CbbDraft | null {
     confirmedPairs: Array.isArray(row.confirmedPairs)
       ? row.confirmedPairs.filter((id): id is string => typeof id === "string")
       : [],
-    phase: row.phase === "recommend" ? "recommend" : "lock",
+    phase: sanitizePhase(row.phase),
     climbingId: typeof row.climbingId === "string" ? row.climbingId : null,
     recommendQueue: Array.isArray(row.recommendQueue)
       ? row.recommendQueue.filter((id): id is string => typeof id === "string")
+      : [],
+    autoBidIds: Array.isArray(row.autoBidIds)
+      ? row.autoBidIds.filter((id): id is string => typeof id === "string")
       : [],
     history: Array.isArray(row.history)
       ? row.history
@@ -76,10 +84,13 @@ function sanitizeDraft(value: unknown): CbbDraft | null {
             confirmedPairs: Array.isArray(item.confirmedPairs)
               ? item.confirmedPairs.filter((id): id is string => typeof id === "string")
               : [],
-            phase: item.phase === "recommend" ? "recommend" as const : "lock" as const,
+            phase: sanitizePhase(item.phase),
             climbingId: typeof item.climbingId === "string" ? item.climbingId : null,
             recommendQueue: Array.isArray(item.recommendQueue)
               ? item.recommendQueue.filter((id): id is string => typeof id === "string")
+              : [],
+            autoBidIds: Array.isArray(item.autoBidIds)
+              ? item.autoBidIds.filter((id): id is string => typeof id === "string")
               : [],
           }))
       : [],

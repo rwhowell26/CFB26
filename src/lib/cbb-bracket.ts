@@ -1,4 +1,4 @@
-import { shortCbbConference } from "./cbb-conferences";
+import { isAutoBidConference, shortCbbConference } from "./cbb-conferences";
 import {
   overallAverage,
   predictiveAverage,
@@ -10,6 +10,7 @@ import {
   COMPLETED_ABOVE,
   FIELD_SIZE,
   FIRST_FOUR_OUT,
+  LAST_FOUR_IN,
   LOCK_SIZE,
   NEXT_FOUR_OUT,
   PLAY_IN_TEAMS,
@@ -84,6 +85,14 @@ export function conferencesFromTeams(teams: CbbTeam[]): string[] {
     shortCbbConference(a).localeCompare(shortCbbConference(b)),
   );
 }
+
+export function autoBidConferences(teams: CbbTeam[], listed?: string[]): string[] {
+  if (listed?.length) return listed.filter(isAutoBidConference);
+  return conferencesFromTeams(teams).filter(isAutoBidConference);
+}
+
+/** Auto-bids who only fill reserved 12–16 slots, not the at-large board. */
+export const AUTO_BID_SCRUB_SEED = 12;
 
 export function bestTeamByConference(
   teams: CbbTeam[],
@@ -414,7 +423,17 @@ export function spotFromRank(rank: number): CbbTeamSpot {
   };
 }
 
+export function lastFourInIds(assignment: FieldAssignment): Set<string> {
+  return new Set(
+    assignment.field
+      .filter((row) => row.role === "at-large")
+      .slice(-LAST_FOUR_IN)
+      .map((row) => row.teamId),
+  );
+}
+
 export function spotLabel(spot: CbbTeamSpot): string {
+  if (spot.band === "last-four-in") return "Last 4 in";
   if (spot.band === "first-four-out") return "First 4 out";
   if (spot.band === "next-four-out") return "Next 4 out";
   if (spot.band === "out") return "Out";
@@ -431,7 +450,13 @@ export function spotForTeam(
   const rank = ranked >= 0 ? ranked + 1 : 0;
   const row = assignment.field.find((item) => item.teamId === teamId);
   if (row) {
-    return { rank: rank || row.sCurveIndex + 1, seed: row.seed, playIn: row.playIn, band: "field" };
+    const lastFour = lastFourInIds(assignment);
+    return {
+      rank: rank || row.sCurveIndex + 1,
+      seed: row.seed,
+      playIn: row.playIn,
+      band: lastFour.has(teamId) ? "last-four-in" : "field",
+    };
   }
   const firstOut = assignment.firstFourOut.indexOf(teamId);
   if (firstOut >= 0) {
@@ -497,12 +522,23 @@ export function fieldResultsForTeam(
 
 export function previousConsideredIds(snapshot: CbbSnapshot | null): Set<string> {
   if (!snapshot) return new Set();
-  return new Set([
-    ...snapshot.atLargeIds,
-    ...Object.values(snapshot.autoBidByConference),
-    ...snapshot.firstFourOut,
-    ...snapshot.nextFourOut,
-  ]);
+  return new Set([...snapshot.atLargeIds, ...snapshot.firstFourOut, ...snapshot.nextFourOut]);
+}
+
+function withinRecommendCutoff(
+  row: CbbTeamMetrics | undefined,
+  bottomOverall: number | null,
+  bottomResume: number | null,
+  bottomPred: number | null,
+  within: number,
+): boolean {
+  const close = (value: number | null, floor: number | null) =>
+    value != null && floor != null && value <= floor + within;
+  return (
+    close(overallAverage(row), bottomOverall) ||
+    close(resumeAverage(row), bottomResume) ||
+    close(predictiveAverage(row), bottomPred)
+  );
 }
 
 export function recommendNewTeams(
@@ -510,9 +546,10 @@ export function recommendNewTeams(
   metrics: Map<string, CbbTeamMetrics>,
   previous: CbbSnapshot | null,
   within = RECOMMEND_WITHIN,
+  alreadyOnBoard: Iterable<string> = [],
 ): string[] {
   if (!previous?.nextFourOut.length) return [];
-  const considered = previousConsideredIds(previous);
+  const considered = new Set([...previousConsideredIds(previous), ...alreadyOnBoard]);
   const bottomId = previous.nextFourOut[previous.nextFourOut.length - 1];
   const bottom = metrics.get(bottomId ?? "");
   const bottomOverall = overallAverage(bottom);
@@ -520,68 +557,151 @@ export function recommendNewTeams(
   const bottomPred = predictiveAverage(bottom);
   if (!bottomId || (bottomOverall == null && bottomResume == null && bottomPred == null)) return [];
   const teamsById = new Map(teams.map((team) => [team.id, team]));
-  const withinCutoff = (value: number | null, floor: number | null) =>
-    value != null && floor != null && value <= floor + within;
   return sortByMetrics(
     teams
       .filter((team) => !considered.has(team.id))
-      .filter((team) => {
-        const row = metrics.get(team.id);
-        return (
-          withinCutoff(overallAverage(row), bottomOverall) ||
-          withinCutoff(resumeAverage(row), bottomResume) ||
-          withinCutoff(predictiveAverage(row), bottomPred)
-        );
-      })
+      .filter((team) =>
+        withinRecommendCutoff(metrics.get(team.id), bottomOverall, bottomResume, bottomPred, within),
+      )
       .map((team) => team.id),
     teamsById,
     metrics,
   );
 }
 
-/** Last projection order (or live six-rank averages), plus missing auto-bid leaders. */
+function firstAtLargeBoardIds(
+  teams: CbbTeam[],
+  teamsById: Map<string, CbbTeam>,
+  metrics: Map<string, CbbTeamMetrics>,
+  allConferences: string[],
+): string[] {
+  const bestByConf = bestTeamByConference(teams, teamsById, metrics);
+  const autoBidIds = new Set<string>();
+  for (const conference of allConferences) {
+    const id = bestByConf.get(conference);
+    if (id) autoBidIds.add(id);
+  }
+  const sorted = sortByMetrics(
+    teams.map((team) => team.id),
+    teamsById,
+    metrics,
+  );
+  const unrepresented = new Set(allConferences);
+  const board: string[] = [];
+  let fieldCount = 0;
+  let outCount = 0;
+  const outLimit = FIRST_FOUR_OUT + NEXT_FOUR_OUT;
+
+  for (const teamId of sorted) {
+    const team = teamsById.get(teamId);
+    if (!team) continue;
+    const slotsLeft = FIELD_SIZE - fieldCount;
+    const confsLeft = unrepresented.size;
+    const isLeader = autoBidIds.has(teamId);
+
+    if (isLeader) {
+      if (slotsLeft > confsLeft) {
+        board.push(teamId);
+        fieldCount += 1;
+        unrepresented.delete(team.conference);
+      }
+      continue;
+    }
+
+    if (slotsLeft > confsLeft) {
+      board.push(teamId);
+      fieldCount += 1;
+    } else if (outCount < outLimit) {
+      board.push(teamId);
+      outCount += 1;
+    }
+  }
+  return board;
+}
+
+/** At-large quality teams from the last projection, in that S-curve order. */
+export function previousAtLargeBoardIds(
+  previous: CbbSnapshot,
+  teams: CbbTeam[],
+  teamsById: Map<string, CbbTeam>,
+  metrics: Map<string, CbbTeamMetrics>,
+  allConferences: string[],
+): string[] {
+  const liveIds = new Set(teams.map((team) => team.id));
+  const bestByConf = bestTeamByConference(teams, teamsById, metrics);
+  const assignment = assignField(previous.sCurve, teamsById, allConferences, bestByConf);
+  const onCurve = new Set(previous.sCurve);
+  const board = new Set<string>();
+  for (const id of [...previous.atLargeIds, ...previous.firstFourOut, ...previous.nextFourOut]) {
+    if (liveIds.has(id)) board.add(id);
+  }
+  for (const row of assignment.field) {
+    if (!liveIds.has(row.teamId)) continue;
+    if (row.role === "at-large") board.add(row.teamId);
+    else if (row.seed < AUTO_BID_SCRUB_SEED && onCurve.has(row.teamId)) board.add(row.teamId);
+  }
+  const ordered: string[] = [];
+  const seen = new Set<string>();
+  for (const id of previous.sCurve) {
+    if (!board.has(id) || seen.has(id)) continue;
+    ordered.push(id);
+    seen.add(id);
+  }
+  for (const id of board) {
+    if (seen.has(id)) continue;
+    ordered.push(id);
+    seen.add(id);
+  }
+  return ordered;
+}
+
+/**
+ * At-large working pool only. Conference champs who cannot make it as
+ * at-larges wait for the auto-bid pass.
+ */
 export function seedWorkingPool(
   teams: CbbTeam[],
   metrics: Map<string, CbbTeamMetrics>,
   previous: CbbSnapshot | null,
+  listedConferences?: string[],
 ): string[] {
   const teamsById = new Map(teams.map((team) => [team.id, team]));
-  const liveIds = new Set(teams.map((team) => team.id));
+  const allConferences = autoBidConferences(teams, listedConferences);
+  if (!previous) return firstAtLargeBoardIds(teams, teamsById, metrics, allConferences);
+  return previousAtLargeBoardIds(previous, teams, teamsById, metrics, allConferences);
+}
+
+/** Conference leaders not already on the at-large board, for the 12–16 scrub. */
+export function remainingAutoBidIds(
+  atLargeBoard: string[],
+  teams: CbbTeam[],
+  metrics: Map<string, CbbTeamMetrics>,
+  listedConferences?: string[],
+  previous: CbbSnapshot | null = null,
+): string[] {
+  const teamsById = new Map(teams.map((team) => [team.id, team]));
+  const have = new Set(atLargeBoard);
   const bestByConf = bestTeamByConference(teams, teamsById, metrics);
-
-  const injectAutoBids = (pool: string[]) => {
-    const next = [...pool];
-    const have = new Set(next);
-    for (const id of bestByConf.values()) {
-      if (!id || have.has(id) || !liveIds.has(id)) continue;
-      for (let i = next.length - 1; i >= 0; i--) {
-        const occupant = teamsById.get(next[i]!);
-        if (!occupant) continue;
-        const confAlready = next.some(
-          (other, j) => j !== i && teamsById.get(other)?.conference === occupant.conference,
-        );
-        if (!confAlready) continue;
-        have.delete(next[i]!);
-        next.splice(i, 1);
-        break;
-      }
-      next.push(id);
-      have.add(id);
-    }
-    return next;
-  };
-
-  if (!previous) {
-    const sorted = sortByMetrics(
-      teams.map((team) => team.id),
-      teamsById,
-      metrics,
-    );
-    return injectAutoBids(sorted.slice(0, LOCK_SIZE));
+  const ids: string[] = [];
+  for (const conference of autoBidConferences(teams, listedConferences)) {
+    const id = bestByConf.get(conference);
+    if (id && !have.has(id)) ids.push(id);
   }
+  if (!previous) return sortByMetrics(ids, teamsById, metrics);
+  const previousOrder = new Map(previous.sCurve.map((id, index) => [id, index]));
+  return [...ids].sort((left, right) => {
+    const leftPrev = previousOrder.get(left);
+    const rightPrev = previousOrder.get(right);
+    if (leftPrev != null && rightPrev != null) return leftPrev - rightPrev;
+    if (leftPrev != null) return -1;
+    if (rightPrev != null) return 1;
+    return compareCbbTeams(left, right, teamsById, metrics);
+  });
+}
 
-  const order = previous.sCurve.filter((id) => liveIds.has(id));
-  return injectAutoBids(order.slice(0, LOCK_SIZE));
+export function draftSCurve(rankedIds: string[], autoBidIds: string[] = []): string[] {
+  const have = new Set(rankedIds);
+  return [...rankedIds, ...autoBidIds.filter((id) => !have.has(id))];
 }
 
 export function snapshotFromAssignment(

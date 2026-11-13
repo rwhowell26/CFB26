@@ -1,4 +1,3 @@
-import { LOCK_SIZE } from "./cbb-season";
 import { applyWinnerAboveLoser } from "./ranking-logic";
 import type { CbbDraft, CbbScrubCheckpoint, CbbScrubPhase } from "./cbb-types";
 
@@ -16,22 +15,33 @@ export type CbbScrubQuestion = {
   phase: CbbScrubPhase;
 };
 
-function lockWindow(rankedIds: string[]) {
-  return Math.min(LOCK_SIZE, rankedIds.length);
+function adjacentPairList(draft: CbbDraft): string[] {
+  return (draft.phase ?? "at-large") === "auto-bid" ? draft.autoBidIds : draft.rankedIds;
 }
 
-/** Adjacent pairs from the 1-seed vs 2-seed through Next 4 Out, then climb recommendations. */
+function rankOffset(draft: CbbDraft): number {
+  return (draft.phase ?? "at-large") === "auto-bid" ? draft.rankedIds.length : 0;
+}
+
+/** Adjacent pairs on the at-large board, then recommended climbs, then 12–16 auto-bids. */
 export function nextScrubQuestion(draft: CbbDraft): CbbScrubQuestion | null {
   const done = new Set(draft.confirmedPairs);
-  const phase = draft.phase ?? "lock";
-  if (phase === "lock") {
-    const end = lockWindow(draft.rankedIds);
-    for (let i = 0; i < end - 1; i++) {
-      const leftId = draft.rankedIds[i];
-      const rightId = draft.rankedIds[i + 1];
+  const phase = draft.phase ?? "at-large";
+  if (phase === "at-large" || phase === "auto-bid") {
+    const list = adjacentPairList(draft);
+    const offset = rankOffset(draft);
+    for (let i = 0; i < list.length - 1; i++) {
+      const leftId = list[i];
+      const rightId = list[i + 1];
       if (!leftId || !rightId) continue;
       if (done.has(scrubPairKey(leftId, rightId))) continue;
-      return { leftId, rightId, leftRank: i + 1, rightRank: i + 2, phase: "lock" };
+      return {
+        leftId,
+        rightId,
+        leftRank: offset + i + 1,
+        rightRank: offset + i + 2,
+        phase,
+      };
     }
     return null;
   }
@@ -47,13 +57,14 @@ export function nextScrubQuestion(draft: CbbDraft): CbbScrubQuestion | null {
 }
 
 export function remainingScrubCount(draft: CbbDraft): number {
-  if ((draft.phase ?? "lock") === "lock") {
+  const phase = draft.phase ?? "at-large";
+  if (phase === "at-large" || phase === "auto-bid") {
     const done = new Set(draft.confirmedPairs);
-    const end = lockWindow(draft.rankedIds);
+    const list = adjacentPairList(draft);
     let count = 0;
-    for (let i = 0; i < end - 1; i++) {
-      const leftId = draft.rankedIds[i];
-      const rightId = draft.rankedIds[i + 1];
+    for (let i = 0; i < list.length - 1; i++) {
+      const leftId = list[i];
+      const rightId = list[i + 1];
       if (!leftId || !rightId) continue;
       if (!done.has(scrubPairKey(leftId, rightId))) count += 1;
     }
@@ -74,6 +85,7 @@ function pushHistory(draft: CbbDraft): CbbScrubCheckpoint[] {
       phase: draft.phase,
       climbingId: draft.climbingId,
       recommendQueue: [...draft.recommendQueue],
+      autoBidIds: [...draft.autoBidIds],
     },
   ];
   if (history.length > MAX_HISTORY) history.splice(0, history.length - MAX_HISTORY);
@@ -96,37 +108,67 @@ function withRecommendPhase(draft: CbbDraft, recommendedIds: string[]): CbbDraft
   };
 }
 
+function withAutoBidPhase(draft: CbbDraft, autoBidIds: string[]): CbbDraft {
+  const have = new Set(draft.rankedIds);
+  return {
+    ...draft,
+    phase: "auto-bid",
+    climbingId: null,
+    recommendQueue: [],
+    autoBidIds: autoBidIds.filter((id) => !have.has(id)),
+  };
+}
+
+function afterAtLargeOrRecommend(
+  draft: CbbDraft,
+  recommendedIds: string[],
+  autoBidIds: string[],
+): CbbDraft {
+  if (nextScrubQuestion(draft)) return draft;
+  if ((draft.phase ?? "at-large") === "at-large") {
+    const rec = withRecommendPhase(draft, recommendedIds);
+    if (nextScrubQuestion(rec)) return rec;
+    return withAutoBidPhase(rec, autoBidIds);
+  }
+  if (draft.phase === "recommend") {
+    return withAutoBidPhase(draft, autoBidIds);
+  }
+  return draft;
+}
+
 export function applyScrubChoice(
   draft: CbbDraft,
   winnerId: string,
   loserId: string,
   recommendedIds: string[] = [],
+  autoBidIds: string[] = [],
 ): CbbDraft {
-  let current = draft;
-  if ((current.phase ?? "lock") === "lock" && !nextScrubQuestion(current)) {
-    current = withRecommendPhase(current, recommendedIds);
-  }
+  let current = afterAtLargeOrRecommend(draft, recommendedIds, autoBidIds);
   const question = nextScrubQuestion(current);
   if (!question) return current;
   const pair = new Set([question.leftId, question.rightId]);
   if (!pair.has(winnerId) || !pair.has(loserId) || winnerId === loserId) return current;
 
   const history = pushHistory(current);
-  const winnerIdx = current.rankedIds.indexOf(winnerId);
-  const loserIdx = current.rankedIds.indexOf(loserId);
-
   if (question.phase === "recommend") {
     const climbingId = current.climbingId ?? question.rightId;
     const remaining = current.recommendQueue.filter((id) => id !== climbingId);
     const nextClimb = remaining[0] ?? null;
-    const finishClimb = (rankedIds: string[], confirmed: string[]) => ({
-      ...current,
-      rankedIds: nextClimb ? [...rankedIds, nextClimb] : rankedIds,
-      confirmedPairs: confirmed,
-      climbingId: nextClimb,
-      recommendQueue: remaining.slice(nextClimb ? 1 : 0),
-      history,
-    });
+    const winnerIdx = current.rankedIds.indexOf(winnerId);
+    const loserIdx = current.rankedIds.indexOf(loserId);
+    const finishClimb = (rankedIds: string[], confirmed: string[]) =>
+      afterAtLargeOrRecommend(
+        {
+          ...current,
+          rankedIds: nextClimb ? [...rankedIds, nextClimb] : rankedIds,
+          confirmedPairs: confirmed,
+          climbingId: nextClimb,
+          recommendQueue: remaining.slice(nextClimb ? 1 : 0),
+          history,
+        },
+        recommendedIds,
+        autoBidIds,
+      );
     if (winnerId === climbingId) {
       const rankedIds =
         winnerIdx > loserIdx
@@ -143,6 +185,23 @@ export function applyScrubChoice(
     ]);
   }
 
+  if (question.phase === "auto-bid") {
+    const winnerIdx = current.autoBidIds.indexOf(winnerId);
+    const loserIdx = current.autoBidIds.indexOf(loserId);
+    const autoBids =
+      winnerIdx > loserIdx
+        ? applyWinnerAboveLoser(current.autoBidIds, winnerId, loserId)
+        : [...current.autoBidIds];
+    return {
+      ...current,
+      autoBidIds: autoBids,
+      confirmedPairs: [...current.confirmedPairs, scrubPairKey(winnerId, loserId)],
+      history,
+    };
+  }
+
+  const winnerIdx = current.rankedIds.indexOf(winnerId);
+  const loserIdx = current.rankedIds.indexOf(loserId);
   const rankedIds =
     winnerIdx > loserIdx
       ? applyWinnerAboveLoser(current.rankedIds, winnerId, loserId)
@@ -153,36 +212,52 @@ export function applyScrubChoice(
     confirmedPairs: [...current.confirmedPairs, scrubPairKey(winnerId, loserId)],
     history,
   };
-  if (!nextScrubQuestion(next)) {
-    return withRecommendPhase(next, recommendedIds);
-  }
-  return next;
+  return afterAtLargeOrRecommend(next, recommendedIds, autoBidIds);
 }
 
-export function skipRemainingScrub(draft: CbbDraft, recommendedIds: string[] = []): CbbDraft {
+export function skipRemainingScrub(
+  draft: CbbDraft,
+  recommendedIds: string[] = [],
+  autoBidIds: string[] = [],
+): CbbDraft {
   const history = pushHistory(draft);
-  if ((draft.phase ?? "lock") === "lock") {
+  const phase = draft.phase ?? "at-large";
+  if (phase === "at-large") {
     const confirmed = new Set(draft.confirmedPairs);
-    const end = lockWindow(draft.rankedIds);
-    for (let i = 0; i < end - 1; i++) {
+    for (let i = 0; i < draft.rankedIds.length - 1; i++) {
       const leftId = draft.rankedIds[i];
       const rightId = draft.rankedIds[i + 1];
       if (!leftId || !rightId) continue;
       confirmed.add(scrubPairKey(leftId, rightId));
     }
-    return withRecommendPhase(
+    return afterAtLargeOrRecommend(
       { ...draft, confirmedPairs: [...confirmed], history },
       recommendedIds,
+      autoBidIds,
     );
   }
-  const leftover = draft.recommendQueue.filter((id) => !draft.rankedIds.includes(id));
-  return {
-    ...draft,
-    rankedIds: leftover.length ? [...draft.rankedIds, ...leftover] : [...draft.rankedIds],
-    climbingId: null,
-    recommendQueue: [],
-    history,
-  };
+  if (phase === "recommend") {
+    const leftover = draft.recommendQueue.filter((id) => !draft.rankedIds.includes(id));
+    return afterAtLargeOrRecommend(
+      {
+        ...draft,
+        rankedIds: leftover.length ? [...draft.rankedIds, ...leftover] : [...draft.rankedIds],
+        climbingId: null,
+        recommendQueue: [],
+        history,
+      },
+      recommendedIds,
+      autoBidIds,
+    );
+  }
+  const confirmed = new Set(draft.confirmedPairs);
+  for (let i = 0; i < draft.autoBidIds.length - 1; i++) {
+    const leftId = draft.autoBidIds[i];
+    const rightId = draft.autoBidIds[i + 1];
+    if (!leftId || !rightId) continue;
+    confirmed.add(scrubPairKey(leftId, rightId));
+  }
+  return { ...draft, confirmedPairs: [...confirmed], history };
 }
 
 export function undoScrubChoice(draft: CbbDraft): CbbDraft | null {
@@ -193,9 +268,10 @@ export function undoScrubChoice(draft: CbbDraft): CbbDraft | null {
     ...draft,
     rankedIds: [...prev.rankedIds],
     confirmedPairs: [...prev.confirmedPairs],
-    phase: prev.phase ?? "lock",
+    phase: prev.phase ?? "at-large",
     climbingId: prev.climbingId ?? null,
     recommendQueue: [...(prev.recommendQueue ?? [])],
+    autoBidIds: [...(prev.autoBidIds ?? [])],
     history,
   };
 }
@@ -211,9 +287,10 @@ export function emptyDraft(
     basedOnId,
     rankedIds: [...rankedIds],
     confirmedPairs: [],
-    phase: "lock",
+    phase: "at-large",
     climbingId: null,
     recommendQueue: [],
+    autoBidIds: [],
     history: [],
   };
 }

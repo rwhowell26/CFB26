@@ -26,7 +26,7 @@ export type QuadRecord = {
   losses: number;
 };
 
-export type CbbScrubPhase = "lock" | "recommend";
+export type CbbScrubPhase = "at-large" | "recommend" | "auto-bid";
 
 /** Published ranks: 1 is best. Null until a source is wired. */
 export type CbbTeamMetrics = {
@@ -54,7 +54,7 @@ export type CbbFieldTeam = {
   playIn: boolean;
 };
 
-export type CbbScrubBand = "field" | "first-four-out" | "next-four-out" | "out";
+export type CbbScrubBand = "field" | "last-four-in" | "first-four-out" | "next-four-out" | "out";
 
 /** Live seed-list spot while scrubbing or on the saved board. */
 export type CbbTeamSpot = {
@@ -83,6 +83,7 @@ export type CbbScrubCheckpoint = {
   phase: CbbScrubPhase;
   climbingId: string | null;
   recommendQueue: string[];
+  autoBidIds: string[];
 };
 
 export type CbbDraft = {
@@ -94,6 +95,7 @@ export type CbbDraft = {
   phase: CbbScrubPhase;
   climbingId: string | null;
   recommendQueue: string[];
+  autoBidIds: string[];
   history: CbbScrubCheckpoint[];
 };
 

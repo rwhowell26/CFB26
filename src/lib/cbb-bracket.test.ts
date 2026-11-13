@@ -7,11 +7,13 @@ import {
   markPlayIn,
   padAboveSlots,
   recommendNewTeams,
+  remainingAutoBidIds,
   seedForFieldIndex,
   seedLinePlayInGames,
   seedLinePlayInTeams,
   seedLineSize,
   seedWorkingPool,
+  spotForTeam,
   spotFromRank,
   spotLabel,
   teamsAboveCurrent,
@@ -117,7 +119,7 @@ test("assignField skips extra at-larges when only auto-bid slots remain", () => 
   assert.ok(result.firstFourOut.includes("p3"));
 });
 
-test("recommendNewTeams keeps teams within 10 of the last Next 4 Out", () => {
+test("recommendNewTeams keeps teams within 15 of the last Next 4 Out", () => {
   const teams = [
     team("in1", "A"),
     team("bubble8", "B"),
@@ -126,7 +128,7 @@ test("recommendNewTeams keeps teams within 10 of the last Next 4 Out", () => {
   ];
   const metrics = rankedMetrics(["in1", "bubble8", "newClose", "newFar"]);
   metrics.set("bubble8", { ...emptyMetrics("bubble8"), sor: 20, kpi: 20, wab: 20 });
-  metrics.set("newClose", { ...emptyMetrics("newClose"), sor: 28, kpi: 28, wab: 28 });
+  metrics.set("newClose", { ...emptyMetrics("newClose"), sor: 34, kpi: 34, wab: 34 });
   metrics.set("newFar", { ...emptyMetrics("newFar"), sor: 50, kpi: 50, wab: 50 });
   const previous: CbbSnapshot = {
     id: "prev",
@@ -139,11 +141,36 @@ test("recommendNewTeams keeps teams within 10 of the last Next 4 Out", () => {
     nextFourOut: ["bubble8"],
     recommendedIds: [],
   };
-  const recs = recommendNewTeams(teams, metrics, previous, 10);
+  const recs = recommendNewTeams(teams, metrics, previous);
   assert.deepEqual(recs, ["newClose"]);
 });
 
-test("seedWorkingPool prepends last S-curve and appends missing auto-bids", () => {
+test("recommendNewTeams still considers a former auto-bid with bubble numbers", () => {
+  const teams = [
+    team("in1", "A"),
+    team("bubble8", "B"),
+    team("grandcanyon", "WAC"),
+    team("utarlington", "WAC"),
+  ];
+  const metrics = rankedMetrics(["in1", "bubble8", "grandcanyon", "utarlington"]);
+  metrics.set("bubble8", { ...emptyMetrics("bubble8"), sor: 40, kpi: 40, wab: 40 });
+  metrics.set("grandcanyon", { ...emptyMetrics("grandcanyon"), sor: 48, kpi: 48, wab: 48 });
+  const previous: CbbSnapshot = {
+    id: "prev",
+    createdAt: "2026-11-01T00:00:00.000Z",
+    label: "prev",
+    sCurve: ["in1", "bubble8", "grandcanyon"],
+    atLargeIds: ["in1"],
+    autoBidByConference: { WAC: "grandcanyon" },
+    firstFourOut: [],
+    nextFourOut: ["bubble8"],
+    recommendedIds: [],
+  };
+  const recs = recommendNewTeams(teams, metrics, previous);
+  assert.ok(recs.includes("grandcanyon"));
+});
+
+test("seedWorkingPool keeps last at-larges and leaves AQ-only teams for the auto-bid pass", () => {
   const teams = [team("duke", "ACC"), team("unc", "ACC"), team("iowa", "MVC", 9, 3)];
   const metrics = rankedMetrics(["duke", "unc", "iowa"]);
   const previous: CbbSnapshot = {
@@ -157,10 +184,11 @@ test("seedWorkingPool prepends last S-curve and appends missing auto-bids", () =
     nextFourOut: [],
     recommendedIds: [],
   };
-  const pool = seedWorkingPool(teams, metrics, previous);
+  const pool = seedWorkingPool(teams, metrics, previous, ["ACC", "MVC"]);
   assert.ok(pool.includes("unc"));
-  assert.ok(pool.includes("iowa"));
-  assert.equal(pool.length, 2);
+  assert.ok(pool.includes("duke"));
+  assert.ok(!pool.includes("iowa"));
+  assert.deepEqual(remainingAutoBidIds(pool, teams, metrics, ["ACC", "MVC"], previous), ["iowa"]);
 });
 
 test("first board seeds by current six-rank average, lowest first", () => {
@@ -186,7 +214,7 @@ test("auto-bid is the current best (lowest) rank average in that conference", ()
   assert.equal(best.get("MVC"), "iowa");
 });
 
-test("seedWorkingPool injects a conference leader even when the average sits below the cut", () => {
+test("first at-large board omits AQ-only conference leaders below the cut", () => {
   const power = Array.from({ length: 80 }, (_, i) => team(`p${i}`, "Power"));
   const mid = team("mid", "MVC");
   const teams = [...power, mid];
@@ -196,10 +224,72 @@ test("seedWorkingPool injects a conference leader even when the average sits bel
     metrics.set(item.id, { ...emptyMetrics(item.id), kenpom: rank });
   }
   metrics.set("mid", { ...emptyMetrics("mid"), kenpom: 200 });
-  const pool = seedWorkingPool(teams, metrics, null);
-  assert.ok(pool.includes("mid"));
-  assert.equal(pool.length, 81);
+  const conferences = ["Power", "MVC"];
+  const pool = seedWorkingPool(teams, metrics, null, conferences);
+  assert.ok(!pool.includes("mid"));
   assert.equal(pool[0], "p0");
+  assert.ok(pool.length >= FIELD_SIZE - 1 + 4);
+  assert.deepEqual(remainingAutoBidIds(pool, teams, metrics, conferences), ["mid"]);
+});
+
+test("a former conference leader stays on the at-large board", () => {
+  const teams = [
+    team("grandcanyon", "WAC"),
+    team("utarlington", "WAC"),
+    team("unc", "ACC"),
+    team("iowa", "MVC"),
+  ];
+  const metrics = rankedMetrics(["unc", "grandcanyon", "utarlington", "iowa"]);
+  const previous: CbbSnapshot = {
+    id: "prev",
+    createdAt: "2026-11-01T00:00:00.000Z",
+    label: "prev",
+    sCurve: ["unc", "grandcanyon", "iowa"],
+    atLargeIds: ["unc", "grandcanyon"],
+    autoBidByConference: { WAC: "grandcanyon", ACC: "unc", MVC: "iowa" },
+    firstFourOut: [],
+    nextFourOut: [],
+    recommendedIds: [],
+  };
+  const pool = seedWorkingPool(teams, metrics, previous, ["WAC", "ACC", "MVC"]);
+  assert.ok(pool.includes("grandcanyon"));
+  assert.ok(pool.includes("unc"));
+});
+
+test("at-larges past the auto-bid reservation are First 4 Out, not 14-seeds", () => {
+  const conferences = Array.from({ length: 4 }, (_, i) => `C${i}`);
+  const power = Array.from({ length: 10 }, (_, i) => team(`p${i}`, "C0"));
+  const autos = conferences.slice(1).map((conf) => team(`${conf}-best`, conf, 8, 8));
+  const teams = [...power, ...autos];
+  const teamsById = new Map(teams.map((item) => [item.id, item]));
+  const best = new Map(conferences.map((conf, i) => [conf, i === 0 ? "p0" : `${conf}-best`]));
+  const sCurve = power.map((item) => item.id);
+  const result = assignField(sCurve, teamsById, conferences, best, 6);
+  assert.ok(result.firstFourOut.includes("p3"));
+  const spot = spotForTeam("p3", sCurve, result);
+  assert.equal(spot.band, "first-four-out");
+  assert.equal(spotLabel(spot), "First 4 out");
+  assert.equal(spot.seed, null);
+});
+
+test("last four at-larges in the field are Last 4 In", () => {
+  const conferences = ["C0"];
+  const power = Array.from({ length: 8 }, (_, i) => team(`p${i}`, "C0"));
+  const teamsById = new Map(power.map((item) => [item.id, item]));
+  const result = assignField(
+    power.map((item) => item.id),
+    teamsById,
+    conferences,
+    new Map([["C0", "p0"]]),
+    8,
+  );
+  const lastIn = result.atLargeIds.slice(-4);
+  assert.equal(lastIn.length, 4);
+  for (const id of lastIn) {
+    const spot = spotForTeam(id, result.field.map((row) => row.teamId), result);
+    assert.equal(spot.band, "last-four-in");
+    assert.equal(spotLabel(spot), "Last 4 in");
+  }
 });
 
 test("seed lines list four First Round spots and even play-in pairs", () => {

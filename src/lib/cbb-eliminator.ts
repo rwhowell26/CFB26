@@ -5,8 +5,11 @@ import {
   seedLineSize,
   sortByMetrics,
 } from "./cbb-bracket";
+import { isAutoBidConference } from "./cbb-conferences";
 import { FIELD_SIZE } from "./cbb-season";
 import type { CbbFieldRole, CbbTeam, CbbTeamMetrics } from "./cbb-types";
+
+export { isAutoBidConference };
 
 export type EliminatorStatus = "open" | "locked" | "eliminated";
 
@@ -21,10 +24,6 @@ export type EliminatorRow = {
   inField: boolean;
   status: EliminatorStatus;
 };
-
-export function isAutoBidConference(name: string): boolean {
-  return Boolean(name) && !/independent/i.test(name);
-}
 
 export function playInForFieldIndex(index: number): boolean {
   const seed = seedForFieldIndex(index);

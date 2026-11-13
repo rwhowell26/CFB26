@@ -1,6 +1,6 @@
 import { sortByMetrics } from "./cbb-bracket";
 import { shortCbbConference } from "./cbb-conferences";
-import { isAutoBidConference } from "./cbb-eliminator";
+import { isAutoBidConference } from "./cbb-conferences";
 import { overallAverage } from "./cbb-metrics";
 import type { CbbTeam, CbbTeamMetrics } from "./cbb-types";
 

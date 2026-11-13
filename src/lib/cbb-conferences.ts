@@ -36,3 +36,7 @@ const SHORT: Record<string, string> = {
 export function shortCbbConference(name: string): string {
   return SHORT[name] ?? name.replace(/ Conference$/i, "").replace(/ League$/i, "");
 }
+
+export function isAutoBidConference(name: string): boolean {
+  return Boolean(name) && !/independent/i.test(name);
+}
