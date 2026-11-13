@@ -8,6 +8,9 @@ import {
   conferenceChampions,
   emptyPlayoffRace,
   eliminateFromAtLarge,
+  formatNextOpponent,
+  nextGameForTeam,
+  overallPlayoffRecord,
   pendingAtLargeGames,
   playoffContentionCounts,
   playoffTables,
@@ -208,6 +211,50 @@ test("at-large queue lists unapplied post-seed games and apply bumps Notre Dame"
   assert.equal(pending[0]?.id, "nd-1");
   const next = applyConferenceGame(live, games[0]!, "ND");
   assert.equal(next.notreDameRecord.losses, 2);
+});
+
+test("at-large overall record follows completed games without Apply", () => {
+  const games = [
+    game("nd-1", "ND", "NAVY", "ND", {
+      conferenceGame: false,
+      date: "2026-11-08T20:00:00.000Z",
+    }),
+    game("nd-2", "PITT", "ND", "PITT", {
+      conferenceGame: false,
+      date: "2026-11-15T20:00:00.000Z",
+    }),
+  ];
+  const live = state({ notreDameRecord: { wins: 6, losses: 1 } });
+  const rec = overallPlayoffRecord(TEAMS.find((row) => row.id === "ND")!, live, games);
+  assert.equal(rec.wins, 1);
+  assert.equal(rec.losses, 1);
+});
+
+test("nextGameForTeam is the soonest unplayed game and formats the opponent", () => {
+  const games = [
+    game("nd-done", "ND", "NAVY", "ND", { conferenceGame: false, date: "2026-11-08T17:00:00.000Z" }),
+    game("nd-next", "PITT", "ND", null, {
+      conferenceGame: false,
+      championshipGame: false,
+      neutralSite: false,
+      date: "2026-11-15T17:00:00.000Z",
+      week: 12,
+    }),
+    game("nd-later", "ND", "USC", null, {
+      conferenceGame: false,
+      championshipGame: false,
+      date: "2026-11-29T20:00:00.000Z",
+      week: 14,
+    }),
+  ];
+  const next = nextGameForTeam("ND", games);
+  assert.equal(next?.id, "nd-next");
+  const teamsById = new Map(TEAMS.map((row) => [row.id, row]));
+  teamsById.set("PITT", team("PITT", ACC, "Pittsburgh"));
+  assert.equal(
+    formatNextOpponent(next!, "ND", teamsById, new Map([["PITT", 18]])),
+    "@ #18 PITT · 11/15",
+  );
 });
 
 test("judgement eliminate drops a team from at-large", () => {
