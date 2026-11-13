@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { BracketologyTab } from "@/components/BracketologyTab";
+import { CbbConferencesTab } from "@/components/CbbConferencesTab";
 import { EliminatorTab } from "@/components/EliminatorTab";
 import { CBB_SEASON_LABEL, CBB_SEASON_YEAR, FIELD_SIZE, PLAY_IN_GAMES, PLAY_IN_TEAMS } from "@/lib/cbb-season";
 import { emptyMetrics } from "@/lib/cbb-metrics";
@@ -26,7 +27,7 @@ export function BasketballApp() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [store, setStore] = useCbbStore();
-  const [tab, setTab] = useState<"bracketology" | "eliminator">("bracketology");
+  const [tab, setTab] = useState<"bracketology" | "eliminator" | "conferences">("bracketology");
 
   useEffect(() => {
     hydrateCbbStoreFromLocalStorage();
@@ -117,7 +118,9 @@ export function BasketballApp() {
       <header className="topbar">
         <div className="brand-block">
           <p className="brand">CBB{String(CBB_SEASON_YEAR).slice(2)}</p>
-          <h1>{tab === "eliminator" ? "Eliminator" : "Bracketology"}</h1>
+          <h1>
+            {tab === "eliminator" ? "Eliminator" : tab === "conferences" ? "Conferences" : "Bracketology"}
+          </h1>
           <p className="tagline">
             {CBB_SEASON_LABEL} · {teams.length} D1 teams · {conferences.length} auto-bids ·{" "}
             {Math.max(0, FIELD_SIZE - conferences.length)} at-large · {PLAY_IN_TEAMS} play-in · {PLAY_IN_GAMES}{" "}
@@ -142,9 +145,18 @@ export function BasketballApp() {
         >
           Eliminator
         </button>
+        <button
+          type="button"
+          className={tab === "conferences" ? "active" : ""}
+          onClick={() => setTab("conferences")}
+        >
+          Conferences
+        </button>
       </nav>
 
-      {tab === "eliminator" ? (
+      {tab === "conferences" ? (
+        <CbbConferencesTab teams={teams} metrics={metrics} />
+      ) : tab === "eliminator" ? (
         <EliminatorTab
           teams={teams}
           metrics={metrics}

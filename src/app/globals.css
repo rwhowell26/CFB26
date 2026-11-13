@@ -3258,3 +3258,83 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
     display: none;
   }
 }
+
+.cbb-conferences {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.cbb-conf-list {
+  gap: 0.12rem;
+}
+
+.cbb-conf-list > li {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.cbb-conf-row {
+  width: 100%;
+  grid-template-columns: 1.7rem 1.8rem minmax(0, 1fr) 3.2rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.cbb-conf-row.is-open {
+  background: rgba(31, 107, 69, 0.08);
+}
+
+.cbb-conf-name {
+  display: grid;
+  min-width: 0;
+}
+
+.cbb-conf-name em {
+  color: var(--muted);
+  font-style: normal;
+  font-size: 0.78rem;
+}
+
+.cbb-conf-logo-gap {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.cbb-conf-row .cbb-scurve-avg {
+  text-align: right;
+  font-weight: 700;
+  color: inherit;
+}
+
+.cbb-conf-teams {
+  list-style: none;
+  margin: 0 0 0.35rem;
+  padding: 0 0.2rem 0.2rem 1.7rem;
+  display: grid;
+  gap: 0.08rem;
+}
+
+.cbb-conf-team {
+  grid-template-columns: 1.4rem 1.2rem minmax(0, 1fr) 3.2rem 2.6rem;
+  padding: 0.12rem 0.3rem;
+  font-size: 0.88rem;
+}
+
+@media (max-width: 640px) {
+  .cbb-conf-row .cbb-scurve-avg,
+  .cbb-conf-team .cbb-scurve-avg {
+    display: block;
+  }
+
+  .cbb-conf-team {
+    grid-template-columns: 1.4rem 1.2rem minmax(0, 1fr) 2.6rem;
+  }
+
+  .cbb-conf-team .cbb-scurve-meta {
+    display: none;
+  }
+}
