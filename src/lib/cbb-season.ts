@@ -25,6 +25,8 @@ export const FIRST_FOUR_OUT = 4;
 export const NEXT_FOUR_OUT = 4;
 /** Recommend teams whose overall rank average is this close to the last Next 4 Out. */
 export const RECOMMEND_WITHIN = 15;
+/** Conference teams this close to their leader's six-rank average are in contention. */
+export const CONTENTION_WITHIN = 50;
 export const CBB_STORE_SCHEMA_VERSION = 6;
 export const LOCK_SIZE = FIELD_SIZE + FIRST_FOUR_OUT + NEXT_FOUR_OUT;
 /** Completed seed-list spots shown beside the current compare. */

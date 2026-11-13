@@ -3830,3 +3830,136 @@ body:has(.cbb-mode.is-bracket) .sport-bar {
   font-size: 0.58rem;
   opacity: 0.78;
 }
+
+.cbb-contention {
+  display: grid;
+  gap: 0.65rem;
+  align-content: start;
+}
+
+.cbb-cont-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.cbb-cont-queue {
+  display: grid;
+  gap: 0.7rem;
+  padding-bottom: 0.75rem;
+}
+
+.cbb-cont-batch-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.35rem;
+}
+
+.cbb-cont-batch-head h3 {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.cbb-cont-batch ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.28rem;
+}
+
+.cbb-cont-move {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr) auto;
+  gap: 0.45rem;
+  align-items: center;
+  padding: 0.35rem 0.45rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+}
+
+.cbb-cont-move.is-add {
+  border-color: rgba(31, 107, 69, 0.28);
+  background: rgba(31, 107, 69, 0.06);
+}
+
+.cbb-cont-move.is-drop {
+  border-color: rgba(143, 45, 45, 0.28);
+  background: rgba(143, 45, 45, 0.06);
+}
+
+.cbb-cont-move-body {
+  min-width: 0;
+  display: grid;
+}
+
+.cbb-cont-move-body strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cbb-cont-move-body em {
+  font-style: normal;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.cbb-cont-list {
+  padding-bottom: 1rem;
+}
+
+.cbb-cont-row {
+  grid-template-columns: 1.6rem 2rem minmax(0, 1fr) auto auto auto minmax(7rem, 0.9fr);
+}
+
+.cbb-cont-row.bubble {
+  background: rgba(196, 165, 116, 0.12);
+}
+
+.cbb-cont-row.is-pending-drop {
+  opacity: 0.72;
+  box-shadow: inset 3px 0 0 var(--loss);
+}
+
+.cbb-cont-reasons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.22rem;
+}
+
+.cbb-cont-reasons em {
+  font-style: normal;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 0.08rem 0.32rem;
+  border-radius: 999px;
+  background: rgba(20, 32, 26, 0.08);
+  color: var(--muted);
+}
+
+.cbb-cont-row.is-pending-drop .cbb-cont-reasons em:first-child {
+  background: rgba(143, 45, 45, 0.16);
+  color: var(--loss);
+}
+
+@media (max-width: 720px) {
+  .cbb-cont-row {
+    grid-template-columns: 1.4rem 1.8rem minmax(0, 1fr) auto;
+  }
+
+  .cbb-cont-row .cbb-scurve-meta {
+    display: none;
+  }
+
+  .cbb-cont-reasons {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+}
