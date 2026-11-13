@@ -188,21 +188,21 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
                     className={index < AT_LARGE_IN_COUNT ? "bid-in" : undefined}
                   >
                     <span className="playoff-slot">{index + 1}</span>
-                    <TeamLogo team={team} />
+                    <TeamLogo team={team} className="playoff-pool-logo" />
                     <div>
                       <span className="playoff-pool-name">
                         <strong>{team.shortName}</strong>
                         {rank != null ? <span className="playoff-pool-rank">#{rank}</span> : null}
+                        {nextGame ? (
+                          <em className="playoff-pool-next">
+                            {formatNextOpponent(nextGame, team.id, teamsById, ranks)}
+                          </em>
+                        ) : null}
                       </span>
                       <em>
                         {rec.wins}-{rec.losses} overall
                         {nd ? "" : ` · ${shortConferenceName(team.conference)}`}
                       </em>
-                      {nextGame ? (
-                        <em className="playoff-pool-next">
-                          {formatNextOpponent(nextGame, team.id, teamsById, ranks)}
-                        </em>
-                      ) : null}
                     </div>
                     <button
                       type="button"

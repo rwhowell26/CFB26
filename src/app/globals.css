@@ -2307,6 +2307,14 @@ input[type="password"],
   border-bottom: 1px solid var(--line);
 }
 
+.playoff-top .playoff-pool .team-logo,
+.playoff-pool-logo {
+  width: 2.35rem;
+  height: 2.35rem;
+  padding: 0.12rem;
+  border-radius: 0.45rem;
+}
+
 .playoff-pool-name {
   display: flex;
   align-items: baseline;
@@ -2315,6 +2323,7 @@ input[type="password"],
 }
 
 .playoff-pool-name strong {
+  display: block;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2332,7 +2341,12 @@ input[type="password"],
 }
 
 .playoff-pool-next {
-  margin-top: 0.08rem;
+  margin-top: 0;
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .playoff-stepper {
