@@ -1,5 +1,6 @@
 "use client";
 
+import { Fragment } from "react";
 import { TeamLogo } from "@/components/TeamLogo";
 import { assignField, bestTeamByConference } from "@/lib/cbb-bracket";
 import {
@@ -24,6 +25,30 @@ const FIRST_ROUND_PAIRS: Array<[number, number]> = [
   [6, 11],
 ];
 
+const COL = {
+  or: 1,
+  feed: 2,
+  r64: 3,
+  j32: 4,
+  r32: 5,
+  j16: 6,
+  s16: 7,
+  j8: 8,
+  e8: 9,
+} as const;
+
+const ROUND_LABELS = [
+  "Opening Round",
+  "",
+  "Round of 64",
+  "",
+  "Round of 32",
+  "",
+  "Sweet 16",
+  "",
+  "Elite Eight",
+] as const;
+
 type Props = {
   teams: CbbTeam[];
   metrics: Map<string, CbbTeamMetrics>;
@@ -31,6 +56,15 @@ type Props = {
   snapshots: CbbSnapshot[];
   viewingId: string | null;
   onViewingId: (id: string | null) => void;
+};
+
+type RowModel = {
+  seed: number | string;
+  team?: CbbTeam;
+  trueSeed?: number;
+  placeholder?: string;
+  playIn?: boolean;
+  receivesPlayIn?: boolean;
 };
 
 function slotBySeed(region: RegionBracket, seed: number): FirstRoundSlot {
@@ -51,101 +85,234 @@ function chipColor(team: CbbTeam | undefined): string | undefined {
   return team.color.startsWith("#") ? team.color : `#${team.color}`;
 }
 
-function TeamChip({
-  team,
-  seed,
-  trueSeed,
-  playIn,
-}: {
-  team: CbbTeam | undefined;
-  seed: number;
-  trueSeed?: number;
-  playIn?: boolean;
-}) {
-  if (!team) {
-    return (
-      <div className="cbb-br-chip is-empty">
-        <span className="cbb-br-seed">{seed}</span>
-        <span className="cbb-br-name">—</span>
-      </div>
-    );
-  }
+/** 1-based grid row for one of the 16 first-round games; row 9 is the region split. */
+function gameRow(index: number): number {
+  return index < 8 ? index + 1 : index + 2;
+}
+
+function TeamRow({ seed, team, trueSeed, placeholder, playIn, receivesPlayIn }: RowModel) {
+  const color = chipColor(team);
   return (
     <div
-      className="cbb-br-chip"
-      style={{ ["--chip-color" as string]: chipColor(team) ?? "var(--turf)" }}
+      className={`cbb-br-row${team ? "" : " is-open"}${receivesPlayIn ? " is-recv" : ""}`}
+      style={color ? { ["--chip-color" as string]: color } : undefined}
     >
-      <span className="cbb-br-seed">{seed}</span>
-      <TeamLogo team={team} />
+      {seed !== "" ? <span className="cbb-br-seed">{seed}</span> : null}
+      {team ? <TeamLogo team={team} /> : null}
       <span className="cbb-br-name">
-        <strong>{team.shortName}</strong>
+        {team ? <strong>{team.shortName}</strong> : null}
         <em>
-          {formatRecord(team.wins, team.losses)}
-          {trueSeed ? ` · #${trueSeed}` : ""}
-          {playIn ? " · OR" : ""}
+          {placeholder
+            ? placeholder
+            : team
+              ? `${formatRecord(team.wins, team.losses)}${trueSeed ? ` · #${trueSeed}` : ""}${
+                  playIn ? " · OR" : ""
+                }`
+              : ""}
         </em>
       </span>
     </div>
   );
 }
 
-function SlotSide({
-  slot,
-  teamsById,
+function GameBubble({
+  top,
+  bottom,
+  playIn,
+  label,
 }: {
-  slot: FirstRoundSlot;
-  teamsById: Map<string, CbbTeam>;
+  top: RowModel;
+  bottom: RowModel;
+  playIn?: boolean;
+  label?: string;
 }) {
-  if (slot.playIn) {
-    const [leftId, rightId] = slot.playIn.teamIds;
-    return (
-      <div className="cbb-br-or">
-        <TeamChip team={teamsById.get(leftId)} seed={slot.seed} trueSeed={slot.trueSeeds[0]} playIn />
-        <TeamChip team={teamsById.get(rightId)} seed={slot.seed} trueSeed={slot.trueSeeds[1]} playIn />
-      </div>
-    );
-  }
   return (
-    <TeamChip
-      team={slot.teamId ? teamsById.get(slot.teamId) : undefined}
-      seed={slot.seed}
-      trueSeed={slot.trueSeeds[0]}
+    <article className={`cbb-br-bubble${playIn ? " is-or" : ""}`} aria-label={label}>
+      <TeamRow {...top} />
+      <TeamRow {...bottom} />
+    </article>
+  );
+}
+
+function EmptyBubble() {
+  return (
+    <div className="cbb-br-bubble is-open">
+      <TeamRow seed="" />
+      <TeamRow seed="" />
+    </div>
+  );
+}
+
+function BracketJoin({ column, row, span }: { column: number; row: number; span: number }) {
+  return (
+    <div
+      className="cbb-br-join"
+      style={{ gridColumn: column, gridRow: `${row} / span ${span}` }}
+      aria-hidden
+    >
+      <span className="cbb-br-join-arm is-top" />
+      <span className="cbb-br-join-arm is-bot" />
+      <span className="cbb-br-join-out" />
+    </div>
+  );
+}
+
+function PlayInBubble({ slot, teamsById }: { slot: FirstRoundSlot; teamsById: Map<string, CbbTeam> }) {
+  if (!slot.playIn) return null;
+  const [leftId, rightId] = slot.playIn.teamIds;
+  return (
+    <GameBubble
+      playIn
+      label={`Opening Round · ${slot.seed} seed`}
+      top={{
+        seed: slot.seed,
+        team: teamsById.get(leftId),
+        trueSeed: slot.trueSeeds[0],
+      }}
+      bottom={{
+        seed: slot.seed,
+        team: teamsById.get(rightId),
+        trueSeed: slot.trueSeeds[1],
+      }}
     />
   );
 }
 
-function RegionTree({
+function FirstRoundBubble({
   region,
+  high,
+  low,
   teamsById,
-  area,
-  flip,
 }: {
   region: RegionBracket;
+  high: number;
+  low: number;
   teamsById: Map<string, CbbTeam>;
-  area: string;
+}) {
+  const top = slotBySeed(region, high);
+  const bottom = slotBySeed(region, low);
+  const topTeam = top.teamId ? teamsById.get(top.teamId) : undefined;
+  const bottomTeam = bottom.teamId ? teamsById.get(bottom.teamId) : undefined;
+  return (
+    <GameBubble
+      label={`${region.label} ${high} vs ${low}`}
+      top={{ seed: high, team: topTeam, trueSeed: top.trueSeeds[0] }}
+      bottom={
+        bottom.playIn
+          ? { seed: low, placeholder: "OR winner", receivesPlayIn: true }
+          : { seed: low, team: bottomTeam, trueSeed: bottom.trueSeeds[0] }
+      }
+    />
+  );
+}
+
+function HalfBracket({
+  top,
+  bottom,
+  teamsById,
+  flip,
+}: {
+  top: RegionBracket;
+  bottom: RegionBracket;
+  teamsById: Map<string, CbbTeam>;
   flip?: boolean;
 }) {
+  const regions = [top, bottom];
   return (
-    <section className={`cbb-br-region${flip ? " is-flip" : ""}`} style={{ gridArea: area }}>
-      <header>
-        <h3>{region.label}</h3>
-        <span>
-          {region.site} · {region.venue}
-        </span>
-      </header>
-      <ol className="cbb-br-r64">
-        {FIRST_ROUND_PAIRS.map(([high, low]) => {
-          const left = slotBySeed(region, high);
-          const right = slotBySeed(region, low);
+    <div className={`cbb-br-half${flip ? " is-flip" : ""}`}>
+      <ol className="cbb-br-round-labels">
+        {ROUND_LABELS.map((label, index) => (
+          <li key={`${label}-${index}`}>{label}</li>
+        ))}
+      </ol>
+      <div className="cbb-br-tree">
+        {regions.flatMap((region, regionIndex) =>
+          FIRST_ROUND_PAIRS.map(([high, low], pairIndex) => {
+            const index = regionIndex * 8 + pairIndex;
+            const row = gameRow(index);
+            const lowSlot = slotBySeed(region, low);
+            return (
+              <Fragment key={`${region.id}-${high}-${low}`}>
+                <div className="cbb-br-or-cell" style={{ gridColumn: COL.or, gridRow: row }}>
+                  <PlayInBubble slot={lowSlot} teamsById={teamsById} />
+                </div>
+                <div
+                  className={`cbb-br-feed${lowSlot.playIn ? " is-on" : ""}`}
+                  style={{ gridColumn: COL.feed, gridRow: row }}
+                  aria-hidden
+                >
+                  {lowSlot.playIn ? (
+                    <svg viewBox="0 0 24 40" preserveAspectRatio="none">
+                      <path d="M0 20 H12 V30 H24" />
+                    </svg>
+                  ) : null}
+                </div>
+                <div className="cbb-br-r64-cell" style={{ gridColumn: COL.r64, gridRow: row }}>
+                  <FirstRoundBubble region={region} high={high} low={low} teamsById={teamsById} />
+                </div>
+              </Fragment>
+            );
+          }),
+        )}
+
+        {Array.from({ length: 8 }, (_, index) => {
+          const start = index * 2;
+          const row = gameRow(start);
+          const span = gameRow(start + 1) - row + 1;
           return (
-            <li key={`${high}-${low}`} className="cbb-br-game">
-              <SlotSide slot={left} teamsById={teamsById} />
-              <SlotSide slot={right} teamsById={teamsById} />
-            </li>
+            <Fragment key={`r32-${index}`}>
+              <BracketJoin column={COL.j32} row={row} span={span} />
+              <div
+                className="cbb-br-later"
+                style={{ gridColumn: COL.r32, gridRow: `${row} / span ${span}` }}
+              >
+                <EmptyBubble />
+              </div>
+            </Fragment>
           );
         })}
-      </ol>
-    </section>
+
+        {Array.from({ length: 4 }, (_, index) => {
+          const start = index * 4;
+          const row = gameRow(start);
+          const span = gameRow(start + 3) - row + 1;
+          return (
+            <Fragment key={`s16-${index}`}>
+              <BracketJoin column={COL.j16} row={row} span={span} />
+              <div
+                className="cbb-br-later"
+                style={{ gridColumn: COL.s16, gridRow: `${row} / span ${span}` }}
+              >
+                <EmptyBubble />
+              </div>
+            </Fragment>
+          );
+        })}
+
+        {regions.map((region, regionIndex) => {
+          const start = regionIndex * 8;
+          const row = gameRow(start);
+          const span = gameRow(start + 7) - row + 1;
+          return (
+            <Fragment key={`e8-${region.id}`}>
+              <BracketJoin column={COL.j8} row={row} span={span} />
+              <div
+                className="cbb-br-e8-cell"
+                style={{ gridColumn: COL.e8, gridRow: `${row} / span ${span}` }}
+              >
+                <p className="cbb-br-region-name">{region.label}</p>
+                <p className="cbb-br-region-meta">
+                  {region.site} · {region.venue}
+                </p>
+                <EmptyBubble />
+              </div>
+            </Fragment>
+          );
+        })}
+
+        <div className="cbb-br-split" style={{ gridColumn: "1 / -1", gridRow: 9 }} aria-hidden />
+      </div>
+    </div>
   );
 }
 
@@ -194,8 +361,8 @@ export function BracketTab({
         <header className="panel-header">
           <p className="eyebrow">2027 NCAA bracket · {viewing.label}</p>
           <p>
-            {placed.playInCount}/{PLAY_IN_GAMES} Opening Round games · overall 1 vs 4 and 2 vs 3 in
-            Detroit · true-seed spread {spread} (prefer ≤6)
+            {placed.playInCount}/{PLAY_IN_GAMES} Opening Round games on the edges · Round of 64
+            inward · overall 1 vs 4 and 2 vs 3 in Detroit · true-seed spread {spread} (prefer ≤6)
           </p>
         </header>
         <label className="week-select">
@@ -212,19 +379,24 @@ export function BracketTab({
       </section>
 
       <div className="cbb-br-frame">
-        <RegionTree region={placed.regions.east} teamsById={teamsById} area="east" />
-        <RegionTree region={placed.regions.midwest} teamsById={teamsById} area="midwest" />
+        <HalfBracket
+          top={placed.regions.east}
+          bottom={placed.regions.midwest}
+          teamsById={teamsById}
+        />
         <aside className="cbb-br-ff">
           <p>Final Four · Detroit</p>
-          <div className="cbb-br-ff-game">
-            <strong>{REGION_META.east.label}</strong>
-            <span>vs</span>
-            <strong>{REGION_META.midwest.label}</strong>
+          <div className="cbb-br-bubble cbb-br-ff-semi">
+            <TeamRow seed="" placeholder={REGION_META.east.label} />
+            <TeamRow seed="" placeholder={REGION_META.midwest.label} />
           </div>
-          <div className="cbb-br-ff-game">
-            <strong>{REGION_META.west.label}</strong>
-            <span>vs</span>
-            <strong>{REGION_META.south.label}</strong>
+          <div className="cbb-br-bubble cbb-br-champ is-open">
+            <TeamRow seed="" placeholder="Championship" />
+            <TeamRow seed="" placeholder="April · Detroit" />
+          </div>
+          <div className="cbb-br-bubble cbb-br-ff-semi">
+            <TeamRow seed="" placeholder={REGION_META.west.label} />
+            <TeamRow seed="" placeholder={REGION_META.south.label} />
           </div>
           <ol className="cbb-br-balance">
             {(["east", "west", "south", "midwest"] as RegionId[]).map((id) => (
@@ -234,8 +406,12 @@ export function BracketTab({
             ))}
           </ol>
         </aside>
-        <RegionTree region={placed.regions.west} teamsById={teamsById} area="west" flip />
-        <RegionTree region={placed.regions.south} teamsById={teamsById} area="south" flip />
+        <HalfBracket
+          top={placed.regions.west}
+          bottom={placed.regions.south}
+          teamsById={teamsById}
+          flip
+        />
       </div>
     </div>
   );
