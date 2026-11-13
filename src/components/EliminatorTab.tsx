@@ -122,7 +122,9 @@ export function EliminatorTab({ teams, metrics, lockedIds, eliminatedIds, onChan
               >
                 <span className="cbb-scurve-rank">{row.seed != null ? row.seed : "·"}</span>
                 <span className="cbb-scurve-idx">#{row.rank}</span>
-                <TeamLogo team={team} onFill={lockedFill?.backgroundColor} />
+                <span className="cbb-elim-logo">
+                  <TeamLogo team={team} onFill={lockedFill?.backgroundColor} />
+                </span>
                 <strong>
                   {team.shortName}
                   {row.playIn ? <span className="cbb-pi">PI</span> : null}
