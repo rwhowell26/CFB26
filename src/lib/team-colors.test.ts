@@ -32,23 +32,22 @@ test("teamFillColors uses the logo disc fill and picks contrasting ink", () => {
   assert.equal(carolina.color.toLowerCase(), "#0f172a");
 });
 
-test("Queens disc uses navy fill and the light contrast Q", () => {
-  const goldSecondary = logoAppearance(
-    "192c66",
-    "857040",
-    "https://a.espncdn.com/i/teamlogos/ncaa/500/2511.png",
-  );
-  assert.equal(goldSecondary.style.backgroundColor.toLowerCase(), "#857040");
+test("logo discs use primary color, not secondary", () => {
+  const queens = logoAppearance("192c66", "857040", "https://a.espncdn.com/i/teamlogos/ncaa/500/2511.png");
+  assert.equal(queens.style.backgroundColor.toLowerCase(), "#192c66");
+  assert.match(queens.src ?? "", /\/ncaa\/500-dark\/2511\.png$/);
 
-  const queens = logoAppearance(
+  const queensWithId = logoAppearance(
     "192c66",
     "857040",
     "https://a.espncdn.com/i/teamlogos/ncaa/500/2511.png",
     "2511",
   );
-  assert.equal(queens.style.backgroundColor.toLowerCase(), "#192c66");
-  assert.equal(queens.markColor, null);
-  assert.match(queens.src ?? "", /\/ncaa\/500-dark\/2511\.png$/);
+  assert.equal(queensWithId.style.backgroundColor.toLowerCase(), "#192c66");
+  assert.equal(queensWithId.markColor, null);
+
+  const notreDame = logoAppearance("062340", "c99700", "https://a.espncdn.com/i/teamlogos/ncaa/500/87.png", "87");
+  assert.equal(notreDame.style.backgroundColor.toLowerCase(), "#062340");
 });
 
 test("white primary falls back to secondary so the disc stays colored", () => {

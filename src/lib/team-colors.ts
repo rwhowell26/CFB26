@@ -45,34 +45,6 @@ const DARK_FILL = 0.38;
 /** Skip a tint that would disappear into the disc. */
 const MIN_MARK_CONTRAST = 3;
 
-/** Disc fills keyed by ESPN team id (overrides secondary-first default). */
-const FILL_OVERRIDES: Record<string, string> = {
-  "145": "#13294b", // Ole Miss navy
-  "87": "#062340", // Notre Dame navy
-  "258": "#232d4b", // Virginia navy
-  "259": "#6a2c3e", // Virginia Tech maroon
-  "167": "#ba0c2f", // New Mexico red
-  "2": "#002b5c", // Auburn navy
-  "235": "#004991", // Memphis blue
-  "344": "#5d1725", // Mississippi State maroon
-  "153": "#7bafd4", // North Carolina carolina blue
-  "256": "#450084", // James Madison purple
-  "66": "#ae192d", // Iowa State red
-  "2305": "#0051ba", // Kansas blue
-  "309": "#ce181e", // Louisiana red
-  "2132": "#000000", // Cincinnati black
-  "326": "#e6d5a8", // Texas State lighter gold
-  "5": "#1a5632", // UAB green
-  "62": "#005737", // Hawaii green
-  "59": "#002f6c", // Georgia Tech navy
-  "290": "#041e42", // Georgia Southern navy
-  "242": "#00205b", // Rice navy
-  "166": "#7e141b", // New Mexico State maroon
-  "2440": "#041e42", // Nevada navy
-  "2429": "#005035", // Charlotte green
-  "2511": "#192c66", // Queens navy
-};
-
 /** Zoom ESPN marks that sit tiny inside their 500px canvas. */
 const LOGO_SCALE: Record<string, number> = {
   "2110": 2.35, // Central Arkansas bear
@@ -88,16 +60,15 @@ const LOGO_FORCE_COLOR = new Set(["197"]); // Oklahoma State orange
 
 /** Tint the 500-dark (white) silhouette to a brand color, when it still contrasts. */
 const LOGO_TINT: Record<string, string> = {
-  "277": "#eaaa00", // West Virginia gold
+  "277": "#002855", // West Virginia navy on gold
   "344": "#ffffff", // Mississippi State white script
   "2649": "#0b2240", // Toledo blue wording
   "2426": "#00225b", // Navy navy mark
   "183": "#000e54", // Syracuse blue S
 };
 
-function pickFill(primary: string | null, secondary: string | null, teamId?: string | null): string {
-  if (teamId && FILL_OVERRIDES[teamId]) return FILL_OVERRIDES[teamId];
-  return usableFill(secondary) ?? usableFill(primary) ?? FALLBACK_FILL;
+function pickFill(primary: string | null, secondary: string | null): string {
+  return usableFill(primary) ?? usableFill(secondary) ?? FALLBACK_FILL;
 }
 
 function tintForFill(teamId: string | null | undefined, fillHex: string): string | null {
@@ -162,7 +133,7 @@ export function logoSwatch(
 ): LogoSwatch {
   const primary = normalizeHex(color);
   const secondary = normalizeHex(alternateColor);
-  const backgroundColor = pickFill(primary, secondary, teamId);
+  const backgroundColor = pickFill(primary, secondary);
   const darkFill = relativeLuminance(backgroundColor) < DARK_FILL;
   const ring = darkFill ? "rgba(255, 255, 255, 0.28)" : "rgba(20, 32, 26, 0.22)";
   return {
