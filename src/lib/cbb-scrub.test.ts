@@ -72,6 +72,13 @@ test("remaining at-large count is adjacent pairs on the at-large board", () => {
   assert.equal(remainingScrubCount(draft), 51);
 });
 
+test("teams past Next 4 Out are not extra at-large pairs", () => {
+  const ids = Array.from({ length: 62 }, (_, i) => `t${i}`);
+  const draft = emptyDraft(ids, null);
+  assert.equal(remainingScrubCount(draft, { lockEnd: 52 }), 51);
+  assert.equal(nextScrubQuestion(draft, { lockEnd: 52 })?.rightId, "t1");
+});
+
 test("a recommended team starts below the last Next 4 Out and climbs until it loses", () => {
   let draft = skipRemainingScrub(emptyDraft(["in1", "in2", "firstOut", "nextOut"], null), ["newTeam"]);
   assert.equal(draft.phase, "recommend");
@@ -105,4 +112,56 @@ test("skip remaining on at-large with no recommends goes straight to auto-bids",
   assert.equal(draft.phase, "auto-bid");
   assert.deepEqual(draft.autoBidIds, ["m", "n"]);
   assert.equal(nextScrubQuestion(draft)?.leftId, "m");
+});
+
+test("at-large pairs stop once Next 4 Out is filled", () => {
+  const ids = ["a", "b", "c", "d", "out1", "out2"];
+  const window = { lockEnd: 4 };
+  const draft = emptyDraft(ids, null);
+  assert.equal(remainingScrubCount(draft, window), 3);
+  const first = nextScrubQuestion(draft, window);
+  assert.equal(first?.leftId, "a");
+  assert.equal(first?.rightId, "b");
+  const skipped = skipRemainingScrub(draft, [], [], window);
+  assert.equal(skipped.phase, "recommend");
+  assert.equal(skipped.climbingId, "out1");
+  assert.deepEqual(skipped.rankedIds, ["a", "b", "c", "d", "out1"]);
+  assert.deepEqual(skipped.recommendQueue, ["out2"]);
+  const climb = nextScrubQuestion(skipped, window);
+  assert.equal(climb?.phase, "recommend");
+  assert.equal(climb?.leftId, "d");
+  assert.equal(climb?.rightId, "out1");
+});
+
+test("a team that loses the Next 4 Out climb is eliminated and the next candidate faces the last Next 4 Out", () => {
+  const window = { lockEnd: 4 };
+  let draft = skipRemainingScrub(emptyDraft(["a", "b", "c", "d", "out1", "out2"], null), ["fresh"], [], window);
+  assert.equal(draft.climbingId, "out1");
+  draft = applyScrubChoice(draft, "d", "out1", ["fresh"], [], window);
+  assert.ok(!draft.rankedIds.includes("out1"));
+  assert.equal(draft.climbingId, "out2");
+  assert.deepEqual(draft.rankedIds, ["a", "b", "c", "d", "out2"]);
+  const question = nextScrubQuestion(draft, window);
+  assert.equal(question?.leftId, "d");
+  assert.equal(question?.rightId, "out2");
+  draft = applyScrubChoice(draft, "d", "out2", ["fresh"], [], window);
+  assert.ok(!draft.rankedIds.includes("out2"));
+  assert.equal(draft.climbingId, "fresh");
+  const next = nextScrubQuestion(draft, window);
+  assert.equal(next?.leftId, "d");
+  assert.equal(next?.rightId, "fresh");
+});
+
+test("a climber who makes Next 4 Out stays; the displaced team is out and the next candidate faces the new last Next 4 Out", () => {
+  const window = { lockEnd: 4 };
+  let draft = skipRemainingScrub(emptyDraft(["a", "b", "c", "d", "out1", "out2"], null), [], [], window);
+  draft = applyScrubChoice(draft, "out1", "d", [], [], window);
+  assert.deepEqual(draft.rankedIds.slice(0, 5), ["a", "b", "c", "out1", "d"]);
+  draft = applyScrubChoice(draft, "c", "out1", [], [], window);
+  assert.ok(draft.rankedIds.includes("out1"));
+  assert.ok(!draft.rankedIds.includes("d"));
+  assert.equal(draft.climbingId, "out2");
+  const question = nextScrubQuestion(draft, window);
+  assert.equal(question?.leftId, "out1");
+  assert.equal(question?.rightId, "out2");
 });

@@ -22,12 +22,14 @@ import {
   COMPLETED_ABOVE,
   FIELD_SIZE,
   FIRST_FOUR_OUT,
+  NEXT_FOUR_OUT,
   PLAY_IN_GAMES,
   PLAY_IN_TEAMS,
   formatCbbDate,
 } from "@/lib/cbb-season";
 import {
   applyScrubChoice,
+  atLargeBoardEnd,
   emptyDraft,
   nextScrubQuestion,
   remainingScrubCount,
@@ -115,30 +117,50 @@ export function BracketologyTab({
   };
 
   if (draft) {
-    const recommended = recommendNewTeams(teams, metrics, previousForSeed, undefined, draft.rankedIds);
+    const bestByConf = bestTeamByConference(teams, teamsById, metrics);
+    const scrubWindow = {
+      champIds: [...bestByConf.values()],
+      conferenceCount: conferences.length,
+    };
+    const recommended = recommendNewTeams(teams, metrics, previousForSeed, undefined, [
+      ...draft.rankedIds,
+      ...draft.recommendQueue,
+    ]);
+    const boardWithoutClimb = draft.climbingId
+      ? draft.rankedIds.filter((id) => id !== draft.climbingId)
+      : draft.rankedIds;
     const autoBidIds = remainingAutoBidIds(
-      draft.rankedIds,
+      boardWithoutClimb.slice(0, atLargeBoardEnd(boardWithoutClimb, scrubWindow)),
       teams,
       metrics,
       conferences,
       previousForSeed,
     );
-    const question = nextScrubQuestion(draft);
+    const question = nextScrubQuestion(draft, scrubWindow);
     const left = question ? teamsById.get(question.leftId) : null;
     const right = question ? teamsById.get(question.rightId) : null;
     const leftMetrics = question ? metricsFor(metrics, question.leftId) : null;
     const rightMetrics = question ? metricsFor(metrics, question.rightId) : null;
-    const remaining = remainingScrubCount(draft);
+    const remaining = remainingScrubCount(draft, scrubWindow);
     const curve = draftSCurve(draft.rankedIds, draft.autoBidIds);
-    const bestByConf = bestTeamByConference(teams, teamsById, metrics);
-    const assignment = assignField(curve, teamsById, conferences, bestByConf);
     const placedForReserve =
       question?.phase === "at-large"
         ? draft.rankedIds.slice(0, Math.max(0, question.leftRank - 1))
         : question?.phase === "recommend"
-          ? draft.rankedIds.slice(0, Math.max(0, question.leftRank))
+          ? boardWithoutClimb
           : draft.rankedIds;
     const live = liveReserveCounts(placedForReserve, teamsById, bestByConf, conferences);
+    const liveBoardEnd =
+      question?.phase === "auto-bid" || !question
+        ? draft.rankedIds.length
+        : question?.phase === "at-large"
+          ? Math.min(live.atLargeSpots + FIRST_FOUR_OUT + NEXT_FOUR_OUT, draft.rankedIds.length)
+          : atLargeBoardEnd(boardWithoutClimb, scrubWindow);
+    const assignmentCurve =
+      question?.phase === "auto-bid" || !question
+        ? curve
+        : draftSCurve(draft.rankedIds.slice(0, liveBoardEnd), draft.autoBidIds);
+    const assignment = assignField(assignmentCurve, teamsById, conferences, bestByConf);
     const reserves =
       question?.phase === "auto-bid" || !question
         ? {
@@ -148,9 +170,18 @@ export function BracketologyTab({
             playInRemaining: assignment.field.filter((row) => row.playIn).length,
           }
         : live;
+    const liveSpot = (teamId: string) => {
+      const idx = draft.rankedIds.indexOf(teamId);
+      if (question?.phase !== "auto-bid" && idx >= liveBoardEnd) {
+        return { rank: idx + 1, seed: null, playIn: false, band: "out" as const };
+      }
+      return spotForTeam(teamId, curve, assignment);
+    };
 
     const pick = (winnerId: string, loserId: string) => {
-      onStoreChange({ draft: applyScrubChoice(draft, winnerId, loserId, recommended, autoBidIds) });
+      onStoreChange({
+        draft: applyScrubChoice(draft, winnerId, loserId, recommended, autoBidIds, scrubWindow),
+      });
     };
 
     const save = () => {
@@ -210,8 +241,8 @@ export function BracketologyTab({
               {question.phase === "recommend"
                 ? "Recommended climb"
                 : question.phase === "auto-bid"
-                  ? `Auto-bid 12–16 · ${spotLabel(spotForTeam(left.id, curve, assignment))} vs ${spotLabel(spotForTeam(right.id, curve, assignment))}`
-                  : `${spotLabel(spotForTeam(left.id, curve, assignment))} vs ${spotLabel(spotForTeam(right.id, curve, assignment))}`}
+                  ? `Auto-bid 12–16 · ${spotLabel(liveSpot(left.id))} vs ${spotLabel(liveSpot(right.id))}`
+                  : `${spotLabel(liveSpot(left.id))} vs ${spotLabel(liveSpot(right.id))}`}
             </p>
             <p>
               {question.phase === "recommend"
@@ -234,7 +265,9 @@ export function BracketologyTab({
             <button
               type="button"
               className="ghost-btn"
-              onClick={() => onStoreChange({ draft: skipRemainingScrub(draft, recommended, autoBidIds) })}
+              onClick={() =>
+                onStoreChange({ draft: skipRemainingScrub(draft, recommended, autoBidIds, scrubWindow) })
+              }
             >
               Keep remaining order
             </button>
@@ -270,7 +303,7 @@ export function BracketologyTab({
                 const team = teamsById.get(id);
                 if (!team) return <li key={id} className="cbb-scurve-row is-empty" />;
                 const rank = curve.indexOf(id) + 1;
-                const spot = spotForTeam(id, curve, assignment);
+                const spot = liveSpot(id);
                 return (
                   <TeamRow
                     key={id}
@@ -304,8 +337,8 @@ export function BracketologyTab({
                   ? "Lower auto-bid"
                   : "Currently lower"
             }
-            leftSpot={spotForTeam(left.id, curve, assignment)}
-            rightSpot={spotForTeam(right.id, curve, assignment)}
+            leftSpot={liveSpot(left.id)}
+            rightSpot={liveSpot(right.id)}
             assignment={assignment}
             teamsById={teamsById}
             onPickLeft={() => pick(left.id, right.id)}
