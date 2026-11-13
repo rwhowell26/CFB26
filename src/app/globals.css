@@ -3397,18 +3397,73 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
   }
 }
 
+body:has(.cbb-mode.is-bracket) {
+  overflow: hidden;
+  height: 100dvh;
+}
+
+body:has(.cbb-mode.is-bracket) main {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+body:has(.cbb-mode.is-bracket) .sport-bar {
+  flex: none;
+  padding: 0.22rem 0.7rem 0.1rem;
+}
+
 .cbb-mode.is-bracket {
-  width: min(1920px, calc(100% - 0.6rem));
-  padding-bottom: 1.1rem;
+  flex: 1;
+  min-height: 0;
+  width: min(1920px, calc(100% - 0.4rem));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0.05rem 0 0.15rem;
+  box-sizing: border-box;
 }
 
 .cbb-mode.is-bracket .topbar {
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.12rem;
+}
+
+.cbb-mode.is-bracket .brand {
+  font-size: 1.45rem;
+}
+
+.cbb-mode.is-bracket .brand-block h1 {
+  font-size: 0.95rem;
+}
+
+.cbb-mode.is-bracket .tabs {
+  gap: 0.3rem;
+  margin-bottom: 0.15rem;
+}
+
+.cbb-mode.is-bracket .tabs button {
+  padding: 0.22rem 0.7rem;
+  font-size: 0.82rem;
+}
+
+.cbb-mode.is-bracket .week-select {
+  gap: 0.12rem;
+  font-size: 0.72rem;
+}
+
+.cbb-mode.is-bracket select {
+  padding: 0.22rem 0.45rem;
+  min-width: 8.5rem;
+  border-radius: 8px;
 }
 
 .cbb-bracket-tab {
+  flex: 1;
+  min-height: 0;
   display: grid;
-  gap: 0.4rem;
+  grid-template-rows: auto 1fr;
+  gap: 0.22rem;
 }
 
 .cbb-br-bar {
@@ -3416,7 +3471,11 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 0.3rem 0.7rem;
+  padding: 0.18rem 0.55rem;
+}
+
+.cbb-br-bar .panel-header p:not(.eyebrow) {
+  display: none;
 }
 
 .cbb-br-bar .panel-header {
@@ -3430,20 +3489,22 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
 
 .cbb-br-frame {
   --br-line: rgba(20, 32, 26, 0.38);
-  --br-cols: minmax(8.3rem, 1.05fr) 1.35rem minmax(8.9rem, 1.22fr) 0.9rem minmax(6.2rem, 0.82fr) 0.8rem minmax(5.6rem, 0.72fr) 0.8rem minmax(5.5rem, 0.7fr);
+  --br-cols: minmax(0, 0.98fr) 0.9rem minmax(0, 1.18fr) 0.7rem minmax(0, 0.74fr) 0.58rem minmax(0, 0.62fr) 0.58rem minmax(0, 0.58fr);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 10.75rem minmax(0, 1fr);
-  gap: 0.15rem 0.2rem;
-  min-height: calc(100dvh - 7.6rem);
-  overflow-x: auto;
-  padding-bottom: 0.2rem;
+  grid-template-columns: minmax(0, 1fr) 7.6rem minmax(0, 1fr);
+  gap: 0.08rem 0.12rem;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
 }
 
 .cbb-br-half {
   min-width: 0;
+  min-height: 0;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.08rem;
 }
 
 .cbb-br-half.is-flip,
@@ -3459,10 +3520,11 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
   display: grid;
   grid-template-columns: var(--br-cols);
   color: var(--muted);
-  font-size: 0.58rem;
+  font-size: 0.52rem;
   font-weight: 700;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  flex: none;
 }
 
 .cbb-br-round-labels li {
@@ -3475,12 +3537,12 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
 
 .cbb-br-tree {
   flex: 1;
+  min-height: 0;
   display: grid;
   grid-template-columns: var(--br-cols);
-  grid-template-rows: repeat(8, minmax(2.55rem, 1fr)) 0.8rem repeat(8, minmax(2.55rem, 1fr));
+  grid-template-rows: repeat(8, minmax(0, 1fr)) 0.4rem repeat(8, minmax(0, 1fr));
   column-gap: 0;
-  row-gap: 0.16rem;
-  min-height: 36rem;
+  row-gap: 0.08rem;
   direction: inherit;
 }
 
@@ -3516,7 +3578,7 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
 .cbb-br-later .cbb-br-bubble,
 .cbb-br-e8-cell .cbb-br-bubble {
   flex: 0 0 auto;
-  height: 2.7rem;
+  height: clamp(1.55rem, 16%, 2.2rem);
 }
 
 .cbb-br-e8-cell {
@@ -3541,15 +3603,15 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
 
 .cbb-br-region-name {
   font-family: var(--font-display), "Barlow Condensed", sans-serif;
-  font-size: 0.92rem;
+  font-size: 0.78rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
 .cbb-br-region-meta {
   color: var(--muted);
-  font-size: 0.58rem;
-  margin-bottom: 0.18rem;
+  font-size: 0.52rem;
+  margin-bottom: 0.1rem;
 }
 
 .cbb-br-split {
@@ -3564,7 +3626,7 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
   overflow: hidden;
   background: var(--panel);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 6px;
   box-shadow: 0 1px 2px rgba(15, 35, 24, 0.07);
   direction: ltr;
 }
@@ -3581,11 +3643,11 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
 .cbb-br-row {
   display: flex;
   align-items: center;
-  gap: 0.22rem;
+  gap: 0.16rem;
   min-width: 0;
   flex: 1;
-  min-height: 1.15rem;
-  padding: 0.08rem 0.28rem 0.08rem 0.16rem;
+  min-height: 0;
+  padding: 0.02rem 0.22rem 0.02rem 0.12rem;
   border-inline-start: 3px solid var(--chip-color, transparent);
 }
 
@@ -3596,7 +3658,7 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
 .cbb-br-half.is-flip .cbb-br-row {
   flex-direction: row-reverse;
   text-align: right;
-  padding: 0.06rem 0.16rem 0.06rem 0.28rem;
+  padding: 0.02rem 0.12rem 0.02rem 0.22rem;
 }
 
 .cbb-br-row.is-open {
@@ -3610,30 +3672,32 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
 .cbb-br-seed {
   font-family: var(--font-display), "Barlow Condensed", sans-serif;
   font-weight: 700;
-  font-size: 0.74rem;
-  width: 1.02rem;
+  font-size: 0.68rem;
+  width: 0.9rem;
   flex: none;
   text-align: center;
 }
 
 .cbb-br-row .team-logo {
-  width: 1.05rem;
-  height: 1.05rem;
-  padding: 0.04rem;
-  border-radius: 0.24rem;
+  width: 0.92rem;
+  height: 0.92rem;
+  padding: 0.03rem;
+  border-radius: 0.2rem;
   flex: none;
 }
 
 .cbb-br-name {
   min-width: 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 0.28rem;
   line-height: 1.05;
   flex: 1;
 }
 
 .cbb-br-name strong {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -3641,11 +3705,12 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
 
 .cbb-br-name em {
   font-style: normal;
-  font-size: 0.58rem;
+  font-size: 0.54rem;
   color: var(--muted);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  flex: none;
 }
 
 .cbb-br-feed {
@@ -3710,14 +3775,14 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
   flex-direction: column;
   justify-content: center;
   align-self: center;
-  gap: 0.5rem;
-  padding: 0.7rem 0.45rem 0.8rem;
+  gap: 0.32rem;
+  padding: 0.45rem 0.3rem 0.5rem;
   background: var(--turf-deep);
   color: #f4fff7;
-  border-radius: 12px;
+  border-radius: 10px;
   text-align: center;
   min-width: 0;
-  max-width: 11rem;
+  max-width: 7.4rem;
   justify-self: center;
 }
 
@@ -3730,22 +3795,27 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
 }
 
 .cbb-br-ff .cbb-br-bubble {
+  height: 2rem;
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.2);
   box-shadow: none;
   color: #f4fff7;
 }
 
+.cbb-br-ff .cbb-br-name {
+  justify-content: center;
+}
+
 .cbb-br-ff .cbb-br-name em {
   color: rgba(244, 255, 247, 0.86);
   font-family: var(--font-display), "Barlow Condensed", sans-serif;
-  font-size: 0.88rem;
+  font-size: 0.72rem;
   letter-spacing: 0.03em;
   text-transform: uppercase;
 }
 
 .cbb-br-ff .cbb-br-champ .cbb-br-name em {
-  font-size: 0.78rem;
+  font-size: 0.64rem;
 }
 
 .cbb-br-ff .cbb-br-row {
@@ -3757,17 +3827,6 @@ body:has(.cbb-mode.is-scrub) .sport-bar {
   list-style: none;
   margin: 0;
   padding: 0;
-  font-size: 0.64rem;
+  font-size: 0.58rem;
   opacity: 0.78;
-}
-
-@media (max-width: 1100px) {
-  .cbb-br-frame {
-    grid-template-columns: minmax(52rem, 1fr);
-    min-height: 0;
-  }
-
-  .cbb-br-ff {
-    order: -1;
-  }
 }

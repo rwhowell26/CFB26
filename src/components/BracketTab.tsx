@@ -90,7 +90,7 @@ function gameRow(index: number): number {
   return index < 8 ? index + 1 : index + 2;
 }
 
-function TeamRow({ seed, team, trueSeed, placeholder, playIn, receivesPlayIn }: RowModel) {
+function TeamRow({ seed, team, placeholder, playIn, receivesPlayIn }: RowModel) {
   const color = chipColor(team);
   return (
     <div
@@ -105,9 +105,7 @@ function TeamRow({ seed, team, trueSeed, placeholder, playIn, receivesPlayIn }: 
           {placeholder
             ? placeholder
             : team
-              ? `${formatRecord(team.wins, team.losses)}${trueSeed ? ` · #${trueSeed}` : ""}${
-                  playIn ? " · OR" : ""
-                }`
+              ? `${formatRecord(team.wins, team.losses)}${playIn ? " · OR" : ""}`
               : ""}
         </em>
       </span>
@@ -361,8 +359,8 @@ export function BracketTab({
         <header className="panel-header">
           <p className="eyebrow">2027 NCAA bracket · {viewing.label}</p>
           <p>
-            {placed.playInCount}/{PLAY_IN_GAMES} Opening Round games on the edges · Round of 64
-            inward · overall 1 vs 4 and 2 vs 3 in Detroit · true-seed spread {spread} (prefer ≤6)
+            {placed.playInCount}/{PLAY_IN_GAMES} Opening Round · Detroit 1 vs 4 and 2 vs 3 ·
+            true-seed spread {spread}
           </p>
         </header>
         <label className="week-select">
