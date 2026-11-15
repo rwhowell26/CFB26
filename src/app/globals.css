@@ -1137,6 +1137,7 @@ input[type="password"],
 }
 
 .slate-team.destiny,
+.slate-team.clinched,
 .slate-team.out-loss,
 .slate-team.eliminated {
   color: #111;
@@ -1144,6 +1145,10 @@ input[type="password"],
 
 .slate-team.destiny {
   background: #00f900;
+}
+
+.slate-team.clinched {
+  background: #ffd400;
 }
 
 .slate-team.out-loss {
@@ -1155,9 +1160,11 @@ input[type="password"],
 }
 
 .slate-team.destiny .slate-rank,
+.slate-team.clinched .slate-rank,
 .slate-team.out-loss .slate-rank,
 .slate-team.eliminated .slate-rank,
 .slate-team.destiny .slate-score,
+.slate-team.clinched .slate-score,
 .slate-team.out-loss .slate-score,
 .slate-team.eliminated .slate-score {
   color: #111;
@@ -1938,6 +1945,12 @@ input[type="password"],
   color: #111;
 }
 
+.playoff-swatches .clinched,
+.playoff-row.clinched {
+  background: #ffd400;
+  color: #111;
+}
+
 .playoff-swatches .alive,
 .playoff-row.alive {
   background: transparent;
@@ -2122,9 +2135,10 @@ input[type="password"],
 
 .playoff-wl {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.05rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.28rem;
   position: relative;
 }
 
@@ -2132,6 +2146,18 @@ input[type="password"],
   font-variant-numeric: tabular-nums;
   font-size: 0.78rem;
   white-space: nowrap;
+}
+
+.playoff-clinch-btn {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.playoff-clinch-btn.is-on {
+  background: #111;
+  color: #ffd400;
+  border-color: #111;
 }
 
 .playoff-elim-date {
@@ -2173,7 +2199,7 @@ input[type="password"],
 }
 
 .playoff-row:hover .playoff-wl .playoff-stepper,
-.playoff-row:focus-within .playoff-wl .playoff-stepper {
+.playoff-wl .playoff-stepper:focus-within {
   display: flex;
 }
 
