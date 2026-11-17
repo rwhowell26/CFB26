@@ -120,7 +120,7 @@ export type RankingStore = {
   playoffRace?: PlayoffRaceState;
 };
 
-export type PlayoffStatus = "destiny" | "alive" | "out-loss" | "eliminated";
+export type PlayoffStatus = "destiny" | "alive" | "clinched" | "out-loss" | "eliminated";
 
 /** Manual playoff-race ledger — not derived from the personal ballot. */
 export type PlayoffRaceState = {

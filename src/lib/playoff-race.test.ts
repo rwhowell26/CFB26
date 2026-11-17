@@ -6,14 +6,17 @@ import {
   atLargePoolTeams,
   autoBidTeams,
   conferenceChampions,
+  cycleTeamStatus,
   emptyPlayoffRace,
   eliminateFromAtLarge,
   formatNextOpponent,
   nextGameForTeam,
+  nextPlayoffStatus,
   overallPlayoffRecord,
   pendingAtLargeGames,
   playoffContentionCounts,
   playoffTables,
+  toggleClinchedCcg,
 } from "./playoff-race.ts";
 import type { CfpPoll, Game, PlayoffRaceState, Team } from "./types.ts";
 
@@ -264,7 +267,33 @@ test("judgement eliminate drops a team from at-large", () => {
   assert.equal(pool.some((row) => row.id === "ND"), false);
 });
 
-test("conference standings: destiny, then alive by losses then CFP, out-loss last", () => {
+test("Clinched CCG stays in conference standings and out of at-large", () => {
+  const live = toggleClinchedCcg(
+    state({
+      records: { MIA: { wins: 7, losses: 1 }, CLEM: { wins: 6, losses: 2 } },
+      status: { CLEM: "eliminated" },
+    }),
+    TEAMS[0],
+  );
+  assert.equal(live.status.MIA, "clinched");
+  const tables = playoffTables(TEAMS, live, cfp([["MIA", 3]]), []);
+  const acc = tables.find((table) => table.label === "ACC")!;
+  assert.equal(acc.standing[0]?.id, "MIA");
+  assert.ok(!acc.eliminated.some((row) => row.id === "MIA"));
+  const pool = atLargePoolTeams(TEAMS, live, cfp([["MIA", 3]]), []);
+  assert.equal(pool.some((row) => row.id === "MIA"), false);
+  const cleared = toggleClinchedCcg(live, TEAMS[0]);
+  assert.equal(cleared.status.MIA, "alive");
+});
+
+test("click cycle includes Clinched CCG between destiny and out-loss", () => {
+  assert.equal(nextPlayoffStatus("destiny"), "clinched");
+  assert.equal(nextPlayoffStatus("clinched"), "out-loss");
+  const afterClinch = cycleTeamStatus(state({ status: { MIA: "destiny" } }), TEAMS[0]);
+  assert.equal(afterClinch.status.MIA, "clinched");
+});
+
+test("conference standings: clinched, then destiny, then alive by losses then CFP, out-loss last", () => {
   const live = state({
     records: {
       MIA: { wins: 6, losses: 2 },

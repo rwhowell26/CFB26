@@ -32,6 +32,7 @@ import {
   restoreToAtLarge,
   setEliminatedOn,
   teamPlayoffStatus,
+  toggleClinchedCcg,
   undoLastAppliedGame,
 } from "@/lib/playoff-race";
 import { formatGameWeekShort } from "@/lib/season";
@@ -48,6 +49,7 @@ type Props = {
 const STATUS_CLASS: Record<PlayoffStatus, string> = {
   destiny: "destiny",
   alive: "alive",
+  clinched: "clinched",
   "out-loss": "out-loss",
   eliminated: "eliminated",
 };
@@ -88,7 +90,8 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
           <h2>Playoff race</h2>
           <p>
             Apply a completed game to update conference records. Click a team to
-            cycle status. Hover a record to adjust W–L.
+            cycle status, or Clinch to lock a CCG berth. Hover a record to adjust
+            W–L.
           </p>
           <button
             type="button"
@@ -114,16 +117,18 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
           </li>
         </ul>
         <ul className="playoff-swatches">
-          {(["alive", "destiny", "out-loss", "eliminated"] as const).map((status) => (
+          {(["alive", "destiny", "clinched", "out-loss", "eliminated"] as const).map((status) => (
             <li key={status} className={STATUS_CLASS[status]}>
               {PLAYOFF_STATUS_LABEL[status]}
             </li>
           ))}
         </ul>
         <p className="playoff-cfp-note">
-          Auto Bid fills when a team wins its CCG — gold 1–5, red 6–10. At-Large is
-          anyone out of the CCG race with 3 or fewer overall losses; the top 7 are gold.
-          Eliminate sends a team to their conference knockout list.
+          Auto Bid fills when a team wins its CCG — gold 1–5, red 6–10. Clinched CCG
+          marks a locked championship-game berth; that team stays in conference, not
+          at-large. At-Large is anyone out of the CCG race with 3 or fewer overall
+          losses; the top 7 are gold. Eliminate sends a team to their conference
+          knockout list.
         </p>
       </section>
 
@@ -256,6 +261,7 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
                     games={games}
                     cfpRank={ranks.get(team.id)}
                     onCycle={() => patch(cycleTeamStatus(live, team, games))}
+                    onClinch={() => patch(toggleClinchedCcg(live, team, games))}
                     onAdjust={(field, delta) =>
                       patch(adjustConferenceRecord(live, team.id, field, delta))
                     }
@@ -276,6 +282,7 @@ export function PlayoffRaceTab({ teams, games, cfp, state, onChange }: Props) {
                         cfpRank={ranks.get(team.id)}
                         asEliminated
                         onCycle={() => patch(cycleTeamStatus(live, team, games))}
+                        onClinch={() => patch(toggleClinchedCcg(live, team, games))}
                         onAdjust={(field, delta) =>
                           patch(adjustConferenceRecord(live, team.id, field, delta))
                         }
@@ -373,6 +380,7 @@ function TeamRow({
   games,
   cfpRank,
   onCycle,
+  onClinch,
   onAdjust,
   onDateChange,
   onRestore,
@@ -383,6 +391,7 @@ function TeamRow({
   games: Game[];
   cfpRank?: number;
   onCycle: () => void;
+  onClinch: () => void;
   onAdjust: (field: "wins" | "losses", delta: number) => void;
   onDateChange: (date: string) => void;
   onRestore?: () => void;
@@ -395,6 +404,7 @@ function TeamRow({
       ? conferenceGamesForTeam(games, team.id)
       : 0;
   const elimDate = status === "eliminated" ? state.eliminatedOn?.[team.id] : undefined;
+  const clinched = status === "clinched";
   return (
     <li className={`playoff-row ${STATUS_CLASS[status]}`}>
       <button type="button" className="playoff-row-main" onClick={onCycle}>
@@ -427,6 +437,14 @@ function TeamRow({
               {rec.wins}-{rec.losses}
               {accGames ? `\u00A0\u00A0${accGames}` : ""}
             </strong>
+            <button
+              type="button"
+              className={`playoff-clinch-btn${clinched ? " is-on" : ""}`}
+              aria-pressed={clinched}
+              onClick={onClinch}
+            >
+              {clinched ? "Clinched" : "Clinch"}
+            </button>
             <span className="playoff-stepper">
               <button type="button" onClick={() => onAdjust("wins", 1)}>
                 W+

@@ -321,6 +321,7 @@ function sanitizePairwise(value: RankingStore["pairwise"]): PairwiseSession | un
 const PLAYOFF_STATUSES = new Set<PlayoffStatus>([
   "destiny",
   "alive",
+  "clinched",
   "out-loss",
   "eliminated",
 ]);

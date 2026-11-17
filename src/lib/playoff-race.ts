@@ -33,6 +33,7 @@ export { PLAYOFF_SEED_VERSION } from "./playoff-race-seed";
 export const PLAYOFF_STATUSES: PlayoffStatus[] = [
   "alive",
   "destiny",
+  "clinched",
   "out-loss",
   "eliminated",
 ];
@@ -40,6 +41,7 @@ export const PLAYOFF_STATUSES: PlayoffStatus[] = [
 export const PLAYOFF_STATUS_LABEL: Record<PlayoffStatus, string> = {
   destiny: "Control destiny",
   alive: "Alive",
+  clinched: "Clinched CCG",
   "out-loss": "Out with a loss",
   eliminated: "Eliminated",
 };
@@ -188,14 +190,13 @@ export function adjustConferenceRecord(
   };
 }
 
-export function cycleTeamStatus(
+export function setTeamPlayoffStatus(
   state: PlayoffRaceState,
   team: Team,
+  next: PlayoffStatus,
   games: Game[] = [],
 ): PlayoffRaceState {
   if (isUConn(team)) return state;
-  const current = teamPlayoffStatus(state, team);
-  const next = nextPlayoffStatus(current);
   const playoffEliminatedIds =
     next === "eliminated"
       ? state.playoffEliminatedIds
@@ -213,6 +214,24 @@ export function cycleTeamStatus(
     playoffEliminatedIds,
     eliminatedOn,
   };
+}
+
+export function cycleTeamStatus(
+  state: PlayoffRaceState,
+  team: Team,
+  games: Game[] = [],
+): PlayoffRaceState {
+  return setTeamPlayoffStatus(state, team, nextPlayoffStatus(teamPlayoffStatus(state, team)), games);
+}
+
+/** Mark (or clear) a locked conference championship berth. */
+export function toggleClinchedCcg(
+  state: PlayoffRaceState,
+  team: Team,
+  games: Game[] = [],
+): PlayoffRaceState {
+  const next = teamPlayoffStatus(state, team) === "clinched" ? "alive" : "clinched";
+  return setTeamPlayoffStatus(state, team, next, games);
 }
 
 export function eliminateFromAtLarge(
@@ -470,10 +489,11 @@ export function playoffTables(
 }
 
 function standingStatusGroup(status: PlayoffStatus): number {
-  if (status === "destiny") return 0;
-  if (status === "out-loss") return 2;
-  if (status === "eliminated") return 3;
-  return 1;
+  if (status === "clinched") return 0;
+  if (status === "destiny") return 1;
+  if (status === "out-loss") return 3;
+  if (status === "eliminated") return 4;
+  return 2;
 }
 
 function compareStandings(
