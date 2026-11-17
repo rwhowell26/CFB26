@@ -1,4 +1,5 @@
 import { sortByMetrics } from "./cbb-bracket";
+import { shortCbbConference } from "./cbb-conferences";
 import { overallAverage } from "./cbb-metrics";
 import { CONTENTION_WITHIN } from "./cbb-season";
 import type { CbbSnapshot, CbbTeam, CbbTeamMetrics } from "./cbb-types";
@@ -157,4 +158,39 @@ export function contentionRosterIds(
     return [...(candidates instanceof Set ? candidates : new Set(candidates))];
   }
   return [...approvedIds];
+}
+
+export function compareAverage(left: number | null, right: number | null): number {
+  if (left != null && right != null && left !== right) return left - right;
+  if (left != null && right == null) return -1;
+  if (left == null && right != null) return 1;
+  return 0;
+}
+
+export type ContentionConferenceGroup<T extends { teamId: string; average: number | null }> = {
+  conference: string;
+  label: string;
+  rows: T[];
+};
+
+export function groupContentionByConference<T extends { teamId: string; average: number | null }>(
+  rows: T[],
+  teamsById: Map<string, CbbTeam>,
+): ContentionConferenceGroup<T>[] {
+  const grouped = new Map<string, T[]>();
+  for (const row of rows) {
+    const conference = teamsById.get(row.teamId)?.conference ?? "";
+    const list = grouped.get(conference) ?? [];
+    list.push(row);
+    grouped.set(conference, list);
+  }
+  return [...grouped.entries()]
+    .sort(([left], [right]) => shortCbbConference(left).localeCompare(shortCbbConference(right)))
+    .map(([conference, list]) => ({
+      conference,
+      label: shortCbbConference(conference) || "Independent",
+      rows: [...list].sort(
+        (left, right) => compareAverage(left.average, right.average) || left.teamId.localeCompare(right.teamId),
+      ),
+    }));
 }
