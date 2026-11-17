@@ -7,6 +7,7 @@ import {
   contentionCandidates,
   contentionMoves,
   contentionRosterIds,
+  groupContentionByConference,
   projectionContentionIds,
   withCandidateReasons,
 } from "./cbb-contention";
@@ -163,6 +164,33 @@ test("approving an add or drop updates the roster", () => {
     { teamId: "old", kind: "drop", reasons: [] },
   ]);
   assert.deepEqual(afterAll, ["keep", "new"]);
+});
+
+test("roster groups by conference short name, then by six-rank average", () => {
+  const teams = [
+    team("wake", "Atlantic Coast Conference"),
+    team("duke", "Atlantic Coast Conference"),
+    team("kansas", "Big 12 Conference"),
+    team("florida", "Southeastern Conference"),
+  ];
+  const teamsById = new Map(teams.map((row) => [row.id, row]));
+  const groups = groupContentionByConference(
+    [
+      { teamId: "wake", average: 40 },
+      { teamId: "florida", average: 4 },
+      { teamId: "kansas", average: 8 },
+      { teamId: "duke", average: 6 },
+    ],
+    teamsById,
+  );
+  assert.deepEqual(
+    groups.map((group) => [group.label, group.rows.map((row) => row.teamId)]),
+    [
+      ["ACC", ["duke", "wake"]],
+      ["Big 12", ["kansas"]],
+      ["SEC", ["florida"]],
+    ],
+  );
 });
 
 test("conference leader is the lowest six-rank average", () => {

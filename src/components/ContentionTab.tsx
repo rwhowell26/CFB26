@@ -5,9 +5,11 @@ import { TeamLogo } from "@/components/TeamLogo";
 import {
   applyContentionMove,
   applyContentionMoves,
+  compareAverage,
   contentionCandidates,
   contentionMoves,
   contentionRosterIds,
+  groupContentionByConference,
   withCandidateReasons,
   type ContentionCandidate,
   type ContentionMove,
@@ -100,9 +102,6 @@ export function ContentionTab({ teams, metrics, snapshot, approvedIds, onApprove
     () => withCandidateReasons(contentionMoves(candidateIds, approvedIds), candidates),
     [candidateIds, approvedIds, candidates],
   );
-  const adds = moves.filter((move) => move.kind === "add");
-  const drops = moves.filter((move) => move.kind === "drop");
-  const dropIds = useMemo(() => new Set(drops.map((move) => move.teamId)), [drops]);
   const roster = useMemo(() => {
     const rows = rosterIds
       .filter((id) => teamsById.has(id))
@@ -117,15 +116,30 @@ export function ContentionTab({ teams, metrics, snapshot, approvedIds, onApprove
           conferenceLeaderId: null,
         };
       });
-    return rows.sort((left, right) => {
-      if (left.average != null && right.average != null && left.average !== right.average) {
-        return left.average - right.average;
-      }
-      if (left.average != null && right.average == null) return -1;
-      if (left.average == null && right.average != null) return 1;
-      return 0;
-    });
+    return groupContentionByConference(rows, teamsById);
   }, [rosterIds, byCandidate, metrics, teamsById]);
+  const rosterCount = useMemo(
+    () => roster.reduce((sum, group) => sum + group.rows.length, 0),
+    [roster],
+  );
+  const sortMoves = (list: ContentionMove[]) =>
+    [...list].sort((left, right) => {
+      const leftTeam = teamsById.get(left.teamId);
+      const rightTeam = teamsById.get(right.teamId);
+      const conference = shortCbbConference(leftTeam?.conference ?? "").localeCompare(
+        shortCbbConference(rightTeam?.conference ?? ""),
+      );
+      if (conference) return conference;
+      const leftRow = byCandidate.get(left.teamId);
+      const rightRow = byCandidate.get(right.teamId);
+      return (
+        compareAverage(leftRow?.average ?? overallAverage(metrics.get(left.teamId)), rightRow?.average ?? overallAverage(metrics.get(right.teamId))) ||
+        (leftTeam?.shortName ?? left.teamId).localeCompare(rightTeam?.shortName ?? right.teamId)
+      );
+    });
+  const adds = sortMoves(moves.filter((move) => move.kind === "add"));
+  const drops = sortMoves(moves.filter((move) => move.kind === "drop"));
+  const dropIds = useMemo(() => new Set(drops.map((move) => move.teamId)), [drops]);
 
   const approve = (move: ContentionMove) => {
     onApprovedIds(applyContentionMove(approvedIds ?? candidateIds, move));
@@ -144,8 +158,8 @@ export function ContentionTab({ teams, metrics, snapshot, approvedIds, onApprove
           <h2>{snapshot ? snapshot.label : "No projection yet"}</h2>
           <p>
             Last projection field, First 4 Out, Next 4 Out, and any team within {CONTENTION_WITHIN}{" "}
-            of its conference leader&apos;s six-rank average
-            {roster.length ? ` · ${roster.length} teams` : ""}
+            of its conference leader&apos;s six-rank average · grouped by conference
+            {rosterCount ? ` · ${rosterCount} teams` : ""}
           </p>
         </header>
       </section>
@@ -222,36 +236,47 @@ export function ContentionTab({ teams, metrics, snapshot, approvedIds, onApprove
       ) : null}
 
       {roster.length ? (
-        <ol className="cbb-scurve cbb-cont-list">
-          {roster.map((row, index) => {
-            const team = teamsById.get(row.teamId);
-            if (!team) return null;
-            return (
-              <li key={row.teamId}>
-                <div
-                  className={`cbb-scurve-row cbb-cont-row${row.reasons.includes("field") ? " at-large" : ""}${
-                    row.reasons.includes("first-four-out") || row.reasons.includes("next-four-out")
-                      ? " bubble"
-                      : ""
-                  }${dropIds.has(row.teamId) ? " is-pending-drop" : ""}`}
-                >
-                  <span className="cbb-scurve-rank">{index + 1}</span>
-                  <TeamLogo team={team} />
-                  <strong>{team.shortName}</strong>
-                  <span className="cbb-scurve-meta">{shortCbbConference(team.conference)}</span>
-                  <span className="cbb-scurve-meta">{formatRecord(team.wins, team.losses)}</span>
-                  <span className="cbb-scurve-avg">{formatRank(row.average, 1)}</span>
-                  <span className="cbb-cont-reasons">
-                    {dropIds.has(row.teamId) ? <em>Pending drop</em> : null}
-                    {row.reasons.map((reason) => (
-                      <em key={reason}>{reasonLabel(row, reason)}</em>
-                    ))}
-                  </span>
-                </div>
-              </li>
-            );
-          })}
-        </ol>
+        <div className="cbb-cont-groups">
+          {roster.map((group) => (
+            <section key={group.conference || group.label} className="cbb-cont-group">
+              <h3>
+                {group.label}{" "}
+                <em>
+                  {group.rows.length} {group.rows.length === 1 ? "team" : "teams"}
+                </em>
+              </h3>
+              <ol className="cbb-scurve cbb-cont-list">
+                {group.rows.map((row, index) => {
+                  const team = teamsById.get(row.teamId);
+                  if (!team) return null;
+                  return (
+                    <li key={row.teamId}>
+                      <div
+                        className={`cbb-scurve-row cbb-cont-row${row.reasons.includes("field") ? " at-large" : ""}${
+                          row.reasons.includes("first-four-out") || row.reasons.includes("next-four-out")
+                            ? " bubble"
+                            : ""
+                        }${dropIds.has(row.teamId) ? " is-pending-drop" : ""}`}
+                      >
+                        <span className="cbb-scurve-rank">{index + 1}</span>
+                        <TeamLogo team={team} />
+                        <strong>{team.shortName}</strong>
+                        <span className="cbb-scurve-meta">{formatRecord(team.wins, team.losses)}</span>
+                        <span className="cbb-scurve-avg">{formatRank(row.average, 1)}</span>
+                        <span className="cbb-cont-reasons">
+                          {dropIds.has(row.teamId) ? <em>Pending drop</em> : null}
+                          {row.reasons.map((reason) => (
+                            <em key={reason}>{reasonLabel(row, reason)}</em>
+                          ))}
+                        </span>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ol>
+            </section>
+          ))}
+        </div>
       ) : (
         <p className="cbb-cont-note">No teams in contention yet.</p>
       )}

@@ -3934,12 +3934,35 @@ body:has(.cbb-mode.is-bracket) .sport-bar {
   font-size: 0.78rem;
 }
 
-.cbb-cont-list {
+.cbb-cont-groups {
+  display: grid;
+  gap: 0.85rem;
   padding-bottom: 1rem;
 }
 
+.cbb-cont-group h3 {
+  margin: 0 0 0.28rem;
+  font-family: var(--font-display), "Barlow Condensed", sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+
+.cbb-cont-group h3 em {
+  font-style: normal;
+  margin-left: 0.4rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  font-family: var(--font-sans), "Source Sans 3", sans-serif;
+}
+
+.cbb-cont-list {
+  padding-bottom: 0;
+}
+
 .cbb-cont-row {
-  grid-template-columns: 1.6rem 2rem minmax(0, 1fr) auto auto auto minmax(7rem, 0.9fr);
+  grid-template-columns: 1.6rem 2rem minmax(0, 1fr) auto auto minmax(7rem, 0.9fr);
 }
 
 .cbb-cont-row.bubble {
